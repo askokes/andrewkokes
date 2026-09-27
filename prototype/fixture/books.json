@@ -1,47 +1,8 @@
 {
  "schema": "asb.books/2",
  "canon": "protestant-66",
- "versification": "BSB (31,102 verses); OpenBible refs outside it are clamped to the chapter's last verse (3 John 1:15 -> 1:14; 4 edges clamped, 1 dropped)",
+ "versification": "BSB (31,102 verses); OpenBible refs outside it are clamped to the chapter's last verse (3 John 1:15 -> 1:14)",
  "books": [
-  {
-   "bookNo": 43,
-   "osis": "John",
-   "name": "John",
-   "short": "John",
-   "sourceName": "John",
-   "aliases": [
-    "Gospel of John",
-    "Jn"
-   ],
-   "testament": "NT",
-   "chapters": 21,
-   "verses": 879,
-   "firstVid": 43001001,
-   "firstOrdinal": 26095,
-   "verseCounts": [
-    51,
-    25,
-    36,
-    54,
-    47,
-    71,
-    53,
-    59,
-    41,
-    42,
-    57,
-    50,
-    38,
-    31,
-    27,
-    33,
-    26,
-    40,
-    42,
-    31,
-    25
-   ]
-  },
   {
    "bookNo": 19,
    "osis": "Ps",
@@ -50,7 +11,9 @@
    "sourceName": "Psalms",
    "aliases": [
     "Psalms",
-    "Psa"
+    "Ps",
+    "Psa",
+    "Pss"
    ],
    "testament": "OT",
    "chapters": 150,
@@ -209,7 +172,46 @@
     9,
     6
    ]
+  },
+  {
+   "bookNo": 43,
+   "osis": "John",
+   "name": "John",
+   "short": "John",
+   "sourceName": "John",
+   "aliases": [
+    "Gospel of John",
+    "Jn"
+   ],
+   "testament": "NT",
+   "chapters": 21,
+   "verses": 879,
+   "firstVid": 43001001,
+   "firstOrdinal": 26045,
+   "verseCounts": [
+    51,
+    25,
+    36,
+    54,
+    47,
+    71,
+    53,
+    59,
+    41,
+    42,
+    57,
+    50,
+    38,
+    31,
+    27,
+    33,
+    26,
+    40,
+    42,
+    31,
+    25
+   ]
   }
  ],
- "_note": "Fixture: two of 66 books (John, Psalm) with real verseCounts from tools/canon.json. Only the John pack (chapter 3) exists in this fixture."
+ "_note": "Fixture: two of 66 books (John, Psalm). Only John chapter 3 has text and cross references in this fixture."
 }

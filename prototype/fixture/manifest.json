@@ -2,7 +2,7 @@
  "schema": "asb.manifest/2",
  "datasetVersion": "2026.09.1",
  "builtAt": "2026-09-27T00:00:00Z",
- "pipeline": "asb-build 0.2",
+ "pipeline": "tools/build_dataset.py",
  "canon": {
   "books": 66,
   "chapters": 1189,
@@ -12,20 +12,23 @@
  "graph": {
   "edges": 343608,
   "edgesDroppedForMissingVerse": 1,
+  "edgesClampedToBsbVersification": 4,
   "rangeTargets": 87934,
   "crossChapterRanges": 650,
+  "crossBookRanges": 18,
   "rangesOver40Verses": 295,
   "maxSpan": 182,
   "incomingRows": 596218,
-  "mergedTickerItems": 840072,
-  "versesWithNoConnections": 114,
   "votes": {
    "min": 1,
    "median": 2,
    "p90": 4,
    "p99": 10,
    "max": 340
-  }
+  },
+  "mergedTickerItems": 840072,
+  "inlineTickerItems": 343635,
+  "versesWithNoConnections": 114
  },
  "ranking": {
   "version": "asb.rank.v2",
@@ -45,7 +48,7 @@
    "light": 0.9022
   },
   "order": "score desc; out/both before in-only; start vid asc",
-  "collision": "same start, different end: keep higher votes, list others in alsoCites (0 occurrences in this dump)",
+  "collision": "same start, different end: keep higher votes, list others in alsoCites",
   "tickerInline": 12,
   "snippetMaxChars": 110,
   "dwellSeconds": "1.6 + 1.2 * weight"
@@ -56,13 +59,13 @@
    "name": "Berean Standard Bible",
    "abbr": "BSB",
    "textVersion": "bsb-2023",
-   "license": "Public domain (CC0)",
-   "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",
+   "license": "Public domain (CC0), BSB Publishing 2023",
    "copyrightNotice": "The Holy Bible, Berean Standard Bible, BSB is produced in cooperation with Bible Hub, Discovery Bible, OpenBible.com, and the Berean Bible Translation Committee. This text of God's Word has been dedicated to the public domain.",
+   "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",
    "role": "placeholder until NIV is licensed",
    "bundled": true,
    "packUrl": null,
-   "sha256": "<sha256 of text/bsb pack>",
+   "sha256": "65cec9123b09bec8b99b664280e321e82d39fe77703539eebe889aa50e232cf9",
    "headings": false
   },
   {
@@ -89,6 +92,7 @@
    "license": "CC-BY",
    "url": "https://www.openbible.info/labs/cross-references/",
    "attribution": "Cross references from OpenBible.info, CC-BY",
+   "via": "https://github.com/scrollmapper/bible_databases (2024 branch, cross_references.txt)",
    "retrievedAt": "2026-09-27"
   },
   {
@@ -99,6 +103,7 @@
    "license": "Public domain (CC0)",
    "url": "https://berean.bible",
    "attribution": "Berean Standard Bible, public domain",
+   "via": "https://github.com/scrollmapper/bible_databases (formats/json/BSB.json)",
    "retrievedAt": "2026-09-27"
   },
   {
@@ -119,33 +124,34 @@
   {
    "path": "books.json",
    "kind": "books",
-   "bytes": 24000,
-   "sha256": "<sha256>"
+   "bytes": 17744,
+   "gzipBytes": 4476,
+   "sha256": "bf18586833bf92eb927f70abbd94a5b0b7eaf8fdc6c148db24a69554d825a1f9"
   },
   {
-   "path": "graph/43-John.json",
+   "path": "graph/01-Gen.json",
    "kind": "graph",
-   "book": 43,
-   "bytes": 409620,
-   "gzipBytes": 74884,
-   "sha256": "<sha256>"
+   "book": 1,
+   "bytes": 985705,
+   "gzipBytes": 129665,
+   "sha256": "fb90ca3d32eaa4fe2bbe3a66c0e3e0cb97db9213a8f58637941c3300b1ffaffb"
   },
   {
-   "path": "incoming/43-John.json",
+   "path": "incoming/01-Gen.json",
    "kind": "incoming",
-   "book": 43,
-   "bytes": 1017157,
-   "gzipBytes": 125738,
-   "sha256": "<sha256>"
+   "book": 1,
+   "bytes": 2540901,
+   "gzipBytes": 169761,
+   "sha256": "08f3beb9aaf048374fdb955d00de0d342bbf818b57d241f5c222d1c647ef0d2e"
   },
   {
-   "path": "text/bsb/43-John.json",
+   "path": "text/bsb/01-Gen.json",
    "kind": "text",
+   "book": 1,
    "translation": "bsb",
-   "book": 43,
-   "bytes": 107379,
-   "gzipBytes": 33981,
-   "sha256": "<sha256>"
+   "bytes": 477554,
+   "gzipBytes": 80288,
+   "sha256": "a2082fbd95eb6e2d679fb2dd9d0719edc9598dff5c6a73dfe9ac3cd3fe59f670"
   }
  ],
  "onDevice": {
@@ -154,5 +160,5 @@
   "estimatedBytes": 36000000,
   "tickerInline": 12
  },
- "_note": "shards lists all 66 x 3 (+66 per extra translation) files in the real manifest; four shown. Byte counts for the four shown are measured on compact JSON of the real data."
+ "_note": "Prototype copy: shard list trimmed to 4 of 199; full list in data/samples/manifest.json."
 }
