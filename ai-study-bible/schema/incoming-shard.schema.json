@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/incoming-shard.schema.json",
+  "title": "Incoming shard",
+  "description": "Incoming citations for one target book, one row per covered verse (spec 2.5).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.incoming/2"
+    },
+    "datasetVersion": {
+      "type": "string"
+    },
+    "book": {
+      "$ref": "common.schema.json#/$defs/bookNo"
+    },
+    "osis": {
+      "type": "string"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "vid": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "from": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "to": {
+            "$ref": "common.schema.json#/$defs/range"
+          },
+          "span": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 40
+          },
+          "viaRange": {
+            "type": "boolean"
+          },
+          "votes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "votesEff": {
+            "type": "number",
+            "minimum": 0
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "vid",
+          "from",
+          "to",
+          "span",
+          "viaRange",
+          "votes",
+          "votesEff",
+          "rank"
+        ]
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "datasetVersion",
+    "book",
+    "osis",
+    "rows"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/connections.schema.json",
+  "title": "Connections",
+  "description": "The uncapped 'See all' list for one verse (spec 2.8).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.connections/2"
+    },
+    "datasetVersion": {
+      "type": "string"
+    },
+    "rankingVersion": {
+      "type": "string"
+    },
+    "translation": {
+      "type": "string"
+    },
+    "vid": {
+      "$ref": "common.schema.json#/$defs/vid"
+    },
+    "ref": {
+      "$ref": "common.schema.json#/$defs/osisRef"
+    },
+    "label": {
+      "type": "string"
+    },
+    "counts": {
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/$defs/counts"
+        },
+        {
+          "required": [
+            "out",
+            "in",
+            "inDirect",
+            "inViaRange",
+            "unique"
+          ]
+        }
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/$defs/tickerItem"
+          },
+          {
+            "required": [
+              "alsoCites"
+            ]
+          }
+        ]
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "datasetVersion",
+    "rankingVersion",
+    "translation",
+    "vid",
+    "ref",
+    "label",
+    "counts",
+    "items"
+  ]
+}

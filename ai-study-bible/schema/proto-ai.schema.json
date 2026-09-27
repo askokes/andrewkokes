@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/proto-ai.schema.json",
+  "title": "Prototype AI notes",
+  "description": "Sample AI notes keyed by connection and by verse (prototype only).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.protoAi/2"
+    },
+    "edges": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^\\d+>\\d+(-\\d+)?$"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "verses": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^\\d+$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "speaker": {
+            "type": "string"
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readingTip": {
+            "type": "string"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "summary"
+        ]
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "edges"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/proto-text.schema.json",
+  "title": "Prototype text pack",
+  "description": "All verse text as books[bookNo-1][chapter-1][verse-1] (prototype only; empty string = omitted verse, null = not in this data set).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.protoText/2"
+    },
+    "translation": {
+      "$ref": "common.schema.json#/$defs/translationHeader"
+    },
+    "snippetMaxChars": {
+      "type": "integer"
+    },
+    "books": {
+      "type": "array",
+      "maxItems": 66,
+      "items": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "items": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "translation",
+    "snippetMaxChars",
+    "books"
+  ]
+}

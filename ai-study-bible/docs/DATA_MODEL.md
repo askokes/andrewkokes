@@ -1,6 +1,6 @@
 # AI Study Bible: Unified Data Model (v2)
 
-Status: final synthesis of three proposals and two judge reviews. Dataset facts below were measured with python3 against `sources/BSB.json` (31,102 verses, 1,189 chapters) and `sources/cross_references.txt` (343,609 OpenBible links, 2016-02-01) on 2026-09-27.
+Status: final synthesis of three proposals and two judge reviews. Dataset facts below were measured with python3 against `data/sources/BSB.json` (31,102 verses, 1,189 chapters) and `data/sources/cross_references.txt` (343,609 OpenBible links, 2016-02-01) on 2026-09-27.
 
 ## 1. Overview
 
@@ -1799,7 +1799,7 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
 {
   "schema": "asb.books/2",
   "canon": "protestant-66",
-  "versification": "BSB (31,102 verses); OpenBible refs outside it are clamped to the chapter's last verse (3 John 1:15 -> 1:14; 4 edges clamped, 1 dropped)",
+  "versification": "BSB (31,102 verses); OpenBible refs outside it are clamped to the chapter's last verse (3 John 1:15 -> 1:14)",
   "books": [
     {
       "bookNo": 43,
@@ -1815,30 +1815,8 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "chapters": 21,
       "verses": 879,
       "firstVid": 43001001,
-      "firstOrdinal": 26095,
-      "verseCounts": [
-        51,
-        25,
-        36,
-        54,
-        47,
-        71,
-        53,
-        59,
-        41,
-        42,
-        57,
-        50,
-        38,
-        31,
-        27,
-        33,
-        26,
-        40,
-        42,
-        31,
-        25
-      ]
+      "firstOrdinal": 26045,
+      "verseCounts": [51, 25, 36, 54, 47, 71, 53, 59, 41, 42, 57, 50, 38, 31, 27, 33, 26, 40, 42, 31, 25]
     },
     {
       "bookNo": 19,
@@ -1848,17 +1826,19 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "sourceName": "Psalms",
       "aliases": [
         "Psalms",
-        "Psa"
+        "Ps",
+        "Psa",
+        "Pss"
       ],
       "testament": "OT",
       "chapters": 150,
       "verses": 2461,
       "firstVid": 19001001,
       "firstOrdinal": 13940,
-      "verseCounts": "[6, 12, 8, ... 176 (Ps 119) ... 6] (150 entries; trimmed here)"
+      "verseCounts": [6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 10, 7, 12, 15, 21, 10, 20, 14, 9, 6]
     }
   ],
-  "_note": "Two of 66 entries shown. name is the singular display form used in labels ('Psalm 2:7'); sourceName is the BSB.json book name ('Psalms', 'I John', 'Revelation of John'); osis is the OpenBible key. verseCounts is a real integer array in the real file."
+  "_note": "Two of 66 entries shown (from data/samples/books.json). name is the singular display form used in labels ('Psalm 2:7'); sourceName is the BSB.json book name ('Psalms', 'I John', 'Revelation of John'); osis is the OpenBible key."
 }
 ```
 
@@ -1869,7 +1849,7 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
   "schema": "asb.manifest/2",
   "datasetVersion": "2026.09.1",
   "builtAt": "2026-09-27T00:00:00Z",
-  "pipeline": "asb-build 0.2",
+  "pipeline": "tools/build_dataset.py",
   "canon": {
     "books": 66,
     "chapters": 1189,
@@ -1879,20 +1859,23 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
   "graph": {
     "edges": 343608,
     "edgesDroppedForMissingVerse": 1,
+    "edgesClampedToBsbVersification": 4,
     "rangeTargets": 87934,
     "crossChapterRanges": 650,
+    "crossBookRanges": 18,
     "rangesOver40Verses": 295,
     "maxSpan": 182,
     "incomingRows": 596218,
-    "mergedTickerItems": 840072,
-    "versesWithNoConnections": 114,
     "votes": {
       "min": 1,
       "median": 2,
       "p90": 4,
       "p99": 10,
       "max": 340
-    }
+    },
+    "mergedTickerItems": 840072,
+    "inlineTickerItems": 343635,
+    "versesWithNoConnections": 114
   },
   "ranking": {
     "version": "asb.rank.v2",
@@ -1912,10 +1895,14 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "light": 0.9022
     },
     "order": "score desc; out/both before in-only; start vid asc",
-    "collision": "same start, different end: keep higher votes, list others in alsoCites (0 occurrences in this dump)",
+    "collision": "same start, different end: keep higher votes, list others in alsoCites",
     "tickerInline": 12,
     "snippetMaxChars": 110,
-    "dwellSeconds": "1.6 + 1.2 * weight"
+    "dwellSeconds": "1.6 + 1.2 * weight",
+    "motion": {
+      "baseSeconds": 1.6,
+      "perWeightSeconds": 1.2
+    }
   },
   "translations": [
     {
@@ -1923,13 +1910,13 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "name": "Berean Standard Bible",
       "abbr": "BSB",
       "textVersion": "bsb-2023",
-      "license": "Public domain (CC0)",
-      "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",
+      "license": "Public domain (CC0), BSB Publishing 2023",
       "copyrightNotice": "The Holy Bible, Berean Standard Bible, BSB is produced in cooperation with Bible Hub, Discovery Bible, OpenBible.com, and the Berean Bible Translation Committee. This text of God's Word has been dedicated to the public domain.",
+      "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",
       "role": "placeholder until NIV is licensed",
       "bundled": true,
       "packUrl": null,
-      "sha256": "<sha256 of text/bsb pack>",
+      "sha256": "65cec9123b09bec8b99b664280e321e82d39fe77703539eebe889aa50e232cf9",
       "headings": false
     },
     {
@@ -1955,7 +1942,8 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "version": "2016-02-01",
       "license": "CC-BY",
       "url": "https://www.openbible.info/labs/cross-references/",
-      "attribution": "Cross references from OpenBible.info, CC-BY",
+      "attribution": "Cross references from OpenBible.info (https://www.openbible.info/labs/cross-references/), used under a Creative Commons Attribution license. Dataset dated 2016-02-01. Vote counts reflect OpenBible.info user voting. Ranking and range handling are our own.",
+      "via": "https://github.com/scrollmapper/bible_databases (2024 branch, cross_references.txt)",
       "retrievedAt": "2026-09-27"
     },
     {
@@ -1966,6 +1954,7 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "license": "Public domain (CC0)",
       "url": "https://berean.bible",
       "attribution": "Berean Standard Bible, public domain",
+      "via": "https://github.com/scrollmapper/bible_databases (formats/json/BSB.json)",
       "retrievedAt": "2026-09-27"
     },
     {
@@ -1986,42 +1975,43 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
     {
       "path": "books.json",
       "kind": "books",
-      "bytes": 24000,
-      "sha256": "<sha256>"
+      "bytes": 17744,
+      "gzipBytes": 4476,
+      "sha256": "bf18586833bf92eb927f70abbd94a5b0b7eaf8fdc6c148db24a69554d825a1f9"
     },
     {
       "path": "graph/43-John.json",
       "kind": "graph",
       "book": 43,
-      "bytes": 409620,
-      "gzipBytes": 74884,
-      "sha256": "<sha256>"
+      "bytes": 895570,
+      "gzipBytes": 118038,
+      "sha256": "bfd79391f677e6eda007ed5b8ae75a2757d0df1acb9e68c1361be35a94b0662a"
     },
     {
       "path": "incoming/43-John.json",
       "kind": "incoming",
       "book": 43,
-      "bytes": 1017157,
-      "gzipBytes": 125738,
-      "sha256": "<sha256>"
+      "bytes": 2818278,
+      "gzipBytes": 188918,
+      "sha256": "d32e5ea659efccb7a2aa50c6c28ab6e195ee52ae8b3c131d818a8de4a0bc9dd8"
     },
     {
       "path": "text/bsb/43-John.json",
       "kind": "text",
-      "translation": "bsb",
       "book": 43,
-      "bytes": 107379,
-      "gzipBytes": 33981,
-      "sha256": "<sha256>"
+      "translation": "bsb",
+      "bytes": 260443,
+      "gzipBytes": 42971,
+      "sha256": "22b96e2a8569466235faada0a2106d4983f492d1ab86b76b2b0a5112d6a1a653"
     }
   ],
   "onDevice": {
     "database": "asb.sqlite",
     "shippedInAppBundle": true,
-    "estimatedBytes": 36000000,
+    "estimatedBytes": 44700000,
     "tickerInline": 12
   },
-  "_note": "shards lists all 66 x 3 (+66 per extra translation) files in the real manifest; four shown. Byte counts for the four shown are measured on compact JSON of the real data."
+  "_note": "Real manifest from data/samples/manifest.json with the shard list trimmed to 4 of 199 entries."
 }
 ```
 
@@ -2030,26 +2020,29 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
 Measured on the real data with compact JSON and gzip level 6; "keyed" estimates assume the readable camelCase keys above (roughly 2.5x raw, 1.3x gzipped).
 
 ```
-dataset/                                  interchange + OTA format, built by tools/build_dataset.py, committed
-  manifest.json                            ~14 KB   versions, ranking constants, sources, translations, 66x3 shards with sha256
-  books.json                               ~24 KB   66 books with verseCounts
-  attribution.md                           ~3 KB    CC-BY text for OpenBible, text notice, AI notice (Settings > About)
-  graph/{bookNo}-{osis}.json               66 files, sharded by SOURCE book, translation-free
-      43-John.json                         410 KB raw / 75 KB gz (11,079 edges)     measured
-      all 66                               11.9 MB raw / 2.2 MB gz compact; ~28 MB / ~3 MB keyed
+data/full/                                distribution + OTA format, built by tools/build_dataset.py (rebuilt locally, not committed)
+  manifest.json                            ~50 KB   versions, measured counts, ranking constants, sources, translations, 199 shards with sha256
+  books.json                               ~18 KB   66 books with verseCounts
+  attribution.md                           ~1 KB    BSB notice, OpenBible CC-BY credit with change note, AI notice (Settings > About)
+  graph/{bookNo}-{osis}.json               66 files, sharded by SOURCE book, translation-free, 343,608 edges
+      43-John.json                         896 KB raw / 118 KB gz                    measured
+      all 66                               26.1 MB raw / 3.5 MB gz                   measured
   incoming/{bookNo}-{osis}.json            66 files, sharded by TARGET book, 596,218 rows
-      43-John.json                         1.0 MB raw / 126 KB gz                   measured
-      all 66                               28.3 MB raw / 3.7 MB gz compact; ~60 MB / ~5 MB keyed
-  text/bsb/{bookNo}-{osis}.json            66 files, {vid: text}; 3.81 M chars
-      43-John.json                         107 KB raw / 34 KB gz                    measured
-      all 66                               4.3 MB raw / 1.3 MB gz; +35% with snippets
+      43-John.json                         2818 KB raw / 189 KB gz                  measured
+      all 66                               79.0 MB raw / 5.2 MB gz                   measured
+  text/bsb/{bookNo}-{osis}.json            66 files, text + snippet + paragraphStart + omitted per verse
+      43-John.json                         260 KB raw / 43 KB gz                    measured
+      all 66                               9.8 MB raw / 1.7 MB gz                     measured
   text/niv/                                same layout, produced only under license, served OTA, never committed
-  connections/{vid}.json                   derived; 840,072 items total; generated on demand by the app, on disk only for the prototype
-  bundles/bsb/{bookNo}/{chapter}.json      derived; the prototype's reader files (John 3: ~95 KB raw / ~20 KB gz with 12 chips x 36 verses;
-                                           Psalm 119 worst case: 176 verses, ~450 KB raw)
-  ai/verse/{bookNo}-{osis}.json            pre-generated verse notes, top ~5,000 verses by degree, ~1.2 KB each -> ~6 MB raw / ~2 MB gz
-  ai/edge/{bookNo}-{osis}.json             pre-generated 'why' for the top 3 chips of those verses, ~0.6 KB each -> ~9 MB raw / ~2.5 MB gz
-  samples/                                 the six documents in section 4
+  bundles/bsb/{bookNo}/{chapter}.json      optional (--bundles): all 1,189 chapter bundles, 145 MB raw (measured); the app builds these from SQLite instead
+      43/003.json                          174 KB raw / 33 KB gz (John 3, 36 verses x 12 chips)   measured
+      19/119.json                          795 KB raw (Psalm 119, the worst case)                measured
+  ai/verse/, ai/edge/                      Phase 2: pre-generated notes for the top ~5,000 verses and their top 3 chips (not built yet)
+
+data/samples/                              committed, founder-readable (1.6 MB): 6 chapter bundles, 5 ticker feeds, 5 connection lists,
+                                           the trail and AI note from section 4, books.json, manifest.json
+prototype/data/                            committed (19.8 MB): compact transport the HTML prototype expands into the documents above
+                                           (books, manifest, all text in one file, 66 per-book ticker packs, sample AI notes)
 
 App bundle (iOS):
   asb.sqlite                               prebuilt by tools/compile_sqlite.py, shipped read-only, copied to Application Support on first launch

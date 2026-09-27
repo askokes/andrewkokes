@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/trail.schema.json",
+  "title": "Trail",
+  "description": "Spiderweb navigation state: hops, back/forward, peeks and the visited web (spec 2.10, example 4.3).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.trail/2"
+    },
+    "id": {
+      "type": "string"
+    },
+    "translation": {
+      "type": "string"
+    },
+    "cursor": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "hops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "kind": {
+            "enum": [
+              "open",
+              "jump",
+              "search",
+              "bookmarkOpen"
+            ]
+          },
+          "vid": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "ref": {
+            "$ref": "common.schema.json#/$defs/osisRef"
+          },
+          "label": {
+            "type": "string"
+          },
+          "book": {
+            "type": "string"
+          },
+          "via": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "$ref": "common.schema.json#/$defs/verseRef"
+                  },
+                  "to": {
+                    "$ref": "common.schema.json#/$defs/verseTarget"
+                  },
+                  "direction": {
+                    "$ref": "common.schema.json#/$defs/direction"
+                  },
+                  "votesOut": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "votesIn": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "rank": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "from",
+                  "to",
+                  "direction",
+                  "votesOut",
+                  "votesIn",
+                  "score",
+                  "rank"
+                ]
+              }
+            ]
+          },
+          "scroll": {
+            "type": "object",
+            "properties": {
+              "chapter": {
+                "$ref": "common.schema.json#/$defs/chapterId"
+              },
+              "anchor": {
+                "$ref": "common.schema.json#/$defs/vid"
+              },
+              "highlight": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "common.schema.json#/$defs/range"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "chapter",
+              "anchor",
+              "highlight"
+            ]
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "index",
+          "kind",
+          "vid",
+          "ref",
+          "label",
+          "book",
+          "via",
+          "scroll",
+          "at"
+        ]
+      }
+    },
+    "forward": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "kind": {
+            "enum": [
+              "open",
+              "jump",
+              "search",
+              "bookmarkOpen"
+            ]
+          },
+          "vid": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "ref": {
+            "$ref": "common.schema.json#/$defs/osisRef"
+          },
+          "label": {
+            "type": "string"
+          },
+          "book": {
+            "type": "string"
+          },
+          "via": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "$ref": "common.schema.json#/$defs/verseRef"
+                  },
+                  "to": {
+                    "$ref": "common.schema.json#/$defs/verseTarget"
+                  },
+                  "direction": {
+                    "$ref": "common.schema.json#/$defs/direction"
+                  },
+                  "votesOut": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "votesIn": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "rank": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "from",
+                  "to",
+                  "direction",
+                  "votesOut",
+                  "votesIn",
+                  "score",
+                  "rank"
+                ]
+              }
+            ]
+          },
+          "scroll": {
+            "type": "object",
+            "properties": {
+              "chapter": {
+                "$ref": "common.schema.json#/$defs/chapterId"
+              },
+              "anchor": {
+                "$ref": "common.schema.json#/$defs/vid"
+              },
+              "highlight": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "common.schema.json#/$defs/range"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "chapter",
+              "anchor",
+              "highlight"
+            ]
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "index",
+          "kind",
+          "vid",
+          "ref",
+          "label",
+          "book",
+          "via",
+          "scroll",
+          "at"
+        ]
+      }
+    },
+    "peeks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fromHop": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "to": {
+            "$ref": "common.schema.json#/$defs/verseTarget"
+          },
+          "votesOut": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "at": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          },
+          "jumped": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "fromHop",
+          "to",
+          "votesOut",
+          "at",
+          "jumped"
+        ]
+      }
+    },
+    "peek": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "open": {
+              "type": "boolean"
+            },
+            "fromHop": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "to": {
+              "$ref": "common.schema.json#/$defs/verseTarget"
+            },
+            "direction": {
+              "$ref": "common.schema.json#/$defs/direction"
+            },
+            "votesOut": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "snippet": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "open",
+            "fromHop",
+            "to"
+          ]
+        }
+      ]
+    },
+    "web": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "common.schema.json#/$defs/vid"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "$ref": "common.schema.json#/$defs/vid"
+              },
+              {
+                "$ref": "common.schema.json#/$defs/vid"
+              },
+              {
+                "type": "integer",
+                "minimum": 0
+              }
+            ],
+            "items": false,
+            "minItems": 3
+          }
+        },
+        "peekOnlyEdges": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "$ref": "common.schema.json#/$defs/vid"
+              },
+              {
+                "$ref": "common.schema.json#/$defs/vid"
+              }
+            ],
+            "items": false,
+            "minItems": 2
+          }
+        },
+        "booksTouched": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "loopClosed": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "nodes",
+        "edges",
+        "peekOnlyEdges",
+        "booksTouched",
+        "loopClosed"
+      ]
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "pushOn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notPushed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scrollUpdatesCurrentHop": {
+          "type": "boolean"
+        },
+        "maxHops": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "persist": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "pushOn",
+        "notPushed",
+        "scrollUpdatesCurrentHop",
+        "maxHops",
+        "persist"
+      ]
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "translation",
+    "cursor",
+    "hops",
+    "forward",
+    "peeks",
+    "peek",
+    "web",
+    "rules"
+  ]
+}

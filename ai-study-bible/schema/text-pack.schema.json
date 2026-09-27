@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/text-pack.schema.json",
+  "title": "Text pack",
+  "description": "One book of one translation: text, snippet and paragraph data per verse (spec 2.3).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.text/2"
+    },
+    "translation": {
+      "type": "string"
+    },
+    "textVersion": {
+      "type": "string"
+    },
+    "book": {
+      "$ref": "common.schema.json#/$defs/bookNo"
+    },
+    "osis": {
+      "type": "string"
+    },
+    "verses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "vid": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "text": {
+            "type": "string"
+          },
+          "snippet": {
+            "type": "string"
+          },
+          "heading": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "paragraphStart": {
+            "type": "boolean"
+          },
+          "omitted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "vid",
+          "text",
+          "snippet",
+          "heading",
+          "paragraphStart",
+          "omitted"
+        ]
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "translation",
+    "textVersion",
+    "book",
+    "osis",
+    "verses"
+  ]
+}

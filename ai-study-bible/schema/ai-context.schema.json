@@ -1,0 +1,502 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/ai-context.schema.json",
+  "title": "AI context",
+  "description": "AI verse note and connection note with provenance and cache rules (spec 2.11, example 4.4).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.ai/2"
+    },
+    "verse": {
+      "$ref": "#/$defs/aiVerseContext"
+    },
+    "connection": {
+      "$ref": "#/$defs/aiConnection"
+    },
+    "requestOnMiss": {
+      "type": "object"
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "verse",
+    "connection"
+  ],
+  "$defs": {
+    "aiVerseContext": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^ai:verse:\\d+:[a-z0-9]+:[a-z0-9-]+:v\\d+$"
+        },
+        "kind": {
+          "const": "verse"
+        },
+        "vid": {
+          "$ref": "common.schema.json#/$defs/vid"
+        },
+        "ref": {
+          "$ref": "common.schema.json#/$defs/osisRef"
+        },
+        "translation": {
+          "type": "string"
+        },
+        "textVersion": {
+          "type": "string"
+        },
+        "content": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "context": {
+              "type": "string"
+            },
+            "speaker": {
+              "type": "string"
+            },
+            "genre": {
+              "type": "string"
+            },
+            "themes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "entities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "enum": [
+                      "person",
+                      "group",
+                      "place",
+                      "thing",
+                      "event"
+                    ]
+                  },
+                  "alias": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "vid": {
+                    "$ref": "common.schema.json#/$defs/vid"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "name",
+                  "type"
+                ]
+              }
+            },
+            "questions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "readingTip": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "context",
+            "speaker",
+            "genre",
+            "themes",
+            "entities",
+            "questions",
+            "readingTip"
+          ]
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "generator": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "promptId": {
+              "type": "string"
+            },
+            "promptVersion": {
+              "type": "string"
+            },
+            "schemaVersion": {
+              "type": "integer"
+            },
+            "inputs": {
+              "type": "object"
+            },
+            "inputHash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "generatedAt": {
+              "$ref": "common.schema.json#/$defs/timestamp"
+            },
+            "backendJob": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tokens": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "output": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "input",
+                "output"
+              ]
+            },
+            "reviewed": {
+              "type": "boolean"
+            },
+            "disclaimer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "generator",
+            "model",
+            "promptId",
+            "promptVersion",
+            "schemaVersion",
+            "inputs",
+            "inputHash",
+            "generatedAt",
+            "backendJob",
+            "tokens",
+            "reviewed",
+            "disclaimer"
+          ]
+        },
+        "cache": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "enum": [
+                "bundled",
+                "fetched",
+                "userRequested"
+              ]
+            },
+            "fetchedAt": {
+              "oneOf": [
+                {
+                  "$ref": "common.schema.json#/$defs/timestamp"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ttlDays": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "invalidateOn": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "source",
+            "fetchedAt",
+            "ttlDays",
+            "invalidateOn"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "kind",
+        "vid",
+        "ref",
+        "translation",
+        "textVersion",
+        "content",
+        "provenance",
+        "cache"
+      ]
+    },
+    "aiConnection": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^ai:edge:\\d+>\\d+(-\\d+)?:[a-z0-9]+:[a-z0-9-]+:v\\d+$"
+        },
+        "kind": {
+          "const": "edge"
+        },
+        "from": {
+          "$ref": "common.schema.json#/$defs/verseRef"
+        },
+        "to": {
+          "$ref": "common.schema.json#/$defs/verseTarget"
+        },
+        "direction": {
+          "$ref": "common.schema.json#/$defs/direction"
+        },
+        "votesOut": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "votesIn": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "translation": {
+          "type": "string"
+        },
+        "textVersion": {
+          "type": "string"
+        },
+        "content": {
+          "type": "object",
+          "properties": {
+            "why": {
+              "type": "string"
+            },
+            "relation": {
+              "enum": [
+                "quotation",
+                "allusion",
+                "fulfillment",
+                "parallel",
+                "contrast",
+                "context",
+                "thematic"
+              ]
+            },
+            "confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "sharedThemes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "readNext": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "to": {
+                    "$ref": "common.schema.json#/$defs/verseTarget"
+                  },
+                  "why": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "to",
+                  "why"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "why",
+            "relation",
+            "confidence",
+            "sharedThemes",
+            "readNext"
+          ]
+        },
+        "relationVocabulary": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "quotation",
+              "allusion",
+              "fulfillment",
+              "parallel",
+              "contrast",
+              "context",
+              "thematic"
+            ]
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "generator": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "promptId": {
+              "type": "string"
+            },
+            "promptVersion": {
+              "type": "string"
+            },
+            "schemaVersion": {
+              "type": "integer"
+            },
+            "inputs": {
+              "type": "object"
+            },
+            "inputHash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "generatedAt": {
+              "$ref": "common.schema.json#/$defs/timestamp"
+            },
+            "backendJob": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tokens": {
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "output": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "input",
+                "output"
+              ]
+            },
+            "reviewed": {
+              "type": "boolean"
+            },
+            "disclaimer": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "generator",
+            "model",
+            "promptId",
+            "promptVersion",
+            "schemaVersion",
+            "inputs",
+            "inputHash",
+            "generatedAt",
+            "backendJob",
+            "tokens",
+            "reviewed",
+            "disclaimer"
+          ]
+        },
+        "cache": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "enum": [
+                "bundled",
+                "fetched",
+                "userRequested"
+              ]
+            },
+            "fetchedAt": {
+              "oneOf": [
+                {
+                  "$ref": "common.schema.json#/$defs/timestamp"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "ttlDays": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "invalidateOn": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "source",
+            "fetchedAt",
+            "ttlDays",
+            "invalidateOn"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "kind",
+        "from",
+        "to",
+        "direction",
+        "votesOut",
+        "votesIn",
+        "translation",
+        "textVersion",
+        "content",
+        "relationVocabulary",
+        "provenance",
+        "cache"
+      ]
+    }
+  }
+}

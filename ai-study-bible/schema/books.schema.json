@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/books.schema.json",
+  "title": "Books index",
+  "description": "The 66-book canon with verse counts per chapter (spec 2.1, example 4.5).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.books/2"
+    },
+    "canon": {
+      "type": "string"
+    },
+    "versification": {
+      "type": "string"
+    },
+    "books": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 66,
+      "items": {
+        "type": "object",
+        "properties": {
+          "bookNo": {
+            "$ref": "common.schema.json#/$defs/bookNo"
+          },
+          "osis": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "short": {
+            "type": "string"
+          },
+          "sourceName": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "testament": {
+            "enum": [
+              "OT",
+              "NT"
+            ]
+          },
+          "chapters": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "verses": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "firstVid": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "firstOrdinal": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "verseCounts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "bookNo",
+          "osis",
+          "name",
+          "short",
+          "sourceName",
+          "testament",
+          "chapters",
+          "verses",
+          "firstVid",
+          "firstOrdinal",
+          "verseCounts"
+        ]
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "canon",
+    "versification",
+    "books"
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/chapter-bundle.schema.json",
+  "title": "Chapter bundle",
+  "description": "The reader screen document: every verse of one chapter with its text and top ranked connections (spec 2.7, example 4.1).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.chapter/2"
+    },
+    "datasetVersion": {
+      "type": "string"
+    },
+    "rankingVersion": {
+      "type": "string"
+    },
+    "translation": {
+      "$ref": "common.schema.json#/$defs/translationHeader"
+    },
+    "book": {
+      "type": "object",
+      "properties": {
+        "bookNo": {
+          "$ref": "common.schema.json#/$defs/bookNo"
+        },
+        "osis": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "short": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "bookNo",
+        "osis",
+        "name",
+        "short"
+      ]
+    },
+    "chapter": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "chapterId": {
+      "$ref": "common.schema.json#/$defs/chapterId"
+    },
+    "verseCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "prevChapter": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/chapterId"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nextChapter": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/chapterId"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "headings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "beforeVerse": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "beforeVerse",
+          "title"
+        ]
+      }
+    },
+    "tickerInline": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "verses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "vid": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "verse": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "ref": {
+            "$ref": "common.schema.json#/$defs/osisRef"
+          },
+          "label": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "omitted": {
+            "type": "boolean",
+            "default": false
+          },
+          "paragraphStart": {
+            "type": "boolean"
+          },
+          "heading": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counts": {
+            "allOf": [
+              {
+                "$ref": "common.schema.json#/$defs/counts"
+              },
+              {
+                "required": [
+                  "out",
+                  "in",
+                  "inDirect",
+                  "inViaRange",
+                  "unique",
+                  "shown",
+                  "more"
+                ]
+              }
+            ]
+          },
+          "ticker": {
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "common.schema.json#/$defs/tickerItem"
+                },
+                {
+                  "required": [
+                    "why",
+                    "aiStatus"
+                  ]
+                }
+              ]
+            }
+          },
+          "connections": {
+            "type": "string"
+          },
+          "ai": {
+            "type": "object",
+            "properties": {
+              "verse": {
+                "type": "string",
+                "pattern": "^ai:verse:"
+              },
+              "status": {
+                "$ref": "common.schema.json#/$defs/aiStatus"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "verse",
+              "status"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "vid",
+          "verse",
+          "ref",
+          "label",
+          "text",
+          "paragraphStart",
+          "counts",
+          "ticker",
+          "connections",
+          "ai"
+        ]
+      }
+    },
+    "attribution": {
+      "$ref": "common.schema.json#/$defs/attribution"
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "datasetVersion",
+    "rankingVersion",
+    "translation",
+    "book",
+    "chapter",
+    "chapterId",
+    "verseCount",
+    "prevChapter",
+    "nextChapter",
+    "headings",
+    "tickerInline",
+    "verses",
+    "attribution"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/graph-shard.schema.json",
+  "title": "Graph shard",
+  "description": "Outgoing OpenBible edges for one source book (spec 2.4).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.graph/2"
+    },
+    "datasetVersion": {
+      "type": "string"
+    },
+    "book": {
+      "$ref": "common.schema.json#/$defs/bookNo"
+    },
+    "osis": {
+      "type": "string"
+    },
+    "sourceId": {
+      "type": "string"
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "$ref": "common.schema.json#/$defs/vid"
+          },
+          "to": {
+            "$ref": "common.schema.json#/$defs/range"
+          },
+          "votes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sourceId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "from",
+          "to",
+          "votes",
+          "rank"
+        ]
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "datasetVersion",
+    "book",
+    "osis",
+    "sourceId",
+    "edges"
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/common.schema.json",
+  "title": "Shared definitions",
+  "description": "Types shared by every AI Study Bible document (docs/DATA_MODEL.md section 2).",
+  "$defs": {
+    "vid": {
+      "type": "integer",
+      "minimum": 1001001,
+      "maximum": 66150176,
+      "description": "Verse id: bookNo*1,000,000 + chapter*1,000 + verse. John 3:16 = 43003016"
+    },
+    "chapterId": {
+      "type": "integer",
+      "minimum": 1001000,
+      "maximum": 66150000,
+      "multipleOf": 1000,
+      "description": "Zero-verse id of a chapter. John 3 = 43003000"
+    },
+    "bookNo": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 66
+    },
+    "osisRef": {
+      "type": "string",
+      "pattern": "^[1-3]?[A-Za-z]+\\.\\d+\\.\\d+(-[1-3]?[A-Za-z]+\\.\\d+\\.\\d+)?$"
+    },
+    "range": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "common.schema.json#/$defs/vid"
+        },
+        "end": {
+          "$ref": "common.schema.json#/$defs/vid"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "verseRef": {
+      "type": "object",
+      "properties": {
+        "vid": {
+          "$ref": "common.schema.json#/$defs/vid"
+        },
+        "ref": {
+          "$ref": "common.schema.json#/$defs/osisRef"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "vid",
+        "ref",
+        "label"
+      ]
+    },
+    "verseTarget": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "common.schema.json#/$defs/vid"
+        },
+        "end": {
+          "$ref": "common.schema.json#/$defs/vid"
+        },
+        "ref": {
+          "$ref": "common.schema.json#/$defs/osisRef"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "ref",
+        "label"
+      ],
+      "description": "Jump target; end == start for a single verse (never null)"
+    },
+    "viaRange": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "start": {
+              "$ref": "common.schema.json#/$defs/vid"
+            },
+            "end": {
+              "$ref": "common.schema.json#/$defs/vid"
+            },
+            "label": {
+              "type": "string"
+            },
+            "span": {
+              "type": "integer",
+              "minimum": 2,
+              "maximum": 40
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end",
+            "label",
+            "span"
+          ]
+        }
+      ],
+      "description": "Present when the incoming citation pointed at a range covering this verse"
+    },
+    "direction": {
+      "enum": [
+        "out",
+        "in",
+        "both"
+      ]
+    },
+    "tier": {
+      "enum": [
+        "strong",
+        "solid",
+        "light"
+      ]
+    },
+    "aiStatus": {
+      "enum": [
+        "cached",
+        "not_generated"
+      ]
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "tickerItem": {
+      "type": "object",
+      "properties": {
+        "rank": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "to": {
+          "$ref": "common.schema.json#/$defs/verseTarget"
+        },
+        "direction": {
+          "$ref": "common.schema.json#/$defs/direction"
+        },
+        "votesOut": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "votesIn": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0
+        },
+        "weight": {
+          "$ref": "common.schema.json#/$defs/weight"
+        },
+        "tier": {
+          "$ref": "common.schema.json#/$defs/tier"
+        },
+        "sameBook": {
+          "type": "boolean"
+        },
+        "viaRange": {
+          "$ref": "common.schema.json#/$defs/viaRange"
+        },
+        "snippet": {
+          "type": "string"
+        },
+        "why": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aiStatus": {
+          "$ref": "common.schema.json#/$defs/aiStatus"
+        },
+        "dwellSeconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "alsoCites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ref": {
+                "$ref": "common.schema.json#/$defs/osisRef"
+              },
+              "label": {
+                "type": "string"
+              },
+              "votes": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "ref",
+              "label",
+              "votes"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "rank",
+        "to",
+        "direction",
+        "votesOut",
+        "votesIn",
+        "score",
+        "weight",
+        "tier",
+        "sameBook",
+        "viaRange",
+        "snippet"
+      ]
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "out": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "in": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "inDirect": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "inViaRange": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "shown": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "more": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "out",
+        "in",
+        "unique"
+      ]
+    },
+    "translationHeader": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "abbr": {
+          "type": "string"
+        },
+        "textVersion": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "copyrightNotice": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "abbr",
+        "textVersion",
+        "license",
+        "copyrightNotice"
+      ]
+    },
+    "attribution": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "crossReferences": {
+          "type": "string"
+        },
+        "ai": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "crossReferences",
+        "ai"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

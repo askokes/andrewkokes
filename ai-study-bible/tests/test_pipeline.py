@@ -86,5 +86,23 @@ class PipelineTest(unittest.TestCase):
                 self.assertEqual(want[k], got[k], f"rank {want['rank']} field {k}")
 
 
+
+class SchemaTest(unittest.TestCase):
+    """Every committed JSON document validates against schema/ (skipped when jsonschema is not installed)."""
+
+    def test_committed_documents_validate(self):
+        try:
+            import validate  # tools/validate.py
+        except ImportError as e:  # pragma: no cover
+            self.skipTest(f"jsonschema not installed: {e}")
+        validators = validate.load_validators()
+        paths = list(validate.iter_files([str(ROOT / "data" / "samples"), str(ROOT / "prototype" / "data")]))
+        self.assertGreater(len(paths), 80)
+        for p in paths:
+            doc = json.loads(p.read_text(encoding="utf-8"))
+            errors = list(validators[doc["schema"]].iter_errors(doc))
+            self.assertEqual(errors, [], f"{p}: {errors[:1]}")
+
+
 if __name__ == "__main__":
     unittest.main()

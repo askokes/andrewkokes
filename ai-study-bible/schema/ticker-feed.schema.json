@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/ticker-feed.schema.json",
+  "title": "Ticker feed",
+  "description": "The strip for one focus verse, with the motion rules in the data (spec 2.9, example 4.2).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.ticker/2"
+    },
+    "rankingVersion": {
+      "type": "string"
+    },
+    "translation": {
+      "type": "string"
+    },
+    "focus": {
+      "$ref": "common.schema.json#/$defs/verseRef"
+    },
+    "counts": {
+      "allOf": [
+        {
+          "$ref": "common.schema.json#/$defs/counts"
+        },
+        {
+          "required": [
+            "out",
+            "in",
+            "unique",
+            "shown",
+            "more"
+          ]
+        }
+      ]
+    },
+    "order": {
+      "type": "string"
+    },
+    "motion": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "autoScroll",
+            "advanceOnFocus"
+          ]
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "baseSeconds": {
+          "type": "number"
+        },
+        "perWeightSeconds": {
+          "type": "number"
+        },
+        "dwellFormula": {
+          "type": "string"
+        },
+        "advanceOnFocusChange": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "loop",
+        "baseSeconds",
+        "perWeightSeconds",
+        "dwellFormula",
+        "advanceOnFocusChange"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "common.schema.json#/$defs/tickerItem"
+          },
+          {
+            "required": [
+              "why",
+              "aiStatus",
+              "dwellSeconds"
+            ]
+          }
+        ]
+      }
+    },
+    "attribution": {
+      "type": "string"
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "rankingVersion",
+    "translation",
+    "focus",
+    "counts",
+    "order",
+    "motion",
+    "items",
+    "attribution"
+  ]
+}
