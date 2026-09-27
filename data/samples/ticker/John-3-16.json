@@ -1,0 +1,301 @@
+{
+  "schema": "asb.ticker/2",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "focus": {
+    "vid": 43003016,
+    "ref": "John.3.16",
+    "label": "John 3:16"
+  },
+  "counts": {
+    "out": 23,
+    "in": 104,
+    "unique": 110,
+    "shown": 12,
+    "more": 98
+  },
+  "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
+  "motion": {
+    "mode": "autoScroll",
+    "loop": true,
+    "baseSeconds": 1.6,
+    "perWeightSeconds": 1.2,
+    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "advanceOnFocusChange": true
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 45005008,
+        "end": 45005008,
+        "ref": "Rom.5.8",
+        "label": "Romans 5:8"
+      },
+      "direction": "both",
+      "votesOut": 178,
+      "votesIn": 33,
+      "score": 194.5,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
+      "why": "Both verses ground God's love in an act, not a feeling: John says God gave His Son; Paul says Christ died for us while we were still sinners.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.8
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 62004009,
+        "end": 62004010,
+        "ref": "1John.4.9-1John.4.10",
+        "label": "1 John 4:9–10"
+      },
+      "direction": "both",
+      "votesOut": 122,
+      "votesIn": 13,
+      "score": 128.5,
+      "weight": 0.922,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+      "why": "John's letter restates his Gospel line almost word for word: God sent His one and only Son into the world, and this is what love is.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.71
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 43003015,
+        "end": 43003015,
+        "ref": "John.3.15",
+        "label": "John 3:15"
+      },
+      "direction": "both",
+      "votesOut": 90,
+      "votesIn": 8,
+      "score": 94.0,
+      "weight": 0.863,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "that everyone who believes in Him may have eternal life.",
+      "why": "The verse immediately before it: 'everyone who believes in Him may have eternal life' is the promise 3:16 then explains with God's love as its cause.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.64
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 43011025,
+        "end": 43011026,
+        "ref": "John.11.25-John.11.26",
+        "label": "John 11:25–26"
+      },
+      "direction": "out",
+      "votesOut": 81,
+      "votesIn": 0,
+      "score": 81.0,
+      "weight": 0.835,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.6
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 43006040,
+        "end": 43006040,
+        "ref": "John.6.40",
+        "label": "John 6:40"
+      },
+      "direction": "both",
+      "votesOut": 72,
+      "votesIn": 3,
+      "score": 72.75,
+      "weight": 0.815,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003018,
+        "label": "John 3:15–18",
+        "span": 4
+      },
+      "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.58
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 45008032,
+        "end": 45008032,
+        "ref": "Rom.8.32",
+        "label": "Romans 8:32"
+      },
+      "direction": "both",
+      "votesOut": 68,
+      "votesIn": 6,
+      "score": 71.0,
+      "weight": 0.811,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.57
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 43003036,
+        "end": 43003036,
+        "ref": "John.3.36",
+        "label": "John 3:36"
+      },
+      "direction": "both",
+      "votesOut": 63,
+      "votesIn": 10,
+      "score": 66.54,
+      "weight": 0.799,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "Whoever believes in the Son has eternal life. Whoever rejects the Son will not see life. Instead, the wrath…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.56
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 62004019,
+        "end": 62004019,
+        "ref": "1John.4.19",
+        "label": "1 John 4:19"
+      },
+      "direction": "both",
+      "votesOut": 59,
+      "votesIn": 3,
+      "score": 60.5,
+      "weight": 0.781,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "We love because He first loved us.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.54
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 54001015,
+        "end": 54001016,
+        "ref": "1Tim.1.15-1Tim.1.16",
+        "label": "1 Timothy 1:15–16"
+      },
+      "direction": "both",
+      "votesOut": 49,
+      "votesIn": 8,
+      "score": 51.83,
+      "weight": 0.752,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.5
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 43010028,
+        "end": 43010028,
+        "ref": "John.10.28",
+        "label": "John 10:28"
+      },
+      "direction": "both",
+      "votesOut": 50,
+      "votesIn": 2,
+      "score": 50.71,
+      "weight": 0.748,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.5
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 43001029,
+        "end": 43001029,
+        "ref": "John.1.29",
+        "label": "John 1:29"
+      },
+      "direction": "both",
+      "votesOut": 46,
+      "votesIn": 3,
+      "score": 47.5,
+      "weight": 0.736,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "The next day John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.48
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 45005010,
+        "end": 45005010,
+        "ref": "Rom.5.10",
+        "label": "Romans 5:10"
+      },
+      "direction": "out",
+      "votesOut": 46,
+      "votesIn": 0,
+      "score": 46.0,
+      "weight": 0.73,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.48
+    }
+  ],
+  "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
+}

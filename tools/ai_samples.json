@@ -1,0 +1,263 @@
+{
+  "_note": "Illustrative sample AI notes, written during prototyping to show where AI context appears. They are not output of the production pipeline and have not been theologically reviewed. Keys are fromVid>toStart or fromVid>toStart-toEnd.",
+  "edges": {
+    "43003016>45005008": "Both verses ground God's love in an act, not a feeling: John says God gave His Son; Paul says Christ died for us while we were still sinners.",
+    "43003016>62004009-62004010": "John's letter restates his Gospel line almost word for word: God sent His one and only Son into the world, and this is what love is.",
+    "43003016>43003015": "The verse immediately before it: 'everyone who believes in Him may have eternal life' is the promise 3:16 then explains with God's love as its cause.",
+    "1001001>43001001-43001003": "John opens his Gospel with the same words, 'In the beginning', and names the Word as the one through whom all things were made.",
+    "1001001>58011003": "Hebrews reads the creation account as a lesson in faith: the universe was formed at God's command, out of what cannot be seen.",
+    "1001001>23045018": "Isaiah points to creation as proof that God is unique: the one who made the heavens and formed the earth is the only God.",
+    "19022001>40027046": "Jesus quotes this opening line from the cross. Matthew gives it in Aramaic, 'Eli, Eli, lema sabachthani', and then translates it.",
+    "19022001>41015034": "Mark records the same cry from the cross in its Aramaic form, 'Eloi, Eloi', with a translation that matches this verse.",
+    "19022001>19022016": "The same psalm moves from the cry of abandonment to a scene of being surrounded, with hands and feet pierced. Christians have long read it alongside the crucifixion.",
+    "23053005>60002024-60002025": "Peter borrows Isaiah's words directly, 'by His stripes you are healed', and then picks up the image of straying sheep from the next verse of Isaiah.",
+    "23053005>60003018": "Peter states the exchange Isaiah describes in plain terms: the righteous suffered for the unrighteous, to bring us to God.",
+    "23053005>40020028": "Jesus describes His own mission in the language of a substitute: He came to give His life as a ransom for many.",
+    "45005008>43003016": "The two best-known statements of God's love side by side: Paul's proof in Christ's death matches Jesus' words about God giving His Son.",
+    "45005008>45005006": "Two verses earlier Paul makes the same point from another angle: Christ died for the ungodly while we were still powerless.",
+    "45005008>43015013": "Jesus calls laying down one's life for friends the greatest love. Paul goes further here: Christ died for people who were still sinners.",
+    "43001001>1001001": "John deliberately echoes the first words of Genesis, placing the Word at the beginning, before creation and behind it.",
+    "43001001>62001001-62001002": "John's first letter opens the same way, 'from the beginning', but stresses that this eternal Word was seen, heard and touched.",
+    "43001001>43017005": "Jesus Himself speaks of the glory He shared with the Father before the world existed, the same claim John makes in his opening line.",
+    "40005003>23066002": "God says He looks with favor on the one who is humble and contrite in spirit, the same people Jesus calls blessed.",
+    "40005003>20029023": "Proverbs makes the same reversal: pride brings a person low, while a humble spirit obtains honor.",
+    "40005003>23061001": "Isaiah's anointed messenger brings good news to the poor. Jesus reads this passage aloud in Luke 4 and claims it for Himself.",
+    "19023001>50004019": "Paul's promise that God will supply every need restates the psalm's confidence: with this shepherd, 'I shall not want'.",
+    "19023001>43010011": "Jesus takes the psalm's title for Himself, 'I am the good shepherd', and adds that this shepherd lays down His life for the sheep.",
+    "19023001>23040011": "Isaiah paints the same picture of God as a shepherd who tends the flock and carries the lambs close to His heart.",
+    "58011001>47004018": "Paul describes faith the same way: fixing our eyes on what is unseen and eternal rather than on what is seen and temporary.",
+    "58011001>47005007": "A one-line summary of the same idea: we walk by faith, not by sight.",
+    "58011001>45008024-45008025": "Paul ties hope to the unseen just as Hebrews does: hope that is seen is no hope at all, so we wait for it patiently.",
+    "23007014>40001023": "Matthew quotes this verse to explain Jesus' birth and translates the name: Immanuel means 'God with us'.",
+    "23007014>23009006": "Two chapters later Isaiah returns to the promised child, 'unto us a child is born', with titles such as Mighty God and Prince of Peace.",
+    "23007014>42001031": "The angel's announcement to Mary follows the same pattern: you will conceive and give birth to a son.",
+    "43014006>43010009": "Another of Jesus' 'I am' sayings with the same claim: He is the gate, and whoever enters through Him will be saved.",
+    "43014006>44004012": "Peter makes the same exclusive claim in public in Jerusalem: salvation is found in no other name.",
+    "43014006>49002018": "Paul explains what 'the way to the Father' means in practice: through Christ, Jew and Gentile both have access by one Spirit.",
+    "49002008>49002005": "Paul says it first three verses earlier, in the middle of a sentence: 'It is by grace you have been saved'.",
+    "49002008>45003022-45003026": "Romans lays out the full argument behind this verse: righteousness from God comes through faith, freely by His grace, to all who believe.",
+    "49002008>45004016": "Paul links faith and grace the same way in Romans: the promise comes by faith so that it rests on grace."
+  },
+  "verses": {
+    "43003016": {
+      "summary": "Jesus tells Nicodemus that God's love for the world is the reason He gave His one and only Son, and that trusting the Son is what separates perishing from eternal life.",
+      "context": "Spoken at night to Nicodemus, a Pharisee (John 3:1-2). It follows the bronze-snake comparison in 3:14-15 (Numbers 21:8-9): as Israel lived by looking at the lifted-up snake, people live by believing in the lifted-up Son.",
+      "speaker": "Jesus (to Nicodemus)",
+      "themes": [
+        "love of God",
+        "eternal life",
+        "belief",
+        "the Son given",
+        "the world"
+      ],
+      "readingTip": "Read 3:14-18 as one unit: 'lifted up', 'gave', and 'not condemned' explain each other.",
+      "questions": [
+        "What does 'the world' include here, given 3:17?",
+        "How do verses 14-15 set up 'gave' in verse 16?"
+      ]
+    }
+  },
+  "aiContextSample": {
+    "schema": "asb.ai/2",
+    "verse": {
+      "key": "ai:verse:43003016:bsb:bsb-2023:v3",
+      "kind": "verse",
+      "vid": 43003016,
+      "ref": "John.3.16",
+      "translation": "bsb",
+      "textVersion": "bsb-2023",
+      "content": {
+        "summary": "Jesus tells Nicodemus that God's love for the world is the reason He gave His one and only Son, and that trusting the Son is what separates perishing from eternal life.",
+        "context": "Spoken at night to Nicodemus, a Pharisee (John 3:1-2). It follows the bronze-snake comparison in 3:14-15 (Numbers 21:8-9): as Israel lived by looking at the lifted-up snake, people live by believing in the lifted-up Son.",
+        "speaker": "Jesus (to Nicodemus)",
+        "genre": "Gospel discourse",
+        "themes": [
+          "love of God",
+          "eternal life",
+          "belief",
+          "the Son given",
+          "the world"
+        ],
+        "entities": [
+          {
+            "name": "God",
+            "type": "person",
+            "role": "giver"
+          },
+          {
+            "name": "the Son",
+            "type": "person",
+            "alias": "Jesus",
+            "role": "given"
+          },
+          {
+            "name": "Nicodemus",
+            "type": "person",
+            "role": "listener",
+            "vid": 43003001
+          },
+          {
+            "name": "the world",
+            "type": "group"
+          }
+        ],
+        "questions": [
+          "What does 'the world' include here, given 3:17?",
+          "How do verses 14-15 set up 'gave' in verse 16?"
+        ],
+        "readingTip": "Read 3:14-18 as one unit: 'lifted up', 'gave', and 'not condemned' explain each other."
+      },
+      "provenance": {
+        "generator": "claude",
+        "model": "claude-opus-5",
+        "promptId": "verse-context",
+        "promptVersion": "v3",
+        "schemaVersion": 2,
+        "inputs": {
+          "verses": [
+            43003014,
+            43003015,
+            43003016,
+            43003017,
+            43003018
+          ],
+          "topConnections": 12,
+          "rankingVersion": "asb.rank.v2",
+          "translation": "bsb",
+          "textVersion": "bsb-2023"
+        },
+        "inputHash": "sha256:5b1e4c0a9d2f7e6b1c3a8d4f0e9b7a6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a",
+        "generatedAt": "2026-09-20T03:12:44Z",
+        "backendJob": "batch_01J8Y2K7",
+        "tokens": {
+          "input": 1840,
+          "output": 212
+        },
+        "reviewed": false,
+        "disclaimer": "AI-generated study aid, not authoritative commentary and not part of the Bible text or the OpenBible dataset."
+      },
+      "cache": {
+        "source": "bundled",
+        "fetchedAt": null,
+        "ttlDays": null,
+        "invalidateOn": [
+          "promptVersion",
+          "textVersion",
+          "rankingVersion"
+        ]
+      }
+    },
+    "connection": {
+      "key": "ai:edge:43003016>45005008:bsb:bsb-2023:v2",
+      "kind": "edge",
+      "from": {
+        "vid": 43003016,
+        "ref": "John.3.16",
+        "label": "John 3:16"
+      },
+      "to": {
+        "start": 45005008,
+        "end": 45005008,
+        "ref": "Rom.5.8",
+        "label": "Romans 5:8"
+      },
+      "direction": "both",
+      "votesOut": 178,
+      "votesIn": 33,
+      "translation": "bsb",
+      "textVersion": "bsb-2023",
+      "content": {
+        "why": "Both verses ground God's love in an act, not a feeling: John says God gave His Son; Paul says Christ died for us while we were still sinners. John states it as Jesus' teaching; Paul states it as the proof of God's love toward sinners.",
+        "relation": "parallel",
+        "confidence": 0.92,
+        "sharedThemes": [
+          "love of God",
+          "the Son given",
+          "sacrifice"
+        ],
+        "readNext": [
+          {
+            "to": {
+              "start": 62004009,
+              "end": 62004010,
+              "ref": "1John.4.9-1John.4.10",
+              "label": "1 John 4:9–10"
+            },
+            "why": "Restates both verses with 'sent His Son' and 'atoning sacrifice'."
+          },
+          {
+            "to": {
+              "start": 45008032,
+              "end": 45008032,
+              "ref": "Rom.8.32",
+              "label": "Romans 8:32"
+            },
+            "why": "Paul's own echo of 'gave His Son': 'did not spare His own Son'."
+          }
+        ]
+      },
+      "relationVocabulary": [
+        "quotation",
+        "allusion",
+        "fulfillment",
+        "parallel",
+        "contrast",
+        "context",
+        "thematic"
+      ],
+      "provenance": {
+        "generator": "claude",
+        "model": "claude-opus-5",
+        "promptId": "edge-why",
+        "promptVersion": "v2",
+        "schemaVersion": 2,
+        "inputs": {
+          "verses": [
+            43003016,
+            45005008
+          ],
+          "votesOut": 178,
+          "votesIn": 33,
+          "translation": "bsb",
+          "textVersion": "bsb-2023"
+        },
+        "inputHash": "sha256:91ad3f0b7c6e5d4a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f91",
+        "generatedAt": "2026-09-21T11:48:52Z",
+        "backendJob": "batch_01J8Y2K7",
+        "tokens": {
+          "input": 610,
+          "output": 96
+        },
+        "reviewed": false,
+        "disclaimer": "AI-generated study aid, not authoritative commentary and not part of the Bible text or the OpenBible dataset."
+      },
+      "cache": {
+        "source": "fetched",
+        "fetchedAt": "2026-09-27T14:04:00Z",
+        "ttlDays": 365,
+        "invalidateOn": [
+          "promptVersion",
+          "textVersion"
+        ]
+      }
+    },
+    "requestOnMiss": {
+      "method": "POST",
+      "path": "/v1/context",
+      "body": {
+        "kind": "edge",
+        "from": 43003016,
+        "to": {
+          "start": 45005008,
+          "end": 45005008
+        },
+        "translation": "bsb",
+        "textVersion": "bsb-2023",
+        "promptVersion": "v2"
+      },
+      "auth": "App Attest + anonymous device token; the phone never holds an Anthropic API key",
+      "policy": "Generated on the backend with the Anthropic API (Batches API for pre-generation). Every AI field renders with an 'AI' marker; model and prompt version shown on long-press."
+    },
+    "_note": "Illustrative sample written during prototyping to show the shape; vids, refs and votes are real. Not production model output."
+  }
+}

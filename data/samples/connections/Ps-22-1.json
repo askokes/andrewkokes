@@ -1,0 +1,1366 @@
+{
+  "schema": "asb.connections/2",
+  "datasetVersion": "2026.09.1",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "vid": 19022001,
+  "ref": "Ps.22.1",
+  "label": "Psalm 22:1",
+  "counts": {
+    "out": 22,
+    "in": 50,
+    "inDirect": 16,
+    "inViaRange": 34,
+    "unique": 62
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 40027046,
+        "end": 40027046,
+        "ref": "Matt.27.46",
+        "label": "Matthew 27:46"
+      },
+      "direction": "both",
+      "votesOut": 10,
+      "votesIn": 14,
+      "score": 17.0,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "About the ninth hour Jesus cried out in a loud voice, “Eli, Eli, lema sabachthani?” which means, “My God, My…",
+      "alsoCites": []
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 41015034,
+        "end": 41015034,
+        "ref": "Mark.15.34",
+        "label": "Mark 15:34"
+      },
+      "direction": "both",
+      "votesOut": 12,
+      "votesIn": 8,
+      "score": 16.0,
+      "weight": 0.98,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "At the ninth hour, Jesus cried out in a loud voice, “Eloi, Eloi, lema sabachthani?” which means, “My God, My…",
+      "alsoCites": []
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 19022016,
+        "end": 19022016,
+        "ref": "Ps.22.16",
+        "label": "Psalm 22:16"
+      },
+      "direction": "both",
+      "votesOut": 4,
+      "votesIn": 3,
+      "score": 5.5,
+      "weight": 0.648,
+      "tier": "solid",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "For dogs surround me; a band of evil men encircles me; they have pierced my hands and feet.",
+      "alsoCites": []
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 58005007,
+        "end": 58005007,
+        "ref": "Heb.5.7",
+        "label": "Hebrews 5:7"
+      },
+      "direction": "both",
+      "votesOut": 5,
+      "votesIn": 2,
+      "score": 5.22,
+      "weight": 0.632,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022021,
+        "label": "Psalm 22:1–21",
+        "span": 21
+      },
+      "snippet": "During the days of Jesus’ earthly life, He offered up prayers and petitions with loud cries and tears to the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 18003024,
+        "end": 18003024,
+        "ref": "Job.3.24",
+        "label": "Job 3:24"
+      },
+      "direction": "both",
+      "votesOut": 4,
+      "votesIn": 2,
+      "score": 4.71,
+      "weight": 0.603,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "I sigh when food is put before me, and my groans pour out like water.",
+      "alsoCites": []
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 19038008,
+        "end": 19038008,
+        "ref": "Ps.38.8",
+        "label": "Psalm 38:8"
+      },
+      "direction": "both",
+      "votesOut": 4,
+      "votesIn": 2,
+      "score": 4.71,
+      "weight": 0.603,
+      "tier": "solid",
+      "sameBook": true,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "I am numb and badly crushed; I groan in anguish of heart.",
+      "alsoCites": []
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 19010001,
+        "end": 19010001,
+        "ref": "Ps.10.1",
+        "label": "Psalm 10:1"
+      },
+      "direction": "both",
+      "votesOut": 2,
+      "votesIn": 5,
+      "score": 4.5,
+      "weight": 0.59,
+      "tier": "solid",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Why, O LORD, do You stand far off? Why do You hide in times of trouble?",
+      "alsoCites": []
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 19032003,
+        "end": 19032004,
+        "ref": "Ps.32.3-Ps.32.4",
+        "label": "Psalm 32:3–4"
+      },
+      "direction": "both",
+      "votesOut": 2,
+      "votesIn": 3,
+      "score": 3.5,
+      "weight": 0.52,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "When I kept silent, my bones became brittle from my groaning all day long.",
+      "alsoCites": []
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 19022011,
+        "end": 19022011,
+        "ref": "Ps.22.11",
+        "label": "Psalm 22:11"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.48,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Be not far from me, for trouble is near and there is no one to help.",
+      "alsoCites": []
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 19026009,
+        "end": 19026009,
+        "ref": "Ps.26.9",
+        "label": "Psalm 26:9"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.48,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Do not take my soul away with sinners, or my life with men of bloodshed,",
+      "alsoCites": []
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 19042001,
+        "end": 19042002,
+        "ref": "Ps.42.1-Ps.42.2",
+        "label": "Psalm 42:1–2"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.48,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "For the choirmaster. A Maskil of the sons of Korah. As the deer pants for streams of water, so my soul longs…",
+      "alsoCites": []
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 23059011,
+        "end": 23059011,
+        "ref": "Isa.59.11",
+        "label": "Isaiah 59:11"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.48,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "We all growl like bears and moan like doves. We hope for justice, but find none, for salvation, but it is far…",
+      "alsoCites": []
+    },
+    {
+      "rank": 13,
+      "to": {
+        "start": 58013005,
+        "end": 58013005,
+        "ref": "Heb.13.5",
+        "label": "Hebrews 13:5"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.48,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Keep your lives free from the love of money and be content with what you have, for God has said: “Never will…",
+      "alsoCites": []
+    },
+    {
+      "rank": 14,
+      "to": {
+        "start": 19031014,
+        "end": 19031016,
+        "ref": "Ps.31.14-Ps.31.16",
+        "label": "Psalm 31:14–16"
+      },
+      "direction": "both",
+      "votesOut": 2,
+      "votesIn": 2,
+      "score": 2.71,
+      "weight": 0.454,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "But I trust in You, O LORD; I say, “You are my God.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 15,
+      "to": {
+        "start": 42024044,
+        "end": 42024044,
+        "ref": "Luke.24.44",
+        "label": "Luke 24:44"
+      },
+      "direction": "both",
+      "votesOut": 2,
+      "votesIn": 3,
+      "score": 2.27,
+      "weight": 0.41,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "Jesus said to them, “These are the words I spoke to you while I was still with you: Everything must be…",
+      "alsoCites": []
+    },
+    {
+      "rank": 16,
+      "to": {
+        "start": 9012022,
+        "end": 9012022,
+        "ref": "1Sam.12.22",
+        "label": "1 Samuel 12:22"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.38,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Indeed, for the sake of His great name, the LORD will not abandon His people, because He was pleased to make…",
+      "alsoCites": []
+    },
+    {
+      "rank": 17,
+      "to": {
+        "start": 19016001,
+        "end": 19016001,
+        "ref": "Ps.16.1",
+        "label": "Psalm 16:1"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.38,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "A Miktam of David. Preserve me, O God, for in You I take refuge.",
+      "alsoCites": []
+    },
+    {
+      "rank": 18,
+      "to": {
+        "start": 19037028,
+        "end": 19037028,
+        "ref": "Ps.37.28",
+        "label": "Psalm 37:28"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.38,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "For the LORD loves justice and will not forsake His saints. They are preserved forever, but the offspring of…",
+      "alsoCites": []
+    },
+    {
+      "rank": 19,
+      "to": {
+        "start": 19043001,
+        "end": 19043005,
+        "ref": "Ps.43.1-Ps.43.5",
+        "label": "Psalm 43:1–5"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.38,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Vindicate me, O God, and plead my case against an ungodly nation; deliver me from deceitful and unjust men.",
+      "alsoCites": []
+    },
+    {
+      "rank": 20,
+      "to": {
+        "start": 19071011,
+        "end": 19071011,
+        "ref": "Ps.71.11",
+        "label": "Psalm 71:11"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.38,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "saying, “God has forsaken him; pursue him and seize him, for there is no one to rescue him.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 21,
+      "to": {
+        "start": 23046013,
+        "end": 23046013,
+        "ref": "Isa.46.13",
+        "label": "Isaiah 46:13"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.38,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "I am bringing My righteousness near; it is not far away, and My salvation will not be delayed. I will grant…",
+      "alsoCites": []
+    },
+    {
+      "rank": 22,
+      "to": {
+        "start": 42022044,
+        "end": 42022044,
+        "ref": "Luke.22.44",
+        "label": "Luke 22:44"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.38,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And in His anguish, He prayed more earnestly, and His sweat became like drops of blood falling to the ground.",
+      "alsoCites": []
+    },
+    {
+      "rank": 23,
+      "to": {
+        "start": 47004009,
+        "end": 47004009,
+        "ref": "2Cor.4.9",
+        "label": "2 Corinthians 4:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.317,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "persecuted, but not forsaken; struck down, but not destroyed.",
+      "alsoCites": []
+    },
+    {
+      "rank": 24,
+      "to": {
+        "start": 35001002,
+        "end": 35001002,
+        "ref": "Hab.1.2",
+        "label": "Habakkuk 1:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.06,
+      "weight": 0.25,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "How long, O LORD, must I call for help but You do not hear, or cry out to You, “Violence!” but You do not…",
+      "alsoCites": []
+    },
+    {
+      "rank": 25,
+      "to": {
+        "start": 40026036,
+        "end": 40026036,
+        "ref": "Matt.26.36",
+        "label": "Matthew 26:36"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.06,
+      "weight": 0.25,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "At that time Jesus went with His disciples to a place called Gethsemane, and He told them, “Sit here while I…",
+      "alsoCites": []
+    },
+    {
+      "rank": 26,
+      "to": {
+        "start": 3001015,
+        "end": 3001015,
+        "ref": "Lev.1.15",
+        "label": "Leviticus 1:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Then the priest shall bring it to the altar, twist off its head, and burn it on the altar; its blood should…",
+      "alsoCites": []
+    },
+    {
+      "rank": 27,
+      "to": {
+        "start": 16006014,
+        "end": 16006014,
+        "ref": "Neh.6.14",
+        "label": "Nehemiah 6:14"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "O my God, remember Tobiah and Sanballat for what they have done, and also Noadiah the prophetess and the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 28,
+      "to": {
+        "start": 19004001,
+        "end": 19004001,
+        "ref": "Ps.4.1",
+        "label": "Psalm 4:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "For the choirmaster. With stringed instruments. A Psalm of David. Answer me when I call, O God of my…",
+      "alsoCites": []
+    },
+    {
+      "rank": 29,
+      "to": {
+        "start": 19025002,
+        "end": 19025002,
+        "ref": "Ps.25.2",
+        "label": "Psalm 25:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "in You, my God, I trust. Do not let me be put to shame; do not let my enemies exult over me.",
+      "alsoCites": []
+    },
+    {
+      "rank": 30,
+      "to": {
+        "start": 19038021,
+        "end": 19038021,
+        "ref": "Ps.38.21",
+        "label": "Psalm 38:21"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Do not forsake me, O LORD; be not far from me, O my God.",
+      "alsoCites": []
+    },
+    {
+      "rank": 31,
+      "to": {
+        "start": 19042006,
+        "end": 19042006,
+        "ref": "Ps.42.6",
+        "label": "Psalm 42:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "O my God, my soul despairs within me. Therefore I remember You from the land of Jordan and the peaks of…",
+      "alsoCites": []
+    },
+    {
+      "rank": 32,
+      "to": {
+        "start": 19069018,
+        "end": 19069018,
+        "ref": "Ps.69.18",
+        "label": "Psalm 69:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Draw near to my soul and redeem me; ransom me because of my foes.",
+      "alsoCites": []
+    },
+    {
+      "rank": 33,
+      "to": {
+        "start": 19083013,
+        "end": 19083013,
+        "ref": "Ps.83.13",
+        "label": "Psalm 83:13"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Make them like tumbleweed, O my God, like chaff before the wind.",
+      "alsoCites": []
+    },
+    {
+      "rank": 34,
+      "to": {
+        "start": 19143010,
+        "end": 19143010,
+        "ref": "Ps.143.10",
+        "label": "Psalm 143:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Teach me to do Your will, for You are my God. May Your good Spirit lead me on level ground.",
+      "alsoCites": []
+    },
+    {
+      "rank": 35,
+      "to": {
+        "start": 23049014,
+        "end": 23049014,
+        "ref": "Isa.49.14",
+        "label": "Isaiah 49:14"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.24,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But Zion said, “The LORD has forsaken me; the Lord has forgotten me!”",
+      "alsoCites": []
+    },
+    {
+      "rank": 36,
+      "to": {
+        "start": 14006040,
+        "end": 14006040,
+        "ref": "2Chr.6.40",
+        "label": "2 Chronicles 6:40"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "Now, my God, may Your eyes be open and Your ears attentive to the prayer offered in this place.",
+      "alsoCites": []
+    },
+    {
+      "rank": 37,
+      "to": {
+        "start": 19013001,
+        "end": 19013001,
+        "ref": "Ps.13.1",
+        "label": "Psalm 13:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "For the choirmaster. A Psalm of David. How long, O LORD? Will You forget me forever? How long will You hide…",
+      "alsoCites": []
+    },
+    {
+      "rank": 38,
+      "to": {
+        "start": 19042009,
+        "end": 19042009,
+        "ref": "Ps.42.9",
+        "label": "Psalm 42:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "I say to God my Rock, “Why have You forgotten me? Why must I walk in sorrow because of the enemy’s…",
+      "alsoCites": []
+    },
+    {
+      "rank": 39,
+      "to": {
+        "start": 22003002,
+        "end": 22003002,
+        "ref": "Song.3.2",
+        "label": "Song of Songs 3:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "I will arise now and go about the city, through the streets and squares. I will seek the one I love. So I…",
+      "alsoCites": []
+    },
+    {
+      "rank": 40,
+      "to": {
+        "start": 22005006,
+        "end": 22005006,
+        "ref": "Song.5.6",
+        "label": "Song of Songs 5:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "I opened for my beloved, but he had turned and gone. My heart sank at his departure. I sought him, but did…",
+      "alsoCites": []
+    },
+    {
+      "rank": 41,
+      "to": {
+        "start": 40026042,
+        "end": 40026042,
+        "ref": "Matt.26.42",
+        "label": "Matthew 26:42"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "A second time He went away and prayed, “My Father, if this cup cannot pass unless I drink it, may Your will…",
+      "alsoCites": []
+    },
+    {
+      "rank": 42,
+      "to": {
+        "start": 41004038,
+        "end": 41004038,
+        "ref": "Mark.4.38",
+        "label": "Mark 4:38"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "But Jesus was in the stern, sleeping on the cushion. So they woke Him and said, “Teacher, don’t You care that…",
+      "alsoCites": []
+    },
+    {
+      "rank": 43,
+      "to": {
+        "start": 41014032,
+        "end": 41014032,
+        "ref": "Mark.14.32",
+        "label": "Mark 14:32"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.186,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022002,
+        "label": "Psalm 22:1–2",
+        "span": 2
+      },
+      "snippet": "Then they came to a place called Gethsemane, and Jesus told His disciples, “Sit here while I pray.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 44,
+      "to": {
+        "start": 18021004,
+        "end": 18021004,
+        "ref": "Job.21.4",
+        "label": "Job 21:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.158,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022003,
+        "label": "Psalm 22:1–3",
+        "span": 3
+      },
+      "snippet": "Is my complaint against a man? Then why should I not be impatient?",
+      "alsoCites": []
+    },
+    {
+      "rank": 45,
+      "to": {
+        "start": 19116004,
+        "end": 19116004,
+        "ref": "Ps.116.4",
+        "label": "Psalm 116:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.158,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022003,
+        "label": "Psalm 22:1–3",
+        "span": 3
+      },
+      "snippet": "Then I called on the name of the LORD: “O LORD, deliver my soul!”",
+      "alsoCites": []
+    },
+    {
+      "rank": 46,
+      "to": {
+        "start": 42018031,
+        "end": 42018031,
+        "ref": "Luke.18.31",
+        "label": "Luke 18:31"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 0.45,
+      "weight": 0.129,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "Then Jesus took the Twelve aside and said to them, “Look, we are going up to Jerusalem, and everything the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 47,
+      "to": {
+        "start": 3002006,
+        "end": 3002006,
+        "ref": "Lev.2.6",
+        "label": "Leviticus 2:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.33,
+      "weight": 0.099,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022021,
+        "label": "Psalm 22:1–21",
+        "span": 21
+      },
+      "snippet": "Crumble it and pour oil on it; it is a grain offering.",
+      "alsoCites": []
+    },
+    {
+      "rank": 48,
+      "to": {
+        "start": 41009012,
+        "end": 41009012,
+        "ref": "Mark.9.12",
+        "label": "Mark 9:12"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.27,
+      "weight": 0.083,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "He replied, “Elijah does indeed come first, and he restores all things. Why then is it written that the Son…",
+      "alsoCites": []
+    },
+    {
+      "rank": 49,
+      "to": {
+        "start": 41014021,
+        "end": 41014021,
+        "ref": "Mark.14.21",
+        "label": "Mark 14:21"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.27,
+      "weight": 0.083,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed! It would…",
+      "alsoCites": []
+    },
+    {
+      "rank": 50,
+      "to": {
+        "start": 42022022,
+        "end": 42022022,
+        "ref": "Luke.22.22",
+        "label": "Luke 22:22"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.27,
+      "weight": 0.083,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "Indeed, the Son of Man will go as it has been determined, but woe to that man who betrays Him.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 51,
+      "to": {
+        "start": 44026023,
+        "end": 44026023,
+        "ref": "Acts.26.23",
+        "label": "Acts 26:23"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.27,
+      "weight": 0.083,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "that the Christ would suffer, and as the first to rise from the dead, would proclaim light to our people and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 52,
+      "to": {
+        "start": 3005011,
+        "end": 3005011,
+        "ref": "Lev.5.11",
+        "label": "Leviticus 5:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.22,
+      "weight": 0.069,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022021,
+        "label": "Psalm 22:1–21",
+        "span": 21
+      },
+      "snippet": "But if he cannot afford two turtledoves or two young pigeons, he may bring a tenth of an ephah of fine flour…",
+      "alsoCites": []
+    },
+    {
+      "rank": 53,
+      "to": {
+        "start": 40020018,
+        "end": 40020018,
+        "ref": "Matt.20.18",
+        "label": "Matthew 20:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "“Look, we are going up to Jerusalem, and the Son of Man will be delivered over to the chief priests and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 54,
+      "to": {
+        "start": 40026024,
+        "end": 40026024,
+        "ref": "Matt.26.24",
+        "label": "Matthew 26:24"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed. It would…",
+      "alsoCites": []
+    },
+    {
+      "rank": 55,
+      "to": {
+        "start": 40026054,
+        "end": 40026054,
+        "ref": "Matt.26.54",
+        "label": "Matthew 26:54"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "But how then would the Scriptures be fulfilled that say it must happen this way?”",
+      "alsoCites": []
+    },
+    {
+      "rank": 56,
+      "to": {
+        "start": 41014049,
+        "end": 41014049,
+        "ref": "Mark.14.49",
+        "label": "Mark 14:49"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "Every day I was with you, teaching in the temple courts, and you did not arrest Me. But this has happened…",
+      "alsoCites": []
+    },
+    {
+      "rank": 57,
+      "to": {
+        "start": 42009022,
+        "end": 42009022,
+        "ref": "Luke.9.22",
+        "label": "Luke 9:22"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "“The Son of Man must suffer many things,” He said. “He must be rejected by the elders, chief priests, and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 58,
+      "to": {
+        "start": 42024026,
+        "end": 42024026,
+        "ref": "Luke.24.26",
+        "label": "Luke 24:26"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "Was it not necessary for the Christ to suffer these things and then to enter His glory?”",
+      "alsoCites": []
+    },
+    {
+      "rank": 59,
+      "to": {
+        "start": 42024046,
+        "end": 42024046,
+        "ref": "Luke.24.46",
+        "label": "Luke 24:46"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "And He told them, “This is what is written: The Christ will suffer and rise from the dead on the third day,",
+      "alsoCites": []
+    },
+    {
+      "rank": 60,
+      "to": {
+        "start": 44003018,
+        "end": 44003018,
+        "ref": "Acts.3.18",
+        "label": "Acts 3:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022030,
+        "label": "Psalm 22:1–30",
+        "span": 30
+      },
+      "snippet": "But in this way God has fulfilled what He foretold through all the prophets, saying that His Christ would…",
+      "alsoCites": []
+    },
+    {
+      "rank": 61,
+      "to": {
+        "start": 46015003,
+        "end": 46015003,
+        "ref": "1Cor.15.3",
+        "label": "1 Corinthians 15:3"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "For what I received I passed on to you as of first importance: that Christ died for our sins according to the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 62,
+      "to": {
+        "start": 60001011,
+        "end": 60001011,
+        "ref": "1Pet.1.11",
+        "label": "1 Peter 1:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.057,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 19022001,
+        "end": 19022031,
+        "label": "Psalm 22:1–31",
+        "span": 31
+      },
+      "snippet": "trying to determine the time and setting to which the Spirit of Christ in them was pointing when He predicted…",
+      "alsoCites": []
+    }
+  ]
+}

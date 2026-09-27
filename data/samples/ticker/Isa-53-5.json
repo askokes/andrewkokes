@@ -1,0 +1,306 @@
+{
+  "schema": "asb.ticker/2",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "focus": {
+    "vid": 23053005,
+    "ref": "Isa.53.5",
+    "label": "Isaiah 53:5"
+  },
+  "counts": {
+    "out": 19,
+    "in": 69,
+    "unique": 79,
+    "shown": 12,
+    "more": 67
+  },
+  "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
+  "motion": {
+    "mode": "autoScroll",
+    "loop": true,
+    "baseSeconds": 1.6,
+    "perWeightSeconds": 1.2,
+    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "advanceOnFocusChange": true
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 60002024,
+        "end": 60002025,
+        "ref": "1Pet.2.24-1Pet.2.25",
+        "label": "1 Peter 2:24–25"
+      },
+      "direction": "both",
+      "votesOut": 15,
+      "votesIn": 11,
+      "score": 18.18,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "He Himself bore our sins in His body on the tree, so that we might die to sin and live to righteousness. “By…",
+      "why": "Peter borrows Isaiah's words directly, 'by His stripes you are healed', and then picks up the image of straying sheep from the next verse of Isaiah.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.8
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 60003018,
+        "end": 60003018,
+        "ref": "1Pet.3.18",
+        "label": "1 Peter 3:18"
+      },
+      "direction": "both",
+      "votesOut": 14,
+      "votesIn": 2,
+      "score": 14.58,
+      "weight": 0.93,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+      "why": "Peter states the exchange Isaiah describes in plain terms: the righteous suffered for the unrighteous, to bring us to God.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.72
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 40020028,
+        "end": 40020028,
+        "ref": "Matt.20.28",
+        "label": "Matthew 20:28"
+      },
+      "direction": "both",
+      "votesOut": 11,
+      "votesIn": 4,
+      "score": 13.0,
+      "weight": 0.893,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "just as the Son of Man did not come to be served, but to serve, and to give His life as a ransom for many.”",
+      "why": "Jesus describes His own mission in the language of a substitute: He came to give His life as a ransom for many.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.67
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 45004025,
+        "end": 45004025,
+        "ref": "Rom.4.25",
+        "label": "Romans 4:25"
+      },
+      "direction": "both",
+      "votesOut": 11,
+      "votesIn": 4,
+      "score": 12.41,
+      "weight": 0.879,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053005,
+        "end": 23053006,
+        "label": "Isaiah 53:5–6",
+        "span": 2
+      },
+      "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.65
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 45005006,
+        "end": 45005010,
+        "ref": "Rom.5.6-Rom.5.10",
+        "label": "Romans 5:6–10"
+      },
+      "direction": "out",
+      "votesOut": 12,
+      "votesIn": 0,
+      "score": 12.0,
+      "weight": 0.868,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.64
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 47005021,
+        "end": 47005021,
+        "ref": "2Cor.5.21",
+        "label": "2 Corinthians 5:21"
+      },
+      "direction": "both",
+      "votesOut": 8,
+      "votesIn": 8,
+      "score": 10.31,
+      "weight": 0.821,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "God made Him who knew no sin to be sin on our behalf, so that in Him we might become the righteousness of God.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.59
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 46015003,
+        "end": 46015003,
+        "ref": "1Cor.15.3",
+        "label": "1 Corinthians 15:3"
+      },
+      "direction": "both",
+      "votesOut": 7,
+      "votesIn": 5,
+      "score": 7.72,
+      "weight": 0.733,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "For what I received I passed on to you as of first importance: that Christ died for our sins according to the…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.48
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 58010010,
+        "end": 58010010,
+        "ref": "Heb.10.10",
+        "label": "Hebrews 10:10"
+      },
+      "direction": "out",
+      "votesOut": 6,
+      "votesIn": 0,
+      "score": 6.0,
+      "weight": 0.659,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And by that will, we have been sanctified through the sacrifice of the body of Jesus Christ once for all.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.39
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 23053006,
+        "end": 23053008,
+        "ref": "Isa.53.6-Isa.53.8",
+        "label": "Isaiah 53:6–8"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.33
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 49005002,
+        "end": 49005002,
+        "ref": "Eph.5.2",
+        "label": "Ephesians 5:2"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "and walk in love, just as Christ loved us and gave Himself up for us as a fragrant sacrificial offering to…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.33
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 58009012,
+        "end": 58009015,
+        "ref": "Heb.9.12-Heb.9.15",
+        "label": "Hebrews 9:12–15"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "He did not enter by the blood of goats and calves, but He entered the Most Holy Place once for all by His own…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.33
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 58010014,
+        "end": 58010014,
+        "ref": "Heb.10.14",
+        "label": "Hebrews 10:14"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "because by a single offering He has made perfect for all time those who are being sanctified.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.33
+    }
+  ],
+  "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
+}

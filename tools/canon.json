@@ -59,6 +59,12 @@
    22,
    33,
    26
+  ],
+  "displayName": "Genesis",
+  "short": "Gen",
+  "aliases": [
+   "Gen",
+   "Gn"
   ]
  },
  {
@@ -111,6 +117,13 @@
    31,
    43,
    38
+  ],
+  "displayName": "Exodus",
+  "short": "Exod",
+  "aliases": [
+   "Exod",
+   "Ex",
+   "Exo"
   ]
  },
  {
@@ -150,6 +163,12 @@
    55,
    46,
    34
+  ],
+  "displayName": "Leviticus",
+  "short": "Lev",
+  "aliases": [
+   "Lev",
+   "Lv"
   ]
  },
  {
@@ -198,6 +217,12 @@
    29,
    34,
    13
+  ],
+  "displayName": "Numbers",
+  "short": "Num",
+  "aliases": [
+   "Num",
+   "Nm"
   ]
  },
  {
@@ -244,6 +269,12 @@
    52,
    29,
    12
+  ],
+  "displayName": "Deuteronomy",
+  "short": "Deut",
+  "aliases": [
+   "Deut",
+   "Dt"
   ]
  },
  {
@@ -280,6 +311,12 @@
    34,
    16,
    33
+  ],
+  "displayName": "Joshua",
+  "short": "Josh",
+  "aliases": [
+   "Josh",
+   "Jos"
   ]
  },
  {
@@ -313,6 +350,13 @@
    30,
    48,
    25
+  ],
+  "displayName": "Judges",
+  "short": "Judg",
+  "aliases": [
+   "Judg",
+   "Jdg",
+   "Jdgs"
   ]
  },
  {
@@ -329,7 +373,10 @@
    23,
    18,
    22
-  ]
+  ],
+  "displayName": "Ruth",
+  "short": "Ruth",
+  "aliases": []
  },
  {
   "order": 9,
@@ -372,6 +419,13 @@
    11,
    31,
    13
+  ],
+  "displayName": "1 Samuel",
+  "short": "1 Sam",
+  "aliases": [
+   "I Samuel",
+   "1Sam",
+   "1 Sam"
   ]
  },
  {
@@ -408,6 +462,13 @@
    51,
    39,
    25
+  ],
+  "displayName": "2 Samuel",
+  "short": "2 Sam",
+  "aliases": [
+   "II Samuel",
+   "2Sam",
+   "2 Sam"
   ]
  },
  {
@@ -442,6 +503,13 @@
    43,
    29,
    53
+  ],
+  "displayName": "1 Kings",
+  "short": "1 Kgs",
+  "aliases": [
+   "I Kings",
+   "1Kgs",
+   "1 Kgs"
   ]
  },
  {
@@ -479,6 +547,13 @@
    37,
    20,
    30
+  ],
+  "displayName": "2 Kings",
+  "short": "2 Kgs",
+  "aliases": [
+   "II Kings",
+   "2Kgs",
+   "2 Kgs"
   ]
  },
  {
@@ -520,6 +595,13 @@
    34,
    21,
    30
+  ],
+  "displayName": "1 Chronicles",
+  "short": "1 Chr",
+  "aliases": [
+   "I Chronicles",
+   "1Chr",
+   "1 Chr"
   ]
  },
  {
@@ -568,6 +650,13 @@
    33,
    27,
    23
+  ],
+  "displayName": "2 Chronicles",
+  "short": "2 Chr",
+  "aliases": [
+   "II Chronicles",
+   "2Chr",
+   "2 Chr"
   ]
  },
  {
@@ -590,7 +679,10 @@
    36,
    15,
    44
-  ]
+  ],
+  "displayName": "Ezra",
+  "short": "Ezra",
+  "aliases": []
  },
  {
   "order": 16,
@@ -615,6 +707,11 @@
    36,
    47,
    31
+  ],
+  "displayName": "Nehemiah",
+  "short": "Neh",
+  "aliases": [
+   "Neh"
   ]
  },
  {
@@ -637,6 +734,11 @@
    17,
    32,
    3
+  ],
+  "displayName": "Esther",
+  "short": "Esth",
+  "aliases": [
+   "Esth"
   ]
  },
  {
@@ -691,7 +793,10 @@
    24,
    34,
    17
-  ]
+  ],
+  "displayName": "Job",
+  "short": "Job",
+  "aliases": []
  },
  {
   "order": 19,
@@ -853,6 +958,14 @@
    14,
    9,
    6
+  ],
+  "displayName": "Psalm",
+  "short": "Ps",
+  "aliases": [
+   "Psalms",
+   "Ps",
+   "Psa",
+   "Pss"
   ]
  },
  {
@@ -896,6 +1009,13 @@
    27,
    33,
    31
+  ],
+  "displayName": "Proverbs",
+  "short": "Prov",
+  "aliases": [
+   "Prov",
+   "Pr",
+   "Prv"
   ]
  },
  {
@@ -920,6 +1040,13 @@
    20,
    10,
    14
+  ],
+  "displayName": "Ecclesiastes",
+  "short": "Eccl",
+  "aliases": [
+   "Eccl",
+   "Ecc",
+   "Qoheleth"
   ]
  },
  {
@@ -940,6 +1067,14 @@
    13,
    13,
    14
+  ],
+  "displayName": "Song of Songs",
+  "short": "Song",
+  "aliases": [
+   "Song of Solomon",
+   "Song",
+   "Canticles",
+   "SOS"
   ]
  },
  {
@@ -1018,6 +1153,12 @@
    12,
    25,
    24
+  ],
+  "displayName": "Isaiah",
+  "short": "Isa",
+  "aliases": [
+   "Isa",
+   "Is"
   ]
  },
  {
@@ -1082,6 +1223,12 @@
    46,
    64,
    34
+  ],
+  "displayName": "Jeremiah",
+  "short": "Jer",
+  "aliases": [
+   "Jer",
+   "Je"
   ]
  },
  {
@@ -1099,6 +1246,12 @@
    66,
    22,
    22
+  ],
+  "displayName": "Lamentations",
+  "short": "Lam",
+  "aliases": [
+   "Lam",
+   "La"
   ]
  },
  {
@@ -1159,6 +1312,12 @@
    24,
    23,
    35
+  ],
+  "displayName": "Ezekiel",
+  "short": "Ezek",
+  "aliases": [
+   "Ezek",
+   "Eze"
   ]
  },
  {
@@ -1183,6 +1342,12 @@
    21,
    45,
    13
+  ],
+  "displayName": "Daniel",
+  "short": "Dan",
+  "aliases": [
+   "Dan",
+   "Dn"
   ]
  },
  {
@@ -1209,6 +1374,12 @@
    14,
    16,
    9
+  ],
+  "displayName": "Hosea",
+  "short": "Hos",
+  "aliases": [
+   "Hos",
+   "Ho"
   ]
  },
  {
@@ -1224,7 +1395,10 @@
    20,
    32,
    21
-  ]
+  ],
+  "displayName": "Joel",
+  "short": "Joel",
+  "aliases": []
  },
  {
   "order": 30,
@@ -1245,7 +1419,10 @@
    17,
    14,
    15
-  ]
+  ],
+  "displayName": "Amos",
+  "short": "Amos",
+  "aliases": []
  },
  {
   "order": 31,
@@ -1258,6 +1435,12 @@
   "verses": 21,
   "verseCounts": [
    21
+  ],
+  "displayName": "Obadiah",
+  "short": "Obad",
+  "aliases": [
+   "Obad",
+   "Ob"
   ]
  },
  {
@@ -1274,6 +1457,12 @@
    10,
    10,
    11
+  ],
+  "displayName": "Jonah",
+  "short": "Jonah",
+  "aliases": [
+   "Jon",
+   "Jnh"
   ]
  },
  {
@@ -1293,6 +1482,12 @@
    15,
    16,
    20
+  ],
+  "displayName": "Micah",
+  "short": "Mic",
+  "aliases": [
+   "Mic",
+   "Mi"
   ]
  },
  {
@@ -1308,6 +1503,12 @@
    15,
    13,
    19
+  ],
+  "displayName": "Nahum",
+  "short": "Nah",
+  "aliases": [
+   "Nah",
+   "Na"
   ]
  },
  {
@@ -1323,6 +1524,12 @@
    17,
    20,
    19
+  ],
+  "displayName": "Habakkuk",
+  "short": "Hab",
+  "aliases": [
+   "Hab",
+   "Hb"
   ]
  },
  {
@@ -1338,6 +1545,13 @@
    18,
    15,
    20
+  ],
+  "displayName": "Zephaniah",
+  "short": "Zeph",
+  "aliases": [
+   "Zeph",
+   "Zep",
+   "Zp"
   ]
  },
  {
@@ -1352,6 +1566,12 @@
   "verseCounts": [
    15,
    23
+  ],
+  "displayName": "Haggai",
+  "short": "Hag",
+  "aliases": [
+   "Hag",
+   "Hg"
   ]
  },
  {
@@ -1378,6 +1598,13 @@
    14,
    9,
    21
+  ],
+  "displayName": "Zechariah",
+  "short": "Zech",
+  "aliases": [
+   "Zech",
+   "Zec",
+   "Zc"
   ]
  },
  {
@@ -1394,6 +1621,12 @@
    17,
    18,
    6
+  ],
+  "displayName": "Malachi",
+  "short": "Mal",
+  "aliases": [
+   "Mal",
+   "Ml"
   ]
  },
  {
@@ -1434,6 +1667,13 @@
    75,
    66,
    20
+  ],
+  "displayName": "Matthew",
+  "short": "Matt",
+  "aliases": [
+   "Matt",
+   "Mt",
+   "Gospel of Matthew"
   ]
  },
  {
@@ -1462,6 +1702,11 @@
    72,
    47,
    20
+  ],
+  "displayName": "Mark",
+  "short": "Mark",
+  "aliases": [
+   "Mk"
   ]
  },
  {
@@ -1498,6 +1743,11 @@
    71,
    56,
    53
+  ],
+  "displayName": "Luke",
+  "short": "Luke",
+  "aliases": [
+   "Lk"
   ]
  },
  {
@@ -1531,6 +1781,12 @@
    42,
    31,
    25
+  ],
+  "displayName": "John",
+  "short": "John",
+  "aliases": [
+   "Gospel of John",
+   "Jn"
   ]
  },
  {
@@ -1571,7 +1827,10 @@
    32,
    44,
    31
-  ]
+  ],
+  "displayName": "Acts",
+  "short": "Acts",
+  "aliases": []
  },
  {
   "order": 45,
@@ -1599,6 +1858,13 @@
    23,
    33,
    27
+  ],
+  "displayName": "Romans",
+  "short": "Rom",
+  "aliases": [
+   "Rom",
+   "Ro",
+   "Rm"
   ]
  },
  {
@@ -1627,6 +1893,13 @@
    40,
    58,
    24
+  ],
+  "displayName": "1 Corinthians",
+  "short": "1 Cor",
+  "aliases": [
+   "I Corinthians",
+   "1Cor",
+   "1 Cor"
   ]
  },
  {
@@ -1652,6 +1925,13 @@
    33,
    21,
    14
+  ],
+  "displayName": "2 Corinthians",
+  "short": "2 Cor",
+  "aliases": [
+   "II Corinthians",
+   "2Cor",
+   "2 Cor"
   ]
  },
  {
@@ -1670,6 +1950,12 @@
    31,
    26,
    18
+  ],
+  "displayName": "Galatians",
+  "short": "Gal",
+  "aliases": [
+   "Gal",
+   "Ga"
   ]
  },
  {
@@ -1688,6 +1974,12 @@
    32,
    33,
    24
+  ],
+  "displayName": "Ephesians",
+  "short": "Eph",
+  "aliases": [
+   "Eph",
+   "Ephes"
   ]
  },
  {
@@ -1704,6 +1996,13 @@
    30,
    21,
    23
+  ],
+  "displayName": "Philippians",
+  "short": "Phil",
+  "aliases": [
+   "Phil",
+   "Php",
+   "Pp"
   ]
  },
  {
@@ -1720,6 +2019,12 @@
    23,
    25,
    18
+  ],
+  "displayName": "Colossians",
+  "short": "Col",
+  "aliases": [
+   "Col",
+   "Co"
   ]
  },
  {
@@ -1737,6 +2042,13 @@
    13,
    18,
    28
+  ],
+  "displayName": "1 Thessalonians",
+  "short": "1 Thess",
+  "aliases": [
+   "I Thessalonians",
+   "1Thess",
+   "1 Thess"
   ]
  },
  {
@@ -1752,6 +2064,13 @@
    12,
    17,
    18
+  ],
+  "displayName": "2 Thessalonians",
+  "short": "2 Thess",
+  "aliases": [
+   "II Thessalonians",
+   "2Thess",
+   "2 Thess"
   ]
  },
  {
@@ -1770,6 +2089,13 @@
    16,
    25,
    21
+  ],
+  "displayName": "1 Timothy",
+  "short": "1 Tim",
+  "aliases": [
+   "I Timothy",
+   "1Tim",
+   "1 Tim"
   ]
  },
  {
@@ -1786,6 +2112,13 @@
    26,
    17,
    22
+  ],
+  "displayName": "2 Timothy",
+  "short": "2 Tim",
+  "aliases": [
+   "II Timothy",
+   "2Tim",
+   "2 Tim"
   ]
  },
  {
@@ -1801,6 +2134,11 @@
    16,
    15,
    15
+  ],
+  "displayName": "Titus",
+  "short": "Titus",
+  "aliases": [
+   "Tit"
   ]
  },
  {
@@ -1814,6 +2152,12 @@
   "verses": 25,
   "verseCounts": [
    25
+  ],
+  "displayName": "Philemon",
+  "short": "Phlm",
+  "aliases": [
+   "Phlm",
+   "Philem"
   ]
  },
  {
@@ -1839,6 +2183,12 @@
    40,
    29,
    25
+  ],
+  "displayName": "Hebrews",
+  "short": "Heb",
+  "aliases": [
+   "Heb",
+   "He"
   ]
  },
  {
@@ -1856,6 +2206,13 @@
    18,
    17,
    20
+  ],
+  "displayName": "James",
+  "short": "Jas",
+  "aliases": [
+   "Jas",
+   "Jam",
+   "Jms"
   ]
  },
  {
@@ -1873,6 +2230,13 @@
    22,
    19,
    14
+  ],
+  "displayName": "1 Peter",
+  "short": "1 Pet",
+  "aliases": [
+   "I Peter",
+   "1Pet",
+   "1 Pet"
   ]
  },
  {
@@ -1888,6 +2252,13 @@
    21,
    22,
    18
+  ],
+  "displayName": "2 Peter",
+  "short": "2 Pet",
+  "aliases": [
+   "II Peter",
+   "2Pet",
+   "2 Pet"
   ]
  },
  {
@@ -1905,6 +2276,12 @@
    24,
    21,
    21
+  ],
+  "displayName": "1 John",
+  "short": "1 John",
+  "aliases": [
+   "I John",
+   "1John"
   ]
  },
  {
@@ -1918,6 +2295,12 @@
   "verses": 13,
   "verseCounts": [
    13
+  ],
+  "displayName": "2 John",
+  "short": "2 John",
+  "aliases": [
+   "II John",
+   "2John"
   ]
  },
  {
@@ -1931,6 +2314,12 @@
   "verses": 14,
   "verseCounts": [
    14
+  ],
+  "displayName": "3 John",
+  "short": "3 John",
+  "aliases": [
+   "III John",
+   "3John"
   ]
  },
  {
@@ -1944,6 +2333,12 @@
   "verses": 25,
   "verseCounts": [
    25
+  ],
+  "displayName": "Jude",
+  "short": "Jude",
+  "aliases": [
+   "Jud",
+   "Jd"
   ]
  },
  {
@@ -1978,6 +2373,14 @@
    15,
    27,
    21
+  ],
+  "displayName": "Revelation",
+  "short": "Rev",
+  "aliases": [
+   "Revelation of John",
+   "Rev",
+   "Apocalypse",
+   "Revelations"
   ]
  }
 ]

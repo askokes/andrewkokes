@@ -1,0 +1,291 @@
+{
+  "schema": "asb.ticker/2",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "focus": {
+    "vid": 1001001,
+    "ref": "Gen.1.1",
+    "label": "Genesis 1:1"
+  },
+  "counts": {
+    "out": 61,
+    "in": 35,
+    "unique": 74,
+    "shown": 12,
+    "more": 62
+  },
+  "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
+  "motion": {
+    "mode": "autoScroll",
+    "loop": true,
+    "baseSeconds": 1.6,
+    "perWeightSeconds": 1.2,
+    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "advanceOnFocusChange": true
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 43001001,
+        "end": 43001003,
+        "ref": "John.1.1-John.1.3",
+        "label": "John 1:1–3"
+      },
+      "direction": "both",
+      "votesOut": 42,
+      "votesIn": 34,
+      "score": 59.0,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "why": "John opens his Gospel with the same words, 'In the beginning', and names the Word as the one through whom all things were made.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.8
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 58011003,
+        "end": 58011003,
+        "ref": "Heb.11.3",
+        "label": "Hebrews 11:3"
+      },
+      "direction": "both",
+      "votesOut": 52,
+      "votesIn": 3,
+      "score": 52.27,
+      "weight": 0.971,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1002001,
+        "label": "Genesis 1:1–2:1",
+        "span": 32
+      },
+      "snippet": "By faith we understand that the universe was formed at God’s command, so that what is seen was not made out…",
+      "why": "Hebrews reads the creation account as a lesson in faith: the universe was formed at God's command, out of what cannot be seen.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.77
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 23045018,
+        "end": 23045018,
+        "ref": "Isa.45.18",
+        "label": "Isaiah 45:18"
+      },
+      "direction": "out",
+      "votesOut": 43,
+      "votesIn": 0,
+      "score": 43.0,
+      "weight": 0.924,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For thus says the LORD, who created the heavens—He is God; He formed the earth and fashioned it; He…",
+      "why": "Isaiah points to creation as proof that God is unique: the one who made the heavens and formed the earth is the only God.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.71
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 18038004,
+        "end": 18038004,
+        "ref": "Job.38.4",
+        "label": "Job 38:4"
+      },
+      "direction": "both",
+      "votesOut": 35,
+      "votesIn": 2,
+      "score": 36.0,
+      "weight": 0.882,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Where were you when I laid the foundations of the earth? Tell Me, if you have understanding.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.66
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 66004011,
+        "end": 66004011,
+        "ref": "Rev.4.11",
+        "label": "Revelation 4:11"
+      },
+      "direction": "both",
+      "votesOut": 33,
+      "votesIn": 6,
+      "score": 36.0,
+      "weight": 0.882,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Worthy are You, our Lord and God, to receive glory and honor and power, for You created all things; by Your…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.66
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 23042005,
+        "end": 23042005,
+        "ref": "Isa.42.5",
+        "label": "Isaiah 42:5"
+      },
+      "direction": "out",
+      "votesOut": 34,
+      "votesIn": 0,
+      "score": 34.0,
+      "weight": 0.868,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "This is what God the LORD says— He who created the heavens and stretched them out, who spread out the earth…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.64
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 58001010,
+        "end": 58001010,
+        "ref": "Heb.1.10",
+        "label": "Hebrews 1:10"
+      },
+      "direction": "both",
+      "votesOut": 32,
+      "votesIn": 4,
+      "score": 34.0,
+      "weight": 0.868,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And: “In the beginning, O Lord, You laid the foundations of the earth, and the heavens are the work of Your…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.64
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 44017024,
+        "end": 44017024,
+        "ref": "Acts.17.24",
+        "label": "Acts 17:24"
+      },
+      "direction": "out",
+      "votesOut": 31,
+      "votesIn": 0,
+      "score": 31.0,
+      "weight": 0.846,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The God who made the world and everything in it is the Lord of heaven and earth and does not live in temples…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.62
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 51001016,
+        "end": 51001017,
+        "ref": "Col.1.16-Col.1.17",
+        "label": "Colossians 1:16–17"
+      },
+      "direction": "out",
+      "votesOut": 30,
+      "votesIn": 0,
+      "score": 30.0,
+      "weight": 0.839,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For in Him all things were created, things in heaven and on earth, visible and invisible, whether thrones or…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.61
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 2020011,
+        "end": 2020011,
+        "ref": "Exod.20.11",
+        "label": "Exodus 20:11"
+      },
+      "direction": "both",
+      "votesOut": 28,
+      "votesIn": 4,
+      "score": 29.41,
+      "weight": 0.834,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001002,
+        "label": "Genesis 1:1–2",
+        "span": 2
+      },
+      "snippet": "For in six days the LORD made the heavens and the earth and the sea and all that is in them, but on the…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.6
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 16009006,
+        "end": 16009006,
+        "ref": "Neh.9.6",
+        "label": "Nehemiah 9:6"
+      },
+      "direction": "both",
+      "votesOut": 22,
+      "votesIn": 7,
+      "score": 25.5,
+      "weight": 0.8,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "You alone are the LORD. You created the heavens, the highest heavens with all their host, the earth and all…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.56
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 19136005,
+        "end": 19136005,
+        "ref": "Ps.136.5",
+        "label": "Psalm 136:5"
+      },
+      "direction": "both",
+      "votesOut": 20,
+      "votesIn": 5,
+      "score": 22.5,
+      "weight": 0.771,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By His insight He made the heavens. His loving devotion endures forever.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.53
+    }
+  ],
+  "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
+}

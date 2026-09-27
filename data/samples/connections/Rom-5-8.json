@@ -1,0 +1,1251 @@
+{
+  "schema": "asb.connections/2",
+  "datasetVersion": "2026.09.1",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "vid": 45005008,
+  "ref": "Rom.5.8",
+  "label": "Romans 5:8",
+  "counts": {
+    "out": 13,
+    "in": 51,
+    "inDirect": 21,
+    "inViaRange": 30,
+    "unique": 57
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 43003016,
+        "end": 43003016,
+        "ref": "John.3.16",
+        "label": "John 3:16"
+      },
+      "direction": "both",
+      "votesOut": 33,
+      "votesIn": 178,
+      "score": 122.0,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+      "alsoCites": []
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 45005006,
+        "end": 45005006,
+        "ref": "Rom.5.6",
+        "label": "Romans 5:6"
+      },
+      "direction": "both",
+      "votesOut": 26,
+      "votesIn": 23,
+      "score": 37.5,
+      "weight": 0.759,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+      "alsoCites": []
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 43015013,
+        "end": 43015013,
+        "ref": "John.15.13",
+        "label": "John 15:13"
+      },
+      "direction": "both",
+      "votesOut": 36,
+      "votesIn": 5,
+      "score": 37.44,
+      "weight": 0.758,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "Greater love has no one than this, that he lay down his life for his friends.",
+      "alsoCites": []
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 62003016,
+        "end": 62003016,
+        "ref": "1John.3.16",
+        "label": "1 John 3:16"
+      },
+      "direction": "both",
+      "votesOut": 19,
+      "votesIn": 5,
+      "score": 21.5,
+      "weight": 0.647,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+      "alsoCites": []
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 60003018,
+        "end": 60003018,
+        "ref": "1Pet.3.18",
+        "label": "1 Peter 3:18"
+      },
+      "direction": "both",
+      "votesOut": 19,
+      "votesIn": 2,
+      "score": 19.58,
+      "weight": 0.628,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 62004009,
+        "end": 62004010,
+        "ref": "1John.4.9-1John.4.10",
+        "label": "1 John 4:9–10"
+      },
+      "direction": "both",
+      "votesOut": 14,
+      "votesIn": 2,
+      "score": 14.58,
+      "weight": 0.571,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+      "alsoCites": []
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 23053006,
+        "end": 23053006,
+        "ref": "Isa.53.6",
+        "label": "Isaiah 53:6"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.548,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 45005020,
+        "end": 45005020,
+        "ref": "Rom.5.20",
+        "label": "Romans 5:20"
+      },
+      "direction": "out",
+      "votesOut": 12,
+      "votesIn": 0,
+      "score": 12.0,
+      "weight": 0.533,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "The law came in so that the trespass would increase; but where sin increased, grace increased all the more,",
+      "alsoCites": []
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 45004025,
+        "end": 45004025,
+        "ref": "Rom.4.25",
+        "label": "Romans 4:25"
+      },
+      "direction": "both",
+      "votesOut": 11,
+      "votesIn": 2,
+      "score": 11.58,
+      "weight": 0.526,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+      "alsoCites": []
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 49002007,
+        "end": 49002007,
+        "ref": "Eph.2.7",
+        "label": "Ephesians 2:7"
+      },
+      "direction": "out",
+      "votesOut": 11,
+      "votesIn": 0,
+      "score": 11.0,
+      "weight": 0.516,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "in order that in the coming ages He might display the surpassing riches of His grace, demonstrated by His…",
+      "alsoCites": []
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 49001006,
+        "end": 49001008,
+        "ref": "Eph.1.6-Eph.1.8",
+        "label": "Ephesians 1:6–8"
+      },
+      "direction": "out",
+      "votesOut": 9,
+      "votesIn": 0,
+      "score": 9.0,
+      "weight": 0.478,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "to the praise of His glorious grace, which He has freely given us in the Beloved One.",
+      "alsoCites": []
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 54001016,
+        "end": 54001016,
+        "ref": "1Tim.1.16",
+        "label": "1 Timothy 1:16"
+      },
+      "direction": "out",
+      "votesOut": 6,
+      "votesIn": 0,
+      "score": 6.0,
+      "weight": 0.404,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But for this very reason I was shown mercy, so that in me, the worst of sinners, Christ Jesus might display…",
+      "alsoCites": []
+    },
+    {
+      "rank": 13,
+      "to": {
+        "start": 47008009,
+        "end": 47008009,
+        "ref": "2Cor.8.9",
+        "label": "2 Corinthians 8:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 7,
+      "score": 3.5,
+      "weight": 0.313,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For you know the grace of our Lord Jesus Christ, that though He was rich, yet for your sakes He became poor…",
+      "alsoCites": []
+    },
+    {
+      "rank": 14,
+      "to": {
+        "start": 62003001,
+        "end": 62003001,
+        "ref": "1John.3.1",
+        "label": "1 John 3:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 7,
+      "score": 3.5,
+      "weight": 0.313,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Behold what manner of love the Father has given to us, that we should be called children of God. And that is…",
+      "alsoCites": []
+    },
+    {
+      "rank": 15,
+      "to": {
+        "start": 23053005,
+        "end": 23053005,
+        "ref": "Isa.53.5",
+        "label": "Isaiah 53:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 12,
+      "score": 2.68,
+      "weight": 0.271,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005010,
+        "label": "Romans 5:6–10",
+        "span": 5
+      },
+      "snippet": "But He was pierced for our transgressions, He was crushed for our iniquities; the punishment that brought us…",
+      "alsoCites": []
+    },
+    {
+      "rank": 16,
+      "to": {
+        "start": 42018013,
+        "end": 42018013,
+        "ref": "Luke.18.13",
+        "label": "Luke 18:13"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 2.5,
+      "weight": 0.26,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But the tax collector stood at a distance, unwilling even to lift up his eyes to heaven. Instead, he beat his…",
+      "alsoCites": []
+    },
+    {
+      "rank": 17,
+      "to": {
+        "start": 45008039,
+        "end": 45008039,
+        "ref": "Rom.8.39",
+        "label": "Romans 8:39"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 2.5,
+      "weight": 0.26,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God…",
+      "alsoCites": []
+    },
+    {
+      "rank": 18,
+      "to": {
+        "start": 26016008,
+        "end": 26016008,
+        "ref": "Ezek.16.8",
+        "label": "Ezekiel 16:8"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.228,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Then I passed by and saw you, and you were indeed old enough for love. So I spread My cloak over you and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 19,
+      "to": {
+        "start": 49002005,
+        "end": 49002005,
+        "ref": "Eph.2.5",
+        "label": "Ephesians 2:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.228,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "made us alive with Christ even when we were dead in our trespasses. It is by grace you have been saved!",
+      "alsoCites": []
+    },
+    {
+      "rank": 20,
+      "to": {
+        "start": 45008030,
+        "end": 45008030,
+        "ref": "Rom.8.30",
+        "label": "Romans 8:30"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 1.15,
+      "weight": 0.159,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "And those He predestined, He also called; those He called, He also justified; those He justified, He also…",
+      "alsoCites": []
+    },
+    {
+      "rank": 21,
+      "to": {
+        "start": 62004010,
+        "end": 62004010,
+        "ref": "1John.4.10",
+        "label": "1 John 4:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 1.15,
+      "weight": 0.159,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "And love consists in this: not that we loved God, but that He loved us and sent His Son as the atoning…",
+      "alsoCites": []
+    },
+    {
+      "rank": 22,
+      "to": {
+        "start": 45008032,
+        "end": 45008032,
+        "ref": "Rom.8.32",
+        "label": "Romans 8:32"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.12,
+      "weight": 0.156,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005010,
+        "label": "Romans 5:6–10",
+        "span": 5
+      },
+      "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+      "alsoCites": []
+    },
+    {
+      "rank": 23,
+      "to": {
+        "start": 45003005,
+        "end": 45003005,
+        "ref": "Rom.3.5",
+        "label": "Romans 3:5"
+      },
+      "direction": "out",
+      "votesOut": 1,
+      "votesIn": 0,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "But if our unrighteousness highlights the righteousness of God, what shall we say? That God is unjust to…",
+      "alsoCites": []
+    },
+    {
+      "rank": 24,
+      "to": {
+        "start": 1022012,
+        "end": 1022012,
+        "ref": "Gen.22.12",
+        "label": "Genesis 22:12"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Do not lay a hand on the boy or do anything to him,” said the angel, “for now I know that you fear God…",
+      "alsoCites": []
+    },
+    {
+      "rank": 25,
+      "to": {
+        "start": 7009017,
+        "end": 7009017,
+        "ref": "Judg.9.17",
+        "label": "Judges 9:17"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "for my father fought for you and risked his life to deliver you from the hand of Midian,",
+      "alsoCites": []
+    },
+    {
+      "rank": 26,
+      "to": {
+        "start": 19068018,
+        "end": 19068018,
+        "ref": "Ps.68.18",
+        "label": "Psalm 68:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "You have ascended on high; You have led captives away. You have received gifts from men, even from the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 27,
+      "to": {
+        "start": 22003010,
+        "end": 22003010,
+        "ref": "Song.3.10",
+        "label": "Song of Songs 3:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "He has made its posts of silver, its base of gold, its seat of purple fabric. Its interior is inlaid with…",
+      "alsoCites": []
+    },
+    {
+      "rank": 28,
+      "to": {
+        "start": 38009017,
+        "end": 38009017,
+        "ref": "Zech.9.17",
+        "label": "Zechariah 9:17"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "How lovely they will be, and how beautiful! Grain will make the young men flourish, and new wine, the young…",
+      "alsoCites": []
+    },
+    {
+      "rank": 29,
+      "to": {
+        "start": 42007037,
+        "end": 42007037,
+        "ref": "Luke.7.37",
+        "label": "Luke 7:37"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "When a sinful woman from that town learned that Jesus was dining there, she brought an alabaster jar of…",
+      "alsoCites": []
+    },
+    {
+      "rank": 30,
+      "to": {
+        "start": 47006004,
+        "end": 47006004,
+        "ref": "2Cor.6.4",
+        "label": "2 Corinthians 6:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Rather, as servants of God we commend ourselves in every way: in great endurance; in troubles, hardships, and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 31,
+      "to": {
+        "start": 53002016,
+        "end": 53002016,
+        "ref": "2Thess.2.16",
+        "label": "2 Thessalonians 2:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Now may our Lord Jesus Christ Himself and God our Father, who by grace has loved us and given us eternal…",
+      "alsoCites": []
+    },
+    {
+      "rank": 32,
+      "to": {
+        "start": 58002009,
+        "end": 58002009,
+        "ref": "Heb.2.9",
+        "label": "Hebrews 2:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But we see Jesus, who was made a little lower than the angels, now crowned with glory and honor because He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 33,
+      "to": {
+        "start": 58009015,
+        "end": 58009015,
+        "ref": "Heb.9.15",
+        "label": "Hebrews 9:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.144,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Therefore Christ is the mediator of a new covenant, so that those who are called may receive the promised…",
+      "alsoCites": []
+    },
+    {
+      "rank": 34,
+      "to": {
+        "start": 42006035,
+        "end": 42006035,
+        "ref": "Luke.6.35",
+        "label": "Luke 6:35"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.13,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "But love your enemies, do good to them, and lend to them, expecting nothing in return. Then your reward will…",
+      "alsoCites": []
+    },
+    {
+      "rank": 35,
+      "to": {
+        "start": 54001015,
+        "end": 54001015,
+        "ref": "1Tim.1.15",
+        "label": "1 Timothy 1:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.13,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+      "alsoCites": []
+    },
+    {
+      "rank": 36,
+      "to": {
+        "start": 48002016,
+        "end": 48002016,
+        "ref": "Gal.2.16",
+        "label": "Galatians 2:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.111,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005009,
+        "label": "Romans 5:8–9",
+        "span": 2
+      },
+      "snippet": "know that a man is not justified by works of the law, but by faith in Jesus Christ. So we, too, have believed…",
+      "alsoCites": []
+    },
+    {
+      "rank": 37,
+      "to": {
+        "start": 19051012,
+        "end": 19051012,
+        "ref": "Ps.51.12",
+        "label": "Psalm 51:12"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 0.63,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005002,
+        "end": 45005011,
+        "label": "Romans 5:2–11",
+        "span": 10
+      },
+      "snippet": "Restore to me the joy of Your salvation, and sustain me with a willing spirit.",
+      "alsoCites": []
+    },
+    {
+      "rank": 38,
+      "to": {
+        "start": 58006019,
+        "end": 58006019,
+        "ref": "Heb.6.19",
+        "label": "Hebrews 6:19"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.61,
+      "weight": 0.099,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005005,
+        "end": 45005010,
+        "label": "Romans 5:5–10",
+        "span": 6
+      },
+      "snippet": "We have this hope as an anchor for the soul, firm and secure. It enters the inner sanctuary behind the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 39,
+      "to": {
+        "start": 22002004,
+        "end": 22002004,
+        "ref": "Song.2.4",
+        "label": "Song of Songs 2:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.095,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "He has brought me to the house of wine, and his banner over me is love.",
+      "alsoCites": []
+    },
+    {
+      "rank": 40,
+      "to": {
+        "start": 23042016,
+        "end": 23042016,
+        "ref": "Isa.42.16",
+        "label": "Isaiah 42:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.095,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "I will lead the blind by a way they did not know; I will guide them on unfamiliar paths. I will turn darkness…",
+      "alsoCites": []
+    },
+    {
+      "rank": 41,
+      "to": {
+        "start": 40007011,
+        "end": 40007011,
+        "ref": "Matt.7.11",
+        "label": "Matthew 7:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.095,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "So if you who are evil know how to give good gifts to your children, how much more will your Father in heaven…",
+      "alsoCites": []
+    },
+    {
+      "rank": 42,
+      "to": {
+        "start": 41002017,
+        "end": 41002017,
+        "ref": "Mark.2.17",
+        "label": "Mark 2:17"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.095,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "On hearing this, Jesus told them, “It is not the healthy who need a doctor, but the sick. I have not come to…",
+      "alsoCites": []
+    },
+    {
+      "rank": 43,
+      "to": {
+        "start": 45004005,
+        "end": 45004005,
+        "ref": "Rom.4.5",
+        "label": "Romans 4:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.095,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "However, to the one who does not work, but believes in Him who justifies the wicked, his faith is credited as…",
+      "alsoCites": []
+    },
+    {
+      "rank": 44,
+      "to": {
+        "start": 1044033,
+        "end": 1044033,
+        "ref": "Gen.44.33",
+        "label": "Genesis 44:33"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.084,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005007,
+        "end": 45005010,
+        "label": "Romans 5:7–10",
+        "span": 4
+      },
+      "snippet": "Now please let your servant stay here as my lord’s slave in place of the boy. Let him return with his…",
+      "alsoCites": []
+    },
+    {
+      "rank": 45,
+      "to": {
+        "start": 49002004,
+        "end": 49002004,
+        "ref": "Eph.2.4",
+        "label": "Ephesians 2:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.5,
+      "weight": 0.084,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But because of His great love for us, God, who is rich in mercy,",
+      "alsoCites": []
+    },
+    {
+      "rank": 46,
+      "to": {
+        "start": 60004018,
+        "end": 60004018,
+        "ref": "1Pet.4.18",
+        "label": "1 Peter 4:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.5,
+      "weight": 0.084,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And, “If it is hard for the righteous to be saved, what will become of the ungodly and the sinner?”",
+      "alsoCites": []
+    },
+    {
+      "rank": 47,
+      "to": {
+        "start": 23009006,
+        "end": 23009006,
+        "ref": "Isa.9.6",
+        "label": "Isaiah 9:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.47,
+      "weight": 0.08,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005001,
+        "end": 45005010,
+        "label": "Romans 5:1–10",
+        "span": 10
+      },
+      "snippet": "For unto us a child is born, unto us a son is given, and the government will be upon His shoulders. And He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 48,
+      "to": {
+        "start": 38013007,
+        "end": 38013007,
+        "ref": "Zech.13.7",
+        "label": "Zechariah 13:7"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.45,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005010,
+        "label": "Romans 5:6–10",
+        "span": 5
+      },
+      "snippet": "Awake, O sword, against My Shepherd, against the man who is My Companion, declares the LORD of Hosts. Strike…",
+      "alsoCites": []
+    },
+    {
+      "rank": 49,
+      "to": {
+        "start": 45003022,
+        "end": 45003022,
+        "ref": "Rom.3.22",
+        "label": "Romans 3:22"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.45,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 45005001,
+        "end": 45005011,
+        "label": "Romans 5:1–11",
+        "span": 11
+      },
+      "snippet": "And this righteousness from God comes through faith in Jesus Christ to all who believe. There is no…",
+      "alsoCites": []
+    },
+    {
+      "rank": 50,
+      "to": {
+        "start": 45008034,
+        "end": 45008034,
+        "ref": "Rom.8.34",
+        "label": "Romans 8:34"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.45,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005010,
+        "label": "Romans 5:6–10",
+        "span": 5
+      },
+      "snippet": "Who is there to condemn us? For Christ Jesus, who died, and more than that was raised to life, is at the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 51,
+      "to": {
+        "start": 3003013,
+        "end": 3003013,
+        "ref": "Lev.3.13",
+        "label": "Leviticus 3:13"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.41,
+      "weight": 0.071,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005011,
+        "label": "Romans 5:6–11",
+        "span": 6
+      },
+      "snippet": "He must lay his hand on its head and slaughter it in front of the Tent of Meeting. Then Aaron’s sons shall…",
+      "alsoCites": []
+    },
+    {
+      "rank": 52,
+      "to": {
+        "start": 3004035,
+        "end": 3004035,
+        "ref": "Lev.4.35",
+        "label": "Leviticus 4:35"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.41,
+      "weight": 0.071,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005011,
+        "label": "Romans 5:6–11",
+        "span": 6
+      },
+      "snippet": "And he shall remove all the fat, just as the fat of the lamb is removed from the peace offerings, and he…",
+      "alsoCites": []
+    },
+    {
+      "rank": 53,
+      "to": {
+        "start": 4007015,
+        "end": 4007015,
+        "ref": "Num.7.15",
+        "label": "Numbers 7:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.41,
+      "weight": 0.071,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005011,
+        "label": "Romans 5:6–11",
+        "span": 6
+      },
+      "snippet": "one young bull, one ram, and one male lamb a year old for a burnt offering;",
+      "alsoCites": []
+    },
+    {
+      "rank": 54,
+      "to": {
+        "start": 22008010,
+        "end": 22008010,
+        "ref": "Song.8.10",
+        "label": "Song of Songs 8:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.32,
+      "weight": 0.058,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005001,
+        "end": 45005010,
+        "label": "Romans 5:1–10",
+        "span": 10
+      },
+      "snippet": "I am a wall, and my breasts are like towers. So I have become in his eyes like one who brings peace.",
+      "alsoCites": []
+    },
+    {
+      "rank": 55,
+      "to": {
+        "start": 23027005,
+        "end": 23027005,
+        "ref": "Isa.27.5",
+        "label": "Isaiah 27:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.32,
+      "weight": 0.058,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005001,
+        "end": 45005010,
+        "label": "Romans 5:1–10",
+        "span": 10
+      },
+      "snippet": "Or let them lay claim to My protection; let them make peace with Me— yes, let them make peace with Me.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 56,
+      "to": {
+        "start": 52005010,
+        "end": 52005010,
+        "ref": "1Thess.5.10",
+        "label": "1 Thessalonians 5:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.29,
+      "weight": 0.053,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "He died for us so that, whether we are awake or asleep, we may live together with Him.",
+      "alsoCites": []
+    },
+    {
+      "rank": 57,
+      "to": {
+        "start": 21005020,
+        "end": 21005020,
+        "ref": "Eccl.5.20",
+        "label": "Ecclesiastes 5:20"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.19,
+      "weight": 0.036,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005005,
+        "end": 45005011,
+        "label": "Romans 5:5–11",
+        "span": 7
+      },
+      "snippet": "For a man seldom considers the days of his life, because God keeps him occupied with the joy of his heart.",
+      "alsoCites": []
+    }
+  ]
+}

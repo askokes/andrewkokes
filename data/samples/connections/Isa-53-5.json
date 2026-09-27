@@ -1,0 +1,1784 @@
+{
+  "schema": "asb.connections/2",
+  "datasetVersion": "2026.09.1",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "vid": 23053005,
+  "ref": "Isa.53.5",
+  "label": "Isaiah 53:5",
+  "counts": {
+    "out": 19,
+    "in": 69,
+    "inDirect": 16,
+    "inViaRange": 53,
+    "unique": 79
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 60002024,
+        "end": 60002025,
+        "ref": "1Pet.2.24-1Pet.2.25",
+        "label": "1 Peter 2:24–25"
+      },
+      "direction": "both",
+      "votesOut": 15,
+      "votesIn": 11,
+      "score": 18.18,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "He Himself bore our sins in His body on the tree, so that we might die to sin and live to righteousness. “By…",
+      "alsoCites": []
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 60003018,
+        "end": 60003018,
+        "ref": "1Pet.3.18",
+        "label": "1 Peter 3:18"
+      },
+      "direction": "both",
+      "votesOut": 14,
+      "votesIn": 2,
+      "score": 14.58,
+      "weight": 0.93,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 40020028,
+        "end": 40020028,
+        "ref": "Matt.20.28",
+        "label": "Matthew 20:28"
+      },
+      "direction": "both",
+      "votesOut": 11,
+      "votesIn": 4,
+      "score": 13.0,
+      "weight": 0.893,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "just as the Son of Man did not come to be served, but to serve, and to give His life as a ransom for many.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 45004025,
+        "end": 45004025,
+        "ref": "Rom.4.25",
+        "label": "Romans 4:25"
+      },
+      "direction": "both",
+      "votesOut": 11,
+      "votesIn": 4,
+      "score": 12.41,
+      "weight": 0.879,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053005,
+        "end": 23053006,
+        "label": "Isaiah 53:5–6",
+        "span": 2
+      },
+      "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+      "alsoCites": []
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 45005006,
+        "end": 45005010,
+        "ref": "Rom.5.6-Rom.5.10",
+        "label": "Romans 5:6–10"
+      },
+      "direction": "out",
+      "votesOut": 12,
+      "votesIn": 0,
+      "score": 12.0,
+      "weight": 0.868,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+      "alsoCites": []
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 47005021,
+        "end": 47005021,
+        "ref": "2Cor.5.21",
+        "label": "2 Corinthians 5:21"
+      },
+      "direction": "both",
+      "votesOut": 8,
+      "votesIn": 8,
+      "score": 10.31,
+      "weight": 0.821,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "God made Him who knew no sin to be sin on our behalf, so that in Him we might become the righteousness of God.",
+      "alsoCites": []
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 46015003,
+        "end": 46015003,
+        "ref": "1Cor.15.3",
+        "label": "1 Corinthians 15:3"
+      },
+      "direction": "both",
+      "votesOut": 7,
+      "votesIn": 5,
+      "score": 7.72,
+      "weight": 0.733,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "For what I received I passed on to you as of first importance: that Christ died for our sins according to the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 58010010,
+        "end": 58010010,
+        "ref": "Heb.10.10",
+        "label": "Hebrews 10:10"
+      },
+      "direction": "out",
+      "votesOut": 6,
+      "votesIn": 0,
+      "score": 6.0,
+      "weight": 0.659,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And by that will, we have been sanctified through the sacrifice of the body of Jesus Christ once for all.",
+      "alsoCites": []
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 23053006,
+        "end": 23053008,
+        "ref": "Isa.53.6-Isa.53.8",
+        "label": "Isaiah 53:6–8"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 49005002,
+        "end": 49005002,
+        "ref": "Eph.5.2",
+        "label": "Ephesians 5:2"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "and walk in love, just as Christ loved us and gave Himself up for us as a fragrant sacrificial offering to…",
+      "alsoCites": []
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 58009012,
+        "end": 58009015,
+        "ref": "Heb.9.12-Heb.9.15",
+        "label": "Hebrews 9:12–15"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "He did not enter by the blood of goats and calves, but He entered the Most Holy Place once for all by His own…",
+      "alsoCites": []
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 58010014,
+        "end": 58010014,
+        "ref": "Heb.10.14",
+        "label": "Hebrews 10:14"
+      },
+      "direction": "out",
+      "votesOut": 5,
+      "votesIn": 0,
+      "score": 5.0,
+      "weight": 0.607,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "because by a single offering He has made perfect for all time those who are being sanctified.",
+      "alsoCites": []
+    },
+    {
+      "rank": 13,
+      "to": {
+        "start": 23053010,
+        "end": 23053012,
+        "ref": "Isa.53.10-Isa.53.12",
+        "label": "Isaiah 53:10–12"
+      },
+      "direction": "both",
+      "votesOut": 4,
+      "votesIn": 3,
+      "score": 4.75,
+      "weight": 0.592,
+      "tier": "solid",
+      "sameBook": true,
+      "viaRange": {
+        "start": 23053003,
+        "end": 23053006,
+        "label": "Isaiah 53:3–6",
+        "span": 4
+      },
+      "snippet": "Yet it was the LORD’s will to crush Him and to cause Him to suffer; and when His soul is made a guilt…",
+      "alsoCites": []
+    },
+    {
+      "rank": 14,
+      "to": {
+        "start": 58009028,
+        "end": 58009028,
+        "ref": "Heb.9.28",
+        "label": "Hebrews 9:28"
+      },
+      "direction": "both",
+      "votesOut": 4,
+      "votesIn": 2,
+      "score": 4.58,
+      "weight": 0.582,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "so also Christ was offered once to bear the sins of many; and He will appear a second time, not to bear sin…",
+      "alsoCites": []
+    },
+    {
+      "rank": 15,
+      "to": {
+        "start": 45003024,
+        "end": 45003026,
+        "ref": "Rom.3.24-Rom.3.26",
+        "label": "Romans 3:24–26"
+      },
+      "direction": "out",
+      "votesOut": 4,
+      "votesIn": 0,
+      "score": 4.0,
+      "weight": 0.545,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "and are justified freely by His grace through the redemption that is in Christ Jesus.",
+      "alsoCites": []
+    },
+    {
+      "rank": 16,
+      "to": {
+        "start": 45005015,
+        "end": 45005021,
+        "ref": "Rom.5.15-Rom.5.21",
+        "label": "Romans 5:15–21"
+      },
+      "direction": "out",
+      "votesOut": 4,
+      "votesIn": 0,
+      "score": 4.0,
+      "weight": 0.545,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But the gift is not like the trespass. For if the many died by the trespass of the one man, how much more did…",
+      "alsoCites": []
+    },
+    {
+      "rank": 17,
+      "to": {
+        "start": 38013007,
+        "end": 38013007,
+        "ref": "Zech.13.7",
+        "label": "Zechariah 13:7"
+      },
+      "direction": "both",
+      "votesOut": 3,
+      "votesIn": 3,
+      "score": 3.57,
+      "weight": 0.514,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053010,
+        "label": "Isaiah 53:4–10",
+        "span": 7
+      },
+      "snippet": "Awake, O sword, against My Shepherd, against the man who is My Companion, declares the LORD of Hosts. Strike…",
+      "alsoCites": []
+    },
+    {
+      "rank": 18,
+      "to": {
+        "start": 1003015,
+        "end": 1003015,
+        "ref": "Gen.3.15",
+        "label": "Genesis 3:15"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.469,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And I will put enmity between you and the woman, and between your seed and her seed. He will crush your head…",
+      "alsoCites": []
+    },
+    {
+      "rank": 19,
+      "to": {
+        "start": 27009024,
+        "end": 27009024,
+        "ref": "Dan.9.24",
+        "label": "Daniel 9:24"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.469,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Seventy weeks are decreed for your people and your holy city to stop their transgression, to put an end to…",
+      "alsoCites": []
+    },
+    {
+      "rank": 20,
+      "to": {
+        "start": 23009006,
+        "end": 23009006,
+        "ref": "Isa.9.6",
+        "label": "Isaiah 9:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 6,
+      "score": 3.0,
+      "weight": 0.469,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "For unto us a child is born, unto us a son is given, and the government will be upon His shoulders. And He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 21,
+      "to": {
+        "start": 39004002,
+        "end": 39004002,
+        "ref": "Mal.4.2",
+        "label": "Malachi 4:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 2.5,
+      "weight": 0.424,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“But for you who fear My name, the sun of righteousness will rise with healing in its wings, and you will go…",
+      "alsoCites": []
+    },
+    {
+      "rank": 22,
+      "to": {
+        "start": 23053004,
+        "end": 23053004,
+        "ref": "Isa.53.4",
+        "label": "Isaiah 53:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 7,
+      "score": 2.47,
+      "weight": 0.421,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 23053005,
+        "end": 23053006,
+        "label": "Isaiah 53:5–6",
+        "span": 2
+      },
+      "snippet": "Surely He took on our infirmities and carried our sorrows; yet we considered Him stricken by God, struck down…",
+      "alsoCites": []
+    },
+    {
+      "rank": 23,
+      "to": {
+        "start": 23006007,
+        "end": 23006007,
+        "ref": "Isa.6.7",
+        "label": "Isaiah 6:7"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.372,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "And with it he touched my mouth and said: “Now that this has touched your lips, your iniquity is removed and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 24,
+      "to": {
+        "start": 23050006,
+        "end": 23050006,
+        "ref": "Isa.50.6",
+        "label": "Isaiah 50:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.372,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "I offered My back to those who struck Me, and My cheeks to those who tore out My beard. I did not hide My…",
+      "alsoCites": []
+    },
+    {
+      "rank": 25,
+      "to": {
+        "start": 40027026,
+        "end": 40027026,
+        "ref": "Matt.27.26",
+        "label": "Matthew 27:26"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.372,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "So Pilate released Barabbas to them. But he had Jesus flogged, and handed Him over to be crucified.",
+      "alsoCites": []
+    },
+    {
+      "rank": 26,
+      "to": {
+        "start": 43019001,
+        "end": 43019001,
+        "ref": "John.19.1",
+        "label": "John 19:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.372,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Then Pilate took Jesus and had Him flogged.",
+      "alsoCites": []
+    },
+    {
+      "rank": 27,
+      "to": {
+        "start": 58004015,
+        "end": 58004015,
+        "ref": "Heb.4.15",
+        "label": "Hebrews 4:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.77,
+      "weight": 0.345,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053005,
+        "label": "Isaiah 53:4–5",
+        "span": 2
+      },
+      "snippet": "For we do not have a high priest who is unable to sympathize with our weaknesses, but we have one who was…",
+      "alsoCites": []
+    },
+    {
+      "rank": 28,
+      "to": {
+        "start": 19103003,
+        "end": 19103003,
+        "ref": "Ps.103.3",
+        "label": "Psalm 103:3"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.31,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "He who forgives all your iniquities and heals all your diseases,",
+      "alsoCites": []
+    },
+    {
+      "rank": 29,
+      "to": {
+        "start": 23052014,
+        "end": 23052014,
+        "ref": "Isa.52.14",
+        "label": "Isaiah 52:14"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.25,
+      "weight": 0.275,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 23053002,
+        "end": 23053005,
+        "label": "Isaiah 53:2–5",
+        "span": 4
+      },
+      "snippet": "Just as many were appalled at Him— His appearance was disfigured beyond that of any man, and His form was…",
+      "alsoCites": []
+    },
+    {
+      "rank": 30,
+      "to": {
+        "start": 19022016,
+        "end": 19022016,
+        "ref": "Ps.22.16",
+        "label": "Psalm 22:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For dogs surround me; a band of evil men encircles me; they have pierced my hands and feet.",
+      "alsoCites": []
+    },
+    {
+      "rank": 31,
+      "to": {
+        "start": 19080017,
+        "end": 19080017,
+        "ref": "Ps.80.17",
+        "label": "Psalm 80:17"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Let Your hand be upon the man at Your right hand, on the son of man You have raised up for Yourself.",
+      "alsoCites": []
+    },
+    {
+      "rank": 32,
+      "to": {
+        "start": 20020030,
+        "end": 20020030,
+        "ref": "Prov.20.30",
+        "label": "Proverbs 20:30"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Lashes and wounds scour evil, and beatings cleanse the inmost parts.",
+      "alsoCites": []
+    },
+    {
+      "rank": 33,
+      "to": {
+        "start": 23053008,
+        "end": 23053008,
+        "ref": "Isa.53.8",
+        "label": "Isaiah 53:8"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "By oppression and judgment He was taken away, and who can recount His descendants? For He was cut off from…",
+      "alsoCites": []
+    },
+    {
+      "rank": 34,
+      "to": {
+        "start": 26040039,
+        "end": 26040039,
+        "ref": "Ezek.40.39",
+        "label": "Ezekiel 40:39"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Inside the portico of the gateway were two tables on each side, on which the burnt offerings, sin offerings…",
+      "alsoCites": []
+    },
+    {
+      "rank": 35,
+      "to": {
+        "start": 42023016,
+        "end": 42023016,
+        "ref": "Luke.23.16",
+        "label": "Luke 23:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Therefore I will punish Him and release Him.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 36,
+      "to": {
+        "start": 43012040,
+        "end": 43012040,
+        "ref": "John.12.40",
+        "label": "John 12:40"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“He has blinded their eyes and hardened their hearts, so that they cannot see with their eyes, and understand…",
+      "alsoCites": []
+    },
+    {
+      "rank": 37,
+      "to": {
+        "start": 47006005,
+        "end": 47006005,
+        "ref": "2Cor.6.5",
+        "label": "2 Corinthians 6:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.235,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "in beatings, imprisonments, and riots; in labor, sleepless nights, and hunger;",
+      "alsoCites": []
+    },
+    {
+      "rank": 38,
+      "to": {
+        "start": 42024046,
+        "end": 42024046,
+        "ref": "Luke.24.46",
+        "label": "Luke 24:46"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 6,
+      "score": 0.9,
+      "weight": 0.217,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053002,
+        "end": 23053012,
+        "label": "Isaiah 53:2–12",
+        "span": 11
+      },
+      "snippet": "And He told them, “This is what is written: The Christ will suffer and rise from the dead on the third day,",
+      "alsoCites": []
+    },
+    {
+      "rank": 39,
+      "to": {
+        "start": 23053011,
+        "end": 23053011,
+        "ref": "Isa.53.11",
+        "label": "Isaiah 53:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.212,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "After the anguish of His soul, He will see the light of life and be satisfied. By His knowledge My righteous…",
+      "alsoCites": []
+    },
+    {
+      "rank": 40,
+      "to": {
+        "start": 43010015,
+        "end": 43010015,
+        "ref": "John.10.15",
+        "label": "John 10:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.212,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "just as the Father knows Me and I know the Father. And I lay down My life for the sheep.",
+      "alsoCites": []
+    },
+    {
+      "rank": 41,
+      "to": {
+        "start": 19069004,
+        "end": 19069004,
+        "ref": "Ps.69.4",
+        "label": "Psalm 69:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.75,
+      "weight": 0.189,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053007,
+        "label": "Isaiah 53:4–7",
+        "span": 4
+      },
+      "snippet": "Those who hate me without cause outnumber the hairs of my head; many are those who would destroy me— my…",
+      "alsoCites": []
+    },
+    {
+      "rank": 42,
+      "to": {
+        "start": 42018031,
+        "end": 42018031,
+        "ref": "Luke.18.31",
+        "label": "Luke 18:31"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 0.72,
+      "weight": 0.184,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "Then Jesus took the Twelve aside and said to them, “Look, we are going up to Jerusalem, and everything the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 43,
+      "to": {
+        "start": 3001015,
+        "end": 3001015,
+        "ref": "Lev.1.15",
+        "label": "Leviticus 1:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.182,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053005,
+        "label": "Isaiah 53:4–5",
+        "span": 2
+      },
+      "snippet": "Then the priest shall bring it to the altar, twist off its head, and burn it on the altar; its blood should…",
+      "alsoCites": []
+    },
+    {
+      "rank": 44,
+      "to": {
+        "start": 5003026,
+        "end": 5003026,
+        "ref": "Deut.3.26",
+        "label": "Deuteronomy 3:26"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.182,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053005,
+        "end": 23053006,
+        "label": "Isaiah 53:5–6",
+        "span": 2
+      },
+      "snippet": "But the LORD was angry with me on account of you, and He would not listen to me. “That is enough,” the LORD…",
+      "alsoCites": []
+    },
+    {
+      "rank": 45,
+      "to": {
+        "start": 20021018,
+        "end": 20021018,
+        "ref": "Prov.21.18",
+        "label": "Proverbs 21:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.182,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053005,
+        "label": "Isaiah 53:4–5",
+        "span": 2
+      },
+      "snippet": "The wicked become a ransom for the righteous, and the faithless for the upright.",
+      "alsoCites": []
+    },
+    {
+      "rank": 46,
+      "to": {
+        "start": 41015024,
+        "end": 41015024,
+        "ref": "Mark.15.24",
+        "label": "Mark 15:24"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.67,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053008,
+        "label": "Isaiah 53:4–8",
+        "span": 5
+      },
+      "snippet": "And they crucified Him. They also divided His garments by casting lots to decide what each of them would take.",
+      "alsoCites": []
+    },
+    {
+      "rank": 47,
+      "to": {
+        "start": 23042004,
+        "end": 23042004,
+        "ref": "Isa.42.4",
+        "label": "Isaiah 42:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 0.6,
+      "weight": 0.159,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 23053002,
+        "end": 23053012,
+        "label": "Isaiah 53:2–12",
+        "span": 11
+      },
+      "snippet": "He will not grow weak or discouraged before He has established justice on the earth. In His law the islands…",
+      "alsoCites": []
+    },
+    {
+      "rank": 48,
+      "to": {
+        "start": 3001004,
+        "end": 3001004,
+        "ref": "Lev.1.4",
+        "label": "Leviticus 1:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "He is to lay his hand on the head of the burnt offering, so it can be accepted on his behalf to make…",
+      "alsoCites": []
+    },
+    {
+      "rank": 49,
+      "to": {
+        "start": 18021019,
+        "end": 18021019,
+        "ref": "Job.21.19",
+        "label": "Job 21:19"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "It is said that God lays up one’s punishment for his children. Let God repay the man himself, so he will know…",
+      "alsoCites": []
+    },
+    {
+      "rank": 50,
+      "to": {
+        "start": 19031011,
+        "end": 19031011,
+        "ref": "Ps.31.11",
+        "label": "Psalm 31:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053003,
+        "end": 23053005,
+        "label": "Isaiah 53:3–5",
+        "span": 3
+      },
+      "snippet": "Among all my enemies I am a disgrace, and among my neighbors even more. I am dreaded by my friends— they flee…",
+      "alsoCites": []
+    },
+    {
+      "rank": 51,
+      "to": {
+        "start": 19038017,
+        "end": 19038017,
+        "ref": "Ps.38.17",
+        "label": "Psalm 38:17"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053003,
+        "end": 23053005,
+        "label": "Isaiah 53:3–5",
+        "span": 3
+      },
+      "snippet": "For I am ready to fall, and my pain is ever with me.",
+      "alsoCites": []
+    },
+    {
+      "rank": 52,
+      "to": {
+        "start": 19088016,
+        "end": 19088016,
+        "ref": "Ps.88.16",
+        "label": "Psalm 88:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053006,
+        "label": "Isaiah 53:4–6",
+        "span": 3
+      },
+      "snippet": "Your wrath has swept over me; Your terrors have destroyed me.",
+      "alsoCites": []
+    },
+    {
+      "rank": 53,
+      "to": {
+        "start": 22005002,
+        "end": 22005002,
+        "ref": "Song.5.2",
+        "label": "Song of Songs 5:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053003,
+        "end": 23053005,
+        "label": "Isaiah 53:3–5",
+        "span": 3
+      },
+      "snippet": "I sleep, but my heart is awake. A sound! My beloved is knocking: “Open to me, my sister, my darling, my dove…",
+      "alsoCites": []
+    },
+    {
+      "rank": 54,
+      "to": {
+        "start": 41009012,
+        "end": 41009012,
+        "ref": "Mark.9.12",
+        "label": "Mark 9:12"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "He replied, “Elijah does indeed come first, and he restores all things. Why then is it written that the Son…",
+      "alsoCites": []
+    },
+    {
+      "rank": 55,
+      "to": {
+        "start": 41015019,
+        "end": 41015019,
+        "ref": "Mark.15.19",
+        "label": "Mark 15:19"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053003,
+        "end": 23053005,
+        "label": "Isaiah 53:3–5",
+        "span": 3
+      },
+      "snippet": "They kept striking His head with a staff and spitting on Him. And they knelt down and bowed before Him.",
+      "alsoCites": []
+    },
+    {
+      "rank": 56,
+      "to": {
+        "start": 42024026,
+        "end": 42024026,
+        "ref": "Luke.24.26",
+        "label": "Luke 24:26"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "Was it not necessary for the Christ to suffer these things and then to enter His glory?”",
+      "alsoCites": []
+    },
+    {
+      "rank": 57,
+      "to": {
+        "start": 42024027,
+        "end": 42024027,
+        "ref": "Luke.24.27",
+        "label": "Luke 24:27"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 0.58,
+      "weight": 0.155,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "And beginning with Moses and all the Prophets, He explained to them what was written in all the Scriptures…",
+      "alsoCites": []
+    },
+    {
+      "rank": 58,
+      "to": {
+        "start": 3002014,
+        "end": 3002014,
+        "ref": "Lev.2.14",
+        "label": "Leviticus 2:14"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.5,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053002,
+        "end": 23053010,
+        "label": "Isaiah 53:2–10",
+        "span": 9
+      },
+      "snippet": "If you bring a grain offering of firstfruits to the LORD, you shall offer crushed heads of new grain roasted…",
+      "alsoCites": []
+    },
+    {
+      "rank": 59,
+      "to": {
+        "start": 38003009,
+        "end": 38003009,
+        "ref": "Zech.3.9",
+        "label": "Zechariah 3:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.5,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053012,
+        "label": "Isaiah 53:4–12",
+        "span": 9
+      },
+      "snippet": "See the stone I have set before Joshua; on that one stone are seven eyes. Behold, I will engrave on it an…",
+      "alsoCites": []
+    },
+    {
+      "rank": 60,
+      "to": {
+        "start": 43011051,
+        "end": 43011051,
+        "ref": "John.11.51",
+        "label": "John 11:51"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053005,
+        "end": 23053008,
+        "label": "Isaiah 53:5–8",
+        "span": 4
+      },
+      "snippet": "Caiaphas did not say this on his own. Instead, as high priest that year, he was prophesying that Jesus would…",
+      "alsoCites": []
+    },
+    {
+      "rank": 61,
+      "to": {
+        "start": 57001018,
+        "end": 57001018,
+        "ref": "Phlm.1.18",
+        "label": "Philemon 1:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053007,
+        "label": "Isaiah 53:4–7",
+        "span": 4
+      },
+      "snippet": "But if he has wronged you in any way or owes you anything, charge it to my account.",
+      "alsoCites": []
+    },
+    {
+      "rank": 62,
+      "to": {
+        "start": 62003005,
+        "end": 62003005,
+        "ref": "1John.3.5",
+        "label": "1 John 3:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.5,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053012,
+        "label": "Isaiah 53:4–12",
+        "span": 9
+      },
+      "snippet": "But you know that Christ appeared to take away sins, and in Him there is no sin.",
+      "alsoCites": []
+    },
+    {
+      "rank": 63,
+      "to": {
+        "start": 40017012,
+        "end": 40017012,
+        "ref": "Matt.17.12",
+        "label": "Matthew 17:12"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.47,
+      "weight": 0.13,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053003,
+        "end": 23053012,
+        "label": "Isaiah 53:3–12",
+        "span": 10
+      },
+      "snippet": "But I tell you that Elijah has already come, and they did not recognize him, but have done to him whatever…",
+      "alsoCites": []
+    },
+    {
+      "rank": 64,
+      "to": {
+        "start": 40026024,
+        "end": 40026024,
+        "ref": "Matt.26.24",
+        "label": "Matthew 26:24"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.43,
+      "weight": 0.121,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed. It would…",
+      "alsoCites": []
+    },
+    {
+      "rank": 65,
+      "to": {
+        "start": 41014021,
+        "end": 41014021,
+        "ref": "Mark.14.21",
+        "label": "Mark 14:21"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.43,
+      "weight": 0.121,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed! It would…",
+      "alsoCites": []
+    },
+    {
+      "rank": 66,
+      "to": {
+        "start": 42009022,
+        "end": 42009022,
+        "ref": "Luke.9.22",
+        "label": "Luke 9:22"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.43,
+      "weight": 0.121,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "“The Son of Man must suffer many things,” He said. “He must be rejected by the elders, chief priests, and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 67,
+      "to": {
+        "start": 42022022,
+        "end": 42022022,
+        "ref": "Luke.22.22",
+        "label": "Luke 22:22"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.43,
+      "weight": 0.121,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "Indeed, the Son of Man will go as it has been determined, but woe to that man who betrays Him.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 68,
+      "to": {
+        "start": 60001011,
+        "end": 60001011,
+        "ref": "1Pet.1.11",
+        "label": "1 Peter 1:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.43,
+      "weight": 0.121,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "trying to determine the time and setting to which the Spirit of Christ in them was pointing when He predicted…",
+      "alsoCites": []
+    },
+    {
+      "rank": 69,
+      "to": {
+        "start": 3003011,
+        "end": 3003011,
+        "ref": "Lev.3.11",
+        "label": "Leviticus 3:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.38,
+      "weight": 0.109,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053010,
+        "label": "Isaiah 53:4–10",
+        "span": 7
+      },
+      "snippet": "Then the priest is to burn them on the altar as food, an offering made by fire to the LORD.",
+      "alsoCites": []
+    },
+    {
+      "rank": 70,
+      "to": {
+        "start": 3016010,
+        "end": 3016010,
+        "ref": "Lev.16.10",
+        "label": "Leviticus 16:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.35,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053011,
+        "label": "Isaiah 53:4–11",
+        "span": 8
+      },
+      "snippet": "But the goat chosen by lot as the scapegoat shall be presented alive before the LORD to make atonement by…",
+      "alsoCites": []
+    },
+    {
+      "rank": 71,
+      "to": {
+        "start": 3005011,
+        "end": 3005011,
+        "ref": "Lev.5.11",
+        "label": "Leviticus 5:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.33,
+      "weight": 0.097,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053002,
+        "end": 23053010,
+        "label": "Isaiah 53:2–10",
+        "span": 9
+      },
+      "snippet": "But if he cannot afford two turtledoves or two young pigeons, he may bring a tenth of an ephah of fine flour…",
+      "alsoCites": []
+    },
+    {
+      "rank": 72,
+      "to": {
+        "start": 58002009,
+        "end": 58002009,
+        "ref": "Heb.2.9",
+        "label": "Hebrews 2:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.33,
+      "weight": 0.097,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053002,
+        "end": 23053010,
+        "label": "Isaiah 53:2–10",
+        "span": 9
+      },
+      "snippet": "But we see Jesus, who was made a little lower than the angels, now crowned with glory and honor because He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 73,
+      "to": {
+        "start": 40020018,
+        "end": 40020018,
+        "ref": "Matt.20.18",
+        "label": "Matthew 20:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.29,
+      "weight": 0.086,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "“Look, we are going up to Jerusalem, and the Son of Man will be delivered over to the chief priests and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 74,
+      "to": {
+        "start": 40026054,
+        "end": 40026054,
+        "ref": "Matt.26.54",
+        "label": "Matthew 26:54"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.29,
+      "weight": 0.086,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "But how then would the Scriptures be fulfilled that say it must happen this way?”",
+      "alsoCites": []
+    },
+    {
+      "rank": 75,
+      "to": {
+        "start": 41014049,
+        "end": 41014049,
+        "ref": "Mark.14.49",
+        "label": "Mark 14:49"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.29,
+      "weight": 0.086,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "Every day I was with you, teaching in the temple courts, and you did not arrest Me. But this has happened…",
+      "alsoCites": []
+    },
+    {
+      "rank": 76,
+      "to": {
+        "start": 44003018,
+        "end": 44003018,
+        "ref": "Acts.3.18",
+        "label": "Acts 3:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.29,
+      "weight": 0.086,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "But in this way God has fulfilled what He foretold through all the prophets, saying that His Christ would…",
+      "alsoCites": []
+    },
+    {
+      "rank": 77,
+      "to": {
+        "start": 44026023,
+        "end": 44026023,
+        "ref": "Acts.26.23",
+        "label": "Acts 26:23"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.29,
+      "weight": 0.086,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053001,
+        "end": 23053012,
+        "label": "Isaiah 53:1–12",
+        "span": 12
+      },
+      "snippet": "that the Christ would suffer, and as the first to rise from the dead, would proclaim light to our people and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 78,
+      "to": {
+        "start": 42024044,
+        "end": 42024044,
+        "ref": "Luke.24.44",
+        "label": "Luke 24:44"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.26,
+      "weight": 0.078,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23052013,
+        "end": 23053012,
+        "label": "Isaiah 52:13–53:12",
+        "span": 15
+      },
+      "snippet": "Jesus said to them, “These are the words I spoke to you while I was still with you: Everything must be…",
+      "alsoCites": []
+    },
+    {
+      "rank": 79,
+      "to": {
+        "start": 1022009,
+        "end": 1022009,
+        "ref": "Gen.22.9",
+        "label": "Genesis 22:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.19,
+      "weight": 0.059,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 23053004,
+        "end": 23053010,
+        "label": "Isaiah 53:4–10",
+        "span": 7
+      },
+      "snippet": "When they arrived at the place God had designated, Abraham built the altar there and arranged the wood. He…",
+      "alsoCites": []
+    }
+  ]
+}

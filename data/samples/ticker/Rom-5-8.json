@@ -1,0 +1,301 @@
+{
+  "schema": "asb.ticker/2",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "focus": {
+    "vid": 45005008,
+    "ref": "Rom.5.8",
+    "label": "Romans 5:8"
+  },
+  "counts": {
+    "out": 13,
+    "in": 51,
+    "unique": 57,
+    "shown": 12,
+    "more": 45
+  },
+  "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
+  "motion": {
+    "mode": "autoScroll",
+    "loop": true,
+    "baseSeconds": 1.6,
+    "perWeightSeconds": 1.2,
+    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "advanceOnFocusChange": true
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 43003016,
+        "end": 43003016,
+        "ref": "John.3.16",
+        "label": "John 3:16"
+      },
+      "direction": "both",
+      "votesOut": 33,
+      "votesIn": 178,
+      "score": 122.0,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+      "why": "The two best-known statements of God's love side by side: Paul's proof in Christ's death matches Jesus' words about God giving His Son.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.8
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 45005006,
+        "end": 45005006,
+        "ref": "Rom.5.6",
+        "label": "Romans 5:6"
+      },
+      "direction": "both",
+      "votesOut": 26,
+      "votesIn": 23,
+      "score": 37.5,
+      "weight": 0.759,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+      "why": "Two verses earlier Paul makes the same point from another angle: Christ died for the ungodly while we were still powerless.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.51
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 43015013,
+        "end": 43015013,
+        "ref": "John.15.13",
+        "label": "John 15:13"
+      },
+      "direction": "both",
+      "votesOut": 36,
+      "votesIn": 5,
+      "score": 37.44,
+      "weight": 0.758,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "Greater love has no one than this, that he lay down his life for his friends.",
+      "why": "Jesus calls laying down one's life for friends the greatest love. Paul goes further here: Christ died for people who were still sinners.",
+      "aiStatus": "cached",
+      "dwellSeconds": 2.51
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 62003016,
+        "end": 62003016,
+        "ref": "1John.3.16",
+        "label": "1 John 3:16"
+      },
+      "direction": "both",
+      "votesOut": 19,
+      "votesIn": 5,
+      "score": 21.5,
+      "weight": 0.647,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.38
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 60003018,
+        "end": 60003018,
+        "ref": "1Pet.3.18",
+        "label": "1 Peter 3:18"
+      },
+      "direction": "both",
+      "votesOut": 19,
+      "votesIn": 2,
+      "score": 19.58,
+      "weight": 0.628,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.35
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 62004009,
+        "end": 62004010,
+        "ref": "1John.4.9-1John.4.10",
+        "label": "1 John 4:9–10"
+      },
+      "direction": "both",
+      "votesOut": 14,
+      "votesIn": 2,
+      "score": 14.58,
+      "weight": 0.571,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 45005008,
+        "end": 45005010,
+        "label": "Romans 5:8–10",
+        "span": 3
+      },
+      "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.29
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 23053006,
+        "end": 23053006,
+        "ref": "Isa.53.6",
+        "label": "Isaiah 53:6"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.548,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.26
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 45005020,
+        "end": 45005020,
+        "ref": "Rom.5.20",
+        "label": "Romans 5:20"
+      },
+      "direction": "out",
+      "votesOut": 12,
+      "votesIn": 0,
+      "score": 12.0,
+      "weight": 0.533,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "The law came in so that the trespass would increase; but where sin increased, grace increased all the more,",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.24
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 45004025,
+        "end": 45004025,
+        "ref": "Rom.4.25",
+        "label": "Romans 4:25"
+      },
+      "direction": "both",
+      "votesOut": 11,
+      "votesIn": 2,
+      "score": 11.58,
+      "weight": 0.526,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 45005006,
+        "end": 45005008,
+        "label": "Romans 5:6–8",
+        "span": 3
+      },
+      "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.23
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 49002007,
+        "end": 49002007,
+        "ref": "Eph.2.7",
+        "label": "Ephesians 2:7"
+      },
+      "direction": "out",
+      "votesOut": 11,
+      "votesIn": 0,
+      "score": 11.0,
+      "weight": 0.516,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "in order that in the coming ages He might display the surpassing riches of His grace, demonstrated by His…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.22
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 49001006,
+        "end": 49001008,
+        "ref": "Eph.1.6-Eph.1.8",
+        "label": "Ephesians 1:6–8"
+      },
+      "direction": "out",
+      "votesOut": 9,
+      "votesIn": 0,
+      "score": 9.0,
+      "weight": 0.478,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "to the praise of His glorious grace, which He has freely given us in the Beloved One.",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.17
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 54001016,
+        "end": 54001016,
+        "ref": "1Tim.1.16",
+        "label": "1 Timothy 1:16"
+      },
+      "direction": "out",
+      "votesOut": 6,
+      "votesIn": 0,
+      "score": 6.0,
+      "weight": 0.404,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But for this very reason I was shown mercy, so that in me, the worst of sinners, Christ Jesus might display…",
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 2.08
+    }
+  ],
+  "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
+}

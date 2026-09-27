@@ -1,0 +1,2363 @@
+{
+  "schema": "asb.connections/2",
+  "datasetVersion": "2026.09.1",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "vid": 43003016,
+  "ref": "John.3.16",
+  "label": "John 3:16",
+  "counts": {
+    "out": 23,
+    "in": 104,
+    "inDirect": 53,
+    "inViaRange": 51,
+    "unique": 110
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 45005008,
+        "end": 45005008,
+        "ref": "Rom.5.8",
+        "label": "Romans 5:8"
+      },
+      "direction": "both",
+      "votesOut": 178,
+      "votesIn": 33,
+      "score": 194.5,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
+      "alsoCites": []
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 62004009,
+        "end": 62004010,
+        "ref": "1John.4.9-1John.4.10",
+        "label": "1 John 4:9–10"
+      },
+      "direction": "both",
+      "votesOut": 122,
+      "votesIn": 13,
+      "score": 128.5,
+      "weight": 0.922,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+      "alsoCites": []
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 43003015,
+        "end": 43003015,
+        "ref": "John.3.15",
+        "label": "John 3:15"
+      },
+      "direction": "both",
+      "votesOut": 90,
+      "votesIn": 8,
+      "score": 94.0,
+      "weight": 0.863,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "that everyone who believes in Him may have eternal life.",
+      "alsoCites": []
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 43011025,
+        "end": 43011026,
+        "ref": "John.11.25-John.11.26",
+        "label": "John 11:25–26"
+      },
+      "direction": "out",
+      "votesOut": 81,
+      "votesIn": 0,
+      "score": 81.0,
+      "weight": 0.835,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.",
+      "alsoCites": []
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 43006040,
+        "end": 43006040,
+        "ref": "John.6.40",
+        "label": "John 6:40"
+      },
+      "direction": "both",
+      "votesOut": 72,
+      "votesIn": 3,
+      "score": 72.75,
+      "weight": 0.815,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003018,
+        "label": "John 3:15–18",
+        "span": 4
+      },
+      "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+      "alsoCites": []
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 45008032,
+        "end": 45008032,
+        "ref": "Rom.8.32",
+        "label": "Romans 8:32"
+      },
+      "direction": "both",
+      "votesOut": 68,
+      "votesIn": 6,
+      "score": 71.0,
+      "weight": 0.811,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+      "alsoCites": []
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 43003036,
+        "end": 43003036,
+        "ref": "John.3.36",
+        "label": "John 3:36"
+      },
+      "direction": "both",
+      "votesOut": 63,
+      "votesIn": 10,
+      "score": 66.54,
+      "weight": 0.799,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "Whoever believes in the Son has eternal life. Whoever rejects the Son will not see life. Instead, the wrath…",
+      "alsoCites": []
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 62004019,
+        "end": 62004019,
+        "ref": "1John.4.19",
+        "label": "1 John 4:19"
+      },
+      "direction": "both",
+      "votesOut": 59,
+      "votesIn": 3,
+      "score": 60.5,
+      "weight": 0.781,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "We love because He first loved us.",
+      "alsoCites": []
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 54001015,
+        "end": 54001016,
+        "ref": "1Tim.1.15-1Tim.1.16",
+        "label": "1 Timothy 1:15–16"
+      },
+      "direction": "both",
+      "votesOut": 49,
+      "votesIn": 8,
+      "score": 51.83,
+      "weight": 0.752,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+      "alsoCites": []
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 43010028,
+        "end": 43010028,
+        "ref": "John.10.28",
+        "label": "John 10:28"
+      },
+      "direction": "both",
+      "votesOut": 50,
+      "votesIn": 2,
+      "score": 50.71,
+      "weight": 0.748,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+      "alsoCites": []
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 43001029,
+        "end": 43001029,
+        "ref": "John.1.29",
+        "label": "John 1:29"
+      },
+      "direction": "both",
+      "votesOut": 46,
+      "votesIn": 3,
+      "score": 47.5,
+      "weight": 0.736,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "The next day John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 45005010,
+        "end": 45005010,
+        "ref": "Rom.5.10",
+        "label": "Romans 5:10"
+      },
+      "direction": "out",
+      "votesOut": 46,
+      "votesIn": 0,
+      "score": 46.0,
+      "weight": 0.73,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+      "alsoCites": []
+    },
+    {
+      "rank": 13,
+      "to": {
+        "start": 53002016,
+        "end": 53002016,
+        "ref": "2Thess.2.16",
+        "label": "2 Thessalonians 2:16"
+      },
+      "direction": "both",
+      "votesOut": 41,
+      "votesIn": 7,
+      "score": 44.5,
+      "weight": 0.724,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Now may our Lord Jesus Christ Himself and God our Father, who by grace has loved us and given us eternal…",
+      "alsoCites": []
+    },
+    {
+      "rank": 14,
+      "to": {
+        "start": 47005019,
+        "end": 47005021,
+        "ref": "2Cor.5.19-2Cor.5.21",
+        "label": "2 Corinthians 5:19–21"
+      },
+      "direction": "out",
+      "votesOut": 43,
+      "votesIn": 0,
+      "score": 43.0,
+      "weight": 0.717,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "that God was reconciling the world to Himself in Christ, not counting men’s trespasses against them. And He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 15,
+      "to": {
+        "start": 1022012,
+        "end": 1022012,
+        "ref": "Gen.22.12",
+        "label": "Genesis 22:12"
+      },
+      "direction": "both",
+      "votesOut": 37,
+      "votesIn": 2,
+      "score": 38.0,
+      "weight": 0.694,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Do not lay a hand on the boy or do anything to him,” said the angel, “for now I know that you fear God…",
+      "alsoCites": []
+    },
+    {
+      "rank": 16,
+      "to": {
+        "start": 49002004,
+        "end": 49002004,
+        "ref": "Eph.2.4",
+        "label": "Ephesians 2:4"
+      },
+      "direction": "both",
+      "votesOut": 36,
+      "votesIn": 2,
+      "score": 36.5,
+      "weight": 0.687,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003017,
+        "label": "John 3:14–17",
+        "span": 4
+      },
+      "snippet": "But because of His great love for us, God, who is rich in mercy,",
+      "alsoCites": []
+    },
+    {
+      "rank": 17,
+      "to": {
+        "start": 66001005,
+        "end": 66001005,
+        "ref": "Rev.1.5",
+        "label": "Revelation 1:5"
+      },
+      "direction": "out",
+      "votesOut": 35,
+      "votesIn": 0,
+      "score": 35.0,
+      "weight": 0.679,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "and from Jesus Christ, the faithful witness, the firstborn from the dead, and the ruler of the kings of the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 18,
+      "to": {
+        "start": 40009013,
+        "end": 40009013,
+        "ref": "Matt.9.13",
+        "label": "Matthew 9:13"
+      },
+      "direction": "out",
+      "votesOut": 34,
+      "votesIn": 0,
+      "score": 34.0,
+      "weight": 0.674,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But go and learn what this means: ‘I desire mercy, not sacrifice.’ For I have not come to call the righteous…",
+      "alsoCites": []
+    },
+    {
+      "rank": 19,
+      "to": {
+        "start": 43001018,
+        "end": 43001018,
+        "ref": "John.1.18",
+        "label": "John 1:18"
+      },
+      "direction": "both",
+      "votesOut": 33,
+      "votesIn": 2,
+      "score": 33.58,
+      "weight": 0.672,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "No one has ever seen God, but the one and only Son, who is Himself God and is at the Father’s side, has made…",
+      "alsoCites": []
+    },
+    {
+      "rank": 20,
+      "to": {
+        "start": 43001014,
+        "end": 43001014,
+        "ref": "John.1.14",
+        "label": "John 1:14"
+      },
+      "direction": "both",
+      "votesOut": 32,
+      "votesIn": 3,
+      "score": 33.5,
+      "weight": 0.671,
+      "tier": "strong",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only…",
+      "alsoCites": []
+    },
+    {
+      "rank": 21,
+      "to": {
+        "start": 56003004,
+        "end": 56003004,
+        "ref": "Titus.3.4",
+        "label": "Titus 3:4"
+      },
+      "direction": "out",
+      "votesOut": 32,
+      "votesIn": 0,
+      "score": 32.0,
+      "weight": 0.663,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But when the kindness of God our Savior and His love for mankind appeared,",
+      "alsoCites": []
+    },
+    {
+      "rank": 22,
+      "to": {
+        "start": 41012006,
+        "end": 41012006,
+        "ref": "Mark.12.6",
+        "label": "Mark 12:6"
+      },
+      "direction": "both",
+      "votesOut": 28,
+      "votesIn": 2,
+      "score": 28.58,
+      "weight": 0.642,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "Finally, having one beloved son, he sent him to them. ‘They will respect my son,’ he said.",
+      "alsoCites": []
+    },
+    {
+      "rank": 23,
+      "to": {
+        "start": 42002014,
+        "end": 42002014,
+        "ref": "Luke.2.14",
+        "label": "Luke 2:14"
+      },
+      "direction": "both",
+      "votesOut": 25,
+      "votesIn": 2,
+      "score": 26.0,
+      "weight": 0.625,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Glory to God in the highest, and on earth peace to men on whom His favor rests!”",
+      "alsoCites": []
+    },
+    {
+      "rank": 24,
+      "to": {
+        "start": 62003016,
+        "end": 62003016,
+        "ref": "1John.3.16",
+        "label": "1 John 3:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 15,
+      "score": 7.5,
+      "weight": 0.406,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+      "alsoCites": []
+    },
+    {
+      "rank": 25,
+      "to": {
+        "start": 46002009,
+        "end": 46002009,
+        "ref": "1Cor.2.9",
+        "label": "1 Corinthians 2:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 12,
+      "score": 6.0,
+      "weight": 0.369,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Rather, as it is written: “No eye has seen, no ear has heard, no heart has imagined, what God has prepared…",
+      "alsoCites": []
+    },
+    {
+      "rank": 26,
+      "to": {
+        "start": 41016016,
+        "end": 41016016,
+        "ref": "Mark.16.16",
+        "label": "Mark 16:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 14,
+      "score": 4.95,
+      "weight": 0.338,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "Whoever believes and is baptized will be saved, but whoever does not believe will be condemned.",
+      "alsoCites": []
+    },
+    {
+      "rank": 27,
+      "to": {
+        "start": 19002007,
+        "end": 19002007,
+        "ref": "Ps.2.7",
+        "label": "Psalm 2:7"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 9,
+      "score": 4.5,
+      "weight": 0.323,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "I will proclaim the decree spoken to Me by the LORD: “You are My Son; today I have become Your Father.",
+      "alsoCites": []
+    },
+    {
+      "rank": 28,
+      "to": {
+        "start": 62003001,
+        "end": 62003001,
+        "ref": "1John.3.1",
+        "label": "1 John 3:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 8,
+      "score": 4.0,
+      "weight": 0.305,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Behold what manner of love the Father has given to us, that we should be called children of God. And that is…",
+      "alsoCites": []
+    },
+    {
+      "rank": 29,
+      "to": {
+        "start": 43005024,
+        "end": 43005024,
+        "ref": "John.5.24",
+        "label": "John 5:24"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 7,
+      "score": 3.5,
+      "weight": 0.285,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Truly, truly, I tell you, whoever hears My word and believes Him who sent Me has eternal life and will not…",
+      "alsoCites": []
+    },
+    {
+      "rank": 30,
+      "to": {
+        "start": 58001002,
+        "end": 58001002,
+        "ref": "Heb.1.2",
+        "label": "Hebrews 1:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 7,
+      "score": 3.5,
+      "weight": 0.285,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But in these last days He has spoken to us by His Son, whom He appointed heir of all things, and through whom…",
+      "alsoCites": []
+    },
+    {
+      "rank": 31,
+      "to": {
+        "start": 47009015,
+        "end": 47009015,
+        "ref": "2Cor.9.15",
+        "label": "2 Corinthians 9:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 2.5,
+      "weight": 0.237,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Thanks be to God for His indescribable gift!",
+      "alsoCites": []
+    },
+    {
+      "rank": 32,
+      "to": {
+        "start": 58002009,
+        "end": 58002009,
+        "ref": "Heb.2.9",
+        "label": "Hebrews 2:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 2.5,
+      "weight": 0.237,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But we see Jesus, who was made a little lower than the angels, now crowned with glory and honor because He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 33,
+      "to": {
+        "start": 48004004,
+        "end": 48004004,
+        "ref": "Gal.4.4",
+        "label": "Galatians 4:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.208,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But when the time had fully come, God sent His Son, born of a woman, born under the law,",
+      "alsoCites": []
+    },
+    {
+      "rank": 34,
+      "to": {
+        "start": 40025046,
+        "end": 40025046,
+        "ref": "Matt.25.46",
+        "label": "Matthew 25:46"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.77,
+      "weight": 0.193,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "And they will go away into eternal punishment, but the righteous into eternal life.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 35,
+      "to": {
+        "start": 43008051,
+        "end": 43008051,
+        "ref": "John.8.51",
+        "label": "John 8:51"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.77,
+      "weight": 0.193,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "Truly, truly, I tell you, if anyone keeps My word, he will never see death.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 36,
+      "to": {
+        "start": 43020031,
+        "end": 43020031,
+        "ref": "John.20.31",
+        "label": "John 20:31"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.77,
+      "weight": 0.193,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "But these are written so that you may believe that Jesus is the Christ, the Son of God, and that by believing…",
+      "alsoCites": []
+    },
+    {
+      "rank": 37,
+      "to": {
+        "start": 47005015,
+        "end": 47005015,
+        "ref": "2Cor.5.15",
+        "label": "2 Corinthians 5:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.77,
+      "weight": 0.193,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "And He died for all, that those who live should no longer live for themselves, but for Him who died for them…",
+      "alsoCites": []
+    },
+    {
+      "rank": 38,
+      "to": {
+        "start": 49002008,
+        "end": 49002008,
+        "ref": "Eph.2.8",
+        "label": "Ephesians 2:8"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 7,
+      "score": 1.57,
+      "weight": 0.179,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003018,
+        "label": "John 3:14–18",
+        "span": 5
+      },
+      "snippet": "For it is by grace you have been saved through faith, and this not from yourselves; it is the gift of God,",
+      "alsoCites": []
+    },
+    {
+      "rank": 39,
+      "to": {
+        "start": 26047009,
+        "end": 26047009,
+        "ref": "Ezek.47.9",
+        "label": "Ezekiel 47:9"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Wherever the river flows, there will be swarms of living creatures and a great number of fish, because it…",
+      "alsoCites": []
+    },
+    {
+      "rank": 40,
+      "to": {
+        "start": 41001011,
+        "end": 41001011,
+        "ref": "Mark.1.11",
+        "label": "Mark 1:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And a voice came from heaven: “You are My beloved Son; in You I am well pleased.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 41,
+      "to": {
+        "start": 43006047,
+        "end": 43006047,
+        "ref": "John.6.47",
+        "label": "John 6:47"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Truly, truly, I tell you, he who believes has eternal life.",
+      "alsoCites": []
+    },
+    {
+      "rank": 42,
+      "to": {
+        "start": 43006051,
+        "end": 43006051,
+        "ref": "John.6.51",
+        "label": "John 6:51"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "I am the living bread that came down from heaven. If anyone eats of this bread, he will live forever. And…",
+      "alsoCites": []
+    },
+    {
+      "rank": 43,
+      "to": {
+        "start": 51003003,
+        "end": 51003003,
+        "ref": "Col.3.3",
+        "label": "Colossians 3:3"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For you died, and your life is now hidden with Christ in God.",
+      "alsoCites": []
+    },
+    {
+      "rank": 44,
+      "to": {
+        "start": 58001006,
+        "end": 58001006,
+        "ref": "Heb.1.6",
+        "label": "Hebrews 1:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And again, when God brings His firstborn into the world, He says: “Let all God’s angels worship Him.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 45,
+      "to": {
+        "start": 66002018,
+        "end": 66002018,
+        "ref": "Rev.2.18",
+        "label": "Revelation 2:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.174,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "To the angel of the church in Thyatira write: These are the words of the Son of God, whose eyes are like a…",
+      "alsoCites": []
+    },
+    {
+      "rank": 46,
+      "to": {
+        "start": 42020013,
+        "end": 42020013,
+        "ref": "Luke.20.13",
+        "label": "Luke 20:13"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 1.41,
+      "weight": 0.167,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "‘What shall I do?’ asked the owner of the vineyard. ‘I will send my beloved son. Perhaps they will respect…",
+      "alsoCites": []
+    },
+    {
+      "rank": 47,
+      "to": {
+        "start": 23009006,
+        "end": 23009006,
+        "ref": "Isa.9.6",
+        "label": "Isaiah 9:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.06,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "For unto us a child is born, unto us a son is given, and the government will be upon His shoulders. And He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 48,
+      "to": {
+        "start": 23051006,
+        "end": 23051006,
+        "ref": "Isa.51.6",
+        "label": "Isaiah 51:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.06,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "Lift up your eyes to the heavens, and look at the earth below; for the heavens will vanish like smoke, the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 49,
+      "to": {
+        "start": 45004011,
+        "end": 45004011,
+        "ref": "Rom.4.11",
+        "label": "Romans 4:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.06,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "And he received the sign of circumcision as a seal of the righteousness that he had by faith while he was…",
+      "alsoCites": []
+    },
+    {
+      "rank": 50,
+      "to": {
+        "start": 62004014,
+        "end": 62004014,
+        "ref": "1John.4.14",
+        "label": "1 John 4:14"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.06,
+      "weight": 0.137,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "And we have seen and testify that the Father has sent His Son to be the Savior of the world.",
+      "alsoCites": []
+    },
+    {
+      "rank": 51,
+      "to": {
+        "start": 1022002,
+        "end": 1022002,
+        "ref": "Gen.22.2",
+        "label": "Genesis 22:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Take your son,” God said, “your only son Isaac, whom you love, and go to the land of Moriah. Offer him there…",
+      "alsoCites": []
+    },
+    {
+      "rank": 52,
+      "to": {
+        "start": 5030015,
+        "end": 5030015,
+        "ref": "Deut.30.15",
+        "label": "Deuteronomy 30:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "See, I have set before you today life and goodness, as well as death and disaster.",
+      "alsoCites": []
+    },
+    {
+      "rank": 53,
+      "to": {
+        "start": 19036007,
+        "end": 19036007,
+        "ref": "Ps.36.7",
+        "label": "Psalm 36:7"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "How precious is Your loving devotion, O God, that the children of men take refuge in the shadow of Your wings!",
+      "alsoCites": []
+    },
+    {
+      "rank": 54,
+      "to": {
+        "start": 20008004,
+        "end": 20008004,
+        "ref": "Prov.8.4",
+        "label": "Proverbs 8:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“To you, O men, I call out, and my cry is to the sons of men.",
+      "alsoCites": []
+    },
+    {
+      "rank": 55,
+      "to": {
+        "start": 20008024,
+        "end": 20008024,
+        "ref": "Prov.8.24",
+        "label": "Proverbs 8:24"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "When there were no watery depths, I was brought forth, when no springs were overflowing with water.",
+      "alsoCites": []
+    },
+    {
+      "rank": 56,
+      "to": {
+        "start": 20008035,
+        "end": 20008035,
+        "ref": "Prov.8.35",
+        "label": "Proverbs 8:35"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For whoever finds me finds life and obtains the favor of the LORD.",
+      "alsoCites": []
+    },
+    {
+      "rank": 57,
+      "to": {
+        "start": 23045022,
+        "end": 23045022,
+        "ref": "Isa.45.22",
+        "label": "Isaiah 45:22"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003013,
+        "end": 43003016,
+        "label": "John 3:13–16",
+        "span": 4
+      },
+      "snippet": "Turn to Me and be saved, all the ends of the earth; for I am God, and there is no other.",
+      "alsoCites": []
+    },
+    {
+      "rank": 58,
+      "to": {
+        "start": 23055004,
+        "end": 23055004,
+        "ref": "Isa.55.4",
+        "label": "Isaiah 55:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Behold, I have made him a witness to the nations, a leader and commander of the peoples.",
+      "alsoCites": []
+    },
+    {
+      "rank": 59,
+      "to": {
+        "start": 26002001,
+        "end": 26002001,
+        "ref": "Ezek.2.1",
+        "label": "Ezekiel 2:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Son of man,” He said to me, “stand up on your feet and I will speak to you.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 60,
+      "to": {
+        "start": 38009017,
+        "end": 38009017,
+        "ref": "Zech.9.17",
+        "label": "Zechariah 9:17"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "How lovely they will be, and how beautiful! Grain will make the young men flourish, and new wine, the young…",
+      "alsoCites": []
+    },
+    {
+      "rank": 61,
+      "to": {
+        "start": 40007011,
+        "end": 40007011,
+        "ref": "Matt.7.11",
+        "label": "Matthew 7:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "So if you who are evil know how to give good gifts to your children, how much more will your Father in heaven…",
+      "alsoCites": []
+    },
+    {
+      "rank": 62,
+      "to": {
+        "start": 40017005,
+        "end": 40017005,
+        "ref": "Matt.17.5",
+        "label": "Matthew 17:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "While Peter was still speaking, a bright cloud enveloped them, and a voice from the cloud said, “This is My…",
+      "alsoCites": []
+    },
+    {
+      "rank": 63,
+      "to": {
+        "start": 40021037,
+        "end": 40021037,
+        "ref": "Matt.21.37",
+        "label": "Matthew 21:37"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Finally, he sent his son to them. ‘They will respect my son,’ he said.",
+      "alsoCites": []
+    },
+    {
+      "rank": 64,
+      "to": {
+        "start": 41001001,
+        "end": 41001001,
+        "ref": "Mark.1.1",
+        "label": "Mark 1:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "This is the beginning of the gospel of Jesus Christ, the Son of God.",
+      "alsoCites": []
+    },
+    {
+      "rank": 65,
+      "to": {
+        "start": 42001078,
+        "end": 42001078,
+        "ref": "Luke.1.78",
+        "label": "Luke 1:78"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "because of the tender mercy of our God, by which the Dawn will visit us from on high,",
+      "alsoCites": []
+    },
+    {
+      "rank": 66,
+      "to": {
+        "start": 42009035,
+        "end": 42009035,
+        "ref": "Luke.9.35",
+        "label": "Luke 9:35"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And a voice came from the cloud, saying, “This is My Son, whom I have chosen. Listen to Him!”",
+      "alsoCites": []
+    },
+    {
+      "rank": 67,
+      "to": {
+        "start": 43004010,
+        "end": 43004010,
+        "ref": "John.4.10",
+        "label": "John 4:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Jesus answered, “If you knew the gift of God and who is asking you for a drink, you would have asked Him, and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 68,
+      "to": {
+        "start": 43005043,
+        "end": 43005043,
+        "ref": "John.5.43",
+        "label": "John 5:43"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "I have come in My Father’s name, and you have not received Me; but if someone else comes in his own name, you…",
+      "alsoCites": []
+    },
+    {
+      "rank": 69,
+      "to": {
+        "start": 45005015,
+        "end": 45005015,
+        "ref": "Rom.5.15",
+        "label": "Romans 5:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But the gift is not like the trespass. For if the many died by the trespass of the one man, how much more did…",
+      "alsoCites": []
+    },
+    {
+      "rank": 70,
+      "to": {
+        "start": 47001019,
+        "end": 47001019,
+        "ref": "2Cor.1.19",
+        "label": "2 Corinthians 1:19"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For the Son of God, Jesus Christ, who was proclaimed among you by me and Silvanus and Timothy, was not “Yes”…",
+      "alsoCites": []
+    },
+    {
+      "rank": 71,
+      "to": {
+        "start": 47005018,
+        "end": 47005018,
+        "ref": "2Cor.5.18",
+        "label": "2 Corinthians 5:18"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "All this is from God, who reconciled us to Himself through Christ and gave us the ministry of reconciliation:",
+      "alsoCites": []
+    },
+    {
+      "rank": 72,
+      "to": {
+        "start": 48002020,
+        "end": 48002020,
+        "ref": "Gal.2.20",
+        "label": "Galatians 2:20"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "I have been crucified with Christ, and I no longer live, but Christ lives in me. The life I live in the body…",
+      "alsoCites": []
+    },
+    {
+      "rank": 73,
+      "to": {
+        "start": 58005005,
+        "end": 58005005,
+        "ref": "Heb.5.5",
+        "label": "Hebrews 5:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "So also Christ did not take upon Himself the glory of becoming a high priest, but He was called by the One…",
+      "alsoCites": []
+    },
+    {
+      "rank": 74,
+      "to": {
+        "start": 58011017,
+        "end": 58011017,
+        "ref": "Heb.11.17",
+        "label": "Hebrews 11:17"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By faith Abraham, when he was tested, offered up Isaac on the altar. He who had received the promises was…",
+      "alsoCites": []
+    },
+    {
+      "rank": 75,
+      "to": {
+        "start": 62004010,
+        "end": 62004010,
+        "ref": "1John.4.10",
+        "label": "1 John 4:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And love consists in this: not that we loved God, but that He loved us and sent His Son as the atoning…",
+      "alsoCites": []
+    },
+    {
+      "rank": 76,
+      "to": {
+        "start": 62005010,
+        "end": 62005010,
+        "ref": "1John.5.10",
+        "label": "1 John 5:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Whoever believes in the Son of God has this testimony within him; whoever does not believe God has made Him…",
+      "alsoCites": []
+    },
+    {
+      "rank": 77,
+      "to": {
+        "start": 43001034,
+        "end": 43001034,
+        "ref": "John.1.34",
+        "label": "John 1:34"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.119,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "I have seen and testified that this is the Son of God.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 78,
+      "to": {
+        "start": 43012034,
+        "end": 43012034,
+        "ref": "John.12.34",
+        "label": "John 12:34"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.119,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003016,
+        "label": "John 3:14–16",
+        "span": 3
+      },
+      "snippet": "The crowd replied, “We have heard from the Law that the Christ will remain forever. So how can You say that…",
+      "alsoCites": []
+    },
+    {
+      "rank": 79,
+      "to": {
+        "start": 54002004,
+        "end": 54002004,
+        "ref": "1Tim.2.4",
+        "label": "1 Timothy 2:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.119,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003017,
+        "label": "John 3:15–17",
+        "span": 3
+      },
+      "snippet": "who wants everyone to be saved and to come to the knowledge of the truth.",
+      "alsoCites": []
+    },
+    {
+      "rank": 80,
+      "to": {
+        "start": 54004010,
+        "end": 54004010,
+        "ref": "1Tim.4.10",
+        "label": "1 Timothy 4:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.87,
+      "weight": 0.119,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003017,
+        "label": "John 3:15–17",
+        "span": 3
+      },
+      "snippet": "To this end we labor and strive, because we have set our hope on the living God, who is the Savior of…",
+      "alsoCites": []
+    },
+    {
+      "rank": 81,
+      "to": {
+        "start": 44010043,
+        "end": 44010043,
+        "ref": "Acts.10.43",
+        "label": "Acts 10:43"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 0.75,
+      "weight": 0.106,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003017,
+        "label": "John 3:14–17",
+        "span": 4
+      },
+      "snippet": "All the prophets testify about Him that everyone who believes in Him receives forgiveness of sins through His…",
+      "alsoCites": []
+    },
+    {
+      "rank": 82,
+      "to": {
+        "start": 19040010,
+        "end": 19040010,
+        "ref": "Ps.40.10",
+        "label": "Psalm 40:10"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "I have not covered up Your righteousness in my heart; I have declared Your faithfulness and salvation; I have…",
+      "alsoCites": []
+    },
+    {
+      "rank": 83,
+      "to": {
+        "start": 40027043,
+        "end": 40027043,
+        "ref": "Matt.27.43",
+        "label": "Matthew 27:43"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "He trusts in God. Let God deliver Him now if He wants Him. For He said, ‘I am the Son of God.’”",
+      "alsoCites": []
+    },
+    {
+      "rank": 84,
+      "to": {
+        "start": 43007029,
+        "end": 43007029,
+        "ref": "John.7.29",
+        "label": "John 7:29"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "but I know Him, because I am from Him and He sent Me.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 85,
+      "to": {
+        "start": 43014004,
+        "end": 43014004,
+        "ref": "John.14.4",
+        "label": "John 14:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003017,
+        "label": "John 3:16–17",
+        "span": 2
+      },
+      "snippet": "You know the way to the place where I am going.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 86,
+      "to": {
+        "start": 44016031,
+        "end": 44016031,
+        "ref": "Acts.16.31",
+        "label": "Acts 16:31"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "They replied, “Believe in the Lord Jesus and you will be saved, you and your household.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 87,
+      "to": {
+        "start": 54001016,
+        "end": 54001016,
+        "ref": "1Tim.1.16",
+        "label": "1 Timothy 1:16"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "But for this very reason I was shown mercy, so that in me, the worst of sinners, Christ Jesus might display…",
+      "alsoCites": []
+    },
+    {
+      "rank": 88,
+      "to": {
+        "start": 56001002,
+        "end": 56001002,
+        "ref": "Titus.1.2",
+        "label": "Titus 1:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "in the hope of eternal life, which God, who cannot lie, promised before time began.",
+      "alsoCites": []
+    },
+    {
+      "rank": 89,
+      "to": {
+        "start": 58010039,
+        "end": 58010039,
+        "ref": "Heb.10.39",
+        "label": "Hebrews 10:39"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "But we are not of those who shrink back and are destroyed, but of those who have faith and preserve their…",
+      "alsoCites": []
+    },
+    {
+      "rank": 90,
+      "to": {
+        "start": 62005011,
+        "end": 62005011,
+        "ref": "1John.5.11",
+        "label": "1 John 5:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.102,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003016,
+        "label": "John 3:15–16",
+        "span": 2
+      },
+      "snippet": "And this is that testimony: God has given us eternal life, and this life is in His Son.",
+      "alsoCites": []
+    },
+    {
+      "rank": 91,
+      "to": {
+        "start": 40026063,
+        "end": 40026063,
+        "ref": "Matt.26.63",
+        "label": "Matthew 26:63"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.087,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "But Jesus remained silent. Then the high priest said to Him, “I charge You under oath by the living God: Tell…",
+      "alsoCites": []
+    },
+    {
+      "rank": 92,
+      "to": {
+        "start": 41009007,
+        "end": 41009007,
+        "ref": "Mark.9.7",
+        "label": "Mark 9:7"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.087,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "Then a cloud appeared and enveloped them, and a voice came from the cloud: “This is My beloved Son. Listen to…",
+      "alsoCites": []
+    },
+    {
+      "rank": 93,
+      "to": {
+        "start": 43006029,
+        "end": 43006029,
+        "ref": "John.6.29",
+        "label": "John 6:29"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.087,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "Jesus replied, “The work of God is this: to believe in the One He has sent.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 94,
+      "to": {
+        "start": 45001003,
+        "end": 45001003,
+        "ref": "Rom.1.3",
+        "label": "Romans 1:3"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.087,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "regarding His Son, who was a descendant of David according to the flesh,",
+      "alsoCites": []
+    },
+    {
+      "rank": 95,
+      "to": {
+        "start": 45004024,
+        "end": 45004024,
+        "ref": "Rom.4.24",
+        "label": "Romans 4:24"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.087,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003016,
+        "label": "John 3:14–16",
+        "span": 3
+      },
+      "snippet": "but also for us, to whom righteousness will be credited—for us who believe in Him who raised Jesus our Lord…",
+      "alsoCites": []
+    },
+    {
+      "rank": 96,
+      "to": {
+        "start": 58002003,
+        "end": 58002003,
+        "ref": "Heb.2.3",
+        "label": "Hebrews 2:3"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.58,
+      "weight": 0.087,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "how shall we escape if we neglect such a great salvation? This salvation was first announced by the Lord, was…",
+      "alsoCites": []
+    },
+    {
+      "rank": 97,
+      "to": {
+        "start": 38013007,
+        "end": 38013007,
+        "ref": "Zech.13.7",
+        "label": "Zechariah 13:7"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003017,
+        "label": "John 3:14–17",
+        "span": 4
+      },
+      "snippet": "Awake, O sword, against My Shepherd, against the man who is My Companion, declares the LORD of Hosts. Strike…",
+      "alsoCites": []
+    },
+    {
+      "rank": 98,
+      "to": {
+        "start": 43009035,
+        "end": 43009035,
+        "ref": "John.9.35",
+        "label": "John 9:35"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003018,
+        "label": "John 3:15–18",
+        "span": 4
+      },
+      "snippet": "When Jesus heard that they had thrown him out, He found the man and said, “Do you believe in the Son of Man?”",
+      "alsoCites": []
+    },
+    {
+      "rank": 99,
+      "to": {
+        "start": 43011026,
+        "end": 43011026,
+        "ref": "John.11.26",
+        "label": "John 11:26"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003018,
+        "label": "John 3:15–18",
+        "span": 4
+      },
+      "snippet": "And everyone who lives and believes in Me will never die. Do you believe this?”",
+      "alsoCites": []
+    },
+    {
+      "rank": 100,
+      "to": {
+        "start": 44020021,
+        "end": 44020021,
+        "ref": "Acts.20.21",
+        "label": "Acts 20:21"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003018,
+        "label": "John 3:15–18",
+        "span": 4
+      },
+      "snippet": "testifying to Jews and Greeks alike about repentance to God and faith in our Lord Jesus Christ.",
+      "alsoCites": []
+    },
+    {
+      "rank": 101,
+      "to": {
+        "start": 45008003,
+        "end": 45008003,
+        "ref": "Rom.8.3",
+        "label": "Romans 8:3"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003017,
+        "label": "John 3:14–17",
+        "span": 4
+      },
+      "snippet": "For what the law was powerless to do in that it was weakened by the flesh, God did by sending His own Son in…",
+      "alsoCites": []
+    },
+    {
+      "rank": 102,
+      "to": {
+        "start": 45008039,
+        "end": 45008039,
+        "ref": "Rom.8.39",
+        "label": "Romans 8:39"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God…",
+      "alsoCites": []
+    },
+    {
+      "rank": 103,
+      "to": {
+        "start": 48003022,
+        "end": 48003022,
+        "ref": "Gal.3.22",
+        "label": "Galatians 3:22"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003015,
+        "end": 43003018,
+        "label": "John 3:15–18",
+        "span": 4
+      },
+      "snippet": "But the Scripture pronounces all things confined by sin, so that by faith in Jesus Christ the promise might…",
+      "alsoCites": []
+    },
+    {
+      "rank": 104,
+      "to": {
+        "start": 51001015,
+        "end": 51001015,
+        "ref": "Col.1.15",
+        "label": "Colossians 1:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.5,
+      "weight": 0.077,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The Son is the image of the invisible God, the firstborn over all creation.",
+      "alsoCites": []
+    },
+    {
+      "rank": 105,
+      "to": {
+        "start": 43003012,
+        "end": 43003012,
+        "ref": "John.3.12",
+        "label": "John 3:12"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.45,
+      "weight": 0.07,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003013,
+        "end": 43003017,
+        "label": "John 3:13–17",
+        "span": 5
+      },
+      "snippet": "If I have told you about earthly things and you do not believe, how will you believe if I tell you about…",
+      "alsoCites": []
+    },
+    {
+      "rank": 106,
+      "to": {
+        "start": 43004042,
+        "end": 43004042,
+        "ref": "John.4.42",
+        "label": "John 4:42"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.45,
+      "weight": 0.07,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003018,
+        "label": "John 3:14–18",
+        "span": 5
+      },
+      "snippet": "They said to the woman, “We now believe not only because of your words; we have heard for ourselves, and we…",
+      "alsoCites": []
+    },
+    {
+      "rank": 107,
+      "to": {
+        "start": 45005001,
+        "end": 45005001,
+        "ref": "Rom.5.1",
+        "label": "Romans 5:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.29,
+      "weight": 0.048,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003016,
+        "end": 43003018,
+        "label": "John 3:16–18",
+        "span": 3
+      },
+      "snippet": "Therefore, since we have been justified through faith, we have peace with God through our Lord Jesus Christ,",
+      "alsoCites": []
+    },
+    {
+      "rank": 108,
+      "to": {
+        "start": 45006023,
+        "end": 45006023,
+        "ref": "Rom.6.23",
+        "label": "Romans 6:23"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.25,
+      "weight": 0.042,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003017,
+        "label": "John 3:14–17",
+        "span": 4
+      },
+      "snippet": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+      "alsoCites": []
+    },
+    {
+      "rank": 109,
+      "to": {
+        "start": 43019039,
+        "end": 43019039,
+        "ref": "John.19.39",
+        "label": "John 19:39"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.22,
+      "weight": 0.038,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": {
+        "start": 43003001,
+        "end": 43003021,
+        "label": "John 3:1–21",
+        "span": 21
+      },
+      "snippet": "Nicodemus, who had previously come to Jesus at night, also brought a mixture of myrrh and aloes, about…",
+      "alsoCites": []
+    },
+    {
+      "rank": 110,
+      "to": {
+        "start": 45003028,
+        "end": 45003028,
+        "ref": "Rom.3.28",
+        "label": "Romans 3:28"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.22,
+      "weight": 0.038,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 43003014,
+        "end": 43003018,
+        "label": "John 3:14–18",
+        "span": 5
+      },
+      "snippet": "For we maintain that a man is justified by faith apart from works of the law.",
+      "alsoCites": []
+    }
+  ]
+}

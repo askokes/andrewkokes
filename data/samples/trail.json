@@ -1,0 +1,181 @@
+{
+  "schema": "asb.trail/2",
+  "id": "trail_2026-09-27T14:02:11Z_a8f3",
+  "translation": "bsb",
+  "cursor": 2,
+  "hops": [
+    {
+      "index": 0,
+      "kind": "open",
+      "vid": 43003016,
+      "ref": "John.3.16",
+      "label": "John 3:16",
+      "book": "John",
+      "via": null,
+      "scroll": {
+        "chapter": 43003000,
+        "anchor": 43003016,
+        "highlight": null
+      },
+      "at": "2026-09-27T14:02:11Z"
+    },
+    {
+      "index": 1,
+      "kind": "jump",
+      "vid": 45005008,
+      "ref": "Rom.5.8",
+      "label": "Romans 5:8",
+      "book": "Romans",
+      "via": {
+        "from": {
+          "vid": 43003016,
+          "ref": "John.3.16",
+          "label": "John 3:16"
+        },
+        "to": {
+          "start": 45005008,
+          "end": 45005008,
+          "ref": "Rom.5.8",
+          "label": "Romans 5:8"
+        },
+        "direction": "both",
+        "votesOut": 178,
+        "votesIn": 33,
+        "score": 194.5,
+        "rank": 1
+      },
+      "scroll": {
+        "chapter": 45005000,
+        "anchor": 45005008,
+        "highlight": null
+      },
+      "at": "2026-09-27T14:03:40Z"
+    },
+    {
+      "index": 2,
+      "kind": "jump",
+      "vid": 62003016,
+      "ref": "1John.3.16",
+      "label": "1 John 3:16",
+      "book": "1 John",
+      "via": {
+        "from": {
+          "vid": 45005008,
+          "ref": "Rom.5.8",
+          "label": "Romans 5:8"
+        },
+        "to": {
+          "start": 62003016,
+          "end": 62003016,
+          "ref": "1John.3.16",
+          "label": "1 John 3:16"
+        },
+        "direction": "both",
+        "votesOut": 19,
+        "votesIn": 5,
+        "score": 21.5,
+        "rank": 4
+      },
+      "scroll": {
+        "chapter": 62003000,
+        "anchor": 62003016,
+        "highlight": null
+      },
+      "at": "2026-09-27T14:05:02Z"
+    }
+  ],
+  "forward": [],
+  "peeks": [
+    {
+      "fromHop": 1,
+      "to": {
+        "start": 45005006,
+        "end": 45005006,
+        "ref": "Rom.5.6",
+        "label": "Romans 5:6"
+      },
+      "votesOut": 26,
+      "at": "2026-09-27T14:04:10Z",
+      "jumped": false
+    },
+    {
+      "fromHop": 2,
+      "to": {
+        "start": 43003016,
+        "end": 43003016,
+        "ref": "John.3.16",
+        "label": "John 3:16"
+      },
+      "votesOut": 15,
+      "at": "2026-09-27T14:05:40Z",
+      "jumped": false
+    }
+  ],
+  "peek": {
+    "open": true,
+    "fromHop": 2,
+    "to": {
+      "start": 43003016,
+      "end": 43003016,
+      "ref": "John.3.16",
+      "label": "John 3:16"
+    },
+    "direction": "out",
+    "votesOut": 15,
+    "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life.",
+    "note": "a peek does not push a hop until the reader taps Go"
+  },
+  "web": {
+    "nodes": [
+      43003016,
+      45005008,
+      62003016
+    ],
+    "edges": [
+      [
+        43003016,
+        45005008,
+        178
+      ],
+      [
+        45005008,
+        62003016,
+        19
+      ],
+      [
+        62003016,
+        43003016,
+        15
+      ]
+    ],
+    "peekOnlyEdges": [
+      [
+        62003016,
+        43003016
+      ]
+    ],
+    "booksTouched": [
+      "John",
+      "Romans",
+      "1 John"
+    ],
+    "loopClosed": true
+  },
+  "rules": {
+    "pushOn": [
+      "open",
+      "jump",
+      "search",
+      "bookmarkOpen"
+    ],
+    "notPushed": [
+      "scroll",
+      "peek",
+      "back",
+      "forward"
+    ],
+    "scrollUpdatesCurrentHop": true,
+    "maxHops": 200,
+    "persist": "SwiftData; active trail restored on relaunch; last 20 trails kept"
+  }
+}

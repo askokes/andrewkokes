@@ -1,0 +1,1788 @@
+{
+  "schema": "asb.manifest/2",
+  "datasetVersion": "2026.09.1",
+  "builtAt": "2026-09-27T00:00:00Z",
+  "pipeline": "tools/build_dataset.py",
+  "canon": {
+    "books": 66,
+    "chapters": 1189,
+    "verses": 31102,
+    "versification": "BSB"
+  },
+  "graph": {
+    "edges": 343608,
+    "edgesDroppedForMissingVerse": 1,
+    "edgesClampedToBsbVersification": 4,
+    "rangeTargets": 87934,
+    "crossChapterRanges": 650,
+    "crossBookRanges": 18,
+    "rangesOver40Verses": 295,
+    "maxSpan": 182,
+    "incomingRows": 596218,
+    "votes": {
+      "min": 1,
+      "median": 2,
+      "p90": 4,
+      "p99": 10,
+      "max": 340
+    },
+    "mergedTickerItems": 840072,
+    "inlineTickerItems": 343635,
+    "versesWithNoConnections": 114
+  },
+  "ranking": {
+    "version": "asb.rank.v2",
+    "incomingFactor": 0.5,
+    "rangeDiscount": "votes / sqrt(span)",
+    "spanCap": 40,
+    "score": "votesOut + incomingFactor * sum(votesIn / sqrt(span))",
+    "weight": "ln(1 + score) / ln(1 + maxScoreOfThisVerse), 3 decimals, per verse",
+    "tiers": {
+      "strong": ">= 10",
+      "solid": ">= 4",
+      "light": "< 4"
+    },
+    "tierShare": {
+      "strong": 0.0079,
+      "solid": 0.0899,
+      "light": 0.9022
+    },
+    "order": "score desc; out/both before in-only; start vid asc",
+    "collision": "same start, different end: keep higher votes, list others in alsoCites",
+    "tickerInline": 12,
+    "snippetMaxChars": 110,
+    "dwellSeconds": "1.6 + 1.2 * weight"
+  },
+  "translations": [
+    {
+      "id": "bsb",
+      "name": "Berean Standard Bible",
+      "abbr": "BSB",
+      "textVersion": "bsb-2023",
+      "license": "Public domain (CC0), BSB Publishing 2023",
+      "copyrightNotice": "The Holy Bible, Berean Standard Bible, BSB is produced in cooperation with Bible Hub, Discovery Bible, OpenBible.com, and the Berean Bible Translation Committee. This text of God's Word has been dedicated to the public domain.",
+      "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",
+      "role": "placeholder until NIV is licensed",
+      "bundled": true,
+      "packUrl": null,
+      "sha256": "65cec9123b09bec8b99b664280e321e82d39fe77703539eebe889aa50e232cf9",
+      "headings": false
+    },
+    {
+      "id": "niv",
+      "name": "New International Version",
+      "abbr": "NIV",
+      "textVersion": null,
+      "license": "Copyright Biblica, Inc.; requires license",
+      "attribution": null,
+      "copyrightNotice": "<supplied by Biblica with the license>",
+      "role": "target translation",
+      "bundled": false,
+      "packUrl": "https://cdn.example.com/asb/text/niv/{book}.json.gz",
+      "sha256": null,
+      "headings": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "openbible-xref-2016-02-01",
+      "kind": "crossReferences",
+      "name": "OpenBible.info Cross References",
+      "version": "2016-02-01",
+      "license": "CC-BY",
+      "url": "https://www.openbible.info/labs/cross-references/",
+      "attribution": "Cross references from OpenBible.info, CC-BY",
+      "via": "https://github.com/scrollmapper/bible_databases (2024 branch, cross_references.txt)",
+      "retrievedAt": "2026-09-27"
+    },
+    {
+      "id": "bsb-2023",
+      "kind": "text",
+      "name": "Berean Standard Bible",
+      "version": "2023",
+      "license": "Public domain (CC0)",
+      "url": "https://berean.bible",
+      "attribution": "Berean Standard Bible, public domain",
+      "via": "https://github.com/scrollmapper/bible_databases (formats/json/BSB.json)",
+      "retrievedAt": "2026-09-27"
+    },
+    {
+      "id": "ai-claude",
+      "kind": "ai",
+      "name": "AI study notes",
+      "generator": "claude",
+      "model": "claude-opus-5",
+      "promptVersions": {
+        "verse-context": "v3",
+        "edge-why": "v2"
+      },
+      "attribution": "AI-generated study aid; not part of the Bible text or the OpenBible dataset",
+      "license": "Generated content, owned by the publisher"
+    }
+  ],
+  "shards": [
+    {
+      "path": "books.json",
+      "kind": "books",
+      "bytes": 17744,
+      "gzipBytes": 4476,
+      "sha256": "bf18586833bf92eb927f70abbd94a5b0b7eaf8fdc6c148db24a69554d825a1f9"
+    },
+    {
+      "path": "graph/01-Gen.json",
+      "kind": "graph",
+      "book": 1,
+      "bytes": 985705,
+      "gzipBytes": 129665,
+      "sha256": "fb90ca3d32eaa4fe2bbe3a66c0e3e0cb97db9213a8f58637941c3300b1ffaffb"
+    },
+    {
+      "path": "incoming/01-Gen.json",
+      "kind": "incoming",
+      "book": 1,
+      "bytes": 2540901,
+      "gzipBytes": 169761,
+      "sha256": "08f3beb9aaf048374fdb955d00de0d342bbf818b57d241f5c222d1c647ef0d2e"
+    },
+    {
+      "path": "text/bsb/01-Gen.json",
+      "kind": "text",
+      "book": 1,
+      "translation": "bsb",
+      "bytes": 477554,
+      "gzipBytes": 80288,
+      "sha256": "a2082fbd95eb6e2d679fb2dd9d0719edc9598dff5c6a73dfe9ac3cd3fe59f670"
+    },
+    {
+      "path": "graph/02-Exod.json",
+      "kind": "graph",
+      "book": 2,
+      "bytes": 740964,
+      "gzipBytes": 97405,
+      "sha256": "6a652b1e611b2bad35749adfb612d6eff783df7f86cab25bd779438d88824c0e"
+    },
+    {
+      "path": "incoming/02-Exod.json",
+      "kind": "incoming",
+      "book": 2,
+      "bytes": 2513208,
+      "gzipBytes": 159371,
+      "sha256": "cd17544fdbca39a2ff9b56e41a7d46bdb459142c88bbb387c9be8a59d7b98898"
+    },
+    {
+      "path": "text/bsb/02-Exod.json",
+      "kind": "text",
+      "book": 2,
+      "translation": "bsb",
+      "bytes": 383982,
+      "gzipBytes": 62214,
+      "sha256": "57237e7e25a5af335816b18d8a01471eafab395271100de3694a5b2941627c42"
+    },
+    {
+      "path": "graph/03-Lev.json",
+      "kind": "graph",
+      "book": 3,
+      "bytes": 510655,
+      "gzipBytes": 66055,
+      "sha256": "c94dfd55f0e465023e2ff34be305bf243f7c9b7ad76d01f727d206ce3193bd9e"
+    },
+    {
+      "path": "incoming/03-Lev.json",
+      "kind": "incoming",
+      "book": 3,
+      "bytes": 1567826,
+      "gzipBytes": 96592,
+      "sha256": "acbc9c128d63351c03bb1dc6b89b19e5ae78cdce4717b2587b6f32afb305cc4a"
+    },
+    {
+      "path": "text/bsb/03-Lev.json",
+      "kind": "text",
+      "book": 3,
+      "translation": "bsb",
+      "bytes": 279279,
+      "gzipBytes": 40321,
+      "sha256": "073a1b1fcc184872ea9701753a5ce98627d8f0386ef2a4556ebc4a180ee3402f"
+    },
+    {
+      "path": "graph/04-Num.json",
+      "kind": "graph",
+      "book": 4,
+      "bytes": 573448,
+      "gzipBytes": 75575,
+      "sha256": "0c2e17a43100c31ceb8d79419da72035013fe38a70ff150c2ac76fb864ca0f3c"
+    },
+    {
+      "path": "incoming/04-Num.json",
+      "kind": "incoming",
+      "book": 4,
+      "bytes": 2068027,
+      "gzipBytes": 124550,
+      "sha256": "238d44ad5b30cf125db77a74df569d1ba3db6899df8fde4f45b72fda3f97696c"
+    },
+    {
+      "path": "text/bsb/04-Num.json",
+      "kind": "text",
+      "book": 4,
+      "translation": "bsb",
+      "bytes": 392222,
+      "gzipBytes": 58269,
+      "sha256": "0f2031375ff39fc330a050cd73b51cb5113c6fd0321aa19c3e140909a6a5f0c5"
+    },
+    {
+      "path": "graph/05-Deut.json",
+      "kind": "graph",
+      "book": 5,
+      "bytes": 676547,
+      "gzipBytes": 91759,
+      "sha256": "d6686e28387951f3558abac62d2b0f1784767d2906bc3afb5e63cade217ae0e9"
+    },
+    {
+      "path": "incoming/05-Deut.json",
+      "kind": "incoming",
+      "book": 5,
+      "bytes": 2357953,
+      "gzipBytes": 157124,
+      "sha256": "284c83ecebc89e8a71e293e9a3737cce3b8b16ecce9906567d6ea3a3d1691ffa"
+    },
+    {
+      "path": "text/bsb/05-Deut.json",
+      "kind": "text",
+      "book": 5,
+      "translation": "bsb",
+      "bytes": 317989,
+      "gzipBytes": 54227,
+      "sha256": "1a5004e41b54269725c24212b6ab16095ec531154d46e4ab4acb914e43c05fd1"
+    },
+    {
+      "path": "graph/06-Josh.json",
+      "kind": "graph",
+      "book": 6,
+      "bytes": 342380,
+      "gzipBytes": 45818,
+      "sha256": "b11b85f009d07d7a6904fcb0f93b2a1a7e9d398a929ae74e4d51eaafacd0de0a"
+    },
+    {
+      "path": "incoming/06-Josh.json",
+      "kind": "incoming",
+      "book": 6,
+      "bytes": 1063581,
+      "gzipBytes": 69403,
+      "sha256": "f7efe023479237d0ecafc5c37f2d9303c45922fbaeca238ad1b26c54516f8624"
+    },
+    {
+      "path": "text/bsb/06-Josh.json",
+      "kind": "text",
+      "book": 6,
+      "translation": "bsb",
+      "bytes": 213003,
+      "gzipBytes": 35552,
+      "sha256": "c7d1bf6b1141ce929ded179cbaf76d6474241f5a2cfe6944c89bc54ce416dc1a"
+    },
+    {
+      "path": "graph/07-Judg.json",
+      "kind": "graph",
+      "book": 7,
+      "bytes": 301086,
+      "gzipBytes": 40267,
+      "sha256": "f610ad9d20eafa7329081efc3e18db270b19a537ea7be545af757f5fbc90e0b8"
+    },
+    {
+      "path": "incoming/07-Judg.json",
+      "kind": "incoming",
+      "book": 7,
+      "bytes": 798278,
+      "gzipBytes": 52754,
+      "sha256": "272cf2f08e641d6fa433046ca74753be8e7252804e83dff43c003aa530d0f32e"
+    },
+    {
+      "path": "text/bsb/07-Judg.json",
+      "kind": "text",
+      "book": 7,
+      "translation": "bsb",
+      "bytes": 211673,
+      "gzipBytes": 37793,
+      "sha256": "04bb637efae95b4cbe1dad0a7f4acdf31cd60cc4dc67c1b63e40a704aa641780"
+    },
+    {
+      "path": "graph/08-Ruth.json",
+      "kind": "graph",
+      "book": 8,
+      "bytes": 43054,
+      "gzipBytes": 6195,
+      "sha256": "6c61f8555ac0ebae5d75bad4dff45557c5cceb881148727256f62d0614238900"
+    },
+    {
+      "path": "incoming/08-Ruth.json",
+      "kind": "incoming",
+      "book": 8,
+      "bytes": 73358,
+      "gzipBytes": 5594,
+      "sha256": "09370b06b7262e26f95fdf98880b8bcb24704542c20abcd75be72ee9fd05b063"
+    },
+    {
+      "path": "text/bsb/08-Ruth.json",
+      "kind": "text",
+      "book": 8,
+      "translation": "bsb",
+      "bytes": 29504,
+      "gzipBytes": 6009,
+      "sha256": "efafeda2744608e265ebe9ce7c03912facd332c0ef4ee4a79c4f5999bfd061d9"
+    },
+    {
+      "path": "graph/09-1Sam.json",
+      "kind": "graph",
+      "book": 9,
+      "bytes": 441349,
+      "gzipBytes": 59639,
+      "sha256": "73fa43efb676aa3e04b3fa74cd972bd4b2dba5e722097806e07254f9a4e42e0c"
+    },
+    {
+      "path": "incoming/09-1Sam.json",
+      "kind": "incoming",
+      "book": 9,
+      "bytes": 1358379,
+      "gzipBytes": 92667,
+      "sha256": "6fee22951e7a2e80761c63ac497c351e466517cb15124a040b65633fb9fe3a22"
+    },
+    {
+      "path": "text/bsb/09-1Sam.json",
+      "kind": "text",
+      "book": 9,
+      "translation": "bsb",
+      "bytes": 280128,
+      "gzipBytes": 51411,
+      "sha256": "2a164a532f92c9fba7f293cbbdfbe918893eb5af4adb32d4c3808bf2461e99f7"
+    },
+    {
+      "path": "graph/10-2Sam.json",
+      "kind": "graph",
+      "book": 10,
+      "bytes": 393519,
+      "gzipBytes": 52385,
+      "sha256": "9ef419f7d2980a830594d26467b22c26d27e7ac3fd5e03a0ae4d9fa1d0afefaa"
+    },
+    {
+      "path": "incoming/10-2Sam.json",
+      "kind": "incoming",
+      "book": 10,
+      "bytes": 1157156,
+      "gzipBytes": 73927,
+      "sha256": "631d736d71d38735df30b0f49cc894a5322ccc0eeed9ac4ac4443733b52dfbb5"
+    },
+    {
+      "path": "text/bsb/10-2Sam.json",
+      "kind": "text",
+      "book": 10,
+      "translation": "bsb",
+      "bytes": 235737,
+      "gzipBytes": 44032,
+      "sha256": "2dd76f7bc64c4af69bd54a61fa697eba433b406a94685a4d6554a0d44e0b0b52"
+    },
+    {
+      "path": "graph/11-1Kgs.json",
+      "kind": "graph",
+      "book": 11,
+      "bytes": 530639,
+      "gzipBytes": 69507,
+      "sha256": "2a1ef1c338027c494a4036216183b087f69203749a83f0039d9aabda385753b2"
+    },
+    {
+      "path": "incoming/11-1Kgs.json",
+      "kind": "incoming",
+      "book": 11,
+      "bytes": 1423478,
+      "gzipBytes": 93342,
+      "sha256": "ef66708c7567c87e68cbb5b987b1112b9b3380538433621d7ac80a7e09404585"
+    },
+    {
+      "path": "text/bsb/11-1Kgs.json",
+      "kind": "text",
+      "book": 11,
+      "translation": "bsb",
+      "bytes": 279351,
+      "gzipBytes": 48993,
+      "sha256": "9d3fc113bd1e0c1e6634169d45a0f3ec020a196c574b98eaf68a26d7b6f8cf91"
+    },
+    {
+      "path": "graph/12-2Kgs.json",
+      "kind": "graph",
+      "book": 12,
+      "bytes": 484325,
+      "gzipBytes": 63079,
+      "sha256": "2eee1d2d15d1f0a259d7c1450b8ce19580fe74498f68498c7671228d8edeb0b3"
+    },
+    {
+      "path": "incoming/12-2Kgs.json",
+      "kind": "incoming",
+      "book": 12,
+      "bytes": 1273013,
+      "gzipBytes": 81766,
+      "sha256": "a3af75ac5a0e973b7ada0026f2888b8fdcbba321858eaede31a36a12554439a2"
+    },
+    {
+      "path": "text/bsb/12-2Kgs.json",
+      "kind": "text",
+      "book": 12,
+      "translation": "bsb",
+      "bytes": 260122,
+      "gzipBytes": 45041,
+      "sha256": "82e92418913b2eb8cc12ca30017f804f9cfdbb5f4fee33b1ea7e5cf9d038bc04"
+    },
+    {
+      "path": "graph/13-1Chr.json",
+      "kind": "graph",
+      "book": 13,
+      "bytes": 393453,
+      "gzipBytes": 51336,
+      "sha256": "c91650e4b9db6f1ff2ae3d2bcc6f8d9394712011a84447236bef75e913a0dc21"
+    },
+    {
+      "path": "incoming/13-1Chr.json",
+      "kind": "incoming",
+      "book": 13,
+      "bytes": 1291080,
+      "gzipBytes": 75504,
+      "sha256": "ba1e574fdabea12435f390db66f11e13e896146792efe359265ce2b685788c47"
+    },
+    {
+      "path": "text/bsb/13-1Chr.json",
+      "kind": "text",
+      "book": 13,
+      "translation": "bsb",
+      "bytes": 272676,
+      "gzipBytes": 46050,
+      "sha256": "fd3dc6ed4bd117ccba39ed7bfd92d1f709655266dc463d8a7d6d8e7e12a9f7d6"
+    },
+    {
+      "path": "graph/14-2Chr.json",
+      "kind": "graph",
+      "book": 14,
+      "bytes": 540957,
+      "gzipBytes": 71301,
+      "sha256": "75497121578416d6198c7d42e8a127e2491d166e96f61f307b387096db295bab"
+    },
+    {
+      "path": "incoming/14-2Chr.json",
+      "kind": "incoming",
+      "book": 14,
+      "bytes": 1454193,
+      "gzipBytes": 93574,
+      "sha256": "862bcffaadb744bd8de46f55483065dd4637a2f9a2cd32b0ad2a7d23d25a3b68"
+    },
+    {
+      "path": "text/bsb/14-2Chr.json",
+      "kind": "text",
+      "book": 14,
+      "translation": "bsb",
+      "bytes": 293161,
+      "gzipBytes": 52983,
+      "sha256": "515e960a4c7e17203e103303fed86e458f6cdc0aa9dd4317dbe09efacb20efaa"
+    },
+    {
+      "path": "graph/15-Ezra.json",
+      "kind": "graph",
+      "book": 15,
+      "bytes": 149695,
+      "gzipBytes": 19599,
+      "sha256": "5de60805644a19e657ac096b6ab4f5f1074fdb4e564a2c4b7b2944c80c984b3a"
+    },
+    {
+      "path": "incoming/15-Ezra.json",
+      "kind": "incoming",
+      "book": 15,
+      "bytes": 402156,
+      "gzipBytes": 25849,
+      "sha256": "efdc6189992a5886b1a142a2eed24bd9c43f8ab5a8ca57e186a22b15be4815ac"
+    },
+    {
+      "path": "text/bsb/15-Ezra.json",
+      "kind": "text",
+      "book": 15,
+      "translation": "bsb",
+      "bytes": 87648,
+      "gzipBytes": 15608,
+      "sha256": "a4ac55c81d0e909a7f816d171580ecfe37d0a24d25b5859d2c855537513c373d"
+    },
+    {
+      "path": "graph/16-Neh.json",
+      "kind": "graph",
+      "book": 16,
+      "bytes": 231275,
+      "gzipBytes": 30487,
+      "sha256": "fbd927260e531b63d8d3e46f7a45352ec5cbdca25c13d4742c4e3ff6dfa0449e"
+    },
+    {
+      "path": "incoming/16-Neh.json",
+      "kind": "incoming",
+      "book": 16,
+      "bytes": 698832,
+      "gzipBytes": 44128,
+      "sha256": "76fa1e7359b64b4f5d9c200e973633eb0d676faedac64cce4091e1cc6b3f61b6"
+    },
+    {
+      "path": "text/bsb/16-Neh.json",
+      "kind": "text",
+      "book": 16,
+      "translation": "bsb",
+      "bytes": 127086,
+      "gzipBytes": 23589,
+      "sha256": "67a820261a60cff493c9d2142d391f6eced6bcda23c7270a5c4773b088ec27f7"
+    },
+    {
+      "path": "graph/17-Esth.json",
+      "kind": "graph",
+      "book": 17,
+      "bytes": 88269,
+      "gzipBytes": 11668,
+      "sha256": "c551705c83957da87ae96273ec74daac537cea5dc10ec67dc2e9e2f2296ad183"
+    },
+    {
+      "path": "incoming/17-Esth.json",
+      "kind": "incoming",
+      "book": 17,
+      "bytes": 207973,
+      "gzipBytes": 14251,
+      "sha256": "608eb8e40b69f8909d26c7347f81b975273db73e2cac1639bdfc597607c5e7dc"
+    },
+    {
+      "path": "text/bsb/17-Esth.json",
+      "kind": "text",
+      "book": 17,
+      "translation": "bsb",
+      "bytes": 61184,
+      "gzipBytes": 11684,
+      "sha256": "8ca615ffbcb9abb559eaff4dc94509f46b53f11fc47fb2111d655134e7b84da9"
+    },
+    {
+      "path": "graph/18-Job.json",
+      "kind": "graph",
+      "book": 18,
+      "bytes": 729014,
+      "gzipBytes": 96571,
+      "sha256": "91f9ed746f08a60f647b8f154ea41d44e4d55947ff5534b00e7aa5ed2a5edd25"
+    },
+    {
+      "path": "incoming/18-Job.json",
+      "kind": "incoming",
+      "book": 18,
+      "bytes": 1941048,
+      "gzipBytes": 125748,
+      "sha256": "376aaff0bc5dce7cb2bc6611d21f4c9ec703de83be981662722c60a5b7aa32e7"
+    },
+    {
+      "path": "text/bsb/18-Job.json",
+      "kind": "text",
+      "book": 18,
+      "translation": "bsb",
+      "bytes": 269451,
+      "gzipBytes": 46856,
+      "sha256": "3e1a1e6cda89c238131a5ed5c45c569daedbf21ee20342a550046aa2be420f2d"
+    },
+    {
+      "path": "graph/19-Ps.json",
+      "kind": "graph",
+      "book": 19,
+      "bytes": 2348069,
+      "gzipBytes": 315626,
+      "sha256": "c21c2886cab5076ac16487609929c476e57a8d60ba87b398277e729280e49c8c"
+    },
+    {
+      "path": "incoming/19-Ps.json",
+      "kind": "incoming",
+      "book": 19,
+      "bytes": 7335236,
+      "gzipBytes": 491650,
+      "sha256": "cab262a798eb220db2109c17585f1b67a1878ed128315602cc34a9b1271309b3"
+    },
+    {
+      "path": "text/bsb/19-Ps.json",
+      "kind": "text",
+      "book": 19,
+      "translation": "bsb",
+      "bytes": 642755,
+      "gzipBytes": 104457,
+      "sha256": "d7acc89fd2c6e06cee538085f408c513da47eb54618a63eb5c258fe5547cc613"
+    },
+    {
+      "path": "graph/20-Prov.json",
+      "kind": "graph",
+      "book": 20,
+      "bytes": 729579,
+      "gzipBytes": 98384,
+      "sha256": "71c47222160d1d03e6385ceacf249779facac506461fd02463cc4b5f968dd02c"
+    },
+    {
+      "path": "incoming/20-Prov.json",
+      "kind": "incoming",
+      "book": 20,
+      "bytes": 1733392,
+      "gzipBytes": 121914,
+      "sha256": "9a3d491601e82aa53ef3226114877c3e4c4ea4f70495e0c4f0a3cc3455dba6d8"
+    },
+    {
+      "path": "text/bsb/20-Prov.json",
+      "kind": "text",
+      "book": 20,
+      "translation": "bsb",
+      "bytes": 233709,
+      "gzipBytes": 38164,
+      "sha256": "d2fd6fca517abc3e361ceb35e74ddb03e70d5d5fd0373040e40ff249c3a7027d"
+    },
+    {
+      "path": "graph/21-Eccl.json",
+      "kind": "graph",
+      "book": 21,
+      "bytes": 215789,
+      "gzipBytes": 28865,
+      "sha256": "fdf655f4dedfda5410dd38fb1f1223a07f908727f3c7ed3c2bde56e46bb41f7b"
+    },
+    {
+      "path": "incoming/21-Eccl.json",
+      "kind": "incoming",
+      "book": 21,
+      "bytes": 394992,
+      "gzipBytes": 27934,
+      "sha256": "9cd12da82cb0d581a6a025c85b62712044d42842a9bb9742e78c6620435eae87"
+    },
+    {
+      "path": "text/bsb/21-Eccl.json",
+      "kind": "text",
+      "book": 21,
+      "translation": "bsb",
+      "bytes": 68562,
+      "gzipBytes": 12756,
+      "sha256": "a862ff41e9a556d68657cbf7bb0e2da5a9dffa454d2b9751f408e747278a699c"
+    },
+    {
+      "path": "graph/22-Song.json",
+      "kind": "graph",
+      "book": 22,
+      "bytes": 126658,
+      "gzipBytes": 16478,
+      "sha256": "7c380b6ca26e95aef78c455ba46bde22534465f9a278f6de83ea764de387d9c7"
+    },
+    {
+      "path": "incoming/22-Song.json",
+      "kind": "incoming",
+      "book": 22,
+      "bytes": 179230,
+      "gzipBytes": 12864,
+      "sha256": "fda7889aa40553cdc83effedc5fcf92dfc19314f4ff9cea2accbd33ded99c39e"
+    },
+    {
+      "path": "text/bsb/22-Song.json",
+      "kind": "text",
+      "book": 22,
+      "translation": "bsb",
+      "bytes": 35234,
+      "gzipBytes": 6587,
+      "sha256": "ac949c3a0e9eec28e8139c43ee5d86ee6aed43cb5984478b01f9b3fe82255472"
+    },
+    {
+      "path": "graph/23-Isa.json",
+      "kind": "graph",
+      "book": 23,
+      "bytes": 1543783,
+      "gzipBytes": 207335,
+      "sha256": "d72744020ff7679079aff5d1d1e843bfbdff47fc62e94683051bc6ceb063ffa6"
+    },
+    {
+      "path": "incoming/23-Isa.json",
+      "kind": "incoming",
+      "book": 23,
+      "bytes": 5320945,
+      "gzipBytes": 352332,
+      "sha256": "1ac4fd429fea6c6fb10948eb11412df3a6ec763a39a3bea19825ff70c24c181c"
+    },
+    {
+      "path": "text/bsb/23-Isa.json",
+      "kind": "text",
+      "book": 23,
+      "translation": "bsb",
+      "bytes": 433436,
+      "gzipBytes": 82900,
+      "sha256": "383724b903175f5f398bb3ec3c827aa79391856f8b73ad41e20dcd6f4fde94ca"
+    },
+    {
+      "path": "graph/24-Jer.json",
+      "kind": "graph",
+      "book": 24,
+      "bytes": 1404239,
+      "gzipBytes": 184962,
+      "sha256": "6d2553f63ad87d033563d17e62069d6d9cc076b5b4a3678a263cc91b1a3515b4"
+    },
+    {
+      "path": "incoming/24-Jer.json",
+      "kind": "incoming",
+      "book": 24,
+      "bytes": 3878027,
+      "gzipBytes": 254257,
+      "sha256": "24a0bbddbdc4c46b0a972a6c826183854e8fb906277f65706a3adfd691ab3305"
+    },
+    {
+      "path": "text/bsb/24-Jer.json",
+      "kind": "text",
+      "book": 24,
+      "translation": "bsb",
+      "bytes": 481465,
+      "gzipBytes": 86537,
+      "sha256": "a5d1d341694c425c1ee8f3b336ff60edee5683b6e72d867319cf0e635e35f1f4"
+    },
+    {
+      "path": "graph/25-Lam.json",
+      "kind": "graph",
+      "book": 25,
+      "bytes": 153429,
+      "gzipBytes": 20625,
+      "sha256": "5cca23fd70b17f3dd3f94a9d63538a0f7905c7364fc1fd91963874ca73bb510d"
+    },
+    {
+      "path": "incoming/25-Lam.json",
+      "kind": "incoming",
+      "book": 25,
+      "bytes": 360350,
+      "gzipBytes": 24850,
+      "sha256": "b03e9ddf370b791d0801bb68b7222657cccf34ac09b686c522451f1fb6cbe1da"
+    },
+    {
+      "path": "text/bsb/25-Lam.json",
+      "kind": "text",
+      "book": 25,
+      "translation": "bsb",
+      "bytes": 44390,
+      "gzipBytes": 8739,
+      "sha256": "1c11097d22b87f4b4ac423f39ac01907dc0d941f32b86dc5bad0b3572f254cdd"
+    },
+    {
+      "path": "graph/26-Ezek.json",
+      "kind": "graph",
+      "book": 26,
+      "bytes": 1039934,
+      "gzipBytes": 134141,
+      "sha256": "11e98349c57f3eb249e3d59dd34d3048f5401983a6beccc28be1765a06317e85"
+    },
+    {
+      "path": "incoming/26-Ezek.json",
+      "kind": "incoming",
+      "book": 26,
+      "bytes": 3048666,
+      "gzipBytes": 189077,
+      "sha256": "0d16913d12d146c0c63237d0cd279453d154eec93ac344f14f80ae6f43d832af"
+    },
+    {
+      "path": "text/bsb/26-Ezek.json",
+      "kind": "text",
+      "book": 26,
+      "translation": "bsb",
+      "bytes": 439589,
+      "gzipBytes": 72317,
+      "sha256": "294af5e05ca067bedca69831eae603f1afdb52b0131c33d22ca428447f8cd49a"
+    },
+    {
+      "path": "graph/27-Dan.json",
+      "kind": "graph",
+      "book": 27,
+      "bytes": 352609,
+      "gzipBytes": 46040,
+      "sha256": "d71f52a5af767745a5744708b92656af90e4805de9a6f0cea7aa7b85fc0a3993"
+    },
+    {
+      "path": "incoming/27-Dan.json",
+      "kind": "incoming",
+      "book": 27,
+      "bytes": 1102722,
+      "gzipBytes": 71960,
+      "sha256": "0eb98465969f4455e5503af83cf3ce4aa54fca47da71aa7cb2753436e3476518"
+    },
+    {
+      "path": "text/bsb/27-Dan.json",
+      "kind": "text",
+      "book": 27,
+      "translation": "bsb",
+      "bytes": 128087,
+      "gzipBytes": 23678,
+      "sha256": "6090e029d6c0ee7c069c3ee661b7c40da42e0319839520a522c4415db0d0dd14"
+    },
+    {
+      "path": "graph/28-Hos.json",
+      "kind": "graph",
+      "book": 28,
+      "bytes": 256763,
+      "gzipBytes": 34039,
+      "sha256": "1a1c8027c1bc1eb33b3bd59c22fcb95a0af244edfff29ea7f331cc9bcc7963e3"
+    },
+    {
+      "path": "incoming/28-Hos.json",
+      "kind": "incoming",
+      "book": 28,
+      "bytes": 537729,
+      "gzipBytes": 37850,
+      "sha256": "9a5962bbf09131dec4aa80e014dd89a9a3767eb9774b8568699ad7fd351ef38c"
+    },
+    {
+      "path": "text/bsb/28-Hos.json",
+      "kind": "text",
+      "book": 28,
+      "translation": "bsb",
+      "bytes": 64414,
+      "gzipBytes": 12510,
+      "sha256": "47b6e92c1f1589814a23b12e2b95a5eaff0b858b363dac5150bcfcd400ca6252"
+    },
+    {
+      "path": "graph/29-Joel.json",
+      "kind": "graph",
+      "book": 29,
+      "bytes": 78879,
+      "gzipBytes": 10798,
+      "sha256": "0ae14b5f2b2683458b00ec87a9a21c4431773473a9ff5c2fc45e2e47338e8828"
+    },
+    {
+      "path": "incoming/29-Joel.json",
+      "kind": "incoming",
+      "book": 29,
+      "bytes": 238010,
+      "gzipBytes": 15893,
+      "sha256": "fbe4a2446455512d315a2ca40e8edb042f3da3ee77c3199b1717c6796c55361f"
+    },
+    {
+      "path": "text/bsb/29-Joel.json",
+      "kind": "text",
+      "book": 29,
+      "translation": "bsb",
+      "bytes": 24416,
+      "gzipBytes": 5102,
+      "sha256": "decb31f8ffdfd3b011641600e517181901466d429669bea2ee228c1fdbb77768"
+    },
+    {
+      "path": "graph/30-Amos.json",
+      "kind": "graph",
+      "book": 30,
+      "bytes": 158205,
+      "gzipBytes": 21462,
+      "sha256": "805e8b2eb6f3b9b1b4aff7bc618e79652c8d756c0ec0132def9584dbea0ae130"
+    },
+    {
+      "path": "incoming/30-Amos.json",
+      "kind": "incoming",
+      "book": 30,
+      "bytes": 438094,
+      "gzipBytes": 29611,
+      "sha256": "d78ef0c7c401ce86712cd252bb8d9cddd635c4ee04d09027efabd0607dbf146b"
+    },
+    {
+      "path": "text/bsb/30-Amos.json",
+      "kind": "text",
+      "book": 30,
+      "translation": "bsb",
+      "bytes": 49260,
+      "gzipBytes": 9421,
+      "sha256": "62748bdbd8086cf2db3974cd66987ce0dc454ad57a8bba4510909836c9ea5247"
+    },
+    {
+      "path": "graph/31-Obad.json",
+      "kind": "graph",
+      "book": 31,
+      "bytes": 23625,
+      "gzipBytes": 3480,
+      "sha256": "4bc43829cebe763b1955d64f46632d8ece2cf42dd059282e3a031220cc765da2"
+    },
+    {
+      "path": "incoming/31-Obad.json",
+      "kind": "incoming",
+      "book": 31,
+      "bytes": 71092,
+      "gzipBytes": 4521,
+      "sha256": "2f10260e1a36b235f9693382d4e259d8a2915a3fcf27cdea0306fd8b363a0d0c"
+    },
+    {
+      "path": "text/bsb/31-Obad.json",
+      "kind": "text",
+      "book": 31,
+      "translation": "bsb",
+      "bytes": 7554,
+      "gzipBytes": 1867,
+      "sha256": "f13746009b7a4bebd0e6db7e8d58ae0d13c73ce740c507b8192e395ed80f96a9"
+    },
+    {
+      "path": "graph/32-Jonah.json",
+      "kind": "graph",
+      "book": 32,
+      "bytes": 40066,
+      "gzipBytes": 5762,
+      "sha256": "57439b7d2d67e803e0a9085042773d6fefeabd9385f6c294b63ae1d1d02b84f7"
+    },
+    {
+      "path": "incoming/32-Jonah.json",
+      "kind": "incoming",
+      "book": 32,
+      "bytes": 117016,
+      "gzipBytes": 8157,
+      "sha256": "bec952c7842510f34db6f0ea1e5c156ddb3f5712defd36c4138a294483adb0b7"
+    },
+    {
+      "path": "text/bsb/32-Jonah.json",
+      "kind": "text",
+      "book": 32,
+      "translation": "bsb",
+      "bytes": 15826,
+      "gzipBytes": 3471,
+      "sha256": "b4a4949421bafa476e1e74e401b4e154522c73cd17a783fd04657ee5d07bc1d3"
+    },
+    {
+      "path": "graph/33-Mic.json",
+      "kind": "graph",
+      "book": 33,
+      "bytes": 148836,
+      "gzipBytes": 20222,
+      "sha256": "e8575ed386936d153c46723c32b3c505edb9d502ea3a012a87eda6c588981d5f"
+    },
+    {
+      "path": "incoming/33-Mic.json",
+      "kind": "incoming",
+      "book": 33,
+      "bytes": 413938,
+      "gzipBytes": 28398,
+      "sha256": "768658317ce416c97102d92e55ddbae014160a90601b61fae2c79df541d5e406"
+    },
+    {
+      "path": "text/bsb/33-Mic.json",
+      "kind": "text",
+      "book": 33,
+      "translation": "bsb",
+      "bytes": 36117,
+      "gzipBytes": 7680,
+      "sha256": "22cfd5e1d101ef865932e9c077e370586ae56d148ff5f273bd23f1c9688e72da"
+    },
+    {
+      "path": "graph/34-Nah.json",
+      "kind": "graph",
+      "book": 34,
+      "bytes": 44492,
+      "gzipBytes": 6277,
+      "sha256": "3453cc6e7cdd05059795628051a0b9f11711a6f973e2d73dc66aa8feb108c3dc"
+    },
+    {
+      "path": "incoming/34-Nah.json",
+      "kind": "incoming",
+      "book": 34,
+      "bytes": 109496,
+      "gzipBytes": 7759,
+      "sha256": "115851305d06694e202153ce1deada72661af800181edba38cc78b967935ae56"
+    },
+    {
+      "path": "text/bsb/34-Nah.json",
+      "kind": "text",
+      "book": 34,
+      "translation": "bsb",
+      "bytes": 15694,
+      "gzipBytes": 3642,
+      "sha256": "f3d1628d47c9eb524fba525adbe523c2516d94084b2f8dd1a90bd81ca59a9a22"
+    },
+    {
+      "path": "graph/35-Hab.json",
+      "kind": "graph",
+      "book": 35,
+      "bytes": 68042,
+      "gzipBytes": 9519,
+      "sha256": "d4b5d34392c1e5cfcc2757a26b4c72464637a2d23756f3b0f6e6d5f819bd4d93"
+    },
+    {
+      "path": "incoming/35-Hab.json",
+      "kind": "incoming",
+      "book": 35,
+      "bytes": 191349,
+      "gzipBytes": 13056,
+      "sha256": "85333dd5a261ce14e8d56d1aab81a04269647ad408a7586c99aa0edbf3e777bf"
+    },
+    {
+      "path": "text/bsb/35-Hab.json",
+      "kind": "text",
+      "book": 35,
+      "translation": "bsb",
+      "bytes": 18197,
+      "gzipBytes": 4201,
+      "sha256": "9be68741396d021dc3d2ed949b29051064691253d86bbef0862018493bfe21f1"
+    },
+    {
+      "path": "graph/36-Zeph.json",
+      "kind": "graph",
+      "book": 36,
+      "bytes": 78253,
+      "gzipBytes": 10741,
+      "sha256": "68b06623fd061e9cb642c46af514feb26cd914a469d4a2a9dc4f55a83fa130f4"
+    },
+    {
+      "path": "incoming/36-Zeph.json",
+      "kind": "incoming",
+      "book": 36,
+      "bytes": 186094,
+      "gzipBytes": 12904,
+      "sha256": "c762ae3490d246b558f54c50a90eb5b598b5cbfc2910e34d566843fba28ecc58"
+    },
+    {
+      "path": "text/bsb/36-Zeph.json",
+      "kind": "text",
+      "book": 36,
+      "translation": "bsb",
+      "bytes": 18594,
+      "gzipBytes": 4176,
+      "sha256": "a39df37a7c5976a270538f670fa7e763b2d276f4cad3b1e5dc3a13545fc03c93"
+    },
+    {
+      "path": "graph/37-Hag.json",
+      "kind": "graph",
+      "book": 37,
+      "bytes": 36384,
+      "gzipBytes": 5105,
+      "sha256": "03471c69e166d348c0705f8b4da185d3f5c31eb69d813735f040bc9a2de0ff5d"
+    },
+    {
+      "path": "incoming/37-Hag.json",
+      "kind": "incoming",
+      "book": 37,
+      "bytes": 95086,
+      "gzipBytes": 6537,
+      "sha256": "e20bc7c0a17eb9e12a4b6234b6dc96538955470ae95150733a50932c0a4155ee"
+    },
+    {
+      "path": "text/bsb/37-Hag.json",
+      "kind": "text",
+      "book": 37,
+      "translation": "bsb",
+      "bytes": 13129,
+      "gzipBytes": 2625,
+      "sha256": "702695c287993dbe313f7de20ceaed4e8f601044556519586ba1384a18b31fca"
+    },
+    {
+      "path": "graph/38-Zech.json",
+      "kind": "graph",
+      "book": 38,
+      "bytes": 283525,
+      "gzipBytes": 38051,
+      "sha256": "73e45a68bb91c2810185d701c60cd4292e5efcdd6891bf10880ab63ab23e4907"
+    },
+    {
+      "path": "incoming/38-Zech.json",
+      "kind": "incoming",
+      "book": 38,
+      "bytes": 667337,
+      "gzipBytes": 45022,
+      "sha256": "5929e42c90b2867923060ef18f2ef47b9b0cbbec3788a1f95d87123ae92a9243"
+    },
+    {
+      "path": "text/bsb/38-Zech.json",
+      "kind": "text",
+      "book": 38,
+      "translation": "bsb",
+      "bytes": 71761,
+      "gzipBytes": 13189,
+      "sha256": "463fa993baae7e174a5d35ed68216bb37f9eabd7bc98e1ba57becdf749dca383"
+    },
+    {
+      "path": "graph/39-Mal.json",
+      "kind": "graph",
+      "book": 39,
+      "bytes": 97014,
+      "gzipBytes": 13616,
+      "sha256": "841bd723178beb1f765956509bc7461b59e4976e05cf5bbc0b98d0b19f2f3b54"
+    },
+    {
+      "path": "incoming/39-Mal.json",
+      "kind": "incoming",
+      "book": 39,
+      "bytes": 248468,
+      "gzipBytes": 17510,
+      "sha256": "78e4a7619278b85be2c52ed0d6f9bdfa9408d6125868a0fb302f487bbac5e682"
+    },
+    {
+      "path": "text/bsb/39-Mal.json",
+      "kind": "text",
+      "book": 39,
+      "translation": "bsb",
+      "bytes": 20219,
+      "gzipBytes": 4426,
+      "sha256": "cee9b73c151394a3d5b23122fbee76711184ddc2847a4fa447895bb190a21c5c"
+    },
+    {
+      "path": "graph/40-Matt.json",
+      "kind": "graph",
+      "book": 40,
+      "bytes": 1050555,
+      "gzipBytes": 141944,
+      "sha256": "0a639a8d4fe79cf23f49703cbf568c73843f70d93f4d1b2179c05aa469990891"
+    },
+    {
+      "path": "incoming/40-Matt.json",
+      "kind": "incoming",
+      "book": 40,
+      "bytes": 3428116,
+      "gzipBytes": 227189,
+      "sha256": "d1108e1531d9cf0bd431b9bee9117690ce1128cb572fed0ad9502bdf8a491c82"
+    },
+    {
+      "path": "text/bsb/40-Matt.json",
+      "kind": "text",
+      "book": 40,
+      "translation": "bsb",
+      "bytes": 319101,
+      "gzipBytes": 54569,
+      "sha256": "0b2cc2773ddf27b25229018dc5f66c25e288ced2653f9b753ceae797db31a4a2"
+    },
+    {
+      "path": "graph/41-Mark.json",
+      "kind": "graph",
+      "book": 41,
+      "bytes": 492471,
+      "gzipBytes": 65647,
+      "sha256": "cebd11e215d7819f9178b93b1b79d3caa1c4202db4a771335dcbf80ae3dc803b"
+    },
+    {
+      "path": "incoming/41-Mark.json",
+      "kind": "incoming",
+      "book": 41,
+      "bytes": 1168592,
+      "gzipBytes": 76211,
+      "sha256": "699bd9659690f99e48fceee23ff014efedee1789227d5278613a583cda55e62c"
+    },
+    {
+      "path": "text/bsb/41-Mark.json",
+      "kind": "text",
+      "book": 41,
+      "translation": "bsb",
+      "bytes": 202588,
+      "gzipBytes": 35526,
+      "sha256": "4291f2a03875555c686d4bf786f530616f8c007994bb47537c1a1c8f19909e52"
+    },
+    {
+      "path": "graph/42-Luke.json",
+      "kind": "graph",
+      "book": 42,
+      "bytes": 938420,
+      "gzipBytes": 126048,
+      "sha256": "580694c0561e7ab6a7c5d60a7656d809ad568952e5be70a17e3d891569eb02ea"
+    },
+    {
+      "path": "incoming/42-Luke.json",
+      "kind": "incoming",
+      "book": 42,
+      "bytes": 2802089,
+      "gzipBytes": 185985,
+      "sha256": "926422f0245318cb74ce518f538447301a68792f29b17fccf24bcdd1703b886a"
+    },
+    {
+      "path": "text/bsb/42-Luke.json",
+      "kind": "text",
+      "book": 42,
+      "translation": "bsb",
+      "bytes": 343298,
+      "gzipBytes": 60657,
+      "sha256": "a6da7a29f82e124a1148b8ee3ebfa0487bf9fa29f47d1d2bcf9422f8fc43a70f"
+    },
+    {
+      "path": "graph/43-John.json",
+      "kind": "graph",
+      "book": 43,
+      "bytes": 895570,
+      "gzipBytes": 118038,
+      "sha256": "bfd79391f677e6eda007ed5b8ae75a2757d0df1acb9e68c1361be35a94b0662a"
+    },
+    {
+      "path": "incoming/43-John.json",
+      "kind": "incoming",
+      "book": 43,
+      "bytes": 2818278,
+      "gzipBytes": 188918,
+      "sha256": "d32e5ea659efccb7a2aa50c6c28ab6e195ee52ae8b3c131d818a8de4a0bc9dd8"
+    },
+    {
+      "path": "text/bsb/43-John.json",
+      "kind": "text",
+      "book": 43,
+      "translation": "bsb",
+      "bytes": 260443,
+      "gzipBytes": 42971,
+      "sha256": "22b96e2a8569466235faada0a2106d4983f492d1ab86b76b2b0a5112d6a1a653"
+    },
+    {
+      "path": "graph/44-Acts.json",
+      "kind": "graph",
+      "book": 44,
+      "bytes": 1014451,
+      "gzipBytes": 132897,
+      "sha256": "33554b53f48959af23031009000a0f0f90366fecc1c3093fc8923f1469b0e142"
+    },
+    {
+      "path": "incoming/44-Acts.json",
+      "kind": "incoming",
+      "book": 44,
+      "bytes": 3066458,
+      "gzipBytes": 201669,
+      "sha256": "a07b692da39c2a173f2d199bc9475a5f5812b36913322fdcea9b1baf1acf3579"
+    },
+    {
+      "path": "text/bsb/44-Acts.json",
+      "kind": "text",
+      "book": 44,
+      "translation": "bsb",
+      "bytes": 315739,
+      "gzipBytes": 57877,
+      "sha256": "3c280309d4be4450dd9164f2a87c563bd67cfe3f40288c5cfbf0d46191a41f59"
+    },
+    {
+      "path": "graph/45-Rom.json",
+      "kind": "graph",
+      "book": 45,
+      "bytes": 589069,
+      "gzipBytes": 77812,
+      "sha256": "c94dd9b0295a1b21dda51e4b247f50b5dd6b550c06e0d8f27a1f28428fd46862"
+    },
+    {
+      "path": "incoming/45-Rom.json",
+      "kind": "incoming",
+      "book": 45,
+      "bytes": 2070936,
+      "gzipBytes": 138149,
+      "sha256": "7adba01efe5c071039a8d5d76e4fec54f27b5ce7e52b79e71a2f1d982ae75835"
+    },
+    {
+      "path": "text/bsb/45-Rom.json",
+      "kind": "text",
+      "book": 45,
+      "translation": "bsb",
+      "bytes": 131935,
+      "gzipBytes": 23333,
+      "sha256": "9433ad0341b337c189399abff899180a83db9faa409e1bb7e76fb5266bd8e1a9"
+    },
+    {
+      "path": "graph/46-1Cor.json",
+      "kind": "graph",
+      "book": 46,
+      "bytes": 433127,
+      "gzipBytes": 57034,
+      "sha256": "8cd18cae8c8516ca32de8207f5a69844856ff7aeaea911e3d81cf8a5dc3f6094"
+    },
+    {
+      "path": "incoming/46-1Cor.json",
+      "kind": "incoming",
+      "book": 46,
+      "bytes": 1444968,
+      "gzipBytes": 96284,
+      "sha256": "b42fa5e748b05c73b6fbc3cdeaa233cf1b49ae53980579932abcb62b1f5e3a6d"
+    },
+    {
+      "path": "text/bsb/46-1Cor.json",
+      "kind": "text",
+      "book": 46,
+      "translation": "bsb",
+      "bytes": 129836,
+      "gzipBytes": 22784,
+      "sha256": "bebb610cc6078992e527e48e1c71e7d11999212ea4659bbed0e997684514ce81"
+    },
+    {
+      "path": "graph/47-2Cor.json",
+      "kind": "graph",
+      "book": 47,
+      "bytes": 323809,
+      "gzipBytes": 42574,
+      "sha256": "31e3f9ddb4adb596ba63e3816ca5a63fe587c358ae48a89847828261707ab1e5"
+    },
+    {
+      "path": "incoming/47-2Cor.json",
+      "kind": "incoming",
+      "book": 47,
+      "bytes": 1057863,
+      "gzipBytes": 71405,
+      "sha256": "452a7d930ed07945fdc0862dad7dd1bd825f695fc9455e8aa9d298eb2d6d26ff"
+    },
+    {
+      "path": "text/bsb/47-2Cor.json",
+      "kind": "text",
+      "book": 47,
+      "translation": "bsb",
+      "bytes": 80469,
+      "gzipBytes": 15199,
+      "sha256": "0742aee4dc09c5734288c8496d56954d554acd77c03bfc485edc4d59dbbc7d99"
+    },
+    {
+      "path": "graph/48-Gal.json",
+      "kind": "graph",
+      "book": 48,
+      "bytes": 191840,
+      "gzipBytes": 25457,
+      "sha256": "18c97e7ce62c3651a71a1781a2728657c60d17c25a00341a599988616feeb528"
+    },
+    {
+      "path": "incoming/48-Gal.json",
+      "kind": "incoming",
+      "book": 48,
+      "bytes": 559366,
+      "gzipBytes": 38750,
+      "sha256": "1811401a8343bd89c1264d5b516270a7b82fd726af707c0b73d1d47a52acb98e"
+    },
+    {
+      "path": "text/bsb/48-Gal.json",
+      "kind": "text",
+      "book": 48,
+      "translation": "bsb",
+      "bytes": 44022,
+      "gzipBytes": 8366,
+      "sha256": "993638f0ee733e4f9cdb91a5fe1a762d087177d77551caee3f46f0847d52ccf4"
+    },
+    {
+      "path": "graph/49-Eph.json",
+      "kind": "graph",
+      "book": 49,
+      "bytes": 261024,
+      "gzipBytes": 35173,
+      "sha256": "66306f4b6a529cb717501d555d6d93bd36c1bf66f5d53d39e94588c1398ce625"
+    },
+    {
+      "path": "incoming/49-Eph.json",
+      "kind": "incoming",
+      "book": 49,
+      "bytes": 967127,
+      "gzipBytes": 64916,
+      "sha256": "bf620b713811d0c72cc13209432f49e30c8d96249368e942b861870e99720525"
+    },
+    {
+      "path": "text/bsb/49-Eph.json",
+      "kind": "text",
+      "book": 49,
+      "translation": "bsb",
+      "bytes": 44755,
+      "gzipBytes": 8185,
+      "sha256": "e1e097ea90c608feb5153ff7e65e3e6acf39d897c3a70a5a928f2a3375e0bba1"
+    },
+    {
+      "path": "graph/50-Phil.json",
+      "kind": "graph",
+      "book": 50,
+      "bytes": 166267,
+      "gzipBytes": 22870,
+      "sha256": "f3806280a5100fd281280aa0f50aa892aebc89ed6ed539959beaddef1093a292"
+    },
+    {
+      "path": "incoming/50-Phil.json",
+      "kind": "incoming",
+      "book": 50,
+      "bytes": 464736,
+      "gzipBytes": 32508,
+      "sha256": "7eec407905f3a1003e9b34a8232a0cd6ddff970a0eaf921b6b186a6d7c58f725"
+    },
+    {
+      "path": "text/bsb/50-Phil.json",
+      "kind": "text",
+      "book": 50,
+      "translation": "bsb",
+      "bytes": 30676,
+      "gzipBytes": 6086,
+      "sha256": "374a875e1e01616cd5a7fc72212d14eadc88330c81540e53c05cb58abf1e558d"
+    },
+    {
+      "path": "graph/51-Col.json",
+      "kind": "graph",
+      "book": 51,
+      "bytes": 162108,
+      "gzipBytes": 21796,
+      "sha256": "d9918ab7737821559d650609978b062508f042ae1388d8c614e636615ffd9644"
+    },
+    {
+      "path": "incoming/51-Col.json",
+      "kind": "incoming",
+      "book": 51,
+      "bytes": 386095,
+      "gzipBytes": 27420,
+      "sha256": "0a9dd95e2c4a68ba79d0101212a02ca96287ecaf98c3aabb8fde3481a2a5c685"
+    },
+    {
+      "path": "text/bsb/51-Col.json",
+      "kind": "text",
+      "book": 51,
+      "translation": "bsb",
+      "bytes": 28438,
+      "gzipBytes": 5692,
+      "sha256": "3aeaf0672dd76678f8177e132e4473914a6c85836069a84b82f495179bb0e186"
+    },
+    {
+      "path": "graph/52-1Thess.json",
+      "kind": "graph",
+      "book": 52,
+      "bytes": 146308,
+      "gzipBytes": 19589,
+      "sha256": "9ff98cc0e3d8c83010c2da79156c7a766a49413b1b84d084167b013d9e4c9755"
+    },
+    {
+      "path": "incoming/52-1Thess.json",
+      "kind": "incoming",
+      "book": 52,
+      "bytes": 377224,
+      "gzipBytes": 26440,
+      "sha256": "7bffad1f1a7eed03ee5899c03542b53ee9f5b5e20325a350792420c0be888439"
+    },
+    {
+      "path": "text/bsb/52-1Thess.json",
+      "kind": "text",
+      "book": 52,
+      "translation": "bsb",
+      "bytes": 26004,
+      "gzipBytes": 5158,
+      "sha256": "2cfb8b4b6d875577f545b586def846c5a1fa393fc0a5d2b54c2f50f0982dab6f"
+    },
+    {
+      "path": "graph/53-2Thess.json",
+      "kind": "graph",
+      "book": 53,
+      "bytes": 70197,
+      "gzipBytes": 9440,
+      "sha256": "eaff7b9b7f66930fdfc1bac70dd31b0e57319a701ee70f570a2a08a0089f96d1"
+    },
+    {
+      "path": "incoming/53-2Thess.json",
+      "kind": "incoming",
+      "book": 53,
+      "bytes": 266293,
+      "gzipBytes": 18079,
+      "sha256": "46cfea2d45b4f1c2c1352c59cd9d4b002f661b8902444b22844a2b67c9bdc1ff"
+    },
+    {
+      "path": "text/bsb/53-2Thess.json",
+      "kind": "text",
+      "book": 53,
+      "translation": "bsb",
+      "bytes": 14615,
+      "gzipBytes": 3080,
+      "sha256": "7124f2ba53907e2deac5d30de14ed75321b313c399e41b798fd80dc586689440"
+    },
+    {
+      "path": "graph/54-1Tim.json",
+      "kind": "graph",
+      "book": 54,
+      "bytes": 184207,
+      "gzipBytes": 24490,
+      "sha256": "2c75e6181a049bff730d4459be64664520da279f13fe3089739ba895a171c538"
+    },
+    {
+      "path": "incoming/54-1Tim.json",
+      "kind": "incoming",
+      "book": 54,
+      "bytes": 409816,
+      "gzipBytes": 28814,
+      "sha256": "32813790d2e363494e5f03c0b39fb5c6ce475ca940cf4b72e841fea5be48bc09"
+    },
+    {
+      "path": "text/bsb/54-1Tim.json",
+      "kind": "text",
+      "book": 54,
+      "translation": "bsb",
+      "bytes": 34548,
+      "gzipBytes": 6971,
+      "sha256": "d4fadb812585f9555142b0190d375039898f14e24d525a990d184cfb9713eb55"
+    },
+    {
+      "path": "graph/55-2Tim.json",
+      "kind": "graph",
+      "book": 55,
+      "bytes": 131372,
+      "gzipBytes": 17911,
+      "sha256": "4e71ec41248f0336d00e718208f59edf385cd985aaa5c2941a058a52b1119d19"
+    },
+    {
+      "path": "incoming/55-2Tim.json",
+      "kind": "incoming",
+      "book": 55,
+      "bytes": 352991,
+      "gzipBytes": 24853,
+      "sha256": "e33f35fab3b3ddba9a4a5f560000f3339d7fc64418b02ccd341cc1fef6d17016"
+    },
+    {
+      "path": "text/bsb/55-2Tim.json",
+      "kind": "text",
+      "book": 55,
+      "translation": "bsb",
+      "bytes": 24685,
+      "gzipBytes": 5149,
+      "sha256": "5864e6c41ef0b9e132f187ab7ddc45a2dc932045dca83dccb3b2c0fd69e702a3"
+    },
+    {
+      "path": "graph/56-Titus.json",
+      "kind": "graph",
+      "book": 56,
+      "bytes": 70512,
+      "gzipBytes": 9607,
+      "sha256": "ae25c27770a537c8c7b2abd0e86643765ece50c0e8280c04b0e3e9a4df7e5134"
+    },
+    {
+      "path": "incoming/56-Titus.json",
+      "kind": "incoming",
+      "book": 56,
+      "bytes": 255705,
+      "gzipBytes": 17699,
+      "sha256": "159b3e72b1623e24f353614495a3a2700e0357ccb67f385ce719628abe445a2f"
+    },
+    {
+      "path": "text/bsb/56-Titus.json",
+      "kind": "text",
+      "book": 56,
+      "translation": "bsb",
+      "bytes": 14126,
+      "gzipBytes": 3147,
+      "sha256": "7ed8922ece753dca61bc08d35629776d45b286129a56e4f52f758bba60fbcf78"
+    },
+    {
+      "path": "graph/57-Phlm.json",
+      "kind": "graph",
+      "book": 57,
+      "bytes": 16802,
+      "gzipBytes": 2449,
+      "sha256": "636d2bbf10ce3c3156193249ce38f05da9d9b9f12403de81c443524d93474bee"
+    },
+    {
+      "path": "incoming/57-Phlm.json",
+      "kind": "incoming",
+      "book": 57,
+      "bytes": 46412,
+      "gzipBytes": 3476,
+      "sha256": "a2f1b9d90a5982e0e4b784a04c7958d86a98349adc0a04daf650fdfb77f46c1b"
+    },
+    {
+      "path": "text/bsb/57-Phlm.json",
+      "kind": "text",
+      "book": 57,
+      "translation": "bsb",
+      "bytes": 6902,
+      "gzipBytes": 1546,
+      "sha256": "87a3273b41948dad8d90c9cbd9d52ccba1e5fc5834b77b33c32db380e5722a53"
+    },
+    {
+      "path": "graph/58-Heb.json",
+      "kind": "graph",
+      "book": 58,
+      "bytes": 423570,
+      "gzipBytes": 56783,
+      "sha256": "281d870b91f1e14a6244bfc9cce751e8e46c3d81150d8b05f0ad040bdf2503c6"
+    },
+    {
+      "path": "incoming/58-Heb.json",
+      "kind": "incoming",
+      "book": 58,
+      "bytes": 1520095,
+      "gzipBytes": 101798,
+      "sha256": "7326767865a02d31e0a7faefc70d419577c8b6ecf66c034ac268a1a5d9f0e55b"
+    },
+    {
+      "path": "text/bsb/58-Heb.json",
+      "kind": "text",
+      "book": 58,
+      "translation": "bsb",
+      "bytes": 94694,
+      "gzipBytes": 17730,
+      "sha256": "0a5809827ca813680ae3becb7c44ed5ea9fa37343127c2a2ba4e315a1e9e7452"
+    },
+    {
+      "path": "graph/59-Jas.json",
+      "kind": "graph",
+      "book": 59,
+      "bytes": 157948,
+      "gzipBytes": 21924,
+      "sha256": "52d80c3f2824955c6fec086fd3bdf1444f45be4a3a58ee65d96fde27b1ef8167"
+    },
+    {
+      "path": "incoming/59-Jas.json",
+      "kind": "incoming",
+      "book": 59,
+      "bytes": 597022,
+      "gzipBytes": 40368,
+      "sha256": "afba8a3312c5b2ee3b4b23126388468d91c3f4a1f10b5ccb4621696d688d8033"
+    },
+    {
+      "path": "text/bsb/59-Jas.json",
+      "kind": "text",
+      "book": 59,
+      "translation": "bsb",
+      "bytes": 32478,
+      "gzipBytes": 6583,
+      "sha256": "ae31db05cf6a487aa9b45810e3b96fb42abbc9f83469c40b535f424680c5e7e0"
+    },
+    {
+      "path": "graph/60-1Pet.json",
+      "kind": "graph",
+      "book": 60,
+      "bytes": 188672,
+      "gzipBytes": 25679,
+      "sha256": "6c925be10f6cef9d9451fa5b8b8d1ebc566b062d76e20799adefe94a6a715d4f"
+    },
+    {
+      "path": "incoming/60-1Pet.json",
+      "kind": "incoming",
+      "book": 60,
+      "bytes": 681661,
+      "gzipBytes": 48070,
+      "sha256": "860b98c14d93635e421128a7050414a0f8dab57545541db9660b5f563e7d815e"
+    },
+    {
+      "path": "text/bsb/60-1Pet.json",
+      "kind": "text",
+      "book": 60,
+      "translation": "bsb",
+      "bytes": 33216,
+      "gzipBytes": 6764,
+      "sha256": "7fac27479ae2605e69c3c51accc8801f8b981f35fba318a49b622e5e7225a58d"
+    },
+    {
+      "path": "graph/61-2Pet.json",
+      "kind": "graph",
+      "book": 61,
+      "bytes": 86440,
+      "gzipBytes": 11867,
+      "sha256": "9673afa032f5508f15adcf2fd6b1abb4b8ef93dafb6dbd5099f5d0d8aa90b5ba"
+    },
+    {
+      "path": "incoming/61-2Pet.json",
+      "kind": "incoming",
+      "book": 61,
+      "bytes": 399110,
+      "gzipBytes": 26848,
+      "sha256": "edca3958838fcd848a4044c6951ee2d42bb404a2db98982cf3ce48f828faca20"
+    },
+    {
+      "path": "text/bsb/61-2Pet.json",
+      "kind": "text",
+      "book": 61,
+      "translation": "bsb",
+      "bytes": 20776,
+      "gzipBytes": 4604,
+      "sha256": "0034fb8cb12e188a6a51cb7aacc923df35a7addae9744ed2989d99cffe777f8a"
+    },
+    {
+      "path": "graph/62-1John.json",
+      "kind": "graph",
+      "book": 62,
+      "bytes": 150690,
+      "gzipBytes": 19789,
+      "sha256": "4095c51ead59022b5e6829e3f8f852c222e04ea34012650cee964b90b01adee5"
+    },
+    {
+      "path": "incoming/62-1John.json",
+      "kind": "incoming",
+      "book": 62,
+      "bytes": 570720,
+      "gzipBytes": 39676,
+      "sha256": "1d21733d714879c1d2fee686c140457ff50cccf9d9a728989a0f2f323d752857"
+    },
+    {
+      "path": "text/bsb/62-1John.json",
+      "kind": "text",
+      "book": 62,
+      "translation": "bsb",
+      "bytes": 32756,
+      "gzipBytes": 5455,
+      "sha256": "cac17c62d352aebca397c81a35ebb37bca1657108b103fb864093d23a5656ca0"
+    },
+    {
+      "path": "graph/63-2John.json",
+      "kind": "graph",
+      "book": 63,
+      "bytes": 11184,
+      "gzipBytes": 1753,
+      "sha256": "334e6d493360e640fd412299fe78374a7cf5eb9cf3c981f3cf6b5c31a2cbdedd"
+    },
+    {
+      "path": "incoming/63-2John.json",
+      "kind": "incoming",
+      "book": 63,
+      "bytes": 42905,
+      "gzipBytes": 3143,
+      "sha256": "74b70b8436b74f96e318c23373c88a523bb4e4d2bca5321f1429806c2e61b17b"
+    },
+    {
+      "path": "text/bsb/63-2John.json",
+      "kind": "text",
+      "book": 63,
+      "translation": "bsb",
+      "bytes": 4101,
+      "gzipBytes": 1045,
+      "sha256": "1a3c36a0564db8934edf58f594f3fcc5bef4b4b5731a31ef77888fe503c6bfdc"
+    },
+    {
+      "path": "graph/64-3John.json",
+      "kind": "graph",
+      "book": 64,
+      "bytes": 11564,
+      "gzipBytes": 1836,
+      "sha256": "03d50b91963af41dec56b76e656ffb7d5355176a67b0b529864fe6804f021ea6"
+    },
+    {
+      "path": "incoming/64-3John.json",
+      "kind": "incoming",
+      "book": 64,
+      "bytes": 42190,
+      "gzipBytes": 2908,
+      "sha256": "99aa7510db12a140870b3f66bb42d5f78d9d37d6078d493a97daad0b0376ee67"
+    },
+    {
+      "path": "text/bsb/64-3John.json",
+      "kind": "text",
+      "book": 64,
+      "translation": "bsb",
+      "bytes": 4347,
+      "gzipBytes": 1122,
+      "sha256": "825a4f594dbf0ce18bc45d814dc5654d07e6c10d91c56f08ee6d9f7ca36c9c3e"
+    },
+    {
+      "path": "graph/65-Jude.json",
+      "kind": "graph",
+      "book": 65,
+      "bytes": 37354,
+      "gzipBytes": 5359,
+      "sha256": "bb416fcb186260c69bbba59237cb6e2b96234295e372c0078591769073b58eb6"
+    },
+    {
+      "path": "incoming/65-Jude.json",
+      "kind": "incoming",
+      "book": 65,
+      "bytes": 125617,
+      "gzipBytes": 9105,
+      "sha256": "08f8e5d6e064fadceb7bfb31f5d4810872544b695a890e695d94cd8f36236398"
+    },
+    {
+      "path": "text/bsb/65-Jude.json",
+      "kind": "text",
+      "book": 65,
+      "translation": "bsb",
+      "bytes": 8448,
+      "gzipBytes": 2184,
+      "sha256": "3dd791f9536368e5ac484b44782cd4fe768c4c0730ac969dfc9a2215feb07825"
+    },
+    {
+      "path": "graph/66-Rev.json",
+      "kind": "graph",
+      "book": 66,
+      "bytes": 492977,
+      "gzipBytes": 64473,
+      "sha256": "e980560837865a00624e95be5eb3f16887cb6a2a3e02e34701300ab3c02bac7c"
+    },
+    {
+      "path": "incoming/66-Rev.json",
+      "kind": "incoming",
+      "book": 66,
+      "bytes": 2187429,
+      "gzipBytes": 144034,
+      "sha256": "0949277b0cf3d6a244315c470c8334702e0314c32ede03a757e5cc63be72af29"
+    },
+    {
+      "path": "text/bsb/66-Rev.json",
+      "kind": "text",
+      "book": 66,
+      "translation": "bsb",
+      "bytes": 138780,
+      "gzipBytes": 24721,
+      "sha256": "c2fe7dfc5fbb9a2ba63751fbe7b5a327a6ecf2e18b1b0222d207050a642f1030"
+    }
+  ],
+  "onDevice": {
+    "database": "asb.sqlite",
+    "shippedInAppBundle": true,
+    "estimatedBytes": 36000000,
+    "tickerInline": 12
+  }
+}

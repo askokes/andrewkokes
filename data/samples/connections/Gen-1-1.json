@@ -1,0 +1,1474 @@
+{
+  "schema": "asb.connections/2",
+  "datasetVersion": "2026.09.1",
+  "rankingVersion": "asb.rank.v2",
+  "translation": "bsb",
+  "vid": 1001001,
+  "ref": "Gen.1.1",
+  "label": "Genesis 1:1",
+  "counts": {
+    "out": 61,
+    "in": 35,
+    "inDirect": 25,
+    "inViaRange": 10,
+    "unique": 74
+  },
+  "items": [
+    {
+      "rank": 1,
+      "to": {
+        "start": 43001001,
+        "end": 43001003,
+        "ref": "John.1.1-John.1.3",
+        "label": "John 1:1–3"
+      },
+      "direction": "both",
+      "votesOut": 42,
+      "votesIn": 34,
+      "score": 59.0,
+      "weight": 1.0,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "alsoCites": []
+    },
+    {
+      "rank": 2,
+      "to": {
+        "start": 58011003,
+        "end": 58011003,
+        "ref": "Heb.11.3",
+        "label": "Hebrews 11:3"
+      },
+      "direction": "both",
+      "votesOut": 52,
+      "votesIn": 3,
+      "score": 52.27,
+      "weight": 0.971,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1002001,
+        "label": "Genesis 1:1–2:1",
+        "span": 32
+      },
+      "snippet": "By faith we understand that the universe was formed at God’s command, so that what is seen was not made out…",
+      "alsoCites": []
+    },
+    {
+      "rank": 3,
+      "to": {
+        "start": 23045018,
+        "end": 23045018,
+        "ref": "Isa.45.18",
+        "label": "Isaiah 45:18"
+      },
+      "direction": "out",
+      "votesOut": 43,
+      "votesIn": 0,
+      "score": 43.0,
+      "weight": 0.924,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For thus says the LORD, who created the heavens—He is God; He formed the earth and fashioned it; He…",
+      "alsoCites": []
+    },
+    {
+      "rank": 4,
+      "to": {
+        "start": 18038004,
+        "end": 18038004,
+        "ref": "Job.38.4",
+        "label": "Job 38:4"
+      },
+      "direction": "both",
+      "votesOut": 35,
+      "votesIn": 2,
+      "score": 36.0,
+      "weight": 0.882,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Where were you when I laid the foundations of the earth? Tell Me, if you have understanding.",
+      "alsoCites": []
+    },
+    {
+      "rank": 5,
+      "to": {
+        "start": 66004011,
+        "end": 66004011,
+        "ref": "Rev.4.11",
+        "label": "Revelation 4:11"
+      },
+      "direction": "both",
+      "votesOut": 33,
+      "votesIn": 6,
+      "score": 36.0,
+      "weight": 0.882,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Worthy are You, our Lord and God, to receive glory and honor and power, for You created all things; by Your…",
+      "alsoCites": []
+    },
+    {
+      "rank": 6,
+      "to": {
+        "start": 23042005,
+        "end": 23042005,
+        "ref": "Isa.42.5",
+        "label": "Isaiah 42:5"
+      },
+      "direction": "out",
+      "votesOut": 34,
+      "votesIn": 0,
+      "score": 34.0,
+      "weight": 0.868,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "This is what God the LORD says— He who created the heavens and stretched them out, who spread out the earth…",
+      "alsoCites": []
+    },
+    {
+      "rank": 7,
+      "to": {
+        "start": 58001010,
+        "end": 58001010,
+        "ref": "Heb.1.10",
+        "label": "Hebrews 1:10"
+      },
+      "direction": "both",
+      "votesOut": 32,
+      "votesIn": 4,
+      "score": 34.0,
+      "weight": 0.868,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And: “In the beginning, O Lord, You laid the foundations of the earth, and the heavens are the work of Your…",
+      "alsoCites": []
+    },
+    {
+      "rank": 8,
+      "to": {
+        "start": 44017024,
+        "end": 44017024,
+        "ref": "Acts.17.24",
+        "label": "Acts 17:24"
+      },
+      "direction": "out",
+      "votesOut": 31,
+      "votesIn": 0,
+      "score": 31.0,
+      "weight": 0.846,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The God who made the world and everything in it is the Lord of heaven and earth and does not live in temples…",
+      "alsoCites": []
+    },
+    {
+      "rank": 9,
+      "to": {
+        "start": 51001016,
+        "end": 51001017,
+        "ref": "Col.1.16-Col.1.17",
+        "label": "Colossians 1:16–17"
+      },
+      "direction": "out",
+      "votesOut": 30,
+      "votesIn": 0,
+      "score": 30.0,
+      "weight": 0.839,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For in Him all things were created, things in heaven and on earth, visible and invisible, whether thrones or…",
+      "alsoCites": []
+    },
+    {
+      "rank": 10,
+      "to": {
+        "start": 2020011,
+        "end": 2020011,
+        "ref": "Exod.20.11",
+        "label": "Exodus 20:11"
+      },
+      "direction": "both",
+      "votesOut": 28,
+      "votesIn": 4,
+      "score": 29.41,
+      "weight": 0.834,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001002,
+        "label": "Genesis 1:1–2",
+        "span": 2
+      },
+      "snippet": "For in six days the LORD made the heavens and the earth and the sea and all that is in them, but on the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 11,
+      "to": {
+        "start": 16009006,
+        "end": 16009006,
+        "ref": "Neh.9.6",
+        "label": "Nehemiah 9:6"
+      },
+      "direction": "both",
+      "votesOut": 22,
+      "votesIn": 7,
+      "score": 25.5,
+      "weight": 0.8,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "You alone are the LORD. You created the heavens, the highest heavens with all their host, the earth and all…",
+      "alsoCites": []
+    },
+    {
+      "rank": 12,
+      "to": {
+        "start": 19136005,
+        "end": 19136005,
+        "ref": "Ps.136.5",
+        "label": "Psalm 136:5"
+      },
+      "direction": "both",
+      "votesOut": 20,
+      "votesIn": 5,
+      "score": 22.5,
+      "weight": 0.771,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By His insight He made the heavens. His loving devotion endures forever.",
+      "alsoCites": []
+    },
+    {
+      "rank": 13,
+      "to": {
+        "start": 19115015,
+        "end": 19115015,
+        "ref": "Ps.115.15",
+        "label": "Psalm 115:15"
+      },
+      "direction": "both",
+      "votesOut": 17,
+      "votesIn": 6,
+      "score": 20.0,
+      "weight": 0.744,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "May you be blessed by the LORD, the Maker of heaven and earth.",
+      "alsoCites": []
+    },
+    {
+      "rank": 14,
+      "to": {
+        "start": 23044024,
+        "end": 23044024,
+        "ref": "Isa.44.24",
+        "label": "Isaiah 44:24"
+      },
+      "direction": "out",
+      "votesOut": 20,
+      "votesIn": 0,
+      "score": 20.0,
+      "weight": 0.744,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Thus says the LORD, your Redeemer who formed you from the womb: “I am the LORD, who has made all things, who…",
+      "alsoCites": []
+    },
+    {
+      "rank": 15,
+      "to": {
+        "start": 61003005,
+        "end": 61003005,
+        "ref": "2Pet.3.5",
+        "label": "2 Peter 3:5"
+      },
+      "direction": "out",
+      "votesOut": 20,
+      "votesIn": 0,
+      "score": 20.0,
+      "weight": 0.744,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But they deliberately overlook the fact that long ago by God’s word the heavens existed and the earth was…",
+      "alsoCites": []
+    },
+    {
+      "rank": 16,
+      "to": {
+        "start": 44014015,
+        "end": 44014015,
+        "ref": "Acts.14.15",
+        "label": "Acts 14:15"
+      },
+      "direction": "both",
+      "votesOut": 17,
+      "votesIn": 4,
+      "score": 19.0,
+      "weight": 0.732,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“Men, why are you doing this? We too are only men, human like you. We are bringing you good news that you…",
+      "alsoCites": []
+    },
+    {
+      "rank": 17,
+      "to": {
+        "start": 24010012,
+        "end": 24010012,
+        "ref": "Jer.10.12",
+        "label": "Jeremiah 10:12"
+      },
+      "direction": "both",
+      "votesOut": 16,
+      "votesIn": 5,
+      "score": 18.5,
+      "weight": 0.725,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The LORD made the earth by His power; He established the world by His wisdom and stretched out the heavens by…",
+      "alsoCites": []
+    },
+    {
+      "rank": 18,
+      "to": {
+        "start": 19102025,
+        "end": 19102025,
+        "ref": "Ps.102.25",
+        "label": "Psalm 102:25"
+      },
+      "direction": "both",
+      "votesOut": 15,
+      "votesIn": 6,
+      "score": 18.0,
+      "weight": 0.719,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "In the beginning You laid the foundations of the earth, and the heavens are the work of Your hands.",
+      "alsoCites": []
+    },
+    {
+      "rank": 19,
+      "to": {
+        "start": 24051015,
+        "end": 24051015,
+        "ref": "Jer.51.15",
+        "label": "Jeremiah 51:15"
+      },
+      "direction": "both",
+      "votesOut": 17,
+      "votesIn": 2,
+      "score": 17.41,
+      "weight": 0.711,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001006,
+        "label": "Genesis 1:1–6",
+        "span": 6
+      },
+      "snippet": "The LORD made the earth by His power; He established the world by His wisdom and stretched out the heavens by…",
+      "alsoCites": []
+    },
+    {
+      "rank": 20,
+      "to": {
+        "start": 24032017,
+        "end": 24032017,
+        "ref": "Jer.32.17",
+        "label": "Jeremiah 32:17"
+      },
+      "direction": "both",
+      "votesOut": 16,
+      "votesIn": 6,
+      "score": 16.54,
+      "weight": 0.7,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001031,
+        "label": "Genesis 1:1–31",
+        "span": 31
+      },
+      "snippet": "“Oh, Lord GOD! You have made the heavens and the earth by Your great power and outstretched arm. Nothing is…",
+      "alsoCites": []
+    },
+    {
+      "rank": 21,
+      "to": {
+        "start": 20008022,
+        "end": 20008030,
+        "ref": "Prov.8.22-Prov.8.30",
+        "label": "Proverbs 8:22–30"
+      },
+      "direction": "out",
+      "votesOut": 16,
+      "votesIn": 0,
+      "score": 16.0,
+      "weight": 0.692,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The LORD created me as His first course, before His works of old.",
+      "alsoCites": []
+    },
+    {
+      "rank": 22,
+      "to": {
+        "start": 66014007,
+        "end": 66014007,
+        "ref": "Rev.14.7",
+        "label": "Revelation 14:7"
+      },
+      "direction": "out",
+      "votesOut": 16,
+      "votesIn": 0,
+      "score": 16.0,
+      "weight": 0.692,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And he said in a loud voice, “Fear God and give Him glory, because the hour of His judgment has come. Worship…",
+      "alsoCites": []
+    },
+    {
+      "rank": 23,
+      "to": {
+        "start": 19008003,
+        "end": 19008003,
+        "ref": "Ps.8.3",
+        "label": "Psalm 8:3"
+      },
+      "direction": "both",
+      "votesOut": 14,
+      "votesIn": 3,
+      "score": 15.5,
+      "weight": 0.685,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "When I behold Your heavens, the work of Your fingers, the moon and the stars, which You have set in place—",
+      "alsoCites": []
+    },
+    {
+      "rank": 24,
+      "to": {
+        "start": 19090002,
+        "end": 19090002,
+        "ref": "Ps.90.2",
+        "label": "Psalm 90:2"
+      },
+      "direction": "both",
+      "votesOut": 14,
+      "votesIn": 3,
+      "score": 15.5,
+      "weight": 0.685,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Before the mountains were born or You brought forth the earth and the world, from everlasting to everlasting…",
+      "alsoCites": []
+    },
+    {
+      "rank": 25,
+      "to": {
+        "start": 20003019,
+        "end": 20003019,
+        "ref": "Prov.3.19",
+        "label": "Proverbs 3:19"
+      },
+      "direction": "out",
+      "votesOut": 15,
+      "votesIn": 0,
+      "score": 15.0,
+      "weight": 0.677,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The LORD founded the earth by wisdom and established the heavens by understanding.",
+      "alsoCites": []
+    },
+    {
+      "rank": 26,
+      "to": {
+        "start": 23040026,
+        "end": 23040026,
+        "ref": "Isa.40.26",
+        "label": "Isaiah 40:26"
+      },
+      "direction": "out",
+      "votesOut": 15,
+      "votesIn": 0,
+      "score": 15.0,
+      "weight": 0.677,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Lift up your eyes on high: Who created all these? He leads forth the starry host by number; He calls each one…",
+      "alsoCites": []
+    },
+    {
+      "rank": 27,
+      "to": {
+        "start": 23051013,
+        "end": 23051013,
+        "ref": "Isa.51.13",
+        "label": "Isaiah 51:13"
+      },
+      "direction": "out",
+      "votesOut": 15,
+      "votesIn": 0,
+      "score": 15.0,
+      "weight": 0.677,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But you have forgotten the LORD, your Maker, who stretched out the heavens and laid the foundations of the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 28,
+      "to": {
+        "start": 38012001,
+        "end": 38012001,
+        "ref": "Zech.12.1",
+        "label": "Zechariah 12:1"
+      },
+      "direction": "out",
+      "votesOut": 15,
+      "votesIn": 0,
+      "score": 15.0,
+      "weight": 0.677,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "This is the burden of the word of the LORD concerning Israel. Thus declares the LORD, who stretches out the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 29,
+      "to": {
+        "start": 19089011,
+        "end": 19089012,
+        "ref": "Ps.89.11-Ps.89.12",
+        "label": "Psalm 89:11–12"
+      },
+      "direction": "both",
+      "votesOut": 12,
+      "votesIn": 5,
+      "score": 14.5,
+      "weight": 0.669,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The heavens are Yours, and also the earth. The earth and its fullness You founded.",
+      "alsoCites": []
+    },
+    {
+      "rank": 30,
+      "to": {
+        "start": 19124008,
+        "end": 19124008,
+        "ref": "Ps.124.8",
+        "label": "Psalm 124:8"
+      },
+      "direction": "both",
+      "votesOut": 12,
+      "votesIn": 4,
+      "score": 14.0,
+      "weight": 0.661,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Our help is in the name of the LORD, the Maker of heaven and earth.",
+      "alsoCites": []
+    },
+    {
+      "rank": 31,
+      "to": {
+        "start": 19146006,
+        "end": 19146006,
+        "ref": "Ps.146.6",
+        "label": "Psalm 146:6"
+      },
+      "direction": "both",
+      "votesOut": 13,
+      "votesIn": 2,
+      "score": 14.0,
+      "weight": 0.661,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "the Maker of heaven and earth, the sea, and everything in them. He remains faithful forever.",
+      "alsoCites": []
+    },
+    {
+      "rank": 32,
+      "to": {
+        "start": 23037016,
+        "end": 23037016,
+        "ref": "Isa.37.16",
+        "label": "Isaiah 37:16"
+      },
+      "direction": "both",
+      "votesOut": 13,
+      "votesIn": 2,
+      "score": 14.0,
+      "weight": 0.661,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "“O LORD of Hosts, God of Israel, enthroned above the cherubim, You alone are God over all the kingdoms of the…",
+      "alsoCites": []
+    },
+    {
+      "rank": 33,
+      "to": {
+        "start": 46008006,
+        "end": 46008006,
+        "ref": "1Cor.8.6",
+        "label": "1 Corinthians 8:6"
+      },
+      "direction": "out",
+      "votesOut": 14,
+      "votesIn": 0,
+      "score": 14.0,
+      "weight": 0.661,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "yet for us there is but one God, the Father, from whom all things came and for whom we exist. And there is…",
+      "alsoCites": []
+    },
+    {
+      "rank": 34,
+      "to": {
+        "start": 58001002,
+        "end": 58001002,
+        "ref": "Heb.1.2",
+        "label": "Hebrews 1:2"
+      },
+      "direction": "out",
+      "votesOut": 14,
+      "votesIn": 0,
+      "score": 14.0,
+      "weight": 0.661,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "But in these last days He has spoken to us by His Son, whom He appointed heir of all things, and through whom…",
+      "alsoCites": []
+    },
+    {
+      "rank": 35,
+      "to": {
+        "start": 66010006,
+        "end": 66010006,
+        "ref": "Rev.10.6",
+        "label": "Revelation 10:6"
+      },
+      "direction": "out",
+      "votesOut": 14,
+      "votesIn": 0,
+      "score": 14.0,
+      "weight": 0.661,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And he swore by Him who lives forever and ever, who created heaven and everything in it, the earth and…",
+      "alsoCites": []
+    },
+    {
+      "rank": 36,
+      "to": {
+        "start": 19033006,
+        "end": 19033006,
+        "ref": "Ps.33.6",
+        "label": "Psalm 33:6"
+      },
+      "direction": "both",
+      "votesOut": 12,
+      "votesIn": 2,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By the word of the LORD the heavens were made, and all the stars by the breath of His mouth.",
+      "alsoCites": []
+    },
+    {
+      "rank": 37,
+      "to": {
+        "start": 19033009,
+        "end": 19033009,
+        "ref": "Ps.33.9",
+        "label": "Psalm 33:9"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For He spoke, and it came to be; He commanded, and it stood firm.",
+      "alsoCites": []
+    },
+    {
+      "rank": 38,
+      "to": {
+        "start": 19104024,
+        "end": 19104024,
+        "ref": "Ps.104.24",
+        "label": "Psalm 104:24"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "How many are Your works, O LORD! In wisdom You have made them all; the earth is full of Your creatures.",
+      "alsoCites": []
+    },
+    {
+      "rank": 39,
+      "to": {
+        "start": 19148004,
+        "end": 19148005,
+        "ref": "Ps.148.4-Ps.148.5",
+        "label": "Psalm 148:4–5"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Praise Him, O highest heavens, and you waters above the skies.",
+      "alsoCites": []
+    },
+    {
+      "rank": 40,
+      "to": {
+        "start": 23040028,
+        "end": 23040028,
+        "ref": "Isa.40.28",
+        "label": "Isaiah 40:28"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Do you not know? Have you not heard? The LORD is the everlasting God, the Creator of the ends of the earth.…",
+      "alsoCites": []
+    },
+    {
+      "rank": 41,
+      "to": {
+        "start": 23051016,
+        "end": 23051016,
+        "ref": "Isa.51.16",
+        "label": "Isaiah 51:16"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "I have put My words in your mouth, and covered you with the shadow of My hand, to establish the heavens, to…",
+      "alsoCites": []
+    },
+    {
+      "rank": 42,
+      "to": {
+        "start": 44004024,
+        "end": 44004024,
+        "ref": "Acts.4.24",
+        "label": "Acts 4:24"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "When the believers heard this, they lifted up their voices to God with one accord. “Sovereign Lord,” they…",
+      "alsoCites": []
+    },
+    {
+      "rank": 43,
+      "to": {
+        "start": 45001019,
+        "end": 45001020,
+        "ref": "Rom.1.19-Rom.1.20",
+        "label": "Romans 1:19–20"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For what may be known about God is plain to them, because God has made it plain to them.",
+      "alsoCites": []
+    },
+    {
+      "rank": 44,
+      "to": {
+        "start": 62001001,
+        "end": 62001001,
+        "ref": "1John.1.1",
+        "label": "1 John 1:1"
+      },
+      "direction": "out",
+      "votesOut": 13,
+      "votesIn": 0,
+      "score": 13.0,
+      "weight": 0.645,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "That which was from the beginning, which we have heard, which we have seen with our own eyes, which we have…",
+      "alsoCites": []
+    },
+    {
+      "rank": 45,
+      "to": {
+        "start": 19096005,
+        "end": 19096005,
+        "ref": "Ps.96.5",
+        "label": "Psalm 96:5"
+      },
+      "direction": "both",
+      "votesOut": 11,
+      "votesIn": 2,
+      "score": 12.0,
+      "weight": 0.626,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For all the gods of the nations are idols, but it is the LORD who made the heavens.",
+      "alsoCites": []
+    },
+    {
+      "rank": 46,
+      "to": {
+        "start": 13016026,
+        "end": 13016026,
+        "ref": "1Chr.16.26",
+        "label": "1 Chronicles 16:26"
+      },
+      "direction": "out",
+      "votesOut": 11,
+      "votesIn": 0,
+      "score": 11.0,
+      "weight": 0.607,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For all the gods of the nations are idols, but it is the LORD who made the heavens.",
+      "alsoCites": []
+    },
+    {
+      "rank": 47,
+      "to": {
+        "start": 19121002,
+        "end": 19121002,
+        "ref": "Ps.121.2",
+        "label": "Psalm 121:2"
+      },
+      "direction": "out",
+      "votesOut": 11,
+      "votesIn": 0,
+      "score": 11.0,
+      "weight": 0.607,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "My help comes from the LORD, the Maker of heaven and earth.",
+      "alsoCites": []
+    },
+    {
+      "rank": 48,
+      "to": {
+        "start": 45011036,
+        "end": 45011036,
+        "ref": "Rom.11.36",
+        "label": "Romans 11:36"
+      },
+      "direction": "out",
+      "votesOut": 11,
+      "votesIn": 0,
+      "score": 11.0,
+      "weight": 0.607,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For from Him and through Him and to Him are all things. To Him be the glory forever! Amen.",
+      "alsoCites": []
+    },
+    {
+      "rank": 49,
+      "to": {
+        "start": 58003004,
+        "end": 58003004,
+        "ref": "Heb.3.4",
+        "label": "Hebrews 3:4"
+      },
+      "direction": "out",
+      "votesOut": 11,
+      "votesIn": 0,
+      "score": 11.0,
+      "weight": 0.607,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And every house is built by someone, but God is the builder of everything.",
+      "alsoCites": []
+    },
+    {
+      "rank": 50,
+      "to": {
+        "start": 19104030,
+        "end": 19104030,
+        "ref": "Ps.104.30",
+        "label": "Psalm 104:30"
+      },
+      "direction": "out",
+      "votesOut": 10,
+      "votesIn": 0,
+      "score": 10.0,
+      "weight": 0.586,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "When You send Your Spirit, they are created, and You renew the face of the earth.",
+      "alsoCites": []
+    },
+    {
+      "rank": 51,
+      "to": {
+        "start": 19134003,
+        "end": 19134003,
+        "ref": "Ps.134.3",
+        "label": "Psalm 134:3"
+      },
+      "direction": "out",
+      "votesOut": 10,
+      "votesIn": 0,
+      "score": 10.0,
+      "weight": 0.586,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "May the LORD, the Maker of heaven and earth, bless you from Zion.",
+      "alsoCites": []
+    },
+    {
+      "rank": 52,
+      "to": {
+        "start": 20016004,
+        "end": 20016004,
+        "ref": "Prov.16.4",
+        "label": "Proverbs 16:4"
+      },
+      "direction": "out",
+      "votesOut": 10,
+      "votesIn": 0,
+      "score": 10.0,
+      "weight": 0.586,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "The LORD has made everything for His purpose— even the wicked for the day of disaster.",
+      "alsoCites": []
+    },
+    {
+      "rank": 53,
+      "to": {
+        "start": 41013019,
+        "end": 41013019,
+        "ref": "Mark.13.19",
+        "label": "Mark 13:19"
+      },
+      "direction": "out",
+      "votesOut": 10,
+      "votesIn": 0,
+      "score": 10.0,
+      "weight": 0.586,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For those will be days of tribulation unmatched from the beginning of God’s creation until now, and never to…",
+      "alsoCites": []
+    },
+    {
+      "rank": 54,
+      "to": {
+        "start": 49003009,
+        "end": 49003009,
+        "ref": "Eph.3.9",
+        "label": "Ephesians 3:9"
+      },
+      "direction": "out",
+      "votesOut": 10,
+      "votesIn": 0,
+      "score": 10.0,
+      "weight": 0.586,
+      "tier": "strong",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "and to illuminate for everyone the stewardship of this mystery, which for ages past was kept hidden in God…",
+      "alsoCites": []
+    },
+    {
+      "rank": 55,
+      "to": {
+        "start": 18026013,
+        "end": 18026013,
+        "ref": "Job.26.13",
+        "label": "Job 26:13"
+      },
+      "direction": "out",
+      "votesOut": 9,
+      "votesIn": 0,
+      "score": 9.0,
+      "weight": 0.562,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "By His breath the skies were cleared; His hand pierced the fleeing serpent.",
+      "alsoCites": []
+    },
+    {
+      "rank": 56,
+      "to": {
+        "start": 66003014,
+        "end": 66003014,
+        "ref": "Rev.3.14",
+        "label": "Revelation 3:14"
+      },
+      "direction": "out",
+      "votesOut": 8,
+      "votesIn": 0,
+      "score": 8.0,
+      "weight": 0.537,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "To the angel of the church in Laodicea write: These are the words of the Amen, the faithful and true Witness…",
+      "alsoCites": []
+    },
+    {
+      "rank": 57,
+      "to": {
+        "start": 23065017,
+        "end": 23065017,
+        "ref": "Isa.65.17",
+        "label": "Isaiah 65:17"
+      },
+      "direction": "out",
+      "votesOut": 6,
+      "votesIn": 0,
+      "score": 6.0,
+      "weight": 0.475,
+      "tier": "solid",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "For behold, I will create new heavens and a new earth. The former things will not be remembered, nor will…",
+      "alsoCites": []
+    },
+    {
+      "rank": 58,
+      "to": {
+        "start": 66022013,
+        "end": 66022013,
+        "ref": "Rev.22.13",
+        "label": "Revelation 22:13"
+      },
+      "direction": "out",
+      "votesOut": 3,
+      "votesIn": 0,
+      "score": 3.0,
+      "weight": 0.339,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "I am the Alpha and the Omega, the First and the Last, the Beginning and the End.”",
+      "alsoCites": []
+    },
+    {
+      "rank": 59,
+      "to": {
+        "start": 43001003,
+        "end": 43001003,
+        "ref": "John.1.3",
+        "label": "John 1:3"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 2.5,
+      "weight": 0.306,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Through Him all things were made, and without Him nothing was made that has been made.",
+      "alsoCites": []
+    },
+    {
+      "rank": 60,
+      "to": {
+        "start": 21012001,
+        "end": 21012001,
+        "ref": "Eccl.12.1",
+        "label": "Ecclesiastes 12:1"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.268,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Remember your Creator in the days of your youth, before the days of adversity come and the years approach of…",
+      "alsoCites": []
+    },
+    {
+      "rank": 61,
+      "to": {
+        "start": 40011025,
+        "end": 40011025,
+        "ref": "Matt.11.25",
+        "label": "Matthew 11:25"
+      },
+      "direction": "out",
+      "votesOut": 2,
+      "votesIn": 0,
+      "score": 2.0,
+      "weight": 0.268,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "At that time Jesus declared, “I praise You, Father, Lord of heaven and earth, because You have hidden these…",
+      "alsoCites": []
+    },
+    {
+      "rank": 62,
+      "to": {
+        "start": 1002001,
+        "end": 1002001,
+        "ref": "Gen.2.1",
+        "label": "Genesis 2:1"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 4,
+      "score": 2.0,
+      "weight": 0.268,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "Thus the heavens and the earth were completed in all their vast array.",
+      "alsoCites": []
+    },
+    {
+      "rank": 63,
+      "to": {
+        "start": 18026007,
+        "end": 18026007,
+        "ref": "Job.26.7",
+        "label": "Job 26:7"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 5,
+      "score": 1.77,
+      "weight": 0.249,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001002,
+        "label": "Genesis 1:1–2",
+        "span": 2
+      },
+      "snippet": "He stretches out the north over empty space; He hangs the earth upon nothing.",
+      "alsoCites": []
+    },
+    {
+      "rank": 64,
+      "to": {
+        "start": 13029011,
+        "end": 13029011,
+        "ref": "1Chr.29.11",
+        "label": "1 Chronicles 29:11"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 3,
+      "score": 1.5,
+      "weight": 0.224,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "Yours, O LORD, is the greatness and the power and the glory and the splendor and the majesty, for everything…",
+      "alsoCites": []
+    },
+    {
+      "rank": 65,
+      "to": {
+        "start": 66021006,
+        "end": 66021006,
+        "ref": "Rev.21.6",
+        "label": "Revelation 21:6"
+      },
+      "direction": "out",
+      "votesOut": 1,
+      "votesIn": 0,
+      "score": 1.0,
+      "weight": 0.169,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And He told me, “It is done! I am the Alpha and the Omega, the Beginning and the End. To the thirsty I will…",
+      "alsoCites": []
+    },
+    {
+      "rank": 66,
+      "to": {
+        "start": 1002004,
+        "end": 1002004,
+        "ref": "Gen.2.4",
+        "label": "Genesis 2:4"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.169,
+      "tier": "light",
+      "sameBook": true,
+      "viaRange": null,
+      "snippet": "This is the account of the heavens and the earth when they were created, in the day that the LORD God made…",
+      "alsoCites": []
+    },
+    {
+      "rank": 67,
+      "to": {
+        "start": 12019015,
+        "end": 12019015,
+        "ref": "2Kgs.19.15",
+        "label": "2 Kings 19:15"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.169,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "And Hezekiah prayed before the LORD: “O LORD, God of Israel, enthroned between the cherubim, You alone are…",
+      "alsoCites": []
+    },
+    {
+      "rank": 68,
+      "to": {
+        "start": 41010006,
+        "end": 41010006,
+        "ref": "Mark.10.6",
+        "label": "Mark 10:6"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.169,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "However, from the beginning of creation, ‘God made them male and female.’",
+      "alsoCites": []
+    },
+    {
+      "rank": 69,
+      "to": {
+        "start": 43005019,
+        "end": 43005019,
+        "ref": "John.5.19",
+        "label": "John 5:19"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 1.0,
+      "weight": 0.169,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": null,
+      "snippet": "So Jesus replied, “Truly, truly, I tell you, the Son can do nothing by Himself, unless He sees the Father…",
+      "alsoCites": []
+    },
+    {
+      "rank": 70,
+      "to": {
+        "start": 14002012,
+        "end": 14002012,
+        "ref": "2Chr.2.12",
+        "label": "2 Chronicles 2:12"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001002,
+        "label": "Genesis 1:1–2",
+        "span": 2
+      },
+      "snippet": "And Hiram added: “Blessed be the LORD, the God of Israel, who made the heavens and the earth! He has given…",
+      "alsoCites": []
+    },
+    {
+      "rank": 71,
+      "to": {
+        "start": 19148005,
+        "end": 19148005,
+        "ref": "Ps.148.5",
+        "label": "Psalm 148:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001002,
+        "label": "Genesis 1:1–2",
+        "span": 2
+      },
+      "snippet": "Let them praise the name of the LORD, for He gave the command and they were created.",
+      "alsoCites": []
+    },
+    {
+      "rank": 72,
+      "to": {
+        "start": 66010005,
+        "end": 66010005,
+        "ref": "Rev.10.5",
+        "label": "Revelation 10:5"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.71,
+      "weight": 0.131,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001002,
+        "label": "Genesis 1:1–2",
+        "span": 2
+      },
+      "snippet": "Then the angel I had seen standing on the sea and on the land lifted up his right hand to heaven.",
+      "alsoCites": []
+    },
+    {
+      "rank": 73,
+      "to": {
+        "start": 20008026,
+        "end": 20008026,
+        "ref": "Prov.8.26",
+        "label": "Proverbs 8:26"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 2,
+      "score": 0.18,
+      "weight": 0.04,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001031,
+        "label": "Genesis 1:1–31",
+        "span": 31
+      },
+      "snippet": "before He made the land or fields, or any of the dust of the earth.",
+      "alsoCites": []
+    },
+    {
+      "rank": 74,
+      "to": {
+        "start": 23066002,
+        "end": 23066002,
+        "ref": "Isa.66.2",
+        "label": "Isaiah 66:2"
+      },
+      "direction": "in",
+      "votesOut": 0,
+      "votesIn": 1,
+      "score": 0.09,
+      "weight": 0.021,
+      "tier": "light",
+      "sameBook": false,
+      "viaRange": {
+        "start": 1001001,
+        "end": 1001031,
+        "label": "Genesis 1:1–31",
+        "span": 31
+      },
+      "snippet": "Has not My hand made all these things? And so they came into being,” declares the LORD. “This is the one I…",
+      "alsoCites": []
+    }
+  ]
+}
