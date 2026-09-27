@@ -65,6 +65,11 @@ ATTRIBUTION = {
     "crossReferences": "Cross references from OpenBible.info, CC-BY (2016-02-01)",
     "ai": "Study notes marked 'why' are AI-generated (see manifest.sources.ai)",
 }
+OPENBIBLE_ABOUT = (
+    "Cross references from OpenBible.info (https://www.openbible.info/labs/cross-references/), used under a "
+    "Creative Commons Attribution license. Dataset dated 2016-02-01. Vote counts reflect OpenBible.info user "
+    "voting. Ranking and range handling are our own."
+)
 ATTRIBUTION_LINE = "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
 
 DIRECTIONS = ["out", "in", "both"]
@@ -467,7 +472,7 @@ def manifest_doc(ds: Dataset, merged_total: int, inline_total: int, tiers: colle
         "sources": [
             {"id": "openbible-xref-2016-02-01", "kind": "crossReferences", "name": "OpenBible.info Cross References",
              "version": "2016-02-01", "license": "CC-BY", "url": "https://www.openbible.info/labs/cross-references/",
-             "attribution": "Cross references from OpenBible.info, CC-BY",
+             "attribution": OPENBIBLE_ABOUT,
              "via": "https://github.com/scrollmapper/bible_databases (2024 branch, cross_references.txt)",
              "retrievedAt": built_at[:10]},
             {"id": "bsb-2023", "kind": "text", "name": "Berean Standard Bible", "version": "2023",
@@ -589,9 +594,9 @@ def main() -> int:
     manifest["translations"][0]["sha256"] = hashlib.sha256(
         "".join(s["sha256"] for s in shards if s["kind"] == "text").encode()).hexdigest()
     dump(out / "manifest.json", manifest, pretty=True)
-    dump(out / "attribution.md", None, pretty=False) if False else (out / "attribution.md").write_text(
-        "# Attribution\n\n" + TRANSLATION["copyrightNotice"] + "\n\n" + ATTRIBUTION["crossReferences"] +
-        ". https://www.openbible.info/labs/cross-references/\n\n" + ATTRIBUTION["ai"] + ".\n", encoding="utf-8")
+    (out / "attribution.md").write_text(
+        "# Attribution\n\n" + TRANSLATION["copyrightNotice"] + "\n\n" + OPENBIBLE_ABOUT + "\n\n" +
+        ATTRIBUTION["ai"] + ".\n", encoding="utf-8")
     print(f"full: {len(shards)} shards, text {text_bytes/1e6:.1f} MB -> {out}", file=sys.stderr)
 
     # ---- founder-readable samples (spec shape, pretty)

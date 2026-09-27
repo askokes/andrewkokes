@@ -91,7 +91,7 @@
       "version": "2016-02-01",
       "license": "CC-BY",
       "url": "https://www.openbible.info/labs/cross-references/",
-      "attribution": "Cross references from OpenBible.info, CC-BY",
+      "attribution": "Cross references from OpenBible.info (https://www.openbible.info/labs/cross-references/), used under a Creative Commons Attribution license. Dataset dated 2016-02-01. Vote counts reflect OpenBible.info user voting. Ranking and range handling are our own.",
       "via": "https://github.com/scrollmapper/bible_databases (2024 branch, cross_references.txt)",
       "retrievedAt": "2026-09-27"
     },
@@ -1782,7 +1782,7 @@
   "onDevice": {
     "database": "asb.sqlite",
     "shippedInAppBundle": true,
-    "estimatedBytes": 36000000,
+    "estimatedBytes": 44700000,
     "tickerInline": 12
   }
 }
