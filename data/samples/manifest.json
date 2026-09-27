@@ -51,7 +51,11 @@
     "collision": "same start, different end: keep higher votes, list others in alsoCites",
     "tickerInline": 12,
     "snippetMaxChars": 110,
-    "dwellSeconds": "1.6 + 1.2 * weight"
+    "dwellSeconds": "1.6 + 1.2 * weight",
+    "motion": {
+      "baseSeconds": 1.6,
+      "perWeightSeconds": 1.2
+    }
   },
   "translations": [
     {

@@ -458,6 +458,7 @@ def manifest_doc(ds: Dataset, merged_total: int, inline_total: int, tiers: colle
             "collision": "same start, different end: keep higher votes, list others in alsoCites",
             "tickerInline": TICKER_INLINE, "snippetMaxChars": SNIPPET_MAX,
             "dwellSeconds": f"{DWELL_BASE} + {DWELL_PER_WEIGHT} * weight",
+            "motion": {"baseSeconds": DWELL_BASE, "perWeightSeconds": DWELL_PER_WEIGHT},
         },
         "translations": [
             {**TRANSLATION, "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",

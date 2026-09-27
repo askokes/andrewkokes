@@ -833,8 +833,10 @@ async function boot() {
     S.books = books.books; S.text = text; S.manifest = manifest;
     if (notes) S.notes = { _note: notes._note || '', edges: notes.edges || {}, verses: notes.verses || {} };
     S.books.forEach(b => { S.bookByNo[b.bookNo] = b; [b.name, b.short, b.osis, b.sourceName].concat(b.aliases || []).forEach(k => { if (k) S.bookKeys.set(norm(k), b.bookNo); }); });
-    const f = manifest && manifest.ranking && String(manifest.ranking.dwellSeconds || '').match(/([\d.]+)\s*\+\s*([\d.]+)\s*\*\s*weight/);
-    if (f) S.motion = { baseSeconds: +f[1], perWeightSeconds: +f[2] };
+    const mo = manifest && manifest.ranking && manifest.ranking.motion;
+    const f = !mo && manifest && manifest.ranking && String(manifest.ranking.dwellSeconds || '').match(/([\d.]+)\s*\+\s*([\d.]+)\s*\*\s*weight/);
+    if (mo && isFinite(mo.baseSeconds) && isFinite(mo.perWeightSeconds)) S.motion = { baseSeconds: +mo.baseSeconds, perWeightSeconds: +mo.perWeightSeconds };
+    else if (f) S.motion = { baseSeconds: +f[1], perWeightSeconds: +f[2] };
   } catch (e) {
     reader.innerHTML = `<div class="loading"><p>The Bible data could not be loaded.</p><p class="fine">${esc(e.message)}</p></div>`;
     console.warn(e); return;
