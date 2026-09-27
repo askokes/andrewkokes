@@ -50,6 +50,7 @@
   --json-key: #8ab8e8; --json-str: #4fcdbf; --json-num: #f0b730; --json-bool: #b39ff0;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html, body { height: 100%; margin: 0; }
 html { box-sizing: border-box; }
 body { background: var(--page); color: var(--ink); font-family: var(--sans); overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; }
@@ -74,7 +75,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .searchrow input { flex: 1; min-width: 0; height: 40px; border-radius: 12px; border: 1px solid var(--rule); background: var(--surface); padding: 0 14px; font-size: 16px; -webkit-appearance: none; }
 .searchrow input::placeholder { color: var(--ink-3); }
 .searchrow .cancel { color: var(--accent); font-size: 16px; padding: 0 4px; }
-.reader { position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 0 20px; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.reader { position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overflow-anchor: none; padding: 0 20px; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 .reader::-webkit-scrollbar { width: 0; }
 .chapter-head { min-height: calc(var(--focus-y) - 10px); display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 14px; }
 .chapter-head .book { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
@@ -96,15 +97,15 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .loading .bar { height: 12px; border-radius: 6px; background: var(--rule); margin: 14px 0; animation: pulse 1.4s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .45; } }
 .strip { flex: none; border-top: 1px solid var(--rule); background: var(--surface-2); padding: 8px 0 8px; }
-.strip-meta { display: flex; align-items: center; gap: 8px; padding: 0 16px; height: 24px; font-size: 12px; color: var(--ink-3); }
+.strip-meta { display: flex; align-items: center; gap: 6px; padding: 0 12px 0 16px; height: 24px; font-size: 11.5px; color: var(--ink-3); }
 .strip-meta .meta-text { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .strip-meta .meta-text b { color: var(--ink-2); font-weight: 600; }
-.switch { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-3); }
+.switch { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink-3); margin-left: 2px; }
 .switch .knob { position: relative; width: 30px; height: 18px; border-radius: 9px; background: var(--rule-2); transition: background .2s; }
 .switch .knob::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .2s; }
 .switch[aria-checked="true"] .knob { background: var(--accent); }
 .switch[aria-checked="true"] .knob::after { transform: translateX(12px); }
-.icon-btn { width: 28px; height: 24px; display: grid; place-items: center; border-radius: 8px; color: var(--ink-2); }
+.icon-btn { width: 26px; height: 24px; display: grid; place-items: center; border-radius: 8px; color: var(--ink-2); }
 .icon-btn svg { width: 16px; height: 16px; }
 .icon-btn:active { background: var(--rule); }
 .marquee { position: relative; height: 64px; margin-top: 6px; overflow: hidden; transition: opacity .14s; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); }
@@ -252,7 +253,7 @@ html[data-motion="reduce"] .sheet, html[data-motion="reduce"] .overlay, html[dat
   <section class="strip" aria-label="Cross references for the verse in focus">
     <div class="strip-meta">
       <span class="meta-text" id="stripMeta"></span>
-      <button class="switch" id="motionToggle" role="switch" aria-checked="false" aria-label="Reduce motion">Reduce motion<span class="knob"></span></button>
+      <button class="switch" id="motionToggle" role="switch" aria-checked="true" aria-label="Ticker motion (off reduces motion)">Motion<span class="knob"></span></button>
       <button class="icon-btn" id="pauseBtn" aria-label="Pause ticker" aria-pressed="false"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
     </div>
     <div class="marquee" id="marquee"><div class="track" id="track"></div></div>
@@ -315,7 +316,7 @@ const whereLabel = () => /fixture/i.test(S.dataRoot) ? 'the fixture' : 'this dat
 /* ---------- ids, refs, labels, snippets (derivations match the pipeline) ---------- */
 const split = vid => ({ book: Math.floor(vid / 1e6), chapter: Math.floor(vid / 1000) % 1000, verse: vid % 1000 });
 const vidOf = (b, c, v) => b * 1e6 + c * 1000 + v;
-const bookOf = vid => S.bookByNo[Math.floor(vid / 1e6)];
+const bookOf = vid => { const n = Math.floor(vid / 1e6); return S.bookByNo[n] || { bookNo: n, osis: `Book${n}`, name: `Book ${n}`, short: `B${n}`, chapters: 0, verseCounts: [], testament: n <= 39 ? 'OT' : 'NT' }; };
 function refOf(start, end) {
   const a = split(start); let s = `${bookOf(start).osis}.${a.chapter}.${a.verse}`;
   if (end !== start) { const b = split(end); s += `-${bookOf(end).osis}.${b.chapter}.${b.verse}`; }
@@ -332,9 +333,9 @@ function labelOf(start, end) {
 function verseText(vid) {
   const p = split(vid), b = S.text && S.text.books[p.book - 1];
   const ch = b && b[p.chapter - 1];
-  return ch ? ch[p.verse - 1] : undefined;
+  const t = ch ? ch[p.verse - 1] : undefined; return typeof t === 'string' ? t : undefined;
 }
-const hasChapter = (bookNo, chapter) => { const b = S.text && S.text.books[bookNo - 1]; return !!(b && Array.isArray(b[chapter - 1]) && b[chapter - 1].length); };
+const hasChapter = (bookNo, chapter) => { const b = S.text && S.text.books[bookNo - 1], ch = b && b[chapter - 1]; return !!(Array.isArray(ch) && ch.length && ch.every(t => typeof t === 'string')); };
 function nextVid(vid) {
   const p = split(vid), book = S.bookByNo[p.book];
   if (p.verse < book.verseCounts[p.chapter - 1]) return vid + 1;
@@ -524,7 +525,9 @@ function flashRange(start, end) {
 async function navigate({ bookNo, chapter, vid, kind = null, via = null, highlight = null }) {
   const book = S.bookByNo[bookNo]; if (!book) return false;
   if (!hasChapter(bookNo, chapter)) { toast(`${book.name} ${chapter} is not in ${whereLabel()} yet`); return false; }
-  const bundle = await buildBundle(bookNo, chapter);
+  let bundle;
+  try { bundle = await buildBundle(bookNo, chapter); }
+  catch (e) { console.warn(e); toast(`${book.name} ${chapter} could not be loaded`); return false; }
   if (kind) pushHop(kind, vid, via, highlight);
   if (bundle !== S.bundle) renderChapter(bundle);
   scrollToVerse(vid); setFocus(vid, { force: true, pin: true });
@@ -579,9 +582,10 @@ function renderStrip(verse) {
   const T = S.ticker; T.gen++; const gen = T.gen;
   cancelAnimationFrame(T.raf); T.raf = 0;
   const meta = $('#stripMeta');
+  const shortLabel = verse ? `${bookOf(verse.vid).short} ${split(verse.vid).chapter}:${verse.verse}` : '';
   if (!verse) meta.textContent = '';
-  else if (!verse.counts.unique) meta.innerHTML = `<b>${esc(verse.label)}</b> \u00b7 no connections`;
-  else meta.innerHTML = `<b>${esc(verse.label)}</b> \u00b7 <span class="num">${verse.counts.unique}</span> connection${verse.counts.unique === 1 ? '' : 's'}${verse.counts.more > 0 ? ` \u00b7 <span class="num">+${verse.counts.more}</span> more` : ''}`;
+  else if (!verse.counts.unique) meta.innerHTML = `<b>${esc(shortLabel)}</b> \u00b7 no connections`;
+  else meta.innerHTML = `<b>${esc(shortLabel)}</b> \u00b7 <span class="num">${verse.counts.unique}</span> connection${verse.counts.unique === 1 ? '' : 's'}${verse.counts.more > 0 ? ` \u00b7 <span class="num">+${verse.counts.more}</span> more` : ''}`;
   marquee.classList.add('fading');
   setTimeout(() => { if (gen !== T.gen) return; fillStrip(verse ? verse.ticker : []); marquee.classList.remove('fading'); }, S.reduceMotion ? 0 : 140);
 }
@@ -615,7 +619,7 @@ function setPaused(on) {
   cancelAnimationFrame(S.ticker.raf); S.ticker.raf = 0; fillStrip(S.ticker.items);
 }
 function setReduceMotion(on, save) {
-  S.reduceMotion = on; $('#motionToggle').setAttribute('aria-checked', String(on));
+  S.reduceMotion = on; $('#motionToggle').setAttribute('aria-checked', String(!on));
   document.documentElement.toggleAttribute('data-motion', on); if (on) document.documentElement.setAttribute('data-motion', 'reduce');
   if (save) store.set('reduceMotion', on);
   cancelAnimationFrame(S.ticker.raf); S.ticker.raf = 0; fillStrip(S.ticker.items);
@@ -688,7 +692,7 @@ function highlightJson(text) {
 }
 function openJson(title, obj, mode) {
   S.jsonMode = mode; const text = JSON.stringify(obj, null, 2);
-  $('#jsonTitle').innerHTML = `${esc(title)}<span class="sub">${mode === 'trail' ? 'asb.trail/2, as the app would store it' : 'asb.chapter/2 verse object, exactly what the ticker reads'}</span>`;
+  $('#jsonTitle').innerHTML = `${esc(title)}<span class="sub">${mode === 'trail' ? 'asb.trail/2 document' : 'asb.chapter/2 verse object'}</span>`;
   const pre = $('#jsonPre'), ta = $('#jsonTa'); pre.innerHTML = highlightJson(text); ta.value = text; pre.hidden = false; ta.hidden = true;
   openSheet('jsonSheet');
 }
@@ -711,7 +715,7 @@ function openAbout() {
     `<h4>Display</h4><div class="seg" id="themeSeg"><button data-theme="" aria-pressed="false">Auto</button><button data-theme="light" aria-pressed="false">Light</button><button data-theme="dark" aria-pressed="false">Dark</button></div>` +
     `<h4>Bible text</h4><p>${esc(tr.attribution || att.text)}</p>${tr.copyrightNotice ? `<p class="fine">${esc(tr.copyrightNotice)}</p>` : ''}` +
     `<h4>Cross references</h4><p>${esc(att.crossReferences)}</p>` +
-    `<h4>AI notes</h4><p>${esc(att.ai)}${aiSrc && aiSrc.model ? ` Model: ${esc(aiSrc.model)}.` : ''}</p>` +
+    `<h4>AI notes</h4><p>${esc(att.ai.replace(/[.\s]*$/, ''))}.${aiSrc && aiSrc.model ? ` Model: ${esc(aiSrc.model)}.` : ''}</p>` +
     (S.notes._note ? `<p class="fine">${esc(S.notes._note)}</p>` : '') +
     `<h4>Dataset</h4><p class="fine num">${m ? `Version ${esc(m.datasetVersion)} \u00b7 built ${esc(String(m.builtAt || '').slice(0, 10))} \u00b7 ${esc(m.pipeline || '')}<br>${m.graph ? `${m.graph.edges.toLocaleString()} cross references \u00b7 ${m.graph.mergedTickerItems.toLocaleString()} ranked connections \u00b7 ` : ''}ranking ${esc(m.ranking ? m.ranking.version : '')}` : 'manifest.json not found; showing built-in attribution'}</p>`;
   const cur = document.documentElement.getAttribute('data-theme') || '';
@@ -742,7 +746,7 @@ function renderWeb() {
   const W = 393, H = 420, cx = W / 2, cy = H / 2 - 6, r = nodes.length > 1 ? 128 : 0, pos = {};
   nodes.forEach((v, i) => { const a = -Math.PI / 2 + (i * 2 * Math.PI) / nodes.length; pos[v] = [cx + r * Math.cos(a), cy + r * Math.sin(a)]; });
   const cur = currentHop() ? currentHop().vid : 0, maxV = Math.max(1, ...T.web.edges.map(e => e[2] || 1));
-  let s = '<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="var(--accent)"/></marker></defs>';
+  let s = '<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="var(--accent)"/></marker></defs>';
   const line = (a, b, w, dashed) => { const [x1, y1] = pos[a], [x2, y2] = pos[b], dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy) || 1, k = 16 / d; return `<line x1="${x1 + dx * k}" y1="${y1 + dy * k}" x2="${x2 - dx * k}" y2="${y2 - dy * k}" stroke="${dashed ? 'var(--ink-3)' : 'var(--accent)'}" stroke-width="${w}" stroke-linecap="round" ${dashed ? 'stroke-dasharray="5 6"' : 'marker-end="url(#arrow)"'} opacity="${dashed ? .8 : .9}"/>`; };
   T.web.edges.forEach(e => { if (pos[e[0]] && pos[e[1]]) s += line(e[0], e[1], (1.2 + 4.5 * Math.sqrt((e[2] || 1) / maxV)).toFixed(2), false); });
   T.web.peekOnlyEdges.forEach(e => { if (pos[e[0]] && pos[e[1]]) s += line(e[0], e[1], 1.4, true); });
@@ -815,13 +819,14 @@ $$('[data-close]').forEach(b => b.addEventListener('click', closeSheet));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (S.sheet) closeSheet(); else if ($('#webOverlay').classList.contains('on')) closeWeb(); else if (!$('#searchRow').hidden) showSearch(false); } });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) S.ticker.lastT = 0; });
 addEventListener('resize', fit);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fit(); if (S.focusVid) scrollToVerse(S.focusVid); });
 matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', e => { if (store.get('reduceMotion') === null) setReduceMotion(e.matches, false); });
 
 /* ---------- boot ---------- */
 async function boot() {
   applyTheme(store.get('theme'));
   const rm = store.get('reduceMotion'); S.reduceMotion = rm === null ? matchMedia('(prefers-reduced-motion: reduce)').matches : !!rm;
-  $('#motionToggle').setAttribute('aria-checked', String(S.reduceMotion)); if (S.reduceMotion) document.documentElement.setAttribute('data-motion', 'reduce');
+  $('#motionToggle').setAttribute('aria-checked', String(!S.reduceMotion)); if (S.reduceMotion) document.documentElement.setAttribute('data-motion', 'reduce');
   S.trail = newTrail(); fit();
   try {
     const [books, text, manifest, notes] = await Promise.all([fetchJson('books.json'), fetchJson('text/bsb.json'), fetchJson('manifest.json', true), fetchJson('ai/notes.json', true)]);
