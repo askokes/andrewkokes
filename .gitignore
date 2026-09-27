@@ -1,0 +1,9 @@
+# downloaded source datasets (rebuild with tools/build_dataset.py)
+data/sources/
+# generated full dataset (large); sample chapters are committed
+data/full/
+# local scratch
+*.pyc
+__pycache__/
+.DS_Store
+node_modules/
