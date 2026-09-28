@@ -46,7 +46,8 @@ const rawPct = chip => Math.round(chip[9][2] * 100);
 const rowJn316 = xJohn.chapters[2][15], rowPs221 = xPs.chapters[21][0];
 // What the strip should show: the first 12 loaded chips by rank that pass the slider and the reason filter.
 const expectStrip = (row, min, kind = 'all') => row[1].filter(c => rawPct(c) >= min && (kind === 'all' || KINDS[c[9][0]] === kind)).slice(0, 12).map(c => c[10]);
-const expectCounts = (row, min) => { const pass = row[1].filter(c => rawPct(c) >= min), c = { all: pass.length, quote: 0, story: 0, topic: 0 }; pass.forEach(x => c[KINDS[x[9][0]]]++); return c; };
+// Each segment's count is the number of chips it will show: passing the slider and that reason, capped at 12 (the strip size).
+const expectCounts = (row, min) => ({ all: expectStrip(row, min).length, quote: expectStrip(row, min, 'quote').length, story: expectStrip(row, min, 'story').length, topic: expectStrip(row, min, 'topic').length });
 const byMatchFrom = (row, min) => row[2].slice(Math.floor(min / 5)).reduce((a, n) => a + n, 0);
 function firstText(start, end) { for (let v = start, n = 0; v !== null && v <= end && n < 400; v = nextVidT(v), n++) { const t = bsb(v); if (t) return t; } return ''; }
 
@@ -154,7 +155,10 @@ try {
   const meta = await page.textContent('#stripMeta');
   check(/110 connections/.test(meta) && /\+98 more/.test(meta), `strip meta shows counts: "${meta}"`);
   const fc = await filterCounts();
-  check(same(fc, expectCounts(rowJn316, 0)), `filter counts on John 3:16 count the ${rowJn316[1].length} loaded chips: ${JSON.stringify(fc)}`);
+  check(same(fc, expectCounts(rowJn316, 0)) && same(fc, { all: 12, quote: 0, story: 3, topic: 12 }), `filter counts on John 3:16 at Any read All 12 \u00b7 Quotes 0 \u00b7 Stories 3 \u00b7 Topics 12 (${JSON.stringify(fc)})`);
+  const shownPerSegment = {};
+  for (const f of ['quote', 'story', 'topic', 'all']) { await page.click(`#filters button[data-filter="${f}"]`); await sleep(220); shownPerSegment[f] = (await stripRanks()).length; }
+  check(['all', 'quote', 'story', 'topic'].every(k => shownPerSegment[k] === fc[k]), `each segment's count equals the chips it shows when selected (${JSON.stringify(shownPerSegment)})`);
   check(await page.$('#track .chip.cross[data-rank="1"]') !== null, 'cross-book chip carries the cross accent');
   check(await noAiUi(), 'no AI note element or AI copy anywhere on the page');
   await shot('01-reader.png');
@@ -217,7 +221,8 @@ try {
   check(/3 of 110 at 80%\+/.test(meta80) && byMatchFrom(rowJn316, 80) === 3, `header reads "${meta80}"`);
   const sl80 = await sliderState();
   check(sl80.value === '80' && sl80.label === '80%+' && sl80.match === 80, `slider reads 80%+ (${JSON.stringify(sl80)})`);
-  check(same(await filterCounts(), expectCounts(rowJn316, 80)), `filter counts follow the slider: ${JSON.stringify(await filterCounts())}`);
+  const fc80 = await filterCounts();
+  check(same(fc80, expectCounts(rowJn316, 80)) && same(fc80, { all: 3, quote: 0, story: 3, topic: 0 }), `filter counts at 80% read All 3 \u00b7 Quotes 0 \u00b7 Stories 3 \u00b7 Topics 0 (${JSON.stringify(fc80)})`);
   check((await stripState()).scrollLeft === 0, 'the strip re-anchors on the first passing chip');
   const f80 = facesOk(await chipFaces()), p80 = await chipPercentages();
   check(f80.ok && pctOk(p80) && p80.every(c => pctNum(c.shown) >= 80), 'the 80% chips keep the verse start, percentage and because rules');
@@ -398,7 +403,7 @@ try {
   const psPct = await chipPercentages();
   check(pctOk(psPct), `every Psalm 22:1 chip shows a match percentage from 1% to 100% (${psPct.map(c => c.shown).join(' ')})`);
   const psCounts = await filterCounts();
-  check(same(psCounts, expectCounts(rowPs221, 0)) && psCounts.quote === 2, `Psalm 22:1 filter counts ${JSON.stringify(psCounts)}`);
+  check(same(psCounts, expectCounts(rowPs221, 0)) && psCounts.quote === 2 && Object.values(psCounts).every(n => n <= 12), `Psalm 22:1 filter counts at Any, capped at 12: ${JSON.stringify(psCounts)}`);
   await page.click('#filterQuote');
   await sleep(300);
   const quotes = await visibleChips();

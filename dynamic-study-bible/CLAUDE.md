@@ -65,7 +65,7 @@ It lives in `ios/`. SwiftUI, iOS 18 minimum, GRDB 7 for the bundled `asb.sqlite`
 3. No ads, in-app purchases, tips, subscriptions or paid tiers.
 4. No AI output shown to users without YouVersion's written approval, plus a Biblica license if the AI reads NIV text.
 5. Keep "NIV" out of the app name, subtitle, keywords and icon.
-6. Show "NIV" and the API's copyright string wherever NIV text appears. Previews show whole verses only.
+6. Show "NIV" and the API's copyright string wherever NIV text appears. NIV previews show whole verses only until YouVersion confirms partial-verse previews are allowed; until then NIV-mode chips show the reference, reason and match only.
 7. `docs/DATA_MODEL.md` and `schema/` are the source of truth. Any data shape change updates the spec, the schema (edit `tools/gen_schemas.py`, then run it), the samples (`build_dataset.py`, then `sync_spec.py`) and the tests together.
 8. The pipeline must keep the tests green. Run the unit tests and the validator before calling a data change done.
 

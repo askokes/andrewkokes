@@ -657,9 +657,11 @@ function atOrAbove(verse, v) {
   if (!Array.isArray(b)) return poolOf(verse).filter(it => (pctOf(it.reason) || 0) >= v).length;
   return b.slice(Math.min(19, Math.floor(v / 5))).reduce((a, n) => a + n, 0);
 }
+// Each segment shows how many chips it will put in the strip: passing the slider and that reason, capped at the strip size.
 function kindCounts(pool) {
-  const passing = pool.filter(passesMatch), c = { all: passing.length, quote: 0, story: 0, topic: 0 };
+  const passing = pool.filter(passesMatch), cap = tickerInline(), c = { all: passing.length, quote: 0, story: 0, topic: 0 };
   passing.forEach(it => { if (it.reason && c[it.reason.kind] !== undefined) c[it.reason.kind]++; });
+  Object.keys(c).forEach(k => { c[k] = Math.min(cap, c[k]); });
   return c;
 }
 function renderMeta(verse) {
