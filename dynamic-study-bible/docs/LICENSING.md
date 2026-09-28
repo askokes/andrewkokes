@@ -19,7 +19,7 @@ YouVersion gives apps free access to its Bible library through an API and a Swif
 
 1. Sign up at https://platform.youversion.com, register the app as non-commercial and get an app key.
 2. Accept the NIV (111) license in the portal. Save PDFs of the license and the Platform Terms (https://platform.youversion.com/terms) in `docs/licenses/`. Read them for display limits, caching and AI.
-3. Email YouVersion Platform Support the questions below. Start now: AI approval has a long lead time.
+3. Email YouVersion Platform Support the questions below, using the draft in `docs/licenses/youversion-support-email.md`. Start now: AI approval has a long lead time.
 4. Keep every answer, dated, in `docs/licenses/`.
 
 ### What the app must display
@@ -48,7 +48,7 @@ YouVersion gives apps free access to its Bible library through an API and a Swif
 3. Shortening. May a preview show part of a verse? Our chips would show the first few words of each connected verse (up to 12 chips at once), with the whole verse on tap.
 4. References. May we ship cross references as verse ids beside NIV text from the SDK?
 5. Caching. Is the SDK's cache the only one allowed? Is offline NIV planned?
-6. Volume. One call per chapter read plus one per preview: acceptable? What are the rate limits?
+6. Volume. One call per chapter read plus one per preview: acceptable? If chips may show NIV words (question 3), each new focus verse could add up to 12 chapter calls: acceptable? What are the rate limits?
 7. Territory. Is version 111 licensed worldwide?
 8. Privacy. Do you keep the installation id the SDK sends? How should we answer Apple's privacy label?
 9. Attribution. Is the `copyright` string enough, or should we credit YouVersion too?

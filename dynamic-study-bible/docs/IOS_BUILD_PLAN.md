@@ -69,7 +69,7 @@ Reader choice. `BibleReaderView` never reports which verse is on screen, and the
 - A Mac with the current Xcode.
 - Apple Developer Program, $99 a year (https://developer.apple.com/programs/). An individual enrolls in a day or two; a company needs a D-U-N-S number and takes longer.
 - An iPhone on iOS 18 or later, with Developer Mode on when Xcode asks.
-- A YouVersion Platform account and app key: sign up at https://platform.youversion.com, register the app as non-commercial, and accept the NIV (version 111) license. Send YouVersion Support the questions in `docs/LICENSING.md` the same week.
+- A YouVersion Platform account and app key: sign up at https://platform.youversion.com, register the app as non-commercial, and accept the NIV (version 111) license. Send YouVersion Support the questions in `docs/LICENSING.md` the same week; the email is drafted in `docs/licenses/youversion-support-email.md`.
 - A clone of this repo on the Mac.
 - Claude Code on a paid Claude plan. Start sessions from the `dynamic-study-bible` folder so it reads `CLAUDE.md`.
 
@@ -84,7 +84,7 @@ Estimates assume 10 to 15 hours a week. If a milestone runs long, ask Claude wha
 Goal: an empty app on your iPhone with GRDB and the YouVersion SDK installed.
 
 ```
-Read CLAUDE.md, docs/IOS_BUILD_PLAN.md and docs/LICENSING.md. Create a SwiftUI iPhone app in ios/ named AIStudyBible, iOS 18 minimum, Swift 6. Add the Swift packages GRDB (https://github.com/groue/GRDB.swift, version 7) and YouVersionPlatform (https://github.com/youversion/platform-sdk-swift.git, 5.5 or later). Configure the SDK at launch with isSignInEnabled false and permittedVersionIds [111]. Read the app key from ios/Secrets.xcconfig, keep that file out of git, and commit a Secrets.example.xcconfig. The first screen shows the NIV copyright string from BibleVersionRepository.shared.version(withId: 111). Then walk me through running it on my iPhone.
+Read CLAUDE.md, docs/IOS_BUILD_PLAN.md and docs/LICENSING.md. Create a SwiftUI iPhone app in ios/ named DynamicStudyBible, with the display name "Dynamic Study Bible", iOS 18 minimum, Swift 6. Add the Swift packages GRDB (https://github.com/groue/GRDB.swift, version 7) and YouVersionPlatform (https://github.com/youversion/platform-sdk-swift.git, 5.5 or later). Configure the SDK at launch with isSignInEnabled false and permittedVersionIds [111]. Read the app key from ios/Secrets.xcconfig, keep that file out of git, and commit a Secrets.example.xcconfig. The first screen shows the NIV copyright string from BibleVersionRepository.shared.version(withId: 111). Then walk me through running it on my iPhone.
 ```
 
 Check: the app opens on your phone and shows the NIV copyright line. An error here means the app key is wrong or the NIV license is not accepted yet.
