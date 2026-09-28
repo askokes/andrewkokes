@@ -39,6 +39,15 @@ function nextVidT(vid) {
   if (c < book.length) return b * 1e6 + (c + 1) * 1000 + 1;
   return b < 66 ? (b + 1) * 1e6 + 1001 : null;
 }
+const xrefFile = f => JSON.parse(fs.readFileSync(path.join(root, 'data', 'xref', f), 'utf8'));
+const xJohn = xrefFile('43-John.json'), xPs = xrefFile('19-Ps.json');
+const KINDS = ['quote', 'story', 'topic'];
+const rawPct = chip => Math.round(chip[9][2] * 100);
+const rowJn316 = xJohn.chapters[2][15], rowPs221 = xPs.chapters[21][0];
+// What the strip should show: the first 12 loaded chips by rank that pass the slider and the reason filter.
+const expectStrip = (row, min, kind = 'all') => row[1].filter(c => rawPct(c) >= min && (kind === 'all' || KINDS[c[9][0]] === kind)).slice(0, 12).map(c => c[10]);
+const expectCounts = (row, min) => { const pass = row[1].filter(c => rawPct(c) >= min), c = { all: pass.length, quote: 0, story: 0, topic: 0 }; pass.forEach(x => c[KINDS[x[9][0]]]++); return c; };
+const byMatchFrom = (row, min) => row[2].slice(Math.floor(min / 5)).reduce((a, n) => a + n, 0);
 function firstText(start, end) { for (let v = start, n = 0; v !== null && v <= end && n < 400; v = nextVidT(v), n++) { const t = bsb(v); if (t) return t; } return ''; }
 
 console.log(`Smoke test: ${url}`);
@@ -74,7 +83,7 @@ const chipByRank = rank => page.evaluate(r => { const c = document.querySelector
 // Every strip chip: line 2 is the start of the target verse (BSB), in the serif; the because sentence is off the face but in aria-label and title.
 const chipFaces = () => page.evaluate(() => {
   const v = window.asb.verseOf(window.asb.state.focusVid);
-  return Array.from(document.querySelectorAll('#track .chip')).map(c => { const it = v.ticker[+c.dataset.rank - 1], s = c.querySelector('.snip'), l = c.querySelector('.lbl');
+  return Array.from(document.querySelectorAll('#track .chip')).map(c => { const it = window.asb.poolOf(v).find(x => x.rank === +c.dataset.rank), s = c.querySelector('.snip'), l = c.querySelector('.lbl');
     return { label: it.to.label, start: it.to.start, end: it.to.end, because: it.reason.because, snip: s ? s.textContent : '', serif: s ? /Literata|serif/i.test(getComputedStyle(s).fontFamily) : false,
       faceBecause: !!c.querySelector('.because') || (c.querySelector('.top').textContent + (s ? s.textContent : '')).includes(it.reason.because), aria: c.getAttribute('aria-label') || '', title: c.getAttribute('title') || '',
       labelWhole: l.scrollWidth <= l.clientWidth + 1 }; });
@@ -88,10 +97,20 @@ const pctNum = s => { const m = /^(\d+)%$/.exec(String(s || '').trim()); return 
 // Every chip in the strip shows a whole-number match percentage from 1% to 100% that equals Math.round(reason.confidence * 100).
 const chipPercentages = () => page.evaluate(() => {
   const v = window.asb.verseOf(window.asb.state.focusVid);
-  return Array.from(document.querySelectorAll('#track .chip')).map(c => { const it = v.ticker[+c.dataset.rank - 1]; return { label: c.querySelector('.lbl').textContent, shown: c.querySelector('.rpill .pct')?.textContent || '', expected: Math.round(it.reason.confidence * 100), visible: getComputedStyle(c.querySelector('.rpill .pct') || c).display !== 'none' }; });
+  return Array.from(document.querySelectorAll('#track .chip')).map(c => { const it = window.asb.poolOf(v).find(x => x.rank === +c.dataset.rank); return { label: c.querySelector('.lbl').textContent, shown: c.querySelector('.rpill .pct')?.textContent || '', expected: Math.round(it.reason.confidence * 100), visible: getComputedStyle(c.querySelector('.rpill .pct') || c).display !== 'none' }; });
 });
 const pctOk = list => list.length > 0 && list.every(c => c.visible && pctNum(c.shown) >= 1 && pctNum(c.shown) <= 100 && pctNum(c.shown) === c.expected);
 const stripState = () => page.evaluate(() => ({ hold: document.getElementById('marquee').classList.contains('hold'), transform: document.getElementById('track').style.transform, scrollLeft: document.getElementById('marquee').scrollLeft, motion: document.getElementById('motionToggle').getAttribute('aria-checked') }));
+const stripRanks = () => page.evaluate(() => Array.from(document.querySelectorAll('#track .chip')).map(c => +c.dataset.rank));
+const sliderState = () => page.evaluate(() => ({ value: document.getElementById('matchSlider').value, label: document.getElementById('matchValue').textContent, match: window.asb.state.match }));
+// Drive the slider with the keyboard, as a user would: Home, then one ArrowRight per 5%. Chrome fires input and change natively.
+async function setSlider(v) {
+  await page.focus('#matchSlider');
+  await page.keyboard.press('Home');
+  for (let i = 0; i < v / 5; i++) await page.keyboard.press('ArrowRight');
+  await sleep(250);
+}
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const filterCounts = () => page.evaluate(() => Object.fromEntries(Array.from(document.querySelectorAll('#filters button')).map(b => [b.dataset.filter, +b.querySelector('.n').textContent])));
 const noAiUi = () => page.evaluate(() => {
   const text = document.getElementById('phone').textContent;
@@ -115,6 +134,9 @@ try {
   await sleep(700);
   const s1 = await stripState();
   check(s0.hold && s1.hold && s0.motion === 'false' && s0.transform === s1.transform && s1.scrollLeft === 0, `strip holds still by default and Motion is off (${JSON.stringify(s1)})`);
+  const sl0 = await sliderState();
+  check(sl0.value === '0' && sl0.label === 'Any' && sl0.match === 0, `the Match slider reads Any at load (${JSON.stringify(sl0)})`);
+  check(same(await stripRanks(), expectStrip(rowJn316, 0)) && (await stripRanks()).length === 12, `John 3:16 shows its usual 12 chips, ranks ${(await stripRanks()).join(',')}`);
   const r1 = await chipByRank(1);
   check(r1 && r1.label === 'Romans 5:8' && r1.pill === 'Topic' && r1.because === 'Shared theme: loved', `rank-1 chip is Romans 5:8, Topic, "Shared theme: loved" (${JSON.stringify(r1)})`);
   check(r1 && r1.snip.startsWith('But God proves His love for us') && !r1.faceBecause && r1.title === 'Shared theme: loved', `Romans 5:8 chip shows the verse start "${r1 && r1.snip}", with the because sentence off the face but in its label and title`);
@@ -132,7 +154,7 @@ try {
   const meta = await page.textContent('#stripMeta');
   check(/110 connections/.test(meta) && /\+98 more/.test(meta), `strip meta shows counts: "${meta}"`);
   const fc = await filterCounts();
-  check(fc.all === 12 && fc.quote === 0 && fc.story === 2 && fc.topic === 10, `filter counts on John 3:16: ${JSON.stringify(fc)}`);
+  check(same(fc, expectCounts(rowJn316, 0)), `filter counts on John 3:16 count the ${rowJn316[1].length} loaded chips: ${JSON.stringify(fc)}`);
   check(await page.$('#track .chip.cross[data-rank="1"]') !== null, 'cross-book chip carries the cross accent');
   check(await noAiUi(), 'no AI note element or AI copy anywhere on the page');
   await shot('01-reader.png');
@@ -177,14 +199,48 @@ try {
   await page.click('#filterQuote');
   await sleep(250);
   const noQuotes = await page.textContent('#track');
-  check(noQuotes.trim() === 'No direct quotes among the top 12', `Quotes filter on John 3:16 shows "${noQuotes.trim()}"`);
+  check(noQuotes.trim() === 'No direct quotes among this verse\u2019s connections', `Quotes filter on John 3:16 shows "${noQuotes.trim()}"`);
   await page.click('#filterStory');
   await sleep(250);
   const stories = await visibleChips();
-  check(stories.length === 2 && stories.every(c => c.pill === 'Story') && stories[0].label === 'John 3:15', `Stories filter shows 2 Story chips (${stories.map(c => c.label).join(', ')})`);
+  check(same(stories.map(c => c.rank), expectStrip(rowJn316, 0, 'story')) && stories.every(c => c.pill === 'Story'), `Stories filter shows the Story chips among the loaded list (${stories.map(c => c.label + ' #' + c.rank).join(', ')})`);
   await page.click('#filterAll');
   await sleep(250);
   check((await visibleChips()).length === 12, 'All filter shows the 12 inlined chips');
+
+  // 4b. Match slider on John 3:16.
+  await setSlider(80);
+  const at80 = await visibleChips();
+  check(same(at80.map(c => c.rank), [3, 7, 105]) && same(at80.map(c => c.label), ['John 3:15', 'John 3:36', 'John 3:12']) && same(at80.map(c => c.pct), ['89%', '83%', '84%']), `at 80% John 3:16 shows exactly 3 chips in rank order: ${at80.map(c => `${c.label} ${c.pct} #${c.rank}`).join(', ')}`);
+  check(same(at80.map(c => c.rank), expectStrip(rowJn316, 80)), 'the 80% strip matches the data (first 12 loaded chips by rank at 80%+)');
+  const meta80 = await page.textContent('#stripMeta');
+  check(/3 of 110 at 80%\+/.test(meta80) && byMatchFrom(rowJn316, 80) === 3, `header reads "${meta80}"`);
+  const sl80 = await sliderState();
+  check(sl80.value === '80' && sl80.label === '80%+' && sl80.match === 80, `slider reads 80%+ (${JSON.stringify(sl80)})`);
+  check(same(await filterCounts(), expectCounts(rowJn316, 80)), `filter counts follow the slider: ${JSON.stringify(await filterCounts())}`);
+  check((await stripState()).scrollLeft === 0, 'the strip re-anchors on the first passing chip');
+  const f80 = facesOk(await chipFaces()), p80 = await chipPercentages();
+  check(f80.ok && pctOk(p80) && p80.every(c => pctNum(c.shown) >= 80), 'the 80% chips keep the verse start, percentage and because rules');
+  await shot('08-match-slider.png');
+  await page.click('#track .chip[data-rank="105"]');
+  await page.waitForSelector('#peekSheet.on', { timeout: 3000 });
+  await sleep(300);
+  check(/rank 105 of 110/.test(await page.textContent('#peekBody')) && (await page.textContent('#peekTitle')).includes('John 3:12'), 'a chip below the top 12 opens its peek with its real rank (105 of 110)');
+  check((await page.textContent('#peekAll')) === 'See all 3', 'the peek offers See all 3 at 80%+');
+  await page.click('#peekAll');
+  await page.waitForSelector('#listSheet.on', { timeout: 3000 });
+  await sleep(300);
+  const list80 = await page.evaluate(() => Array.from(document.querySelectorAll('#listBody .chip')).map(c => +c.dataset.rank));
+  check(same(list80, [3, 7, 105]), `See all at 80% lists 3 rows (${list80.join(', ')})`);
+  check((await page.textContent('#listMore')) === 'Every connection at 80%+ for this verse is shown.', 'See all says every 80%+ connection is shown');
+  await page.click('#listSheet [data-close]');
+  await sleep(300);
+  await setSlider(100);
+  const empty100 = (await page.textContent('#track')).trim();
+  check(empty100 === 'No connections at 100%+ for this verse. Lower the Match slider.', `at 100% John 3:16 shows the empty state: "${empty100}"`);
+  check(/0 of 110 at 100%\+/.test(await page.textContent('#stripMeta')), 'header reads 0 of 110 at 100%+');
+  await setSlider(0);
+  check(same(await stripRanks(), expectStrip(rowJn316, 0)) && (await sliderState()).label === 'Any' && /110 connections/.test(await page.textContent('#stripMeta')) && /\+98 more/.test(await page.textContent('#stripMeta')), 'returning the slider to 0 restores the default strip and header');
 
   // 5. Motion switch: off by default, on moves slowly, off holds again.
   const dwell = await page.evaluate(() => [window.asb.state.motion.baseSeconds, window.asb.state.motion.perWeightSeconds, window.asb.state.motion.defaultMode]);
@@ -239,6 +295,9 @@ try {
   await page.waitForSelector('#jsonSheet.on', { timeout: 3000 });
   const vjson = await page.textContent('#jsonPre');
   check(/"vid": 43003016/.test(vjson) && /"reason": \{/.test(vjson) && /"source": "rule"/.test(vjson) && /"label": "Same topic"/.test(vjson), 'verse JSON shows the reason object on each ticker item');
+  const bm = await page.evaluate(() => window.asb.verseOf(43003016).counts.byMatch);
+  check(Array.isArray(bm) && bm.length === 20 && bm.every(Number.isInteger) && bm.reduce((a, n) => a + n, 0) === 110 && same(bm, rowJn316[2]) && /"byMatch": \[/.test(vjson), `verse JSON carries counts.byMatch with 20 numbers summing to 110 (${bm.join(',')})`);
+  check(await page.evaluate(() => { const v = window.asb.verseOf(43003016); return v.ticker.length === 12 && !Object.keys(v).includes('pool') && !JSON.stringify(v).includes('"pool"'); }), 'ticker[] stays the 12 shown chips and the loaded list stays out of the JSON');
   check(/"why": null/.test(vjson) && /"aiStatus": "not_generated"/.test(vjson) && /"status": "not_generated"/.test(vjson), 'verse JSON keeps why null and aiStatus not_generated');
   const vObj = await page.evaluate(() => window.asb.verseOf(43003016));
   check(vObj.ticker.every(t => t.reason && ['quote', 'story', 'topic'].includes(t.reason.kind) && typeof t.reason.because === 'string' && t.reason.because.length > 0 && t.reason.source === 'rule'), 'every ticker item carries a reason with kind, because and source');
@@ -308,8 +367,9 @@ try {
   await page.waitForSelector('#listSheet.on', { timeout: 3000 });
   await sleep(300);
   const rows = await page.evaluate(() => Array.from(document.querySelectorAll('#listBody .chip')).map(c => [c.querySelector('.rpill .k')?.textContent, c.querySelector('.because')?.textContent, c.querySelector('.rpill .pct')?.textContent]));
-  check(rows.length === 12 && rows.every(r => /^(Quote|Story|Topic)$/.test(r[0]) && r[1] && pctNum(r[2]) >= 1 && pctNum(r[2]) <= 100), 'See all lists 12 rows, each with a reason pill, a match percentage and a because line');
-  check(/\+98 more live in the full dataset/.test(await page.textContent('#listBody')), 'See all notes the +98 more');
+  check(rows.length === rowJn316[1].length && rows.every(r => /^(Quote|Story|Topic)$/.test(r[0]) && r[1] && pctNum(r[2]) >= 1 && pctNum(r[2]) <= 100), `See all at Any lists all ${rows.length} loaded rows, each with a reason pill, a match percentage and a because line`);
+  const more0 = await page.textContent('#listMore');
+  check(more0.startsWith(`+${110 - rowJn316[1].length} more live in the full dataset`), `See all notes what the preview leaves out: "${more0}"`);
   await page.click('#listSheet [data-close]');
   await sleep(300);
 
@@ -338,17 +398,32 @@ try {
   const psPct = await chipPercentages();
   check(pctOk(psPct), `every Psalm 22:1 chip shows a match percentage from 1% to 100% (${psPct.map(c => c.shown).join(' ')})`);
   const psCounts = await filterCounts();
-  check(psCounts.all === 12 && psCounts.quote === 2 && psCounts.quote + psCounts.story + psCounts.topic === 12, `Psalm 22:1 filter counts ${JSON.stringify(psCounts)}`);
+  check(same(psCounts, expectCounts(rowPs221, 0)) && psCounts.quote === 2, `Psalm 22:1 filter counts ${JSON.stringify(psCounts)}`);
   await page.click('#filterQuote');
   await sleep(300);
   const quotes = await visibleChips();
   check(quotes.length === 2 && quotes[0].label === 'Matthew 27:46' && quotes[1].label === 'Mark 15:34' && quotes.every(c => c.pill === 'Quote'), `Quotes filter on Psalm 22:1 shows exactly 2 chips (${quotes.map(c => c.label).join(', ')})`);
   await shot('07-quotes.png');
-  await page.click('#backBtn');
-  await sleep(500);
-  check((await evalState('window.asb.state.filter')) === 'quote' && (await page.getAttribute('#filterQuote', 'aria-pressed')) === 'true' && (await page.textContent('#track')).trim() === 'No direct quotes among the top 12', 'the filter choice is kept while navigating');
   await page.click('#filterAll');
+  await setSlider(100);
+  const ps100 = await visibleChips();
+  check(same(ps100.map(c => c.label), ['Matthew 27:46', 'Mark 15:34']) && same(ps100.map(c => c.rank), expectStrip(rowPs221, 100)), `at 100% Psalm 22:1 shows only ${ps100.map(c => c.label + ' ' + c.pct).join(' and ')}`);
+  check(/2 of 62 at 100%\+/.test(await page.textContent('#stripMeta')), `Psalm 22:1 header reads "${await page.textContent('#stripMeta')}"`);
+  await setSlider(80);
+  await page.click('#filterStory');
   await sleep(250);
+  const psStory80 = await visibleChips();
+  check(psStory80.length > 0 && same(psStory80.map(c => c.rank), expectStrip(rowPs221, 80, 'story')) && psStory80.every(c => c.pill === 'Story' && pctNum(c.pct) >= 80), `slider and reason filter combine: Psalm 22:1 at 80% with Stories shows ${psStory80.map(c => c.label + ' ' + c.pct).join(', ')}`);
+  check(same(await filterCounts(), expectCounts(rowPs221, 80)), `Psalm 22:1 filter counts at 80%: ${JSON.stringify(await filterCounts())}`);
+  await page.click('#backBtn');
+  await sleep(600);
+  const kept = await sliderState();
+  check((await focusVid()) === 43003016 && kept.match === 80 && kept.label === '80%+' && (await evalState('window.asb.state.filter')) === 'story', 'the slider value and the reason filter are kept while navigating');
+  check(same(await stripRanks(), expectStrip(rowJn316, 80, 'story')) && (await stripState()).scrollLeft === 0, `back on John 3:16 the strip re-anchors on the first passing chip (${(await stripRanks()).join(', ')})`);
+  check(await page.evaluate(() => localStorage.getItem('asb.match.v1')) === '80', 'the slider value is remembered under asb.match.v1');
+  await page.click('#filterAll');
+  await setSlider(0);
+  check(same(await stripRanks(), expectStrip(rowJn316, 0)), 'slider back at Any restores the default John 3:16 strip');
 
   // 13. Book and chapter picker; omitted verse.
   await page.click('#titleBtn');
@@ -378,6 +453,7 @@ try {
   check((await page.textContent('#aboutReasons')) === 'Connection reasons are computed by rules from the public-domain text, not by AI.', 'About states reasons are rules, not AI');
   check((await page.textContent('#aboutNivPreview')) === 'In the app, chip previews will show the NIV if YouVersion allows partial-verse previews; otherwise they show the reference and reason only.', 'About carries the NIV chip-preview line under the preview note');
   check(await page.evaluate(() => document.getElementById('aboutPreview').nextElementSibling?.id === 'aboutNivPreview'), 'the NIV chip-preview line sits right under the preview note');
+  check((await page.textContent('#aboutSlider')) === 'Match slider: raise it to see only the closest matches; lower it to include looser topical links.', 'About explains the Match slider');
   check((await page.textContent('#aboutMatch')) === 'Match percentage: 100% means the same words or the same account; lower means a looser topical or word match. It blends shared wording, names and themes with OpenBible.info reader votes.', 'About explains the match percentage');
   check(await noAiUi(), 'About has no AI notes section');
   await page.click('#aboutSheet [data-close]');
