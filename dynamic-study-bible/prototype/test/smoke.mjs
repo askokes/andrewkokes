@@ -1,4 +1,4 @@
-// Smoke test for the AI-Assisted Study Bible prototype (real data in prototype/data/).
+// Smoke test for the Dynamic Study Bible prototype (real data in prototype/data/).
 // Usage: python3 -m http.server 8765 --directory prototype   (in another shell)
 //        PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node prototype/test/smoke.mjs [--base http://localhost:8765]
 // Drives the page with Playwright, asserts the product behaviours, takes screenshots and fails on any console error.
@@ -33,6 +33,13 @@ function specChapter() {
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'data', 'manifest.json'), 'utf8'));
 const textPack = JSON.parse(fs.readFileSync(path.join(root, 'data', 'text', 'bsb.json'), 'utf8'));
 const bsb = vid => textPack.books[Math.floor(vid / 1e6) - 1][Math.floor(vid / 1000) % 1000 - 1][vid % 1000 - 1];
+function nextVidT(vid) {
+  const b = Math.floor(vid / 1e6), c = Math.floor(vid / 1000) % 1000, v = vid % 1000, book = textPack.books[b - 1];
+  if (book[c - 1] && v < book[c - 1].length) return vid + 1;
+  if (c < book.length) return b * 1e6 + (c + 1) * 1000 + 1;
+  return b < 66 ? (b + 1) * 1e6 + 1001 : null;
+}
+function firstText(start, end) { for (let v = start, n = 0; v !== null && v <= end && n < 400; v = nextVidT(v), n++) { const t = bsb(v); if (t) return t; } return ''; }
 
 console.log(`Smoke test: ${url}`);
 const browser = await chromium.launch();
@@ -62,8 +69,21 @@ async function scrollVerseToFocus(vid) {
 }
 const waitStrip = () => page.waitForFunction(() => !document.getElementById('marquee').classList.contains('fading') && document.querySelector('#track').children.length > 0, null, { timeout: 3000 });
 const visibleChips = () => page.evaluate(() => Array.from(document.querySelectorAll('#track .chip')).map(c => ({
-  rank: +c.dataset.rank, label: c.querySelector('.lbl').textContent, pill: c.querySelector('.rpill .k')?.textContent || '', pct: c.querySelector('.rpill .pct')?.textContent || '', because: c.querySelector('.because').textContent })));
-const chipByRank = rank => page.evaluate(r => { const c = document.querySelector(`#track .chip[data-rank="${r}"]`); return c && { label: c.querySelector('.lbl').textContent, pill: c.querySelector('.rpill .k')?.textContent || '', pct: c.querySelector('.rpill .pct')?.textContent || '', because: c.querySelector('.because').textContent, snip: !!c.querySelector('.snip') }; }, rank);
+  rank: +c.dataset.rank, label: c.querySelector('.lbl').textContent, pill: c.querySelector('.rpill .k')?.textContent || '', pct: c.querySelector('.rpill .pct')?.textContent || '', because: (c.getAttribute('aria-label') || '').slice((c.getAttribute('aria-label') || '').indexOf(': ') + 2), snip: c.querySelector('.snip')?.textContent || '', faceBecause: !!c.querySelector('.because') })));
+const chipByRank = rank => page.evaluate(r => { const c = document.querySelector(`#track .chip[data-rank="${r}"]`); return c && { label: c.querySelector('.lbl').textContent, pill: c.querySelector('.rpill .k')?.textContent || '', pct: c.querySelector('.rpill .pct')?.textContent || '', because: (c.getAttribute('aria-label') || '').slice((c.getAttribute('aria-label') || '').indexOf(': ') + 2), title: c.getAttribute('title') || '', snip: c.querySelector('.snip')?.textContent || '', faceBecause: !!c.querySelector('.because') }; }, rank);
+// Every strip chip: line 2 is the start of the target verse (BSB), in the serif; the because sentence is off the face but in aria-label and title.
+const chipFaces = () => page.evaluate(() => {
+  const v = window.asb.verseOf(window.asb.state.focusVid);
+  return Array.from(document.querySelectorAll('#track .chip')).map(c => { const it = v.ticker[+c.dataset.rank - 1], s = c.querySelector('.snip'), l = c.querySelector('.lbl');
+    return { label: it.to.label, start: it.to.start, end: it.to.end, because: it.reason.because, snip: s ? s.textContent : '', serif: s ? /Literata|serif/i.test(getComputedStyle(s).fontFamily) : false,
+      faceBecause: !!c.querySelector('.because') || (c.querySelector('.top').textContent + (s ? s.textContent : '')).includes(it.reason.because), aria: c.getAttribute('aria-label') || '', title: c.getAttribute('title') || '',
+      labelWhole: l.scrollWidth <= l.clientWidth + 1 }; });
+});
+function facesOk(list) {
+  const bad = list.filter(c => { const full = firstText(c.start, c.end), cut = c.snip.replace(/\u2026$/, '');
+    return !c.snip || !full.startsWith(cut) || (c.snip.endsWith('\u2026') ? cut.length >= full.length : c.snip !== full) || !c.serif || c.faceBecause || !c.aria.endsWith(': ' + c.because) || c.title !== c.because || !c.labelWhole; });
+  return { ok: list.length > 0 && bad.length === 0, bad: bad.map(c => c.label) };
+}
 const pctNum = s => { const m = /^(\d+)%$/.exec(String(s || '').trim()); return m ? +m[1] : NaN; };
 // Every chip in the strip shows a whole-number match percentage from 1% to 100% that equals Math.round(reason.confidence * 100).
 const chipPercentages = () => page.evaluate(() => {
@@ -85,8 +105,8 @@ try {
   await sleep(500);
 
   // 1. Name, opening state, hold mode by default.
-  check((await page.title()) === 'AI-Assisted Study Bible', `document title is "${await page.title()}"`);
-  check((await page.textContent('#aboutSheet h2')).startsWith('AI-Assisted Study Bible'), 'About sheet carries the new name');
+  check((await page.title()) === 'Dynamic Study Bible', `document title is "${await page.title()}"`);
+  check((await page.textContent('#aboutSheet h2')).startsWith('Dynamic Study Bible'), 'About sheet carries the new name');
   check((await page.textContent('#previewTag')) === 'BSB preview', 'a "BSB preview" tag sits under the chapter title');
   check((await title()) === 'John 3', 'opens on John 3');
   check((await focusVid()) === 43003016, 'verse 16 is in focus at rest');
@@ -97,7 +117,9 @@ try {
   check(s0.hold && s1.hold && s0.motion === 'false' && s0.transform === s1.transform && s1.scrollLeft === 0, `strip holds still by default and Motion is off (${JSON.stringify(s1)})`);
   const r1 = await chipByRank(1);
   check(r1 && r1.label === 'Romans 5:8' && r1.pill === 'Topic' && r1.because === 'Shared theme: loved', `rank-1 chip is Romans 5:8, Topic, "Shared theme: loved" (${JSON.stringify(r1)})`);
-  check(r1 && !r1.snip, 'chips carry no verse snippet');
+  check(r1 && r1.snip.startsWith('But God proves His love for us') && !r1.faceBecause && r1.title === 'Shared theme: loved', `Romans 5:8 chip shows the verse start "${r1 && r1.snip}", with the because sentence off the face but in its label and title`);
+  const jnFaces = facesOk(await chipFaces());
+  check(jnFaces.ok, `every John 3:16 chip shows the start of its BSB verse in the serif, whole label, because only in aria-label and title${jnFaces.bad.length ? ' (bad: ' + jnFaces.bad.join(', ') + ')' : ''}`);
   check(r1 && pctNum(r1.pct) <= 80, `John 3:16 \u2192 Romans 5:8 (a topic) shows at most 80% (${r1 && r1.pct})`);
   const jnPct = await chipPercentages();
   check(pctOk(jnPct), `every John 3:16 chip shows a match percentage from 1% to 100% (${jnPct.map(c => c.shown).join(' ')})`);
@@ -310,6 +332,9 @@ try {
   check(ps[0]?.label === 'Matthew 27:46' && ps[0].pill === 'Quote' && ps[0].because === 'Matthew 27:46 quotes Psalm 22:1', `Psalm 22:1 rank 1: ${JSON.stringify(ps[0])}`);
   check(ps[1]?.label === 'Mark 15:34' && ps[1].pill === 'Quote' && ps[1].because === 'Mark 15:34 quotes Psalm 22:1', `Psalm 22:1 rank 2: ${JSON.stringify(ps[1])}`);
   check(pctNum(ps[0]?.pct) >= 90, `Psalm 22:1 \u2192 Matthew 27:46 shows at least 90% (${ps[0] && ps[0].pct})`);
+  check(ps[0]?.snip.startsWith('About the ninth hour Jesus cried out') || ps[0]?.snip.startsWith(firstText(40027046, 40027046).slice(0, 20)), `Matthew 27:46 chip shows its verse start "${ps[0] && ps[0].snip}"`);
+  const psFaces = facesOk(await chipFaces());
+  check(psFaces.ok, `every Psalm 22:1 chip shows the start of its BSB verse, because only in aria-label and title${psFaces.bad.length ? ' (bad: ' + psFaces.bad.join(', ') + ')' : ''}`);
   const psPct = await chipPercentages();
   check(pctOk(psPct), `every Psalm 22:1 chip shows a match percentage from 1% to 100% (${psPct.map(c => c.shown).join(' ')})`);
   const psCounts = await filterCounts();
@@ -351,6 +376,8 @@ try {
   check((await page.textContent('#aboutXref')) === xrefAttr, 'About shows the OpenBible attribution from manifest.sources');
   check((await page.textContent('#aboutNotice')) === notice, 'About shows the BSB copyright notice');
   check((await page.textContent('#aboutReasons')) === 'Connection reasons are computed by rules from the public-domain text, not by AI.', 'About states reasons are rules, not AI');
+  check((await page.textContent('#aboutNivPreview')) === 'In the app, chip previews will show the NIV if YouVersion allows partial-verse previews; otherwise they show the reference and reason only.', 'About carries the NIV chip-preview line under the preview note');
+  check(await page.evaluate(() => document.getElementById('aboutPreview').nextElementSibling?.id === 'aboutNivPreview'), 'the NIV chip-preview line sits right under the preview note');
   check((await page.textContent('#aboutMatch')) === 'Match percentage: 100% means the same words or the same account; lower means a looser topical or word match. It blends shared wording, names and themes with OpenBible.info reader votes.', 'About explains the match percentage');
   check(await noAiUi(), 'About has no AI notes section');
   await page.click('#aboutSheet [data-close]');

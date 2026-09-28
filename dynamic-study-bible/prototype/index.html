@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI-Assisted Study Bible</title>
+<title>Dynamic Study Bible</title>
 <style>
 :root {
   --page: #d8dad6; --page-2: #eceeea; --bezel: #101114; --bezel-edge: #3b3d43;
@@ -105,7 +105,20 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .loading .bar { height: 12px; border-radius: 6px; background: var(--rule); margin: 14px 0; animation: pulse 1.4s ease-in-out infinite; }
 @keyframes pulse { 50% { opacity: .45; } }
 .strip { flex: none; border-top: 1px solid var(--rule); background: var(--surface-2); padding: 7px 0 8px; }
-.strip-meta { display: flex; align-items: center; gap: 8px; padding: 0 16px; height: 24px; font-size: 11.5px; color: var(--ink-3); }
+.strip-meta { display: flex; align-items: center; gap: 8px; padding: 0 16px; height: 20px; font-size: 11.5px; color: var(--ink-3); }
+.strip-controls { display: flex; align-items: center; gap: 8px; padding: 0 16px; height: 32px; }
+.m-label { flex: none; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+#matchValue { flex: none; min-width: 36px; font-size: 12px; font-weight: 700; color: var(--ink); text-align: right; font-variant-numeric: tabular-nums; }
+.strip-controls .switch { margin-left: 8px; padding-left: 10px; border-left: 1px solid var(--rule); }
+#matchSlider { --p: 0; flex: 1; min-width: 0; height: 32px; margin: 0; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; touch-action: pan-x; }
+#matchSlider:focus-visible { outline: none; }
+#matchSlider::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--accent) calc(12px + (100% - 24px) * var(--p)), var(--rule-2) 0); }
+#matchSlider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; margin-top: -10px; border-radius: 50%; background: #fff; border: 0; box-shadow: 0 0 0 .5px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.25); }
+#matchSlider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--accent), 0 2px 5px rgba(0,0,0,.25); }
+#matchSlider::-moz-range-track { height: 4px; border-radius: 2px; background: var(--rule-2); }
+#matchSlider::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--accent); }
+#matchSlider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 0; box-shadow: 0 0 0 .5px rgba(0,0,0,.12), 0 2px 5px rgba(0,0,0,.25); }
+#matchSlider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--accent), 0 2px 5px rgba(0,0,0,.25); }
 .strip-meta .meta-text { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .strip-meta .meta-text b { color: var(--ink-2); font-weight: 600; }
 .switch { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--ink-2); flex: none; }
@@ -113,7 +126,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .switch .knob::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .2s; }
 .switch[aria-checked="true"] .knob { background: var(--accent); }
 .switch[aria-checked="true"] .knob::after { transform: translateX(12px); }
-.filters { display: flex; gap: 2px; margin: 5px 16px 0; padding: 2px; border-radius: 9px; background: var(--seg); }
+.filters { display: flex; gap: 2px; margin: 2px 16px 0; padding: 2px; border-radius: 9px; background: var(--seg); }
 .filters button { flex: 1; min-width: 0; height: 24px; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
 .filters button[aria-pressed="true"] { background: var(--seg-on); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
 .filters .n { font-weight: 500; color: var(--ink-3); }
@@ -128,7 +141,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .marquee.dragging .chip { pointer-events: none; }
 .track { display: flex; gap: 8px; padding: 0 16px; width: max-content; will-change: transform; }
 .marquee.hold .track { transform: none !important; }
-.chip { display: inline-flex; flex-direction: column; gap: 4px; flex: none; text-align: left; min-width: 200px; max-width: 288px; padding: 8px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--rule); color: var(--ink); scroll-snap-align: start; box-shadow: 0 1px 2px rgba(20,24,30,.05); user-select: none; -webkit-user-select: none; }
+.chip { display: inline-flex; flex-direction: column; gap: 4px; flex: none; text-align: left; min-width: 260px; max-width: 336px; padding: 8px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--rule); color: var(--ink); scroll-snap-align: start; box-shadow: 0 1px 2px rgba(20,24,30,.05); user-select: none; -webkit-user-select: none; }
 .chip .top { display: flex; align-items: center; gap: 6px; font-size: 13.5px; line-height: 20px; white-space: nowrap; min-width: 0; }
 .chip .dir { color: var(--accent); font-size: 15px; width: 14px; text-align: center; flex: none; }
 .chip.cross { border-color: var(--cross-soft); }
@@ -137,6 +150,8 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .chip .dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
 .chip .rpill { margin-left: auto; }
 .chip .because { font-size: 12.5px; line-height: 16px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chip .snip { width: 0; min-width: 100%; font-family: var(--serif); font-size: 13px; line-height: 18px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chip .snip.none { font-family: var(--sans); font-size: 12px; color: var(--ink-3); }
 .dot.strong { background: var(--strong); } .dot.solid { background: var(--solid); } .dot.light { background: var(--light); }
 .rpill { display: inline-flex; align-items: center; flex: none; height: 18px; padding: 0 7px; border-radius: 999px; font-size: 10.5px; font-weight: 700; letter-spacing: .02em; line-height: 1; }
 .rpill.quote { color: var(--quote); background: var(--quote-soft); }
@@ -221,7 +236,7 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
 .legend { display: flex; gap: 14px; justify-content: center; font-size: 12px; color: var(--ink-3); margin: 0 0 12px; }
 .legend i { display: inline-block; width: 18px; border-top: 2px solid var(--accent); vertical-align: middle; margin-right: 5px; }
 .legend i.dash { border-top-style: dashed; border-color: var(--ink-3); }
-.toast { position: absolute; left: 50%; bottom: 230px; transform: translate(-50%, 8px); max-width: 84%; padding: 10px 16px; border-radius: 14px; background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 500; text-align: center; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 70; }
+.toast { position: absolute; left: 50%; bottom: 258px; transform: translate(-50%, 8px); max-width: 84%; padding: 10px 16px; border-radius: 14px; background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 500; text-align: center; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 70; }
 .toast.on { opacity: 1; transform: translate(-50%, 0); }
 @media (max-width: 500px) {
   .stage { padding: 0; background: var(--bg); }
@@ -231,7 +246,7 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   .searchrow { top: calc(6px + env(safe-area-inset-top, 0px)); }
   .trailbar { padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); }
   .overlay .s-head { padding-top: calc(12px + env(safe-area-inset-top, 0px)); }
-  .toast { bottom: calc(200px + env(safe-area-inset-bottom, 0px)); }
+  .toast { bottom: calc(228px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .sheet, .overlay, .scrim, .toast, .marquee, .v, .switch .knob, .switch .knob::after { transition: none; }
@@ -265,8 +280,11 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
     <div class="loading"><div class="bar" style="width:40%"></div><div class="bar"></div><div class="bar" style="width:85%"></div><div class="bar" style="width:70%"></div></div>
   </main>
   <section class="strip" aria-label="Connections for the verse in focus">
-    <div class="strip-meta">
-      <span class="meta-text" id="stripMeta"></span>
+    <div class="strip-meta"><span class="meta-text" id="stripMeta"></span></div>
+    <div class="strip-controls">
+      <label class="m-label" for="matchSlider">Match</label>
+      <input type="range" id="matchSlider" min="0" max="100" step="5" value="0" aria-valuetext="Any match">
+      <output id="matchValue" for="matchSlider">Any</output>
       <button class="switch" id="motionToggle" role="switch" aria-checked="false" aria-label="Auto-scroll the connections">Motion<span class="knob"></span></button>
     </div>
     <div class="filters" id="filters" role="group" aria-label="Filter connections by reason">
@@ -290,7 +308,7 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   <section class="sheet tall" id="listSheet" role="dialog" aria-modal="true" aria-label="All connections"><div class="grab"></div><div class="s-head"><h2 id="listTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body list" id="listBody"></div></section>
   <section class="sheet tall" id="pickerSheet" role="dialog" aria-modal="true" aria-label="Books and chapters"><div class="grab"></div><div class="s-head"><button class="x-btn" id="pickerBack" aria-label="Back to books" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="pickerTitle">Books</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body" id="pickerBody"></div></section>
   <section class="sheet tall" id="jsonSheet" role="dialog" aria-modal="true" aria-label="JSON"><div class="grab"></div><div class="s-head"><h2 id="jsonTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body"><pre class="json" id="jsonPre"></pre><textarea class="json" id="jsonTa" readonly hidden aria-label="JSON text"></textarea><div class="actions"><button class="btn primary" id="jsonCopy">Copy JSON</button></div></div></section>
-  <section class="sheet" id="aboutSheet" role="dialog" aria-modal="true" aria-label="About"><div class="grab"></div><div class="s-head"><h2>AI-Assisted Study Bible<span class="sub">Interactive prototype</span></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body about" id="aboutBody"></div></section>
+  <section class="sheet" id="aboutSheet" role="dialog" aria-modal="true" aria-label="About"><div class="grab"></div><div class="s-head"><h2>Dynamic Study Bible<span class="sub">Interactive prototype</span></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body about" id="aboutBody"></div></section>
 
   <section class="overlay" id="webOverlay" role="dialog" aria-modal="true" aria-label="Trail web">
     <div class="s-head"><h2>Your trail<span class="sub" id="webSub"></span></h2><button class="x-btn" id="webClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
@@ -322,7 +340,7 @@ const S = {
   dataRoot: (params.get('data') || './data').replace(/\/+$/, ''),
   books: [], bookByNo: {}, bookKeys: new Map(), text: null, xref: {}, legend: { ...LEGEND }, notes: { edges: {}, verses: {} }, manifest: null,
   bundles: {}, missing: [], bookNo: 0, chapter: 0, bundle: null, focusVid: 0, pinned: false, focusLockUntil: 0, scrollRaf: 0,
-  motion: { defaultMode: 'hold', baseSeconds: 3.0, perWeightSeconds: 3.0 }, motionOn: false, prefersReduced: false, filter: 'all',
+  motion: { defaultMode: 'hold', baseSeconds: 3.0, perWeightSeconds: 3.0 }, motionOn: false, prefersReduced: false, filter: 'all', match: 0, matchSlider: { min: 0, max: 100, step: 5, default: 0 }, listItems: [],
   ticker: { all: [], items: [], x: 0, seqW: 0, widths: [], cum: [], dwell: [], raf: 0, lastT: 0, gen: 0, holdPointer: false, drag: null, suppressClick: false, wheelAt: 0 },
   trail: null, peekItem: null, peekFocus: null, sheet: null, pickerBook: 0, jsonMode: null
 };
@@ -378,19 +396,23 @@ function snippetOf(start, end) {
   if (i > 0) c = c.slice(0, i);
   return c.replace(/[,;:]+$/, '') + '\u2026';
 }
-function reasonOf(r) {
+// reason = [kind, basis, confidence, because]; because is an index into the xref file's top-level because list (older files carried the string inline).
+function reasonOf(r, becauseList) {
   if (!Array.isArray(r)) return null;
   const kind = S.legend.reasonKinds[r[0]] || 'topic';
-  return { kind, label: (REASON[kind] || REASON.topic).label, because: r[3] || '', basis: S.legend.reasonBases[r[1]] || null, confidence: r[2], source: 'rule' };
+  const because = typeof r[3] === 'number' ? ((becauseList && becauseList[r[3]]) || '') : (r[3] || '');
+  return { kind, label: (REASON[kind] || REASON.topic).label, because, basis: S.legend.reasonBases[r[1]] || null, confidence: r[2], source: 'rule' };
 }
-function expandChip(focusVid, raw, rank) {
-  const [start, end, dir, votesOut, votesIn, score, weight, tier, via, r] = raw;
+// chip[10] is the chip's rank in the verse's full list; the position argument is only a fallback for older files.
+function expandChip(focusVid, raw, position, becauseList) {
+  const [start, end, dir, votesOut, votesIn, score, weight, tier, via, r, fullRank] = raw;
+  const rank = Number.isInteger(fullRank) ? fullRank : position;
   const why = S.notes.edges[`${focusVid}>${start}${end !== start ? '-' + end : ''}`] || null;
   return {
     rank, to: { start, end, ref: refOf(start, end), label: labelOf(start, end) }, direction: DIR[dir], votesOut, votesIn, score, weight,
     tier: TIER[tier], sameBook: Math.floor(start / 1e6) === Math.floor(focusVid / 1e6),
     viaRange: via ? { start: via[0], end: via[1], label: labelOf(via[0], via[1]), span: via[2] } : null,
-    snippet: snippetOf(start, end), reason: reasonOf(r), why, aiStatus: why ? 'cached' : 'not_generated'
+    snippet: snippetOf(start, end), reason: reasonOf(r, becauseList), why, aiStatus: why ? 'cached' : 'not_generated'
   };
 }
 
@@ -424,6 +446,11 @@ function neighbourChapter(bookNo, chapter, dir) {
   else if (c > b.chapters) { n = bookNo + 1; if (!S.bookByNo[n]) return null; c = 1; }
   return vidOf(n, c, 0);
 }
+function bucketize(pool) {
+  const b = new Array(20).fill(0);
+  pool.forEach(it => { const p = pctOf(it.reason); if (p !== null) b[Math.min(19, Math.floor(p / 5))]++; });
+  return b;
+}
 async function buildBundle(bookNo, chapter) {
   const chapterId = vidOf(bookNo, chapter, 0);
   if (S.bundles[chapterId]) return S.bundles[chapterId];
@@ -432,12 +459,17 @@ async function buildBundle(bookNo, chapter) {
   const tickerInline = (S.manifest && S.manifest.ranking && S.manifest.ranking.tickerInline) || 12;
   const verses = texts.map((text, i) => {
     const vid = vidOf(bookNo, chapter, i + 1), row = xch[i] || [[0, 0, 0, 0, 0], []];
-    const [out, inn, inDirect, inViaRange, unique] = row[0], ticker = row[1].map((raw, r) => expandChip(vid, raw, r + 1));
-    return {
+    // row = [counts, chips, byMatch]: chips are the top 40 by rank plus every lower-ranked match of 60% or better.
+    const [out, inn, inDirect, inViaRange, unique] = row[0], pool = (row[1] || []).map((raw, r) => expandChip(vid, raw, r + 1, x.because));
+    const ticker = pool.slice(0, tickerInline), byMatch = Array.isArray(row[2]) && row[2].length === 20 ? row[2].slice() : bucketize(pool);
+    const verse = {
       vid, verse: i + 1, ref: `${book.osis}.${chapter}.${i + 1}`, label: `${book.name} ${chapter}:${i + 1}`, text, omitted: text === '', paragraphStart: i === 0,
-      counts: { out, in: inn, inDirect, inViaRange, unique, shown: ticker.length, more: unique - ticker.length }, ticker,
+      counts: { out, in: inn, inDirect, inViaRange, unique, shown: ticker.length, more: unique - ticker.length, byMatch }, ticker,
       connections: `connections/${vid}.json`, ai: { verse: `ai:verse:${vid}:bsb:bsb-2023:v3`, status: S.notes.verses[vid] ? 'cached' : 'not_generated' }
     };
+    // The full loaded list stays off the spec-shaped object (non-enumerable), so the JSON view shows exactly the spec verse.
+    Object.defineProperty(verse, 'pool', { value: pool, enumerable: false });
+    return verse;
   });
   const bundle = {
     schema: 'asb.chapter/2', datasetVersion: x.datasetVersion || (S.manifest && S.manifest.datasetVersion) || '2026.09.1', rankingVersion: x.rankingVersion || 'asb.rank.v2',
@@ -605,19 +637,41 @@ function pillHtml(reason, lg) {
   const p = pctOf(reason), word = lg ? reason.label : (REASON[reason.kind] || REASON.topic).pill;
   return `<span class="rpill ${reason.kind}${lg ? ' lg' : ''}" title="${esc(reason.label)}${p !== null ? `, ${p}% match` : ''}"><span class="k">${esc(word)}</span>${p !== null ? `<span class="pct">${p}%${lg ? ' match' : ''}</span>` : ''}</span>`;
 }
-function chipHtml(it, showRank) {
+// Strip chips: line 1 is glyph, label, tier dot and reason pill; line 2 is the first words of the target verse.
+// See all rows (inList) keep the because sentence on line 2. The because sentence is always in the aria-label and title.
+function chipHtml(it, inList) {
   const r = it.reason, because = r ? r.because : 'Cross reference';
-  return `<button class="chip${it.sameBook ? '' : ' cross'}" data-rank="${it.rank}" style="opacity:${(0.35 + 0.65 * it.weight).toFixed(3)}" aria-label="${esc(it.to.label)}, ${esc(r ? (REASON[r.kind] || REASON.topic).pill : 'Connection')}${pctOf(r) !== null ? `, ${pctOf(r)}% match` : ''}: ${esc(because)}">` +
-    `<span class="top">${showRank ? `<span class="rank num">${it.rank}</span>` : ''}<span class="dir" aria-hidden="true">${GLYPH[it.direction]}</span><span class="lbl" style="font-weight:${Math.round(400 + 300 * it.weight)}">${esc(it.to.label)}</span><span class="dot ${it.tier}" title="${it.tier}"></span>${pillHtml(r)}</span>` +
-    `<span class="because">${esc(because)}</span></button>`;
+  const line2 = inList ? `<span class="because">${esc(because)}</span>`
+    : it.snippet ? `<span class="snip">${esc(it.snippet)}</span>` : '<span class="snip none">Verse omitted in this translation</span>';
+  return `<button class="chip${it.sameBook ? '' : ' cross'}" data-rank="${it.rank}" style="opacity:${(0.35 + 0.65 * it.weight).toFixed(3)}" title="${esc(because)}" aria-label="${esc(it.to.label)}, ${esc(r ? (REASON[r.kind] || REASON.topic).pill : 'Connection')}${pctOf(r) !== null ? `, ${pctOf(r)}% match` : ''}: ${esc(because)}">` +
+    `<span class="top">${inList ? `<span class="rank num">${it.rank}</span>` : ''}<span class="dir" aria-hidden="true">${GLYPH[it.direction]}</span><span class="lbl" style="font-weight:${Math.round(400 + 300 * it.weight)}">${esc(it.to.label)}</span><span class="dot ${it.tier}" title="${it.tier}"></span>${pillHtml(r)}</span>` +
+    `${line2}</button>`;
 }
-function kindCounts(ticker) {
-  const c = { all: ticker.length, quote: 0, story: 0, topic: 0 };
-  ticker.forEach(it => { if (it.reason && c[it.reason.kind] !== undefined) c[it.reason.kind]++; });
+const poolOf = verse => (verse && verse.pool) || (verse ? verse.ticker : []);
+const passesMatch = it => (pctOf(it.reason) || 0) >= S.match;
+const passesKind = it => S.filter === 'all' || (it.reason && it.reason.kind === S.filter);
+const tickerInline = () => (S.manifest && S.manifest.ranking && S.manifest.ranking.tickerInline) || 12;
+// How many of the verse's connections (all of them, not only the loaded ones) sit at or above the slider, from counts.byMatch.
+function atOrAbove(verse, v) {
+  const b = verse && verse.counts.byMatch;
+  if (!Array.isArray(b)) return poolOf(verse).filter(it => (pctOf(it.reason) || 0) >= v).length;
+  return b.slice(Math.min(19, Math.floor(v / 5))).reduce((a, n) => a + n, 0);
+}
+function kindCounts(pool) {
+  const passing = pool.filter(passesMatch), c = { all: passing.length, quote: 0, story: 0, topic: 0 };
+  passing.forEach(it => { if (it.reason && c[it.reason.kind] !== undefined) c[it.reason.kind]++; });
   return c;
 }
+function renderMeta(verse) {
+  const meta = $('#stripMeta');
+  const shortLabel = verse ? `${bookOf(verse.vid).short} ${split(verse.vid).chapter}:${verse.verse}` : '';
+  if (!verse) meta.textContent = '';
+  else if (!verse.counts.unique) meta.innerHTML = `<b>${esc(shortLabel)}</b> \u00b7 no connections`;
+  else if (S.match > 0) meta.innerHTML = `<b>${esc(shortLabel)}</b> \u00b7 <span class="num">${atOrAbove(verse, S.match)}</span> of <span class="num">${verse.counts.unique}</span> at <span class="num">${S.match}</span>%+`;
+  else meta.innerHTML = `<b>${esc(shortLabel)}</b> \u00b7 <span class="num">${verse.counts.unique}</span> connection${verse.counts.unique === 1 ? '' : 's'}${verse.counts.more > 0 ? ` \u00b7 <span class="num">+${verse.counts.more}</span> more` : ''}`;
+}
 function renderFilters(verse) {
-  const c = kindCounts(verse ? verse.ticker : []);
+  const c = kindCounts(poolOf(verse));
   $$('#filters button').forEach(b => {
     const f = b.dataset.filter; b.setAttribute('aria-pressed', String(f === S.filter));
     b.querySelector('.n').textContent = c[f]; b.classList.toggle('zero', !c[f]);
@@ -626,22 +680,20 @@ function renderFilters(verse) {
 function renderStrip(verse) {
   const T = S.ticker; T.gen++; const gen = T.gen;
   cancelAnimationFrame(T.raf); T.raf = 0;
-  const meta = $('#stripMeta');
-  const shortLabel = verse ? `${bookOf(verse.vid).short} ${split(verse.vid).chapter}:${verse.verse}` : '';
-  if (!verse) meta.textContent = '';
-  else if (!verse.counts.unique) meta.innerHTML = `<b>${esc(shortLabel)}</b> \u00b7 no connections`;
-  else meta.innerHTML = `<b>${esc(shortLabel)}</b> \u00b7 <span class="num">${verse.counts.unique}</span> connection${verse.counts.unique === 1 ? '' : 's'}${verse.counts.more > 0 ? ` \u00b7 <span class="num">+${verse.counts.more}</span> more` : ''}`;
+  renderMeta(verse);
   renderFilters(verse);
   marquee.classList.add('fading');
-  setTimeout(() => { if (gen !== T.gen) return; fillStrip(verse ? verse.ticker : []); marquee.classList.remove('fading'); }, S.prefersReduced ? 0 : 140);
+  setTimeout(() => { if (gen !== T.gen) return; fillStrip(poolOf(verse)); marquee.classList.remove('fading'); }, S.prefersReduced ? 0 : 140);
 }
-function fillStrip(all) {
-  const T = S.ticker; T.all = all; T.x = 0; track.style.transform = ''; marquee.scrollLeft = 0;
-  const items = S.filter === 'all' ? all : all.filter(it => it.reason && it.reason.kind === S.filter);
+// The strip shows the first 12 loaded chips, in rank order, that pass the Match slider and the reason filter.
+function fillStrip(pool) {
+  const T = S.ticker; T.all = pool; T.x = 0; track.style.transform = ''; marquee.scrollLeft = 0;
+  const passing = pool.filter(passesMatch), items = passing.filter(passesKind).slice(0, tickerInline());
   T.items = items;
   const hold = !S.motionOn; marquee.classList.toggle('hold', hold);
-  if (!all.length) { track.innerHTML = '<div class="empty">No cross references for this verse</div>'; return; }
-  if (!items.length) { track.innerHTML = `<div class="empty">${esc(REASON[S.filter].none)} among the top ${all.length}</div>`; return; }
+  if (!pool.length) { track.innerHTML = '<div class="empty">No cross references for this verse</div>'; return; }
+  if (!passing.length) { track.innerHTML = `<div class="empty">No connections at ${S.match}%+ for this verse. Lower the Match slider.</div>`; return; }
+  if (!items.length) { track.innerHTML = `<div class="empty">${esc(REASON[S.filter].none)} ${S.match > 0 ? `at ${S.match}%+ for this verse` : 'among this verse\u2019s connections'}</div>`; return; }
   track.innerHTML = items.map(it => chipHtml(it, false)).join('');
   if (hold) return;
   const gap = 8; T.widths = items.map((_, i) => track.children[i].offsetWidth + gap);
@@ -671,6 +723,23 @@ function setFilter(f) {
   S.filter = REASON[f] ? f : 'all';
   renderFilters(verseOf(S.focusVid));
   cancelAnimationFrame(S.ticker.raf); S.ticker.raf = 0; fillStrip(S.ticker.all);
+}
+function renderSlider() {
+  const el = $('#matchSlider'), v = S.match, span = (S.matchSlider.max - S.matchSlider.min) || 100;
+  if (+el.value !== v) el.value = String(v);
+  el.style.setProperty('--p', ((v - S.matchSlider.min) / span).toFixed(4));
+  el.setAttribute('aria-valuetext', v > 0 ? `${v}% match or better` : 'Any match');
+  $('#matchValue').textContent = v > 0 ? `${v}%+` : 'Any';
+}
+// The slider value is kept while navigating; each change re-anchors the strip on the first passing chip.
+function setMatch(v, save) {
+  const m = S.matchSlider, step = m.step || 5;
+  S.match = Math.max(m.min, Math.min(m.max, Math.round((+v || 0) / step) * step));
+  renderSlider();
+  const verse = verseOf(S.focusVid);
+  renderMeta(verse); renderFilters(verse);
+  cancelAnimationFrame(S.ticker.raf); S.ticker.raf = 0; fillStrip(poolOf(verse));
+  if (save) store.set('match.v1', S.match);
 }
 function stepChips(dir) {
   const chips = $$('.chip', track); if (!chips.length) return;
@@ -720,13 +789,18 @@ function openPeek(item) {
     `<ul class="votes-list">${lines.join('')}</ul>` +
     (item.viaRange ? `<p class="via">Points at ${esc(item.viaRange.label)} (${item.viaRange.span} verses), which covers ${esc(focus.label)}.</p>` : '') +
     `<p class="fine num">${item.sameBook ? 'Same book' : esc(bookOf(item.to.start).name)} \u00b7 ${item.tier} \u00b7 rank ${item.rank} of ${focus.counts.unique} \u00b7 score ${item.score}</p>`;
-  $('#peekAll').textContent = `See all ${focus.counts.unique}`;
+  $('#peekAll').textContent = `See all ${S.match > 0 ? atOrAbove(focus, S.match) : focus.counts.unique}`;
   openSheet('peekSheet');
 }
+// See all lists every loaded connection that passes the Match slider, and says how many more the full dataset holds.
 function openList(verse) {
-  $('#listTitle').innerHTML = `${esc(verse.label)}<span class="sub"><span class="num">${verse.counts.unique}</span> connections \u00b7 ${verse.counts.out} outgoing, ${verse.counts.in} incoming</span>`;
-  $('#listBody').innerHTML = verse.ticker.map(it => chipHtml(it, true)).join('') +
-    (verse.counts.more > 0 ? `<p class="note">+${verse.counts.more} more live in the full dataset. The chapter bundle carries the top ${verse.counts.shown}.</p>` : `<p class="note">Every connection for this verse is shown.</p>`);
+  const v = S.match, items = poolOf(verse).filter(passesMatch), total = v > 0 ? atOrAbove(verse, v) : verse.counts.unique, missing = Math.max(0, total - items.length);
+  S.listItems = items;
+  $('#listTitle').innerHTML = `${esc(verse.label)}<span class="sub">${v > 0 ? `<span class="num">${total}</span> of <span class="num">${verse.counts.unique}</span> at <span class="num">${v}</span>%+` : `<span class="num">${verse.counts.unique}</span> connections \u00b7 ${verse.counts.out} outgoing, ${verse.counts.in} incoming`}</span>`;
+  const at = v > 0 ? ` at ${v}%+` : '';
+  $('#listBody').innerHTML = (items.length ? items.map(it => chipHtml(it, true)).join('') : `<p class="note">No connections${at} for this verse. Lower the Match slider.</p>`) +
+    (missing > 0 ? `<p class="note" id="listMore">+${missing} more${at} live in the full dataset. This preview carries each verse\u2019s top 40 connections plus every match of 60% or better.</p>`
+      : items.length ? `<p class="note" id="listMore">Every connection${at} for this verse is shown.</p>` : '');
   openSheet('listSheet');
 }
 function highlightJson(text) {
@@ -756,10 +830,11 @@ function openAbout() {
   $('#aboutBody').innerHTML =
     `<p class="lead">Read a chapter, and the strip below it shows the other verses across the Bible that connect to the verse in focus, with the reason for each link. Tap a connection to read it, tap Go to jump, and the trail remembers your path so you can spiderweb back.</p>` +
     `<h4>Display</h4><div class="seg" id="themeSeg"><button data-theme="" aria-pressed="false">Auto</button><button data-theme="light" aria-pressed="false">Light</button><button data-theme="dark" aria-pressed="false">Dark</button></div>` +
-    `<h4>Bible text</h4><p id="aboutPreview">Preview text: ${esc(tr.name || 'Berean Standard Bible')}. The app launches with the NIV.</p><p>${esc(tr.attribution || att.text)}</p>${notice ? `<p class="fine" id="aboutNotice">${esc(notice)}</p>` : ''}` +
+    `<h4>Bible text</h4><p id="aboutPreview">Preview text: ${esc(tr.name || 'Berean Standard Bible')}. The app launches with the NIV.</p><p id="aboutNivPreview">In the app, chip previews will show the NIV if YouVersion allows partial-verse previews; otherwise they show the reference and reason only.</p><p>${esc(tr.attribution || att.text)}</p>${notice ? `<p class="fine" id="aboutNotice">${esc(notice)}</p>` : ''}` +
     `<h4>Cross references</h4><p id="aboutXref">${esc(att.crossReferences)}</p>` +
     `<h4>Connection reasons</h4><p id="aboutReasons">Connection reasons are computed by rules from the public-domain text, not by AI.</p>` +
     `<p id="aboutMatch">Match percentage: 100% means the same words or the same account; lower means a looser topical or word match. It blends shared wording, names and themes with OpenBible.info reader votes.</p>` +
+    `<p id="aboutSlider">Match slider: raise it to see only the closest matches; lower it to include looser topical links.</p>` +
     `<h4>Dataset</h4><p class="fine num">${m ? `Version ${esc(m.datasetVersion)} \u00b7 built ${esc(String(m.builtAt || '').slice(0, 10))} \u00b7 ${esc(m.pipeline || '')}<br>${m.graph ? `${m.graph.edges.toLocaleString()} cross references \u00b7 ${m.graph.mergedTickerItems.toLocaleString()} ranked connections \u00b7 ` : ''}ranking ${esc(m.ranking ? m.ranking.version : '')}` : 'manifest.json not found; showing built-in attribution'}</p>`;
   const cur = document.documentElement.getAttribute('data-theme') || '';
   $$('#themeSeg button').forEach(b => { b.setAttribute('aria-pressed', String(b.dataset.theme === cur)); b.onclick = () => { applyTheme(b.dataset.theme); store.set('theme', b.dataset.theme); $$('#themeSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); }; });
@@ -831,8 +906,8 @@ reader.addEventListener('click', e => {
   const nav = e.target.closest('.nav-btn'); if (nav) { const p = split(+nav.dataset.chapter); navigate({ bookNo: p.book, chapter: p.chapter, vid: vidOf(p.book, p.chapter, 1), kind: 'open' }); return; }
   const v = e.target.closest('.v'); if (v) setFocus(+v.dataset.vid, { pin: true, force: true });
 });
-track.addEventListener('click', e => { if (S.ticker.suppressClick) return; const c = e.target.closest('.chip'); if (c) openPeek(S.ticker.all[+c.dataset.rank - 1]); });
-$('#listBody').addEventListener('click', e => { const c = e.target.closest('.chip'); const f = verseOf(S.focusVid); if (c && f) openPeek(f.ticker[+c.dataset.rank - 1]); });
+track.addEventListener('click', e => { if (S.ticker.suppressClick) return; const c = e.target.closest('.chip'); if (c) openPeek(S.ticker.items.find(it => it.rank === +c.dataset.rank)); });
+$('#listBody').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c) openPeek(S.listItems.find(it => it.rank === +c.dataset.rank)); });
 marquee.addEventListener('pointerdown', e => {
   S.ticker.holdPointer = true;
   if (e.pointerType === 'mouse' && marquee.classList.contains('hold')) S.ticker.drag = { x: e.clientX, left: marquee.scrollLeft, moved: false };
@@ -856,6 +931,8 @@ marquee.addEventListener('wheel', e => {
 }, { passive: false });
 $('#filters').addEventListener('click', e => { const b = e.target.closest('button[data-filter]'); if (b) setFilter(b.dataset.filter); });
 $('#motionToggle').addEventListener('click', () => setMotion(!S.motionOn, true));
+$('#matchSlider').addEventListener('input', e => setMatch(e.target.value, false));
+$('#matchSlider').addEventListener('change', e => setMatch(e.target.value, true));
 $('#backBtn').addEventListener('click', goBack);
 $('#fwdBtn').addEventListener('click', goForward);
 $('#crumbs').addEventListener('click', e => { const c = e.target.closest('.crumb'); if (c) goToHop(+c.dataset.hop); });
@@ -906,6 +983,12 @@ async function boot() {
     reader.innerHTML = `<div class="loading"><p>The Bible data could not be loaded.</p><p class="fine">${esc(e.message)}</p></div>`;
     console.warn(e); return;
   }
+  const ms = S.manifest && S.manifest.ranking && S.manifest.ranking.matchSlider;
+  if (ms) S.matchSlider = { min: isFinite(ms.min) ? +ms.min : 0, max: isFinite(ms.max) ? +ms.max : 100, step: isFinite(ms.step) && ms.step > 0 ? +ms.step : 5, default: isFinite(ms.default) ? +ms.default : 0 };
+  const sl = $('#matchSlider'); sl.min = S.matchSlider.min; sl.max = S.matchSlider.max; sl.step = S.matchSlider.step;
+  const savedMatch = store.get('match.v1');
+  S.match = typeof savedMatch === 'number' && savedMatch >= S.matchSlider.min && savedMatch <= S.matchSlider.max ? savedMatch : S.matchSlider.default;
+  renderSlider();
   const saved = store.get('motion.v2');
   S.motionOn = S.prefersReduced ? false : saved === null ? S.motion.defaultMode === 'autoScroll' : saved === true;
   $('#motionToggle').setAttribute('aria-checked', String(S.motionOn));
@@ -918,7 +1001,7 @@ async function boot() {
   const ok = await navigate({ bookNo: p.book, chapter: p.chapter, vid: target, kind: 'open' });
   if (!ok) reader.innerHTML = '<div class="loading"><p>No chapter text is available in this preview.</p></div>';
 }
-window.asb = { state: S, parseRef, navigate, expandChip, snippetOf, labelOf, refOf, buildBundle, openPeek, goBack, goForward, verseOf, setFilter, setMotion };
+window.asb = { state: S, parseRef, navigate, expandChip, snippetOf, labelOf, refOf, buildBundle, openPeek, goBack, goForward, verseOf, setFilter, setMatch, poolOf, atOrAbove, setMotion };
 boot();
 </script>
 </body>
