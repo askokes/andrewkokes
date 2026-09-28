@@ -46,7 +46,7 @@
               "maxItems": 12,
               "items": {
                 "type": "array",
-                "minItems": 9,
+                "minItems": 10,
                 "items": false,
                 "prefixItems": [
                   {
@@ -105,6 +105,33 @@
                         ],
                         "items": false,
                         "minItems": 3
+                      }
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 4,
+                    "items": false,
+                    "prefixItems": [
+                      {
+                        "enum": [
+                          0,
+                          1,
+                          2
+                        ]
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 6
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "string"
                       }
                     ]
                   }

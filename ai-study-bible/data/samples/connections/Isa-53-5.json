@@ -36,6 +36,17 @@
         "span": 3
       },
       "snippet": "He Himself bore our sins in His body on the tree, so that we might die to sin and live to righteousness. “By…",
+      "reason": {
+        "kind": "quote",
+        "label": "Direct quote",
+        "because": "1 Peter 2:24–25 quotes Isaiah 53:5",
+        "basis": "quotation",
+        "confidence": 0.9,
+        "source": "rule",
+        "evidence": {
+          "phrase": "By His stripes you are healed."
+        }
+      },
       "alsoCites": []
     },
     {
@@ -60,6 +71,15 @@
         "span": 3
       },
       "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.5,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -79,6 +99,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "just as the Son of Man did not come to be served, but to serve, and to give His life as a ransom for many.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -103,6 +132,15 @@
         "span": 2
       },
       "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -122,6 +160,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -146,6 +193,15 @@
         "span": 3
       },
       "snippet": "God made Him who knew no sin to be sin on our behalf, so that in Him we might become the righteousness of God.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -170,6 +226,15 @@
         "span": 12
       },
       "snippet": "For what I received I passed on to you as of first importance: that Christ died for our sins according to the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -189,6 +254,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And by that will, we have been sanctified through the sacrifice of the body of Jesus Christ once for all.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -208,6 +282,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Isaiah 53",
+        "basis": "samePassage",
+        "confidence": 0.85,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -227,6 +310,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "and walk in love, just as Christ loved us and gave Himself up for us as a fragrant sacrificial offering to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -246,6 +338,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "He did not enter by the blood of goats and calves, but He entered the Most Holy Place once for all by His own…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: transgressions",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "transgressions"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -265,6 +370,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "because by a single offering He has made perfect for all time those who are being sanctified.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -289,6 +403,15 @@
         "span": 4
       },
       "snippet": "Yet it was the LORD’s will to crush Him and to cause Him to suffer; and when His soul is made a guilt…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Isaiah 53",
+        "basis": "samePassage",
+        "confidence": 0.85,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -313,6 +436,15 @@
         "span": 3
       },
       "snippet": "so also Christ was offered once to bear the sins of many; and He will appear a second time, not to bear sin…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -332,6 +464,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "and are justified freely by His grace through the redemption that is in Christ Jesus.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -351,6 +492,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But the gift is not like the trespass. For if the many died by the trespass of the one man, how much more did…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -375,6 +525,15 @@
         "span": 7
       },
       "snippet": "Awake, O sword, against My Shepherd, against the man who is My Companion, declares the LORD of Hosts. Strike…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -394,6 +553,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And I will put enmity between you and the woman, and between your seed and her seed. He will crush your head…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: crushed",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "crushed"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -413,6 +585,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Seventy weeks are decreed for your people and your holy city to stop their transgression, to put an end to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: transgressions",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "transgressions"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -432,6 +617,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For unto us a child is born, unto us a son is given, and the government will be upon His shoulders. And He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: peace",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "peace"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -451,6 +649,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“But for you who fear My name, the sun of righteousness will rise with healing in its wings, and you will go…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: healed",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "healed"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -475,6 +686,15 @@
         "span": 2
       },
       "snippet": "Surely He took on our infirmities and carried our sorrows; yet we considered Him stricken by God, struck down…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Isaiah 53",
+        "basis": "samePassage",
+        "confidence": 0.84,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -494,6 +714,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "And with it he touched my mouth and said: “Now that this has touched your lips, your iniquity is removed and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -513,6 +742,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "I offered My back to those who struck Me, and My cheeks to those who tore out My beard. I did not hide My…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -532,6 +770,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "So Pilate released Barabbas to them. But he had Jesus flogged, and handed Him over to be crucified.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -551,6 +798,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Then Pilate took Jesus and had Him flogged.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -575,6 +831,15 @@
         "span": 2
       },
       "snippet": "For we do not have a high priest who is unable to sympathize with our weaknesses, but we have one who was…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -594,6 +859,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "He who forgives all your iniquities and heals all your diseases,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: iniquities and healed",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "iniquities",
+            "healed"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -618,6 +897,15 @@
         "span": 4
       },
       "snippet": "Just as many were appalled at Him— His appearance was disfigured beyond that of any man, and His form was…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.36,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -637,6 +925,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For dogs surround me; a band of evil men encircles me; they have pierced my hands and feet.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: pierced",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "pierced"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -656,6 +957,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Let Your hand be upon the man at Your right hand, on the son of man You have raised up for Yourself.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -675,6 +985,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Lashes and wounds scour evil, and beatings cleanse the inmost parts.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -694,6 +1013,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "By oppression and judgment He was taken away, and who can recount His descendants? For He was cut off from…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Isaiah 53",
+        "basis": "samePassage",
+        "confidence": 0.84,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -713,6 +1041,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Inside the portico of the gateway were two tables on each side, on which the burnt offerings, sin offerings…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -732,6 +1069,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Therefore I will punish Him and release Him.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -751,6 +1097,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“He has blinded their eyes and hardened their hearts, so that they cannot see with their eyes, and understand…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: healed",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "healed"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -770,6 +1129,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "in beatings, imprisonments, and riots; in labor, sleepless nights, and hunger;",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -794,6 +1162,15 @@
         "span": 11
       },
       "snippet": "And He told them, “This is what is written: The Christ will suffer and rise from the dead on the third day,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -818,6 +1195,15 @@
         "span": 3
       },
       "snippet": "After the anguish of His soul, He will see the light of life and be satisfied. By His knowledge My righteous…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Isaiah 53",
+        "basis": "samePassage",
+        "confidence": 0.83,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -842,6 +1228,15 @@
         "span": 3
       },
       "snippet": "just as the Father knows Me and I know the Father. And I lay down My life for the sheep.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -866,6 +1261,15 @@
         "span": 4
       },
       "snippet": "Those who hate me without cause outnumber the hairs of my head; many are those who would destroy me— my…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -890,6 +1294,15 @@
         "span": 12
       },
       "snippet": "Then Jesus took the Twelve aside and said to them, “Look, we are going up to Jerusalem, and everything the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -914,6 +1327,15 @@
         "span": 2
       },
       "snippet": "Then the priest shall bring it to the altar, twist off its head, and burn it on the altar; its blood should…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -938,6 +1360,15 @@
         "span": 2
       },
       "snippet": "But the LORD was angry with me on account of you, and He would not listen to me. “That is enough,” the LORD…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -962,6 +1393,15 @@
         "span": 2
       },
       "snippet": "The wicked become a ransom for the righteous, and the faithless for the upright.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -986,6 +1426,15 @@
         "span": 5
       },
       "snippet": "And they crucified Him. They also divided His garments by casting lots to decide what each of them would take.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1010,6 +1459,15 @@
         "span": 11
       },
       "snippet": "He will not grow weak or discouraged before He has established justice on the earth. In His law the islands…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1034,6 +1492,15 @@
         "span": 3
       },
       "snippet": "He is to lay his hand on the head of the burnt offering, so it can be accepted on his behalf to make…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1058,6 +1525,19 @@
         "span": 3
       },
       "snippet": "It is said that God lays up one’s punishment for his children. Let God repay the man himself, so he will know…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: punishment",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "punishment"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1082,6 +1562,15 @@
         "span": 3
       },
       "snippet": "Among all my enemies I am a disgrace, and among my neighbors even more. I am dreaded by my friends— they flee…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1106,6 +1595,15 @@
         "span": 3
       },
       "snippet": "For I am ready to fall, and my pain is ever with me.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1130,6 +1628,15 @@
         "span": 3
       },
       "snippet": "Your wrath has swept over me; Your terrors have destroyed me.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1154,6 +1661,15 @@
         "span": 3
       },
       "snippet": "I sleep, but my heart is awake. A sound! My beloved is knocking: “Open to me, my sister, my darling, my dove…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1178,6 +1694,15 @@
         "span": 12
       },
       "snippet": "He replied, “Elijah does indeed come first, and he restores all things. Why then is it written that the Son…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1202,6 +1727,15 @@
         "span": 3
       },
       "snippet": "They kept striking His head with a staff and spitting on Him. And they knelt down and bowed before Him.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1226,6 +1760,15 @@
         "span": 12
       },
       "snippet": "Was it not necessary for the Christ to suffer these things and then to enter His glory?”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1250,6 +1793,15 @@
         "span": 12
       },
       "snippet": "And beginning with Moses and all the Prophets, He explained to them what was written in all the Scriptures…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1274,6 +1826,19 @@
         "span": 9
       },
       "snippet": "If you bring a grain offering of firstfruits to the LORD, you shall offer crushed heads of new grain roasted…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: crushed",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "crushed"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1298,6 +1863,15 @@
         "span": 9
       },
       "snippet": "See the stone I have set before Joshua; on that one stone are seven eyes. Behold, I will engrave on it an…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1322,6 +1896,15 @@
         "span": 4
       },
       "snippet": "Caiaphas did not say this on his own. Instead, as high priest that year, he was prophesying that Jesus would…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1346,6 +1929,15 @@
         "span": 4
       },
       "snippet": "But if he has wronged you in any way or owes you anything, charge it to my account.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1370,6 +1962,15 @@
         "span": 9
       },
       "snippet": "But you know that Christ appeared to take away sins, and in Him there is no sin.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1394,6 +1995,15 @@
         "span": 10
       },
       "snippet": "But I tell you that Elijah has already come, and they did not recognize him, but have done to him whatever…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1418,6 +2028,15 @@
         "span": 12
       },
       "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed. It would…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1442,6 +2061,15 @@
         "span": 12
       },
       "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed! It would…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1466,6 +2094,15 @@
         "span": 12
       },
       "snippet": "“The Son of Man must suffer many things,” He said. “He must be rejected by the elders, chief priests, and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1490,6 +2127,15 @@
         "span": 12
       },
       "snippet": "Indeed, the Son of Man will go as it has been determined, but woe to that man who betrays Him.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1514,6 +2160,15 @@
         "span": 12
       },
       "snippet": "trying to determine the time and setting to which the Spirit of Christ in them was pointing when He predicted…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1538,6 +2193,15 @@
         "span": 7
       },
       "snippet": "Then the priest is to burn them on the altar as food, an offering made by fire to the LORD.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1562,6 +2226,15 @@
         "span": 8
       },
       "snippet": "But the goat chosen by lot as the scapegoat shall be presented alive before the LORD to make atonement by…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1586,6 +2259,15 @@
         "span": 9
       },
       "snippet": "But if he cannot afford two turtledoves or two young pigeons, he may bring a tenth of an ephah of fine flour…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1610,6 +2292,15 @@
         "span": 9
       },
       "snippet": "But we see Jesus, who was made a little lower than the angels, now crowned with glory and honor because He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1634,6 +2325,15 @@
         "span": 12
       },
       "snippet": "“Look, we are going up to Jerusalem, and the Son of Man will be delivered over to the chief priests and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1658,6 +2358,15 @@
         "span": 12
       },
       "snippet": "But how then would the Scriptures be fulfilled that say it must happen this way?”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1682,6 +2391,15 @@
         "span": 12
       },
       "snippet": "Every day I was with you, teaching in the temple courts, and you did not arrest Me. But this has happened…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1706,6 +2424,15 @@
         "span": 12
       },
       "snippet": "But in this way God has fulfilled what He foretold through all the prophets, saying that His Christ would…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1730,6 +2457,15 @@
         "span": 12
       },
       "snippet": "that the Christ would suffer, and as the first to rise from the dead, would proclaim light to our people and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1754,6 +2490,15 @@
         "span": 15
       },
       "snippet": "Jesus said to them, “These are the words I spoke to you while I was still with you: Everything must be…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1778,6 +2523,15 @@
         "span": 7
       },
       "snippet": "When they arrived at the place God had designated, Abraham built the altar there and arranged the wood. He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     }
   ]

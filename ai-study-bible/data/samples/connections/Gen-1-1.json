@@ -31,6 +31,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning",
+        "basis": "theme",
+        "confidence": 0.71,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -55,6 +68,15 @@
         "span": 32
       },
       "snippet": "By faith we understand that the universe was formed at God’s command, so that what is seen was not made out…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -74,6 +96,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For thus says the LORD, who created the heavens—He is God; He formed the earth and fashioned it; He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.8,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -93,6 +130,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Where were you when I laid the foundations of the earth? Tell Me, if you have understanding.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: earth",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -112,6 +162,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Worthy are You, our Lord and God, to receive glory and honor and power, for You created all things; by Your…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -131,6 +194,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "This is what God the LORD says— He who created the heavens and stretched them out, who spread out the earth…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.78,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -150,6 +228,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And: “In the beginning, O Lord, You laid the foundations of the earth, and the heavens are the work of Your…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.74,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -169,6 +262,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The God who made the world and everything in it is the Lord of heaven and earth and does not live in temples…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -188,6 +295,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For in Him all things were created, things in heaven and on earth, visible and invisible, whether thrones or…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.74,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -212,6 +334,20 @@
         "span": 2
       },
       "snippet": "For in six days the LORD made the heavens and the earth and the sea and all that is in them, but on the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -231,6 +367,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "You alone are the LORD. You created the heavens, the highest heavens with all their host, the earth and all…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.73,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -250,6 +401,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "By His insight He made the heavens. His loving devotion endures forever.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens",
+        "basis": "theme",
+        "confidence": 0.58,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -269,6 +433,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "May you be blessed by the LORD, the Maker of heaven and earth.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -288,6 +466,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Thus says the LORD, your Redeemer who formed you from the womb: “I am the LORD, who has made all things, who…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -307,6 +499,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But they deliberately overlook the fact that long ago by God’s word the heavens existed and the earth was…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -326,6 +532,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Men, why are you doing this? We too are only men, human like you. We are bringing you good news that you…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -345,6 +565,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The LORD made the earth by His power; He established the world by His wisdom and stretched out the heavens by…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -364,6 +598,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "In the beginning You laid the foundations of the earth, and the heavens are the work of Your hands.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.7,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -388,6 +637,20 @@
         "span": 6
       },
       "snippet": "The LORD made the earth by His power; He established the world by His wisdom and stretched out the heavens by…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -412,6 +675,20 @@
         "span": 31
       },
       "snippet": "“Oh, Lord GOD! You have made the heavens and the earth by Your great power and outstretched arm. Nothing is…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.64,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -431,6 +708,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The LORD created me as His first course, before His works of old.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, beginning and heavens",
+        "basis": "theme",
+        "confidence": 0.78,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "beginning",
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -450,6 +742,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And he said in a loud voice, “Fear God and give Him glory, because the hour of His judgment has come. Worship…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.64,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -469,6 +775,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "When I behold Your heavens, the work of Your fingers, the moon and the stars, which You have set in place—",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens",
+        "basis": "theme",
+        "confidence": 0.56,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -488,6 +807,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Before the mountains were born or You brought forth the earth and the world, from everlasting to everlasting…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: earth",
+        "basis": "theme",
+        "confidence": 0.58,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -507,6 +839,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The LORD founded the earth by wisdom and established the heavens by understanding.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -526,6 +872,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Lift up your eyes on high: Who created all these? He leads forth the starry host by number; He calls each one…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created",
+        "basis": "theme",
+        "confidence": 0.59,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -545,6 +904,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But you have forgotten the LORD, your Maker, who stretched out the heavens and laid the foundations of the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -564,6 +937,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "This is the burden of the word of the LORD concerning Israel. Thus declares the LORD, who stretches out the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -583,6 +970,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The heavens are Yours, and also the earth. The earth and its fullness You founded.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.69,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -602,6 +1004,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Our help is in the name of the LORD, the Maker of heaven and earth.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.6,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -621,6 +1037,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "the Maker of heaven and earth, the sea, and everything in them. He remains faithful forever.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.6,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -640,6 +1070,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“O LORD of Hosts, God of Israel, enthroned above the cherubim, You alone are God over all the kingdoms of the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -659,6 +1103,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "yet for us there is but one God, the Father, from whom all things came and for whom we exist. And there is…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.53,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -678,6 +1131,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But in these last days He has spoken to us by His Son, whom He appointed heir of all things, and through whom…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.5,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -697,6 +1159,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And he swore by Him who lives forever and ever, who created heaven and everything in it, the earth and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.69,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -716,6 +1193,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "By the word of the LORD the heavens were made, and all the stars by the breath of His mouth.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens",
+        "basis": "theme",
+        "confidence": 0.55,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -735,6 +1225,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For He spoke, and it came to be; He commanded, and it stood firm.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -754,6 +1253,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "How many are Your works, O LORD! In wisdom You have made them all; the earth is full of Your creatures.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: earth",
+        "basis": "theme",
+        "confidence": 0.54,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -773,6 +1285,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Praise Him, O highest heavens, and you waters above the skies.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created and heavens",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -792,6 +1318,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Do you not know? Have you not heard? The LORD is the everlasting God, the Creator of the ends of the earth.…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: earth",
+        "basis": "theme",
+        "confidence": 0.57,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -811,6 +1350,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "I have put My words in your mouth, and covered you with the shadow of My hand, to establish the heavens, to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.6,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -830,6 +1383,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "When the believers heard this, they lifted up their voices to God with one accord. “Sovereign Lord,” they…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -849,6 +1416,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For what may be known about God is plain to them, because God has made it plain to them.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.52,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -868,6 +1444,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "That which was from the beginning, which we have heard, which we have seen with our own eyes, which we have…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning",
+        "basis": "theme",
+        "confidence": 0.57,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -887,6 +1476,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For all the gods of the nations are idols, but it is the LORD who made the heavens.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens",
+        "basis": "theme",
+        "confidence": 0.57,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -906,6 +1508,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For all the gods of the nations are idols, but it is the LORD who made the heavens.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens",
+        "basis": "theme",
+        "confidence": 0.56,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -925,6 +1540,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "My help comes from the LORD, the Maker of heaven and earth.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.59,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -944,6 +1573,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For from Him and through Him and to Him are all things. To Him be the glory forever! Amen.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -963,6 +1601,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And every house is built by someone, but God is the builder of everything.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.51,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -982,6 +1629,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "When You send Your Spirit, they are created, and You renew the face of the earth.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created and earth",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1001,6 +1662,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "May the LORD, the Maker of heaven and earth, bless you from Zion.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.58,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1020,6 +1695,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The LORD has made everything for His purpose— even the wicked for the day of disaster.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1039,6 +1723,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For those will be days of tribulation unmatched from the beginning of God’s creation until now, and never to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning",
+        "basis": "theme",
+        "confidence": 0.58,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1058,6 +1755,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "and to illuminate for everyone the stewardship of this mystery, which for ages past was kept hidden in God…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created",
+        "basis": "theme",
+        "confidence": 0.59,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1077,6 +1787,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "By His breath the skies were cleared; His hand pierced the fleeing serpent.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1096,6 +1815,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "To the angel of the church in Laodicea write: These are the words of the Amen, the faithful and true Witness…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1115,6 +1843,21 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For behold, I will create new heavens and a new earth. The former things will not be remembered, nor will…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1134,6 +1877,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "I am the Alpha and the Omega, the First and the Last, the Beginning and the End.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1153,6 +1909,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Through Him all things were made, and without Him nothing was made that has been made.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1172,6 +1937,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Remember your Creator in the days of your youth, before the days of adversity come and the years approach of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1191,6 +1965,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "At that time Jesus declared, “I praise You, Father, Lord of heaven and earth, because You have hidden these…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1210,6 +1998,20 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Thus the heavens and the earth were completed in all their vast array.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1234,6 +2036,19 @@
         "span": 2
       },
       "snippet": "He stretches out the north over empty space; He hangs the earth upon nothing.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: earth",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1253,6 +2068,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Yours, O LORD, is the greatness and the power and the glory and the splendor and the majesty, for everything…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1272,6 +2101,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And He told me, “It is done! I am the Alpha and the Omega, the Beginning and the End. To the thirsty I will…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1291,6 +2133,21 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "This is the account of the heavens and the earth when they were created, in the day that the LORD God made…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.57,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1310,6 +2167,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And Hezekiah prayed before the LORD: “O LORD, God of Israel, enthroned between the cherubim, You alone are…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1329,6 +2200,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "However, from the beginning of creation, ‘God made them male and female.’",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1348,6 +2232,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "So Jesus replied, “Truly, truly, I tell you, the Son can do nothing by Himself, unless He sees the Father…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1372,6 +2265,20 @@
         "span": 2
       },
       "snippet": "And Hiram added: “Blessed be the LORD, the God of Israel, who made the heavens and the earth! He has given…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1396,6 +2303,19 @@
         "span": 2
       },
       "snippet": "Let them praise the name of the LORD, for He gave the command and they were created.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1420,6 +2340,19 @@
         "span": 2
       },
       "snippet": "Then the angel I had seen standing on the sea and on the land lifted up his right hand to heaven.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1444,6 +2377,19 @@
         "span": 31
       },
       "snippet": "before He made the land or fields, or any of the dust of the earth.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: earth",
+        "basis": "theme",
+        "confidence": 0.36,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "earth"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1468,6 +2414,15 @@
         "span": 31
       },
       "snippet": "Has not My hand made all these things? And so they came into being,” declares the LORD. “This is the one I…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     }
   ]

@@ -16,11 +16,11 @@
   },
   "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
   "motion": {
-    "mode": "autoScroll",
+    "mode": "hold",
     "loop": true,
-    "baseSeconds": 1.6,
-    "perWeightSeconds": 1.2,
-    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "baseSeconds": 3.0,
+    "perWeightSeconds": 3.0,
+    "dwellFormula": "dwellSeconds = 3.0 + 3.0 * weight",
     "advanceOnFocusChange": true
   },
   "items": [
@@ -41,9 +41,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "About the ninth hour Jesus cried out in a loud voice, “Eli, Eli, lema sabachthani?” which means, “My God, My…",
-      "why": "Jesus quotes this opening line from the cross. Matthew gives it in Aramaic, 'Eli, Eli, lema sabachthani', and then translates it.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.8
+      "reason": {
+        "kind": "quote",
+        "label": "Direct quote",
+        "because": "Matthew 27:46 quotes Psalm 22:1",
+        "basis": "sharedWording",
+        "confidence": 1.0,
+        "source": "rule",
+        "evidence": {
+          "phrase": "My God my God why have You forsaken me"
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 6.0
     },
     {
       "rank": 2,
@@ -62,9 +73,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "At the ninth hour, Jesus cried out in a loud voice, “Eloi, Eloi, lema sabachthani?” which means, “My God, My…",
-      "why": "Mark records the same cry from the cross in its Aramaic form, 'Eloi, Eloi', with a translation that matches this verse.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.78
+      "reason": {
+        "kind": "quote",
+        "label": "Direct quote",
+        "because": "Mark 15:34 quotes Psalm 22:1",
+        "basis": "sharedWording",
+        "confidence": 1.0,
+        "source": "rule",
+        "evidence": {
+          "phrase": "My God my God why have You forsaken me"
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.94
     },
     {
       "rank": 3,
@@ -83,9 +105,18 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For dogs surround me; a band of evil men encircles me; they have pierced my hands and feet.",
-      "why": "The same psalm moves from the cry of abandonment to a scene of being surrounded, with hands and feet pierced. Christians have long read it alongside the crucifixion.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.38
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Psalm 22",
+        "basis": "samePassage",
+        "confidence": 0.78,
+        "source": "rule",
+        "evidence": {}
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 4.94
     },
     {
       "rank": 4,
@@ -109,9 +140,22 @@
         "span": 21
       },
       "snippet": "During the days of Jesus’ earthly life, He offered up prayers and petitions with loud cries and tears to the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: saving",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "saving"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.36
+      "dwellSeconds": 4.9
     },
     {
       "rank": 5,
@@ -135,9 +179,22 @@
         "span": 2
       },
       "snippet": "I sigh when food is put before me, and my groans pour out like water.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: groaning",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "groaning"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.32
+      "dwellSeconds": 4.81
     },
     {
       "rank": 6,
@@ -161,9 +218,22 @@
         "span": 2
       },
       "snippet": "I am numb and badly crushed; I groan in anguish of heart.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: groaning",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "groaning"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.32
+      "dwellSeconds": 4.81
     },
     {
       "rank": 7,
@@ -182,9 +252,22 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Why, O LORD, do You stand far off? Why do You hide in times of trouble?",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: far",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "far"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.31
+      "dwellSeconds": 4.77
     },
     {
       "rank": 8,
@@ -203,9 +286,22 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "When I kept silent, my bones became brittle from my groaning all day long.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: groaning",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "groaning"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.22
+      "dwellSeconds": 4.56
     },
     {
       "rank": 9,
@@ -224,9 +320,18 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Be not far from me, for trouble is near and there is no one to help.",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Psalm 22",
+        "basis": "samePassage",
+        "confidence": 0.81,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.18
+      "dwellSeconds": 4.44
     },
     {
       "rank": 10,
@@ -245,9 +350,18 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Do not take my soul away with sinners, or my life with men of bloodshed,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.4,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.18
+      "dwellSeconds": 4.44
     },
     {
       "rank": 11,
@@ -266,9 +380,18 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For the choirmaster. A Maskil of the sons of Korah. As the deer pants for streams of water, so my soul longs…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.18
+      "dwellSeconds": 4.44
     },
     {
       "rank": 12,
@@ -287,9 +410,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "We all growl like bears and moan like doves. We hope for justice, but find none, for salvation, but it is far…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: far",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "far"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.18
+      "dwellSeconds": 4.44
     }
   ],
   "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."

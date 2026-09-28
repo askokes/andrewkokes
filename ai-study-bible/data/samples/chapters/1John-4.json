@@ -59,6 +59,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now there were also false prophets among the people, just as there will be false teachers among you. They…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: false and prophets",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "false",
+                "prophets"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -79,6 +93,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "but test all things. Hold fast to what is good.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: test",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "test"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -99,6 +126,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I know your deeds, your labor, and your perseverance. I know that you cannot tolerate those who are evil, and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: false and test",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "false",
+                "test"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -119,6 +160,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Beware of false prophets. They come to you in sheep’s clothing, but inwardly they are ravenous wolves.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: false and prophets",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "false",
+                "prophets"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -139,6 +194,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "to another the working of miracles, to another prophecy, to another distinguishing between spirits, to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: spirit",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -159,6 +227,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Children, it is the last hour; and just as you have heard that the antichrist is coming, so now many…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -179,6 +256,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Jesus answered, “See to it that you are not deceived. For many will come in My name, claiming, ‘I am He,’…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -204,6 +290,19 @@
             "span": 3
           },
           "snippet": "For many deceivers have gone out into the world, refusing to confess the coming of Jesus Christ in the flesh.…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -224,6 +323,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And why don’t you judge for yourselves what is right?",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -244,6 +352,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now the Spirit expressly states that in later times some will abandon the faith to follow deceitful spirits…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: spirit",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -269,6 +390,19 @@
             "span": 3
           },
           "snippet": "Two or three prophets should speak, and the others should weigh carefully what is said.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: prophets",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "prophets"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -289,6 +423,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Jesus answered, “See to it that no one deceives you.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -339,6 +482,20 @@
             "span": 2
           },
           "snippet": "Therefore I inform you that no one who is speaking by the Spirit of God says, “Jesus be cursed,” and no one…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit and Jesus",
+            "basis": "theme",
+            "confidence": 0.59,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -364,6 +521,19 @@
             "span": 2
           },
           "snippet": "The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: flesh",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "flesh"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -384,6 +554,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Everyone who believes that Jesus is the Christ has been born of God, and everyone who loves the Father also…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ and Jesus",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -409,6 +593,19 @@
             "span": 2
           },
           "snippet": "that if you confess with your mouth, “Jesus is Lord,” and believe in your heart that God raised Him from the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Jesus",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -429,6 +626,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "However, when the Spirit of truth comes, He will guide you into all truth. For He will not speak on His own…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -449,6 +659,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "By common confession, the mystery of godliness is great: He appeared in the flesh, was vindicated by the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: flesh and Spirit",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "flesh",
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -469,6 +693,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Whoever denies the Son does not have the Father, but whoever confesses the Son has the Father as well.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: confesses",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "confesses"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -489,6 +726,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "and every spirit that does not confess Jesus is not from God. This is the spirit of the antichrist, which you…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.88,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -509,6 +755,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone confesses that Jesus is the Son of God, God abides in him, and he in God.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -534,6 +789,19 @@
             "span": 2
           },
           "snippet": "Therefore, when Christ came into the world, He said: “Sacrifice and offering You did not desire, but a body…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -554,6 +822,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "and every tongue confess that Jesus Christ is Lord, to the glory of God the Father.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ and Jesus",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -579,6 +861,19 @@
             "span": 2
           },
           "snippet": "not to be easily disconcerted or alarmed by any spirit or message or letter seeming to be from us, alleging…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -624,6 +919,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Children, it is the last hour; and just as you have heard that the antichrist is coming, so now many…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: antichrist and coming",
+            "basis": "theme",
+            "confidence": 0.57,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "antichrist",
+                "coming"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -644,6 +953,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Who is the liar, if it is not the one who denies that Jesus is the Christ? This is the antichrist, who denies…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: antichrist and Jesus",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "antichrist",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -669,6 +992,21 @@
             "span": 3
           },
           "snippet": "For many deceivers have gone out into the world, refusing to confess the coming of Jesus Christ in the flesh.…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: antichrist, confess and world",
+            "basis": "theme",
+            "confidence": 0.65,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "antichrist",
+                "confess",
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -694,6 +1032,20 @@
             "span": 2
           },
           "snippet": "Therefore I inform you that no one who is speaking by the Spirit of God says, “Jesus be cursed,” and no one…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: spirit and Jesus",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "spirit",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -719,6 +1071,15 @@
             "span": 2
           },
           "snippet": "The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -744,6 +1105,20 @@
             "span": 2
           },
           "snippet": "that if you confess with your mouth, “Jesus is Lord,” and believe in your heart that God raised Him from the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: confess and Jesus",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "confess",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -764,6 +1139,21 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Let no one deceive you in any way, for it will not come until the rebellion occurs and the man of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: already, Jesus and coming",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "already",
+                "Jesus",
+                "coming"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -789,6 +1179,19 @@
             "span": 2
           },
           "snippet": "Therefore, when Christ came into the world, He said: “Sacrifice and offering You did not desire, but a body…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -809,6 +1212,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For the mystery of lawlessness is already at work, but the one who now restrains it will continue until he is…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: already",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "already"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -834,6 +1250,15 @@
             "span": 2
           },
           "snippet": "By this the children of God are distinguished from the children of the devil: Anyone who does not practice…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -859,6 +1284,19 @@
             "span": 3
           },
           "snippet": "It is written in the Prophets: ‘And they will all be taught by God.’ Everyone who has heard the Father and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: coming",
+            "basis": "theme",
+            "confidence": 0.39,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "coming"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -879,6 +1317,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "During the days of Jesus’ earthly life, He offered up prayers and petitions with loud cries and tears to the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Jesus",
+            "basis": "theme",
+            "confidence": 0.37,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -924,6 +1375,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "What then shall we say in response to these things? If God is for us, who can be against us?",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -944,6 +1404,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "because everyone born of God overcomes the world. And this is the victory that has overcome the world: our…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: overcome and world",
+            "basis": "theme",
+            "confidence": 0.64,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "overcome",
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -964,6 +1438,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now judgment is upon this world; now the prince of this world will be cast out.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -984,6 +1471,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "No, in all these things we are more than conquerors through Him who loved us.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1009,6 +1505,19 @@
             "span": 3
           },
           "snippet": "We know that we are of God, and that the whole world is under the power of the evil one.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1029,6 +1538,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "so that Christ may dwell in your hearts through faith. Then you, being rooted and grounded in love,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1054,6 +1572,19 @@
             "span": 2
           },
           "snippet": "We have not received the spirit of the world, but the Spirit who is from God, that we may understand what God…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1074,6 +1605,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "I am writing to you, fathers, because you know Him who is from the beginning. I am writing to you, young men…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: overcome and children",
+            "basis": "theme",
+            "confidence": 0.57,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "overcome",
+                "children"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1094,6 +1639,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I have told you these things so that in Me you may have peace. In the world you will have tribulation. But…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: overcome and world",
+            "basis": "theme",
+            "confidence": 0.57,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "overcome",
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1114,6 +1673,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "in which you used to walk when you conformed to the ways of this world and of the ruler of the power of the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1134,6 +1706,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "They have conquered him by the blood of the Lamb and by the word of their testimony. And they did not love…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1154,6 +1735,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But if Christ is in you, your body is dead because of sin, yet your spirit is alive because of righteousness.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -1204,6 +1794,19 @@
             "span": 2
           },
           "snippet": "I have given them Your word and the world has hated them; for they are not of the world, just as I am not of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1229,6 +1832,19 @@
             "span": 2
           },
           "snippet": "Then He told them, “You are from below; I am from above. You are of this world; I am not of this world.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1249,6 +1865,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The One who comes from above is above all. The one who is from the earth belongs to the earth and speaks as…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1274,6 +1899,19 @@
             "span": 2
           },
           "snippet": "If you were of the world, it would love you as its own. Instead, the world hates you, because you are not of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1299,6 +1937,19 @@
             "span": 2
           },
           "snippet": "Do not be conformed to this world, but be transformed by the renewing of your mind. Then you will be able to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1319,6 +1970,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "They are not of the world, just as I am not of the world.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1339,6 +2003,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For the time will come when men will not tolerate sound doctrine, but with itching ears they will gather…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1359,6 +2032,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "As for the deeds of men— by the word of Your lips I have avoided the ways of the violent.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1379,6 +2061,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "They say to the seers, “Stop seeing visions!” and to the prophets, “Do not prophesy to us the truth! Speak to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1399,6 +2090,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The prophets prophesy falsely, and the priests rule by their own authority. My people love it so, but what…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1419,6 +2119,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For this is what the LORD of Hosts, the God of Israel, says: “Do not be deceived by the prophets and diviners…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: listens",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "listens"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1439,6 +2152,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "If a man of wind were to come and say falsely, “I will preach to you of wine and strong drink,” he would be…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -1484,6 +2206,21 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "the Spirit of truth. The world cannot receive Him, because it neither sees Him nor knows Him. But you do know…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: truth, Spirit and knows",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "truth",
+                "Spirit",
+                "knows"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1504,6 +2241,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "If anyone considers himself a prophet or spiritual person, let him acknowledge that what I am writing you is…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1524,6 +2270,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "“Then You are a king!” Pilate said. “You say that I am a king,” Jesus answered. “For this reason I was born…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: truth and listens",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "truth",
+                "listens"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1544,6 +2304,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "However, when the Spirit of truth comes, He will guide you into all truth. For He will not speak on His own…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: truth and Spirit",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "truth",
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1564,6 +2338,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "You, little children, are from God and have overcome them, because greater is He who is in you than he who is…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1584,6 +2367,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "My sheep listen to My voice; I know them, and they follow Me.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: listens and knows",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "listens",
+                "knows"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1604,6 +2401,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "You are looking at outward appearances. If anyone is confident that he belongs to Christ, he should remind…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1624,6 +2430,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now the Spirit expressly states that in later times some will abandon the faith to follow deceitful spirits…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1644,6 +2463,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "When the Advocate comes, whom I will send to you from the Father—the Spirit of truth who proceeds from the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: truth and Spirit",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "truth",
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1664,6 +2497,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "by recalling what was foretold by the holy prophets and commanded by our Lord and Savior through your…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1684,6 +2526,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Beloved, do not believe every spirit, but test the spirits to see whether they are from God. For many false…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1704,6 +2555,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But you, beloved, remember what was foretold by the apostles of our Lord Jesus Christ",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -1749,6 +2609,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Whoever does not love does not know God, because God is love.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.89,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1769,6 +2638,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If you know that He is righteous, you also know that everyone who practices righteousness has been born of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: born and knows",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "born",
+                "knows"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1789,6 +2672,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Since you have purified your souls by obedience to the truth so that you have a genuine love for your…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1809,6 +2705,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone says, “I love God,” but hates his brother, he is a liar. For anyone who does not love his brother…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1834,6 +2739,19 @@
             "span": 10
           },
           "snippet": "Now about brotherly love, you do not need anyone to write to you, because you yourselves have been taught by…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1859,6 +2777,19 @@
             "span": 10
           },
           "snippet": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1879,6 +2810,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Whoever loves his brother remains in the light, and there is no cause of stumbling in him.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1899,6 +2843,21 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "By this the children of God are distinguished from the children of the devil: Anyone who does not practice…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: beloved, love and knows",
+            "basis": "theme",
+            "confidence": 0.61,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "beloved",
+                "love",
+                "knows"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1919,6 +2878,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "No one has ever seen God; but if we love one another, God remains in us, and His love is perfected in us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.86,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1939,6 +2907,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The LORD your God will circumcise your hearts and the hearts of your descendants, and you will love Him with…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1959,6 +2940,17 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Anyone born of God refuses to practice sin, because God’s seed abides in him; he cannot go on sinning…",
+          "reason": {
+            "kind": "quote",
+            "label": "Direct quote",
+            "because": "1 John 4:7 and 1 John 3:9 share the same words",
+            "basis": "sharedWording",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {
+              "phrase": "has been born of God"
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1984,6 +2976,19 @@
             "span": 12
           },
           "snippet": "And now these three remain: faith, hope, and love; but the greatest of these is love.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2034,6 +3039,15 @@
             "span": 3
           },
           "snippet": "And we have come to know and believe the love that God has for us. God is love; whoever abides in love abides…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.93,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2054,6 +3068,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Beloved, let us love one another, because love comes from God. Everyone who loves has been born of God and…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.96,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2074,6 +3097,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And this is the message we have heard from Him and announce to you: God is light, and in Him there is no…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2099,6 +3131,19 @@
             "span": 9
           },
           "snippet": "Finally, brothers, rejoice! Aim for perfect harmony, encourage one another, be of one mind, live in peace.…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.73,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2119,6 +3164,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But You, O Lord, are a compassionate and gracious God, slow to anger, abounding in loving devotion and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.73,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2139,6 +3197,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "No one who remains in Him keeps on sinning. No one who continues to sin has seen Him or known Him.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2164,6 +3231,19 @@
             "span": 2
           },
           "snippet": "For You, O Lord, are kind and forgiving, rich in loving devotion to all who call on You.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.62,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2184,6 +3264,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then the LORD passed in front of Moses and called out: “The LORD, the LORD God, is compassionate and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.7,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2204,6 +3297,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But because of His great love for us, God, who is rich in mercy,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.7,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2224,6 +3330,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "“For our God is a consuming fire.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2244,6 +3359,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone says, “I know Him,” but does not keep His commandments, he is a liar, and the truth is not in him.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2264,6 +3388,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone claims to be in the light but hates his brother, he is still in the darkness.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2314,6 +3447,20 @@
             "span": 2
           },
           "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world and love",
+            "basis": "theme",
+            "confidence": 0.77,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2334,6 +3481,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And this is that testimony: God has given us eternal life, and this life is in His Son.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2354,6 +3510,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2379,6 +3544,15 @@
             "span": 2
           },
           "snippet": "And love consists in this: not that we loved God, but that He loved us and sent His Son as the atoning…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.88,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2404,6 +3578,19 @@
             "span": 2
           },
           "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2424,6 +3611,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Just as the living Father sent Me and I live because of the Father, so also the one who feeds on Me will live…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: live",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "live"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2444,6 +3644,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And He died for all, that those who live should no longer live for themselves, but for Him who died for them…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: live",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "live"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2469,6 +3682,20 @@
             "span": 3
           },
           "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love and live",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love",
+                "live"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2489,6 +3716,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Whoever believes in Him is not condemned, but whoever does not believe has already been condemned, because he…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2509,6 +3745,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2534,6 +3779,19 @@
             "span": 2
           },
           "snippet": "Jesus said to them, “If God were your Father, you would love Me, for I have come here from God. I have not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2559,6 +3817,15 @@
             "span": 3
           },
           "snippet": "And we have come to know and believe the love that God has for us. God is love; whoever abides in love abides…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2609,6 +3876,19 @@
             "span": 2
           },
           "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.68,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2629,6 +3909,17 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "He Himself is the atoning sacrifice for our sins, and not only for ours but also for the sins of the whole…",
+          "reason": {
+            "kind": "quote",
+            "label": "Direct quote",
+            "because": "1 John 4:10 and 1 John 2:2 share the same words",
+            "basis": "sharedWording",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {
+              "phrase": "the atoning sacrifice for our sins"
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2654,6 +3945,19 @@
             "span": 2
           },
           "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.57,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2674,6 +3978,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "We love because He first loved us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.83,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2699,6 +4012,19 @@
             "span": 10
           },
           "snippet": "But because of His great love for us, God, who is rich in mercy,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2724,6 +4050,19 @@
             "span": 2
           },
           "snippet": "Behold what manner of love the Father has given to us, that we should be called children of God. And that is…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2744,6 +4083,17 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "God presented Him as the atoning sacrifice through faith in His blood, in order to demonstrate His…",
+          "reason": {
+            "kind": "quote",
+            "label": "Direct quote",
+            "because": "1 John 4:10 and Romans 3:25–26 share the same words",
+            "basis": "sharedWording",
+            "confidence": 0.83,
+            "source": "rule",
+            "evidence": {
+              "phrase": "as the atoning sacrifice"
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2764,6 +4114,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "You did not choose Me, but I chose you. And I appointed you to go and bear fruit—fruit that will remain—so…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2784,6 +4143,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.88,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2804,6 +4172,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The LORD did not set His affection on you and choose you because you were more numerous than the other…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2824,6 +4205,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "that God was reconciling the world to Himself in Christ, not counting men’s trespasses against them. And He…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sins",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sins"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2844,6 +4238,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sins",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sins"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2894,6 +4301,19 @@
             "span": 3
           },
           "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.62,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2919,6 +4339,19 @@
             "span": 5
           },
           "snippet": "A new commandment I give you: Love one another. As I have loved you, so you also must love one another.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2939,6 +4372,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And this is His commandment: that we should believe in the name of His Son, Jesus Christ, and we should love…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2959,6 +4405,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2984,6 +4443,15 @@
             "span": 2
           },
           "snippet": "“The one who showed him mercy,” replied the expert in the law. Then Jesus told him, “Go and do likewise.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3004,6 +4472,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Be imitators of God, therefore, as beloved children,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: beloved",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "beloved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3029,6 +4510,19 @@
             "span": 12
           },
           "snippet": "And now these three remain: faith, hope, and love; but the greatest of these is love.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3054,6 +4548,19 @@
             "span": 10
           },
           "snippet": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3074,6 +4581,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then the master summoned him and declared, ‘You wicked servant! I forgave all your debt because you begged me.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3094,6 +4610,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "This is My commandment, that you love one another as I have loved you.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3114,6 +4643,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I am not making a demand, but I am testing the sincerity of your love in comparison to the earnestness of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3134,6 +4676,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Get rid of all bitterness, rage and anger, outcry and slander, along with every form of malice.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: beloved and loved",
+            "basis": "theme",
+            "confidence": 0.68,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "beloved",
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -3179,6 +4735,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "No one has ever seen God, but the one and only Son, who is Himself God and is at the Father’s side, has made…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3199,6 +4764,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone says, “I love God,” but hates his brother, he is a liar. For anyone who does not love his brother…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3219,6 +4793,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "There is no fear in love, but perfect love drives out fear, because fear involves punishment. The one who…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.89,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3244,6 +4827,20 @@
             "span": 2
           },
           "snippet": "But if anyone keeps His word, the love of God has been truly perfected in him. By this we know that we are in…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perfected and love",
+            "basis": "theme",
+            "confidence": 0.68,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perfected",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3264,6 +4861,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "In this way, love has been perfected among us, so that we may have confidence on the day of judgment; for in…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.89,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3289,6 +4895,20 @@
             "span": 12
           },
           "snippet": "And now these three remain: faith, hope, and love; but the greatest of these is love.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: remains and love",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "remains",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3314,6 +4934,19 @@
             "span": 2
           },
           "snippet": "Whoever keeps His commandments remains in God, and God in him. And by this we know that He remains in us: by…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: remains",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "remains"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3334,6 +4967,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "He alone is immortal and dwells in unapproachable light. No one has ever seen Him, nor can anyone see Him. To…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3354,6 +4996,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now to the King eternal, immortal, and invisible, the only God, be honor and glory forever and ever. Amen.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3374,6 +5025,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore if you have any encouragement in Christ, if any comfort from His love, if any fellowship with the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3394,6 +5058,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "So Jacob named the place Peniel, saying, “Indeed, I have seen God face to face, and yet my life was spared.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3414,6 +5087,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "By faith Moses left Egypt, not fearing the king’s anger; he persevered because he saw Him who is invisible.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -3464,6 +5146,20 @@
             "span": 2
           },
           "snippet": "Whoever keeps His commandments remains in God, and God in him. And by this we know that He remains in us: by…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: remain and Spirit",
+            "basis": "theme",
+            "confidence": 0.76,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "remain",
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3489,6 +5185,19 @@
             "span": 10
           },
           "snippet": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.57,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3509,6 +5218,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "On that day you will know that I am in My Father, and you are in Me, and I am in you.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3529,6 +5251,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "You, however, are controlled not by the flesh, but by the Spirit, if the Spirit of God lives in you. And if…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3549,6 +5284,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Do you not know that you yourselves are God’s temple, and that God’s Spirit dwells in you?",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3569,6 +5317,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone confesses that Jesus is the Son of God, God abides in him, and he in God.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.83,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3589,6 +5346,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "By this we can be sure that we have come to know Him: if we keep His commandments.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3609,6 +5375,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The Spirit Himself testifies with our spirit that we are God’s children.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3634,6 +5413,19 @@
             "span": 12
           },
           "snippet": "And now these three remain: faith, hope, and love; but the greatest of these is love.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: remain",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "remain"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3659,6 +5451,15 @@
             "span": 2
           },
           "snippet": "But if anyone keeps His word, the love of God has been truly perfected in him. By this we know that we are in…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3679,6 +5480,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "We have not received the spirit of the world, but the Spirit who is from God, that we may understand what God…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3699,6 +5513,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Do you not know that your body is a temple of the Holy Spirit who is in you, whom you have received from God?…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -3744,6 +5571,17 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "They said to the woman, “We now believe not only because of your words; we have heard for ourselves, and we…",
+          "reason": {
+            "kind": "quote",
+            "label": "Direct quote",
+            "because": "1 John 4:14 and John 4:42 share the same words",
+            "basis": "sharedWording",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {
+              "phrase": "the Savior of the world"
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3764,6 +5602,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: father",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "father"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3784,6 +5635,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "That which was from the beginning, which we have heard, which we have seen with our own eyes, which we have…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: father",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "father"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3804,6 +5668,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God did not send His Son into the world to condemn the world, but to save the world through Him.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3824,6 +5701,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3844,6 +5734,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "As for anyone who hears My words and does not keep them, I do not judge him. For I have not come to judge the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3864,6 +5767,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "When the Advocate comes, whom I will send to you from the Father—the Spirit of truth who proceeds from the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: testify and father",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "testify",
+                "father"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3884,6 +5801,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And love consists in this: not that we loved God, but that He loved us and sent His Son as the atoning…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3904,6 +5830,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And you also must testify, because you have been with Me from the beginning.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: testify",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "testify"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3924,6 +5863,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "He Himself is the atoning sacrifice for our sins, and not only for ours but also for the sins of the whole…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3944,6 +5896,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For we did not follow cleverly devised fables when we made known to you the power and coming of our Lord…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.39,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3969,6 +5930,20 @@
             "span": 6
           },
           "snippet": "then what about the One whom the Father sanctified and sent into the world? How then can you accuse Me of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world and father",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world",
+                "father"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -4014,6 +5989,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But Israel will be saved by the LORD with an everlasting salvation; you will not be put to shame or…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4039,6 +6023,19 @@
             "span": 2
           },
           "snippet": "He who dwells in the shelter of the Most High will abide in the shadow of the Almighty.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: abides",
+            "basis": "theme",
+            "confidence": 0.57,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "abides"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4059,6 +6056,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Who then overcomes the world? Only he who believes that Jesus is the Son of God.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Jesus",
+            "basis": "theme",
+            "confidence": 0.57,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4079,6 +6089,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "that if you confess with your mouth, “Jesus is Lord,” and believe in your heart that God raised Him from the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Jesus",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4104,6 +6127,15 @@
             "span": 2
           },
           "snippet": "Whoever keeps His commandments remains in God, and God in him. And by this we know that He remains in us: by…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4124,6 +6156,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore everyone who confesses Me before men, I will also confess him before My Father in heaven.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: confesses",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "confesses"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4144,6 +6189,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "and every tongue confess that Jesus Christ is Lord, to the glory of God the Father.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Jesus",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4164,6 +6222,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "By this you will know the Spirit of God: Every spirit that confesses that Jesus Christ has come in the flesh…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.86,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4184,6 +6251,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "What agreement can exist between the temple of God and idols? For we are the temple of the living God. As God…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4204,6 +6280,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "No one has ever seen God; but if we love one another, God remains in us, and His love is perfected in us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4224,6 +6309,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Whoever denies the Son does not have the Father, but whoever confesses the Son has the Father as well.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: confesses",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "confesses"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4249,6 +6347,19 @@
             "span": 2
           },
           "snippet": "Everyone who believes that Jesus is the Christ has been born of God, and everyone who loves the Father also…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Jesus",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -4299,6 +6410,19 @@
             "span": 2
           },
           "snippet": "He who dwells in the shelter of the Most High will abide in the shadow of the Almighty.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: abides",
+            "basis": "theme",
+            "confidence": 0.59,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "abides"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4319,6 +6443,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Whoever does not love does not know God, because God is love.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4344,6 +6477,15 @@
             "span": 2
           },
           "snippet": "Whoever keeps His commandments remains in God, and God in him. And by this we know that He remains in us: by…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4364,6 +6506,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "From ancient times no one has heard, no ear has perceived, no eye has seen any God besides You, who acts on…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4384,6 +6535,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Behold what manner of love the Father has given to us, that we should be called children of God. And that is…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4404,6 +6568,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Rather, as it is written: “No eye has seen, no ear has heard, no heart has imagined, what God has prepared…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4424,6 +6601,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "You, little children, are from God and have overcome them, because greater is He who is in you than he who is…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.81,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4444,6 +6630,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "so that Christ may dwell in your hearts through faith. Then you, being rooted and grounded in love,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4469,6 +6668,19 @@
             "span": 12
           },
           "snippet": "And now these three remain: faith, hope, and love; but the greatest of these is love.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4494,6 +6706,19 @@
             "span": 10
           },
           "snippet": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4514,6 +6739,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For the choirmaster. Of David the servant of the LORD, who sang this song to the LORD on the day the LORD had…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4534,6 +6772,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "How great is Your goodness which You have laid up for those who fear You, which You have bestowed before the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -4579,6 +6826,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And now, little children, remain in Christ, so that when He appears, we may be confident and unashamed before…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4604,6 +6860,15 @@
             "span": 2
           },
           "snippet": "No one has ever seen God; but if we love one another, God remains in us, and His love is perfected in us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.87,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4624,6 +6889,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "But if anyone keeps His word, the love of God has been truly perfected in him. By this we know that we are in…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perfected and love",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perfected",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4644,6 +6923,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And everyone who has this hope in Him purifies himself, just as Christ is pure.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4664,6 +6952,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For those God foreknew, He also predestined to be conformed to the image of His Son, so that He would be the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4684,6 +6981,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And by this we will know that we belong to the truth, and will assure our hearts in His presence:",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: confidence",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "confidence"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4704,6 +7014,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Truly I tell you, it will be more bearable for Sodom and Gomorrah on the day of judgment than for that town.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: judgment",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "judgment"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4724,6 +7047,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Remember the word that I spoke to you: ‘No servant is greater than his master.’ If they persecuted Me, they…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4749,6 +7081,19 @@
             "span": 2
           },
           "snippet": "You see that his faith was working with his actions, and his faith was perfected by what he did.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perfected",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perfected"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4774,6 +7119,19 @@
             "span": 12
           },
           "snippet": "And now these three remain: faith, hope, and love; but the greatest of these is love.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4794,6 +7152,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "It is enough for a disciple to be like his teacher, and a servant like his master. If the head of the house…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4814,6 +7181,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But I tell you, it will be more bearable for Tyre and Sidon on the day of judgment than for you.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: judgment",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "judgment"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -4859,6 +7239,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God has not given us a spirit of fear, but of power, love, and self-control.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: fear and love",
+            "basis": "theme",
+            "confidence": 0.67,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "fear",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4879,6 +7273,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For you did not receive a spirit of slavery that returns you to fear, but you received the Spirit of sonship…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: fear",
+            "basis": "theme",
+            "confidence": 0.6,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "fear"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4904,6 +7311,15 @@
             "span": 2
           },
           "snippet": "No one has ever seen God; but if we love one another, God remains in us, and His love is perfected in us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.86,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4924,6 +7340,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "deliverance from hostile hands, that we may serve Him without fear,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: fear",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "fear"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4944,6 +7373,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore, since we are receiving an unshakable kingdom, let us be filled with gratitude, and so worship God…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4969,6 +7407,19 @@
             "span": 12
           },
           "snippet": "And now these three remain: faith, hope, and love; but the greatest of these is love.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4989,6 +7440,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Sounds of terror fill his ears; in his prosperity the destroyer attacks him.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5009,6 +7469,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "But if anyone keeps His word, the love of God has been truly perfected in him. By this we know that we are in…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perfect and love",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perfect",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5029,6 +7503,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "As Pharaoh approached, the Israelites looked up and saw the Egyptians marching after them, and they were…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.35,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5049,6 +7532,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For I was afraid of you, because you are a harsh man. You withdraw what you did not deposit and reap what you…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.35,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5074,6 +7566,19 @@
             "span": 4
           },
           "snippet": "For in Christ Jesus neither circumcision nor uncircumcision has any value. All that matters is faith…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5099,6 +7604,15 @@
             "span": 2
           },
           "snippet": "Allow perseverance to finish its work, so that you may be mature and complete, not lacking anything.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.34,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5144,6 +7658,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.8,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5164,6 +7691,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And love consists in this: not that we loved God, but that He loved us and sent His Son as the atoning…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.92,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5189,6 +7725,19 @@
             "span": 2
           },
           "snippet": "If you love Me, you will keep My commandments.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.77,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5209,6 +7758,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore I tell you, because her many sins have been forgiven, she has loved much. But he who has been…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.76,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5229,6 +7791,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And we know that God works all things together for the good of those who love Him, who are called according…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.76,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5249,6 +7824,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "You did not choose Me, but I chose you. And I appointed you to go and bear fruit—fruit that will remain—so…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5269,6 +7853,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.72,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5289,6 +7886,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For at one time we too were foolish, disobedient, misled, and enslaved to all sorts of desires and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.7,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5309,6 +7919,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore, as the elect of God, holy and beloved, clothe yourselves with hearts of compassion, kindness…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5329,6 +7948,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Rather, as it is written: “No eye has seen, no ear has heard, no heart has imagined, what God has prepared…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.69,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5349,6 +7981,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "All of us also lived among them at one time, fulfilling the cravings of our flesh and indulging its desires…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.68,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5369,6 +8014,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For the choirmaster. Of David the servant of the LORD, who sang this song to the LORD on the day the LORD had…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.68,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5414,6 +8072,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone with earthly possessions sees his brother in need, but withholds his compassion from him, how can…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love and brother",
+            "basis": "theme",
+            "confidence": 0.61,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love",
+                "brother"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5434,6 +8106,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "No one has ever seen God; but if we love one another, God remains in us, and His love is perfected in us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in 1 John 4",
+            "basis": "samePassage",
+            "confidence": 0.83,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5454,6 +8135,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone says, “I know Him,” but does not keep His commandments, he is a liar, and the truth is not in him.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: liar",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "liar"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5474,6 +8168,17 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If anyone claims to be in the light but hates his brother, he is still in the darkness.",
+          "reason": {
+            "kind": "quote",
+            "label": "Direct quote",
+            "because": "1 John 4:20 and 1 John 2:9 share the same words",
+            "basis": "sharedWording",
+            "confidence": 0.87,
+            "source": "rule",
+            "evidence": {
+              "phrase": "but hates his brother he is"
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5499,6 +8204,19 @@
             "span": 2
           },
           "snippet": "If you love Me, you will keep My commandments.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5519,6 +8237,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "If we say we have fellowship with Him yet walk in the darkness, we lie and do not practice the truth.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5544,6 +8271,19 @@
             "span": 2
           },
           "snippet": "By this everyone will know that you are My disciples, if you love one another.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5564,6 +8304,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "But whoever hates his brother is in the darkness and walks in the darkness. He does not know where he is…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hates and brother",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hates",
+                "brother"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5584,6 +8338,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "No one has ever seen God, but the one and only Son, who is Himself God and is at the Father’s side, has made…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5609,6 +8372,19 @@
             "span": 2
           },
           "snippet": "But I tell you that anyone who is angry with his brother will be subject to judgment. Again, anyone who says…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: brother",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "brother"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5629,6 +8405,21 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "When Joseph’s brothers saw that their father loved him more than any of them, they hated him and could not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hates, love and brother",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hates",
+                "love",
+                "brother"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5654,6 +8445,19 @@
             "span": 2
           },
           "snippet": "Though you have not seen Him, you love Him; and though you do not see Him now, you believe in Him and rejoice…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5699,6 +8503,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "This is the message you have heard from the beginning: We should love one another.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loves",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5719,6 +8536,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "This is My commandment, that you love one another as I have loved you.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: commandment and loves",
+            "basis": "theme",
+            "confidence": 0.61,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "commandment",
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5744,6 +8575,20 @@
             "span": 2
           },
           "snippet": "A new commandment I give you: Love one another. As I have loved you, so you also must love one another.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: commandment and loves",
+            "basis": "theme",
+            "confidence": 0.6,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "commandment",
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5769,6 +8614,20 @@
             "span": 2
           },
           "snippet": "Now about brotherly love, you do not need anyone to write to you, because you yourselves have been taught by…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loves and brother",
+            "basis": "theme",
+            "confidence": 0.61,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loves",
+                "brother"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5789,6 +8648,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "And this is His commandment: that we should believe in the name of His Son, Jesus Christ, and we should love…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: commandment and loves",
+            "basis": "theme",
+            "confidence": 0.6,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "commandment",
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5814,6 +8687,19 @@
             "span": 2
           },
           "snippet": "By this everyone will know that you are My disciples, if you love one another.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loves",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5834,6 +8720,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Do not seek revenge or bear a grudge against any of your people, but love your neighbor as yourself. I am the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loves",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5854,6 +8753,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Jesus declared, “‘Love the Lord your God with all your heart and with all your soul and with all your mind.’",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: commandment and loves",
+            "basis": "theme",
+            "confidence": 0.61,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "commandment",
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5879,6 +8792,19 @@
             "span": 4
           },
           "snippet": "For in Christ Jesus neither circumcision nor uncircumcision has any value. All that matters is faith…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loves",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5899,6 +8825,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Carry one another’s burdens, and in this way you will fulfill the law of Christ.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5924,6 +8859,20 @@
             "span": 2
           },
           "snippet": "We know that we have passed from death to life, because we love our brothers. The one who does not love…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loves and brother",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loves",
+                "brother"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5944,6 +8893,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Jesus replied, “This is the most important: ‘Hear O Israel, the Lord our God, the Lord is One.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: commandment and loves",
+            "basis": "theme",
+            "confidence": 0.6,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "commandment",
+                "loves"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5958,6 +8921,6 @@
   "attribution": {
     "text": "Berean Standard Bible, public domain",
     "crossReferences": "Cross references from OpenBible.info, CC-BY (2016-02-01)",
-    "ai": "Study notes marked 'why' are AI-generated (see manifest.sources.ai)"
+    "ai": "No AI-generated content in this version. Connection reasons are computed by rules from the public-domain text."
   }
 }

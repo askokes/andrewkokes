@@ -16,11 +16,11 @@
   },
   "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
   "motion": {
-    "mode": "autoScroll",
+    "mode": "hold",
     "loop": true,
-    "baseSeconds": 1.6,
-    "perWeightSeconds": 1.2,
-    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "baseSeconds": 3.0,
+    "perWeightSeconds": 3.0,
+    "dwellFormula": "dwellSeconds = 3.0 + 3.0 * weight",
     "advanceOnFocusChange": true
   },
   "items": [
@@ -46,9 +46,20 @@
         "span": 3
       },
       "snippet": "He Himself bore our sins in His body on the tree, so that we might die to sin and live to righteousness. “By…",
-      "why": "Peter borrows Isaiah's words directly, 'by His stripes you are healed', and then picks up the image of straying sheep from the next verse of Isaiah.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.8
+      "reason": {
+        "kind": "quote",
+        "label": "Direct quote",
+        "because": "1 Peter 2:24–25 quotes Isaiah 53:5",
+        "basis": "quotation",
+        "confidence": 0.9,
+        "source": "rule",
+        "evidence": {
+          "phrase": "By His stripes you are healed."
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 6.0
     },
     {
       "rank": 2,
@@ -72,9 +83,18 @@
         "span": 3
       },
       "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
-      "why": "Peter states the exchange Isaiah describes in plain terms: the righteous suffered for the unrighteous, to bring us to God.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.72
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.5,
+        "source": "rule",
+        "evidence": {}
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.79
     },
     {
       "rank": 3,
@@ -93,9 +113,18 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "just as the Son of Man did not come to be served, but to serve, and to give His life as a ransom for many.”",
-      "why": "Jesus describes His own mission in the language of a substitute: He came to give His life as a ransom for many.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.67
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.68
     },
     {
       "rank": 4,
@@ -119,9 +148,18 @@
         "span": 2
       },
       "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.65
+      "dwellSeconds": 5.64
     },
     {
       "rank": 5,
@@ -140,9 +178,18 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.64
+      "dwellSeconds": 5.6
     },
     {
       "rank": 6,
@@ -166,9 +213,18 @@
         "span": 3
       },
       "snippet": "God made Him who knew no sin to be sin on our behalf, so that in Him we might become the righteousness of God.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.59
+      "dwellSeconds": 5.46
     },
     {
       "rank": 7,
@@ -192,9 +248,18 @@
         "span": 12
       },
       "snippet": "For what I received I passed on to you as of first importance: that Christ died for our sins according to the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.48
+      "dwellSeconds": 5.2
     },
     {
       "rank": 8,
@@ -213,9 +278,18 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And by that will, we have been sanctified through the sacrifice of the body of Jesus Christ once for all.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.39
+      "dwellSeconds": 4.98
     },
     {
       "rank": 9,
@@ -234,9 +308,18 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Isaiah 53",
+        "basis": "samePassage",
+        "confidence": 0.85,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.33
+      "dwellSeconds": 4.82
     },
     {
       "rank": 10,
@@ -255,9 +338,18 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "and walk in love, just as Christ loved us and gave Himself up for us as a fragrant sacrificial offering to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.33
+      "dwellSeconds": 4.82
     },
     {
       "rank": 11,
@@ -276,9 +368,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "He did not enter by the blood of goats and calves, but He entered the Most Holy Place once for all by His own…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: transgressions",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "transgressions"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.33
+      "dwellSeconds": 4.82
     },
     {
       "rank": 12,
@@ -297,9 +402,18 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "because by a single offering He has made perfect for all time those who are being sanctified.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.33
+      "dwellSeconds": 4.82
     }
   ],
   "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."

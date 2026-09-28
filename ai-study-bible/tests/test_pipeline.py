@@ -20,7 +20,10 @@ class PipelineTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.ds = Dataset(*ensure_sources(ROOT / "data" / "sources"))
-        cls.b = Builder(cls.ds, {})
+        from build_dataset import BOOK
+        from reasons import ReasonModel
+        rm = ReasonModel(cls.ds.text, cls.ds.ordlist, cls.ds.ordinal, {b: BOOK[b]["displayName"] for b in BOOK})
+        cls.b = Builder(cls.ds, {}, rm)
 
     def test_dataset_totals(self):
         s = self.ds.stats
@@ -82,7 +85,7 @@ class PipelineTest(unittest.TestCase):
         gen = self.b.ticker_feed(43003016)
         for want, got in zip(feed["items"], gen["items"]):
             for k in ("rank", "to", "direction", "votesOut", "votesIn", "score", "weight", "tier", "sameBook",
-                      "viaRange", "snippet", "dwellSeconds"):
+                      "viaRange", "snippet", "dwellSeconds", "reason"):
                 self.assertEqual(want[k], got[k], f"rank {want['rank']} field {k}")
 
 
@@ -102,6 +105,86 @@ class SchemaTest(unittest.TestCase):
             doc = json.loads(p.read_text(encoding="utf-8"))
             errors = list(validators[doc["schema"]].iter_errors(doc))
             self.assertEqual(errors, [], f"{p}: {errors[:1]}")
+
+
+
+class ReasonTest(unittest.TestCase):
+    """Connection reasons (tools/reasons.py) against the hand-labelled pairs in tests/gold_reasons.json."""
+
+    @classmethod
+    def setUpClass(cls):
+        from build_dataset import BOOK, BOOK_NO
+        from reasons import ReasonModel
+        cls.ds = Dataset(*ensure_sources(ROOT / "data" / "sources"))
+        cls.rm = ReasonModel(cls.ds.text, cls.ds.ordlist, cls.ds.ordinal, {b: BOOK[b]["displayName"] for b in BOOK})
+        cls.book_no = BOOK_NO
+
+    def vid(self, ref):
+        b, c, v = ref.split(".")
+        return self.book_no[b] * 1_000_000 + int(c) * 1000 + int(v)
+
+    def test_gold_pairs(self):
+        gold = json.loads((ROOT / "tests" / "gold_reasons.json").read_text(encoding="utf-8"))["pairs"]
+        wrong = []
+        for focus, target, kinds in gold:
+            fv, tv = self.vid(focus), self.vid(target)
+            item = next((it for it in self.ds.merged(fv) if it["start"] <= tv <= it["end"]), None)
+            self.assertIsNotNone(item, f"{focus} -> {target} is not a connection in the dataset")
+            r = self.rm.classify(fv, item["start"], item["end"])
+            if r["kind"] not in kinds:
+                wrong.append(f"{focus} -> {target}: {r['kind']} ({r['because']}), expected {kinds}")
+        self.assertEqual(wrong, [])
+
+    def test_reason_shape_and_wording(self):
+        r = self.rm.classify(19022001, 40027046, 40027046)
+        self.assertEqual((r["kind"], r["label"], r["because"]), ("quote", "Direct quote", "Matthew 27:46 quotes Psalm 22:1"))
+        r = self.rm.classify(43003016, 43003015, 43003015)
+        self.assertEqual((r["kind"], r["basis"]), ("story", "samePassage"))
+        r = self.rm.classify(43003016, 45005008, 45005008)
+        self.assertEqual((r["kind"], r["because"]), ("topic", "Shared theme: loved"))
+        self.assertEqual(r["source"], "rule")
+
+
+class ConfidenceTest(unittest.TestCase):
+    """The match percentage: 100% for the same words or the same account, lower for looser matches."""
+
+    @classmethod
+    def setUpClass(cls):
+        from build_dataset import BOOK
+        from reasons import ReasonModel
+        cls.ds = Dataset(*ensure_sources(ROOT / "data" / "sources"))
+        cls.rm = ReasonModel(cls.ds.text, cls.ds.ordlist, cls.ds.ordinal, {b: BOOK[b]["displayName"] for b in BOOK})
+
+    def conf(self, focus, target):
+        it = next(i for i in self.ds.merged(focus) if i["start"] <= target <= i["end"])
+        return self.rm.classify(focus, it["start"], it["end"], it["score"])
+
+    def test_exact_matches_are_100(self):
+        self.assertEqual(self.conf(19022001, 40027046)["confidence"], 1.0)   # Psalm 22:1 in Matthew 27:46
+        self.assertEqual(self.conf(40013005, 41004005)["confidence"], 1.0)   # Matthew 13:5 = Mark 4:5
+        self.assertEqual(self.conf(45001017, 35002004)["confidence"], 1.0)   # Romans 1:17 quotes Habakkuk 2:4
+
+    def test_looser_matches_score_lower(self):
+        topic = self.conf(43003016, 45005008)                                  # John 3:16 and Romans 5:8
+        self.assertEqual(topic["kind"], "topic")
+        self.assertTrue(0.5 <= topic["confidence"] <= 0.8, topic)
+        passage = self.conf(43003016, 43003015)
+        self.assertTrue(0.8 <= passage["confidence"] < 1.0, passage)
+        for vid in (1001001, 19023001, 58011001):
+            for it in self.ds.merged(vid)[:12]:
+                r = self.rm.classify(vid, it["start"], it["end"], it["score"])
+                self.assertTrue(0.05 <= r["confidence"] <= 1.0)
+                if r["kind"] == "topic":
+                    self.assertLessEqual(r["confidence"], 0.8)
+
+
+class SpecSyncTest(unittest.TestCase):
+    def test_spec_examples_match_samples(self):
+        import subprocess
+        result = subprocess.run([sys.executable, str(ROOT / "tools" / "sync_spec.py"), "--check"],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
 
 
 if __name__ == "__main__":

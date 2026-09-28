@@ -31,6 +31,17 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "About the ninth hour Jesus cried out in a loud voice, “Eli, Eli, lema sabachthani?” which means, “My God, My…",
+      "reason": {
+        "kind": "quote",
+        "label": "Direct quote",
+        "because": "Matthew 27:46 quotes Psalm 22:1",
+        "basis": "sharedWording",
+        "confidence": 1.0,
+        "source": "rule",
+        "evidence": {
+          "phrase": "My God my God why have You forsaken me"
+        }
+      },
       "alsoCites": []
     },
     {
@@ -50,6 +61,17 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "At the ninth hour, Jesus cried out in a loud voice, “Eloi, Eloi, lema sabachthani?” which means, “My God, My…",
+      "reason": {
+        "kind": "quote",
+        "label": "Direct quote",
+        "because": "Mark 15:34 quotes Psalm 22:1",
+        "basis": "sharedWording",
+        "confidence": 1.0,
+        "source": "rule",
+        "evidence": {
+          "phrase": "My God my God why have You forsaken me"
+        }
+      },
       "alsoCites": []
     },
     {
@@ -69,6 +91,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For dogs surround me; a band of evil men encircles me; they have pierced my hands and feet.",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Psalm 22",
+        "basis": "samePassage",
+        "confidence": 0.78,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -93,6 +124,19 @@
         "span": 21
       },
       "snippet": "During the days of Jesus’ earthly life, He offered up prayers and petitions with loud cries and tears to the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: saving",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "saving"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -117,6 +161,19 @@
         "span": 2
       },
       "snippet": "I sigh when food is put before me, and my groans pour out like water.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: groaning",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "groaning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -141,6 +198,19 @@
         "span": 2
       },
       "snippet": "I am numb and badly crushed; I groan in anguish of heart.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: groaning",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "groaning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -160,6 +230,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Why, O LORD, do You stand far off? Why do You hide in times of trouble?",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: far",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "far"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -179,6 +262,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "When I kept silent, my bones became brittle from my groaning all day long.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: groaning",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "groaning"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -198,6 +294,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Be not far from me, for trouble is near and there is no one to help.",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Psalm 22",
+        "basis": "samePassage",
+        "confidence": 0.81,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -217,6 +322,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Do not take my soul away with sinners, or my life with men of bloodshed,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.4,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -236,6 +350,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For the choirmaster. A Maskil of the sons of Korah. As the deer pants for streams of water, so my soul longs…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -255,6 +378,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "We all growl like bears and moan like doves. We hope for justice, but find none, for salvation, but it is far…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: far",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "far"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -274,6 +410,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Keep your lives free from the love of money and be content with what you have, for God has said: “Never will…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -298,6 +443,19 @@
         "span": 2
       },
       "snippet": "But I trust in You, O LORD; I say, “You are my God.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: saving",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "saving"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -322,6 +480,19 @@
         "span": 31
       },
       "snippet": "Jesus said to them, “These are the words I spoke to you while I was still with you: Everything must be…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: words",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "words"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -341,6 +512,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Indeed, for the sake of His great name, the LORD will not abandon His people, because He was pleased to make…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -360,6 +540,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "A Miktam of David. Preserve me, O God, for in You I take refuge.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: David",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "David"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -379,6 +572,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For the LORD loves justice and will not forsake His saints. They are preserved forever, but the offspring of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -398,6 +600,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Vindicate me, O God, and plead my case against an ungodly nation; deliver me from deceitful and unjust men.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -417,6 +628,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "saying, “God has forsaken him; pursue him and seize him, for there is no one to rescue him.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: forsaken",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "forsaken"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -436,6 +660,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "I am bringing My righteousness near; it is not far away, and My salvation will not be delayed. I will grant…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: far",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "far"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -455,6 +692,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And in His anguish, He prayed more earnestly, and His sweat became like drops of blood falling to the ground.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -474,6 +720,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "persecuted, but not forsaken; struck down, but not destroyed.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: forsaken",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "forsaken"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -498,6 +757,19 @@
         "span": 2
       },
       "snippet": "How long, O LORD, must I call for help but You do not hear, or cry out to You, “Violence!” but You do not…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: saving",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "saving"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -522,6 +794,15 @@
         "span": 2
       },
       "snippet": "At that time Jesus went with His disciples to a place called Gethsemane, and He told them, “Sit here while I…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -541,6 +822,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Then the priest shall bring it to the altar, twist off its head, and burn it on the altar; its blood should…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -560,6 +850,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "O my God, remember Tobiah and Sanballat for what they have done, and also Noadiah the prophetess and the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -579,6 +878,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For the choirmaster. With stringed instruments. A Psalm of David. Answer me when I call, O God of my…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: David",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "David"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -598,6 +910,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "in You, my God, I trust. Do not let me be put to shame; do not let my enemies exult over me.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -617,6 +938,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Do not forsake me, O LORD; be not far from me, O my God.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: far",
+        "basis": "theme",
+        "confidence": 0.4,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "far"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -636,6 +970,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "O my God, my soul despairs within me. Therefore I remember You from the land of Jordan and the peaks of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -655,6 +998,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Draw near to my soul and redeem me; ransom me because of my foes.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -674,6 +1026,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Make them like tumbleweed, O my God, like chaff before the wind.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -693,6 +1054,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Teach me to do Your will, for You are my God. May Your good Spirit lead me on level ground.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -712,6 +1082,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But Zion said, “The LORD has forsaken me; the Lord has forgotten me!”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: forsaken",
+        "basis": "theme",
+        "confidence": 0.4,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "forsaken"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -736,6 +1119,15 @@
         "span": 2
       },
       "snippet": "Now, my God, may Your eyes be open and Your ears attentive to the prayer offered in this place.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -760,6 +1152,19 @@
         "span": 2
       },
       "snippet": "For the choirmaster. A Psalm of David. How long, O LORD? Will You forget me forever? How long will You hide…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: David",
+        "basis": "theme",
+        "confidence": 0.36,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "David"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -784,6 +1189,15 @@
         "span": 2
       },
       "snippet": "I say to God my Rock, “Why have You forgotten me? Why must I walk in sorrow because of the enemy’s…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -808,6 +1222,15 @@
         "span": 2
       },
       "snippet": "I will arise now and go about the city, through the streets and squares. I will seek the one I love. So I…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -832,6 +1255,15 @@
         "span": 2
       },
       "snippet": "I opened for my beloved, but he had turned and gone. My heart sank at his departure. I sought him, but did…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -856,6 +1288,15 @@
         "span": 2
       },
       "snippet": "A second time He went away and prayed, “My Father, if this cup cannot pass unless I drink it, may Your will…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -880,6 +1321,15 @@
         "span": 2
       },
       "snippet": "But Jesus was in the stern, sleeping on the cushion. So they woke Him and said, “Teacher, don’t You care that…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -904,6 +1354,15 @@
         "span": 2
       },
       "snippet": "Then they came to a place called Gethsemane, and Jesus told His disciples, “Sit here while I pray.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -928,6 +1387,15 @@
         "span": 3
       },
       "snippet": "Is my complaint against a man? Then why should I not be impatient?",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -952,6 +1420,15 @@
         "span": 3
       },
       "snippet": "Then I called on the name of the LORD: “O LORD, deliver my soul!”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -976,6 +1453,15 @@
         "span": 31
       },
       "snippet": "Then Jesus took the Twelve aside and said to them, “Look, we are going up to Jerusalem, and everything the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1000,6 +1486,15 @@
         "span": 21
       },
       "snippet": "Crumble it and pour oil on it; it is a grain offering.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1024,6 +1519,19 @@
         "span": 31
       },
       "snippet": "He replied, “Elijah does indeed come first, and he restores all things. Why then is it written that the Son…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: doe",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "doe"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1048,6 +1556,15 @@
         "span": 31
       },
       "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed! It would…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1072,6 +1589,15 @@
         "span": 31
       },
       "snippet": "Indeed, the Son of Man will go as it has been determined, but woe to that man who betrays Him.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1096,6 +1622,15 @@
         "span": 31
       },
       "snippet": "that the Christ would suffer, and as the first to rise from the dead, would proclaim light to our people and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1120,6 +1655,15 @@
         "span": 21
       },
       "snippet": "But if he cannot afford two turtledoves or two young pigeons, he may bring a tenth of an ephah of fine flour…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1144,6 +1688,15 @@
         "span": 31
       },
       "snippet": "“Look, we are going up to Jerusalem, and the Son of Man will be delivered over to the chief priests and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1168,6 +1721,15 @@
         "span": 31
       },
       "snippet": "The Son of Man will go just as it is written about Him, but woe to that man by whom He is betrayed. It would…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1192,6 +1754,15 @@
         "span": 31
       },
       "snippet": "But how then would the Scriptures be fulfilled that say it must happen this way?”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1216,6 +1787,15 @@
         "span": 31
       },
       "snippet": "Every day I was with you, teaching in the temple courts, and you did not arrest Me. But this has happened…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1240,6 +1820,15 @@
         "span": 31
       },
       "snippet": "“The Son of Man must suffer many things,” He said. “He must be rejected by the elders, chief priests, and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1264,6 +1853,15 @@
         "span": 31
       },
       "snippet": "Was it not necessary for the Christ to suffer these things and then to enter His glory?”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1288,6 +1886,15 @@
         "span": 31
       },
       "snippet": "And He told them, “This is what is written: The Christ will suffer and rise from the dead on the third day,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1312,6 +1919,15 @@
         "span": 30
       },
       "snippet": "But in this way God has fulfilled what He foretold through all the prophets, saying that His Christ would…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1336,6 +1952,15 @@
         "span": 31
       },
       "snippet": "For what I received I passed on to you as of first importance: that Christ died for our sins according to the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1360,6 +1985,15 @@
         "span": 31
       },
       "snippet": "trying to determine the time and setting to which the Spirit of Christ in them was pointing when He predicted…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     }
   ]

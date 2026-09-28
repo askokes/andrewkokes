@@ -18,8 +18,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from build_dataset import (CANON, DIRECTIONS, TIERS, TRANSLATION, Dataset, ROOT,  # noqa: E402
-                           ai_key, vid_of)
+from build_dataset import (CANON, DIRECTIONS, REASON_BASES, REASON_KINDS, TIERS, TRANSLATION,  # noqa: E402
+                           Dataset, ROOT, ai_key, vid_of)
+from reasons import ReasonModel  # noqa: E402
 from sources import ensure_sources  # noqa: E402
 
 DDL = """
@@ -38,18 +39,21 @@ CREATE TABLE incoming (vid INTEGER NOT NULL, rank INTEGER NOT NULL, fromVid INTE
 CREATE TABLE ticker (vid INTEGER NOT NULL, rank INTEGER NOT NULL, toStart INTEGER NOT NULL, toEnd INTEGER,
   direction INTEGER NOT NULL, votesOut INTEGER NOT NULL, votesIn INTEGER NOT NULL, score100 INTEGER NOT NULL,
   weight1000 INTEGER NOT NULL, tier INTEGER NOT NULL, viaStart INTEGER, viaEnd INTEGER, viaSpan INTEGER,
-  PRIMARY KEY (vid, rank)) WITHOUT ROWID;
+  reasonKind INTEGER NOT NULL, reasonBasis INTEGER NOT NULL, reasonConfidence100 INTEGER NOT NULL,
+  reasonTextId INTEGER NOT NULL, PRIMARY KEY (vid, rank)) WITHOUT ROWID;
+CREATE TABLE reason_text (id INTEGER PRIMARY KEY, because TEXT NOT NULL UNIQUE);
 CREATE TABLE ai_context (key TEXT PRIMARY KEY, kind TEXT NOT NULL, json TEXT NOT NULL) WITHOUT ROWID;
 CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL) WITHOUT ROWID;
 """
 
 CHAPTER_SQL = """
 SELECT v.vid, v.text, t.rank, t.toStart, coalesce(t.toEnd, t.toStart), t.direction, t.votesOut, t.votesIn,
-       t.score100 / 100.0, t.weight1000 / 1000.0, t.tier,
+       t.score100 / 100.0, t.weight1000 / 1000.0, t.tier, t.reasonKind, rt.because,
        t.viaStart, t.viaEnd, t.viaSpan, s.snippet
 FROM verses v
 LEFT JOIN ticker t ON t.vid = v.vid AND t.rank <= :inline
 LEFT JOIN verses s ON s.translation = v.translation AND s.vid = t.toStart
+LEFT JOIN reason_text rt ON rt.id = t.reasonTextId
 WHERE v.translation = :tr AND v.vid BETWEEN :lo AND :hi
 ORDER BY v.vid, t.rank
 """
@@ -59,7 +63,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--sources", default=str(ROOT / "data" / "sources"))
     ap.add_argument("--out", default=str(ROOT / "data" / "full" / "asb.sqlite"))
-    ap.add_argument("--ai", default=str(HERE / "ai_samples.json"))
+    ap.add_argument("--ai", default="", help="optional AI notes file (deferred: v1 ships no AI output)")
     ap.add_argument("--no-fts", action="store_true")
     ap.add_argument("--profile", choices=["ship", "full"], default="ship",
                     help="ship: what the app bundles (ticker, verses, ai); full: also raw edges and incoming rows for tooling")
@@ -88,21 +92,28 @@ def main() -> int:
     for vid, rows in ds.inc.items():
         for i, (f, ts, te, n, v, eff) in enumerate(sorted(rows, key=lambda r: (-r[5], r[3], r[0]))):
             inc_rows.append((vid, i + 1, f, ts, te, n, v, round(eff, 3)))
+    rm = ReasonModel(ds.text, ds.ordlist, ds.ordinal, {b["order"]: b["displayName"] for b in CANON})
+    text_ids: dict[str, int] = {}
     for vid in ds.ordlist:
         for it in ds.merged(vid):
             via = it["via"] or {}
+            r = rm.classify(vid, it["start"], it["end"], it["score"])
+            tid = text_ids.setdefault(r["because"], len(text_ids) + 1)
             tick_rows.append((vid, it["rank"], it["start"], it["end"] if it["end"] != it["start"] else None,
                               DIRECTIONS.index(it["direction"]), it["votesOut"], it["votesIn"],
                               round(it["score"] * 100), round(it["weight"] * 1000), TIERS.index(it["tier"]),
-                              via.get("start"), via.get("end"), via.get("span")))
+                              via.get("start"), via.get("end"), via.get("span"),
+                              REASON_KINDS.index(r["kind"]), REASON_BASES.index(r["basis"]),
+                              round(r["confidence"] * 100), tid))
     if args.profile == "full":
         db.executemany("INSERT INTO edges VALUES (?,?,?,?,?)", edge_rows)
         db.executemany("INSERT INTO incoming VALUES (?,?,?,?,?,?,?,?)", inc_rows)
     else:
         db.execute("DROP TABLE edges")
         db.execute("DROP TABLE incoming")
-    db.executemany("INSERT INTO ticker VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", tick_rows)
-    ai = json.loads(Path(args.ai).read_text(encoding="utf-8")) if Path(args.ai).exists() else {}
+    db.executemany("INSERT INTO ticker VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", tick_rows)
+    db.executemany("INSERT INTO reason_text VALUES (?,?)", [(i, t) for t, i in text_ids.items()])
+    ai = json.loads(Path(args.ai).read_text(encoding="utf-8")) if args.ai and Path(args.ai).exists() else {}
     for k, why in ai.get("edges", {}).items():
         frm, tgt = k.split(">")
         a, _, b = tgt.partition("-")
@@ -141,7 +152,8 @@ def main() -> int:
     counts = {t: ro.execute(f"SELECT count(*) FROM {t}").fetchone()[0] for t in tables}
     ro.close()
     report = {
-        "path": str(out.relative_to(ROOT)), "profile": args.profile, "bytes": out.stat().st_size, "bytesWithoutFts": size_no_fts,
+        "path": str(out.relative_to(ROOT)), "profile": args.profile, "bytes": out.stat().st_size,
+        "distinctReasonSentences": len(text_ids), "bytesWithoutFts": size_no_fts,
         "rows": counts, "john3Rows": len(rows), "john3ColdQueryMs": round(ms_chapter, 2),
         "psalm119WarmQueryMs": round(ms_ps119, 2), "john316Rank1": top, "ftsHitsShepherd": fts,
     }

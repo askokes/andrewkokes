@@ -16,11 +16,11 @@
   },
   "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
   "motion": {
-    "mode": "autoScroll",
+    "mode": "hold",
     "loop": true,
-    "baseSeconds": 1.6,
-    "perWeightSeconds": 1.2,
-    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "baseSeconds": 3.0,
+    "perWeightSeconds": 3.0,
+    "dwellFormula": "dwellSeconds = 3.0 + 3.0 * weight",
     "advanceOnFocusChange": true
   },
   "items": [
@@ -41,9 +41,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
-      "why": "Both verses ground God's love in an act, not a feeling: John says God gave His Son; Paul says Christ died for us while we were still sinners.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.8
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 6.0
     },
     {
       "rank": 2,
@@ -62,9 +75,23 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
-      "why": "John's letter restates his Gospel line almost word for word: God sent His one and only Son into the world, and this is what love is.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.71
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world and loved",
+        "basis": "theme",
+        "confidence": 0.72,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world",
+            "loved"
+          ]
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.77
     },
     {
       "rank": 3,
@@ -83,9 +110,18 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "that everyone who believes in Him may have eternal life.",
-      "why": "The verse immediately before it: 'everyone who believes in Him may have eternal life' is the promise 3:16 then explains with God's love as its cause.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.64
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in John 3",
+        "basis": "samePassage",
+        "confidence": 0.89,
+        "source": "rule",
+        "evidence": {}
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.59
     },
     {
       "rank": 4,
@@ -104,9 +140,23 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes and life",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes",
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.6
+      "dwellSeconds": 5.5
     },
     {
       "rank": 5,
@@ -130,9 +180,24 @@
         "span": 4
       },
       "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, believes and life",
+        "basis": "theme",
+        "confidence": 0.75,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "believes",
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.58
+      "dwellSeconds": 5.45
     },
     {
       "rank": 6,
@@ -151,9 +216,18 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.57
+      "dwellSeconds": 5.43
     },
     {
       "rank": 7,
@@ -177,9 +251,18 @@
         "span": 2
       },
       "snippet": "Whoever believes in the Son has eternal life. Whoever rejects the Son will not see life. Instead, the wrath…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in John 3",
+        "basis": "samePassage",
+        "confidence": 0.83,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.56
+      "dwellSeconds": 5.4
     },
     {
       "rank": 8,
@@ -198,9 +281,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "We love because He first loved us.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.54
+      "dwellSeconds": 5.34
     },
     {
       "rank": 9,
@@ -224,9 +320,24 @@
         "span": 2
       },
       "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, world and believes",
+        "basis": "theme",
+        "confidence": 0.77,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "world",
+            "believes"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.5
+      "dwellSeconds": 5.26
     },
     {
       "rank": 10,
@@ -250,9 +361,24 @@
         "span": 2
       },
       "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, perish and life",
+        "basis": "theme",
+        "confidence": 0.73,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "perish",
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.5
+      "dwellSeconds": 5.24
     },
     {
       "rank": 11,
@@ -271,9 +397,22 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "The next day John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.48
+      "dwellSeconds": 5.21
     },
     {
       "rank": 12,
@@ -292,9 +431,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life",
+        "basis": "theme",
+        "confidence": 0.66,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.48
+      "dwellSeconds": 5.19
     }
   ],
   "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."

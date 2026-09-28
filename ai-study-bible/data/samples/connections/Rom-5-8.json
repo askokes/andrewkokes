@@ -31,6 +31,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -50,6 +63,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Romans 5",
+        "basis": "samePassage",
+        "confidence": 0.88,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -74,6 +96,19 @@
         "span": 3
       },
       "snippet": "Greater love has no one than this, that he lay down his life for his friends.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.6,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -93,6 +128,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.56,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -117,6 +165,19 @@
         "span": 3
       },
       "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ",
+        "basis": "theme",
+        "confidence": 0.58,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -141,6 +202,19 @@
         "span": 3
       },
       "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.55,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -160,6 +234,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -179,6 +262,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "The law came in so that the trespass would increase; but where sin increased, grace increased all the more,",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in Romans 5",
+        "basis": "samePassage",
+        "confidence": 0.79,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -203,6 +295,15 @@
         "span": 3
       },
       "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -222,6 +323,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "in order that in the coming ages He might display the surpassing riches of His grace, demonstrated by His…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ",
+        "basis": "theme",
+        "confidence": 0.52,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -241,6 +355,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "to the praise of His glorious grace, which He has freely given us in the Beloved One.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -260,6 +383,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But for this very reason I was shown mercy, so that in me, the worst of sinners, Christ Jesus might display…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: sinners and Christ",
+        "basis": "theme",
+        "confidence": 0.54,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "sinners",
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -279,6 +416,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For you know the grace of our Lord Jesus Christ, that though He was rich, yet for your sakes He became poor…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ",
+        "basis": "theme",
+        "confidence": 0.45,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -298,6 +448,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Behold what manner of love the Father has given to us, that we should be called children of God. And that is…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -322,6 +485,15 @@
         "span": 5
       },
       "snippet": "But He was pierced for our transgressions, He was crushed for our iniquities; the punishment that brought us…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.4,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -341,6 +513,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But the tax collector stood at a distance, unwilling even to lift up his eyes to heaven. Instead, he beat his…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: sinners",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "sinners"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -360,6 +545,20 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ and love",
+        "basis": "theme",
+        "confidence": 0.48,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ",
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -379,6 +578,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Then I passed by and saw you, and you were indeed old enough for love. So I spread My cloak over you and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -398,6 +610,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "made us alive with Christ even when we were dead in our trespasses. It is by grace you have been saved!",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -422,6 +647,15 @@
         "span": 3
       },
       "snippet": "And those He predestined, He also called; those He called, He also justified; those He justified, He also…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.36,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -446,6 +680,19 @@
         "span": 3
       },
       "snippet": "And love consists in this: not that we loved God, but that He loved us and sent His Son as the atoning…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -470,6 +717,15 @@
         "span": 5
       },
       "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -489,6 +745,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "But if our unrighteousness highlights the righteousness of God, what shall we say? That God is unjust to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -508,6 +773,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Do not lay a hand on the boy or do anything to him,” said the angel, “for now I know that you fear God…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -527,6 +801,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "for my father fought for you and risked his life to deliver you from the hand of Midian,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -546,6 +829,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "You have ascended on high; You have led captives away. You have received gifts from men, even from the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -565,6 +857,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "He has made its posts of silver, its base of gold, its seat of purple fabric. Its interior is inlaid with…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -584,6 +889,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "How lovely they will be, and how beautiful! Grain will make the young men flourish, and new wine, the young…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -603,6 +921,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "When a sinful woman from that town learned that Jesus was dining there, she brought an alabaster jar of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -622,6 +949,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Rather, as servants of God we commend ourselves in every way: in great endurance; in troubles, hardships, and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -641,6 +977,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Now may our Lord Jesus Christ Himself and God our Father, who by grace has loved us and given us eternal…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ and love",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ",
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -660,6 +1010,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But we see Jesus, who was made a little lower than the angels, now crowned with glory and honor because He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -679,6 +1038,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Therefore Christ is the mediator of a new covenant, so that those who are called may receive the promised…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: died and Christ",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "died",
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -703,6 +1076,19 @@
         "span": 3
       },
       "snippet": "But love your enemies, do good to them, and lend to them, expecting nothing in return. Then your reward will…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -727,6 +1113,20 @@
         "span": 3
       },
       "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: sinners and Christ",
+        "basis": "theme",
+        "confidence": 0.44,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "sinners",
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -751,6 +1151,19 @@
         "span": 2
       },
       "snippet": "know that a man is not justified by works of the law, but by faith in Jesus Christ. So we, too, have believed…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -775,6 +1188,15 @@
         "span": 10
       },
       "snippet": "Restore to me the joy of Your salvation, and sustain me with a willing spirit.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -799,6 +1221,15 @@
         "span": 6
       },
       "snippet": "We have this hope as an anchor for the soul, firm and secure. It enters the inner sanctuary behind the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -823,6 +1254,19 @@
         "span": 3
       },
       "snippet": "He has brought me to the house of wine, and his banner over me is love.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -847,6 +1291,15 @@
         "span": 3
       },
       "snippet": "I will lead the blind by a way they did not know; I will guide them on unfamiliar paths. I will turn darkness…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -871,6 +1324,15 @@
         "span": 3
       },
       "snippet": "So if you who are evil know how to give good gifts to your children, how much more will your Father in heaven…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -895,6 +1357,19 @@
         "span": 3
       },
       "snippet": "On hearing this, Jesus told them, “It is not the healthy who need a doctor, but the sick. I have not come to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: sinners",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "sinners"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -919,6 +1394,15 @@
         "span": 3
       },
       "snippet": "However, to the one who does not work, but believes in Him who justifies the wicked, his faith is credited as…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -943,6 +1427,15 @@
         "span": 4
       },
       "snippet": "Now please let your servant stay here as my lord’s slave in place of the boy. Let him return with his…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -962,6 +1455,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But because of His great love for us, God, who is rich in mercy,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: love",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "love"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -981,6 +1487,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And, “If it is hard for the righteous to be saved, what will become of the ungodly and the sinner?”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: sinners",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "sinners"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1005,6 +1524,15 @@
         "span": 10
       },
       "snippet": "For unto us a child is born, unto us a son is given, and the government will be upon His shoulders. And He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1029,6 +1557,15 @@
         "span": 5
       },
       "snippet": "Awake, O sword, against My Shepherd, against the man who is My Companion, declares the LORD of Hosts. Strike…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1053,6 +1590,19 @@
         "span": 11
       },
       "snippet": "And this righteousness from God comes through faith in Jesus Christ to all who believe. There is no…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: Christ",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1077,6 +1627,20 @@
         "span": 5
       },
       "snippet": "Who is there to condemn us? For Christ Jesus, who died, and more than that was raised to life, is at the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: died and Christ",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "died",
+            "Christ"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1101,6 +1665,15 @@
         "span": 6
       },
       "snippet": "He must lay his hand on its head and slaughter it in front of the Tent of Meeting. Then Aaron’s sons shall…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1125,6 +1698,15 @@
         "span": 6
       },
       "snippet": "And he shall remove all the fat, just as the fat of the lamb is removed from the peace offerings, and he…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1149,6 +1731,15 @@
         "span": 6
       },
       "snippet": "one young bull, one ram, and one male lamb a year old for a burnt offering;",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1173,6 +1764,15 @@
         "span": 10
       },
       "snippet": "I am a wall, and my breasts are like towers. So I have become in his eyes like one who brings peace.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1197,6 +1797,15 @@
         "span": 10
       },
       "snippet": "Or let them lay claim to My protection; let them make peace with Me— yes, let them make peace with Me.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.32,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1221,6 +1830,19 @@
         "span": 3
       },
       "snippet": "He died for us so that, whether we are awake or asleep, we may live together with Him.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: died",
+        "basis": "theme",
+        "confidence": 0.36,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "died"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1245,6 +1867,15 @@
         "span": 7
       },
       "snippet": "For a man seldom considers the days of his life, because God keeps him occupied with the joy of his heart.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     }
   ]

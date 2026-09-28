@@ -16,11 +16,11 @@
   },
   "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
   "motion": {
-    "mode": "autoScroll",
+    "mode": "hold",
     "loop": true,
-    "baseSeconds": 1.6,
-    "perWeightSeconds": 1.2,
-    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "baseSeconds": 3.0,
+    "perWeightSeconds": 3.0,
+    "dwellFormula": "dwellSeconds = 3.0 + 3.0 * weight",
     "advanceOnFocusChange": true
   },
   "items": [
@@ -41,9 +41,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "In the beginning was the Word, and the Word was with God, and the Word was God.",
-      "why": "John opens his Gospel with the same words, 'In the beginning', and names the Word as the one through whom all things were made.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.8
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning",
+        "basis": "theme",
+        "confidence": 0.71,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning"
+          ]
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 6.0
     },
     {
       "rank": 2,
@@ -67,9 +80,18 @@
         "span": 32
       },
       "snippet": "By faith we understand that the universe was formed at God’s command, so that what is seen was not made out…",
-      "why": "Hebrews reads the creation account as a lesson in faith: the universe was formed at God's command, out of what cannot be seen.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.77
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {}
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.91
     },
     {
       "rank": 3,
@@ -88,9 +110,24 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For thus says the LORD, who created the heavens—He is God; He formed the earth and fashioned it; He…",
-      "why": "Isaiah points to creation as proof that God is unique: the one who made the heavens and formed the earth is the only God.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.71
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.8,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.77
     },
     {
       "rank": 4,
@@ -109,9 +146,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Where were you when I laid the foundations of the earth? Tell Me, if you have understanding.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: earth",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "earth"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.66
+      "dwellSeconds": 5.65
     },
     {
       "rank": 5,
@@ -130,9 +180,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Worthy are You, our Lord and God, to receive glory and honor and power, for You created all things; by Your…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.66
+      "dwellSeconds": 5.65
     },
     {
       "rank": 6,
@@ -151,9 +214,24 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "This is what God the LORD says— He who created the heavens and stretched them out, who spread out the earth…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.78,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.64
+      "dwellSeconds": 5.6
     },
     {
       "rank": 7,
@@ -172,9 +250,24 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And: “In the beginning, O Lord, You laid the foundations of the earth, and the heavens are the work of Your…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: beginning, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.74,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "beginning",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.64
+      "dwellSeconds": 5.6
     },
     {
       "rank": 8,
@@ -193,9 +286,23 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The God who made the world and everything in it is the Lord of heaven and earth and does not live in temples…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.62
+      "dwellSeconds": 5.54
     },
     {
       "rank": 9,
@@ -214,9 +321,24 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For in Him all things were created, things in heaven and on earth, visible and invisible, whether thrones or…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.74,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.61
+      "dwellSeconds": 5.52
     },
     {
       "rank": 10,
@@ -240,9 +362,23 @@
         "span": 2
       },
       "snippet": "For in six days the LORD made the heavens and the earth and the sea and all that is in them, but on the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens and earth",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.6
+      "dwellSeconds": 5.5
     },
     {
       "rank": 11,
@@ -261,9 +397,24 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "You alone are the LORD. You created the heavens, the highest heavens with all their host, the earth and all…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: created, heavens and earth",
+        "basis": "theme",
+        "confidence": 0.73,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "created",
+            "heavens",
+            "earth"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.56
+      "dwellSeconds": 5.4
     },
     {
       "rank": 12,
@@ -282,9 +433,22 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "By His insight He made the heavens. His loving devotion endures forever.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: heavens",
+        "basis": "theme",
+        "confidence": 0.58,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "heavens"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.53
+      "dwellSeconds": 5.31
     }
   ],
   "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."

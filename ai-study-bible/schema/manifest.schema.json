@@ -217,6 +217,12 @@
         "motion": {
           "type": "object",
           "properties": {
+            "defaultMode": {
+              "enum": [
+                "hold",
+                "autoScroll"
+              ]
+            },
             "baseSeconds": {
               "type": "number"
             },
@@ -226,6 +232,7 @@
           },
           "additionalProperties": false,
           "required": [
+            "defaultMode",
             "baseSeconds",
             "perWeightSeconds"
           ]
@@ -240,6 +247,106 @@
         "order",
         "tickerInline",
         "snippetMaxChars"
+      ]
+    },
+    "reasons": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "string"
+        },
+        "analysisText": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "properties": {
+            "quote": {
+              "type": "string"
+            },
+            "story": {
+              "type": "string"
+            },
+            "topic": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "quote",
+            "story",
+            "topic"
+          ]
+        },
+        "bases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "share": {
+          "type": "object",
+          "properties": {
+            "quote": {
+              "type": "number"
+            },
+            "story": {
+              "type": "number"
+            },
+            "topic": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "quote",
+            "story",
+            "topic"
+          ]
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "quote": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "story": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "topic": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "quote",
+            "story",
+            "topic"
+          ]
+        },
+        "confidence": {
+          "type": "string"
+        },
+        "tested": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "rules",
+        "analysisText",
+        "labels",
+        "share"
       ]
     },
     "translations": {
@@ -280,6 +387,16 @@
           },
           "bundled": {
             "type": "boolean"
+          },
+          "delivery": {
+            "enum": [
+              "bundled",
+              "pack",
+              "youversionPlatform"
+            ]
+          },
+          "youversionVersionId": {
+            "type": "integer"
           },
           "packUrl": {
             "type": [
@@ -331,6 +448,12 @@
           },
           "name": {
             "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "deferred"
+            ]
           },
           "version": {
             "type": "string"
@@ -455,6 +578,7 @@
     "canon",
     "graph",
     "ranking",
+    "reasons",
     "translations",
     "sources",
     "shards",

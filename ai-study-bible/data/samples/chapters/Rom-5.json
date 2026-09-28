@@ -59,6 +59,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Peace I leave with you; My peace I give to you. I do not give to you as the world gives. Do not let your…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: peace",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "peace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -79,6 +92,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Now may the God of hope fill you with all joy and peace as you believe in Him, so that you may overflow with…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: peace",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "peace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -104,6 +130,19 @@
             "span": 5
           },
           "snippet": "For the kingdom of God is not a matter of eating and drinking, but of righteousness, peace, and joy in the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: peace",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "peace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -124,6 +163,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The work of righteousness will be peace; the service of righteousness will be quiet confidence forever.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: peace",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "peace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -144,6 +196,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ and Jesus",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -164,6 +230,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore let it be known to you, brothers, that through Jesus the forgiveness of sins is proclaimed to you.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: justified and Jesus",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "justified",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -184,6 +264,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Let the peace of Christ rule in your hearts, for to this you were called as members of one body. And be…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: peace and Christ",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "peace",
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -204,6 +298,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "and through Him to reconcile to Himself all things, whether things on earth or things in heaven, by making…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: peace",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "peace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -224,6 +331,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Therefore, since we have now been justified by His blood, how much more shall we be saved from wrath through…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.86,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -244,6 +360,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Therefore, there is now no condemnation for those who are in Christ Jesus.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ and Jesus",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -269,6 +399,21 @@
             "span": 2
           },
           "snippet": "And Jesus told the woman, “Your faith has saved you; go in peace.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: faith, peace and Jesus",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "faith",
+                "peace",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -289,6 +434,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "You will keep in perfect peace the steadfast of mind, because he trusts in You.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: peace",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "peace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -334,6 +492,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For through Him we both have access to the Father by one Spirit.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: access",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "access"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -354,6 +525,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "In Him and through faith in Him we may enter God’s presence with boldness and confidence.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: faith",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "faith"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -374,6 +558,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now, brothers, I want to remind you of the gospel I preached to you, which you received, and in which you…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -394,6 +587,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But Christ is faithful as the Son over God’s house. And we are His house, if we hold firmly to our confidence…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -414,6 +620,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Jesus answered, “I am the way and the truth and the life. No one comes to the Father except through Me.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -434,6 +649,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -454,6 +678,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Truly, truly, I tell you, whoever hears My word and believes Him who sent Me has eternal life and will not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -479,6 +712,19 @@
             "span": 2
           },
           "snippet": "And Jesus told the woman, “Your faith has saved you; go in peace.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: faith",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "faith"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -504,6 +750,19 @@
             "span": 3
           },
           "snippet": "Be joyful in hope, patient in affliction, persistent in prayer.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -529,6 +788,15 @@
             "span": 2
           },
           "snippet": "I am the gate. If anyone enters through Me, he will be saved. He will come in and go out and find pasture.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -549,6 +817,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore my heart is glad and my tongue rejoices; my body also will dwell securely.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -569,6 +850,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Blessed is the man who does not walk in the counsel of the wicked, or set foot on the path of sinners, or sit…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -614,6 +904,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Consider it pure joy, my brothers, when you encounter trials of many kinds,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perseverance",
+            "basis": "theme",
+            "confidence": 0.59,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perseverance"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -639,6 +942,15 @@
             "span": 3
           },
           "snippet": "And we know that God works all things together for the good of those who love Him, who are called according…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -659,6 +971,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Blessed is the man who perseveres under trial, because when he has stood the test, he will receive the crown…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -679,6 +1000,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But He said to me, “My grace is sufficient for you, for My power is perfected in weakness.” Therefore I will…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -699,6 +1029,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Blessed are you when people hate you, and when they exclude you and insult you and reject your name as evil…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -719,6 +1062,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But even if you should suffer for what is right, you are blessed. “Do not fear what they fear; do not be…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sufferings",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sufferings"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -744,6 +1100,19 @@
             "span": 3
           },
           "snippet": "For our light and momentary affliction is producing for us an eternal weight of glory that is far beyond…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: produces",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "produces"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -769,6 +1138,19 @@
             "span": 2
           },
           "snippet": "because you know that the testing of your faith develops perseverance.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perseverance",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perseverance"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -789,6 +1171,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But even if I am being poured out like a drink offering on the sacrifice and service of your faith, I am glad…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -814,6 +1209,15 @@
             "span": 3
           },
           "snippet": "Who shall separate us from the love of Christ? Shall trouble or distress or persecution or famine or…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -834,6 +1238,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The apostles left the Sanhedrin, rejoicing that they had been counted worthy of suffering disgrace for the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sufferings and rejoice",
+            "basis": "theme",
+            "confidence": 0.6,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sufferings",
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -854,6 +1272,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "So I ask you not to be discouraged because of my sufferings for you, which are your glory.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sufferings",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sufferings"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -904,6 +1335,15 @@
             "span": 3
           },
           "snippet": "And we know that God works all things together for the good of those who love Him, who are called according…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -929,6 +1369,19 @@
             "span": 2
           },
           "snippet": "because you know that the testing of your faith develops perseverance.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perseverance",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perseverance"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -949,6 +1402,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Blessed is the man who perseveres under trial, because when he has stood the test, he will receive the crown…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -974,6 +1436,15 @@
             "span": 3
           },
           "snippet": "We are hard pressed on all sides, but not crushed; perplexed, but not in despair;",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -994,6 +1465,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "These things come to mind as I pour out my soul: how I walked with the multitude, leading the procession to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1019,6 +1503,15 @@
             "span": 3
           },
           "snippet": "For our light and momentary affliction is producing for us an eternal weight of glory that is far beyond…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.39,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1044,6 +1537,19 @@
             "span": 2
           },
           "snippet": "and to knowledge, self-control; and to self-control, perseverance; and to perseverance, godliness;",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: perseverance",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "perseverance"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1064,6 +1570,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "When they had brought the kings to Joshua, he summoned all the men of Israel and said to the army commanders…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1084,6 +1599,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "David replied, “Your servant has been tending his father’s sheep, and whenever a lion or a bear came and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1104,6 +1628,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "When the wicked came upon me to devour my flesh, my enemies and foes stumbled and fell.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1124,6 +1657,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But I will always hope and will praise You more and more.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1144,6 +1690,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Even when I am old and gray, do not forsake me, O God, until I proclaim Your power to the next generation…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -1194,6 +1749,19 @@
             "span": 3
           },
           "snippet": "And we know that God works all things together for the good of those who love Him, who are called according…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1214,6 +1782,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God has not given us a spirit of fear, but of power, love, and self-control.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit and love",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1234,6 +1816,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And because you are sons, God sent the Spirit of His Son into our hearts, crying out, “Abba, Father!”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit and hearts",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit",
+                "hearts"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1254,6 +1850,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I eagerly expect and hope that I will in no way be ashamed, but will have complete boldness so that now as…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1274,6 +1883,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "as it is written: “See, I lay in Zion a stone of stumbling and a rock of offense; and the one who believes in…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1299,6 +1917,15 @@
             "span": 2
           },
           "snippet": "For this reason, even though I suffer as I do, I am not ashamed; for I know whom I have believed, and I am…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1319,6 +1946,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For what is the hope of the godless when he is cut off, when God takes away his life?",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1339,6 +1979,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Sustain me as You promised, that I may live; let me not be ashamed of my hope.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1359,6 +2012,21 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Exalted, then, to the right hand of God, He has received from the Father the promised Holy Spirit and has…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: poured, holy and Spirit",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "poured",
+                "holy",
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1384,6 +2052,20 @@
             "span": 5
           },
           "snippet": "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Spirit and love",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Spirit",
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1404,6 +2086,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For I will pour water on the thirsty land, and currents on the dry ground. I will pour out My Spirit on your…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: poured and Spirit",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "poured",
+                "Spirit"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1424,6 +2120,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Kings will be your foster fathers, and their queens your nursing mothers. They will bow to you facedown and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: hope",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "hope"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -1469,6 +2178,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.88,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1489,6 +2207,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And you were dead in your trespasses and sins,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1509,6 +2240,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "When you were dead in your trespasses and in the uncircumcision of your sinful nature, God made you alive…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1534,6 +2278,15 @@
             "span": 3
           },
           "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1554,6 +2307,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.82,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1574,6 +2336,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For at one time we too were foolish, disobedient, misled, and enslaved to all sorts of desires and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1594,6 +2365,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "It instructs us to renounce ungodliness and worldly passions, and to live sensible, upright, and godly lives…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1614,6 +2394,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "to execute judgment on everyone, and to convict all the ungodly of every ungodly act of wickedness and every…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: ungodly",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "ungodly"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1639,6 +2432,15 @@
             "span": 3
           },
           "snippet": "However, to the one who does not work, but believes in Him who justifies the wicked, his faith is credited as…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1659,6 +2461,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Blessed is the man who does not walk in the counsel of the wicked, or set foot on the path of sinners, or sit…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1679,6 +2490,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "On the day of your birth your cord was not cut, nor were you washed with water for cleansing. You were not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1699,6 +2519,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God has not appointed us to suffer wrath, but to obtain salvation through our Lord Jesus Christ.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -1744,6 +2577,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "It is well with the man who is generous and lends freely, whose affairs are guided by justice.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: man",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1769,6 +2615,15 @@
             "span": 3
           },
           "snippet": "Greater love has no one than this, that he lay down his life for his friends.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1789,6 +2644,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Barnabas was a good man, full of the Holy Spirit and faith, and a great number of people were brought to the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: good and man",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "good",
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1809,6 +2678,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "who have risked their lives for me. Not only I but all the churches of the Gentiles are grateful to them.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1834,6 +2712,15 @@
             "span": 5
           },
           "snippet": "But He was pierced for our transgressions, He was crushed for our iniquities; the punishment that brought us…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1854,6 +2741,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But the people pleaded, “You must not go out! For if we have to flee, they will pay no attention to us. Even…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: die",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "die"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1874,6 +2774,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The watchman said, “The first man appears to me to be running like Ahimaaz son of Zadok.” “This is a good…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: good and man",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "good",
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1894,6 +2808,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "At that time David was in the stronghold, and the garrison of the Philistines was at Bethlehem.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1914,6 +2837,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1939,6 +2871,15 @@
             "span": 5
           },
           "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.35,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1959,6 +2900,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "So the three mighty men broke through the Philistine camp, drew water from the well near the gate of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.35,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1979,6 +2929,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "The good man obtains favor from the LORD, but the LORD condemns a man who devises evil.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: good and man",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "good",
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2024,8 +2988,21 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
-          "why": "The two best-known statements of God's love side by side: Paul's proof in Christ's death matches Jesus' words about God giving His Son.",
-          "aiStatus": "cached"
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.65,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
+          "why": null,
+          "aiStatus": "not_generated"
         },
         {
           "rank": 2,
@@ -2044,8 +3021,17 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
-          "why": "Two verses earlier Paul makes the same point from another angle: Christ died for the ungodly while we were still powerless.",
-          "aiStatus": "cached"
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.88,
+            "source": "rule",
+            "evidence": {}
+          },
+          "why": null,
+          "aiStatus": "not_generated"
         },
         {
           "rank": 3,
@@ -2069,8 +3055,21 @@
             "span": 3
           },
           "snippet": "Greater love has no one than this, that he lay down his life for his friends.",
-          "why": "Jesus calls laying down one's life for friends the greatest love. Paul goes further here: Christ died for people who were still sinners.",
-          "aiStatus": "cached"
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.6,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
+          "why": null,
+          "aiStatus": "not_generated"
         },
         {
           "rank": 4,
@@ -2089,6 +3088,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2114,6 +3126,19 @@
             "span": 3
           },
           "snippet": "For Christ also suffered for sins once for all, the righteous for the unrighteous, to bring you to God. He…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2139,6 +3164,19 @@
             "span": 3
           },
           "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: love",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "love"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2159,6 +3197,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "We all like sheep have gone astray, each one has turned to his own way; and the LORD has laid upon Him the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2179,6 +3226,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "The law came in so that the trespass would increase; but where sin increased, grace increased all the more,",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.79,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2204,6 +3260,15 @@
             "span": 3
           },
           "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2224,6 +3289,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "in order that in the coming ages He might display the surpassing riches of His grace, demonstrated by His…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Christ",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2244,6 +3322,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "to the praise of His glorious grace, which He has freely given us in the Beloved One.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2264,6 +3351,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But for this very reason I was shown mercy, so that in me, the worst of sinners, Christ Jesus might display…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sinners and Christ",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sinners",
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2309,6 +3410,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "The wrath of God is being revealed from heaven against all the godlessness and wickedness of men who suppress…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: wrath",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "wrath"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2334,6 +3448,19 @@
             "span": 2
           },
           "snippet": "and to await His Son from heaven, whom He raised from the dead—Jesus our deliverer from the coming wrath.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: wrath",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "wrath"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2359,6 +3486,15 @@
             "span": 2
           },
           "snippet": "Therefore, since we have been justified through faith, we have peace with God through our Lord Jesus Christ,",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.86,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2379,6 +3515,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "and are justified freely by His grace through the redemption that is in Christ Jesus.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: justified and blood",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "justified",
+                "blood"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2404,6 +3554,19 @@
             "span": 3
           },
           "snippet": "And those He predestined, He also called; those He called, He also justified; those He justified, He also…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: justified",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "justified"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2424,6 +3587,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Truly, truly, I tell you, whoever hears My word and believes Him who sent Me has eternal life and will not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2444,6 +3616,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Therefore, there is now no condemnation for those who are in Christ Jesus.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2464,6 +3645,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "According to the law, in fact, nearly everything must be purified with blood, and without the shedding of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: blood",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "blood"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2489,6 +3683,19 @@
             "span": 2
           },
           "snippet": "But now in Christ Jesus you who once were far away have been brought near through the blood of Christ.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: blood",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "blood"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2514,6 +3721,15 @@
             "span": 5
           },
           "snippet": "But He was pierced for our transgressions, He was crushed for our iniquities; the punishment that brought us…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2534,6 +3750,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.86,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2554,6 +3779,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "how much more will the blood of Christ, who through the eternal Spirit offered Himself unblemished to God…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: blood",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "blood"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2599,6 +3837,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: life",
+            "basis": "theme",
+            "confidence": 0.62,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2624,6 +3875,19 @@
             "span": 2
           },
           "snippet": "All this is from God, who reconciled us to Himself through Christ and gave us the ministry of reconciliation:",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reconciled",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reconciled"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2649,6 +3913,15 @@
             "span": 5
           },
           "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2669,6 +3942,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "and reconciling both of them to God in one body through the cross, by which He extinguished their hostility.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reconciled",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reconciled"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2689,6 +3975,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Seventy weeks are decreed for your people and your holy city to stop their transgression, to put an end to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2709,6 +4004,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For at just the right time, while we were still powerless, Christ died for the ungodly.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.82,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2729,6 +4033,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "In a little while the world will see Me no more, but you will see Me. Because I live, you also will live.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2749,6 +4062,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Not only that, but we also rejoice in God through our Lord Jesus Christ, through whom we have now received…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2769,6 +4091,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "We always carry around in our body the death of Jesus, so that the life of Jesus may also be revealed in our…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: death and life",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "death",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2789,6 +4125,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "and through Him to reconcile to Himself all things, whether things on earth or things in heaven, by making…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reconciled",
+            "basis": "theme",
+            "confidence": 0.51,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reconciled"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2809,6 +4158,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For you died, and your life is now hidden with Christ in God.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: life",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2829,6 +4191,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Peace I leave with you; My peace I give to you. I do not give to you as the world gives. Do not let your…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -2879,6 +4250,20 @@
             "span": 2
           },
           "snippet": "All this is from God, who reconciled us to Himself through Christ and gave us the ministry of reconciliation:",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reconciliation and Christ",
+            "basis": "theme",
+            "confidence": 0.59,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reconciliation",
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2899,6 +4284,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I will rejoice greatly in the LORD, my soul will exult in my God; for He has clothed me with garments of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2919,6 +4317,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2939,6 +4346,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then Mary said: “My soul magnifies the Lord,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2959,6 +4375,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "At that time Hannah prayed: “My heart rejoices in the LORD in whom my horn is exalted. My mouth speaks boldly…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2979,6 +4408,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Be glad in the LORD and rejoice, O righteous ones; shout for joy, all you upright in heart.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -2999,6 +4441,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then I will go to the altar of God, to God, my greatest joy. I will praise You with the harp, O God, my God.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3019,6 +4470,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Finally, my brothers, rejoice in the Lord. It is no trouble for me to write the same things to you again, and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3039,6 +4503,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Rejoice in the Lord always. I will say it again: Rejoice!",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3064,6 +4541,19 @@
             "span": 2
           },
           "snippet": "For if their rejection is the reconciliation of the world, what will their acceptance be but life from the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reconciliation",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reconciliation"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3084,6 +4574,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "May my meditation be pleasing to Him, for I rejoice in the LORD.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3104,6 +4607,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Let Israel rejoice in their Maker; let the children of Zion rejoice in their King.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: rejoice",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "rejoice"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -3149,6 +4665,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: death and sin",
+            "basis": "theme",
+            "confidence": 0.59,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "death",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3174,6 +4704,20 @@
             "span": 6
           },
           "snippet": "For since death came through a man, the resurrection of the dead comes also through a man.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: death and man",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "death",
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3194,6 +4738,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For just as through the disobedience of the one man the many were made sinners, so also through the obedience…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.82,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3219,6 +4772,15 @@
             "span": 10
           },
           "snippet": "but you must not eat from the tree of the knowledge of good and evil; for in the day that you eat of it, you…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3239,6 +4801,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Surely I was brought forth in iniquity; I was sinful when my mother conceived me.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3264,6 +4835,20 @@
             "span": 10
           },
           "snippet": "Then after desire has conceived, it gives birth to sin; and sin, when it is full-grown, gives birth to death.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: death and sin",
+            "basis": "theme",
+            "confidence": 0.53,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "death",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3284,6 +4869,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "for all have sinned and fall short of the glory of God,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sinned",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sinned"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3304,6 +4902,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "so that, just as sin reigned in death, so also grace might reign through righteousness to bring eternal life…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3324,6 +4931,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "If we say we have no sin, we deceive ourselves, and the truth is not in us.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sinned and sin",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sinned",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3349,6 +4970,15 @@
             "span": 8
           },
           "snippet": "When the woman saw that the tree was good for food and pleasing to the eyes, and that it was desirable for…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3374,6 +5004,15 @@
             "span": 10
           },
           "snippet": "By the sweat of your brow you will eat your bread, until you return to the ground— because out of it were you…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3394,6 +5033,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Behold, every soul belongs to Me; both father and son are Mine. The soul who sins is the one who will die.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -3439,6 +5091,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "because the law brings wrath. And where there is no law, there is no transgression.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: law",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "law"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3464,6 +5129,20 @@
             "span": 2
           },
           "snippet": "The sting of death is sin, and the power of sin is the law.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: law and sin",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "law",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3484,6 +5163,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "If you do what is right, will you not be accepted? But if you refuse to do what is right, sin is crouching at…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3504,6 +5196,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then the LORD saw that the wickedness of man was great upon the earth, and that every inclination of the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3524,6 +5225,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now the earth was corrupt in the sight of God, and full of violence.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3544,6 +5254,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "When the LORD smelled the pleasing aroma, He said in His heart, “Never again will I curse the ground because…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3564,6 +5283,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But the men of Sodom were wicked, sinning greatly against the LORD.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3584,6 +5312,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then the LORD said, “The outcry against Sodom and Gomorrah is great. Because their sin is so grievous,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3604,6 +5345,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Before they had gone to bed, all the men of the city of Sodom, both young and old, surrounded the house.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3624,6 +5374,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Come, let us get our father drunk with wine so we can sleep with him and preserve his line.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3644,6 +5403,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Thus both of Lot’s daughters became pregnant by their father.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3664,6 +5432,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But Er, Judah’s firstborn, was wicked in the sight of the LORD; so the LORD put him to death.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -3709,6 +5486,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "so that, just as sin reigned in death, so also grace might reign through righteousness to bring eternal life…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3734,6 +5520,19 @@
             "span": 3
           },
           "snippet": "So it is written: “The first man Adam became a living being;” the last Adam a life-giving spirit.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Adam",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Adam"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3759,6 +5558,19 @@
             "span": 3
           },
           "snippet": "So Adam lived a total of 930 years, and then he died.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: Adam",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "Adam"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3779,6 +5591,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then Cain said to his brother Abel, “Let us go out to the field.” And while they were in the field, Cain rose…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3799,6 +5620,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Of all that was on dry land, everything that had the breath of life in its nostrils died.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3819,6 +5649,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Thus He destroyed these cities and the entire plain, including all the inhabitants of the cities and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3839,6 +5678,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now Joseph and all his brothers and all that generation died,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3859,6 +5707,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then Pharaoh commanded all his people: “Every son born to the Hebrews you must throw into the Nile, but every…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3879,6 +5736,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Now at midnight the LORD struck down every firstborn male in the land of Egypt, from the firstborn of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3899,6 +5765,22 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But they, like Adam, have transgressed the covenant; there they were unfaithful to Me.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Both tell of Adam",
+            "basis": "sharedNames",
+            "confidence": 0.69,
+            "source": "rule",
+            "evidence": {
+              "names": [
+                "Adam"
+              ],
+              "words": [
+                "transgressed"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3919,6 +5801,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "So should I not care about the great city of Nineveh, which has more than 120,000 people who cannot tell…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -3939,6 +5830,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For if, by the trespass of the one man, death reigned through that one man, how much more will those who…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -3989,6 +5889,15 @@
             "span": 4
           },
           "snippet": "Therefore, just as sin entered the world through one man, and death through sin, so also death was passed on…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4009,6 +5918,21 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: gift, Christ and Jesus",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "gift",
+                "Christ",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4029,6 +5953,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "On the contrary, we believe it is through the grace of the Lord Jesus that we are saved, just as they are.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace and Jesus",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4049,6 +5987,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Thanks be to God for His indescribable gift!",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: gift",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "gift"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4069,6 +6020,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "After the anguish of His soul, He will see the light of life and be satisfied. By His knowledge My righteous…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4089,6 +6049,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "This is My blood of the covenant, which is poured out for many for the forgiveness of sins.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4109,6 +6078,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Again, the gift is not like the result of the one man’s sin: The judgment that followed one sin brought…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.92,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4129,6 +6107,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For it is by grace you have been saved through faith, and this not from yourselves; it is the gift of God,",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace and gift",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace",
+                "gift"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4149,6 +6141,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And this is that testimony: God has given us eternal life, and this life is in His Son.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4174,6 +6175,19 @@
             "span": 5
           },
           "snippet": "just as the Son of Man did not come to be served, but to serve, and to give His life as a ransom for many.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: man",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4194,6 +6208,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Let the wicked man forsake his own way and the unrighteous man his own thoughts; let him return to the LORD…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: man",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4214,6 +6241,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And many who sleep in the dust of the earth will awake, some to everlasting life, but others to shame and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -4259,6 +6295,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore let it be known to you, brothers, that through Jesus the forgiveness of sins is proclaimed to you.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4284,6 +6333,19 @@
             "span": 8
           },
           "snippet": "When the woman saw that the tree was good for food and pleasing to the eyes, and that it was desirable for…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: man",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4304,6 +6366,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "“Come now, let us reason together,” says the LORD. “Though your sins are like scarlet, they will be as white…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4324,6 +6399,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I, yes I, am He who blots out your transgressions for My own sake and remembers your sins no more.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4344,6 +6432,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I have blotted out your transgressions like a cloud, and your sins like a mist. Return to Me, for I have…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4364,6 +6465,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore I tell you, because her many sins have been forgiven, she has loved much. But he who has been…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4384,6 +6498,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Do you not know that the wicked will not inherit the kingdom of God? Do not be deceived: Neither the sexually…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4404,6 +6527,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But when we are judged by the Lord, we are being disciplined so that we will not be condemned with the world.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4424,6 +6556,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "All who rely on works of the law are under a curse. For it is written: “Cursed is everyone who does not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4444,6 +6585,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I was formerly a blasphemer, a persecutor, and a violent man; yet because I had acted in ignorance and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: man",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4464,6 +6618,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Whoever keeps the whole law but stumbles at just one point is guilty of breaking all of it.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4489,6 +6652,15 @@
             "span": 9
           },
           "snippet": "The thief comes only to steal and kill and destroy. I have come that they may have life, and have it in all…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -4539,6 +6711,15 @@
             "span": 4
           },
           "snippet": "Therefore, just as sin entered the world through one man, and death through sin, so also death was passed on…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.83,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4559,6 +6740,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "There will be no more night in the city, and they will have no need for the light of a lamp or of the sun.…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reigned",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reigned"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4584,6 +6778,15 @@
             "span": 8
           },
           "snippet": "When the woman saw that the tree was good for food and pleasing to the eyes, and that it was desirable for…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4609,6 +6812,21 @@
             "span": 6
           },
           "snippet": "For since death came through a man, the resurrection of the dead comes also through a man.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: death, Christ and man",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "death",
+                "Christ",
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4634,6 +6852,19 @@
             "span": 9
           },
           "snippet": "The thief comes only to steal and kill and destroy. I have come that they may have life, and have it in all…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: life",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4659,6 +6890,15 @@
             "span": 10
           },
           "snippet": "By the sweat of your brow you will eat your bread, until you return to the ground— because out of it were you…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4679,6 +6919,21 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: gift, death and life",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "gift",
+                "death",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4699,6 +6954,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "if we endure, we will also reign with Him; if we deny Him, He will also deny us;",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reigned",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reigned"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4719,6 +6987,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "To the one who overcomes, I will grant the right to sit with Me on My throne, just as I overcame and sat down…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4739,6 +7016,21 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Then I saw the thrones, and those seated on them had been given authority to judge. And I saw the souls of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reigned, receive and life",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reigned",
+                "receive",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4764,6 +7056,21 @@
             "span": 6
           },
           "snippet": "And the grace of our Lord overflowed to me, along with the faith and love that are in Christ Jesus.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace, Christ and Jesus",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace",
+                "Christ",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4784,6 +7091,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I will rejoice greatly in the LORD, my soul will exult in my God; for He has clothed me with garments of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: righteousness",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "righteousness"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -4829,6 +7149,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For just as through the disobedience of the one man the many were made sinners, so also through the obedience…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4849,6 +7178,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "He was delivered over to death for our trespasses and was raised to life for our justification.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: justification and life",
+            "basis": "theme",
+            "confidence": 0.52,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "justification",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4869,6 +7212,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "But we see Jesus, who was made a little lower than the angels, now crowned with glory and honor because He…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4894,6 +7246,15 @@
             "span": 5
           },
           "snippet": "But the gift is not like the trespass. For if the many died by the trespass of the one man, how much more did…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.85,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4919,6 +7280,15 @@
             "span": 10
           },
           "snippet": "For as in Adam all die, so in Christ all will be made alive.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4944,6 +7314,15 @@
             "span": 3
           },
           "snippet": "And I, when I am lifted up from the earth, will draw everyone to Myself.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4964,6 +7343,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Through Him everyone who believes is justified from everything you could not be justified from by the law of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.42,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -4984,6 +7372,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Therefore, just as sin entered the world through one man, and death through sin, so also death was passed on…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.82,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5004,6 +7401,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "who wants everyone to be saved and to come to the knowledge of the truth.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: men",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "men"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5024,6 +7434,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "He came as a witness to testify about the Light, so that through him everyone might believe.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5044,6 +7463,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "So John’s disciples came to him and said, “Look, Rabbi, the One who was with you beyond the Jordan, the One…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5064,6 +7492,19 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Now we know that whatever the law says, it says to those who are under the law, so that every mouth may be…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: righteousness",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "righteousness"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5109,6 +7550,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "God made Him who knew no sin to be sin on our behalf, so that in Him we might become the righteousness of God.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5129,6 +7579,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And being found in appearance as a man, He humbled Himself and became obedient to death— even death on a…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: man",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5149,6 +7612,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Therefore, just as sin entered the world through one man, and death through sin, so also death was passed on…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.82,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5169,6 +7641,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "So then, just as one trespass brought condemnation for all men, so also one act of righteousness brought…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5194,6 +7675,15 @@
             "span": 5
           },
           "snippet": "But the gift is not like the trespass. For if the many died by the trespass of the one man, how much more did…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.84,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5219,6 +7709,15 @@
             "span": 5
           },
           "snippet": "to the praise of His glorious grace, which He has freely given us in the Beloved One.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5239,6 +7738,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Yet it was the LORD’s will to crush Him and to cause Him to suffer; and when His soul is made a guilt…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: righteous",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "righteous"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5259,6 +7771,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Seventy weeks are decreed for your people and your holy city to stop their transgression, to put an end to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.4,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5279,6 +7800,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore confess your sins to each other and pray for each other so that you may be healed. The prayer of a…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: righteous and man",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "righteous",
+                "man"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5299,6 +7834,15 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "After this I looked and saw a multitude too large to count, from every nation and tribe and people and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5319,6 +7863,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Because they were ignorant of God’s righteousness and sought to establish their own, they did not submit to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5344,6 +7897,15 @@
             "span": 9
           },
           "snippet": "The thief comes only to steal and kill and destroy. I have come that they may have life, and have it in all…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.38,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5389,6 +7951,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I, yes I, am He who blots out your transgressions for My own sake and remembers your sins no more.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5409,6 +7984,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.79,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5434,6 +8018,21 @@
             "span": 2
           },
           "snippet": "What then shall we say? Shall we continue in sin so that grace may increase?",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: increase, grace and sin",
+            "basis": "theme",
+            "confidence": 0.63,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "increase",
+                "grace",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5459,6 +8058,15 @@
             "span": 2
           },
           "snippet": "For the sake of Your name, O LORD, forgive my iniquity, for it is great.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5484,6 +8092,21 @@
             "span": 2
           },
           "snippet": "For sin shall not be your master, because you are not under law, but under grace.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace, law and sin",
+            "basis": "theme",
+            "confidence": 0.54,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace",
+                "law",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5504,6 +8127,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "For at one time we too were foolish, disobedient, misled, and enslaved to all sorts of desires and…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5529,6 +8165,15 @@
             "span": 9
           },
           "snippet": "The thief comes only to steal and kill and destroy. I have come that they may have life, and have it in all…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.41,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5554,6 +8199,19 @@
             "span": 2
           },
           "snippet": "because the law brings wrath. And where there is no law, there is no transgression.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: law",
+            "basis": "theme",
+            "confidence": 0.45,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "law"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5579,6 +8237,20 @@
             "span": 2
           },
           "snippet": "Why then was the law given? It was added because of transgressions, until the arrival of the seed to whom the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: law and sin",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "law",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5599,6 +8271,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "“Come now, let us reason together,” says the LORD. “Though your sins are like scarlet, they will be as white…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5619,6 +8304,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore I tell you, because her many sins have been forgiven, she has loved much. But he who has been…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5639,6 +8337,19 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "If I had not come and spoken to them, they would not be guilty of sin. Now, however, they have no excuse for…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: sin",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5684,6 +8395,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Nevertheless, death reigned from Adam until Moses, even over those who did not sin in the way that Adam…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.86,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5704,6 +8424,21 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, death and life",
+            "basis": "theme",
+            "confidence": 0.62,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "death",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5724,6 +8459,15 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Therefore, just as sin entered the world through one man, and death through sin, so also death was passed on…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in Romans 5",
+            "basis": "samePassage",
+            "confidence": 0.83,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5744,6 +8488,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "Jesus answered, “I am the way and the truth and the life. No one comes to the Father except through Me.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: life and Jesus",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "life",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5769,6 +8527,19 @@
             "span": 2
           },
           "snippet": "For the grace of God has appeared, bringing salvation to everyone.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5789,6 +8560,21 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "From His fullness we have all received grace upon grace.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace, Christ and Jesus",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace",
+                "Christ",
+                "Jesus"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5809,6 +8595,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal and life",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5834,6 +8634,20 @@
             "span": 2
           },
           "snippet": "For sin shall not be your master, because you are not under law, but under grace.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: grace and sin",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "grace",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5859,6 +8673,21 @@
             "span": 2
           },
           "snippet": "And after you have suffered for a little while, the God of all grace, who has called you to His eternal glory…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, grace and Christ",
+            "basis": "theme",
+            "confidence": 0.5,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "grace",
+                "Christ"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5879,6 +8708,20 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "Therefore do not let sin reign in your mortal body so that you obey its desires.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: reigned and sin",
+            "basis": "theme",
+            "confidence": 0.49,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "reigned",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5899,6 +8742,21 @@
           "sameBook": true,
           "viaRange": null,
           "snippet": "But if Christ is in you, your body is dead because of sin, yet your spirit is alive because of righteousness.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: righteousness, Christ and sin",
+            "basis": "theme",
+            "confidence": 0.48,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "righteousness",
+                "Christ",
+                "sin"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -5919,6 +8777,20 @@
           "sameBook": false,
           "viaRange": null,
           "snippet": "And this is the promise that He Himself made to us: eternal life.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal and life",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -5933,6 +8805,6 @@
   "attribution": {
     "text": "Berean Standard Bible, public domain",
     "crossReferences": "Cross references from OpenBible.info, CC-BY (2016-02-01)",
-    "ai": "Study notes marked 'why' are AI-generated (see manifest.sources.ai)"
+    "ai": "No AI-generated content in this version. Connection reasons are computed by rules from the public-domain text."
   }
 }

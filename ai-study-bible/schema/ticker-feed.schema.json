@@ -41,8 +41,8 @@
       "properties": {
         "mode": {
           "enum": [
-            "autoScroll",
-            "advanceOnFocus"
+            "hold",
+            "autoScroll"
           ]
         },
         "loop": {

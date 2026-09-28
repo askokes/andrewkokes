@@ -146,6 +146,87 @@
       "minimum": 0,
       "maximum": 1
     },
+    "reason": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "quote",
+            "story",
+            "topic"
+          ]
+        },
+        "label": {
+          "enum": [
+            "Direct quote",
+            "Same story",
+            "Same topic"
+          ]
+        },
+        "because": {
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "sharedWording",
+            "quotation",
+            "parallelAccount",
+            "retelling",
+            "samePassage",
+            "sharedNames",
+            "theme"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Match strength shown as a percentage: 1.0 = the same words or the same account"
+        },
+        "source": {
+          "enum": [
+            "rule",
+            "ai",
+            "editor"
+          ]
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "phrase": {
+              "type": "string"
+            },
+            "names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "words": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parallel": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": []
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "label",
+        "because",
+        "basis",
+        "confidence",
+        "source"
+      ],
+      "description": "Why the verse is connected (docs/DATA_MODEL.md 2.6.1, tools/reasons.py)"
+    },
     "tickerItem": {
       "type": "object",
       "properties": {
@@ -185,6 +266,9 @@
         },
         "snippet": {
           "type": "string"
+        },
+        "reason": {
+          "$ref": "common.schema.json#/$defs/reason"
         },
         "why": {
           "type": [
@@ -236,7 +320,8 @@
         "tier",
         "sameBook",
         "viaRange",
-        "snippet"
+        "snippet",
+        "reason"
       ]
     },
     "counts": {

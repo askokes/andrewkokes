@@ -34,6 +34,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 from sources import ensure_sources  # noqa: E402
+from reasons import ReasonModel  # noqa: E402
 
 # ------------------------------------------------------------------ constants (all mirrored into manifest.ranking)
 DATASET_VERSION = "2026.09.1"
@@ -44,8 +45,12 @@ TIER_STRONG = 10
 TIER_SOLID = 4
 TICKER_INLINE = 12
 SNIPPET_MAX = 110
-DWELL_BASE = 1.6
-DWELL_PER_WEIGHT = 1.2
+MOTION_DEFAULT = "hold"      # the strip holds on the focus verse; auto-scroll is opt-in
+DWELL_BASE = 3.0             # seconds per chip when auto-scroll is on: 3.0 + 3.0 * weight (3 to 6 s)
+DWELL_PER_WEIGHT = 3.0
+REASONS_VERSION = "asb.reasons.v1"
+REASON_KINDS = ["quote", "story", "topic"]
+REASON_BASES = ["sharedWording", "quotation", "parallelAccount", "retelling", "samePassage", "sharedNames", "theme"]
 AI_PROMPT_VERSIONS = {"verse-context": "v3", "edge-why": "v2"}
 
 TRANSLATION = {
@@ -63,12 +68,12 @@ TRANSLATION = {
 ATTRIBUTION = {
     "text": "Berean Standard Bible, public domain",
     "crossReferences": "Cross references from OpenBible.info, CC-BY (2016-02-01)",
-    "ai": "Study notes marked 'why' are AI-generated (see manifest.sources.ai)",
+    "ai": "No AI-generated content in this version. Connection reasons are computed by rules from the public-domain text.",
 }
 OPENBIBLE_ABOUT = (
     "Cross references from OpenBible.info (https://www.openbible.info/labs/cross-references/), used under a "
     "Creative Commons Attribution license. Dataset dated 2016-02-01. Vote counts reflect OpenBible.info user "
-    "voting. Ranking and range handling are our own."
+    "voting. Ranking, range handling and connection reasons are our own."
 )
 ATTRIBUTION_LINE = "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
 
@@ -265,8 +270,9 @@ def ai_key(frm: int, start: int, end: int) -> str:
 
 
 class Builder:
-    def __init__(self, ds: Dataset, ai: dict):
+    def __init__(self, ds: Dataset, ai: dict, reasons: ReasonModel):
         self.ds = ds
+        self.reasons = reasons
         self.ai_edges: dict[str, str] = ai.get("edges", {})
         self.ai_verses: dict[str, dict] = ai.get("verses", {})
         self._merged_cache: dict[int, list[dict]] = {}
@@ -275,6 +281,11 @@ class Builder:
         if vid not in self._merged_cache:
             self._merged_cache[vid] = self.ds.merged(vid)
         return self._merged_cache[vid]
+
+    def reason(self, vid: int, it: dict) -> dict:
+        if "reason" not in it:
+            it["reason"] = self.reasons.classify(vid, it["start"], it["end"], it["score"])
+        return it["reason"]
 
     def ticker_item(self, vid: int, it: dict, kind: str = "bundle") -> dict:
         d = {
@@ -290,6 +301,7 @@ class Builder:
             "sameBook": it["sameBook"],
             "viaRange": it["via"],
             "snippet": self.ds.snippet(it["start"], it["end"]),
+            "reason": self.reason(vid, it),
         }
         if kind in ("bundle", "feed"):
             why = self.ai_edges.get(ai_key(vid, it["start"], it["end"]))
@@ -339,7 +351,7 @@ class Builder:
             "focus": {"vid": vid, "ref": ref_of(vid), "label": label_of(vid)},
             "counts": {k: c[k] for k in ("out", "in", "unique", "shown", "more")},
             "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
-            "motion": {"mode": "autoScroll", "loop": True, "baseSeconds": DWELL_BASE,
+            "motion": {"mode": MOTION_DEFAULT, "loop": True, "baseSeconds": DWELL_BASE,
                        "perWeightSeconds": DWELL_PER_WEIGHT,
                        "dwellFormula": f"dwellSeconds = {DWELL_BASE} + {DWELL_PER_WEIGHT} * weight",
                        "advanceOnFocusChange": True},
@@ -440,7 +452,19 @@ def books_doc() -> dict:
 
 
 def manifest_doc(ds: Dataset, merged_total: int, inline_total: int, tiers: collections.Counter,
-                 no_conn: int, shards: list[dict], built_at: str) -> dict:
+                 no_conn: int, shards: list[dict], built_at: str, reason_counts: collections.Counter) -> dict:
+    reasons_block = {
+        "version": REASONS_VERSION, "rules": "tools/reasons.py", "analysisText": "bsb-2023",
+        "labels": {"quote": "Direct quote", "story": "Same story", "topic": "Same topic"},
+        "bases": REASON_BASES,
+        "share": {k: round(reason_counts[k] / merged_total, 4) for k in REASON_KINDS},
+        "counts": {k: reason_counts[k] for k in REASON_KINDS},
+        "confidence": "match strength 0..1, shown as a percentage: 1.0 = the same words or the same account; "
+                      "topics are capped at 0.8 (tools/reasons.py, docs/DATA_MODEL.md 2.6.1)",
+        "tested": "tests/gold_reasons.json (60 hand-labelled connections, all correct)",
+        "note": "Deterministic rules over the public-domain BSB text, so no licensed text is processed. "
+                "An AI pass may later replace a reason (source 'ai'), only with YouVersion's written approval.",
+    }
     return {
         "schema": "asb.manifest/2", "datasetVersion": DATASET_VERSION, "builtAt": built_at,
         "pipeline": "tools/build_dataset.py",
@@ -458,17 +482,20 @@ def manifest_doc(ds: Dataset, merged_total: int, inline_total: int, tiers: colle
             "collision": "same start, different end: keep higher votes, list others in alsoCites",
             "tickerInline": TICKER_INLINE, "snippetMaxChars": SNIPPET_MAX,
             "dwellSeconds": f"{DWELL_BASE} + {DWELL_PER_WEIGHT} * weight",
-            "motion": {"baseSeconds": DWELL_BASE, "perWeightSeconds": DWELL_PER_WEIGHT},
+            "motion": {"defaultMode": MOTION_DEFAULT, "baseSeconds": DWELL_BASE, "perWeightSeconds": DWELL_PER_WEIGHT},
         },
+        "reasons": reasons_block,
         "translations": [
             {**TRANSLATION, "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",
-             "role": "placeholder until NIV is licensed", "bundled": True, "packUrl": None,
-             "sha256": None, "headings": False},
+             "role": "offline fallback and the analysis text for connection reasons", "bundled": True,
+             "delivery": "bundled", "packUrl": None, "sha256": None, "headings": False},
             {"id": "niv", "name": "New International Version", "abbr": "NIV", "textVersion": None,
-             "license": "Copyright Biblica, Inc.; requires license", "attribution": None,
-             "copyrightNotice": "<supplied by Biblica with the license>", "role": "target translation",
-             "bundled": False, "packUrl": "https://cdn.example.com/asb/text/niv/{book}.json.gz", "sha256": None,
-             "headings": True},
+             "license": "Copyright Biblica, Inc. Delivered by the YouVersion Platform under its non-commercial license",
+             "attribution": None,
+             "copyrightNotice": "<the copyright string returned by the YouVersion API, shown wherever NIV text appears>",
+             "role": "launch translation, fetched at runtime; never bundled, stored or indexed",
+             "bundled": False, "delivery": "youversionPlatform", "youversionVersionId": 111,
+             "packUrl": None, "sha256": None, "headings": True},
         ],
         "sources": [
             {"id": "openbible-xref-2016-02-01", "kind": "crossReferences", "name": "OpenBible.info Cross References",
@@ -481,9 +508,11 @@ def manifest_doc(ds: Dataset, merged_total: int, inline_total: int, tiers: colle
              "attribution": "Berean Standard Bible, public domain",
              "via": "https://github.com/scrollmapper/bible_databases (formats/json/BSB.json)",
              "retrievedAt": built_at[:10]},
-            {"id": "ai-claude", "kind": "ai", "name": "AI study notes", "generator": "claude", "model": "claude-opus-5",
+            {"id": "ai-claude", "kind": "ai", "name": "AI study notes", "status": "deferred", "generator": "claude",
+             "model": "claude-opus-5",
              "promptVersions": AI_PROMPT_VERSIONS,
-             "attribution": "AI-generated study aid; not part of the Bible text or the OpenBible dataset",
+             "attribution": "Deferred: v1 ships no AI output. When enabled, notes are marked as an AI-generated study aid, "
+                            "not part of the Bible text or the OpenBible dataset",
              "license": "Generated content, owned by the publisher"},
         ],
         "shards": shards,
@@ -504,21 +533,23 @@ def main() -> int:
     ap.add_argument("--out", default=str(ROOT / "data" / "full"))
     ap.add_argument("--samples", default=str(ROOT / "data" / "samples"))
     ap.add_argument("--proto", default=str(ROOT / "prototype" / "data"))
-    ap.add_argument("--ai", default=str(HERE / "ai_samples.json"))
+    ap.add_argument("--ai", default="", help="optional AI notes file (deferred: v1 ships no AI output)")
     ap.add_argument("--bundles", action="store_true", help="write all 1,189 chapter bundles to --out/bundles")
     ap.add_argument("--built-at", default=dt.date.today().isoformat() + "T00:00:00Z")
     args = ap.parse_args()
 
     bsb_path, xref_path = ensure_sources(Path(args.sources))
     ds = Dataset(bsb_path, xref_path)
-    ai = json.loads(Path(args.ai).read_text(encoding="utf-8")) if Path(args.ai).exists() else {}
-    bld = Builder(ds, ai)
+    ai = json.loads(Path(args.ai).read_text(encoding="utf-8")) if args.ai and Path(args.ai).exists() else {}
+    rm = ReasonModel(ds.text, ds.ordlist, ds.ordinal, {b["order"]: b["displayName"] for b in CANON})
+    bld = Builder(ds, ai, rm)
     out, samples, proto = Path(args.out), Path(args.samples), Path(args.proto)
     print(f"verses={len(ds.ordlist)} edges={ds.stats['edges']} incomingRows={ds.stats['incomingRows']}", file=sys.stderr)
 
     # ---- per-verse merge (once), global stats, compact prototype xref packs
     merged_total = inline_total = no_conn = 0
     tiers: collections.Counter = collections.Counter()
+    reason_counts: collections.Counter = collections.Counter()
     for b in CANON:
         bn = b["order"]
         chapters = []
@@ -532,10 +563,13 @@ def main() -> int:
                 no_conn += 0 if m else 1
                 for it in m:
                     tiers[it["tier"]] += 1
+                    reason_counts[bld.reason(vid, it)["kind"]] += 1
                 c = ds.counts(vid, m)
                 chips = [[it["start"], it["end"], DIRECTIONS.index(it["direction"]), it["votesOut"], it["votesIn"],
                           it["score"], it["weight"], TIERS.index(it["tier"]),
-                          [it["via"]["start"], it["via"]["end"], it["via"]["span"]] if it["via"] else 0]
+                          [it["via"]["start"], it["via"]["end"], it["via"]["span"]] if it["via"] else 0,
+                          [REASON_KINDS.index(it["reason"]["kind"]), REASON_BASES.index(it["reason"]["basis"]),
+                           it["reason"]["confidence"], it["reason"]["because"]]]
                          for it in m[:TICKER_INLINE]]
                 verses.append([[c["out"], c["in"], c["inDirect"], c["inViaRange"], c["unique"]], chips])
             chapters.append(verses)
@@ -543,11 +577,15 @@ def main() -> int:
             "schema": "asb.protoXref/2", "datasetVersion": DATASET_VERSION, "rankingVersion": RANKING_VERSION,
             "book": bn, "osis": b["id"],
             "legend": {"verse": ["counts", "ticker"], "counts": ["out", "in", "inDirect", "inViaRange", "unique"],
-                       "chip": ["start", "end", "direction", "votesOut", "votesIn", "score", "weight", "tier", "viaRange"],
-                       "direction": DIRECTIONS, "tier": TIERS, "viaRange": "0 or [start,end,span]"},
+                       "chip": ["start", "end", "direction", "votesOut", "votesIn", "score", "weight", "tier", "viaRange",
+                                "reason"],
+                       "direction": DIRECTIONS, "tier": TIERS, "viaRange": "0 or [start,end,span]",
+                       "reason": "[kind, basis, confidence, because]; kind and basis index reasonKinds and reasonBases",
+                       "reasonKinds": REASON_KINDS, "reasonBases": REASON_BASES},
             "chapters": chapters}, pretty=False)
         bld._merged_cache.clear()  # keep memory flat; samples recompute what they need
-    print(f"merged={merged_total} inline={inline_total} noConnections={no_conn} tiers={dict(tiers)}", file=sys.stderr)
+    print(f"merged={merged_total} inline={inline_total} noConnections={no_conn} tiers={dict(tiers)} "
+          f"reasons={dict(reason_counts)}", file=sys.stderr)
 
     # ---- full distribution format
     shards: list[dict] = []
@@ -591,13 +629,13 @@ def main() -> int:
                 dump(out / "bundles" / "bsb" / f"{bn:02d}" / f"{ch:03d}.json", bld.chapter_bundle(bn, ch), pretty=False)
             bld._merged_cache.clear()
     text_bytes = sum(s["bytes"] for s in shards if s["kind"] == "text")
-    manifest = manifest_doc(ds, merged_total, inline_total, tiers, no_conn, shards, args.built_at)
+    manifest = manifest_doc(ds, merged_total, inline_total, tiers, no_conn, shards, args.built_at, reason_counts)
     manifest["translations"][0]["sha256"] = hashlib.sha256(
         "".join(s["sha256"] for s in shards if s["kind"] == "text").encode()).hexdigest()
     dump(out / "manifest.json", manifest, pretty=True)
     (out / "attribution.md").write_text(
         "# Attribution\n\n" + TRANSLATION["copyrightNotice"] + "\n\n" + OPENBIBLE_ABOUT + "\n\n" +
-        ATTRIBUTION["ai"] + ".\n", encoding="utf-8")
+        ATTRIBUTION["ai"] + "\n", encoding="utf-8")
     print(f"full: {len(shards)} shards, text {text_bytes/1e6:.1f} MB -> {out}", file=sys.stderr)
 
     # ---- founder-readable samples (spec shape, pretty)
@@ -610,8 +648,11 @@ def main() -> int:
         dump(samples / "ticker" / f"{tag}.json", bld.ticker_feed(vid), pretty=True)
         dump(samples / "connections" / f"{tag}.json", bld.connections(vid), pretty=True)
     dump(samples / "trail.json", bld.trail_sample(), pretty=True)
+    stale_ai = samples / "ai-context-John-3-16.json"
     if ai.get("aiContextSample"):
-        dump(samples / "ai-context-John-3-16.json", ai["aiContextSample"], pretty=True)
+        dump(stale_ai, ai["aiContextSample"], pretty=True)
+    elif stale_ai.exists():
+        stale_ai.unlink()  # AI notes are deferred; the shape stays documented in docs/DATA_MODEL.md 4.4
 
     # ---- prototype transport files
     dump(proto / "books.json", books, pretty=False)
@@ -624,7 +665,7 @@ def main() -> int:
                    for ch in range(1, b["chapters"] + 1)] for b in CANON]}, pretty=False)
     dump(proto / "ai" / "notes.json", {
         "schema": "asb.protoAi/2",
-        "_note": ai.get("_note", "Illustrative sample notes; not production model output."),
+        "_note": ai.get("_note", "AI notes are deferred. v1 ships no AI output; this file stays empty."),
         "edges": bld.ai_edges,
         "verses": bld.ai_verses}, pretty=False)
     print(f"samples -> {samples}\nprototype -> {proto}", file=sys.stderr)

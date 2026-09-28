@@ -1,12 +1,16 @@
-# AI Study Bible: Unified Data Model (v2)
+# AI-Assisted Study Bible: Data Model (v2.1)
 
 Status: final synthesis of three proposals and two judge reviews. Dataset facts below were measured with python3 against `data/sources/BSB.json` (31,102 verses, 1,189 chapters) and `data/sources/cross_references.txt` (343,609 OpenBible links, 2016-02-01) on 2026-09-27.
+
+Updated 2026-09-28 after the founder's decisions: every connection now carries a reason (section 2.6.1), the ticker holds still by default, the NIV is the launch translation through the YouVersion Platform (references only, never stored), the app is free, and AI notes are deferred.
 
 ## 1. Overview
 
 The model treats the Bible as one connected map. Every verse is a point on that map with a permanent number (John 3:16 is `43003016`: book 43, chapter 3, verse 16), and every OpenBible cross reference is a line between two points, carrying the crowd's vote count for how relevant the link is. The words of each verse live in a separate "text pack" per translation (the public-domain Berean Standard Bible today, the NIV once licensed), so swapping translations never touches the map. On top of that, the AI layer adds optional study notes in two places: a note about a verse (summary, themes, who is speaking) and a note about a connection (why these two verses belong together), each stamped with which model wrote it, which prompt version, and when.
 
 The ticker and the spiderweb fall straight out of this. At build time, for each verse we gather every line that touches it, in both directions ("John 3:16 points to Romans 5:8" and "who points back at John 3:16?"), fold both directions into one entry per neighbour, score it, rank it, and attach a short preview snippet. The reader screen loads one chapter document in which each verse already carries its top 12 ranked connections, so as the verse in focus changes while you scroll, the ticker strip renders the next verse's chips with no lookup. Tapping a chip opens a peek sheet from the same data; tapping Go jumps to the target chapter and pushes a hop onto the trail, which remembers the exact connection you travelled. The trail is the spiderweb: a list of hops plus the small web of verses and lines you have visited, drawn from the same ids, so you can always see the path and step back.
+
+Every connection also says why it is there. The pipeline labels each one a direct quote, the same story, or the same topic, with a one-line reason such as "Matthew 27:46 quotes Psalm 22:1", "Another part of the same passage in John 3" or "Shared theme: loved". The labels come from deterministic rules over the public-domain Berean text, so no licensed text is ever processed. At launch the reader shows the NIV, fetched at runtime from the YouVersion Platform; the model stores only verse references for it, never NIV words. Chips therefore show the reference and the reason, and the whole NIV verse appears when the reader taps. The ticker holds still on the verse in focus; auto-scroll is an option the reader turns on.
 
 ## 2. Entities
 
@@ -36,9 +40,11 @@ All keys are camelCase words (no single-letter keys). Every document that a scre
 | name, abbr | string | yes | "Berean Standard Bible", "BSB" |
 | textVersion | string | yes when bundled | Edition id (`bsb-2023`); part of every AI cache key |
 | license, attribution | string | yes | Rendered in Settings > About |
-| copyrightNotice | string | yes | Exact notice the licensor requires in-app |
-| role | string | no | "placeholder until NIV is licensed" / "target translation" |
-| bundled | bool | yes | Ships inside the app (BSB) or is downloaded (NIV) |
+| copyrightNotice | string | yes | Exact notice the licensor requires in-app; for the NIV, the `copyright` string the YouVersion API returns, shown wherever NIV text appears |
+| role | string | no | BSB: "offline fallback and the analysis text for connection reasons"; NIV: "launch translation, fetched at runtime" |
+| bundled | bool | yes | Ships inside the app (BSB) or is fetched at runtime (NIV) |
+| delivery | "bundled" / "pack" / "youversionPlatform" | yes | How the text reaches the phone; the NIV comes from the YouVersion Platform SDK |
+| youversionVersionId | int | NIV only | YouVersion Bible version id (NIV = 111) |
 | packUrl, sha256 | string / null | when not bundled | OTA pack location and integrity hash |
 | headings | bool | yes | Whether the pack supplies section headings |
 
@@ -90,11 +96,54 @@ All keys are camelCase words (no single-letter keys). Every document that a scre
 | tier | "strong" / "solid" / "light" | yes | Global filter band from score |
 | sameBook | bool | yes | Lets the strip style cross-book jumps differently |
 | viaRange | {start, end, label, span} / null | yes | Present when the incoming citation pointed at a range covering this verse |
-| snippet | string | yes | Target verse preview (translation-specific) |
-| why | string / null | in bundle and feed | AI one-liner for the connection when cached |
-| aiStatus | "cached" / "not_generated" | in bundle and feed | Explains a null `why` |
+| snippet | string | yes | Target verse preview in the bundled public-domain text. Never stored for the NIV: the app fetches the whole NIV verse when the reader taps the chip |
+| reason | Reason | yes | Why this verse is connected: direct quote, same story or same topic (2.6.1) |
+| why | string / null | in bundle and feed | Deferred AI one-liner for the connection; null in v1 |
+| aiStatus | "cached" / "not_generated" | in bundle and feed | Explains a null `why`; "not_generated" in v1 |
 | alsoCites | {ref, label, votes}[] | Connections doc only | Other outgoing ranges from this verse that share the same start verse |
-| dwellSeconds | number | TickerFeed only | `1.6 + 1.2 * weight` |
+| dwellSeconds | number | TickerFeed only | `3.0 + 3.0 * weight`; used only when the reader turns auto-scroll on |
+
+### 2.6.1 Reason (why a verse is connected; `reason` on every TickerItem)
+
+| Field | Type | Required | Meaning |
+|---|---|---|---|
+| kind | "quote" / "story" / "topic" | yes | The founder's three reasons |
+| label | "Direct quote" / "Same story" / "Same topic" | yes | The words on the chip's pill |
+| because | string | yes | One plain sentence the chip and peek sheet show |
+| basis | string | yes | Which rule fired (below) |
+| confidence | number 0..1 | yes | The match strength, shown to readers as a percentage: 1.0 means the passages are literally the same thing (the same words or the same account); lower means a looser match |
+| source | "rule" / "ai" / "editor" | yes | "rule" in v1; an AI pass or an editor may replace a reason later |
+| evidence | {phrase?, names?, words?, parallel?} | no | What the rule matched, for tooling and debugging; not shown to readers |
+
+Rules, first match wins (tools/reasons.py):
+
+| Basis | Kind | Fires when | Example `because` |
+|---|---|---|---|
+| parallelAccount | story | The same account told twice: distinctive shared wording between parallel books (the Gospels; Samuel, Kings and Chronicles; Kings with Isaiah or Jeremiah; Chronicles, Ezra and Nehemiah; Joshua and Judges; Genesis and Chronicles), or inside one narrative book when the passages also share a name | "The same account told in Matthew and Mark" |
+| samePassage | story | Same chapter, at most 20 verses apart (not Proverbs) | "Another part of the same passage in John 3" |
+| sharedWording | quote | At least two shared word trigrams that occur in at most 30 verses each, forming a run of four or more words with real content | "Matthew 1:23 quotes Isaiah 7:14" |
+| quotation | quote | A New Testament quotation inside quotation marks reuses most of the Old Testament verse's words | "Matthew 4:10 quotes Deuteronomy 6:13" |
+| retelling | story | Old Testament passages share distinctive wording and two names in a narrative book | "Both retell the account of Sihon and Og" |
+| sharedNames | story | Both refer to the same specific people: a person named in at most 150 verses plus another shared word, two people, a person and a place, or two rare places; a single place is not enough | "Both tell of Moses" |
+| theme | topic | Everything else, with the most distinctive shared words when there are any | "Shared theme: loved" / "Linked by theme" |
+
+Match percentage (`confidence`), by rule. "Run coverage" is how much of the shorter passage, or of the marked quotation, the longest shared run of words covers. "Theme coverage" is the share of the focus verse's distinctive vocabulary (idf-weighted stems) that the other passage uses. "Votes" is ln(1 + score) / ln(61), capped at 1.
+
+| Basis | Match | Range seen |
+|---|---|---|
+| sharedWording | 0.80 + 0.20 x run coverage (for New Testament quotes, coverage of the marked quotation) | 81 to 100% |
+| quotation | 0.74 + 0.16 x share of the quotation's words reused | 84 to 90% |
+| parallelAccount | 0.82 + 0.18 x run coverage; 0.72 + 0.13 x theme coverage without a long shared run | 74 to 100% |
+| retelling | 0.72 + 0.18 x the larger of run and theme coverage | 75 to 90% |
+| samePassage | 0.84 - 0.004 x verses apart + 0.12 x theme coverage | 76 to 96% |
+| sharedNames | 0.58 + 0.06 x shared names (up to 3) + 0.15 x theme coverage, capped at 0.85 | 65 to 85% |
+| theme (topic) | 0.30 + 0.30 x theme coverage + 0.30 x votes, capped at 0.80 | 31 to 80%, median 41% |
+
+Examples: Psalm 22:1 and Matthew 27:46 100%, Matthew 13:5 and Mark 4:5 100%, Matthew 1:23 and Isaiah 7:14 95%, John 3:16 and John 3:15 89%, John 3:14 and Numbers 21:7-9 70%, John 3:16 and Romans 5:8 65%. Topics stay at or below 80% because a looser topical or word match is never "the same thing".
+
+Analysis text: the public-domain BSB, for every translation, so reasons never depend on licensed text. Names are told apart from places by how the text uses them (places follow "in", "to", "from"; people follow "son of" or precede "said"). Theme words match on light stems, so "loved" matches "love".
+
+Measured on the real data: across all 840,072 connections, 776,847 topic (92.5%), 47,824 story (5.7%) and 15,401 quote (1.8%). Among the 343,635 chips the ticker shows (top 12 per verse), 87.2% topic, 9.5% story and 3.3% quote. Accuracy: all 60 hand-labelled pairs in tests/gold_reasons.json are correct (for example Matthew 1:23 and Isaiah 7:14 quote, John 3:14 and Numbers 21:9 story, John 3:16 and Romans 5:8 topic). Hand audits of random samples found roughly 13 of 15 parallel accounts, 12 of 15 shared-name stories and 12 of 12 quotes correct after tuning; same-passage links are correct by construction. Treat reasons as a strong first pass; an AI or editorial pass can refine them later, and an AI pass needs YouVersion's written approval before its output reaches readers.
 
 ### 2.7 ChapterBundle (the reader screen document; built at runtime from SQLite, also emitted by the pipeline for the prototype)
 
@@ -118,7 +167,7 @@ Same header as a verse (`vid`, `ref`, `label`, `counts`) plus `items[]`: every m
 
 ### 2.9 TickerFeed (the strip for one focus verse; derived from the bundle, shown separately so the motion is in the data)
 
-`focus {vid, ref, label}`, `counts`, `order` (sentence), `motion {mode, loop, baseSeconds, perWeightSeconds, dwellFormula, advanceOnFocusChange}`, `items[]` with `dwellSeconds`, `attribution`.
+`focus {vid, ref, label}`, `counts`, `order` (sentence), `motion {mode, loop, baseSeconds, perWeightSeconds, dwellFormula, advanceOnFocusChange}`, `items[]` with `dwellSeconds`, `attribution`. `mode` is "hold" by default: the strip sits still on the verse in focus and the reader swipes it. "autoScroll" is the reader's opt-in.
 
 ### 2.10 Trail (spiderweb navigation state; SwiftData on device)
 
@@ -132,7 +181,9 @@ Same header as a verse (`vid`, `ref`, `label`, `counts`) plus `items[]`: every m
 | web | {nodes: int[], edges: [from, to, votes][], peekOnlyEdges, booksTouched, loopClosed} | yes | Data for the map view; all ids are integer vids |
 | rules | object | yes | Self-documenting behaviour: `pushOn`, `notPushed`, `scrollUpdatesCurrentHop`, `maxHops`, `persist` |
 
-### 2.11 AIVerseContext and AIConnection (table `ai_context`, keyed cache)
+### 2.11 AIVerseContext and AIConnection (table `ai_context`, keyed cache; deferred)
+
+AI notes are deferred: v1 ships no AI output and the table ships empty. YouVersion's platform terms require written approval before an app shows readers AI output, and Biblica requires a license that expressly permits AI use of NIV content. The slots stay so the feature can return without a schema change.
 
 | Field | Type | Required | Meaning |
 |---|---|---|---|
@@ -147,7 +198,7 @@ Same header as a verse (`vid`, `ref`, `label`, `counts`) plus `items[]`: every m
 
 ### 2.12 Manifest (manifest.json)
 
-`schema, datasetVersion, builtAt, pipeline, canon, graph` (measured counts), `ranking` (every constant of asb.rank.v2), `translations[]`, `sources[]` (id, kind, license, url, attribution, retrievedAt), `shards[]` (path, kind, book, translation, bytes, gzipBytes, sha256), `onDevice`.
+`schema, datasetVersion, builtAt, pipeline, canon, graph` (measured counts), `ranking` (every constant of asb.rank.v2, including `motion {defaultMode, baseSeconds, perWeightSeconds}`), `reasons` (rules version, analysis text, labels, measured share and counts, test note), `translations[]`, `sources[]` (id, kind, license, url, attribution, retrievedAt), `shards[]` (path, kind, book, translation, bytes, gzipBytes, sha256), `onDevice`.
 
 ## 3. Id scheme and ranking formula
 
@@ -168,7 +219,8 @@ Same header as a verse (`vid`, `ref`, `label`, `counts`) plus `items[]`: every m
 4. Weight (per verse). `weight = round(ln(1 + score) / ln(1 + maxScore of this verse), 3)`. The top chip of every verse is exactly 1.0, so a quiet verse still gets a graded strip. Because it is computed on the merged score, outgoing and incoming chips sit on one scale.
 5. Tier (global). `strong` if score >= 10, `solid` if score >= 4, else `light`. Measured over all 840,072 merged items: 0.8% strong, 9.0% solid, 90.2% light (raw votes: 1.0% of edges have >= 10 votes, 16.7% have >= 4). 28,345 of 30,988 connected verses have a best score under 10, which is why emphasis must come from `weight`, not `tier`.
 6. Order. score desc, then out/both before in-only, then start vid asc. `rank` is the 1-based position. The bundle inlines the top `tickerInline = 12`; `counts.more = unique - shown`.
-7. Motion. The strip auto-scrolls in a loop and re-anchors when the focus verse changes; each chip dwells `1.6 + 1.2 * weight` seconds, so a 1.0 chip holds 2.8 s and a 0.3 chip 1.96 s.
+7. Motion. The strip holds on the focus verse by default: rank 1 first, the reader swipes for more, and it re-anchors when the focus verse changes. Auto-scroll is the reader's opt-in; each chip then dwells `3.0 + 3.0 * weight` seconds, so a 1.0 chip holds 6 s and a 0.3 chip 3.9 s.
+8. Reason. Each ranked item gets its reason (2.6.1). Reasons do not change the order.
 
 ### Worked example: John 3:16 -> Romans 5:8
 
@@ -177,7 +229,8 @@ Real rows: `John.3.16 -> Rom.5.8 178` and `Rom.5.8 -> John.3.16 33` (both direct
 - votesOut = 178, votesIn = 33, votesEff = 33 / sqrt(1) = 33
 - score = 178 + 0.5 * 33 = 194.5
 - John 3:16's maxScore is this item, so weight = ln(195.5) / ln(195.5) = 5.2756 / 5.2756 = 1.000
-- tier: 194.5 >= 10, strong. direction: both. rank 1 of 110 merged items (23 outgoing + 104 incoming rows: 53 direct + 51 via ranges). dwellSeconds = 1.6 + 1.2 * 1.0 = 2.8
+- tier: 194.5 >= 10, strong. direction: both. rank 1 of 110 merged items (23 outgoing + 104 incoming rows: 53 direct + 51 via ranges). dwellSeconds = 3.0 + 3.0 * 1.0 = 6.0 when auto-scroll is on
+- reason: Same topic, "Shared theme: loved" (John 3:16 says "loved", Romans 5:8 says "love"; no rare shared phrase, no shared names)
 
 Second chip for contrast, 1 John 4:9–10: out 122 (to the range), in 13 (from 1 John 4:9, direct, folded onto the same start vid 62004009), score = 122 + 6.5 = 128.5, weight = ln(129.5) / ln(195.5) = 4.8637 / 5.2756 = 0.922, strong, rank 2. On John 3:17 the top item (1 John 4:14) scores only 10.06 and still gets weight 1.000.
 
@@ -220,6 +273,7 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "ref": "John.3.15",
       "label": "John 3:15",
       "text": "that everyone who believes in Him may have eternal life.",
+      "omitted": false,
       "paragraphStart": false,
       "counts": {
         "out": 33,
@@ -248,6 +302,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in John 3",
+            "basis": "samePassage",
+            "confidence": 0.96,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -273,6 +336,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "Whoever believes in the Son has eternal life. Whoever rejects the Son will not see life. Instead, the wrath…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, believes and life",
+            "basis": "theme",
+            "confidence": 0.78,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -298,6 +376,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "And this is that testimony: God has given us eternal life, and this life is in His Son.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, believes and life",
+            "basis": "theme",
+            "confidence": 0.77,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -323,6 +416,19 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "Whoever believes and is baptized will be saved, but whoever does not believe will be condemned.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: believes",
+            "basis": "theme",
+            "confidence": 0.56,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "believes"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -348,6 +454,20 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "But these are written so that you may believe that Jesus is the Christ, the Son of God, and that by believing…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: believes and life",
+            "basis": "theme",
+            "confidence": 0.62,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -373,6 +493,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 4
           },
           "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, believes and life",
+            "basis": "theme",
+            "confidence": 0.74,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -398,6 +533,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 4
           },
           "snippet": "Turn to Me and be saved, all the ends of the earth; for I am God, and there is no other.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -418,6 +562,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": false,
           "viaRange": null,
           "snippet": "Therefore He is able to save completely those who draw near to God through Him, since He always lives to…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -443,6 +596,20 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal and life",
+            "basis": "theme",
+            "confidence": 0.63,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -468,6 +635,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "But we are not of those who shrink back and are destroyed, but of those who have faith and preserve their…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -488,6 +664,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "Truly, truly, I tell you, whoever hears My word and believes Him who sent Me has eternal life and will not…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, believes and life",
+            "basis": "theme",
+            "confidence": 0.72,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -508,6 +699,20 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: believes and life",
+            "basis": "theme",
+            "confidence": 0.6,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -524,6 +729,7 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "ref": "John.3.16",
       "label": "John 3:16",
       "text": "For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life.",
+      "omitted": false,
       "paragraphStart": false,
       "counts": {
         "out": 23,
@@ -552,8 +758,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": false,
           "viaRange": null,
           "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
-          "why": "Both verses ground God's love in an act, not a feeling: John says God gave His Son; Paul says Christ died for us while we were still sinners.",
-          "aiStatus": "cached"
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.65,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
+          "why": null,
+          "aiStatus": "not_generated"
         },
         {
           "rank": 2,
@@ -572,8 +791,22 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": false,
           "viaRange": null,
           "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
-          "why": "John's letter restates his Gospel line almost word for word: God sent His one and only Son into the world, and this is what love is.",
-          "aiStatus": "cached"
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world and loved",
+            "basis": "theme",
+            "confidence": 0.72,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world",
+                "loved"
+              ]
+            }
+          },
+          "why": null,
+          "aiStatus": "not_generated"
         },
         {
           "rank": 3,
@@ -592,8 +825,17 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "that everyone who believes in Him may have eternal life.",
-          "why": "The verse immediately before it: 'everyone who believes in Him may have eternal life' is the promise 3:16 then explains with God's love as its cause.",
-          "aiStatus": "cached"
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in John 3",
+            "basis": "samePassage",
+            "confidence": 0.89,
+            "source": "rule",
+            "evidence": {}
+          },
+          "why": null,
+          "aiStatus": "not_generated"
         },
         {
           "rank": 4,
@@ -612,6 +854,20 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: believes and life",
+            "basis": "theme",
+            "confidence": 0.68,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -637,6 +893,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 4
           },
           "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, believes and life",
+            "basis": "theme",
+            "confidence": 0.75,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "believes",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -657,6 +928,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": false,
           "viaRange": null,
           "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.62,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -682,6 +962,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "Whoever believes in the Son has eternal life. Whoever rejects the Son will not see life. Instead, the wrath…",
+          "reason": {
+            "kind": "story",
+            "label": "Same story",
+            "because": "Another part of the same passage in John 3",
+            "basis": "samePassage",
+            "confidence": 0.83,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -702,6 +991,19 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": false,
           "viaRange": null,
           "snippet": "We love because He first loved us.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: loved",
+            "basis": "theme",
+            "confidence": 0.63,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "loved"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -727,6 +1029,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, world and believes",
+            "basis": "theme",
+            "confidence": 0.77,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "world",
+                "believes"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -752,6 +1069,21 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: eternal, perish and life",
+            "basis": "theme",
+            "confidence": 0.73,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "eternal",
+                "perish",
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -772,6 +1104,19 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "The next day John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.65,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -792,6 +1137,19 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": false,
           "viaRange": null,
           "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: life",
+            "basis": "theme",
+            "confidence": 0.66,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "life"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -799,7 +1157,7 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "connections": "connections/43003016.json",
       "ai": {
         "verse": "ai:verse:43003016:bsb:bsb-2023:v3",
-        "status": "cached"
+        "status": "not_generated"
       }
     },
     {
@@ -808,6 +1166,7 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "ref": "John.3.17",
       "label": "John 3:17",
       "text": "For God did not send His Son into the world to condemn the world, but to save the world through Him.",
+      "omitted": false,
       "paragraphStart": false,
       "counts": {
         "out": 29,
@@ -841,6 +1200,19 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 2
           },
           "snippet": "And we have seen and testify that the Father has sent His Son to be the Savior of the world.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -861,6 +1233,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "The thief comes only to steal and kill and destroy. I have come that they may have life, and have it in all…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -881,6 +1262,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "Just as the living Father sent Me and I live because of the Father, so also the one who feeds on Me will live…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -901,6 +1291,17 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "As for anyone who hears My words and does not keep them, I do not judge him. For I have not come to judge the…",
+          "reason": {
+            "kind": "quote",
+            "label": "Direct quote",
+            "because": "John 3:17 and John 12:47–48 share the same words",
+            "basis": "sharedWording",
+            "confidence": 0.87,
+            "source": "rule",
+            "evidence": {
+              "phrase": "the world but to save the world"
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -921,6 +1322,19 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": false,
           "viaRange": null,
           "snippet": "For the Son of Man came to seek and to save the lost.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: save",
+            "basis": "theme",
+            "confidence": 0.55,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "save"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -941,6 +1355,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "I knew that You always hear Me, but I say this for the benefit of the people standing here, so they may…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -961,6 +1384,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "Again Jesus said to them, “Peace be with you. As the Father has sent Me, so also I am sending you.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.44,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -986,6 +1418,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 3
           },
           "snippet": "Jesus replied, “The work of God is this: to believe in the One He has sent.”",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1006,6 +1447,19 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "then what about the One whom the Father sanctified and sent into the world? How then can you accuse Me of…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Shared theme: world",
+            "basis": "theme",
+            "confidence": 0.58,
+            "source": "rule",
+            "evidence": {
+              "words": [
+                "world"
+              ]
+            }
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1026,6 +1480,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "Now this is eternal life, that they may know You, the only true God, and Jesus Christ, whom You have sent.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.47,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1046,6 +1509,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
           "sameBook": true,
           "viaRange": null,
           "snippet": "You judge according to the flesh; I judge no one.",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.43,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         },
@@ -1071,6 +1543,15 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
             "span": 4
           },
           "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+          "reason": {
+            "kind": "topic",
+            "label": "Same topic",
+            "because": "Linked by theme",
+            "basis": "theme",
+            "confidence": 0.46,
+            "source": "rule",
+            "evidence": {}
+          },
           "why": null,
           "aiStatus": "not_generated"
         }
@@ -1085,9 +1566,9 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
   "attribution": {
     "text": "Berean Standard Bible, public domain",
     "crossReferences": "Cross references from OpenBible.info, CC-BY (2016-02-01)",
-    "ai": "Study notes marked 'why' are AI-generated (see manifest.sources.ai)"
+    "ai": "No AI-generated content in this version. Connection reasons are computed by rules from the public-domain text."
   },
-  "_note": "Sample trimmed to verses 15-17 of 36; the real file carries every verse of the chapter with the same shape. headings is empty because the BSB source has no section headings; a licensed NIV pack supplies them as data. AI 'why' strings are illustrative sample output."
+  "_note": "Sample trimmed to verses 15-17 of 36 (from data/samples/chapters/John-3.json); the real file carries every verse with the same shape. headings is empty because the BSB source has none. why and aiStatus stay empty while AI notes are deferred."
 }
 ```
 
@@ -1112,11 +1593,11 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
   },
   "order": "score desc; out/both before in-only; then canonical order (start vid asc)",
   "motion": {
-    "mode": "autoScroll",
+    "mode": "hold",
     "loop": true,
-    "baseSeconds": 1.6,
-    "perWeightSeconds": 1.2,
-    "dwellFormula": "dwellSeconds = 1.6 + 1.2 * weight",
+    "baseSeconds": 3.0,
+    "perWeightSeconds": 3.0,
+    "dwellFormula": "dwellSeconds = 3.0 + 3.0 * weight",
     "advanceOnFocusChange": true
   },
   "items": [
@@ -1137,9 +1618,22 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": false,
       "viaRange": null,
       "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
-      "why": "Both verses ground God's love in an act, not a feeling: John says God gave His Son; Paul says Christ died for us while we were still sinners.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.8
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 6.0
     },
     {
       "rank": 2,
@@ -1158,9 +1652,23 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": false,
       "viaRange": null,
       "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
-      "why": "John's letter restates his Gospel line almost word for word: God sent His one and only Son into the world, and this is what love is.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.71
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world and loved",
+        "basis": "theme",
+        "confidence": 0.72,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world",
+            "loved"
+          ]
+        }
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.77
     },
     {
       "rank": 3,
@@ -1179,9 +1687,18 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": true,
       "viaRange": null,
       "snippet": "that everyone who believes in Him may have eternal life.",
-      "why": "The verse immediately before it: 'everyone who believes in Him may have eternal life' is the promise 3:16 then explains with God's love as its cause.",
-      "aiStatus": "cached",
-      "dwellSeconds": 2.64
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in John 3",
+        "basis": "samePassage",
+        "confidence": 0.89,
+        "source": "rule",
+        "evidence": {}
+      },
+      "why": null,
+      "aiStatus": "not_generated",
+      "dwellSeconds": 5.59
     },
     {
       "rank": 4,
@@ -1200,9 +1717,23 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": true,
       "viaRange": null,
       "snippet": "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes and life",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes",
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.6
+      "dwellSeconds": 5.5
     },
     {
       "rank": 5,
@@ -1226,9 +1757,24 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
         "span": 4
       },
       "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, believes and life",
+        "basis": "theme",
+        "confidence": 0.75,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "believes",
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.58
+      "dwellSeconds": 5.45
     },
     {
       "rank": 6,
@@ -1247,9 +1793,18 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": false,
       "viaRange": null,
       "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.57
+      "dwellSeconds": 5.43
     },
     {
       "rank": 7,
@@ -1273,9 +1828,18 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
         "span": 2
       },
       "snippet": "Whoever believes in the Son has eternal life. Whoever rejects the Son will not see life. Instead, the wrath…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in John 3",
+        "basis": "samePassage",
+        "confidence": 0.83,
+        "source": "rule",
+        "evidence": {}
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.56
+      "dwellSeconds": 5.4
     },
     {
       "rank": 8,
@@ -1294,9 +1858,22 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": false,
       "viaRange": null,
       "snippet": "We love because He first loved us.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.54
+      "dwellSeconds": 5.34
     },
     {
       "rank": 9,
@@ -1320,9 +1897,24 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
         "span": 2
       },
       "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, world and believes",
+        "basis": "theme",
+        "confidence": 0.77,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "world",
+            "believes"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.5
+      "dwellSeconds": 5.26
     },
     {
       "rank": 10,
@@ -1346,9 +1938,24 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
         "span": 2
       },
       "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, perish and life",
+        "basis": "theme",
+        "confidence": 0.73,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "perish",
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.5
+      "dwellSeconds": 5.24
     },
     {
       "rank": 11,
@@ -1367,9 +1974,22 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": true,
       "viaRange": null,
       "snippet": "The next day John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.48
+      "dwellSeconds": 5.21
     },
     {
       "rank": 12,
@@ -1388,9 +2008,22 @@ Verse text is BSB; every vote count, snippet, id and label below was produced by
       "sameBook": false,
       "viaRange": null,
       "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life",
+        "basis": "theme",
+        "confidence": 0.66,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life"
+          ]
+        }
+      },
       "why": null,
       "aiStatus": "not_generated",
-      "dwellSeconds": 2.48
+      "dwellSeconds": 5.19
     }
   ],
   "attribution": "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
@@ -1530,33 +2163,14 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
     "note": "a peek does not push a hop until the reader taps Go"
   },
   "web": {
-    "nodes": [
-      43003016,
-      45005008,
-      62003016
-    ],
+    "nodes": [43003016, 45005008, 62003016],
     "edges": [
-      [
-        43003016,
-        45005008,
-        178
-      ],
-      [
-        45005008,
-        62003016,
-        19
-      ],
-      [
-        62003016,
-        43003016,
-        15
-      ]
+      [43003016, 45005008, 178],
+      [45005008, 62003016, 19],
+      [62003016, 43003016, 15]
     ],
     "peekOnlyEdges": [
-      [
-        62003016,
-        43003016
-      ]
+      [62003016, 43003016]
     ],
     "booksTouched": [
       "John",
@@ -1586,6 +2200,8 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
 ```
 
 ### 4.4 AI context: verse John 3:16 and connection John 3:16 > Romans 5:8
+
+Deferred. This hand-written example documents the shape for when AI notes return; nothing like it ships in v1, and the content strings are illustrative.
 
 ```json
 {
@@ -1838,7 +2454,7 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "verseCounts": [6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 10, 7, 12, 15, 21, 10, 20, 14, 9, 6]
     }
   ],
-  "_note": "Two of 66 entries shown (from data/samples/books.json). name is the singular display form used in labels ('Psalm 2:7'); sourceName is the BSB.json book name ('Psalms', 'I John', 'Revelation of John'); osis is the OpenBible key."
+  "_note": "Two of 66 entries shown (from data/samples/books.json). name is the singular display form used in labels ('Psalm 2:7'); sourceName is the BSB.json book name; osis is the OpenBible key."
 }
 ```
 
@@ -1848,7 +2464,7 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
 {
   "schema": "asb.manifest/2",
   "datasetVersion": "2026.09.1",
-  "builtAt": "2026-09-27T00:00:00Z",
+  "builtAt": "2026-09-28T00:00:00Z",
   "pipeline": "tools/build_dataset.py",
   "canon": {
     "books": 66,
@@ -1898,11 +2514,43 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
     "collision": "same start, different end: keep higher votes, list others in alsoCites",
     "tickerInline": 12,
     "snippetMaxChars": 110,
-    "dwellSeconds": "1.6 + 1.2 * weight",
+    "dwellSeconds": "3.0 + 3.0 * weight",
     "motion": {
-      "baseSeconds": 1.6,
-      "perWeightSeconds": 1.2
+      "defaultMode": "hold",
+      "baseSeconds": 3.0,
+      "perWeightSeconds": 3.0
     }
+  },
+  "reasons": {
+    "version": "asb.reasons.v1",
+    "rules": "tools/reasons.py",
+    "analysisText": "bsb-2023",
+    "labels": {
+      "quote": "Direct quote",
+      "story": "Same story",
+      "topic": "Same topic"
+    },
+    "bases": [
+      "sharedWording",
+      "quotation",
+      "parallelAccount",
+      "retelling",
+      "samePassage",
+      "sharedNames",
+      "theme"
+    ],
+    "share": {
+      "quote": 0.0183,
+      "story": 0.0569,
+      "topic": 0.9247
+    },
+    "counts": {
+      "quote": 15401,
+      "story": 47824,
+      "topic": 776847
+    },
+    "tested": "tests/gold_reasons.json (60 hand-labelled connections, all correct)",
+    "note": "Deterministic rules over the public-domain BSB text, so no licensed text is processed. An AI pass may later replace a reason (source 'ai'), only with YouVersion's written approval."
   },
   "translations": [
     {
@@ -1913,8 +2561,9 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "license": "Public domain (CC0), BSB Publishing 2023",
       "copyrightNotice": "The Holy Bible, Berean Standard Bible, BSB is produced in cooperation with Bible Hub, Discovery Bible, OpenBible.com, and the Berean Bible Translation Committee. This text of God's Word has been dedicated to the public domain.",
       "attribution": "Berean Standard Bible, BSB Publishing 2023, public domain",
-      "role": "placeholder until NIV is licensed",
+      "role": "offline fallback and the analysis text for connection reasons",
       "bundled": true,
+      "delivery": "bundled",
       "packUrl": null,
       "sha256": "65cec9123b09bec8b99b664280e321e82d39fe77703539eebe889aa50e232cf9",
       "headings": false
@@ -1924,12 +2573,14 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "name": "New International Version",
       "abbr": "NIV",
       "textVersion": null,
-      "license": "Copyright Biblica, Inc.; requires license",
+      "license": "Copyright Biblica, Inc. Delivered by the YouVersion Platform under its non-commercial license",
       "attribution": null,
-      "copyrightNotice": "<supplied by Biblica with the license>",
-      "role": "target translation",
+      "copyrightNotice": "<the copyright string returned by the YouVersion API, shown wherever NIV text appears>",
+      "role": "launch translation, fetched at runtime; never bundled, stored or indexed",
       "bundled": false,
-      "packUrl": "https://cdn.example.com/asb/text/niv/{book}.json.gz",
+      "delivery": "youversionPlatform",
+      "youversionVersionId": 111,
+      "packUrl": null,
       "sha256": null,
       "headings": true
     }
@@ -1942,9 +2593,9 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "version": "2016-02-01",
       "license": "CC-BY",
       "url": "https://www.openbible.info/labs/cross-references/",
-      "attribution": "Cross references from OpenBible.info (https://www.openbible.info/labs/cross-references/), used under a Creative Commons Attribution license. Dataset dated 2016-02-01. Vote counts reflect OpenBible.info user voting. Ranking and range handling are our own.",
+      "attribution": "Cross references from OpenBible.info (https://www.openbible.info/labs/cross-references/), used under a Creative Commons Attribution license. Dataset dated 2016-02-01. Vote counts reflect OpenBible.info user voting. Ranking, range handling and connection reasons are our own.",
       "via": "https://github.com/scrollmapper/bible_databases (2024 branch, cross_references.txt)",
-      "retrievedAt": "2026-09-27"
+      "retrievedAt": "2026-09-28"
     },
     {
       "id": "bsb-2023",
@@ -1955,19 +2606,20 @@ Real edges: `John.3.16 -> Rom.5.8 178`, `Rom.5.8 -> 1John.3.16 19` (rank 4 on Ro
       "url": "https://berean.bible",
       "attribution": "Berean Standard Bible, public domain",
       "via": "https://github.com/scrollmapper/bible_databases (formats/json/BSB.json)",
-      "retrievedAt": "2026-09-27"
+      "retrievedAt": "2026-09-28"
     },
     {
       "id": "ai-claude",
       "kind": "ai",
       "name": "AI study notes",
+      "status": "deferred",
       "generator": "claude",
       "model": "claude-opus-5",
       "promptVersions": {
         "verse-context": "v3",
         "edge-why": "v2"
       },
-      "attribution": "AI-generated study aid; not part of the Bible text or the OpenBible dataset",
+      "attribution": "Deferred: v1 ships no AI output. When enabled, notes are marked as an AI-generated study aid, not part of the Bible text or the OpenBible dataset",
       "license": "Generated content, owned by the publisher"
     }
   ],
@@ -2041,19 +2693,20 @@ data/full/                                distribution + OTA format, built by to
 
 data/samples/                              committed, founder-readable (1.6 MB): 6 chapter bundles, 5 ticker feeds, 5 connection lists,
                                            the trail and AI note from section 4, books.json, manifest.json
-prototype/data/                            committed (19.8 MB): compact transport the HTML prototype expands into the documents above
+prototype/data/                            committed (29 MB): compact transport the HTML prototype expands into the documents above
                                            (books, manifest, all text in one file, 66 per-book ticker packs, sample AI notes)
 
 App bundle (iOS):
   asb.sqlite                               prebuilt by tools/compile_sqlite.py, shipped read-only, copied to Application Support on first launch
-                                           (cold start = a ~45 MB file copy, never a JSON parse). Tables: books(66), translations, verses(31,102 x translations,
-                                           text + snippet + heading + paragraphStart), [edges(343,608) and incoming(596,218) in the tooling profile only],
-                                           ticker(840,072 merged items; PK vid, rank; score and weight stored as integers x100 / x1000; snippet joined from verses),
-                                           ai_context(key PK, kind, json, provenance, cache), FTS5 on verses.text (~8 MB).
-                                           Measured (tools/compile_sqlite.py --profile ship): 37.5 MB without search, 44.7 MB with FTS5, ~14 MB gzipped
-                                           (what the App Store download compresses to). John 3 opens in ~2 ms, Psalm 119 in ~6 ms (desktop CPython;
-                                           expect several times that on an iPhone, still well under a frame). Raw edges/incoming stay out of the shipped
-                                           file (profile full = 73 MB, for tooling only). +~5 MB per extra translation.
+                                           (cold start = a ~58 MB file copy, never a JSON parse). Tables: books(66), translations, verses(31,102 BSB rows:
+                                           text + snippet + heading + paragraphStart; BSB only, NIV text is never stored),
+                                           [edges(343,608) and incoming(596,218) in the tooling profile only],
+                                           ticker(840,072 merged items; PK vid, rank; score and weight stored as integers x100 / x1000; reasonKind,
+                                           reasonBasis, reasonConfidence100, reasonTextId), reason_text(63,217 distinct "because" sentences),
+                                           ai_context(empty in v1), FTS5 on the BSB verses.text (search runs over BSB wording and opens the NIV).
+                                           Measured (tools/compile_sqlite.py --profile ship): 50.5 MB without search, 57.7 MB with FTS5. John 3 opens in
+                                           ~2.5 ms, Psalm 119 in ~7 ms (desktop CPython; expect several times that on an iPhone, still well under a frame).
+                                           Raw edges/incoming stay out of the shipped file (profile full, for tooling only).
   Runtime: GRDB; chapter open = one indexed query over verses + ticker (36 x 12 rows for John 3), LRU of 5 ChapterBundles, prev/next chapter prefetched.
 
 Downloaded on demand (CDN, verified by manifest sha256):
@@ -2082,13 +2735,19 @@ On device only (SwiftData): Trail (active + last 20), bookmarks, highlights, rea
 | 14 | Span cap and discount exposed in UI docs (P2) vs build-time only (judge 1) | Build-time constants in the manifest; chips expose only `viaRange {start, end, label, span}` | The peek sheet can say "points at John 3:15–16" without the reader meeting a square root. |
 | 15 | Dataset facts: judge 2 cited 645 cross-chapter ranges, 244 spans over 40, max span 88; judge 1 relayed P1's 70 + 34 incoming split | Measured: 650 cross-chapter, 295 over 40 verses, max span 182; John 3:16 incoming = 53 direct + 51 via range | Numbers in this spec were recomputed from the source files; the earlier figures counted within-chapter spans only or were not measured. |
 
+| 16 | Why is a verse connected? (founder, 2026-09-28) | Every connection carries a reason: direct quote, same story or same topic, with a one-line "because" | The founder asked that each served verse say which of the three it is. Rules over the BSB keep it free, deterministic and compliant with the NIV and YouVersion terms. |
+| 17 | Ticker motion (founder) | Hold by default; opt-in auto-scroll at 3.0 + 3.0 x weight seconds per chip | "Better if it didn't automatically scroll, or at least slower." |
+| 18 | Launch translation (founder) | NIV through the YouVersion Platform (version 111), fetched at runtime; BSB bundled as offline fallback and analysis text | Free, non-commercial NIV access with a Swift SDK. NIV text is never bundled, stored or indexed, so chips show references and reasons and the peek sheet fetches the whole verse. |
+| 19 | Price and AI (founder) | Free forever; AI notes deferred, slots kept | YouVersion requires no ads or paid tiers, and written approval before readers see AI output. |
+| 20 | Confidence on screen (founder) | Every chip and peek sheet shows a match percentage: 100% for the same words or the same account, lower for looser topical or word matches | "Each match should include a confidence match. 100% if it is literally talking about the exact same thing, slightly less if it's a looser topical or word match." |
+
 ## 7. Open questions for the founder
 
-1. NIV licensing path: Biblica direct, API.Bible, or YouVersion partner program? Only a direct license clearly allows offline text on device; the API programs generally forbid caching whole books, which would make NIV online-only and BSB the offline text. This decides the text-pack design and the launch translation.
-2. Ticker behaviour default: the sample auto-scrolls in a loop and re-anchors on focus change. Do you prefer advance-on-focus-then-hold? Same data, different motion, and it changes how many chips need to be inlined.
-3. Incoming references: merged into one strip with a direction glyph (current), or a separate "Who quotes this?" lane? The merge rule and the score's 0.5 incoming factor exist only because of the merged design.
-4. AI scope and cost for v1: verse notes only, or also per-connection "why" text? Pre-generating notes for the ~5,000 most connected verses plus "why" for their top 3 chips is roughly 25 M input tokens, about $60-130 at Claude Opus 5 Batches API rates ($2.50 / $12.50 per MTok); all 31,102 verses plus every strong and solid chip is roughly 10x that. On-demand generation means a 2-5 s first-open wait.
-5. Peek sheet depth: snippet only (zero reads) or the full target verse with one verse of context on each side (one indexed read)? Recommendation: full verse with context.
-6. Ranking parameters to confirm once you feel the prototype: 12 chips inline, 0.5 incoming factor, 1/sqrt(span) discount, 40-verse cap, tiers at 10 / 4.
-7. Trail persistence and sharing: on-device sessions only (current: last 20), or synced via iCloud and shareable as a replay link (John 3:16 -> Romans 5:8 -> 1 John 3:16)? Sharing adds a small deep-link scheme and a privacy statement.
-8. Editorial overlay: should there be a hand-curated "editor's picks" source that the ticker prefers when present, and may readers add their own links or upvotes? Both fit as extra `sourceId` values on Edge; they change the pipeline and the App Store data-collection disclosure.
+Answered on 2026-09-28: the launch translation (NIV through YouVersion), the ticker motion (hold, slower opt-in scroll), the reasons for a connection, the price (free) and AI notes (deferred). Still open, in order of impact:
+
+1. Questions for YouVersion Support before the ticker ships: how many NIV verses may be on screen at once (a forum report says 25), whether a preview may show part of a verse, whether storing only references is fine, and whether it keeps the SDK's installation id (it decides the privacy label).
+2. The name: "AI-Assisted Study Bible" with no AI output in v1 may draw an App Review question on accurate metadata, and it sits close to "Light - AI Study Bible". See docs/IOS_BUILD_PLAN.md.
+3. Incoming references: merged into one strip with a direction glyph (current), or a separate "Who quotes this?" lane.
+4. Ranking constants to confirm after using the prototype: 12 chips, 0.5 incoming factor, 1/sqrt(span) discount, 40-verse cap, tiers at 10 / 4.
+5. Trail persistence and sharing: on-device (last 20 trails) or iCloud sync with shareable replay links.
+6. An editorial overlay: hand-picked links or corrected reasons (source "editor") that override the rules where they are wrong.

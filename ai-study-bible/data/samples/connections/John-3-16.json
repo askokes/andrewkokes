@@ -31,6 +31,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But God proves His love for us in this: While we were still sinners, Christ died for us.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -50,6 +63,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "This is how God’s love was revealed among us: God sent His one and only Son into the world, so that we might…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world and loved",
+        "basis": "theme",
+        "confidence": 0.72,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world",
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -69,6 +96,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "that everyone who believes in Him may have eternal life.",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in John 3",
+        "basis": "samePassage",
+        "confidence": 0.89,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -88,6 +124,20 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Jesus said to her, “I am the resurrection and the life. Whoever believes in Me will live, even though he dies.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes and life",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -112,6 +162,21 @@
         "span": 4
       },
       "snippet": "For it is My Father’s will that everyone who looks to the Son and believes in Him shall have eternal life…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, believes and life",
+        "basis": "theme",
+        "confidence": 0.75,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "believes",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -131,6 +196,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "He who did not spare His own Son but gave Him up for us all, how will He not also, along with Him, freely…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -155,6 +229,15 @@
         "span": 2
       },
       "snippet": "Whoever believes in the Son has eternal life. Whoever rejects the Son will not see life. Instead, the wrath…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in John 3",
+        "basis": "samePassage",
+        "confidence": 0.83,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -174,6 +257,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "We love because He first loved us.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.63,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -198,6 +294,21 @@
         "span": 2
       },
       "snippet": "This is a trustworthy saying, worthy of full acceptance: Christ Jesus came into the world to save sinners, of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, world and believes",
+        "basis": "theme",
+        "confidence": 0.77,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "world",
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -222,6 +333,21 @@
         "span": 2
       },
       "snippet": "I give them eternal life, and they will never perish. No one can snatch them out of My hand.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, perish and life",
+        "basis": "theme",
+        "confidence": 0.73,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "perish",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -241,6 +367,19 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "The next day John saw Jesus coming toward him and said, “Look, the Lamb of God, who takes away the sin of the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world",
+        "basis": "theme",
+        "confidence": 0.65,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -260,6 +399,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For if, when we were enemies of God, we were reconciled to Him through the death of His Son, how much more…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life",
+        "basis": "theme",
+        "confidence": 0.66,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -279,6 +431,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Now may our Lord Jesus Christ Himself and God our Father, who by grace has loved us and given us eternal…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal and loved",
+        "basis": "theme",
+        "confidence": 0.68,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -298,6 +464,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "that God was reconciling the world to Himself in Christ, not counting men’s trespasses against them. And He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world",
+        "basis": "theme",
+        "confidence": 0.64,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -317,6 +496,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Do not lay a hand on the boy or do anything to him,” said the angel, “for now I know that you fear God…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -341,6 +529,19 @@
         "span": 4
       },
       "snippet": "But because of His great love for us, God, who is rich in mercy,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.62,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -360,6 +561,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "and from Jesus Christ, the faithful witness, the firstborn from the dead, and the ruler of the kings of the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.6,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -379,6 +593,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But go and learn what this means: ‘I desire mercy, not sacrifice.’ For I have not come to call the righteous…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.56,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -403,6 +626,15 @@
         "span": 3
       },
       "snippet": "No one has ever seen God, but the one and only Son, who is Himself God and is at the Father’s side, has made…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.6,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -422,6 +654,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.58,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -441,6 +682,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But when the kindness of God our Savior and His love for mankind appeared,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.61,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -465,6 +719,15 @@
         "span": 3
       },
       "snippet": "Finally, having one beloved son, he sent him to them. ‘They will respect my son,’ he said.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.57,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -484,6 +747,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Glory to God in the highest, and on earth peace to men on whom His favor rests!”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.56,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -503,6 +775,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "By this we know what love is: Jesus laid down His life for us, and we ought to lay down our lives for our…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life and loved",
+        "basis": "theme",
+        "confidence": 0.53,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life",
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -522,6 +808,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Rather, as it is written: “No eye has seen, no ear has heard, no heart has imagined, what God has prepared…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -546,6 +845,19 @@
         "span": 2
       },
       "snippet": "Whoever believes and is baptized will be saved, but whoever does not believe will be condemned.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -565,6 +877,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "I will proclaim the decree spoken to Me by the LORD: “You are My Son; today I have become Your Father.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.45,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -584,6 +905,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Behold what manner of love the Father has given to us, that we should be called children of God. And that is…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world and loved",
+        "basis": "theme",
+        "confidence": 0.51,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world",
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -603,6 +938,21 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Truly, truly, I tell you, whoever hears My word and believes Him who sent Me has eternal life and will not…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, believes and life",
+        "basis": "theme",
+        "confidence": 0.54,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "believes",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -622,6 +972,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But in these last days He has spoken to us by His Son, whom He appointed heir of all things, and through whom…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -641,6 +1000,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Thanks be to God for His indescribable gift!",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -660,6 +1028,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But we see Jesus, who was made a little lower than the angels, now crowned with glory and honor because He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -679,6 +1056,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But when the time had fully come, God sent His Son, born of a woman, born under the law,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -703,6 +1089,20 @@
         "span": 2
       },
       "snippet": "And they will go away into eternal punishment, but the righteous into eternal life.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal and life",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -727,6 +1127,15 @@
         "span": 2
       },
       "snippet": "Truly, truly, I tell you, if anyone keeps My word, he will never see death.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -751,6 +1160,20 @@
         "span": 2
       },
       "snippet": "But these are written so that you may believe that Jesus is the Christ, the Son of God, and that by believing…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes and life",
+        "basis": "theme",
+        "confidence": 0.49,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -775,6 +1198,15 @@
         "span": 2
       },
       "snippet": "And He died for all, that those who live should no longer live for themselves, but for Him who died for them…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -799,6 +1231,15 @@
         "span": 5
       },
       "snippet": "For it is by grace you have been saved through faith, and this not from yourselves; it is the gift of God,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -818,6 +1259,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Wherever the river flows, there will be swarms of living creatures and a great number of fish, because it…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -837,6 +1287,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And a voice came from heaven: “You are My beloved Son; in You I am well pleased.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -856,6 +1315,21 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Truly, truly, I tell you, he who believes has eternal life.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, believes and life",
+        "basis": "theme",
+        "confidence": 0.5,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "believes",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -875,6 +1349,20 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "I am the living bread that came down from heaven. If anyone eats of this bread, he will live forever. And…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world and life",
+        "basis": "theme",
+        "confidence": 0.45,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -894,6 +1382,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For you died, and your life is now hidden with Christ in God.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -913,6 +1414,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And again, when God brings His firstborn into the world, He says: “Let all God’s angels worship Him.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -932,6 +1446,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "To the angel of the church in Thyatira write: These are the words of the Son of God, whose eyes are like a…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -956,6 +1479,15 @@
         "span": 2
       },
       "snippet": "‘What shall I do?’ asked the owner of the vineyard. ‘I will send my beloved son. Perhaps they will respect…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -980,6 +1512,15 @@
         "span": 2
       },
       "snippet": "For unto us a child is born, unto us a son is given, and the government will be upon His shoulders. And He…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1004,6 +1545,15 @@
         "span": 2
       },
       "snippet": "Lift up your eyes to the heavens, and look at the earth below; for the heavens will vanish like smoke, the…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1028,6 +1578,19 @@
         "span": 2
       },
       "snippet": "And he received the sign of circumcision as a seal of the righteousness that he had by faith while he was…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.4,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1052,6 +1615,19 @@
         "span": 2
       },
       "snippet": "And we have seen and testify that the Father has sent His Son to be the Savior of the world.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1071,6 +1647,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Take your son,” God said, “your only son Isaac, whom you love, and go to the land of Moriah. Offer him there…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1090,6 +1679,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "See, I have set before you today life and goodness, as well as death and disaster.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1109,6 +1711,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "How precious is Your loving devotion, O God, that the children of men take refuge in the shadow of Your wings!",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.4,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1128,6 +1743,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“To you, O men, I call out, and my cry is to the sons of men.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1147,6 +1771,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "When there were no watery depths, I was brought forth, when no springs were overflowing with water.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1166,6 +1799,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For whoever finds me finds life and obtains the favor of the LORD.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1190,6 +1836,15 @@
         "span": 4
       },
       "snippet": "Turn to Me and be saved, all the ends of the earth; for I am God, and there is no other.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1209,6 +1864,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Behold, I have made him a witness to the nations, a leader and commander of the peoples.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1228,6 +1892,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "“Son of man,” He said to me, “stand up on your feet and I will speak to you.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1247,6 +1920,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "How lovely they will be, and how beautiful! Grain will make the young men flourish, and new wine, the young…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1266,6 +1952,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "So if you who are evil know how to give good gifts to your children, how much more will your Father in heaven…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1285,6 +1980,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "While Peter was still speaking, a bright cloud enveloped them, and a voice from the cloud said, “This is My…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1304,6 +2008,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Finally, he sent his son to them. ‘They will respect my son,’ he said.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1323,6 +2036,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "This is the beginning of the gospel of Jesus Christ, the Son of God.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1342,6 +2064,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "because of the tender mercy of our God, by which the Dawn will visit us from on high,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1361,6 +2092,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And a voice came from the cloud, saying, “This is My Son, whom I have chosen. Listen to Him!”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1380,6 +2120,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "Jesus answered, “If you knew the gift of God and who is asking you for a drink, you would have asked Him, and…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1399,6 +2148,15 @@
       "sameBook": true,
       "viaRange": null,
       "snippet": "I have come in My Father’s name, and you have not received Me; but if someone else comes in his own name, you…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1418,6 +2176,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "But the gift is not like the trespass. For if the many died by the trespass of the one man, how much more did…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1437,6 +2204,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "For the Son of God, Jesus Christ, who was proclaimed among you by me and Silvanus and Timothy, was not “Yes”…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1456,6 +2232,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "All this is from God, who reconciled us to Himself through Christ and gave us the ministry of reconciliation:",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1475,6 +2260,20 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "I have been crucified with Christ, and I no longer live, but Christ lives in me. The life I live in the body…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: life and loved",
+        "basis": "theme",
+        "confidence": 0.46,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "life",
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1494,6 +2293,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "So also Christ did not take upon Himself the glory of becoming a high priest, but He was called by the One…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1513,6 +2321,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "By faith Abraham, when he was tested, offered up Isaac on the altar. He who had received the promises was…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1532,6 +2349,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "And love consists in this: not that we loved God, but that He loved us and sent His Son as the atoning…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1551,6 +2381,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "Whoever believes in the Son of God has this testimony within him; whoever does not believe God has made Him…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.43,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1575,6 +2418,15 @@
         "span": 3
       },
       "snippet": "I have seen and testified that this is the Son of God.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1599,6 +2451,15 @@
         "span": 3
       },
       "snippet": "The crowd replied, “We have heard from the Law that the Christ will remain forever. So how can You say that…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1623,6 +2484,15 @@
         "span": 3
       },
       "snippet": "who wants everyone to be saved and to come to the knowledge of the truth.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1647,6 +2517,19 @@
         "span": 3
       },
       "snippet": "To this end we labor and strive, because we have set our hope on the living God, who is the Savior of…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1671,6 +2554,19 @@
         "span": 4
       },
       "snippet": "All the prophets testify about Him that everyone who believes in Him receives forgiveness of sins through His…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1695,6 +2591,19 @@
         "span": 2
       },
       "snippet": "I have not covered up Your righteousness in my heart; I have declared Your faithfulness and salvation; I have…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1719,6 +2628,15 @@
         "span": 2
       },
       "snippet": "He trusts in God. Let God deliver Him now if He wants Him. For He said, ‘I am the Son of God.’”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1743,6 +2661,15 @@
         "span": 2
       },
       "snippet": "but I know Him, because I am from Him and He sent Me.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1767,6 +2694,15 @@
         "span": 2
       },
       "snippet": "You know the way to the place where I am going.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1791,6 +2727,19 @@
         "span": 2
       },
       "snippet": "They replied, “Believe in the Lord Jesus and you will be saved, you and your household.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1815,6 +2764,21 @@
         "span": 2
       },
       "snippet": "But for this very reason I was shown mercy, so that in me, the worst of sinners, Christ Jesus might display…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal, believes and life",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "believes",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1839,6 +2803,20 @@
         "span": 2
       },
       "snippet": "in the hope of eternal life, which God, who cannot lie, promised before time began.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal and life",
+        "basis": "theme",
+        "confidence": 0.45,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1863,6 +2841,15 @@
         "span": 2
       },
       "snippet": "But we are not of those who shrink back and are destroyed, but of those who have faith and preserve their…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1887,6 +2874,20 @@
         "span": 2
       },
       "snippet": "And this is that testimony: God has given us eternal life, and this life is in His Son.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal and life",
+        "basis": "theme",
+        "confidence": 0.47,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1911,6 +2912,15 @@
         "span": 3
       },
       "snippet": "But Jesus remained silent. Then the high priest said to Him, “I charge You under oath by the living God: Tell…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1935,6 +2945,15 @@
         "span": 3
       },
       "snippet": "Then a cloud appeared and enveloped them, and a voice came from the cloud: “This is My beloved Son. Listen to…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.36,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -1959,6 +2978,19 @@
         "span": 3
       },
       "snippet": "Jesus replied, “The work of God is this: to believe in the One He has sent.”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -1983,6 +3015,15 @@
         "span": 3
       },
       "snippet": "regarding His Son, who was a descendant of David according to the flesh,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.36,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2007,6 +3048,19 @@
         "span": 3
       },
       "snippet": "but also for us, to whom righteousness will be credited—for us who believe in Him who raised Jesus our Lord…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -2031,6 +3085,15 @@
         "span": 3
       },
       "snippet": "how shall we escape if we neglect such a great salvation? This salvation was first announced by the Lord, was…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2055,6 +3118,15 @@
         "span": 4
       },
       "snippet": "Awake, O sword, against My Shepherd, against the man who is My Companion, declares the LORD of Hosts. Strike…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.33,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2079,6 +3151,19 @@
         "span": 4
       },
       "snippet": "When Jesus heard that they had thrown him out, He found the man and said, “Do you believe in the Son of Man?”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.39,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -2103,6 +3188,19 @@
         "span": 4
       },
       "snippet": "And everyone who lives and believes in Me will never die. Do you believe this?”",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -2127,6 +3225,15 @@
         "span": 4
       },
       "snippet": "testifying to Jews and Greeks alike about repentance to God and faith in our Lord Jesus Christ.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.35,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2151,6 +3258,15 @@
         "span": 4
       },
       "snippet": "For what the law was powerless to do in that it was weakened by the flesh, God did by sending His own Son in…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2170,6 +3286,19 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: loved",
+        "basis": "theme",
+        "confidence": 0.38,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "loved"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -2194,6 +3323,19 @@
         "span": 4
       },
       "snippet": "But the Scripture pronounces all things confined by sin, so that by faith in Jesus Christ the promise might…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: believes",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -2213,6 +3355,15 @@
       "sameBook": false,
       "viaRange": null,
       "snippet": "The Son is the image of the invisible God, the firstborn over all creation.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.37,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2237,6 +3388,15 @@
         "span": 5
       },
       "snippet": "If I have told you about earthly things and you do not believe, how will you believe if I tell you about…",
+      "reason": {
+        "kind": "story",
+        "label": "Same story",
+        "because": "Another part of the same passage in John 3",
+        "basis": "samePassage",
+        "confidence": 0.84,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2261,6 +3421,20 @@
         "span": 5
       },
       "snippet": "They said to the woman, “We now believe not only because of your words; we have heard for ourselves, and we…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: world and believes",
+        "basis": "theme",
+        "confidence": 0.41,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "world",
+            "believes"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -2285,6 +3459,15 @@
         "span": 3
       },
       "snippet": "Therefore, since we have been justified through faith, we have peace with God through our Lord Jesus Christ,",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.34,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2309,6 +3492,20 @@
         "span": 4
       },
       "snippet": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Shared theme: eternal and life",
+        "basis": "theme",
+        "confidence": 0.42,
+        "source": "rule",
+        "evidence": {
+          "words": [
+            "eternal",
+            "life"
+          ]
+        }
+      },
       "alsoCites": []
     },
     {
@@ -2333,6 +3530,15 @@
         "span": 21
       },
       "snippet": "Nicodemus, who had previously come to Jesus at night, also brought a mixture of myrrh and aloes, about…",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     },
     {
@@ -2357,6 +3563,15 @@
         "span": 5
       },
       "snippet": "For we maintain that a man is justified by faith apart from works of the law.",
+      "reason": {
+        "kind": "topic",
+        "label": "Same topic",
+        "because": "Linked by theme",
+        "basis": "theme",
+        "confidence": 0.31,
+        "source": "rule",
+        "evidence": {}
+      },
       "alsoCites": []
     }
   ]
