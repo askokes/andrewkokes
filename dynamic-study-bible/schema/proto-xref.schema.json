@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/proto-xref.schema.json",
+  "title": "Prototype ticker pack",
+  "description": "Compact per-book tickers the HTML prototype expands into spec TickerItems (prototype only).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.protoXref/2"
+    },
+    "datasetVersion": {
+      "type": "string"
+    },
+    "rankingVersion": {
+      "type": "string"
+    },
+    "book": {
+      "$ref": "common.schema.json#/$defs/bookNo"
+    },
+    "osis": {
+      "type": "string"
+    },
+    "legend": {
+      "type": "object"
+    },
+    "because": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "minItems": 3,
+          "items": false,
+          "prefixItems": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "minItems": 5,
+              "maxItems": 5
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "minItems": 11,
+                "items": false,
+                "prefixItems": [
+                  {
+                    "$ref": "common.schema.json#/$defs/vid"
+                  },
+                  {
+                    "$ref": "common.schema.json#/$defs/vid"
+                  },
+                  {
+                    "enum": [
+                      0,
+                      1,
+                      2
+                    ]
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  {
+                    "$ref": "common.schema.json#/$defs/weight"
+                  },
+                  {
+                    "enum": [
+                      0,
+                      1,
+                      2
+                    ]
+                  },
+                  {
+                    "oneOf": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "array",
+                        "prefixItems": [
+                          {
+                            "$ref": "common.schema.json#/$defs/vid"
+                          },
+                          {
+                            "$ref": "common.schema.json#/$defs/vid"
+                          },
+                          {
+                            "type": "integer",
+                            "minimum": 2
+                          }
+                        ],
+                        "items": false,
+                        "minItems": 3
+                      }
+                    ]
+                  },
+                  {
+                    "type": "array",
+                    "minItems": 4,
+                    "items": false,
+                    "prefixItems": [
+                      {
+                        "enum": [
+                          0,
+                          1,
+                          2
+                        ]
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 6
+                      },
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    ]
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                ]
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "minItems": 20,
+              "maxItems": 20
+            }
+          ]
+        }
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "datasetVersion",
+    "rankingVersion",
+    "book",
+    "osis",
+    "legend",
+    "because",
+    "chapters"
+  ]
+}

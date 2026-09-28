@@ -1,0 +1,624 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/manifest.schema.json",
+  "title": "Dataset manifest",
+  "description": "Versions, measured counts, ranking constants, translations, sources and shard hashes (spec 2.12, example 4.6).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.manifest/2"
+    },
+    "datasetVersion": {
+      "type": "string"
+    },
+    "builtAt": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "pipeline": {
+      "type": "string"
+    },
+    "canon": {
+      "type": "object",
+      "properties": {
+        "books": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "chapters": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "versification": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "books",
+        "chapters",
+        "verses",
+        "versification"
+      ]
+    },
+    "graph": {
+      "type": "object",
+      "properties": {
+        "edges": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "edgesDroppedForMissingVerse": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "edgesClampedToBsbVersification": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rangeTargets": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "crossChapterRanges": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "crossBookRanges": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rangesOver40Verses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxSpan": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "incomingRows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mergedTickerItems": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "inlineTickerItems": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "versesWithNoConnections": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "votes": {
+          "type": "object",
+          "properties": {
+            "min": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "median": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "p90": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "p99": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "min",
+            "median",
+            "p90",
+            "p99",
+            "max"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "edges",
+        "incomingRows",
+        "mergedTickerItems"
+      ]
+    },
+    "ranking": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "incomingFactor": {
+          "type": "number"
+        },
+        "rangeDiscount": {
+          "type": "string"
+        },
+        "spanCap": {
+          "type": "integer"
+        },
+        "score": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "string"
+        },
+        "tiers": {
+          "type": "object",
+          "properties": {
+            "strong": {
+              "type": "string"
+            },
+            "solid": {
+              "type": "string"
+            },
+            "light": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "strong",
+            "solid",
+            "light"
+          ]
+        },
+        "tierShare": {
+          "type": "object",
+          "properties": {
+            "strong": {
+              "type": "number"
+            },
+            "solid": {
+              "type": "number"
+            },
+            "light": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "strong",
+            "solid",
+            "light"
+          ]
+        },
+        "order": {
+          "type": "string"
+        },
+        "collision": {
+          "type": "string"
+        },
+        "tickerInline": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "snippetMaxChars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dwellSeconds": {
+          "type": "string"
+        },
+        "matchSlider": {
+          "type": "object",
+          "properties": {
+            "min": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "step": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "default": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "buckets": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rule": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "min",
+            "max",
+            "step",
+            "default",
+            "buckets",
+            "rule"
+          ]
+        },
+        "motion": {
+          "type": "object",
+          "properties": {
+            "defaultMode": {
+              "enum": [
+                "hold",
+                "autoScroll"
+              ]
+            },
+            "baseSeconds": {
+              "type": "number"
+            },
+            "perWeightSeconds": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "defaultMode",
+            "baseSeconds",
+            "perWeightSeconds"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "incomingFactor",
+        "spanCap",
+        "tiers",
+        "order",
+        "tickerInline",
+        "snippetMaxChars"
+      ]
+    },
+    "reasons": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "string"
+        },
+        "analysisText": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "properties": {
+            "quote": {
+              "type": "string"
+            },
+            "story": {
+              "type": "string"
+            },
+            "topic": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "quote",
+            "story",
+            "topic"
+          ]
+        },
+        "bases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "share": {
+          "type": "object",
+          "properties": {
+            "quote": {
+              "type": "number"
+            },
+            "story": {
+              "type": "number"
+            },
+            "topic": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "quote",
+            "story",
+            "topic"
+          ]
+        },
+        "counts": {
+          "type": "object",
+          "properties": {
+            "quote": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "story": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "topic": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "quote",
+            "story",
+            "topic"
+          ]
+        },
+        "confidence": {
+          "type": "string"
+        },
+        "tested": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "rules",
+        "analysisText",
+        "labels",
+        "share"
+      ]
+    },
+    "translations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "abbr": {
+            "type": "string"
+          },
+          "textVersion": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "license": {
+            "type": "string"
+          },
+          "attribution": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "copyrightNotice": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "bundled": {
+            "type": "boolean"
+          },
+          "delivery": {
+            "enum": [
+              "bundled",
+              "pack",
+              "youversionPlatform"
+            ]
+          },
+          "youversionVersionId": {
+            "type": "integer"
+          },
+          "packUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sha256": {
+            "oneOf": [
+              {
+                "$ref": "common.schema.json#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "headings": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "abbr",
+          "textVersion",
+          "license",
+          "copyrightNotice",
+          "bundled",
+          "headings"
+        ]
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "crossReferences",
+              "text",
+              "ai"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "deferred"
+            ]
+          },
+          "version": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "attribution": {
+            "type": "string"
+          },
+          "via": {
+            "type": "string"
+          },
+          "retrievedAt": {
+            "type": "string"
+          },
+          "generator": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "promptVersions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "name",
+          "license",
+          "attribution"
+        ]
+      }
+    },
+    "shards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "books",
+              "graph",
+              "incoming",
+              "text"
+            ]
+          },
+          "book": {
+            "$ref": "common.schema.json#/$defs/bookNo"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "gzipBytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "kind",
+          "bytes",
+          "sha256"
+        ]
+      }
+    },
+    "onDevice": {
+      "type": "object",
+      "properties": {
+        "database": {
+          "type": "string"
+        },
+        "shippedInAppBundle": {
+          "type": "boolean"
+        },
+        "estimatedBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tickerInline": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "database",
+        "shippedInAppBundle",
+        "estimatedBytes",
+        "tickerInline"
+      ]
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "datasetVersion",
+    "builtAt",
+    "pipeline",
+    "canon",
+    "graph",
+    "ranking",
+    "reasons",
+    "translations",
+    "sources",
+    "shards",
+    "onDevice"
+  ]
+}
