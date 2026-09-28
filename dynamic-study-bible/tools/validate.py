@@ -17,7 +17,7 @@ from referencing import Registry, Resource
 SCHEMA_DIR = Path(__file__).resolve().parent.parent / "schema"
 BY_TYPE = {
     "asb.chapter/2": "chapter-bundle", "asb.ticker/2": "ticker-feed", "asb.connections/2": "connections",
-    "asb.trail/2": "trail", "asb.ai/2": "ai-context", "asb.books/2": "books", "asb.manifest/2": "manifest",
+    "asb.trail/2": "trail", "asb.annotations/1": "annotations", "asb.ai/2": "ai-context", "asb.books/2": "books", "asb.manifest/2": "manifest",
     "asb.graph/2": "graph-shard", "asb.incoming/2": "incoming-shard", "asb.text/2": "text-pack",
     "asb.protoXref/2": "proto-xref", "asb.protoText/2": "proto-text", "asb.protoAi/2": "proto-ai",
 }

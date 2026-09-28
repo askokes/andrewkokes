@@ -1,8 +1,8 @@
-# Dynamic Study Bible: Data Model (v2.1)
+# Dynamic Study Bible: Data Model (v2.2)
 
 Status: final synthesis of three proposals and two judge reviews. Dataset facts below were measured with python3 against `data/sources/BSB.json` (31,102 verses, 1,189 chapters) and `data/sources/cross_references.txt` (343,609 OpenBible links, 2016-02-01) on 2026-09-27.
 
-Updated 2026-09-28 after the founder's decisions: every connection now carries a reason (section 2.6.1), the ticker holds still by default, the NIV is the launch translation through the YouVersion Platform (references only, never stored), the app is free, and AI notes are deferred.
+Updated 2026-09-28 after the founder's decisions: every connection now carries a reason (section 2.6.1), the ticker holds still by default, the NIV is the launch translation through the YouVersion Platform (references only, never stored), the app is free, and AI notes are deferred. v2.2 adds the reader's highlights, bookmarks, notes and tags (section 2.13).
 
 ## 1. Overview
 
@@ -201,6 +201,38 @@ AI notes are deferred: v1 ships no AI output and the table ships empty. YouVersi
 ### 2.12 Manifest (manifest.json)
 
 `schema, datasetVersion, builtAt, pipeline, canon, graph` (measured counts), `ranking` (every constant of asb.rank.v2, including `motion {defaultMode, baseSeconds, perWeightSeconds}` and `matchSlider {min, max, step, default, buckets, rule}`), `reasons` (rules version, analysis text, labels, measured share and counts, test note), `translations[]`, `sources[]` (id, kind, license, url, attribution, retrievedAt), `shards[]` (path, kind, book, translation, bytes, gzipBytes, sha256), `onDevice`.
+
+### 2.13 Annotation (the reader's highlights, bookmarks, notes and tags; SwiftData on device, `asb.annotations/1` for export and the sample)
+
+The reader can mark any verse, verse range or run of words, as in the YouVersion app. Four kinds share one shape:
+
+| Kind | What it holds | Partial verse? |
+|---|---|---|
+| highlight | a palette colour | yes |
+| bookmark | nothing else; shows in My Study and the margin | no, whole verses only |
+| note | the reader's own text, plus optional tags | yes |
+| tag | one or more keywords, no text | yes |
+
+| Field | Type | Required | Meaning |
+|---|---|---|---|
+| id | string | yes | `ann_` plus a unique suffix |
+| kind | enum | yes | highlight / bookmark / note / tag |
+| anchor | Anchor | yes | Where the mark sits (below) |
+| color | string / null | yes | Palette id (yellow, green, blue, pink, orange); highlights only |
+| body | string / null | yes | The reader's text; notes only. Never pre-filled with verse text |
+| tags | string[] | yes | Tag ids; at least one on a `tag` mark |
+| createdAt, updatedAt | timestamp | yes | |
+| sync | {icloud, youversion} | yes | `youversion` is off / pending / synced / notEligible. Only whole-verse NIV highlights can sync |
+
+Anchor: `{translation, start {vid, word, of}, end {vid, word, of}, ref, label, partial}`. `word` is the 0-based index of a whitespace-separated word in that translation's verse, inclusive at both ends; null means the whole verse. `of` is the verse's word count when the mark was saved. If the text later has a different count, the mark falls back to the whole verse rather than landing on the wrong words. A partial mark shown in another translation widens to whole verses.
+
+The document also carries `palette[] {id, label, hex}`, `tags[] {id, name, createdAt}` and `rules` (plain-language behaviour, as on the trail).
+
+NIV rules. Marks store verse ids and word positions, never words, so they fit hard rules 1 and 2 in CLAUDE.md. A note holds only what the reader types; the app never copies verse text into it. Search inside notes runs over the reader's own text.
+
+Where marks live. SwiftData on device, synced through the reader's private iCloud database (CloudKit), so there is still no server of ours and no account of ours. Optional: a reader who signs in with YouVersion can sync whole-verse NIV highlights with the YouVersion app. The SDK supports this (`YouVersionAPI.Highlights`, one passage id per verse such as `JHN.3.16`, colour as hex, the `highlights` permission). YouVersion has no API for bookmarks, notes or partial-verse highlights, so those stay in iCloud.
+
+Tags and the strip (open question 7): tags are the reader's own connections. The strip could show "Your tag: love" chips for other verses carrying the same tag.
 
 ## 3. Id scheme and ranking formula
 
@@ -2681,6 +2713,276 @@ Deferred. This hand-written example documents the shape for when AI notes return
 }
 ```
 
+### 4.7 Annotations: highlights, a bookmark, a note and tags
+
+Real verse ids and BSB word counts (`data/samples/annotations.json`). Romans 5:8 words 0 to 8 are "But God proves His love for us in this:"; Psalm 23:1 words 4 to 8 are "The LORD is my shepherd;". The note body is sample text a reader might type.
+
+```json
+{
+  "schema": "asb.annotations/1",
+  "palette": [
+    {
+      "id": "yellow",
+      "label": "Yellow",
+      "hex": "#ffe27a"
+    },
+    {
+      "id": "green",
+      "label": "Green",
+      "hex": "#b8e6a0"
+    },
+    {
+      "id": "blue",
+      "label": "Blue",
+      "hex": "#a9d3f5"
+    },
+    {
+      "id": "pink",
+      "label": "Pink",
+      "hex": "#f6b8d1"
+    },
+    {
+      "id": "orange",
+      "label": "Orange",
+      "hex": "#ffc98a"
+    }
+  ],
+  "tags": [
+    {
+      "id": "love",
+      "name": "love",
+      "createdAt": "2026-09-27T14:06:30Z"
+    },
+    {
+      "id": "grace",
+      "name": "grace",
+      "createdAt": "2026-09-27T14:07:12Z"
+    }
+  ],
+  "items": [
+    {
+      "id": "ann_01",
+      "kind": "highlight",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "ref": "John.3.16",
+        "label": "John 3:16",
+        "partial": false
+      },
+      "color": "yellow",
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-27T14:02:30Z",
+      "updatedAt": "2026-09-27T14:02:30Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "synced"
+      }
+    },
+    {
+      "id": "ann_02",
+      "kind": "highlight",
+      "anchor": {
+        "translation": "bsb",
+        "start": {
+          "vid": 45005008,
+          "word": 0,
+          "of": 18
+        },
+        "end": {
+          "vid": 45005008,
+          "word": 8,
+          "of": 18
+        },
+        "ref": "Rom.5.8",
+        "label": "Romans 5:8",
+        "partial": true
+      },
+      "color": "blue",
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-27T14:03:55Z",
+      "updatedAt": "2026-09-27T14:03:55Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_03",
+      "kind": "bookmark",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 43003017,
+          "word": null,
+          "of": null
+        },
+        "ref": "John.3.16-John.3.17",
+        "label": "John 3:16–17",
+        "partial": false
+      },
+      "color": null,
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-27T14:04:20Z",
+      "updatedAt": "2026-09-27T14:04:20Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_04",
+      "kind": "note",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 45005008,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 45005008,
+          "word": null,
+          "of": null
+        },
+        "ref": "Rom.5.8",
+        "label": "Romans 5:8",
+        "partial": false
+      },
+      "color": null,
+      "body": "He did not wait for us to get it together first. Compare 1 John 3:16.",
+      "tags": [
+        "grace",
+        "love"
+      ],
+      "createdAt": "2026-09-27T14:07:12Z",
+      "updatedAt": "2026-09-27T14:07:12Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_05",
+      "kind": "tag",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 62003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 62003016,
+          "word": null,
+          "of": null
+        },
+        "ref": "1John.3.16",
+        "label": "1 John 3:16",
+        "partial": false
+      },
+      "color": null,
+      "body": null,
+      "tags": [
+        "love"
+      ],
+      "createdAt": "2026-09-27T14:06:30Z",
+      "updatedAt": "2026-09-27T14:06:30Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_06",
+      "kind": "tag",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "ref": "John.3.16",
+        "label": "John 3:16",
+        "partial": false
+      },
+      "color": null,
+      "body": null,
+      "tags": [
+        "love"
+      ],
+      "createdAt": "2026-09-27T14:06:45Z",
+      "updatedAt": "2026-09-27T14:06:45Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_07",
+      "kind": "highlight",
+      "anchor": {
+        "translation": "bsb",
+        "start": {
+          "vid": 19023001,
+          "word": 4,
+          "of": 13
+        },
+        "end": {
+          "vid": 19023001,
+          "word": 8,
+          "of": 13
+        },
+        "ref": "Ps.23.1",
+        "label": "Psalm 23:1",
+        "partial": true
+      },
+      "color": "green",
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-28T07:15:00Z",
+      "updatedAt": "2026-09-28T07:15:00Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    }
+  ],
+  "rules": {
+    "anchor": "Verse ids plus optional word positions. word counts whitespace-separated words of the anchor's translation from 0, inclusive at both ends; null means the whole verse. of is the verse's word count when saved: if the text now has a different count, the mark covers the whole verse.",
+    "otherTranslation": "A partial mark shown in another translation widens to whole verses.",
+    "bookmark": "Whole verses only.",
+    "neverStores": "NIV words. Marks hold verse ids and word positions; a note holds only what the reader types, and the app never pastes verse text into it.",
+    "youversionSync": "Optional, after Sign in with YouVersion with the highlights permission. Only whole-verse NIV highlights sync, one passage per verse, colour as hex. Everything else stays on device and in the reader's iCloud.",
+    "persist": "SwiftData on device, synced through the reader's private iCloud database. No server of ours."
+  },
+  "_note": "Sample of one reader's marks. Every id, word position and word count is real BSB data; the note body is sample text a reader might type. NIV anchors store positions only, never words."
+}
+```
+
 ## 5. File layout and size estimates
 
 Measured on the real data with compact JSON and gzip level 6; "keyed" estimates assume the readable camelCase keys above (roughly 2.5x raw, 1.3x gzipped).
@@ -2706,7 +3008,7 @@ data/full/                                distribution + OTA format, built by to
   ai/verse/, ai/edge/                      Phase 2: pre-generated notes for the top ~5,000 verses and their top 3 chips (not built yet)
 
 data/samples/                              committed, founder-readable (1.6 MB): 6 chapter bundles, 5 ticker feeds, 5 connection lists,
-                                           the trail and AI note from section 4, books.json, manifest.json
+                                           the trail, annotations and AI note from section 4, books.json, manifest.json
 prototype/data/                            committed (29 MB): compact transport the HTML prototype expands into the documents above
                                            (books, manifest, all text in one file, 66 per-book ticker packs, sample AI notes)
 
@@ -2726,7 +3028,7 @@ App bundle (iOS):
 Downloaded on demand (CDN, verified by manifest sha256):
   text/niv/*.json.gz (~1.7 MB, license-gated), ai/ packs, manifest deltas. Download budget for full offline BSB reading: 0 (it ships in the binary).
 
-On device only (SwiftData): Trail (active + last 20), bookmarks, highlights, reading position, fetched ai_context rows.
+On device only (SwiftData, synced through the reader's private iCloud): Trail (active + last 20), annotations (highlights, bookmarks, notes, tags; spec 2.13), reading position, fetched ai_context rows.
 ```
 
 ## 6. Decisions log
@@ -2756,6 +3058,7 @@ On device only (SwiftData): Trail (active + last 20), bookmarks, highlights, rea
 | 21 | Name (founder) | "Dynamic Study Bible" | No "AI" in the name while v1 has no AI output. The Android app "Dynamic Bible" is the closest existing name; check before reserving. |
 | 22 | Chip face (founder) | Line 2 shows the first words of the verse again; the "because" sentence moves to the peek sheet and See all | "I liked the scrolling references better when they had the first few words of the verse." |
 | 23 | Match slider (founder) | A slider from 0 to 100% hides connections below the chosen match; the strip shows the top 12 by rank that pass | "A slider filter for confidence matching so a viewer could see loose matches or raise it to only very high confidence matches." |
+| 24 | Highlights, bookmarks, notes and tags (founder) | One Annotation shape with four kinds, anchored to verse ids plus optional word positions; stored in SwiftData with iCloud sync; whole-verse NIV highlights can also sync to YouVersion after sign-in | "Like in the YouVersion app, I would also like to be able to highlight and bookmark and add keywords or notes to the verses or to sections of verses." Word positions, not words, keep NIV text out of storage. |
 
 ## 7. Open questions for the founder
 
@@ -2767,3 +3070,5 @@ Answered on 2026-09-28: the launch translation (NIV through YouVersion), the tic
 4. Ranking constants to confirm after using the prototype: 12 chips, 0.5 incoming factor, 1/sqrt(span) discount, 40-verse cap, tiers at 10 / 4.
 5. Trail persistence and sharing: on-device (last 20 trails) or iCloud sync with shareable replay links.
 6. An editorial overlay: hand-picked links or corrected reasons (source "editor") that override the rules where they are wrong.
+7. Your tags in the strip: show "Your tag" chips for other verses that carry the same tag, so the reader's own keywords join the web.
+8. YouVersion highlight sync: offer Sign in with YouVersion in v1, or wait for v1.1. It adds a sign-in screen, an account-linked line on the privacy label and a review note, in exchange for highlights that match the reader's YouVersion app.

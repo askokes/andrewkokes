@@ -330,7 +330,7 @@ class ReasonModel:
         names_b = set()
         for t in targets:
             names_b |= self.names[t]
-        shared = sorted(self.names[focus] & names_b, key=lambda w: -self.name_df[w])
+        shared = sorted(self.names[focus] & names_b, key=lambda w: (-self.name_df[w], w))
         people = [w for w in shared if w not in self.is_place]
         places = [w for w in shared if w in self.is_place]
         display_names = people + places

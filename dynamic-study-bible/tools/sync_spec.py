@@ -8,7 +8,7 @@ python3 tools/build_dataset.py whenever a document shape or the data changes:
     python3 tools/sync_spec.py --check    # exit 1 if the spec is out of date (used by the tests)
 
 Blocks refreshed: 4.1 chapter bundle (John 3, verses 15 to 17), 4.2 ticker feed (John 3:16),
-4.3 trail, 4.5 books (John and Psalm), 4.6 manifest (shard list trimmed). 4.4, the AI context
+4.3 trail, 4.5 books (John and Psalm), 4.6 manifest (shard list trimmed), 4.7 annotations. 4.4, the AI context
 example, is a hand-written shape reference while AI notes are deferred, so it is left alone.
 """
 from __future__ import annotations
@@ -51,7 +51,7 @@ def blocks() -> dict[str, dict]:
                           ("books.json", "graph/43-John.json", "incoming/43-John.json", "text/bsb/43-John.json")]
     manifest["_note"] = f"Real manifest from data/samples/manifest.json with the shard list trimmed to 4 of {total} entries."
     return {"4.1": chapter, "4.2": load("ticker/John-3-16.json"), "4.3": load("trail.json"), "4.5": books,
-            "4.6": manifest}
+            "4.6": manifest, "4.7": load("annotations.json")}
 
 
 def main() -> int:

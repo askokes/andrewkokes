@@ -35,6 +35,8 @@ YouVersion gives apps free access to its Bible library through an API and a Swif
 - The SDK does all NIV caching, until the server's cache header expires or 7 days by default (confirmed: `CachedBibleContent.swift`). Our code never writes NIV text to disk, SwiftData, logs or crash reports.
 - No offline NIV: the SDK reports every version as not downloadable (confirmed, commit of 2026-09-23). The labelled BSB covers offline reading.
 - We never index or search NIV text. Search runs over the BSB.
+- Reader marks (highlights, bookmarks, notes, tags) store verse ids and word positions, never NIV words. The app never copies verse text into a note, and notes sync only through the reader's own private iCloud.
+- The SDK can sync whole-verse NIV highlights with the reader's YouVersion account (`YouVersionAPI.Highlights`, after Sign in with YouVersion and the "highlights" permission; confirmed in the SDK source). It has no API for bookmarks, notes or partial-verse highlights. Using sign-in changes the privacy label.
 - No NIV text to any AI model. Reasons are computed from the BSB.
 - Whole verses only in previews until YouVersion confirms shortening is allowed.
 - Keep NIV on screen low: one chapter in the reader plus the peek sheet. A forum post reports the limit as "2 chapters or 25 verses displayed at a time" (unverified, no primary source).
@@ -52,6 +54,7 @@ YouVersion gives apps free access to its Bible library through an API and a Swif
 7. Territory. Is version 111 licensed worldwide?
 8. Privacy. Do you keep the installation id the SDK sends? How should we answer Apple's privacy label?
 9. Attribution. Is the `copyright` string enough, or should we credit YouVersion too?
+10. Highlights. May we sync whole-verse NIV highlights through Sign in with YouVersion while keeping bookmarks, notes and partial highlights in the reader's iCloud? Are bookmark or note APIs planned?
 
 ## Biblica direct (later)
 

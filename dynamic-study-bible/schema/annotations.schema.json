@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://asb.dev/schema/annotations.schema.json",
+  "title": "Annotations",
+  "description": "The reader's highlights, bookmarks, notes and tags (spec 2.13, example 4.7).",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "asb.annotations/1"
+    },
+    "palette": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "hex": {
+            "type": "string",
+            "pattern": "^#[0-9a-f]{6}$"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "hex"
+        ]
+      },
+      "minItems": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdAt": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "createdAt"
+        ]
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^ann_[A-Za-z0-9_-]+$"
+          },
+          "kind": {
+            "enum": [
+              "highlight",
+              "bookmark",
+              "note",
+              "tag"
+            ]
+          },
+          "anchor": {
+            "type": "object",
+            "properties": {
+              "translation": {
+                "enum": [
+                  "niv",
+                  "bsb"
+                ]
+              },
+              "start": {
+                "type": "object",
+                "properties": {
+                  "vid": {
+                    "$ref": "common.schema.json#/$defs/vid"
+                  },
+                  "word": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "of": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 1
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "vid",
+                  "word",
+                  "of"
+                ]
+              },
+              "end": {
+                "type": "object",
+                "properties": {
+                  "vid": {
+                    "$ref": "common.schema.json#/$defs/vid"
+                  },
+                  "word": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "of": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 1
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "vid",
+                  "word",
+                  "of"
+                ]
+              },
+              "ref": {
+                "$ref": "common.schema.json#/$defs/osisRef"
+              },
+              "label": {
+                "type": "string"
+              },
+              "partial": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "translation",
+              "start",
+              "end",
+              "ref",
+              "label",
+              "partial"
+            ]
+          },
+          "color": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "body": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "createdAt": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          },
+          "updatedAt": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          },
+          "sync": {
+            "type": "object",
+            "properties": {
+              "icloud": {
+                "type": "boolean"
+              },
+              "youversion": {
+                "enum": [
+                  "off",
+                  "pending",
+                  "synced",
+                  "notEligible"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "icloud",
+              "youversion"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "anchor",
+          "color",
+          "body",
+          "tags",
+          "createdAt",
+          "updatedAt",
+          "sync"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "highlight"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "color": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "note"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "body": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "tag"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "tags": {
+                  "minItems": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "bookmark"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "anchor": {
+                  "properties": {
+                    "partial": {
+                      "const": false
+                    },
+                    "start": {
+                      "properties": {
+                        "word": {
+                          "const": null
+                        }
+                      }
+                    },
+                    "end": {
+                      "properties": {
+                        "word": {
+                          "const": null
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "anchor": {
+                  "properties": {
+                    "partial": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "anchor": {
+                  "properties": {
+                    "start": {
+                      "properties": {
+                        "word": {
+                          "const": null
+                        }
+                      }
+                    },
+                    "end": {
+                      "properties": {
+                        "word": {
+                          "const": null
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "sync": {
+                  "properties": {
+                    "youversion": {
+                      "enum": [
+                        "pending",
+                        "synced"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "kind": {
+                  "const": "highlight"
+                },
+                "anchor": {
+                  "properties": {
+                    "translation": {
+                      "const": "niv"
+                    },
+                    "partial": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "rules": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "_note": {
+      "type": "string",
+      "description": "Illustrative-content marker; consumers ignore it"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "palette",
+    "tags",
+    "items",
+    "rules"
+  ]
+}

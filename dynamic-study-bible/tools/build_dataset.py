@@ -80,6 +80,28 @@ OPENBIBLE_ABOUT = (
 )
 ATTRIBUTION_LINE = "Cross references from OpenBible.info, CC-BY (2016-02-01). Text: Berean Standard Bible, public domain."
 
+ANNOTATION_KINDS = ["highlight", "bookmark", "note", "tag"]
+ANNOTATION_PALETTE = [
+    {"id": "yellow", "label": "Yellow", "hex": "#ffe27a"},
+    {"id": "green", "label": "Green", "hex": "#b8e6a0"},
+    {"id": "blue", "label": "Blue", "hex": "#a9d3f5"},
+    {"id": "pink", "label": "Pink", "hex": "#f6b8d1"},
+    {"id": "orange", "label": "Orange", "hex": "#ffc98a"},
+]
+ANNOTATION_RULES = {
+    "anchor": "Verse ids plus optional word positions. word counts whitespace-separated words of the anchor's "
+              "translation from 0, inclusive at both ends; null means the whole verse. of is the verse's word "
+              "count when saved: if the text now has a different count, the mark covers the whole verse.",
+    "otherTranslation": "A partial mark shown in another translation widens to whole verses.",
+    "bookmark": "Whole verses only.",
+    "neverStores": "NIV words. Marks hold verse ids and word positions; a note holds only what the reader types, "
+                   "and the app never pastes verse text into it.",
+    "youversionSync": "Optional, after Sign in with YouVersion with the highlights permission. Only whole-verse NIV "
+                      "highlights sync, one passage per verse, colour as hex. Everything else stays on device and in "
+                      "the reader's iCloud.",
+    "persist": "SwiftData on device, synced through the reader's private iCloud database. No server of ours.",
+}
+
 DIRECTIONS = ["out", "in", "both"]
 TIERS = ["strong", "solid", "light"]
 
@@ -428,6 +450,49 @@ class Builder:
         }
 
 
+    # -------------------------------------------------------------- annotations sample (the reader's own marks)
+
+    def annotations_sample(self) -> dict:
+        def point(vid: int, word: int | None, translation: str) -> dict:
+            words = len(self.ds.text[vid].split()) if word is not None and translation == "bsb" else None
+            return {"vid": vid, "word": word, "of": words}
+
+        def anchor(start: int, end: int | None = None, words: tuple[int, int] | None = None,
+                   translation: str = "niv") -> dict:
+            end = end or start
+            w0, w1 = words if words else (None, None)
+            return {"translation": translation, "start": point(start, w0, translation),
+                    "end": point(end, w1, translation), "ref": ref_of(start, end), "label": label_of(start, end),
+                    "partial": words is not None}
+
+        def ann(i: int, kind: str, a: dict, at: str, color=None, body=None, tags=(), yv="notEligible") -> dict:
+            return {"id": f"ann_{i:02d}", "kind": kind, "anchor": a, "color": color, "body": body,
+                    "tags": list(tags), "createdAt": at, "updatedAt": at, "sync": {"icloud": True, "youversion": yv}}
+
+        j316, j317, r58, j1316, ps231 = 43003016, 43003017, 45005008, 62003016, 19023001
+        return {
+            "schema": "asb.annotations/1",
+            "palette": ANNOTATION_PALETTE,
+            "tags": [{"id": "love", "name": "love", "createdAt": "2026-09-27T14:06:30Z"},
+                     {"id": "grace", "name": "grace", "createdAt": "2026-09-27T14:07:12Z"}],
+            "items": [
+                ann(1, "highlight", anchor(j316), "2026-09-27T14:02:30Z", color="yellow", yv="synced"),
+                ann(2, "highlight", anchor(r58, words=(0, 8), translation="bsb"), "2026-09-27T14:03:55Z", color="blue"),
+                ann(3, "bookmark", anchor(j316, j317), "2026-09-27T14:04:20Z"),
+                ann(4, "note", anchor(r58), "2026-09-27T14:07:12Z",
+                    body="He did not wait for us to get it together first. Compare 1 John 3:16.",
+                    tags=("grace", "love")),
+                ann(5, "tag", anchor(j1316), "2026-09-27T14:06:30Z", tags=("love",)),
+                ann(6, "tag", anchor(j316), "2026-09-27T14:06:45Z", tags=("love",)),
+                ann(7, "highlight", anchor(ps231, words=(4, 8), translation="bsb"), "2026-09-28T07:15:00Z",
+                    color="green"),
+            ],
+            "rules": ANNOTATION_RULES,
+            "_note": "Sample of one reader's marks. Every id, word position and word count is real BSB data; the "
+                     "note body is sample text a reader might type. NIV anchors store positions only, never words.",
+        }
+
+
 # ------------------------------------------------------------------ writers
 
 def dump(path: Path, doc, pretty: bool) -> bytes:
@@ -672,6 +737,8 @@ def main() -> int:
         dump(samples / "ticker" / f"{tag}.json", bld.ticker_feed(vid), pretty=True)
         dump(samples / "connections" / f"{tag}.json", bld.connections(vid), pretty=True)
     dump(samples / "trail.json", bld.trail_sample(), pretty=True)
+    annotations = bld.annotations_sample()
+    dump(samples / "annotations.json", annotations, pretty=True)
     stale_ai = samples / "ai-context-John-3-16.json"
     if ai.get("aiContextSample"):
         dump(stale_ai, ai["aiContextSample"], pretty=True)
@@ -687,6 +754,7 @@ def main() -> int:
         "schema": "asb.protoText/2", "translation": TRANSLATION, "snippetMaxChars": SNIPPET_MAX,
         "books": [[[ds.text[vid_of(b["order"], ch, v)] for v in range(1, b["verseCounts"][ch - 1] + 1)]
                    for ch in range(1, b["chapters"] + 1)] for b in CANON]}, pretty=False)
+    dump(proto / "annotations.json", annotations, pretty=False)
     dump(proto / "ai" / "notes.json", {
         "schema": "asb.protoAi/2",
         "_note": ai.get("_note", "AI notes are deferred. v1 ships no AI output; this file stays empty."),

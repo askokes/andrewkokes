@@ -17,6 +17,7 @@ Decisions (final, 2026-09-28):
 - Every connection has a reason, "Direct quote", "Same story" or "Same topic", with a one-line "because" sentence and a match percentage shown on every chip (100% = the same words or the same account; topics never above 80%). Deterministic rules in `tools/reasons.py` over the BSB, not AI.
 - Chips show the reference, the reason and match percentage, and the first words of the verse (NIV words only once YouVersion allows partial-verse previews). A Match slider hides connections below a chosen percentage.
 - The strip holds still by default and the reader swipes it. A Motion switch turns on auto-scroll: each chip dwells 3.0 + 3.0 x weight seconds.
+- Readers can highlight, bookmark, tag and write notes on whole verses or runs of words (`docs/DATA_MODEL.md` 2.13). Marks store verse ids and word positions, sync through the reader's private iCloud, and never hold NIV words. Syncing whole-verse NIV highlights with YouVersion through Sign in with YouVersion is an open decision.
 - No AI output in v1. The data model's AI slots stay, unused.
 - No backend in v1.
 
@@ -57,12 +58,12 @@ python3 -m http.server 8765 --directory prototype       # then open http://local
 
 ## The iOS app
 
-It lives in `ios/`. SwiftUI, iOS 18 minimum, GRDB 7 for the bundled `asb.sqlite`, the YouVersion SDK (`https://github.com/youversion/platform-sdk-swift.git`) for NIV text, SwiftData for trails and bookmarks. The build plan lists the SDK calls we use and why we render verses ourselves instead of using `BibleReaderView`. When unsure about an SDK name, read the SDK source rather than guessing. The YouVersion app key lives in `ios/Secrets.xcconfig`, which is never committed.
+It lives in `ios/`. SwiftUI, iOS 18 minimum, GRDB 7 for the bundled `asb.sqlite`, the YouVersion SDK (`https://github.com/youversion/platform-sdk-swift.git`) for NIV text, SwiftData for trails and reader marks, synced through the reader's private iCloud (CloudKit). The build plan lists the SDK calls we use and why we render verses ourselves instead of using `BibleReaderView`. When unsure about an SDK name, read the SDK source rather than guessing. The YouVersion app key lives in `ios/Secrets.xcconfig`, which is never committed.
 
 ## Hard rules
 
 1. Never commit, bundle, store, index, log or send to any AI model any NIV text. Our code holds NIV text in memory only; the SDK does the caching.
-2. References only for the NIV. Our data holds verse ids, votes and reasons, never NIV words.
+2. References only for the NIV. Our data holds verse ids, votes and reasons, never NIV words. Reader marks hold verse ids and word positions; the app never copies verse text into a note.
 3. No ads, in-app purchases, tips, subscriptions or paid tiers.
 4. No AI output shown to users without YouVersion's written approval, plus a Biblica license if the AI reads NIV text.
 5. Keep "NIV" out of the app name, subtitle, keywords and icon.

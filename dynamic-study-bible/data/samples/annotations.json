@@ -1,0 +1,263 @@
+{
+  "schema": "asb.annotations/1",
+  "palette": [
+    {
+      "id": "yellow",
+      "label": "Yellow",
+      "hex": "#ffe27a"
+    },
+    {
+      "id": "green",
+      "label": "Green",
+      "hex": "#b8e6a0"
+    },
+    {
+      "id": "blue",
+      "label": "Blue",
+      "hex": "#a9d3f5"
+    },
+    {
+      "id": "pink",
+      "label": "Pink",
+      "hex": "#f6b8d1"
+    },
+    {
+      "id": "orange",
+      "label": "Orange",
+      "hex": "#ffc98a"
+    }
+  ],
+  "tags": [
+    {
+      "id": "love",
+      "name": "love",
+      "createdAt": "2026-09-27T14:06:30Z"
+    },
+    {
+      "id": "grace",
+      "name": "grace",
+      "createdAt": "2026-09-27T14:07:12Z"
+    }
+  ],
+  "items": [
+    {
+      "id": "ann_01",
+      "kind": "highlight",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "ref": "John.3.16",
+        "label": "John 3:16",
+        "partial": false
+      },
+      "color": "yellow",
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-27T14:02:30Z",
+      "updatedAt": "2026-09-27T14:02:30Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "synced"
+      }
+    },
+    {
+      "id": "ann_02",
+      "kind": "highlight",
+      "anchor": {
+        "translation": "bsb",
+        "start": {
+          "vid": 45005008,
+          "word": 0,
+          "of": 18
+        },
+        "end": {
+          "vid": 45005008,
+          "word": 8,
+          "of": 18
+        },
+        "ref": "Rom.5.8",
+        "label": "Romans 5:8",
+        "partial": true
+      },
+      "color": "blue",
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-27T14:03:55Z",
+      "updatedAt": "2026-09-27T14:03:55Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_03",
+      "kind": "bookmark",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 43003017,
+          "word": null,
+          "of": null
+        },
+        "ref": "John.3.16-John.3.17",
+        "label": "John 3:16–17",
+        "partial": false
+      },
+      "color": null,
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-27T14:04:20Z",
+      "updatedAt": "2026-09-27T14:04:20Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_04",
+      "kind": "note",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 45005008,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 45005008,
+          "word": null,
+          "of": null
+        },
+        "ref": "Rom.5.8",
+        "label": "Romans 5:8",
+        "partial": false
+      },
+      "color": null,
+      "body": "He did not wait for us to get it together first. Compare 1 John 3:16.",
+      "tags": [
+        "grace",
+        "love"
+      ],
+      "createdAt": "2026-09-27T14:07:12Z",
+      "updatedAt": "2026-09-27T14:07:12Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_05",
+      "kind": "tag",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 62003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 62003016,
+          "word": null,
+          "of": null
+        },
+        "ref": "1John.3.16",
+        "label": "1 John 3:16",
+        "partial": false
+      },
+      "color": null,
+      "body": null,
+      "tags": [
+        "love"
+      ],
+      "createdAt": "2026-09-27T14:06:30Z",
+      "updatedAt": "2026-09-27T14:06:30Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_06",
+      "kind": "tag",
+      "anchor": {
+        "translation": "niv",
+        "start": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "end": {
+          "vid": 43003016,
+          "word": null,
+          "of": null
+        },
+        "ref": "John.3.16",
+        "label": "John 3:16",
+        "partial": false
+      },
+      "color": null,
+      "body": null,
+      "tags": [
+        "love"
+      ],
+      "createdAt": "2026-09-27T14:06:45Z",
+      "updatedAt": "2026-09-27T14:06:45Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    },
+    {
+      "id": "ann_07",
+      "kind": "highlight",
+      "anchor": {
+        "translation": "bsb",
+        "start": {
+          "vid": 19023001,
+          "word": 4,
+          "of": 13
+        },
+        "end": {
+          "vid": 19023001,
+          "word": 8,
+          "of": 13
+        },
+        "ref": "Ps.23.1",
+        "label": "Psalm 23:1",
+        "partial": true
+      },
+      "color": "green",
+      "body": null,
+      "tags": [],
+      "createdAt": "2026-09-28T07:15:00Z",
+      "updatedAt": "2026-09-28T07:15:00Z",
+      "sync": {
+        "icloud": true,
+        "youversion": "notEligible"
+      }
+    }
+  ],
+  "rules": {
+    "anchor": "Verse ids plus optional word positions. word counts whitespace-separated words of the anchor's translation from 0, inclusive at both ends; null means the whole verse. of is the verse's word count when saved: if the text now has a different count, the mark covers the whole verse.",
+    "otherTranslation": "A partial mark shown in another translation widens to whole verses.",
+    "bookmark": "Whole verses only.",
+    "neverStores": "NIV words. Marks hold verse ids and word positions; a note holds only what the reader types, and the app never pastes verse text into it.",
+    "youversionSync": "Optional, after Sign in with YouVersion with the highlights permission. Only whole-verse NIV highlights sync, one passage per verse, colour as hex. Everything else stays on device and in the reader's iCloud.",
+    "persist": "SwiftData on device, synced through the reader's private iCloud database. No server of ours."
+  },
+  "_note": "Sample of one reader's marks. Every id, word position and word count is real BSB data; the note body is sample text a reader might type. NIV anchors store positions only, never words."
+}

@@ -178,6 +178,58 @@ class ConfidenceTest(unittest.TestCase):
                     self.assertLessEqual(r["confidence"], 0.8)
 
 
+class AnnotationTest(unittest.TestCase):
+    """The reader's marks (spec 2.13): the sample is consistent with the BSB and the schema rejects unsafe shapes."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.doc = json.loads((ROOT / "data" / "samples" / "annotations.json").read_text(encoding="utf-8"))
+        text = json.loads((ROOT / "prototype" / "data" / "text" / "bsb.json").read_text(encoding="utf-8"))["books"]
+        cls.words = staticmethod(lambda vid: text[vid // 1_000_000 - 1][vid // 1_000 % 1_000 - 1][vid % 1_000 - 1].split())
+
+    def test_sample_is_consistent(self):
+        tag_ids = {t["id"] for t in self.doc["tags"]}
+        colors = {c["id"] for c in self.doc["palette"]}
+        self.assertEqual(sorted(self.doc["items"], key=lambda a: a["id"]), self.doc["items"])
+        for a in self.doc["items"]:
+            an = a["anchor"]
+            self.assertLessEqual(set(a["tags"]), tag_ids, a["id"])
+            self.assertEqual(an["ref"], ref_of(an["start"]["vid"], an["end"]["vid"]))
+            self.assertEqual(an["label"], label_of(an["start"]["vid"], an["end"]["vid"]))
+            self.assertLessEqual(an["start"]["vid"], an["end"]["vid"])
+            if a["kind"] == "highlight":
+                self.assertIn(a["color"], colors)
+            for pt in (an["start"], an["end"]):
+                if pt["word"] is not None:
+                    self.assertEqual(an["translation"], "bsb", "sample word positions are checked against the BSB")
+                    self.assertEqual(pt["of"], len(self.words(pt["vid"])))
+                    self.assertLess(pt["word"], pt["of"])
+        r58 = next(a for a in self.doc["items"] if a["id"] == "ann_02")["anchor"]
+        self.assertEqual(" ".join(self.words(45005008)[r58["start"]["word"]:r58["end"]["word"] + 1]),
+                         "But God proves His love for us in this:")
+
+    def test_schema_rejects_unsafe_marks(self):
+        try:
+            import validate
+        except ImportError as e:  # pragma: no cover
+            self.skipTest(f"jsonschema not installed: {e}")
+        v = validate.load_validators()["asb.annotations/1"]
+        self.assertEqual(list(v.iter_errors(self.doc)), [])
+
+        def broken(item_id, change):
+            d = json.loads(json.dumps(self.doc))
+            change(next(a for a in d["items"] if a["id"] == item_id))
+            return list(v.iter_errors(d))
+
+        def partial_bookmark(a):
+            a["anchor"]["partial"], a["anchor"]["start"]["word"] = True, 0
+        self.assertTrue(broken("ann_03", partial_bookmark))                                  # bookmarks are whole verses
+        self.assertTrue(broken("ann_02", lambda a: a["sync"].update(youversion="synced")))   # partial BSB never syncs
+        self.assertTrue(broken("ann_04", lambda a: a.update(body="")))                       # a note needs text
+        self.assertTrue(broken("ann_05", lambda a: a.update(tags=[])))                       # a tag mark needs a tag
+        self.assertTrue(broken("ann_01", lambda a: a.update(quote="For God so loved")))      # no stored verse text
+
+
 class SpecSyncTest(unittest.TestCase):
     def test_spec_examples_match_samples(self):
         import subprocess

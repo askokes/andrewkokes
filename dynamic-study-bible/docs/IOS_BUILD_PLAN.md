@@ -22,10 +22,11 @@ Definition of done for v1:
 3. The strip shows up to 12 chips for the verse in focus: reference, direction, reason with its match percentage, and the first words of the verse. A Match slider hides connections below a chosen percentage. The strip moves only when swiped, or when Motion is on.
 4. The peek sheet shows the whole target verse in the NIV, the reason and its "because" sentence, the vote counts and Go.
 5. Go, Back, Forward and the trail web work; the trail survives a relaunch.
-6. Search by reference or word, plus a book and chapter picker.
-7. Works with the largest Dynamic Type sizes, VoiceOver and Reduce Motion.
-8. An About screen credits every source. No ads, purchases, accounts or AI output.
-9. Live on the App Store.
+6. Highlight, bookmark, tag or annotate a whole verse or a few words; marks sync through iCloud and show in My Study.
+7. Search by reference or word, plus a book and chapter picker.
+8. Works with the largest Dynamic Type sizes, VoiceOver and Reduce Motion.
+9. An About screen credits every source. No ads, purchases, accounts or AI output.
+10. Live on the App Store.
 
 ## Architecture
 
@@ -43,13 +44,13 @@ Definition of done for v1:
 |   reason and "because" line    |                                |
 |  search index over BSB         |                                |
 +--------------------------------+--------------------------------+
-| SwiftData: trails, bookmarks, reading position (verse ids only) |
-| Settings (AppStorage): Motion switch                            |
+| SwiftData + iCloud: trails, highlights, bookmarks, notes, tags   |
+| Settings (AppStorage): Motion switch, Match slider               |
 +-----------------------------------------------------------------+
 No backend. No accounts. No analytics. No AI.
 ```
 
-Every verse has a permanent id (John 3:16 is `43003016`, spec section 3). The reader asks the SDK for the NIV chapter and our database for that chapter's ticker rows. Chips carry only references and reasons, so moving the strip makes no network calls. Our code keeps NIV text in memory only. SwiftData stores verse ids, never verse text.
+Every verse has a permanent id (John 3:16 is `43003016`, spec section 3). The reader asks the SDK for the NIV chapter and our database for that chapter's ticker rows. Chips carry only references and reasons, so moving the strip makes no network calls. Our code keeps NIV text in memory only. SwiftData stores verse ids and word positions, never verse text.
 
 SDK facts, read in the source of `youversion/platform-sdk-swift` 5.5.0 (latest commit 2026-09-23):
 
@@ -151,7 +152,21 @@ Check: go John 3:16, Romans 5:8, 1 John 3:16. Tap Back twice and Forward once. F
 
 Time: 2 to 3 weeks.
 
-### 7. Search and book picker
+### 7. Highlights, bookmarks, notes and tags
+
+Goal: mark up the Bible the way you do in the YouVersion app, on whole verses or just a few words.
+
+```
+Implement the Annotation from docs/DATA_MODEL.md section 2.13 in SwiftData, with CloudKit sync to the reader's private iCloud database (make every property optional or defaulted and avoid unique constraints, as CloudKit requires). Render each verse row with a selectable text view (a UITextView wrapper) so the reader can long-press and drag to select words, like the YouVersion app. Add Highlight (the 5 palette colours), Bookmark, Note, Tag and Clear to the edit menu, and to a small action bar when a whole verse is tapped. Convert a selection to an Anchor: verse ids plus 0-based word positions, counting words by splitting the verse's plain text (no verse numbers or footnote markers) on whitespace, with the verse's word count saved as "of". One function does this counting everywhere; unit-test it against data/samples/annotations.json on the BSB. Draw highlights on exactly those words; if a verse's word count no longer matches "of", or the mark was made in the other translation, highlight the whole verse. Show a bookmark glyph and a note glyph in the margin and tag chips under the verse. The note editor shows the verse reference, never the verse text, and must never copy verse text into a note. Add a My Study screen with Highlights, Bookmarks, Notes and Tags tabs; tapping a row jumps there and pushes a trail hop (bookmarkOpen for bookmarks). Search inside note text. Use data/samples/annotations.json as a test fixture.
+```
+
+Check: highlight just "The LORD is my shepherd" in Psalm 23:1, bookmark John 3:16, write a note on Romans 5:8 tagged "grace". Open My Study > Tags > grace and jump back to Romans 5:8. Sign in to the same Apple ID on another device (or delete and reinstall) and the marks come back from iCloud.
+
+Optional, only if you decide to offer Sign in with YouVersion (open decision 8): set isSignInEnabled to true, ask for the "highlights" permission with DataExchangeSession, and mirror whole-verse NIV highlights through BibleHighlightsRepository. Partial highlights, bookmarks, notes and tags stay in iCloud because YouVersion has no API for them. A highlight you make here then shows in the YouVersion app, and the other way round.
+
+Time: 2 to 3 weeks, plus about 1 week for YouVersion sync.
+
+### 8. Search and book picker
 
 Goal: get anywhere fast.
 
@@ -163,7 +178,7 @@ Check: search "rom 5 8", then "shepherd". Both land where you expect.
 
 Time: 1 to 2 weeks.
 
-### 8. Accessibility and About
+### 9. Accessibility and About
 
 Goal: usable by everyone, and every source credited.
 
@@ -175,7 +190,7 @@ Check: on your iPhone turn on the largest text size, then VoiceOver, then Reduce
 
 Time: 1 to 2 weeks.
 
-### 9. TestFlight
+### 10. TestFlight
 
 Goal: friends test the real app.
 
@@ -187,7 +202,7 @@ Check: install from the TestFlight app on your phone, then invite 5 to 20 tester
 
 Time: 1 to 2 weeks, including fixes from feedback.
 
-### 10. App Store
+### 11. App Store
 
 Goal: approved and live.
 
@@ -199,7 +214,7 @@ Check: the listing is live and installs on a friend's phone.
 
 Time: 1 to 2 weeks. Reviews usually take a day or two (verify).
 
-Total: about 12 to 21 weeks part time, so three to five months.
+Total: about 14 to 24 weeks part time, so three and a half to six months. YouVersion highlight sync adds about a week.
 
 ## TestFlight and App Store submission
 
@@ -207,7 +222,7 @@ Total: about 12 to 21 weeks part time, so three to five months.
 2. In Xcode, Product > Archive, then Distribute App.
 3. TestFlight: internal testers need no review; external testers need a short Beta App Review first.
 4. Publish a privacy policy page and a support page; both URLs are required. GitHub Pages is free.
-5. Privacy label. Our code collects nothing. The YouVersion SDK sends a random installation id, created on first launch, with every request (confirmed in the SDK source). Apple counts data as collected when it is kept longer than needed to answer the request (https://developer.apple.com/app-store/app-privacy-details/). Ask YouVersion whether they keep it. If not, answer "Data Not Collected". If they do, declare Identifiers > Device ID, not linked to the user, not used for tracking, for App Functionality.
+5. Privacy label. Our code collects nothing. The YouVersion SDK sends a random installation id, created on first launch, with every request (confirmed in the SDK source). Apple counts data as collected when it is kept longer than needed to answer the request (https://developer.apple.com/app-store/app-privacy-details/). Ask YouVersion whether they keep it. If not, answer "Data Not Collected". If they do, declare Identifiers > Device ID, not linked to the user, not used for tracking, for App Functionality. Highlights, notes and tags sync through the reader's private iCloud database, which we cannot read, so they should not count as collected (verify). Sign in with YouVersion, if you add it, changes this answer.
 6. Category: Reference.
 7. Age rating: answer the questionnaire honestly (no user content, no web browsing, no purchases). Expect the lowest rating (verify).
 8. Price: Free, with no in-app purchases.
@@ -223,8 +238,9 @@ Total: about 12 to 21 weeks part time, so three to five months.
 3. Launch countries. Recommendation: the United States first, until YouVersion confirms where version 111 is licensed.
 4. Peek length for long ranges. Recommendation: whole verses, 5 at most, until YouVersion answers the display-limit question.
 5. Confidence on screen. Decided (2026-09-28): every chip and peek sheet shows the match percentage. 100% means the same words or the same account; looser topical or word matches score lower, and topics never exceed 80%.
-6. Designer. Recommendation: a small contract for the icon and screenshots after milestone 8.
+6. Designer. Recommendation: a small contract for the icon and screenshots after milestone 9.
 7. Analytics and crash tools. Recommendation: none. Xcode Organizer's opt-in crash reports keep the privacy label clean.
+8. Sign in with YouVersion for highlight sync. Recommendation: v1.1, not v1. It is the only way highlights match the reader's YouVersion app, but it adds a sign-in screen, an account-linked line on the privacy label and a review note. iCloud sync covers every mark in v1 with no sign-in.
 
 ## Budget
 

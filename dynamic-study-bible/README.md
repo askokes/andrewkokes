@@ -6,7 +6,7 @@ This folder holds the data model, a working prototype built on it, and the plan 
 
 ## Start here
 
-1. **Try the prototype.** It opens on John 3:16. The strip holds still; swipe it, or turn on Motion for a slow scroll. Use the filter to see only quotes, stories or topics, and the Match slider to hide looser matches. Tap a chip, then Go, then Web to see your trail. The `{ }` button shows the exact JSON behind the screen.
+1. **Try the prototype.** It opens on John 3:16. The strip holds still; swipe it, or turn on Motion for a slow scroll. Use the filter to see only quotes, stories or topics, and the Match slider to hide looser matches. Tap a chip, then Go, then Web to see your trail. Tap a verse to highlight, bookmark, tag or note it, or pick Part of verse to mark just a few words; My Study lists everything you marked. The `{ }` button shows the exact JSON behind the screen.
    - Published: https://claude.ai/artifact/7Yj2v8vmhHSaH2m18U9uav (private to your account until you share it)
    - Local: `python3 -m http.server 8765 --directory prototype`, then open http://localhost:8765
 2. **Read the plan.** `docs/IOS_BUILD_PLAN.md` walks you through building the app with Claude Code, milestone by milestone, with the prompt to use at each step. `docs/LICENSING.md` covers the NIV path.
@@ -20,6 +20,7 @@ This folder holds the data model, a working prototype built on it, and the plan 
 - **The name.** Dynamic Study Bible.
 - **Reasons on every connection.** Direct quote, same story, or same topic, each with a one-line "because" and a match percentage (100% = the same words or the same account).
 - **The strip holds still.** Motion is off by default. When on, each chip stays 3 to 6 seconds.
+- **Your own marks.** Highlight, bookmark, tag or write a note on a whole verse or just a few words, as in the YouVersion app. Marks sync through your iCloud. They store verse ids and word positions, never NIV words.
 - **AI notes later.** v1 shows no AI-generated text. YouVersion requires written approval before an app shows AI output, so start that conversation early.
 - **Built by you with Claude.** No backend is needed for v1.
 

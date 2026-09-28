@@ -22,7 +22,8 @@ A few questions so I build this the right way:
 6. Countries. Is version 111 licensed worldwide? I plan to launch in the US first.
 7. Privacy. The SDK sends an installation id with each request. Do you keep it? Your answer decides how I fill in Apple's privacy label.
 8. Credit. Is "NIV" plus the copyright string from the API enough, or should I credit YouVersion as well?
-9. AI, later. I may add AI-written study notes generated only from the public-domain BSB, never from the NIV. What does your written approval involve and how long does it take? Nothing AI ships until I hear from you.
+9. Highlights. Readers can highlight, bookmark and write notes, stored in their own iCloud. I'd like to offer Sign in with YouVersion so whole-verse NIV highlights sync with your app. Is that fine, and are bookmark or note APIs coming?
+10. AI, later. I may add AI-written study notes generated only from the public-domain BSB, never from the NIV. What does your written approval involve and how long does it take? Nothing AI ships until I hear from you.
 
 Thanks. Happy to share a TestFlight build whenever it's useful.
 

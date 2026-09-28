@@ -139,6 +139,39 @@ doc("trail.schema.json", "Trail", "Spiderweb navigation state: hops, back/forwar
                     "scrollUpdatesCurrentHop": {"type": "boolean"}, "maxHops": {"type": "integer", "minimum": 1},
                     "persist": STR}, note=False)})
 
+# ---------------- annotations (the reader's highlights, bookmarks, notes and tags)
+point = obj({"vid": ref("vid"), "word": {"type": ["integer", "null"], "minimum": 0},
+             "of": {"type": ["integer", "null"], "minimum": 1}}, note=False)
+anchor = obj({"translation": {"enum": ["niv", "bsb"]}, "start": point, "end": point, "ref": ref("osisRef"),
+              "label": STR, "partial": {"type": "boolean"}}, note=False)
+WHOLE = {"properties": {"word": {"const": None}}}
+annotation = {**obj({
+    "id": {"type": "string", "pattern": "^ann_[A-Za-z0-9_-]+$"}, "kind": {"enum": ["highlight", "bookmark", "note", "tag"]},
+    "anchor": anchor, "color": NSTR, "body": NSTR, "tags": {"type": "array", "items": STR, "uniqueItems": True},
+    "createdAt": ref("timestamp"), "updatedAt": ref("timestamp"),
+    "sync": obj({"icloud": {"type": "boolean"}, "youversion": {"enum": ["off", "pending", "synced", "notEligible"]}}, note=False)},
+    note=False),
+  "allOf": [
+    {"if": {"properties": {"kind": {"const": "highlight"}}}, "then": {"properties": {"color": STR}}},
+    {"if": {"properties": {"kind": {"const": "note"}}}, "then": {"properties": {"body": {"type": "string", "minLength": 1}}}},
+    {"if": {"properties": {"kind": {"const": "tag"}}}, "then": {"properties": {"tags": {"minItems": 1}}}},
+    {"if": {"properties": {"kind": {"const": "bookmark"}}},
+     "then": {"properties": {"anchor": {"properties": {"partial": {"const": False}, "start": WHOLE, "end": WHOLE}}}}},
+    {"if": {"properties": {"anchor": {"properties": {"partial": {"const": False}}}}},
+     "then": {"properties": {"anchor": {"properties": {"start": WHOLE, "end": WHOLE}}}}},
+    {"if": {"properties": {"sync": {"properties": {"youversion": {"enum": ["pending", "synced"]}}}}},
+     "then": {"properties": {"kind": {"const": "highlight"},
+                             "anchor": {"properties": {"translation": {"const": "niv"}, "partial": {"const": False}}}}}},
+  ]}
+doc("annotations.schema.json", "Annotations", "The reader's highlights, bookmarks, notes and tags (spec 2.13, example 4.7).",
+    "asb.annotations/1", {
+      "palette": {"type": "array", "items": obj({"id": STR, "label": STR, "hex": {"type": "string", "pattern": "^#[0-9a-f]{6}$"}}, note=False),
+                  "minItems": 1},
+      "tags": {"type": "array", "items": obj({"id": {"type": "string", "pattern": "^[a-z0-9-]+$"}, "name": STR,
+                                             "createdAt": ref("timestamp")}, note=False)},
+      "items": {"type": "array", "items": annotation},
+      "rules": {"type": "object", "additionalProperties": STR}})
+
 # ---------------- AI context
 prov = obj({"generator": STR, "model": STR, "promptId": STR, "promptVersion": STR, "schemaVersion": {"type": "integer"},
             "inputs": {"type": "object"}, "inputHash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
