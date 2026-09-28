@@ -19,6 +19,8 @@
   --seg: #e7e8e4; --seg-on: #ffffff;
   --hl: #fbefb8; --scrim: rgba(20,24,30,.38); --shadow: 0 -8px 30px rgba(20,24,30,.14);
   --json-key: #23517f; --json-str: #157a72; --json-num: #a05a00; --json-bool: #6a4bb0;
+  --mk-yellow: #ffe27a; --mk-green: #b8e6a0; --mk-blue: #a9d3f5; --mk-pink: #f6b8d1; --mk-orange: #ffc98a;
+  --bm: #c2413b; --danger: #b3261e; --bar-shadow: 0 8px 28px rgba(20,24,30,.18);
   --serif: Literata, "Iowan Old Style", "Palatino Linotype", Charter, Georgia, serif;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", sans-serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -40,6 +42,8 @@
     --seg: #1d2229; --seg-on: #353b45;
     --hl: #4a3d12; --scrim: rgba(0,0,0,.55); --shadow: 0 -8px 30px rgba(0,0,0,.5);
     --json-key: #8ab8e8; --json-str: #4fcdbf; --json-num: #f0b730; --json-bool: #bba6f5;
+    --mk-yellow: rgba(255,226,122,.3); --mk-green: rgba(184,230,160,.26); --mk-blue: rgba(169,211,245,.28); --mk-pink: rgba(246,184,209,.28); --mk-orange: rgba(255,201,138,.28);
+    --bm: #f28b82; --danger: #f2b8b5; --bar-shadow: 0 8px 28px rgba(0,0,0,.55);
   }
 }
 :root[data-theme="dark"] {
@@ -57,6 +61,8 @@
   --seg: #1d2229; --seg-on: #353b45;
   --hl: #4a3d12; --scrim: rgba(0,0,0,.55); --shadow: 0 -8px 30px rgba(0,0,0,.5);
   --json-key: #8ab8e8; --json-str: #4fcdbf; --json-num: #f0b730; --json-bool: #bba6f5;
+  --mk-yellow: rgba(255,226,122,.3); --mk-green: rgba(184,230,160,.26); --mk-blue: rgba(169,211,245,.28); --mk-pink: rgba(246,184,209,.28); --mk-orange: rgba(255,201,138,.28);
+  --bm: #f28b82; --danger: #f2b8b5; --bar-shadow: 0 8px 28px rgba(0,0,0,.55);
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
@@ -141,7 +147,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .marquee.dragging .chip { pointer-events: none; }
 .track { display: flex; gap: 8px; padding: 0 16px; width: max-content; will-change: transform; }
 .marquee.hold .track { transform: none !important; }
-.chip { display: inline-flex; flex-direction: column; gap: 4px; flex: none; text-align: left; min-width: 260px; max-width: 336px; padding: 8px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--rule); color: var(--ink); scroll-snap-align: start; box-shadow: 0 1px 2px rgba(20,24,30,.05); user-select: none; -webkit-user-select: none; }
+.chip { position: relative; display: inline-flex; flex-direction: column; gap: 4px; flex: none; text-align: left; min-width: 260px; max-width: 336px; padding: 8px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--rule); color: var(--ink); scroll-snap-align: start; box-shadow: 0 1px 2px rgba(20,24,30,.05); user-select: none; -webkit-user-select: none; }
 .chip .top { display: flex; align-items: center; gap: 6px; font-size: 13.5px; line-height: 20px; white-space: nowrap; min-width: 0; }
 .chip .dir { color: var(--accent); font-size: 15px; width: 14px; text-align: center; flex: none; }
 .chip.cross { border-color: var(--cross-soft); }
@@ -238,6 +244,82 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
 .legend i.dash { border-top-style: dashed; border-color: var(--ink-3); }
 .toast { position: absolute; left: 50%; bottom: 258px; transform: translate(-50%, 8px); max-width: 84%; padding: 10px 16px; border-radius: 14px; background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 500; text-align: center; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 70; }
 .toast.on { opacity: 1; transform: translate(-50%, 0); }
+/* the reader's marks: highlights, bookmarks, notes, tags */
+.vt { -webkit-tap-highlight-color: transparent; }
+.hlr { background: var(--mk); border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.v.sel .vt { text-decoration: underline dotted var(--ink-3); text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+.v.sel.part .vt { text-decoration: none; }
+.v.part .w { cursor: pointer; }
+.w.ul { text-decoration: underline dotted var(--ink-3); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.pick { color: var(--accent); background-image: linear-gradient(var(--accent), var(--accent)); background-repeat: no-repeat; background-size: 100% 2px; background-position: 0 100%; }
+.v-note { position: relative; display: inline-grid; place-items: center; width: 24px; height: 20px; margin-left: 5px; vertical-align: -3px; border-radius: 6px; color: var(--accent); background: var(--accent-soft); }
+.v-note::after { content: ""; position: absolute; inset: -12px -10px; }
+.v-note svg { width: 14px; height: 14px; }
+.v-bm { position: absolute; right: -17px; top: 7px; width: 12px; height: 16px; color: var(--bm); }
+.v-bm svg { display: block; width: 12px; height: 16px; }
+.v-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 5px 0 2px; }
+.v-tag { height: 22px; padding: 0 8px; border-radius: 999px; border: 1px solid var(--rule-2); font-family: var(--sans); font-size: 11.5px; font-weight: 500; line-height: 20px; color: var(--ink-2); }
+.chip .mine-dot { position: absolute; top: 5px; right: 5px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: .7; }
+.abar { position: absolute; left: 8px; right: 8px; bottom: 250px; z-index: 44; padding: 0 8px 8px; border-radius: 18px; background: var(--surface); border: 1px solid var(--rule); box-shadow: var(--bar-shadow); }
+.ab-head { display: flex; align-items: center; gap: 8px; height: 44px; padding-left: 6px; font-size: 13px; }
+.ab-head b { flex: none; font-size: 14px; font-weight: 700; color: var(--ink); }
+.ab-hint { flex: 1; min-width: 0; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ab-x { width: 44px; height: 44px; margin: 0 -6px 0 auto; display: grid; place-items: center; color: var(--ink-2); flex: none; }
+.ab-x span { width: 28px; height: 28px; border-radius: 50%; background: var(--bg); display: grid; place-items: center; }
+.ab-x svg { width: 12px; height: 12px; }
+.ab-row { display: flex; align-items: center; gap: 2px; }
+.sw { width: 44px; height: 44px; display: grid; place-items: center; flex: none; }
+.sw::before { content: ""; width: 30px; height: 30px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+.sw[aria-pressed="true"]::before { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
+.sw:disabled { opacity: .35; cursor: default; }
+.ab-clear { margin-left: auto; height: 44px; padding: 0 12px; border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.ab-clear:disabled { color: var(--rule-2); cursor: default; }
+.ab-acts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 4px; }
+.ab-acts button { height: 50px; min-width: 0; border-radius: 12px; background: var(--bg); color: var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.ab-acts svg { width: 20px; height: 20px; }
+.ab-acts button[aria-pressed="true"] { background: var(--accent-soft); }
+#abBookmark[aria-pressed="true"] svg path { fill: currentColor; }
+.ab-acts button:disabled { color: var(--rule-2); cursor: default; }
+.ntext { display: block; width: 100%; min-height: 150px; margin: 2px 0 12px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--rule); background: var(--bg); color: var(--ink); font: 16px/1.5 var(--sans); resize: vertical; }
+.ntext:focus { outline: none; border-color: var(--accent); }
+.ntext::placeholder, .tag-in::placeholder { color: var(--ink-3); }
+.tagbox { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 48px; padding: 6px 8px; border-radius: 12px; border: 1px solid var(--rule); background: var(--bg); cursor: text; }
+.tagbox:focus-within { border-color: var(--accent); }
+.tag-in { flex: 1; min-width: 120px; height: 34px; padding: 0 4px; border: 0; background: transparent; font-size: 16px; outline: none; }
+.tchip { display: inline-flex; align-items: center; height: 32px; padding: 0 0 0 11px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 14px; font-weight: 600; }
+.tchip button { width: 32px; height: 32px; display: grid; place-items: center; font-size: 18px; line-height: 1; color: var(--accent); }
+.tsugg { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; }
+.tsugg .ts-lbl { width: 100%; font-size: 12px; color: var(--ink-3); }
+.tsugg button { height: 36px; padding: 0 13px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink-2); font-size: 14px; }
+.s-body .fld-hint { margin: 10px 0 0; font-size: 12px; color: var(--ink-3); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.danger { color: var(--danger); }
+.btn.danger-fill { background: var(--danger); color: var(--surface); }
+.filters.tabs { margin: 2px 20px 8px; flex: none; }
+.filters.tabs button { flex: 1 1 auto; height: 36px; padding: 0 6px; font-size: 12.5px; }
+.mrow { display: flex; align-items: flex-start; gap: 12px; width: 100%; min-height: 56px; padding: 11px 2px; text-align: left; border-bottom: 1px solid var(--rule); color: var(--ink); }
+.mrow:active { background: var(--accent-soft); }
+.mrow.tagrow { align-items: center; }
+.m-ico { width: 22px; height: 22px; flex: none; display: grid; place-items: center; color: var(--accent); font-size: 16px; font-weight: 700; }
+.m-ico svg { width: 18px; height: 18px; }
+.m-ico.bm { color: var(--bm); }
+.cdot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--mk); box-shadow: inset 0 0 0 1px rgba(0,0,0,.14); flex: none; }
+.m-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.m-top { display: flex; align-items: baseline; gap: 8px; font-size: 15px; font-weight: 600; line-height: 20px; }
+.m-part { font-size: 12px; font-weight: 500; color: var(--ink-3); white-space: nowrap; }
+.m-date, .m-count { margin-left: auto; flex: none; font-size: 12px; font-weight: 500; color: var(--ink-3); }
+.m-count { font-size: 13px; font-weight: 600; }
+.m-sub { font-size: 13.5px; line-height: 18px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.m-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tpill { display: inline-flex; align-items: center; height: 20px; padding: 0 7px; border-radius: 999px; border: 1px solid var(--rule); font-size: 11.5px; color: var(--ink-2); }
+.m-chev { align-self: center; color: var(--ink-3); flex: none; }
+.m-chev svg { width: 14px; height: 14px; display: block; }
+.study-foot { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+.study-foot .btn { font-size: 15px; }
+.s-body .study-foot p { margin: 0; }
+.s-body .mine-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: -4px 0 14px; padding: 8px 12px; border-radius: 12px; background: var(--bg); font-size: 13px; line-height: 1.4; color: var(--ink-2); }
+.mine-line .ml-k { font-weight: 700; color: var(--ink); }
+.mine-line .ml-note { flex-basis: 100%; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 500px) {
   .stage { padding: 0; background: var(--bg); }
   .phone { width: 100%; height: 100%; border-radius: 0; box-shadow: none; transform: none; }
@@ -268,6 +350,7 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   </div>
   <header class="topbar">
     <button class="tb-btn" id="aboutBtn" aria-label="About this prototype"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5" stroke-linecap="round"/></svg></button>
+    <button class="tb-btn" id="studyBtn" aria-label="My Study: your highlights, bookmarks, notes and tags"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="4.5" y="3" width="15" height="18" rx="2.5"/><path d="M9 3v18M12.5 8h4M12.5 11.5h4"/></svg></button>
     <button class="title" id="titleBtn" aria-label="Choose book and chapter"><span class="t-main"><span id="titleText">John 3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span><span class="t-tag" id="previewTag" title="Preview text: Berean Standard Bible. The app launches with the NIV.">BSB preview</span></button>
     <button class="tb-btn" id="jsonBtn" aria-label="Show the JSON behind this verse" style="font-family: var(--mono)">{ }</button>
     <button class="tb-btn" id="searchBtn" aria-label="Search a reference"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></button>
@@ -303,18 +386,32 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   </footer>
   <div class="home"></div>
 
+  <section class="abar" id="actionBar" aria-label="Mark this verse" hidden>
+    <div class="ab-head"><b id="abLabel"></b><span class="ab-hint" id="abHint" aria-live="polite"></span><button class="ab-x" id="abClose" aria-label="Close the mark bar"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></button></div>
+    <div class="ab-row"><span class="ab-row" id="abSwatches" role="group" aria-label="Highlight color"></span><button class="ab-clear" id="abClear">Clear</button></div>
+    <div class="ab-acts">
+      <button id="abBookmark" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6.5 3.5h11v17l-5.5-4.2-5.5 4.2z"/></svg><span>Bookmark</span></button>
+      <button id="abNote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M5 3.5h14v11l-6 6H5z"/><path d="M13 20.5v-6h6M8.5 8.5h7M8.5 12h4" fill="none"/></svg><span>Note</span></button>
+      <button id="abTag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3.5 3.5h8l9 9-8 8-9-9z"/><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg><span>Tag</span></button>
+      <button id="abPart" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5H5v14h3M16 5h3v14h-3M9.5 12h5" fill="none"/></svg><span id="abPartLbl">Part of verse</span></button>
+    </div>
+  </section>
+
   <div class="scrim" id="scrim"></div>
   <section class="sheet" id="peekSheet" role="dialog" aria-modal="true" aria-label="Connection"><div class="grab"></div><div class="s-head"><h2 id="peekTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot" id="peekBody"></div><div class="s-foot"><div class="actions"><button class="btn primary" id="peekGo">Go</button><button class="btn" id="peekAll">See all</button><button class="btn sq" id="peekJson" aria-label="Show JSON for this verse">{ }</button></div></div></section>
   <section class="sheet tall" id="listSheet" role="dialog" aria-modal="true" aria-label="All connections"><div class="grab"></div><div class="s-head"><h2 id="listTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body list" id="listBody"></div></section>
   <section class="sheet tall" id="pickerSheet" role="dialog" aria-modal="true" aria-label="Books and chapters"><div class="grab"></div><div class="s-head"><button class="x-btn" id="pickerBack" aria-label="Back to books" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="pickerTitle">Books</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body" id="pickerBody"></div></section>
   <section class="sheet tall" id="jsonSheet" role="dialog" aria-modal="true" aria-label="JSON"><div class="grab"></div><div class="s-head"><h2 id="jsonTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body"><pre class="json" id="jsonPre"></pre><textarea class="json" id="jsonTa" readonly hidden aria-label="JSON text"></textarea><div class="actions"><button class="btn primary" id="jsonCopy">Copy JSON</button></div></div></section>
+  <section class="sheet" id="noteSheet" role="dialog" aria-modal="true" aria-label="Note"><div class="grab"></div><div class="s-head"><h2 id="noteTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><textarea class="ntext" id="noteText" rows="5" placeholder="Write your note" aria-label="Note text"></textarea><div class="tagbox" id="noteTagBox"><input class="tag-in" id="noteTagIn" type="text" placeholder="Add a tag" autocomplete="off" autocapitalize="none" enterkeyhint="done" aria-label="Add a tag, then press Enter"></div><div class="tsugg" id="noteTagSugg"></div><p class="fld-hint">Only what you type is saved. The verse text is never copied into a note.</p></div><div class="s-foot"><div class="actions"><button class="btn danger" id="noteDelete">Delete</button><button class="btn primary" id="noteSave">Save</button></div></div></section>
+  <section class="sheet" id="tagSheet" role="dialog" aria-modal="true" aria-label="Tags"><div class="grab"></div><div class="s-head"><h2 id="tagsTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><div class="tagbox" id="tagsTagBox"><input class="tag-in" id="tagsTagIn" type="text" placeholder="Add a tag" autocomplete="off" autocapitalize="none" enterkeyhint="done" aria-label="Add a tag, then press Enter"></div><div class="tsugg" id="tagsTagSugg"></div></div><div class="s-foot"><div class="actions"><button class="btn primary" id="tagsSave">Save</button></div></div></section>
+  <section class="sheet tall" id="studySheet" role="dialog" aria-modal="true" aria-label="My Study"><div class="grab"></div><div class="s-head"><button class="x-btn" id="studyBack" aria-label="Back to all tags" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="studyTitle">My Study</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="filters tabs" id="studyTabs" role="group" aria-label="My Study sections"><button data-tab="highlights" aria-pressed="true">Highlights <span class="n num">0</span></button><button data-tab="bookmarks" aria-pressed="false">Bookmarks <span class="n num">0</span></button><button data-tab="notes" aria-pressed="false">Notes <span class="n num">0</span></button><button data-tab="tags" aria-pressed="false">Tags <span class="n num">0</span></button></div><div class="s-body" id="studyBody"></div></section>
   <section class="sheet" id="aboutSheet" role="dialog" aria-modal="true" aria-label="About"><div class="grab"></div><div class="s-head"><h2>Dynamic Study Bible<span class="sub">Interactive prototype</span></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body about" id="aboutBody"></div></section>
 
   <section class="overlay" id="webOverlay" role="dialog" aria-modal="true" aria-label="Trail web">
     <div class="s-head"><h2>Your trail<span class="sub" id="webSub"></span></h2><button class="x-btn" id="webClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <svg class="web" id="webSvg" viewBox="0 0 393 420" aria-label="Visited verses drawn as a web"></svg>
     <div class="foot">
-      <div class="legend"><span><i></i>Travelled</span><span><i class="dash"></i>Peeked only</span><span>Line weight = votes</span></div>
+      <div class="legend"><span><i></i>Traveled</span><span><i class="dash"></i>Peeked only</span><span>Line weight = votes</span></div>
       <div class="actions"><button class="btn primary" id="copyTrail">Copy trail JSON</button><button class="btn" id="viewTrail">View JSON</button></div>
     </div>
   </section>
@@ -342,7 +439,8 @@ const S = {
   bundles: {}, missing: [], bookNo: 0, chapter: 0, bundle: null, focusVid: 0, pinned: false, focusLockUntil: 0, scrollRaf: 0,
   motion: { defaultMode: 'hold', baseSeconds: 3.0, perWeightSeconds: 3.0 }, motionOn: false, prefersReduced: false, filter: 'all', match: 0, matchSlider: { min: 0, max: 100, step: 5, default: 0 }, listItems: [],
   ticker: { all: [], items: [], x: 0, seqW: 0, widths: [], cum: [], dwell: [], raf: 0, lastT: 0, gen: 0, holdPointer: false, drag: null, suppressClick: false, wheelAt: 0 },
-  trail: null, peekItem: null, peekFocus: null, sheet: null, pickerBook: 0, jsonMode: null
+  trail: null, peekItem: null, peekFocus: null, sheet: null, pickerBook: 0, jsonMode: null,
+  ann: null, annSeed: null, annIdx: new Map(), sel: null, editing: null, draftTags: [], draftNames: {}, study: { tab: 'highlights', tag: null, confirm: false }
 };
 const store = {
   get(k) { try { return JSON.parse(localStorage.getItem('asb.' + k)); } catch (e) { return null; } },
@@ -534,9 +632,7 @@ function renderChapter(bundle) {
   const prev = bundle.prevChapter, next = bundle.nextChapter;
   let html = `<div class="chapter-head"><div class="book">${esc(bundle.book.name)}</div><div class="num-big num">${bundle.chapter}</div></div>`;
   for (const v of bundle.verses) {
-    html += v.omitted
-      ? `<p class="v omitted" data-vid="${v.vid}"><sup class="vn">${v.verse}</sup><span class="tag">omitted</span></p>`
-      : `<p class="v${v.paragraphStart ? ' para' : ''}" data-vid="${v.vid}"><sup class="vn">${v.verse}</sup>${esc(v.text)}</p>`;
+    html += `<p class="v${v.omitted ? ' omitted' : ''}${v.paragraphStart && !v.omitted ? ' para' : ''}" data-vid="${v.vid}">${verseInner(v)}</p>`;
   }
   html += `<div class="chapter-foot">${prev ? `<button class="nav-btn" data-chapter="${prev}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>${esc(nav(prev))}</button>` : '<span></span>'}${next ? `<button class="nav-btn" data-chapter="${next}">${esc(nav(next))}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>` : '<span></span>'}</div>`;
   reader.innerHTML = html;
@@ -588,6 +684,7 @@ async function navigate({ bookNo, chapter, vid, kind = null, via = null, highlig
   try { bundle = await buildBundle(bookNo, chapter); }
   catch (e) { console.warn(e); toast(`${book.name} ${chapter} could not be loaded`); return false; }
   if (kind) pushHop(kind, vid, via, highlight);
+  closeBar();
   if (bundle !== S.bundle) renderChapter(bundle);
   scrollToVerse(vid); setFocus(vid, { force: true, pin: true });
   if (highlight) flashRange(highlight.start, highlight.end);
@@ -598,6 +695,7 @@ async function restoreHop(hop) {
   const p = split(hop.scroll.chapter);
   if (!hasChapter(p.book, p.chapter)) { toast(`${bookOf(hop.vid).name} ${p.chapter} is not available in this preview`); return; }
   const bundle = await buildBundle(p.book, p.chapter);
+  closeBar();
   if (bundle !== S.bundle) renderChapter(bundle);
   scrollToVerse(hop.scroll.anchor); setFocus(hop.scroll.anchor, { force: true, pin: true });
   renderTrail();
@@ -639,11 +737,15 @@ function pillHtml(reason, lg) {
 }
 // Strip chips: line 1 is glyph, label, tier dot and reason pill; line 2 is the first words of the target verse.
 // See all rows (inList) keep the because sentence on line 2. The because sentence is always in the aria-label and title.
-function chipHtml(it, inList) {
+function chipAria(it) {
   const r = it.reason, because = r ? r.because : 'Cross reference';
+  return `${it.to.label}, ${r ? (REASON[r.kind] || REASON.topic).pill : 'Connection'}${pctOf(r) !== null ? `, ${pctOf(r)}% match` : ''}${hasMarks(it.to.start, it.to.end) ? ', has your marks' : ''}: ${because}`;
+}
+function chipHtml(it, inList) {
+  const r = it.reason, because = r ? r.because : 'Cross reference', mine = hasMarks(it.to.start, it.to.end);
   const line2 = inList ? `<span class="because">${esc(because)}</span>`
     : it.snippet ? `<span class="snip">${esc(it.snippet)}</span>` : '<span class="snip none">Verse omitted in this translation</span>';
-  return `<button class="chip${it.sameBook ? '' : ' cross'}" data-rank="${it.rank}" style="opacity:${(0.35 + 0.65 * it.weight).toFixed(3)}" title="${esc(because)}" aria-label="${esc(it.to.label)}, ${esc(r ? (REASON[r.kind] || REASON.topic).pill : 'Connection')}${pctOf(r) !== null ? `, ${pctOf(r)}% match` : ''}: ${esc(because)}">` +
+  return `<button class="chip${it.sameBook ? '' : ' cross'}${mine ? ' mine' : ''}" data-rank="${it.rank}" style="opacity:${(0.35 + 0.65 * it.weight).toFixed(3)}" title="${esc(because)}" aria-label="${esc(chipAria(it))}">${mine ? '<span class="mine-dot" aria-hidden="true"></span>' : ''}` +
     `<span class="top">${inList ? `<span class="rank num">${it.rank}</span>` : ''}<span class="dir" aria-hidden="true">${GLYPH[it.direction]}</span><span class="lbl" style="font-weight:${Math.round(400 + 300 * it.weight)}">${esc(it.to.label)}</span><span class="dot ${it.tier}" title="${it.tier}"></span>${pillHtml(r)}</span>` +
     `${line2}</button>`;
 }
@@ -787,7 +889,7 @@ function openPeek(item) {
   const r = item.reason;
   $('#peekBody').innerHTML =
     (r ? `<div class="reason-line" id="peekReason">${pillHtml(r, true)}<span class="because-lg">${esc(r.because)}</span></div>` : '') +
-    `<p class="passage" id="peekPassage">${passage || esc(item.snippet)}</p><p class="caption">${esc(tr.name || 'Berean Standard Bible')} (preview text)</p>` +
+    `<p class="passage" id="peekPassage">${passage || esc(item.snippet)}</p><p class="caption">${esc(tr.name || 'Berean Standard Bible')} (preview text)</p>` + mineHtml(item.to.start, item.to.end) +
     `<ul class="votes-list">${lines.join('')}</ul>` +
     (item.viaRange ? `<p class="via">Points at ${esc(item.viaRange.label)} (${item.viaRange.span} verses), which covers ${esc(focus.label)}.</p>` : '') +
     `<p class="fine num">${item.sameBook ? 'Same book' : esc(bookOf(item.to.start).name)} \u00b7 ${item.tier} \u00b7 rank ${item.rank} of ${focus.counts.unique} \u00b7 score ${item.score}</p>`;
@@ -811,7 +913,7 @@ function highlightJson(text) {
 }
 function openJson(title, obj, mode) {
   S.jsonMode = mode; const text = JSON.stringify(obj, null, 2);
-  $('#jsonTitle').innerHTML = `${esc(title)}<span class="sub">${mode === 'trail' ? 'asb.trail/2 document' : 'asb.chapter/2 verse object'}</span>`;
+  $('#jsonTitle').innerHTML = `${esc(title)}<span class="sub">${{ trail: 'asb.trail/2 document', annotations: 'asb.annotations/1 document' }[mode] || 'asb.chapter/2 verse object'}</span>`;
   const pre = $('#jsonPre'), ta = $('#jsonTa'); pre.innerHTML = highlightJson(text); ta.value = text; pre.hidden = false; ta.hidden = true;
   openSheet('jsonSheet');
 }
@@ -837,6 +939,7 @@ function openAbout() {
     `<h4>Connection reasons</h4><p id="aboutReasons">Connection reasons are computed by rules from the public-domain text, not by AI.</p>` +
     `<p id="aboutMatch">Match percentage: 100% means the same words or the same account; lower means a looser topical or word match. It blends shared wording, names and themes with OpenBible.info reader votes.</p>` +
     `<p id="aboutSlider">Match slider: raise it to see only the closest matches; lower it to include looser topical links.</p>` +
+    `<h4>Your marks</h4><p id="aboutMarks">Highlights, bookmarks, notes and tags are saved in this browser. In the app they stay on your iPhone and sync through your private iCloud. A note holds only what you type.</p>` +
     `<h4>Dataset</h4><p class="fine num">${m ? `Version ${esc(m.datasetVersion)} \u00b7 built ${esc(String(m.builtAt || '').slice(0, 10))} \u00b7 ${esc(m.pipeline || '')}<br>${m.graph ? `${m.graph.edges.toLocaleString()} cross references \u00b7 ${m.graph.mergedTickerItems.toLocaleString()} ranked connections \u00b7 ` : ''}ranking ${esc(m.ranking ? m.ranking.version : '')}` : 'manifest.json not found; showing built-in attribution'}</p>`;
   const cur = document.documentElement.getAttribute('data-theme') || '';
   $$('#themeSeg button').forEach(b => { b.setAttribute('aria-pressed', String(b.dataset.theme === cur)); b.onclick = () => { applyTheme(b.dataset.theme); store.set('theme', b.dataset.theme); $$('#themeSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); }; });
@@ -857,6 +960,394 @@ function openPicker(bookNo) {
     $('#pickerBody').innerHTML = `<div class="grid">${Array.from({ length: b.chapters }, (_, i) => `<button data-ch="${i + 1}" class="${bookNo === S.bookNo && i + 1 === S.chapter ? 'cur' : ''}">${i + 1}</button>`).join('')}</div>`;
   }
   openSheet('pickerSheet');
+}
+
+/* ---------- the reader's marks: highlights, bookmarks, notes, tags (spec 2.13) ---------- */
+const PALETTE = [{ id: 'yellow', label: 'Yellow', hex: '#ffe27a' }, { id: 'green', label: 'Green', hex: '#b8e6a0' }, { id: 'blue', label: 'Blue', hex: '#a9d3f5' }, { id: 'pink', label: 'Pink', hex: '#f6b8d1' }, { id: 'orange', label: 'Orange', hex: '#ffc98a' }];
+const ANN_KEY = 'annotations.v1';
+const ICON = {
+  bookmark: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 3.5h11v17l-5.5-4.2-5.5 4.2z"/></svg>',
+  note: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M5 3.5h14v11l-6 6H5z"/><path d="M13 20.5v-6h6M8.5 8.5h7M8.5 12h4"/></svg>',
+  tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3.5 3.5h8l9 9-8 8-9-9z"/><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>',
+  chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>'
+};
+const STUDY_TABS = {
+  highlights: { kind: 'highlight', empty: 'No highlights yet. Tap a verse and pick a color.' },
+  bookmarks: { kind: 'bookmark', empty: 'No bookmarks yet. Tap a verse, then Bookmark.' },
+  notes: { kind: 'note', empty: 'No notes yet. Tap a verse, then Note.' },
+  tags: { kind: null, empty: 'No tags yet. Tap a verse, then Tag, or add tags to a note.' }
+};
+const emptyAnn = () => ({ schema: 'asb.annotations/1', palette: PALETTE.map(p => ({ ...p })), tags: [], items: [], rules: {} });
+const validAnn = d => !!d && typeof d === 'object' && d.schema === 'asb.annotations/1' && Array.isArray(d.items) && Array.isArray(d.tags);
+const cloneJson = o => JSON.parse(JSON.stringify(o));
+const shownTranslation = () => (S.text && S.text.translation && S.text.translation.id) || 'bsb';
+const wordsOf = vid => { const t = verseText(vid); return t ? t.split(/\s+/) : []; };
+const paletteOf = () => (S.ann && Array.isArray(S.ann.palette) && S.ann.palette.length ? S.ann.palette : PALETTE);
+const colorOf = id => paletteOf().find(p => p.id === id) || null;
+const colorLabel = id => { const c = colorOf(id); return c ? c.label : 'Highlight'; };
+// Dots and swatches use the solid palette colour in both themes; highlights behind text use the --mk-* tokens, dimmed in dark mode.
+const solidHex = id => { const c = colorOf(id); return c && /^#[0-9a-f]{6}$/i.test(c.hex) ? c.hex : '#ffe27a'; };
+const mkVar = id => /^[a-z]+$/.test(id || '') ? `var(--mk-${id}, ${solidHex(id)})` : solidHex(id);
+const findItem = id => S.ann.items.find(it => it.id === id) || null;
+const covers = (it, vid) => it.anchor.start.vid <= vid && vid <= it.anchor.end.vid;
+const anchorKey = a => `${a.start.vid}.${a.partial ? a.start.word : '*'}-${a.end.vid}.${a.partial ? a.end.word : '*'}`;
+const tagName = id => { const t = S.ann.tags.find(x => x.id === id); return t ? t.name : (S.draftNames[id] || id); };
+const firstLine = body => String(body || '').trim().split('\n')[0];
+function fmtDate(iso) {
+  const d = new Date(iso); if (isNaN(d)) return '';
+  const o = { month: 'short', day: 'numeric' }; if (d.getFullYear() !== new Date().getFullYear()) o.year = 'numeric';
+  return d.toLocaleDateString('en-US', o);
+}
+const wordsLabel = a => a.partial && a.start.vid === a.end.vid ? `words ${a.start.word + 1}–${a.end.word + 1}` : a.partial ? 'part' : '';
+
+// First run (nothing stored) seeds from data/annotations.json so the examples show; every read and write survives storage that throws.
+function loadAnn(seed) {
+  const saved = store.get(ANN_KEY);
+  if (validAnn(saved)) S.ann = saved;
+  else { S.ann = validAnn(seed) ? cloneJson(seed) : emptyAnn(); saveAnn(); }
+  if (!Array.isArray(S.ann.palette) || !S.ann.palette.length) S.ann.palette = PALETTE.map(p => ({ ...p }));
+  indexAnn();
+}
+function saveAnn() { store.set(ANN_KEY, S.ann); }
+// Where a mark lands in the text on screen. Word positions hold only in the translation they were saved in, and only while the
+// verse still has the same word count; otherwise the mark widens to whole verses.
+function spansOf(a) {
+  const exact = a.partial && a.translation === shownTranslation() && [a.start, a.end].every(p => Number.isInteger(p.word) && p.of === wordsOf(p.vid).length);
+  return rangeVids(a.start.vid, a.end.vid).map(vid => {
+    const n = wordsOf(vid).length;
+    let from = exact && vid === a.start.vid ? a.start.word : 0, to = exact && vid === a.end.vid ? a.end.word : n - 1;
+    if (from > to) [from, to] = [to, from];
+    from = Math.max(0, Math.min(from, n - 1)); to = Math.max(0, Math.min(to, n - 1));
+    return { vid, from, to, whole: !exact || (from === 0 && to === n - 1) };
+  });
+}
+function indexAnn() {
+  const idx = new Map();
+  const at = vid => { if (!idx.has(vid)) idx.set(vid, { cover: [], hl: [], bm: [], under: [] }); return idx.get(vid); };
+  S.ann.items.forEach(it => {
+    if (!it || !it.anchor || !it.anchor.start || !it.anchor.end) return;
+    spansOf(it.anchor).forEach(sp => {
+      const m = at(sp.vid); m.cover.push(it);
+      if (it.kind === 'highlight' && colorOf(it.color)) m.hl.push({ it, ...sp });
+      else if (it.kind === 'bookmark') m.bm.push(it);
+      else if ((it.kind === 'note' || it.kind === 'tag') && !sp.whole) m.under.push(sp);
+    });
+  });
+  idx.forEach(m => m.hl.sort((a, b) => String(a.it.createdAt).localeCompare(String(b.it.createdAt))));
+  S.annIdx = idx;
+}
+function marksIn(start, end) {
+  const out = [];
+  rangeVids(start, end).forEach(v => { const m = S.annIdx.get(v); if (m) m.cover.forEach(it => { if (!out.includes(it)) out.push(it); }); });
+  return out;
+}
+const hasMarks = (start, end) => !!S.ann && marksIn(start, end).length > 0;
+function tagsAt(vid) {
+  const m = S.annIdx.get(vid), out = [];
+  if (m) m.cover.forEach(it => { if (it.anchor.start.vid === vid) (it.tags || []).forEach(t => { if (!out.includes(t)) out.push(t); }); });
+  return out;
+}
+
+/* verse markup: every word is a span with its 0-based index in text.split(/\s+/), so part-of-verse marks land on exact words */
+function wordsHtml(v, m, sel) {
+  const toks = v.text.split(/(\s+)/), n = Math.ceil(toks.length / 2);
+  const col = new Array(n).fill(null), under = new Array(n).fill(false), pick = new Array(n).fill(false);
+  if (m) {
+    m.hl.forEach(sp => { for (let i = sp.from; i <= sp.to; i++) col[i] = sp.it.color; });
+    m.under.forEach(sp => { for (let i = sp.from; i <= sp.to; i++) under[i] = true; });
+  }
+  const r = sel && sel.part ? pickRange() : null;
+  if (r) for (let i = r[0]; i <= r[1]; i++) pick[i] = true;
+  let out = '', open = null;
+  const close = () => { if (open !== null) { out += '</span>'; open = null; } };
+  toks.forEach((tok, t) => {
+    if (t % 2 === 0) {
+      const i = t / 2, c = col[i];
+      if (c !== open) { close(); if (c) { out += `<span class="hlr" style="--mk:${mkVar(c)}">`; open = c; } }
+      out += `<span class="w${pick[i] ? ' pick' : ''}${under[i] ? ' ul' : ''}" data-w="${i}">${esc(tok)}</span>`;
+    } else {
+      const i = (t - 1) / 2;
+      if (!(col[i] && col[i] === col[i + 1])) close();
+      out += pick[i] && pick[i + 1] ? `<span class="pick">${esc(tok)}</span>` : esc(tok);
+    }
+  });
+  close();
+  return out;
+}
+function verseInner(v) {
+  const m = S.annIdx.get(v.vid), sel = S.sel && S.sel.vid === v.vid ? S.sel : null;
+  let html = `<sup class="vn">${v.verse}</sup>` + (v.omitted ? '<span class="tag">omitted</span>' : `<span class="vt">${wordsHtml(v, m, sel)}</span>`);
+  if (!m) return html;
+  m.cover.filter(it => it.kind === 'note' && it.anchor.start.vid === v.vid).forEach(it => {
+    html += `<button class="v-note" data-note="${esc(it.id)}" aria-label="Open your note on ${esc(it.anchor.label)}">${ICON.note}</button>`;
+  });
+  if (m.bm.length) html += `<span class="v-bm" role="img" aria-label="Bookmarked">${ICON.bookmark}</span>`;
+  const tags = tagsAt(v.vid);
+  if (tags.length) html += `<span class="v-tags">${tags.map(id => `<button class="v-tag" data-tag="${esc(id)}" aria-label="Tag ${esc(tagName(id))}. Show every verse with this tag">${esc(tagName(id))}</button>`).join('')}</span>`;
+  return html;
+}
+// Re-renders only the verses whose marks or selection changed, then the chip dots and any open list.
+function refreshMarks() {
+  if (!S.bundle) return;
+  reader.querySelectorAll('.v').forEach(el => {
+    const vid = +el.dataset.vid, v = verseOf(vid); if (!v) return;
+    const html = verseInner(v);
+    if (el._mk !== html) { el.innerHTML = html; el._mk = html; }
+    el.classList.toggle('sel', !!S.sel && S.sel.vid === vid);
+    el.classList.toggle('part', !!S.sel && S.sel.vid === vid && S.sel.part);
+  });
+  const sync = (sel, items) => $$(sel).forEach(c => {
+    const it = items.find(x => x.rank === +c.dataset.rank); if (!it) return;
+    const mine = hasMarks(it.to.start, it.to.end), dot = c.querySelector('.mine-dot');
+    c.classList.toggle('mine', mine);
+    if (mine && !dot) c.insertAdjacentHTML('afterbegin', '<span class="mine-dot" aria-hidden="true"></span>');
+    if (!mine && dot) dot.remove();
+    c.setAttribute('aria-label', chipAria(it));
+  });
+  sync('#track .chip', S.ticker.all || []); sync('#listBody .chip', S.listItems || []);
+}
+
+/* creating and changing marks */
+function makeAnchor(vid, range) {
+  const n = wordsOf(vid).length, partial = !!range && n > 0 && !(range[0] === 0 && range[1] === n - 1);
+  const pt = w => ({ vid, word: partial ? w : null, of: partial ? n : null });
+  return { translation: shownTranslation(), start: pt(range && range[0]), end: pt(range && range[1]), ref: refOf(vid, vid), label: labelOf(vid, vid), partial };
+}
+function newItem(kind, anchor, { color = null, body = null, tags = [] } = {}) {
+  const at = nowIso();
+  // Only whole-verse NIV highlights can sync with YouVersion; the prototype has no sign-in, so those start "off".
+  const yv = kind === 'highlight' && anchor.translation === 'niv' && !anchor.partial ? 'off' : 'notEligible';
+  return { id: `ann_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`, kind, anchor, color: kind === 'highlight' ? color : null, body: kind === 'note' ? body : null, tags, createdAt: at, updatedAt: at, sync: { icloud: true, youversion: yv } };
+}
+function touch(it) { it.updatedAt = nowIso(); if (it.sync && it.sync.youversion === 'synced') it.sync.youversion = 'pending'; }
+function afterChange() {
+  S.ann.tags = S.ann.tags.filter(t => S.ann.items.some(it => (it.tags || []).includes(t.id)));
+  saveAnn(); indexAnn(); refreshMarks();
+  if (S.sel) renderBar();
+  if (S.sheet === 'studySheet') renderStudy();
+}
+function applyColor(color) {
+  const s = S.sel; if (!s) return;
+  const range = s.part ? pickRange() : null; if (s.part && !range) return;
+  const anchor = makeAnchor(s.vid, range);
+  if (!anchor.partial) {
+    // A whole-verse colour replaces every highlight that sits on this verse alone.
+    const here = S.ann.items.filter(it => it.kind === 'highlight' && it.anchor.start.vid === s.vid && it.anchor.end.vid === s.vid);
+    const keep = here.find(it => !it.anchor.partial) || null;
+    S.ann.items = S.ann.items.filter(it => !here.includes(it) || it === keep);
+    if (keep) { keep.color = color; touch(keep); } else S.ann.items.push(newItem('highlight', anchor, { color }));
+  } else {
+    const same = S.ann.items.find(it => it.kind === 'highlight' && anchorKey(it.anchor) === anchorKey(anchor));
+    if (same) { same.color = color; touch(same); } else S.ann.items.push(newItem('highlight', anchor, { color }));
+  }
+  endPart(); afterChange();
+}
+function clearHighlight() {
+  const s = S.sel; if (!s) return;
+  S.ann.items = S.ann.items.filter(it => !(it.kind === 'highlight' && covers(it, s.vid)));
+  endPart(); afterChange();
+}
+function toggleBookmark() {
+  const s = S.sel; if (!s || s.part) return;
+  const on = S.ann.items.filter(it => it.kind === 'bookmark' && covers(it, s.vid));
+  if (on.length) S.ann.items = S.ann.items.filter(it => !on.includes(it));
+  else S.ann.items.push(newItem('bookmark', makeAnchor(s.vid, null)));
+  afterChange(); toast(on.length ? 'Bookmark removed' : 'Bookmarked');
+}
+
+/* the action bar: opens on a verse tap, sits above the strip so the connections stay in view */
+function openBar(vid) {
+  if (!verseOf(vid)) return;
+  S.sel = { vid, part: false, a: null, b: null };
+  renderBar(); $('#actionBar').hidden = false; placeBar(); refreshMarks(); keepVisible(vid);
+}
+function closeBar() {
+  if (!S.sel) return;
+  S.sel = null; $('#actionBar').hidden = true; refreshMarks();
+}
+function placeBar() {
+  const bar = $('#actionBar'); if (bar.hidden || !reader.offsetParent) return;
+  bar.style.bottom = `${reader.offsetParent.clientHeight - reader.offsetTop - reader.offsetHeight + 8}px`;
+}
+function keepVisible(vid) {
+  const el = reader.querySelector(`.v[data-vid="${vid}"]`), bar = $('#actionBar'); if (!el || bar.hidden) return;
+  const room = reader.clientHeight - bar.offsetHeight - 24, bottom = el.offsetTop + el.offsetHeight - reader.scrollTop;
+  if (bottom <= room) return;
+  S.focusLockUntil = performance.now() + 700;
+  reader.scrollTop += Math.min(bottom - room, el.offsetTop - reader.scrollTop - 8);
+}
+const pickRange = () => { const s = S.sel; if (!s || s.a === null) return null; const b = s.b === null ? s.a : s.b; return [Math.min(s.a, b), Math.max(s.a, b)]; };
+function pickWord(i) {
+  const s = S.sel; if (!s) return;
+  if (s.a === null || s.b !== null) { s.a = i; s.b = null; } else s.b = i;
+  renderBar(); refreshMarks();
+}
+function togglePart() { const s = S.sel; if (!s) return; s.part = !s.part; s.a = s.b = null; renderBar(); refreshMarks(); }
+function endPart() { const s = S.sel; if (s && s.part) { s.part = false; s.a = s.b = null; } }
+function barAnchor() { const s = S.sel; if (!s) return null; if (!s.part) return makeAnchor(s.vid, null); const r = pickRange(); return r ? makeAnchor(s.vid, r) : null; }
+function renderBar() {
+  const s = S.sel, v = verseOf(s.vid); if (!v) return;
+  const m = S.annIdx.get(s.vid), r = pickRange(), wait = s.part && !r, bm = !!(m && m.bm.length), hl = !!(m && m.hl.length);
+  const whole = m && m.hl.filter(h => h.whole).map(h => h.it.color).pop();
+  $('#abLabel').textContent = v.label;
+  $('#abHint').textContent = !s.part ? '' : s.a === null ? 'Tap the first word' : s.b === null ? 'Tap the last word' : `${r[1] - r[0] + 1} word${r[1] === r[0] ? '' : 's'} selected`;
+  $('#actionBar').setAttribute('aria-label', `Mark ${v.label}`);
+  $('#abSwatches').innerHTML = paletteOf().map(p => `<button class="sw" data-color="${esc(p.id)}" style="--sw:${esc(p.hex)}" aria-label="Highlight ${esc(p.label.toLowerCase())}${s.part ? ', selected words' : ''}" aria-pressed="${!s.part && p.id === whole}"${wait || v.omitted ? ' disabled' : ''}></button>`).join('');
+  const clr = $('#abClear'); clr.disabled = !hl; clr.setAttribute('aria-label', `Clear the highlight on ${v.label}`);
+  const b = $('#abBookmark'); b.disabled = s.part; b.setAttribute('aria-pressed', String(bm)); b.setAttribute('aria-label', bm ? `Remove the bookmark on ${v.label}` : `Bookmark ${v.label}`);
+  const n = $('#abNote'); n.disabled = wait; n.setAttribute('aria-label', s.part ? 'Write a note on the selected words' : `Write a note on ${v.label}`);
+  const t = $('#abTag'); t.disabled = wait; t.setAttribute('aria-label', s.part ? 'Tag the selected words' : `Tag ${v.label}`);
+  const p = $('#abPart'); p.disabled = v.omitted; p.setAttribute('aria-pressed', String(s.part)); p.setAttribute('aria-label', s.part ? 'Back to the whole verse' : 'Mark part of the verse: tap the first word, then the last');
+  $('#abPartLbl').textContent = s.part ? 'Whole verse' : 'Part of verse';
+}
+
+/* tag field, shared by the note and tag sheets (one is open at a time) */
+function slugOf(name) { return String(name).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40); }
+function addDraftTag(raw) {
+  const name = String(raw).replace(/^#+/, '').trim().replace(/\s+/g, ' '), id = slugOf(name); if (!id) return false;
+  if (!S.draftTags.includes(id)) S.draftTags.push(id);
+  if (!S.ann.tags.some(t => t.id === id) && !S.draftNames[id]) S.draftNames[id] = name;
+  return true;
+}
+function renderTagField(which) {
+  const box = $(`#${which}TagBox`), input = $(`#${which}TagIn`), q = slugOf(input.value);
+  box.querySelectorAll('.tchip').forEach(n => n.remove());
+  input.insertAdjacentHTML('beforebegin', S.draftTags.map(id => `<span class="tchip">${esc(tagName(id))}<button type="button" data-rm="${esc(id)}" aria-label="Remove tag ${esc(tagName(id))}">×</button></span>`).join(''));
+  const pool = S.ann.tags.filter(t => !S.draftTags.includes(t.id) && (!q || t.id.includes(q)));
+  $(`#${which}TagSugg`).innerHTML = pool.length ? '<span class="ts-lbl">Your tags</span>' + pool.slice(0, 12).map(t => `<button type="button" data-add="${esc(t.id)}" aria-label="Add tag ${esc(t.name)}">${esc(t.name)}</button>`).join('') : '';
+}
+function commitDraftTags(which) {
+  const input = $(`#${which}TagIn`); if (input.value.trim()) { addDraftTag(input.value); input.value = ''; }
+  const at = nowIso();
+  S.draftTags.forEach(id => { if (!S.ann.tags.some(t => t.id === id)) S.ann.tags.push({ id, name: S.draftNames[id] || id, createdAt: at }); });
+  return S.draftTags.slice();
+}
+function wireTagField(which) {
+  const input = $(`#${which}TagIn`);
+  input.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ',') && !e.isComposing) { e.preventDefault(); if (addDraftTag(input.value)) input.value = ''; renderTagField(which); }
+    else if (e.key === 'Backspace' && !input.value && S.draftTags.length) { S.draftTags.pop(); renderTagField(which); }
+  });
+  input.addEventListener('input', () => renderTagField(which));
+  $(`#${which}TagBox`).addEventListener('click', e => { const rm = e.target.closest('[data-rm]'); if (rm) { S.draftTags = S.draftTags.filter(id => id !== rm.dataset.rm); renderTagField(which); } input.focus(); });
+  $(`#${which}TagSugg`).addEventListener('click', e => { const a = e.target.closest('[data-add]'); if (a) { if (!S.draftTags.includes(a.dataset.add)) S.draftTags.push(a.dataset.add); renderTagField(which); } });
+}
+function startDraft(tags) { S.draftTags = (tags || []).slice(); S.draftNames = {}; }
+
+/* note editor: the verse label, never the verse text */
+function openNote(item, anchor) {
+  const a = item ? item.anchor : anchor; if (!a) return;
+  S.editing = { kind: 'note', id: item ? item.id : null, anchor: a };
+  $('#noteTitle').innerHTML = `${esc(a.label)}<span class="sub">${a.partial ? `Note on ${esc(wordsLabel(a))}` : 'Note'}</span>`;
+  $('#noteText').value = item ? item.body || '' : '';
+  $('#noteTagIn').value = '';
+  startDraft(item && item.tags); renderTagField('note');
+  $('#noteDelete').hidden = !item; $('#noteSave').disabled = !$('#noteText').value.trim();
+  openSheet('noteSheet');
+}
+function saveNote() {
+  const e = S.editing, body = $('#noteText').value.trim(); if (!e || !body) return;
+  const tags = commitDraftTags('note'), it = e.id && findItem(e.id);
+  if (it) { it.body = body; it.tags = tags; touch(it); } else S.ann.items.push(newItem('note', e.anchor, { body, tags }));
+  S.editing = null; endPart(); closeSheet(); afterChange(); toast('Note saved');
+}
+function deleteNote() {
+  const e = S.editing; if (!e || !e.id) return;
+  S.ann.items = S.ann.items.filter(it => it.id !== e.id);
+  S.editing = null; closeSheet(); afterChange(); toast('Note deleted');
+}
+/* quick tags without a note */
+function openTagSheet(anchor) {
+  if (!anchor) return;
+  const it = S.ann.items.find(x => x.kind === 'tag' && anchorKey(x.anchor) === anchorKey(anchor)) || null;
+  S.editing = { kind: 'tag', id: it ? it.id : null, anchor };
+  $('#tagsTitle').innerHTML = `${esc(anchor.label)}<span class="sub">${anchor.partial ? `Tags on ${esc(wordsLabel(anchor))}` : 'Tags'}</span>`;
+  $('#tagsTagIn').value = '';
+  startDraft(it && it.tags); renderTagField('tags');
+  openSheet('tagSheet');
+}
+function saveTags() {
+  const e = S.editing; if (!e) return;
+  const tags = commitDraftTags('tags'), it = e.id && findItem(e.id);
+  if (it) { if (tags.length) { it.tags = tags; touch(it); } else S.ann.items = S.ann.items.filter(x => x !== it); }
+  else if (tags.length) S.ann.items.push(newItem('tag', e.anchor, { tags }));
+  S.editing = null; endPart(); closeSheet(); afterChange(); toast(tags.length ? 'Tags saved' : 'Tags removed');
+}
+
+/* My Study: every mark, newest first; tapping a row jumps there and pushes a trail hop */
+const newestFirst = (a, b) => String(b.updatedAt || b.createdAt).localeCompare(String(a.updatedAt || a.createdAt));
+function tagGroups(id) {
+  const groups = new Map();
+  S.ann.items.filter(it => (it.tags || []).includes(id)).sort(newestFirst).forEach(it => { const k = anchorKey(it.anchor); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(it); });
+  return Array.from(groups.values());
+}
+function rowHtml(it, group) {
+  const a = it.anchor, list = group || [it], note = list.find(x => x.kind === 'note'), tags = [];
+  list.forEach(x => (x.tags || []).forEach(t => { if (!tags.includes(t)) tags.push(t); }));
+  const kinds = { highlight: `${colorLabel(it.color)} highlight`, bookmark: 'Bookmark', note: 'Note', tag: 'Tags' };
+  const ico = it.kind === 'highlight' ? `<span class="m-ico"><i class="cdot" style="--mk:${solidHex(it.color)}"></i></span>` : `<span class="m-ico${it.kind === 'bookmark' ? ' bm' : ''}">${ICON[it.kind === 'tag' ? 'tag' : it.kind]}</span>`;
+  const sub = note ? firstLine(note.body) : it.kind === 'highlight' ? colorLabel(it.color) : it.kind === 'bookmark' ? 'Bookmark' : '';
+  const date = fmtDate(it.updatedAt || it.createdAt), part = wordsLabel(a);
+  return `<button class="mrow" data-ann="${esc(it.id)}" aria-label="${esc(`${a.label}${part ? ', ' + part : ''}, ${group ? list.map(x => kinds[x.kind]).join(' and ') : kinds[it.kind]}, ${date}. Go to the verse`)}">${ico}<span class="m-main">` +
+    `<span class="m-top"><span>${esc(a.label)}</span>${part ? `<span class="m-part">${esc(part)}</span>` : ''}<span class="m-date">${esc(date)}</span></span>` +
+    (sub ? `<span class="m-sub">${esc(sub)}</span>` : '') +
+    (tags.length ? `<span class="m-tags">${tags.map(t => `<span class="tpill">${esc(tagName(t))}</span>`).join('')}</span>` : '') + '</span></button>';
+}
+function openStudy(tab, tag) {
+  if (!S.ann) return;
+  S.study = { tab: STUDY_TABS[tab] ? tab : S.study.tab, tag: tag || null, confirm: false };
+  closeBar(); renderStudy(); openSheet('studySheet');
+}
+function renderStudy() {
+  const st = S.study, items = S.ann.items, count = k => items.filter(it => it.kind === k).length;
+  const counts = { highlights: count('highlight'), bookmarks: count('bookmark'), notes: count('note'), tags: S.ann.tags.length };
+  $$('#studyTabs button').forEach(b => { b.setAttribute('aria-pressed', String(b.dataset.tab === st.tab)); b.querySelector('.n').textContent = counts[b.dataset.tab]; });
+  const drill = st.tab === 'tags' && st.tag && S.ann.tags.some(t => t.id === st.tag) ? st.tag : null;
+  $('#studyBack').hidden = !drill;
+  let body;
+  if (drill) {
+    const groups = tagGroups(drill);
+    $('#studyTitle').innerHTML = `${esc(tagName(drill))}<span class="sub"><span class="num">${groups.length}</span> verse${groups.length === 1 ? '' : 's'} with this tag</span>`;
+    body = groups.map(g => rowHtml(g[0], g)).join('');
+  } else {
+    $('#studyTitle').innerHTML = `My Study<span class="sub"><span class="num">${items.length}</span> mark${items.length === 1 ? '' : 's'} saved in this browser</span>`;
+    if (st.tab === 'tags') {
+      body = S.ann.tags.map(t => ({ t, n: tagGroups(t.id).length })).sort((a, b) => b.n - a.n || a.t.name.localeCompare(b.t.name))
+        .map(({ t, n }) => `<button class="mrow tagrow" data-tag="${esc(t.id)}" aria-label="${esc(`Tag ${t.name}, ${n} verse${n === 1 ? '' : 's'}`)}"><span class="m-ico">#</span><span class="m-main"><span class="m-top"><span>${esc(t.name)}</span><span class="m-count num">${n}</span></span></span><span class="m-chev">${ICON.chev}</span></button>`).join('');
+    } else body = items.filter(it => it.kind === STUDY_TABS[st.tab].kind).sort(newestFirst).map(it => rowHtml(it)).join('');
+    if (!body) body = `<p class="note" id="studyEmpty">${esc(STUDY_TABS[st.tab].empty)}</p>`;
+  }
+  const foot = st.confirm
+    ? `<p class="fine">Remove all <span class="num">${items.length}</span> mark${items.length === 1 ? '' : 's'} and every tag? This cannot be undone.</p><div class="actions"><button class="btn" data-study="cancel">Cancel</button><button class="btn danger-fill" data-study="clearYes">Clear all</button></div>`
+    : `<div class="actions"><button class="btn" data-study="json">View JSON</button></div><div class="actions"><button class="btn" data-study="restore">Restore examples</button><button class="btn danger" data-study="clear"${items.length ? '' : ' disabled'}>Clear all my marks</button></div>`;
+  $('#studyBody').innerHTML = `<div id="studyList">${body}</div><div class="study-foot" id="studyFoot">${foot}</div>`;
+}
+async function jumpToMark(it) {
+  const a = it.anchor, p = split(a.start.vid);
+  const ok = await navigate({ bookNo: p.book, chapter: p.chapter, vid: a.start.vid, kind: it.kind === 'bookmark' ? 'bookmarkOpen' : 'open', highlight: { start: a.start.vid, end: a.end.vid } });
+  if (ok) closeSheet();
+}
+async function restoreExamples() {
+  const seed = validAnn(S.annSeed) ? S.annSeed : await fetchJson('annotations.json', true);
+  if (!validAnn(seed)) { toast('The examples could not be loaded'); return; }
+  S.annSeed = seed;
+  const have = new Set(S.ann.items.map(it => it.id));
+  cloneJson(seed.items).forEach(it => { if (!have.has(it.id)) S.ann.items.push(it); });
+  cloneJson(seed.tags).forEach(t => { if (!S.ann.tags.some(x => x.id === t.id)) S.ann.tags.push(t); });
+  S.study.confirm = false; afterChange(); toast('Examples restored');
+}
+function clearAllMarks() {
+  S.ann.items = []; S.ann.tags = []; S.study = { tab: S.study.tab, tag: null, confirm: false };
+  afterChange(); toast('All your marks are cleared');
+}
+// The peek's "Your notes" line: highlight colours, tags and the first line of a note on the peeked verse.
+function mineHtml(start, end) {
+  if (!S.ann) return '';
+  const items = marksIn(start, end).filter(it => it.kind !== 'bookmark'); if (!items.length) return '';
+  const colors = [], tags = [], note = items.filter(it => it.kind === 'note').sort(newestFirst)[0];
+  items.forEach(it => { if (it.kind === 'highlight' && !colors.includes(it.color)) colors.push(it.color); (it.tags || []).forEach(t => { if (!tags.includes(t)) tags.push(t); }); });
+  return `<p class="mine-line" id="peekMine"><span class="ml-k">Your notes</span>${colors.map(c => `<i class="cdot" style="--mk:${solidHex(c)}" role="img" aria-label="${esc(colorLabel(c))} highlight"></i>`).join('')}` +
+    (tags.length ? `<span class="ml-tags">${tags.map(t => esc(tagName(t))).join(' · ')}</span>` : '') + (note ? `<span class="ml-note">${esc(firstLine(note.body))}</span>` : '') + '</p>';
 }
 
 /* ---------- trail web overlay ---------- */
@@ -900,13 +1391,21 @@ function fit() {
   else phone.style.setProperty('--scale', Math.min(1, (innerHeight - 44) / 880, (innerWidth - 44) / 420).toFixed(3));
   phone.style.setProperty('--focus-y', `${Math.round(reader.clientHeight / 3)}px`);
   phone.style.setProperty('--reader-h', `${reader.clientHeight}px`);
+  placeBar();
 }
 
 /* ---------- events ---------- */
 reader.addEventListener('scroll', () => { if (!S.scrollRaf) S.scrollRaf = requestAnimationFrame(onScroll); }, { passive: true });
 reader.addEventListener('click', e => {
   const nav = e.target.closest('.nav-btn'); if (nav) { const p = split(+nav.dataset.chapter); navigate({ bookNo: p.book, chapter: p.chapter, vid: vidOf(p.book, p.chapter, 1), kind: 'open' }); return; }
-  const v = e.target.closest('.v'); if (v) setFocus(+v.dataset.vid, { pin: true, force: true });
+  const nb = e.target.closest('.v-note'); if (nb) { const it = findItem(nb.dataset.note); if (it) openNote(it); return; }
+  const tg = e.target.closest('.v-tag'); if (tg) { openStudy('tags', tg.dataset.tag); return; }
+  const v = e.target.closest('.v'); if (!v) return;
+  const vid = +v.dataset.vid;
+  // In part-of-verse mode a tap on a word of the selected verse picks the first, then the last word.
+  if (S.sel && S.sel.vid === vid && S.sel.part) { const w = e.target.closest('.w'); if (w) pickWord(+w.dataset.w); return; }
+  setFocus(vid, { pin: true, force: true });
+  if (S.sel && S.sel.vid === vid) closeBar(); else openBar(vid);
 });
 track.addEventListener('click', e => { if (S.ticker.suppressClick) return; const c = e.target.closest('.chip'); if (c) openPeek(S.ticker.items.find(it => it.rank === +c.dataset.rank)); });
 $('#listBody').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c) openPeek(S.listItems.find(it => it.rank === +c.dataset.rank)); });
@@ -948,6 +1447,32 @@ $('#peekGo').addEventListener('click', () => { if (S.peekItem) goToChip(S.peekIt
 $('#peekAll').addEventListener('click', () => { if (S.peekFocus) openList(S.peekFocus); });
 $('#peekJson').addEventListener('click', () => { if (S.peekFocus) openJson(`${S.peekFocus.label} \u00b7 verse JSON`, S.peekFocus, 'verse'); });
 $('#aboutBtn').addEventListener('click', openAbout);
+$('#studyBtn').addEventListener('click', () => openStudy());
+$('#abClose').addEventListener('click', closeBar);
+$('#abSwatches').addEventListener('click', e => { const b = e.target.closest('.sw'); if (b && !b.disabled) applyColor(b.dataset.color); });
+$('#abClear').addEventListener('click', clearHighlight);
+$('#abBookmark').addEventListener('click', toggleBookmark);
+$('#abNote').addEventListener('click', () => { const a = barAnchor(); if (!a) return; openNote(S.ann.items.find(it => it.kind === 'note' && anchorKey(it.anchor) === anchorKey(a)) || null, a); });
+$('#abTag').addEventListener('click', () => openTagSheet(barAnchor()));
+$('#abPart').addEventListener('click', togglePart);
+$('#noteText').addEventListener('input', () => { $('#noteSave').disabled = !$('#noteText').value.trim(); });
+$('#noteSave').addEventListener('click', saveNote);
+$('#noteDelete').addEventListener('click', deleteNote);
+$('#tagsSave').addEventListener('click', saveTags);
+wireTagField('note'); wireTagField('tags');
+$('#studyTabs').addEventListener('click', e => { const b = e.target.closest('button[data-tab]'); if (!b) return; S.study = { tab: b.dataset.tab, tag: null, confirm: false }; renderStudy(); $('#studyBody').scrollTop = 0; });
+$('#studyBack').addEventListener('click', () => { S.study.tag = null; renderStudy(); });
+$('#studyBody').addEventListener('click', e => {
+  const t = e.target.closest('[data-tag]'); if (t) { S.study.tag = t.dataset.tag; renderStudy(); $('#studyBody').scrollTop = 0; return; }
+  const r = e.target.closest('[data-ann]'); if (r) { const it = findItem(r.dataset.ann); if (it) jumpToMark(it); return; }
+  const a = e.target.closest('[data-study]'); if (!a) return;
+  const act = a.dataset.study;
+  if (act === 'json') openJson('My marks JSON', S.ann, 'annotations');
+  else if (act === 'restore') restoreExamples();
+  else if (act === 'clear') { S.study.confirm = true; renderStudy(); }
+  else if (act === 'cancel') { S.study.confirm = false; renderStudy(); }
+  else if (act === 'clearYes') clearAllMarks();
+});
 $('#titleBtn').addEventListener('click', () => openPicker(0));
 $('#pickerBack').addEventListener('click', () => openPicker(0));
 $('#pickerBody').addEventListener('click', async e => {
@@ -959,7 +1484,7 @@ $('#searchCancel').addEventListener('click', () => showSearch(false));
 $('#searchRow').addEventListener('submit', e => { e.preventDefault(); runSearch($('#searchInput').value); });
 $('#scrim').addEventListener('click', closeSheet);
 $$('[data-close]').forEach(b => b.addEventListener('click', closeSheet));
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (S.sheet) closeSheet(); else if ($('#webOverlay').classList.contains('on')) closeWeb(); else if (!$('#searchRow').hidden) showSearch(false); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (S.sheet) closeSheet(); else if ($('#webOverlay').classList.contains('on')) closeWeb(); else if (!$('#searchRow').hidden) showSearch(false); else if (S.sel) closeBar(); } });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) S.ticker.lastT = 0; });
 addEventListener('resize', fit);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fit(); if (S.focusVid) scrollToVerse(S.focusVid); });
@@ -972,10 +1497,11 @@ async function boot() {
   S.prefersReduced = reducedQuery.matches;
   S.trail = newTrail(); fit();
   try {
-    const [books, text, manifest, notes] = await Promise.all([fetchJson('books.json'), fetchJson('text/bsb.json'), fetchJson('manifest.json', true), fetchJson('ai/notes.json', true)]);
-    S.books = books.books; S.text = text; S.manifest = manifest;
+    const [books, text, manifest, notes, annSeed] = await Promise.all([fetchJson('books.json'), fetchJson('text/bsb.json'), fetchJson('manifest.json', true), fetchJson('ai/notes.json', true), fetchJson('annotations.json', true)]);
+    S.books = books.books; S.text = text; S.manifest = manifest; S.annSeed = annSeed;
     if (notes) S.notes = { edges: notes.edges || {}, verses: notes.verses || {} };
     S.books.forEach(b => { S.bookByNo[b.bookNo] = b; [b.name, b.short, b.osis, b.sourceName].concat(b.aliases || []).forEach(k => { if (k) S.bookKeys.set(norm(k), b.bookNo); }); });
+    loadAnn(annSeed);
     const mo = manifest && manifest.ranking && manifest.ranking.motion;
     const f = !mo && manifest && manifest.ranking && String(manifest.ranking.dwellSeconds || '').match(/([\d.]+)\s*\+\s*([\d.]+)\s*\*\s*weight/);
     if (mo && isFinite(mo.baseSeconds) && isFinite(mo.perWeightSeconds)) S.motion = { defaultMode: mo.defaultMode || 'hold', baseSeconds: +mo.baseSeconds, perWeightSeconds: +mo.perWeightSeconds };
@@ -1003,7 +1529,7 @@ async function boot() {
   const ok = await navigate({ bookNo: p.book, chapter: p.chapter, vid: target, kind: 'open' });
   if (!ok) reader.innerHTML = '<div class="loading"><p>No chapter text is available in this preview.</p></div>';
 }
-window.asb = { state: S, parseRef, navigate, expandChip, snippetOf, labelOf, refOf, buildBundle, openPeek, goBack, goForward, verseOf, setFilter, setMatch, poolOf, atOrAbove, setMotion };
+window.asb = { state: S, parseRef, navigate, expandChip, snippetOf, labelOf, refOf, buildBundle, openPeek, goBack, goForward, verseOf, setFilter, setMatch, poolOf, atOrAbove, setMotion, openStudy, openBar, closeBar, annotations: () => S.ann };
 boot();
 </script>
 </body>
