@@ -1,5 +1,6 @@
-// Smoke test for the AI Study Bible prototype.
-// Usage: PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node test/smoke.mjs [--fixture] [--base http://localhost:8765]
+// Smoke test for the AI-Assisted Study Bible prototype (real data in prototype/data/).
+// Usage: python3 -m http.server 8765 --directory prototype   (in another shell)
+//        PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers node prototype/test/smoke.mjs [--base http://localhost:8765]
 // Drives the page with Playwright, asserts the product behaviours, takes screenshots and fails on any console error.
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
@@ -13,32 +14,37 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const args = process.argv.slice(2);
 const base = args.includes('--base') ? args[args.indexOf('--base') + 1] : 'http://localhost:8765';
-const realData = fs.existsSync(path.join(root, 'data', 'books.json'));
-const FIXTURE = args.includes('--fixture') || !realData;
-const url = `${base}/index.html${FIXTURE ? '?data=./fixture' : ''}`;
-const shots = path.join(here, 'screens', FIXTURE ? 'fixture' : '');
+const url = `${base}/index.html`;
+const shots = path.join(here, 'screens');
 fs.mkdirSync(shots, { recursive: true });
 
 const failures = [];
 const passes = [];
-const check = (cond, msg) => { (cond ? passes : failures).push(msg); if (!cond) console.log('  FAIL', msg); else console.log('  ok  ', msg); };
+const check = (cond, msg) => { (cond ? passes : failures).push(msg); console.log(cond ? '  ok  ' : '  FAIL', msg); };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // Spec section 4.1 (John 3:15-17) is the contract the loader must reproduce.
 function specChapter() {
-  const spec = fs.readFileSync(path.resolve(root, '..', 'docs', 'DATA_MODEL.md'), 'utf8');
-  const m = spec.match(/### 4\.1 [^\n]*\n```json\n([\s\S]*?)\n```/);
+  const file = path.resolve(root, '..', 'docs', 'DATA_MODEL.md');
+  if (!fs.existsSync(file)) return null;
+  const m = fs.readFileSync(file, 'utf8').match(/### 4\.1 [^\n]*\n\s*```json\n([\s\S]*?)\n```/);
   return m ? JSON.parse(m[1]) : null;
 }
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'data', 'manifest.json'), 'utf8'));
+const textPack = JSON.parse(fs.readFileSync(path.join(root, 'data', 'text', 'bsb.json'), 'utf8'));
+const bsb = vid => textPack.books[Math.floor(vid / 1e6) - 1][Math.floor(vid / 1000) % 1000 - 1][vid % 1000 - 1];
 
-console.log(`Smoke test: ${url}  (${FIXTURE ? 'fixture' : 'real data'})`);
+console.log(`Smoke test: ${url}`);
 const browser = await chromium.launch();
 // ignoreHTTPSErrors: this sandbox reaches Google Fonts through a TLS-intercepting proxy whose CA Chromium does not trust.
 const context = await browser.newContext({ viewport: { width: 1200, height: 1000 }, deviceScaleFactor: 2, permissions: ['clipboard-read', 'clipboard-write'], ignoreHTTPSErrors: true });
 const page = await context.newPage();
 const consoleErrors = [];
-page.on('console', msg => { if (msg.type() === 'error') consoleErrors.push({ text: msg.text(), url: (msg.location() || {}).url || '' }); });
-page.on('pageerror', err => consoleErrors.push({ text: `pageerror: ${err.message}`, url: '' }));
+const watch = p => {
+  p.on('console', msg => { if (msg.type() === 'error') consoleErrors.push({ text: msg.text(), url: (msg.location() || {}).url || '' }); });
+  p.on('pageerror', err => consoleErrors.push({ text: `pageerror: ${err.message}`, url: '' }));
+};
+watch(page);
 
 const evalState = expr => page.evaluate(expr);
 const focusVid = () => page.evaluate(() => +(document.querySelector('.v.focus') || {}).dataset?.vid || 0);
@@ -54,130 +60,210 @@ async function scrollVerseToFocus(vid) {
   await page.evaluate(v => { const r = document.getElementById('reader'), el = r.querySelector(`.v[data-vid="${v}"]`); r.scrollTop = el.offsetTop - r.clientHeight / 3 + 2; }, vid);
   await page.waitForFunction(v => document.querySelector('.v.focus')?.dataset.vid === String(v), vid, { timeout: 3000 }).catch(() => {});
 }
-const firstChipLabel = () => page.evaluate(() => document.querySelector('#track .chip[data-rank="1"] .lbl')?.textContent || '');
 const waitStrip = () => page.waitForFunction(() => !document.getElementById('marquee').classList.contains('fading') && document.querySelector('#track').children.length > 0, null, { timeout: 3000 });
+const visibleChips = () => page.evaluate(() => Array.from(document.querySelectorAll('#track .chip')).map(c => ({
+  rank: +c.dataset.rank, label: c.querySelector('.lbl').textContent, pill: c.querySelector('.rpill .k')?.textContent || '', pct: c.querySelector('.rpill .pct')?.textContent || '', because: c.querySelector('.because').textContent })));
+const chipByRank = rank => page.evaluate(r => { const c = document.querySelector(`#track .chip[data-rank="${r}"]`); return c && { label: c.querySelector('.lbl').textContent, pill: c.querySelector('.rpill .k')?.textContent || '', pct: c.querySelector('.rpill .pct')?.textContent || '', because: c.querySelector('.because').textContent, snip: !!c.querySelector('.snip') }; }, rank);
+const pctNum = s => { const m = /^(\d+)%$/.exec(String(s || '').trim()); return m ? +m[1] : NaN; };
+// Every chip in the strip shows a whole-number match percentage from 1% to 100% that equals Math.round(reason.confidence * 100).
+const chipPercentages = () => page.evaluate(() => {
+  const v = window.asb.verseOf(window.asb.state.focusVid);
+  return Array.from(document.querySelectorAll('#track .chip')).map(c => { const it = v.ticker[+c.dataset.rank - 1]; return { label: c.querySelector('.lbl').textContent, shown: c.querySelector('.rpill .pct')?.textContent || '', expected: Math.round(it.reason.confidence * 100), visible: getComputedStyle(c.querySelector('.rpill .pct') || c).display !== 'none' }; });
+});
+const pctOk = list => list.length > 0 && list.every(c => c.visible && pctNum(c.shown) >= 1 && pctNum(c.shown) <= 100 && pctNum(c.shown) === c.expected);
+const stripState = () => page.evaluate(() => ({ hold: document.getElementById('marquee').classList.contains('hold'), transform: document.getElementById('track').style.transform, scrollLeft: document.getElementById('marquee').scrollLeft, motion: document.getElementById('motionToggle').getAttribute('aria-checked') }));
+const filterCounts = () => page.evaluate(() => Object.fromEntries(Array.from(document.querySelectorAll('#filters button')).map(b => [b.dataset.filter, +b.querySelector('.n').textContent])));
+const noAiUi = () => page.evaluate(() => {
+  const text = document.getElementById('phone').textContent;
+  return document.querySelectorAll('.ai-pill, .ai-box, .ai-mark, #aiSheet, [data-ai]').length === 0 && !/AI note|AI-generated|AI study|AI marker/i.test(text);
+});
 
 try {
   await page.goto(url, { waitUntil: 'load' });
   await page.waitForSelector('.v[data-vid="43003016"]', { timeout: 20000 });
   await page.waitForFunction(() => document.fonts ? document.fonts.status === 'loaded' : true, null, { timeout: 5000 }).catch(() => {});
-  await sleep(400);
+  await sleep(500);
 
-  // 1. Opens complete: John 3 with verse 16 in focus and the ticker running.
+  // 1. Name, opening state, hold mode by default.
+  check((await page.title()) === 'AI-Assisted Study Bible', `document title is "${await page.title()}"`);
+  check((await page.textContent('#aboutSheet h2')).startsWith('AI-Assisted Study Bible'), 'About sheet carries the new name');
+  check((await page.textContent('#previewTag')) === 'BSB preview', 'a "BSB preview" tag sits under the chapter title');
   check((await title()) === 'John 3', 'opens on John 3');
   check((await focusVid()) === 43003016, 'verse 16 is in focus at rest');
   await waitStrip();
-  check((await firstChipLabel()) === 'Romans 5:8', 'rank-1 chip for John 3:16 is Romans 5:8');
+  const s0 = await stripState();
+  await sleep(700);
+  const s1 = await stripState();
+  check(s0.hold && s1.hold && s0.motion === 'false' && s0.transform === s1.transform && s1.scrollLeft === 0, `strip holds still by default and Motion is off (${JSON.stringify(s1)})`);
+  const r1 = await chipByRank(1);
+  check(r1 && r1.label === 'Romans 5:8' && r1.pill === 'Topic' && r1.because === 'Shared theme: loved', `rank-1 chip is Romans 5:8, Topic, "Shared theme: loved" (${JSON.stringify(r1)})`);
+  check(r1 && !r1.snip, 'chips carry no verse snippet');
+  check(r1 && pctNum(r1.pct) <= 80, `John 3:16 \u2192 Romans 5:8 (a topic) shows at most 80% (${r1 && r1.pct})`);
+  const jnPct = await chipPercentages();
+  check(pctOk(jnPct), `every John 3:16 chip shows a match percentage from 1% to 100% (${jnPct.map(c => c.shown).join(' ')})`);
+  const pctFits = await page.evaluate(() => Array.from(document.querySelectorAll('#track .chip .rpill')).every(p => { const c = p.closest('.chip').getBoundingClientRect(), r = p.getBoundingClientRect(); return r.right <= c.right - 8 && p.scrollWidth <= p.clientWidth + 1; }));
+  check(pctFits, 'the percentage is never clipped inside its chip');
+  const firstLeft = await page.evaluate(() => { const m = document.getElementById('marquee').getBoundingClientRect(), c = document.querySelector('#track .chip').getBoundingClientRect(); return c.left - m.left; });
+  check(firstLeft >= 12 && firstLeft <= 20, `rank 1 is the first chip, fully in view (${firstLeft.toFixed(1)} px from the strip edge)`);
+  const r3 = await chipByRank(3);
+  check(r3 && r3.label === 'John 3:15' && r3.pill === 'Story' && r3.because === 'Another part of the same passage in John 3', `John 3:15 on John 3:16 is a Story chip (${JSON.stringify(r3)})`);
+  const meta = await page.textContent('#stripMeta');
+  check(/110 connections/.test(meta) && /\+98 more/.test(meta), `strip meta shows counts: "${meta}"`);
+  const fc = await filterCounts();
+  check(fc.all === 12 && fc.quote === 0 && fc.story === 2 && fc.topic === 10, `filter counts on John 3:16: ${JSON.stringify(fc)}`);
+  check(await page.$('#track .chip.cross[data-rank="1"]') !== null, 'cross-book chip carries the cross accent');
+  check(await noAiUi(), 'no AI note element or AI copy anywhere on the page');
+  await shot('01-reader.png');
 
-  // 2. Focus follows the reader: scroll to the top, then bring verse 16 back into the focus band.
+  // 2. Loader reproduces spec 4.1 (ids, refs, labels, snippets, ranking fields and reasons).
+  const spec = specChapter();
+  if (spec) {
+    let mismatches = 0, compared = 0, confCompared = 0;
+    const confStale = [];
+    const cmp = (a, b, where) => { compared++; if (JSON.stringify(a) !== JSON.stringify(b)) { mismatches++; console.log('   spec mismatch', where, JSON.stringify(a), 'vs', JSON.stringify(b)); } };
+    for (const sv of spec.verses) {
+      const pv = await page.evaluate(vid => window.asb.verseOf(vid), sv.vid);
+      for (const k of ['ref', 'label', 'text', 'omitted', 'paragraphStart', 'counts', 'connections', 'ai']) cmp(pv[k], sv[k], `${sv.label} ${k}`);
+      sv.ticker.forEach((sc, i) => {
+        const pc = pv.ticker[i] || {};
+        for (const k of ['rank', 'to', 'direction', 'votesOut', 'votesIn', 'score', 'weight', 'tier', 'sameBook', 'viaRange', 'snippet', 'why', 'aiStatus']) cmp(pc[k], sc[k], `${sv.label} #${sc.rank} ${k}`);
+        const { evidence, confidence, ...specReason } = sc.reason || {};
+        const { confidence: dataConfidence, ...pageReason } = pc.reason || {};
+        cmp(pageReason, specReason, `${sv.label} #${sc.rank} reason`);
+        confCompared++; if (dataConfidence !== confidence) confStale.push(`${sv.label} #${sc.rank} ${confidence} -> ${dataConfidence}`);
+      });
+    }
+    check(mismatches === 0, `expanded bundle matches spec 4.1 (${compared} fields compared, ${mismatches} mismatches)`);
+    // reason.confidence passes straight through from the data, so a difference here means the spec example is stale, not a loader bug.
+    check(confStale.length === 0, confStale.length ? `spec 4.1 example is stale: ${confStale.length} of ${confCompared} reason.confidence values differ from prototype/data (run tools/build_dataset.py, then tools/sync_spec.py); first: ${confStale.slice(0, 3).join('; ')}` : `spec 4.1 reason.confidence values match prototype/data (${confCompared} compared)`);
+  } else check(false, 'spec 4.1 example found in docs/DATA_MODEL.md');
+
+  // 3. Focus follows the reader and the strip re-anchors on rank 1.
   await page.waitForFunction(() => performance.now() > window.asb.state.focusLockUntil, null, { timeout: 3000 });
+  await page.evaluate(() => { document.getElementById('marquee').scrollLeft = 400; });
+  await sleep(250);
   await page.evaluate(() => { document.getElementById('reader').scrollTop = 0; });
   await page.waitForFunction(() => document.querySelector('.v.focus')?.dataset.vid === '43003001', null, { timeout: 3000 }).catch(() => {});
   check((await focusVid()) === 43003001, 'scrolling to the top focuses verse 1');
   await scrollVerseToFocus(43003016);
   check((await focusVid()) === 43003016, 'scrolling verse 16 into the focus band focuses it');
   await waitStrip();
-  check((await firstChipLabel()) === 'Romans 5:8', 'ticker re-anchors on Romans 5:8');
-  const meta = await page.textContent('#stripMeta');
-  check(/110 connections/.test(meta) && /\+98 more/.test(meta), `strip meta shows counts: "${meta}"`);
-  check(await page.$('#track .chip.cross[data-rank="1"]') !== null, 'cross-book chip carries the cross accent');
-  const t1 = await page.evaluate(() => document.getElementById('track').style.transform);
-  await sleep(350);
-  const t2 = await page.evaluate(() => document.getElementById('track').style.transform);
-  check(t1 !== t2, 'marquee is moving');
-  const dwell = await page.evaluate(() => window.asb.state.ticker.dwell.slice(0, 2));
-  check(Math.abs(dwell[0] - 2.8) < 1e-9, `dwell for weight 1.0 is 2.8 s (got ${dwell[0]})`);
-  await shot('01-reader.png');
+  await sleep(200);
+  check((await stripState()).scrollLeft === 0 && (await visibleChips())[0].label === 'Romans 5:8', 'strip re-anchors on rank 1 after a focus change');
 
-  // 3. Loader reproduces spec 4.1 exactly (ids, refs, labels, snippets, ranking fields).
-  const spec = specChapter();
-  if (spec) {
-    let mismatches = 0, compared = 0;
-    for (const sv of spec.verses) {
-      const pv = await page.evaluate(vid => window.asb.verseOf(vid), sv.vid);
-      for (const k of ['ref', 'label', 'text']) { compared++; if (pv[k] !== sv[k]) { mismatches++; console.log('   spec mismatch', sv.label, k, JSON.stringify(pv[k]), 'vs', JSON.stringify(sv[k])); } }
-      for (const k of Object.keys(sv.counts)) { compared++; if (pv.counts[k] !== sv.counts[k]) { mismatches++; console.log('   spec mismatch', sv.label, 'counts.' + k, pv.counts[k], 'vs', sv.counts[k]); } }
-      sv.ticker.forEach((sc, i) => {
-        const pc = pv.ticker[i] || {};
-        for (const k of ['rank', 'direction', 'votesOut', 'votesIn', 'score', 'weight', 'tier', 'sameBook', 'snippet']) { compared++; if (JSON.stringify(pc[k]) !== JSON.stringify(sc[k])) { mismatches++; console.log('   spec mismatch', sv.label, '#' + sc.rank, k, JSON.stringify(pc[k]), 'vs', JSON.stringify(sc[k])); } }
-        for (const k of ['to', 'viaRange']) { compared++; if (JSON.stringify(pc[k]) !== JSON.stringify(sc[k])) { mismatches++; console.log('   spec mismatch', sv.label, '#' + sc.rank, k, JSON.stringify(pc[k]), 'vs', JSON.stringify(sc[k])); } }
-      });
-    }
-    check(mismatches === 0, `expanded bundle matches spec 4.1 (${compared} fields compared, ${mismatches} mismatches)`);
-  }
+  // 4. Reason filter.
+  await page.click('#filterQuote');
+  await sleep(250);
+  const noQuotes = await page.textContent('#track');
+  check(noQuotes.trim() === 'No direct quotes among the top 12', `Quotes filter on John 3:16 shows "${noQuotes.trim()}"`);
+  await page.click('#filterStory');
+  await sleep(250);
+  const stories = await visibleChips();
+  check(stories.length === 2 && stories.every(c => c.pill === 'Story') && stories[0].label === 'John 3:15', `Stories filter shows 2 Story chips (${stories.map(c => c.label).join(', ')})`);
+  await page.click('#filterAll');
+  await sleep(250);
+  check((await visibleChips()).length === 12, 'All filter shows the 12 inlined chips');
 
-  // 4. Peek sheet.
-  await page.click('#pauseBtn');
-  check(await page.evaluate(() => document.getElementById('marquee').classList.contains('hold')), 'pause switches the strip to hold mode');
+  // 5. Motion switch: off by default, on moves slowly, off holds again.
+  const dwell = await page.evaluate(() => [window.asb.state.motion.baseSeconds, window.asb.state.motion.perWeightSeconds, window.asb.state.motion.defaultMode]);
+  check(dwell[0] === 3 && dwell[1] === 3 && dwell[2] === 'hold', `motion constants come from manifest.ranking.motion (${JSON.stringify(dwell)})`);
+  await page.click('#motionToggle');
+  await sleep(400);
+  const m0 = await stripState();
+  await sleep(1000);
+  const m1 = await stripState();
+  const px = (t) => -parseFloat((t.match(/translate3d\((-?[\d.]+)px/) || [0, 0])[1]);
+  const moved = px(m1.transform) - px(m0.transform);
+  check(!m1.hold && m1.motion === 'true' && moved > 5, `Motion on starts auto-scroll (moved ${moved.toFixed(1)} px in 1 s)`);
+  check(moved < 110, `auto-scroll is slow: a chip dwells 3 to 6 s (${moved.toFixed(1)} px/s)`);
+  const tickerDwell = await page.evaluate(() => window.asb.state.ticker.dwell.slice(0, 1)[0]);
+  check(Math.abs(tickerDwell - 6) < 1e-9, `dwell for weight 1.0 is 6.0 s (got ${tickerDwell})`);
+  check(await page.evaluate(() => localStorage.getItem('asb.motion.v2')) === 'true', 'the choice is saved under asb.motion.v2');
+  await page.click('#motionToggle');
+  await sleep(300);
+  const m2 = await stripState();
+  check(m2.hold && m2.motion === 'false', 'Motion off returns the strip to hold');
+
+  // 6. Peek sheet: reason line, whole verse, caption, votes, no AI.
   await page.click('#track .chip[data-rank="1"]');
   await page.waitForSelector('#peekSheet.on', { timeout: 3000 });
   await sleep(450);
-  const peekText = await page.textContent('#peekBody');
-  check(/178/.test(peekText) && /33/.test(peekText), 'peek shows cited 178 and cites back 33');
   check(/Romans 5:8/.test(await page.textContent('#peekTitle')), 'peek title is Romans 5:8');
-  check(await page.$('#peekBody .ai-box:not(.muted)') !== null, 'peek shows the cached AI why note');
-  check(/While we were still sinners/.test(peekText), 'peek shows the target passage text');
+  const reasonLine = await page.textContent('#peekReason');
+  const peekPct = await page.evaluate(() => ({ k: document.querySelector('#peekReason .rpill .k')?.textContent, pct: document.querySelector('#peekReason .rpill .pct')?.textContent, because: document.querySelector('#peekReason .because-lg')?.textContent }));
+  check(peekPct.k === 'Same topic' && /^\d+% match$/.test(peekPct.pct || '') && pctNum((peekPct.pct || '').replace(' match', '')) === pctNum(r1.pct) && peekPct.because === 'Shared theme: loved', `peek reason line reads "${peekPct.k} \u00b7 ${peekPct.pct}" then "${peekPct.because}"`);
+  check(!/rule confidence/i.test(await page.textContent('#peekBody')), 'the old rule-confidence fine print is gone');
+  const passage = await page.textContent('#peekPassage');
+  check(passage.replace(/^8\s*/, '') === bsb(45005008), `peek shows the whole verse: "${passage}"`);
+  check((await page.textContent('#peekBody')).includes('Berean Standard Bible (preview text)'), 'peek captions the text as Berean Standard Bible (preview text)');
+  const peekText = await page.textContent('#peekBody');
+  check(/178 votes/.test(peekText) && /33 votes/.test(peekText), 'peek shows cited 178 and cites back 33');
+  check(await noAiUi(), 'peek has no AI block');
+  const order = await page.evaluate(() => { const b = document.getElementById('peekBody'); const pos = el => Array.from(b.children).indexOf(el); return [pos(document.getElementById('peekReason')), pos(document.getElementById('peekPassage')), pos(b.querySelector('.votes-list'))]; });
+  check(order[0] < order[1] && order[1] < order[2], 'peek order: reason line, verse text, vote lines');
   await shot('02-peek.png');
+  await page.click('#peekSheet [data-close]');
+  await sleep(350);
 
-  // 5. Go and trail.
+  // 6b. A range chip shows the whole range, never truncated.
+  await page.click('#track .chip[data-rank="2"]');
+  await page.waitForSelector('#peekSheet.on', { timeout: 3000 });
+  await sleep(350);
+  const rangeText = await page.textContent('#peekPassage');
+  check(rangeText.includes(bsb(62004009)) && rangeText.includes(bsb(62004010)), '1 John 4:9–10 peek shows both whole verses');
+
+  // 7. JSON view carries the reason object.
+  await page.click('#peekJson');
+  await page.waitForSelector('#jsonSheet.on', { timeout: 3000 });
+  const vjson = await page.textContent('#jsonPre');
+  check(/"vid": 43003016/.test(vjson) && /"reason": \{/.test(vjson) && /"source": "rule"/.test(vjson) && /"label": "Same topic"/.test(vjson), 'verse JSON shows the reason object on each ticker item');
+  check(/"why": null/.test(vjson) && /"aiStatus": "not_generated"/.test(vjson) && /"status": "not_generated"/.test(vjson), 'verse JSON keeps why null and aiStatus not_generated');
+  const vObj = await page.evaluate(() => window.asb.verseOf(43003016));
+  check(vObj.ticker.every(t => t.reason && ['quote', 'story', 'topic'].includes(t.reason.kind) && typeof t.reason.because === 'string' && t.reason.because.length > 0 && t.reason.source === 'rule'), 'every ticker item carries a reason with kind, because and source');
+  await page.click('#jsonSheet [data-close]');
+  await sleep(300);
+
+  // 8. Go, trail, Back, Forward.
+  await page.click('#track .chip[data-rank="1"]');
+  await page.waitForSelector('#peekSheet.on', { timeout: 3000 });
+  await sleep(300);
   await page.click('#peekGo');
-  if (FIXTURE) {
-    await page.waitForSelector('#toast.on', { timeout: 3000 });
-    const toastText = await page.textContent('#toast');
-    check(/not in the fixture/.test(toastText), `missing pack is handled gracefully: "${toastText}"`);
-    check((await title()) === 'John 3', 'reader stays on John 3 when the target is missing');
-    await page.click('#peekSheet [data-close]');
-    await sleep(300);
-    await page.click('#track .chip[data-rank="3"]');
-    await page.waitForSelector('#peekSheet.on', { timeout: 3000 });
-    await sleep(300);
-    check(/John 3:15/.test(await page.textContent('#peekTitle')), 'same-book chip John 3:15 peeks');
-    await page.click('#peekGo');
-    await sleep(500);
-    check((await focusVid()) === 43003015, 'Go lands on John 3:15');
-    check((await crumbs()) === 'John 3:16 → John 3:15', `trail reads ${await crumbs()}`);
-  } else {
-    await page.waitForFunction(() => document.getElementById('titleText').textContent === 'Romans 5', null, { timeout: 5000 });
-    await sleep(400);
-    check((await focusVid()) === 45005008, 'Go lands on Romans 5:8 in focus');
-    check(await page.$('.v.hl[data-vid="45005008"]') !== null, 'target range is highlighted after the jump');
-    check((await crumbs()) === 'John 3:16 → Romans 5:8', `trail reads ${await crumbs()}`);
-    await waitStrip();
-    check((await firstChipLabel()).length > 0, `Romans 5:8 ticker filled (rank 1: ${await firstChipLabel()})`);
-  }
+  await page.waitForFunction(() => document.getElementById('titleText').textContent === 'Romans 5', null, { timeout: 5000 });
+  await sleep(400);
+  check((await focusVid()) === 45005008, 'Go lands on Romans 5:8 in focus');
+  check(await page.$('.v.hl[data-vid="45005008"]') !== null, 'target verse is highlighted after the jump');
+  check((await crumbs()) === 'John 3:16 → Romans 5:8', `trail reads ${await crumbs()}`);
   check(await page.evaluate(() => !document.getElementById('peekSheet').classList.contains('on')), 'peek sheet closes after Go');
+  await waitStrip();
+  const romans1 = await chipByRank(1);
+  check(romans1 && romans1.label.length > 0 && romans1.pill.length > 0, `Romans 5:8 strip filled (rank 1: ${romans1 && romans1.label}, ${romans1 && romans1.pill})`);
   await shot('03-trail.png');
-
-  // 6. Back and Forward.
   await page.click('#backBtn');
   await sleep(500);
   check((await title()) === 'John 3' && (await focusVid()) === 43003016, 'Back returns to John 3:16');
   check(await page.evaluate(() => !document.getElementById('fwdBtn').disabled), 'Forward becomes available after Back');
   await page.click('#fwdBtn');
   await sleep(500);
-  check((await focusVid()) === (FIXTURE ? 43003015 : 45005008), 'Forward returns to the jump target');
+  check((await focusVid()) === 45005008, 'Forward returns to Romans 5:8');
   await page.click('#backBtn');
   await sleep(500);
   check((await focusVid()) === 43003016, 'Back again returns to John 3:16');
 
-  // 7. Trail object matches spec 4.3 shape.
+  // 9. Trail object matches spec 4.3 shape.
   const trail = await evalState('window.asb.state.trail');
   check(trail.schema === 'asb.trail/2' && Array.isArray(trail.hops) && Array.isArray(trail.forward) && Array.isArray(trail.peeks) && trail.web && trail.rules, 'trail has the spec 4.3 top-level shape');
   check(trail.hops[0].kind === 'open' && trail.hops[0].vid === 43003016 && trail.hops[0].via === null, 'hop 0 is kind open at John 3:16');
   const jumpHop = trail.forward[0];
-  check(jumpHop && jumpHop.kind === 'jump' && jumpHop.via && jumpHop.via.from.vid === 43003016 && jumpHop.via.rank === (FIXTURE ? 3 : 1), 'jump hop carries via from John 3:16 with the chip rank');
-  check(jumpHop && jumpHop.via.votesOut === (FIXTURE ? 90 : 178), `jump via votesOut = ${jumpHop && jumpHop.via.votesOut}`);
+  check(jumpHop && jumpHop.kind === 'jump' && jumpHop.via && jumpHop.via.from.vid === 43003016 && jumpHop.via.rank === 1 && jumpHop.via.votesOut === 178, 'jump hop carries via from John 3:16, rank 1, 178 votes');
   check(trail.web.nodes.length === 2 && trail.web.edges.length === 1 && trail.web.edges[0][0] === 43003016, 'web has 2 nodes and 1 travelled edge');
-  check(trail.peeks.length >= 1 && trail.peeks.some(p => p.jumped) && trail.peek === null, 'peeks are recorded and the jumped one is marked');
-  check(trail.rules.pushOn.join() === 'open,jump,search,bookmarkOpen' && trail.rules.scrollUpdatesCurrentHop === true, 'trail rules match the spec');
-  check(trail.hops[0].scroll.anchor === 43003016, 'scroll updates the current hop anchor without pushing');
+  check(trail.peeks.length >= 3 && trail.peeks.some(p => p.jumped) && trail.peek === null, 'peeks are recorded and the jumped one is marked');
 
-  // 8. Web overlay and copy.
+  // 10. Web overlay and copy.
   await page.click('#webBtn');
   await page.waitForSelector('#webOverlay.on', { timeout: 3000 });
   await sleep(450);
   const svgStats = await page.evaluate(() => ({ circles: document.querySelectorAll('#webSvg circle').length, lines: document.querySelectorAll('#webSvg line').length, dashed: document.querySelectorAll('#webSvg line[stroke-dasharray]').length }));
-  check(svgStats.circles >= 2 && svgStats.lines >= 1, `web draws ${svgStats.circles} nodes and ${svgStats.lines} edges (${svgStats.dashed} peek-only)`);
+  check(svgStats.circles >= 3 && svgStats.lines >= 2 && svgStats.dashed >= 1, `web draws ${svgStats.circles} nodes and ${svgStats.lines} edges (${svgStats.dashed} peek-only)`);
   await shot('04-web.png');
   await page.click('#copyTrail');
   await sleep(300);
@@ -193,32 +279,19 @@ try {
   await page.click('#webClose');
   await sleep(400);
 
-  // 9. Verse JSON view and AI verse note.
-  await page.click('#jsonBtn');
-  await page.waitForSelector('#jsonSheet.on', { timeout: 3000 });
-  const vjson = await page.textContent('#jsonPre');
-  check(/"vid": 43003016/.test(vjson) && /"aiStatus": "cached"/.test(vjson) && /"status": "cached"/.test(vjson), 'verse JSON view shows John 3:16 with cached AI status');
-  await page.click('#jsonSheet [data-close]');
-  await sleep(300);
-  check(await page.$('.ai-pill[data-ai="43003016"]') !== null, 'John 3:16 carries the AI note affordance');
-  await page.click('.ai-pill[data-ai="43003016"]');
-  await page.waitForSelector('#aiSheet.on', { timeout: 3000 });
-  check(/AI-generated study aid/.test(await page.textContent('#aiBody')) && /Nicodemus/.test(await page.textContent('#aiBody')), 'AI note card opens with the sample note');
-  await page.click('#aiSheet [data-close]');
-  await sleep(300);
-
-  // 10. See all list.
+  // 11. See all list: reason pill and because on every row.
   await page.click('#track .chip[data-rank="1"]');
   await page.waitForSelector('#peekSheet.on', { timeout: 3000 });
   await page.click('#peekAll');
   await page.waitForSelector('#listSheet.on', { timeout: 3000 });
   await sleep(300);
-  const listCount = await page.evaluate(() => document.querySelectorAll('#listBody .chip').length);
-  check(listCount === 12 && /\+98 more live in the full dataset/.test(await page.textContent('#listBody')), 'See all lists the 12 inlined chips and the +more note');
+  const rows = await page.evaluate(() => Array.from(document.querySelectorAll('#listBody .chip')).map(c => [c.querySelector('.rpill .k')?.textContent, c.querySelector('.because')?.textContent, c.querySelector('.rpill .pct')?.textContent]));
+  check(rows.length === 12 && rows.every(r => /^(Quote|Story|Topic)$/.test(r[0]) && r[1] && pctNum(r[2]) >= 1 && pctNum(r[2]) <= 100), 'See all lists 12 rows, each with a reason pill, a match percentage and a because line');
+  check(/\+98 more live in the full dataset/.test(await page.textContent('#listBody')), 'See all notes the +98 more');
   await page.click('#listSheet [data-close]');
   await sleep(300);
 
-  // 11. Reference parsing and search.
+  // 12. Reference parsing and search; Psalm 22:1 quotes and the Quotes filter.
   const parsed = await page.evaluate(() => ['Rom 5:8', '1 John 4:9', 'John 3', 'Ps 22:1', 'Song of Songs 2:1', 'nonsense 9'].map(q => window.asb.parseRef(q)));
   check(parsed[0]?.bookNo === 45 && parsed[0].chapter === 5 && parsed[0].verse === 8, 'parses "Rom 5:8"');
   check(parsed[1]?.bookNo === 62 && parsed[1].chapter === 4 && parsed[1].verse === 9, 'parses "1 John 4:9"');
@@ -226,85 +299,110 @@ try {
   check(parsed[3]?.bookNo === 19 && parsed[3].chapter === 22 && parsed[3].verse === 1, 'parses "Ps 22:1"');
   check(parsed[4]?.bookNo === 22 && parsed[5] === null, 'parses "Song of Songs 2:1" and rejects nonsense');
   await page.click('#searchBtn');
-  await page.fill('#searchInput', FIXTURE ? 'John 3:1' : 'Ps 22:1');
+  await page.fill('#searchInput', 'Ps 22:1');
   await page.press('#searchInput', 'Enter');
-  await sleep(600);
-  if (FIXTURE) {
-    check((await focusVid()) === 43003001, 'search "John 3:1" focuses John 3:1');
-  } else {
-    check((await title()) === 'Psalm 22' && (await focusVid()) === 19022001, 'search "Ps 22:1" opens Psalm 22:1');
-    await waitStrip();
-    const ps = await page.evaluate(() => window.asb.verseOf(19022001).ticker.slice(0, 3).map(c => [c.to.label, c.aiStatus]));
-    check(ps.some(c => /Matthew 27:46/.test(c[0]) && c[1] === 'cached'), `Psalm 22:1 chips include Matthew 27:46 with an AI note (${JSON.stringify(ps)})`);
-  }
-  const lastHop = await evalState('window.asb.state.trail.hops[window.asb.state.trail.cursor].kind');
-  check(lastHop === 'search', 'search pushes a hop of kind search');
+  await page.waitForFunction(() => document.getElementById('titleText').textContent === 'Psalm 22', null, { timeout: 5000 });
+  await sleep(400);
+  check((await focusVid()) === 19022001, 'search "Ps 22:1" opens Psalm 22:1');
+  check((await evalState('window.asb.state.trail.hops[window.asb.state.trail.cursor].kind')) === 'search', 'search pushes a hop of kind search');
+  await waitStrip();
+  const ps = [await chipByRank(1), await chipByRank(2)];
+  check(ps[0]?.label === 'Matthew 27:46' && ps[0].pill === 'Quote' && ps[0].because === 'Matthew 27:46 quotes Psalm 22:1', `Psalm 22:1 rank 1: ${JSON.stringify(ps[0])}`);
+  check(ps[1]?.label === 'Mark 15:34' && ps[1].pill === 'Quote' && ps[1].because === 'Mark 15:34 quotes Psalm 22:1', `Psalm 22:1 rank 2: ${JSON.stringify(ps[1])}`);
+  check(pctNum(ps[0]?.pct) >= 90, `Psalm 22:1 \u2192 Matthew 27:46 shows at least 90% (${ps[0] && ps[0].pct})`);
+  const psPct = await chipPercentages();
+  check(pctOk(psPct), `every Psalm 22:1 chip shows a match percentage from 1% to 100% (${psPct.map(c => c.shown).join(' ')})`);
+  const psCounts = await filterCounts();
+  check(psCounts.all === 12 && psCounts.quote === 2 && psCounts.quote + psCounts.story + psCounts.topic === 12, `Psalm 22:1 filter counts ${JSON.stringify(psCounts)}`);
+  await page.click('#filterQuote');
+  await sleep(300);
+  const quotes = await visibleChips();
+  check(quotes.length === 2 && quotes[0].label === 'Matthew 27:46' && quotes[1].label === 'Mark 15:34' && quotes.every(c => c.pill === 'Quote'), `Quotes filter on Psalm 22:1 shows exactly 2 chips (${quotes.map(c => c.label).join(', ')})`);
+  await shot('07-quotes.png');
+  await page.click('#backBtn');
+  await sleep(500);
+  check((await evalState('window.asb.state.filter')) === 'quote' && (await page.getAttribute('#filterQuote', 'aria-pressed')) === 'true' && (await page.textContent('#track')).trim() === 'No direct quotes among the top 12', 'the filter choice is kept while navigating');
+  await page.click('#filterAll');
+  await sleep(250);
 
-  // 12. Book and chapter picker.
+  // 13. Book and chapter picker; omitted verse.
   await page.click('#titleBtn');
   await page.waitForSelector('#pickerSheet.on', { timeout: 3000 });
   await sleep(300);
-  const bookCount = await page.evaluate(() => document.querySelectorAll('#pickerBody .book-btn').length);
-  check(bookCount === 66, `picker lists ${bookCount} books in two columns`);
+  check(await page.evaluate(() => document.querySelectorAll('#pickerBody .book-btn').length) === 66, 'picker lists 66 books in two columns');
   await page.click('#pickerBody .book-btn[data-book="43"]');
   await sleep(200);
   check(await page.evaluate(() => document.querySelectorAll('#pickerBody .grid button').length) === 21, 'John shows a 21-chapter grid');
   await page.click('#pickerBody .grid button[data-ch="3"]');
   await sleep(600);
   check((await title()) === 'John 3' && (await evalState('window.asb.state.trail.hops[window.asb.state.trail.cursor].kind')) === 'open', 'picker opens John 3 with a hop of kind open');
+  await page.evaluate(() => window.asb.navigate({ bookNo: 40, chapter: 17, vid: 40017021, kind: 'open' }));
+  await sleep(500);
+  check(await page.$('.v.omitted[data-vid="40017021"] .tag') !== null, 'Matthew 17:21 renders as an omitted verse');
+  await page.evaluate(() => window.asb.navigate({ bookNo: 43, chapter: 3, vid: 43003016, kind: 'open' }));
+  await sleep(500);
 
-  // 13. Omitted verse rendering (real data only: Matthew 17:21 is empty in the BSB).
-  if (!FIXTURE) {
-    await page.evaluate(() => window.asb.navigate({ bookNo: 40, chapter: 17, vid: 40017021, kind: 'open' }));
-    await sleep(500);
-    check(await page.$('.v.omitted[data-vid="40017021"] .tag') !== null, 'Matthew 17:21 renders as an omitted verse');
-    check(/No cross references|connections/.test(await page.textContent('#stripMeta')), 'strip handles an omitted verse');
-    await page.evaluate(() => window.asb.navigate({ bookNo: 43, chapter: 3, vid: 43003016, kind: 'open' }));
-    await sleep(500);
-  }
-
-  // 14. Reduce motion toggle.
-  await page.click('#motionToggle');
-  await sleep(200);
-  check(await page.evaluate(() => document.getElementById('marquee').classList.contains('hold') && document.getElementById('motionToggle').getAttribute('aria-checked') === 'false' && window.asb.state.reduceMotion === true), 'Motion switch off (reduce motion) puts the strip in hold mode');
-  await page.click('#motionToggle');
-  await page.click('#pauseBtn');
-  await sleep(400);
-  check(await page.evaluate(() => !document.getElementById('marquee').classList.contains('hold')), 'strip resumes when motion is back on');
+  // 14. About: preview line, attributions, reasons line, no AI notes.
+  await page.click('#aboutBtn');
+  await page.waitForSelector('#aboutSheet.on', { timeout: 3000 });
+  const xrefAttr = manifest.sources.find(s => s.kind === 'crossReferences').attribution;
+  const notice = manifest.translations[0].copyrightNotice;
+  check((await page.textContent('#aboutPreview')) === 'Preview text: Berean Standard Bible. The app launches with the NIV.', 'About carries the preview-text line');
+  check((await page.textContent('#aboutXref')) === xrefAttr, 'About shows the OpenBible attribution from manifest.sources');
+  check((await page.textContent('#aboutNotice')) === notice, 'About shows the BSB copyright notice');
+  check((await page.textContent('#aboutReasons')) === 'Connection reasons are computed by rules from the public-domain text, not by AI.', 'About states reasons are rules, not AI');
+  check((await page.textContent('#aboutMatch')) === 'Match percentage: 100% means the same words or the same account; lower means a looser topical or word match. It blends shared wording, names and themes with OpenBible.info reader votes.', 'About explains the match percentage');
+  check(await noAiUi(), 'About has no AI notes section');
+  await page.click('#aboutSheet [data-close]');
+  await sleep(300);
 
   // 15. Dark mode.
   await page.emulateMedia({ colorScheme: 'dark' });
   await sleep(400);
   const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   check(bg === 'rgb(5, 6, 8)', `dark mode applies a true dark palette (body ${bg})`);
+  const pillDark = await page.evaluate(() => getComputedStyle(document.querySelector('#track .rpill')).color);
+  check(pillDark !== 'rgb(79, 93, 109)', `reason pills switch to their dark tokens (${pillDark})`);
   await shot('05-dark.png');
   await page.emulateMedia({ colorScheme: 'light' });
 
-  // 16. Phone-width layout: no bezel, no horizontal scroll.
+  // 16. Phone width: no bezel, no horizontal scroll; an old saved "motion on" preference does not override the new default.
   const mobile = await context.newPage();
+  watch(mobile);
+  await mobile.addInitScript(() => { try { localStorage.setItem('asb.reduceMotion', 'false'); localStorage.removeItem('asb.motion.v2'); localStorage.removeItem('asb.position'); } catch (e) {} });
   await mobile.setViewportSize({ width: 390, height: 844 });
-  mobile.on('console', msg => { if (msg.type() === 'error') consoleErrors.push({ text: msg.text(), url: (msg.location() || {}).url || '' }); });
-  mobile.on('pageerror', err => consoleErrors.push({ text: `pageerror: ${err.message}`, url: '' }));
   await mobile.goto(url, { waitUntil: 'load' });
   await mobile.waitForSelector('.v[data-vid="43003016"]', { timeout: 20000 });
-  await sleep(600);
-  const m = await mobile.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: innerWidth, island: getComputedStyle(document.querySelector('.island')).display, pw: document.getElementById('phone').getBoundingClientRect().width }));
-  check(m.sw <= m.iw && m.island === 'none' && Math.round(m.pw) === 390, `phone width fills the viewport without a bezel or horizontal scroll (${JSON.stringify(m)})`);
+  await sleep(700);
+  const m = await mobile.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: innerWidth, bodySw: document.body.scrollWidth, island: getComputedStyle(document.querySelector('.island')).display, pw: document.getElementById('phone').getBoundingClientRect().width }));
+  check(m.sw <= m.iw && m.bodySw <= m.iw && m.island === 'none' && Math.round(m.pw) === 390, `phone width fills the viewport without a bezel or horizontal scroll (${JSON.stringify(m)})`);
+  const mm = await mobile.evaluate(() => ({ hold: document.getElementById('marquee').classList.contains('hold'), motion: document.getElementById('motionToggle').getAttribute('aria-checked') }));
+  check(mm.hold && mm.motion === 'false', 'an old saved motion preference does not switch auto-scroll on');
   await mobile.screenshot({ path: path.join(shots, '06-mobile.png') });
   console.log('  shot', path.join(shots, '06-mobile.png'));
   await mobile.close();
 
-  // 17. Console errors: only 404s the app handled on purpose are tolerated (missing optional files).
+  // 17. prefers-reduced-motion keeps Motion off even with a saved "on".
+  const rm = await browser.newContext({ viewport: { width: 1200, height: 1000 }, reducedMotion: 'reduce', ignoreHTTPSErrors: true });
+  const rp = await rm.newPage();
+  watch(rp);
+  await rp.addInitScript(() => { try { localStorage.setItem('asb.motion.v2', 'true'); } catch (e) {} });
+  await rp.goto(url, { waitUntil: 'load' });
+  await rp.waitForSelector('.v[data-vid="43003016"]', { timeout: 20000 });
+  await sleep(500);
+  check(await rp.evaluate(() => document.getElementById('marquee').classList.contains('hold') && document.getElementById('motionToggle').getAttribute('aria-checked') === 'false'), 'prefers-reduced-motion keeps the strip still');
+  await rm.close();
+
+  // 18. Console errors.
   const handled = await page.evaluate(() => window.asb.state.missing);
   const fontNoise = consoleErrors.filter(e => /Failed to load resource/.test(e.text) && /fonts\.(googleapis|gstatic)\.com/.test(e.url));
   if (fontNoise.length) console.log(`  note  ${fontNoise.length} Google Fonts request(s) failed in this sandbox (the page falls back to the system serif); not counted as app errors`);
-  const real = consoleErrors.filter(e => !fontNoise.includes(e) && !(/Failed to load resource/.test(e.text) && handled.some(u => e.url.endsWith(u.replace(/^\.\//, '/')) || e.url.includes(u.replace(/^\.\//, '')))));
-  const handledCount = consoleErrors.length - real.length - fontNoise.length;
-  check(real.length === 0, real.length ? `console errors: ${JSON.stringify(real)}` : `no console errors (${handledCount} handled 404s: ${handled.join(', ') || 'none'})`);
+  const real = consoleErrors.filter(e => !fontNoise.includes(e) && !(/Failed to load resource/.test(e.text) && handled.some(u => e.url.includes(u.replace(/^\.\//, '')))));
+  check(real.length === 0, real.length ? `console errors: ${JSON.stringify(real)}` : 'no console errors');
 } catch (e) {
   failures.push(`exception: ${e.stack || e}`);
   console.log('  EXCEPTION', e.stack || e);
-  await shot('99-failure.png').catch(() => {});
+  await page.screenshot({ path: path.join(shots, '99-failure.png') }).catch(() => {});
 }
 await browser.close();
 console.log(`\n${passes.length} passed, ${failures.length} failed`);

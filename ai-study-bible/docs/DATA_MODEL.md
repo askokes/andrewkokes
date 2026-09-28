@@ -2549,6 +2549,7 @@ Deferred. This hand-written example documents the shape for when AI notes return
       "story": 47824,
       "topic": 776847
     },
+    "confidence": "match strength 0..1, shown as a percentage: 1.0 = the same words or the same account; topics are capped at 0.8 (tools/reasons.py, docs/DATA_MODEL.md 2.6.1)",
     "tested": "tests/gold_reasons.json (60 hand-labelled connections, all correct)",
     "note": "Deterministic rules over the public-domain BSB text, so no licensed text is processed. An AI pass may later replace a reason (source 'ai'), only with YouVersion's written approval."
   },
