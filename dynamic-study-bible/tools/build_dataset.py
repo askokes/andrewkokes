@@ -517,7 +517,7 @@ def books_doc() -> dict:
     books, first_ord = [], 0
     for b in CANON:
         books.append({
-            "bookNo": b["order"], "osis": b["id"], "name": b["displayName"], "short": b["short"],
+            "bookNo": b["order"], "osis": b["id"], "usfm": b["usfm"], "name": b["displayName"], "short": b["short"],
             "sourceName": b["bsbName"], "aliases": b["aliases"], "testament": b["testament"],
             "chapters": b["chapters"], "verses": b["verses"], "firstVid": vid_of(b["order"], 1, 1),
             "firstOrdinal": first_ord, "verseCounts": b["verseCounts"],

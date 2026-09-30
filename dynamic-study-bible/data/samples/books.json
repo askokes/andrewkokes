@@ -6,6 +6,7 @@
     {
       "bookNo": 1,
       "osis": "Gen",
+      "usfm": "GEN",
       "name": "Genesis",
       "short": "Gen",
       "sourceName": "Genesis",
@@ -74,6 +75,7 @@
     {
       "bookNo": 2,
       "osis": "Exod",
+      "usfm": "EXO",
       "name": "Exodus",
       "short": "Exod",
       "sourceName": "Exodus",
@@ -133,6 +135,7 @@
     {
       "bookNo": 3,
       "osis": "Lev",
+      "usfm": "LEV",
       "name": "Leviticus",
       "short": "Lev",
       "sourceName": "Leviticus",
@@ -178,6 +181,7 @@
     {
       "bookNo": 4,
       "osis": "Num",
+      "usfm": "NUM",
       "name": "Numbers",
       "short": "Num",
       "sourceName": "Numbers",
@@ -232,6 +236,7 @@
     {
       "bookNo": 5,
       "osis": "Deut",
+      "usfm": "DEU",
       "name": "Deuteronomy",
       "short": "Deut",
       "sourceName": "Deuteronomy",
@@ -284,6 +289,7 @@
     {
       "bookNo": 6,
       "osis": "Josh",
+      "usfm": "JOS",
       "name": "Joshua",
       "short": "Josh",
       "sourceName": "Joshua",
@@ -326,6 +332,7 @@
     {
       "bookNo": 7,
       "osis": "Judg",
+      "usfm": "JDG",
       "name": "Judges",
       "short": "Judg",
       "sourceName": "Judges",
@@ -366,6 +373,7 @@
     {
       "bookNo": 8,
       "osis": "Ruth",
+      "usfm": "RUT",
       "name": "Ruth",
       "short": "Ruth",
       "sourceName": "Ruth",
@@ -385,6 +393,7 @@
     {
       "bookNo": 9,
       "osis": "1Sam",
+      "usfm": "1SA",
       "name": "1 Samuel",
       "short": "1 Sam",
       "sourceName": "I Samuel",
@@ -435,6 +444,7 @@
     {
       "bookNo": 10,
       "osis": "2Sam",
+      "usfm": "2SA",
       "name": "2 Samuel",
       "short": "2 Sam",
       "sourceName": "II Samuel",
@@ -478,6 +488,7 @@
     {
       "bookNo": 11,
       "osis": "1Kgs",
+      "usfm": "1KI",
       "name": "1 Kings",
       "short": "1 Kgs",
       "sourceName": "I Kings",
@@ -519,6 +530,7 @@
     {
       "bookNo": 12,
       "osis": "2Kgs",
+      "usfm": "2KI",
       "name": "2 Kings",
       "short": "2 Kgs",
       "sourceName": "II Kings",
@@ -563,6 +575,7 @@
     {
       "bookNo": 13,
       "osis": "1Chr",
+      "usfm": "1CH",
       "name": "1 Chronicles",
       "short": "1 Chr",
       "sourceName": "I Chronicles",
@@ -611,6 +624,7 @@
     {
       "bookNo": 14,
       "osis": "2Chr",
+      "usfm": "2CH",
       "name": "2 Chronicles",
       "short": "2 Chr",
       "sourceName": "II Chronicles",
@@ -666,6 +680,7 @@
     {
       "bookNo": 15,
       "osis": "Ezra",
+      "usfm": "EZR",
       "name": "Ezra",
       "short": "Ezra",
       "sourceName": "Ezra",
@@ -691,6 +706,7 @@
     {
       "bookNo": 16,
       "osis": "Neh",
+      "usfm": "NEH",
       "name": "Nehemiah",
       "short": "Neh",
       "sourceName": "Nehemiah",
@@ -721,6 +737,7 @@
     {
       "bookNo": 17,
       "osis": "Esth",
+      "usfm": "EST",
       "name": "Esther",
       "short": "Esth",
       "sourceName": "Esther",
@@ -748,6 +765,7 @@
     {
       "bookNo": 18,
       "osis": "Job",
+      "usfm": "JOB",
       "name": "Job",
       "short": "Job",
       "sourceName": "Job",
@@ -805,6 +823,7 @@
     {
       "bookNo": 19,
       "osis": "Ps",
+      "usfm": "PSA",
       "name": "Psalm",
       "short": "Ps",
       "sourceName": "Psalms",
@@ -975,6 +994,7 @@
     {
       "bookNo": 20,
       "osis": "Prov",
+      "usfm": "PRO",
       "name": "Proverbs",
       "short": "Prov",
       "sourceName": "Proverbs",
@@ -1025,6 +1045,7 @@
     {
       "bookNo": 21,
       "osis": "Eccl",
+      "usfm": "ECC",
       "name": "Ecclesiastes",
       "short": "Eccl",
       "sourceName": "Ecclesiastes",
@@ -1056,6 +1077,7 @@
     {
       "bookNo": 22,
       "osis": "Song",
+      "usfm": "SNG",
       "name": "Song of Songs",
       "short": "Song",
       "sourceName": "Song of Solomon",
@@ -1084,6 +1106,7 @@
     {
       "bookNo": 23,
       "osis": "Isa",
+      "usfm": "ISA",
       "name": "Isaiah",
       "short": "Isa",
       "sourceName": "Isaiah",
@@ -1168,6 +1191,7 @@
     {
       "bookNo": 24,
       "osis": "Jer",
+      "usfm": "JER",
       "name": "Jeremiah",
       "short": "Jer",
       "sourceName": "Jeremiah",
@@ -1238,6 +1262,7 @@
     {
       "bookNo": 25,
       "osis": "Lam",
+      "usfm": "LAM",
       "name": "Lamentations",
       "short": "Lam",
       "sourceName": "Lamentations",
@@ -1261,6 +1286,7 @@
     {
       "bookNo": 26,
       "osis": "Ezek",
+      "usfm": "EZK",
       "name": "Ezekiel",
       "short": "Ezek",
       "sourceName": "Ezekiel",
@@ -1327,6 +1353,7 @@
     {
       "bookNo": 27,
       "osis": "Dan",
+      "usfm": "DAN",
       "name": "Daniel",
       "short": "Dan",
       "sourceName": "Daniel",
@@ -1357,6 +1384,7 @@
     {
       "bookNo": 28,
       "osis": "Hos",
+      "usfm": "HOS",
       "name": "Hosea",
       "short": "Hos",
       "sourceName": "Hosea",
@@ -1389,6 +1417,7 @@
     {
       "bookNo": 29,
       "osis": "Joel",
+      "usfm": "JOL",
       "name": "Joel",
       "short": "Joel",
       "sourceName": "Joel",
@@ -1407,6 +1436,7 @@
     {
       "bookNo": 30,
       "osis": "Amos",
+      "usfm": "AMO",
       "name": "Amos",
       "short": "Amos",
       "sourceName": "Amos",
@@ -1431,6 +1461,7 @@
     {
       "bookNo": 31,
       "osis": "Obad",
+      "usfm": "OBA",
       "name": "Obadiah",
       "short": "Obad",
       "sourceName": "Obadiah",
@@ -1450,6 +1481,7 @@
     {
       "bookNo": 32,
       "osis": "Jonah",
+      "usfm": "JON",
       "name": "Jonah",
       "short": "Jonah",
       "sourceName": "Jonah",
@@ -1472,6 +1504,7 @@
     {
       "bookNo": 33,
       "osis": "Mic",
+      "usfm": "MIC",
       "name": "Micah",
       "short": "Mic",
       "sourceName": "Micah",
@@ -1497,6 +1530,7 @@
     {
       "bookNo": 34,
       "osis": "Nah",
+      "usfm": "NAM",
       "name": "Nahum",
       "short": "Nah",
       "sourceName": "Nahum",
@@ -1518,6 +1552,7 @@
     {
       "bookNo": 35,
       "osis": "Hab",
+      "usfm": "HAB",
       "name": "Habakkuk",
       "short": "Hab",
       "sourceName": "Habakkuk",
@@ -1539,6 +1574,7 @@
     {
       "bookNo": 36,
       "osis": "Zeph",
+      "usfm": "ZEP",
       "name": "Zephaniah",
       "short": "Zeph",
       "sourceName": "Zephaniah",
@@ -1561,6 +1597,7 @@
     {
       "bookNo": 37,
       "osis": "Hag",
+      "usfm": "HAG",
       "name": "Haggai",
       "short": "Hag",
       "sourceName": "Haggai",
@@ -1581,6 +1618,7 @@
     {
       "bookNo": 38,
       "osis": "Zech",
+      "usfm": "ZEC",
       "name": "Zechariah",
       "short": "Zech",
       "sourceName": "Zechariah",
@@ -1614,6 +1652,7 @@
     {
       "bookNo": 39,
       "osis": "Mal",
+      "usfm": "MAL",
       "name": "Malachi",
       "short": "Mal",
       "sourceName": "Malachi",
@@ -1636,6 +1675,7 @@
     {
       "bookNo": 40,
       "osis": "Matt",
+      "usfm": "MAT",
       "name": "Matthew",
       "short": "Matt",
       "sourceName": "Matthew",
@@ -1683,6 +1723,7 @@
     {
       "bookNo": 41,
       "osis": "Mark",
+      "usfm": "MRK",
       "name": "Mark",
       "short": "Mark",
       "sourceName": "Mark",
@@ -1716,6 +1757,7 @@
     {
       "bookNo": 42,
       "osis": "Luke",
+      "usfm": "LUK",
       "name": "Luke",
       "short": "Luke",
       "sourceName": "Luke",
@@ -1757,6 +1799,7 @@
     {
       "bookNo": 43,
       "osis": "John",
+      "usfm": "JHN",
       "name": "John",
       "short": "John",
       "sourceName": "John",
@@ -1796,6 +1839,7 @@
     {
       "bookNo": 44,
       "osis": "Acts",
+      "usfm": "ACT",
       "name": "Acts",
       "short": "Acts",
       "sourceName": "Acts",
@@ -1839,6 +1883,7 @@
     {
       "bookNo": 45,
       "osis": "Rom",
+      "usfm": "ROM",
       "name": "Romans",
       "short": "Rom",
       "sourceName": "Romans",
@@ -1874,6 +1919,7 @@
     {
       "bookNo": 46,
       "osis": "1Cor",
+      "usfm": "1CO",
       "name": "1 Corinthians",
       "short": "1 Cor",
       "sourceName": "I Corinthians",
@@ -1909,6 +1955,7 @@
     {
       "bookNo": 47,
       "osis": "2Cor",
+      "usfm": "2CO",
       "name": "2 Corinthians",
       "short": "2 Cor",
       "sourceName": "II Corinthians",
@@ -1941,6 +1988,7 @@
     {
       "bookNo": 48,
       "osis": "Gal",
+      "usfm": "GAL",
       "name": "Galatians",
       "short": "Gal",
       "sourceName": "Galatians",
@@ -1965,6 +2013,7 @@
     {
       "bookNo": 49,
       "osis": "Eph",
+      "usfm": "EPH",
       "name": "Ephesians",
       "short": "Eph",
       "sourceName": "Ephesians",
@@ -1989,6 +2038,7 @@
     {
       "bookNo": 50,
       "osis": "Phil",
+      "usfm": "PHP",
       "name": "Philippians",
       "short": "Phil",
       "sourceName": "Philippians",
@@ -2012,6 +2062,7 @@
     {
       "bookNo": 51,
       "osis": "Col",
+      "usfm": "COL",
       "name": "Colossians",
       "short": "Col",
       "sourceName": "Colossians",
@@ -2034,6 +2085,7 @@
     {
       "bookNo": 52,
       "osis": "1Thess",
+      "usfm": "1TH",
       "name": "1 Thessalonians",
       "short": "1 Thess",
       "sourceName": "I Thessalonians",
@@ -2058,6 +2110,7 @@
     {
       "bookNo": 53,
       "osis": "2Thess",
+      "usfm": "2TH",
       "name": "2 Thessalonians",
       "short": "2 Thess",
       "sourceName": "II Thessalonians",
@@ -2080,6 +2133,7 @@
     {
       "bookNo": 54,
       "osis": "1Tim",
+      "usfm": "1TI",
       "name": "1 Timothy",
       "short": "1 Tim",
       "sourceName": "I Timothy",
@@ -2105,6 +2159,7 @@
     {
       "bookNo": 55,
       "osis": "2Tim",
+      "usfm": "2TI",
       "name": "2 Timothy",
       "short": "2 Tim",
       "sourceName": "II Timothy",
@@ -2128,6 +2183,7 @@
     {
       "bookNo": 56,
       "osis": "Titus",
+      "usfm": "TIT",
       "name": "Titus",
       "short": "Titus",
       "sourceName": "Titus",
@@ -2148,6 +2204,7 @@
     {
       "bookNo": 57,
       "osis": "Phlm",
+      "usfm": "PHM",
       "name": "Philemon",
       "short": "Phlm",
       "sourceName": "Philemon",
@@ -2167,6 +2224,7 @@
     {
       "bookNo": 58,
       "osis": "Heb",
+      "usfm": "HEB",
       "name": "Hebrews",
       "short": "Heb",
       "sourceName": "Hebrews",
@@ -2198,6 +2256,7 @@
     {
       "bookNo": 59,
       "osis": "Jas",
+      "usfm": "JAS",
       "name": "James",
       "short": "Jas",
       "sourceName": "James",
@@ -2222,6 +2281,7 @@
     {
       "bookNo": 60,
       "osis": "1Pet",
+      "usfm": "1PE",
       "name": "1 Peter",
       "short": "1 Pet",
       "sourceName": "I Peter",
@@ -2246,6 +2306,7 @@
     {
       "bookNo": 61,
       "osis": "2Pet",
+      "usfm": "2PE",
       "name": "2 Peter",
       "short": "2 Pet",
       "sourceName": "II Peter",
@@ -2268,6 +2329,7 @@
     {
       "bookNo": 62,
       "osis": "1John",
+      "usfm": "1JN",
       "name": "1 John",
       "short": "1 John",
       "sourceName": "I John",
@@ -2291,6 +2353,7 @@
     {
       "bookNo": 63,
       "osis": "2John",
+      "usfm": "2JN",
       "name": "2 John",
       "short": "2 John",
       "sourceName": "II John",
@@ -2310,6 +2373,7 @@
     {
       "bookNo": 64,
       "osis": "3John",
+      "usfm": "3JN",
       "name": "3 John",
       "short": "3 John",
       "sourceName": "III John",
@@ -2329,6 +2393,7 @@
     {
       "bookNo": 65,
       "osis": "Jude",
+      "usfm": "JUD",
       "name": "Jude",
       "short": "Jude",
       "sourceName": "Jude",
@@ -2348,6 +2413,7 @@
     {
       "bookNo": 66,
       "osis": "Rev",
+      "usfm": "REV",
       "name": "Revelation",
       "short": "Rev",
       "sourceName": "Revelation of John",

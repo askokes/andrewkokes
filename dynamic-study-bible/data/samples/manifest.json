@@ -1,7 +1,7 @@
 {
   "schema": "asb.manifest/2",
   "datasetVersion": "2026.09.1",
-  "builtAt": "2026-09-28T00:00:00Z",
+  "builtAt": "2026-09-30T00:00:00Z",
   "pipeline": "tools/build_dataset.py",
   "canon": {
     "books": 66,
@@ -141,7 +141,7 @@
       "url": "https://www.openbible.info/labs/cross-references/",
       "attribution": "Cross references from OpenBible.info (https://www.openbible.info/labs/cross-references/), used under a Creative Commons Attribution license. Dataset dated 2016-02-01. Vote counts reflect OpenBible.info user voting. Ranking, range handling and connection reasons are our own.",
       "via": "https://github.com/scrollmapper/bible_databases (2024 branch, cross_references.txt)",
-      "retrievedAt": "2026-09-28"
+      "retrievedAt": "2026-09-30"
     },
     {
       "id": "bsb-2023",
@@ -152,7 +152,7 @@
       "url": "https://berean.bible",
       "attribution": "Berean Standard Bible, public domain",
       "via": "https://github.com/scrollmapper/bible_databases (formats/json/BSB.json)",
-      "retrievedAt": "2026-09-28"
+      "retrievedAt": "2026-09-30"
     },
     {
       "id": "ai-claude",
@@ -173,9 +173,9 @@
     {
       "path": "books.json",
       "kind": "books",
-      "bytes": 17744,
-      "gzipBytes": 4476,
-      "sha256": "bf18586833bf92eb927f70abbd94a5b0b7eaf8fdc6c148db24a69554d825a1f9"
+      "bytes": 18602,
+      "gzipBytes": 4757,
+      "sha256": "22bdea1f1716c7f0217457a6f987f30c811e561157ba722bff0224d97a57ba03"
     },
     {
       "path": "graph/01-Gen.json",

@@ -204,7 +204,7 @@ doc("ai-context.schema.json", "AI context", "AI verse note and connection note w
     required=["verse", "connection"], defs={"aiVerseContext": ai_verse, "aiConnection": ai_edge})
 
 # ---------------- books
-book = obj({"bookNo": ref("bookNo"), "osis": STR, "name": STR, "short": STR, "sourceName": STR,
+book = obj({"bookNo": ref("bookNo"), "osis": STR, "usfm": {"type": "string", "pattern": "^[1-3]?[A-Z]{2,3}$"}, "name": STR, "short": STR, "sourceName": STR,
             "aliases": {"type": "array", "items": STR}, "testament": {"enum": ["OT", "NT"]},
             "chapters": {"type": "integer", "minimum": 1}, "verses": {"type": "integer", "minimum": 1},
             "firstVid": ref("vid"), "firstOrdinal": INT0,
