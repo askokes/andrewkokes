@@ -402,7 +402,7 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   <section class="sheet tall" id="listSheet" role="dialog" aria-modal="true" aria-label="All connections"><div class="grab"></div><div class="s-head"><h2 id="listTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body list" id="listBody"></div></section>
   <section class="sheet tall" id="pickerSheet" role="dialog" aria-modal="true" aria-label="Books and chapters"><div class="grab"></div><div class="s-head"><button class="x-btn" id="pickerBack" aria-label="Back to books" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="pickerTitle">Books</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body" id="pickerBody"></div></section>
   <section class="sheet tall" id="jsonSheet" role="dialog" aria-modal="true" aria-label="JSON"><div class="grab"></div><div class="s-head"><h2 id="jsonTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body"><pre class="json" id="jsonPre"></pre><textarea class="json" id="jsonTa" readonly hidden aria-label="JSON text"></textarea><div class="actions"><button class="btn primary" id="jsonCopy">Copy JSON</button></div></div></section>
-  <section class="sheet" id="noteSheet" role="dialog" aria-modal="true" aria-label="Note"><div class="grab"></div><div class="s-head"><h2 id="noteTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><textarea class="ntext" id="noteText" rows="5" placeholder="Write your note" aria-label="Note text"></textarea><div class="tagbox" id="noteTagBox"><input class="tag-in" id="noteTagIn" type="text" placeholder="Add a tag" autocomplete="off" autocapitalize="none" enterkeyhint="done" aria-label="Add a tag, then press Enter"></div><div class="tsugg" id="noteTagSugg"></div><p class="fld-hint">Only what you type is saved. The verse text is never copied into a note.</p></div><div class="s-foot"><div class="actions"><button class="btn danger" id="noteDelete">Delete</button><button class="btn primary" id="noteSave">Save</button></div></div></section>
+  <section class="sheet" id="noteSheet" role="dialog" aria-modal="true" aria-label="Note"><div class="grab"></div><div class="s-head"><h2 id="noteTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><textarea class="ntext" id="noteText" rows="5" placeholder="Write a note, add a tag, or both" aria-label="Note text"></textarea><div class="tagbox" id="noteTagBox"><input class="tag-in" id="noteTagIn" type="text" placeholder="Add a tag" autocomplete="off" autocapitalize="none" enterkeyhint="done" aria-label="Add a tag, then press Enter"></div><div class="tsugg" id="noteTagSugg"></div><p class="fld-hint">A note, a tag, or both. Only what you type is saved; the verse text is never copied in.</p></div><div class="s-foot"><div class="actions"><button class="btn danger" id="noteDelete">Delete</button><button class="btn primary" id="noteSave">Save</button></div></div></section>
   <section class="sheet" id="tagSheet" role="dialog" aria-modal="true" aria-label="Tags"><div class="grab"></div><div class="s-head"><h2 id="tagsTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><div class="tagbox" id="tagsTagBox"><input class="tag-in" id="tagsTagIn" type="text" placeholder="Add a tag" autocomplete="off" autocapitalize="none" enterkeyhint="done" aria-label="Add a tag, then press Enter"></div><div class="tsugg" id="tagsTagSugg"></div></div><div class="s-foot"><div class="actions"><button class="btn primary" id="tagsSave">Save</button></div></div></section>
   <section class="sheet tall" id="studySheet" role="dialog" aria-modal="true" aria-label="My Study"><div class="grab"></div><div class="s-head"><button class="x-btn" id="studyBack" aria-label="Back to all tags" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="studyTitle">My Study</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="filters tabs" id="studyTabs" role="group" aria-label="My Study sections"><button data-tab="highlights" aria-pressed="true">Highlights <span class="n num">0</span></button><button data-tab="bookmarks" aria-pressed="false">Bookmarks <span class="n num">0</span></button><button data-tab="notes" aria-pressed="false">Notes <span class="n num">0</span></button><button data-tab="tags" aria-pressed="false">Tags <span class="n num">0</span></button></div><div class="s-body" id="studyBody"></div></section>
   <section class="sheet" id="aboutSheet" role="dialog" aria-modal="true" aria-label="About"><div class="grab"></div><div class="s-head"><h2>Dynamic Study Bible<span class="sub">Interactive prototype</span></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body about" id="aboutBody"></div></section>
@@ -1213,6 +1213,7 @@ function renderTagField(which) {
   const box = $(`#${which}TagBox`), input = $(`#${which}TagIn`), q = slugOf(input.value);
   box.querySelectorAll('.tchip').forEach(n => n.remove());
   input.insertAdjacentHTML('beforebegin', S.draftTags.map(id => `<span class="tchip">${esc(tagName(id))}<button type="button" data-rm="${esc(id)}" aria-label="Remove tag ${esc(tagName(id))}">×</button></span>`).join(''));
+  if (which === 'note') syncNoteSave();
   const pool = S.ann.tags.filter(t => !S.draftTags.includes(t.id) && (!q || t.id.includes(q)));
   $(`#${which}TagSugg`).innerHTML = pool.length ? '<span class="ts-lbl">Your tags</span>' + pool.slice(0, 12).map(t => `<button type="button" data-add="${esc(t.id)}" aria-label="Add tag ${esc(t.name)}">${esc(t.name)}</button>`).join('') : '';
 }
@@ -1242,14 +1243,25 @@ function openNote(item, anchor) {
   $('#noteText').value = item ? item.body || '' : '';
   $('#noteTagIn').value = '';
   startDraft(item && item.tags); renderTagField('note');
-  $('#noteDelete').hidden = !item; $('#noteSave').disabled = !$('#noteText').value.trim();
+  $('#noteDelete').hidden = !item; syncNoteSave();
   openSheet('noteSheet');
 }
+/* a note needs text or a tag, not both */
+function noteCanSave() { return !!($('#noteText').value.trim() || S.draftTags.length || slugOf($('#noteTagIn').value)); }
+function syncNoteSave() { $('#noteSave').disabled = !noteCanSave(); }
 function saveNote() {
-  const e = S.editing, body = $('#noteText').value.trim(); if (!e || !body) return;
+  const e = S.editing, body = $('#noteText').value.trim(); if (!e || !noteCanSave()) return;
   const tags = commitDraftTags('note'), it = e.id && findItem(e.id);
-  if (it) { it.body = body; it.tags = tags; touch(it); } else S.ann.items.push(newItem('note', e.anchor, { body, tags }));
-  S.editing = null; endPart(); closeSheet(); afterChange(); toast('Note saved');
+  if (body) {
+    if (it) { it.body = body; it.tags = tags; touch(it); } else S.ann.items.push(newItem('note', e.anchor, { body, tags }));
+  } else {
+    // tags without text are a tag mark: fold them into the one on these words, and drop a note whose text was cleared
+    if (it) S.ann.items = S.ann.items.filter(x => x !== it);
+    const tm = S.ann.items.find(x => x.kind === 'tag' && anchorKey(x.anchor) === anchorKey(e.anchor));
+    if (tm) { tags.forEach(t => { if (!tm.tags.includes(t)) tm.tags.push(t); }); touch(tm); }
+    else S.ann.items.push(newItem('tag', e.anchor, { tags }));
+  }
+  S.editing = null; endPart(); closeSheet(); afterChange(); toast(body ? 'Note saved' : tags.length > 1 ? 'Tags saved' : 'Tag saved');
 }
 function deleteNote() {
   const e = S.editing; if (!e || !e.id) return;
@@ -1455,7 +1467,7 @@ $('#abBookmark').addEventListener('click', toggleBookmark);
 $('#abNote').addEventListener('click', () => { const a = barAnchor(); if (!a) return; openNote(S.ann.items.find(it => it.kind === 'note' && anchorKey(it.anchor) === anchorKey(a)) || null, a); });
 $('#abTag').addEventListener('click', () => openTagSheet(barAnchor()));
 $('#abPart').addEventListener('click', togglePart);
-$('#noteText').addEventListener('input', () => { $('#noteSave').disabled = !$('#noteText').value.trim(); });
+$('#noteText').addEventListener('input', syncNoteSave);
 $('#noteSave').addEventListener('click', saveNote);
 $('#noteDelete').addEventListener('click', deleteNote);
 $('#tagsSave').addEventListener('click', saveTags);

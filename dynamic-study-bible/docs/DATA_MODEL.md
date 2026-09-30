@@ -226,6 +226,8 @@ The reader can mark any verse, verse range or run of words, as in the YouVersion
 
 Anchor: `{translation, start {vid, word, of}, end {vid, word, of}, ref, label, partial}`. `word` is the 0-based index of a whitespace-separated word in that translation's verse, inclusive at both ends; null means the whole verse. `of` is the verse's word count when the mark was saved. If the text later has a different count, the mark falls back to the whole verse rather than landing on the wrong words. A partial mark shown in another translation widens to whole verses.
 
+The note editor saves whatever the reader gives it: text makes a note (with any tags), tags alone make a tag mark, and clearing a note's text but keeping its tags turns it into a tag mark. Save needs one or the other, never both (founder, 2026-09-30).
+
 The document also carries `palette[] {id, label, hex}`, `tags[] {id, name, createdAt}` and `rules` (plain-language behaviour, as on the trail).
 
 NIV rules. Marks store verse ids and word positions, never words, so they fit hard rules 1 and 2 in CLAUDE.md. A note holds only what the reader types; the app never copies verse text into it. Search inside notes runs over the reader's own text.

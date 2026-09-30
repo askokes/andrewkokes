@@ -731,6 +731,44 @@ try {
   await page.click('#studySheet [data-close]');
   await sleep(300);
 
+  // The note editor saves a tag alone, a note alone, or both (founder, 2026-09-30).
+  const openNoteOn = async vid => {
+    await page.click(`.v[data-vid="${vid}"] .w[data-w="0"]`);
+    await page.waitForSelector('#actionBar:not([hidden])', { timeout: 3000 });
+    await page.click('#abNote');
+    await page.waitForSelector('#noteSheet.on', { timeout: 3000 });
+    await sleep(300);
+  };
+  const saveOff = () => page.evaluate(() => document.getElementById('noteSave').disabled);
+  await openNoteOn(43003013);
+  const offAtStart = await saveOff();
+  await page.fill('#noteTagIn', 'creation');
+  check(offAtStart && !(await saveOff()), 'Save waits for text or a tag, and a tag typed without Enter is enough');
+  await page.click('#noteSave');
+  await sleep(400);
+  const tagOnly = await lastItem();
+  check(tagOnly.kind === 'tag' && tagOnly.body === null && same(tagOnly.tags, ['creation']) && tagOnly.anchor.ref === 'John.3.13' && (await annDoc()).tags.some(t => t.id === 'creation'), `a tag with no note text saves as a tag mark (${JSON.stringify(tagOnly.tags)})`);
+  check(await page.$('.v[data-vid="43003013"] .v-note') === null && same(await vtags(43003013), ['creation']), 'John 3:13 shows the creation chip and no note glyph');
+  await page.click('#abClose').catch(() => {});
+  await openNoteOn(43003012);
+  await page.fill('#noteText', 'Earthly things first, then heavenly ones.');
+  check(!(await saveOff()), 'note text alone is enough to save');
+  await page.click('#noteSave');
+  await sleep(400);
+  const textOnly = await lastItem();
+  check(textOnly.kind === 'note' && textOnly.tags.length === 0 && textOnly.body.startsWith('Earthly'), 'a note with no tags saves as a note');
+  await page.click('#abClose').catch(() => {});
+  await page.click('.v[data-vid="43003012"] .v-note');
+  await page.waitForSelector('#noteSheet.on', { timeout: 3000 });
+  await sleep(300);
+  await page.fill('#noteText', '');
+  await page.fill('#noteTagIn', 'heaven');
+  await page.click('#noteSave');
+  await sleep(400);
+  const d12 = (await annDoc()).items.filter(it => it.anchor.ref === 'John.3.12');
+  check(d12.length === 1 && d12[0].kind === 'tag' && same(d12[0].tags, ['heaven']), `clearing a note's text but keeping a tag leaves a tag mark (${JSON.stringify(d12.map(i => [i.kind, i.tags]))})`);
+  await page.click('#abClose').catch(() => {});
+
   // Storage that throws: the page still loads, seeds from the file and takes new marks in memory.
   const sx = await browser.newContext({ viewport: { width: 390, height: 844 }, ignoreHTTPSErrors: true });
   const sp = await sx.newPage();
