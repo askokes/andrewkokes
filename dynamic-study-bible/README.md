@@ -9,6 +9,10 @@ This folder holds the data model, a working prototype built on it, and the plan 
 1. **Try the prototype.** It opens on John 3:16. The strip holds still; swipe it, or turn on Motion for a slow scroll. Use the filter to see only quotes, stories or topics, and the Match slider to hide looser matches. Tap a chip, then Go, then Web to see your trail. Tap a verse to highlight, bookmark, tag or note it, or pick Part of verse to mark just a few words; My Study lists everything you marked. The `{ }` button shows the exact JSON behind the screen.
    - Published: https://claude.ai/artifact/7Yj2v8vmhHSaH2m18U9uav (private to your account until you share it)
    - Local: `python3 -m http.server 8765 --directory prototype`, then open http://localhost:8765
+   - **See the NIV.** The switch under the chapter title flips between BSB and NIV. The NIV loads live from YouVersion with your free app key and is never saved. The published link most likely can't reach YouVersion, so use the local copy on your Mac:
+     1. Get an app key at https://platform.youversion.com: register the app as non-commercial and accept the NIV (version 111) license.
+     2. In Terminal: `git clone https://github.com/askokes/andrewkokes.git`, then `cd andrewkokes/dynamic-study-bible`, `git checkout claude/ai-study-bible-app-ptpt6z`, and `python3 -m http.server 8765 --directory prototype`.
+     3. Open http://localhost:8765, tap NIV, paste the key and tap Load NIV. If it fails, the banner says why and the page stays on the BSB.
 2. **Read the plan.** `docs/IOS_BUILD_PLAN.md` walks you through building the app with Claude Code, milestone by milestone, with the prompt to use at each step. `docs/LICENSING.md` covers the NIV path.
 3. **Read the JSON.** `data/samples/chapters/John-3.json` is exactly what one reader screen needs: every verse with its top 12 connections, ranked, each with its reason.
 4. **Working with Claude Code?** `CLAUDE.md` is the guide every session reads first: the decisions, the commands and the rules that keep the NIV license safe.

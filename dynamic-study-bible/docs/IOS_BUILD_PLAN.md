@@ -109,7 +109,7 @@ Time: 1 to 2 weeks.
 Goal: the reader shows the NIV when online and the labelled BSB when not.
 
 ```
-Add an NIVTextClient. Map our bookNo values to USFM book codes (GEN to REV) in a Swift table, with a test covering all 66. Fetch the chapter with BibleChapterRepository.shared.chapter(withReference:) for version 111, parse it once with BibleTextNode(html:), and render each verse as its own row with BibleVersionRendering.textBlocks(from:reference:fonts:). Show "NIV" and BibleVersion.copyright under the chapter. Never write NIV text to disk, SwiftData or logs. If the fetch fails, show the BSB chapter from our database under the banner "Offline: showing the Berean Standard Bible (BSB)". Show a clear message for YouVersionAPIError.notPermitted. List any chapters where NIV verse numbers differ from BSB.
+Add an NIVTextClient. Take each book's USFM code (GEN to REV) from the usfm field in data/full/books.json, with a test covering all 66. Fetch the chapter with BibleChapterRepository.shared.chapter(withReference:) for version 111, parse it once with BibleTextNode(html:), and render each verse as its own row with BibleVersionRendering.textBlocks(from:reference:fonts:). Show "NIV" and BibleVersion.copyright under the chapter. Never write NIV text to disk, SwiftData or logs. If the fetch fails, show the BSB chapter from our database under the banner "Offline: showing the Berean Standard Bible (BSB)". Show a clear message for YouVersionAPIError.notPermitted. List any chapters where NIV verse numbers differ from BSB.
 ```
 
 Check: John 3 reads in the NIV with the copyright line. In airplane mode, a chapter you have never opened shows the BSB with the banner; one you opened today still shows the NIV from the SDK cache.

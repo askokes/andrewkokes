@@ -19,6 +19,7 @@ Decisions (final, 2026-09-28):
 - The strip holds still by default and the reader swipes it. A Motion switch turns on auto-scroll: each chip dwells 3.0 + 3.0 x weight seconds.
 - Readers can highlight, bookmark, tag and write notes on whole verses or runs of words (`docs/DATA_MODEL.md` 2.13). Marks store verse ids and word positions, sync through the reader's private iCloud, and never hold NIV words. Syncing whole-verse NIV highlights with YouVersion through Sign in with YouVersion is an open decision.
 - No AI output in v1. The data model's AI slots stay, unused.
+- The HTML prototype has a BSB / NIV switch. NIV mode fetches from the YouVersion API with the founder's app key, entered in the page and kept in that browser; NIV text stays in memory, and NIV chips show the "because" line in place of verse words.
 - No backend in v1.
 
 The plan is `docs/IOS_BUILD_PLAN.md`; licensing is `docs/LICENSING.md`.

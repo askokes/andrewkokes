@@ -22,6 +22,7 @@ All keys are camelCase words (no single-letter keys). Every document that a scre
 |---|---|---|---|
 | bookNo | int 1-66 | yes | Protestant canon order; the first digits of every vid |
 | osis | string | yes | OpenBible key (`Gen`, `1John`, `Rev`) |
+| usfm | string | yes | YouVersion book code (`GEN`, `1JN`, `REV`); passage ids are `JHN.3` or `JHN.3.16` |
 | name | string | yes | Display name used in labels, singular ("Psalm", "1 John", "Revelation") |
 | short | string | yes | Abbreviation for tight chips ("Ps", "1Jn") |
 | sourceName | string | yes | Name as it appears in the text source ("Psalms", "I John", "Revelation of John") |
