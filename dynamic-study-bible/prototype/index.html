@@ -82,11 +82,19 @@ button { cursor: pointer; border: 0; background: none; padding: 0; margin: 0; }
 .tb-btn { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--accent); font-size: 15px; font-weight: 600; flex: none; }
 .tb-btn:active { background: var(--accent-soft); }
 .tb-btn svg { width: 22px; height: 22px; }
-.title { flex: 1; min-width: 0; height: 44px; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-radius: 12px; }
+.title { flex: 1; min-width: 0; height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.title-btn { display: inline-flex; align-items: center; max-width: 100%; min-width: 0; height: 24px; padding: 0 6px; border-radius: 8px; }
+.title-btn:active { background: var(--accent-soft); }
 .title .t-main { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; font-size: 17px; font-weight: 600; letter-spacing: -.2px; line-height: 21px; white-space: nowrap; }
 .title .t-main span { overflow: hidden; text-overflow: ellipsis; }
 .title svg { width: 14px; height: 14px; color: var(--ink-3); flex: none; }
-.t-tag { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; line-height: 14px; color: var(--ink-3); border: 1px solid var(--rule-2); border-radius: 5px; padding: 0 5px; }
+.tr-switch { position: relative; flex: none; display: grid; grid-template-columns: 1fr 1fr; width: 78px; height: 18px; border-radius: 6px; background: var(--seg); font-size: 9.5px; font-weight: 700; letter-spacing: .08em; line-height: 18px; color: var(--ink-3); }
+.tr-switch::before { content: ""; position: absolute; top: 1px; bottom: 1px; left: 1px; width: calc(50% - 1px); border-radius: 5px; background: var(--seg-on); box-shadow: 0 1px 2px rgba(0,0,0,.2); transition: transform .2s; }
+.tr-switch::after { content: ""; position: absolute; inset: -9px -14px -4px; }
+.tr-switch[aria-checked="true"]::before { transform: translateX(100%); }
+.tr-switch span { position: relative; text-align: center; transition: color .2s; }
+.tr-switch[aria-checked="false"] .ts-bsb, .tr-switch[aria-checked="true"] .ts-niv { color: var(--ink); }
+.tr-switch[aria-busy="true"]::before { animation: pulse 1s ease-in-out infinite; }
 .searchrow { position: absolute; inset: 2px 12px 6px; display: flex; gap: 8px; align-items: center; background: var(--bg); }
 .searchrow input { flex: 1; min-width: 0; height: 40px; border-radius: 12px; border: 1px solid var(--rule); background: var(--surface); padding: 0 14px; font-size: 16px; -webkit-appearance: none; }
 .searchrow input::placeholder { color: var(--ink-3); }
@@ -320,6 +328,27 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
 .s-body .mine-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: -4px 0 14px; padding: 8px 12px; border-radius: 12px; background: var(--bg); font-size: 13px; line-height: 1.4; color: var(--ink-2); }
 .mine-line .ml-k { font-weight: 700; color: var(--ink); }
 .mine-line .ml-note { flex-basis: 100%; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* NIV mode: live text from YouVersion, never stored */
+.tr-banner { flex: none; margin: 0 12px 8px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--rule-2); background: var(--surface); font-size: 13.5px; line-height: 1.4; color: var(--ink-2); }
+.tr-banner p { margin: 0 0 8px; }
+.tr-banner b { color: var(--ink); }
+.tr-banner .tb-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.tr-banner button { height: 36px; padding: 0 12px; border-radius: 10px; background: var(--bg); color: var(--accent); font-size: 14px; font-weight: 600; }
+.tr-banner button.primary { background: var(--accent); color: var(--accent-ink); }
+.v-missing { font-family: var(--sans); font-size: 13px; color: var(--ink-3); }
+.v.missing .vn { color: var(--rule-2); }
+.tr-credit { margin: 14px 0 0; font-size: 11.5px; line-height: 1.45; color: var(--ink-3); }
+.tr-credit b { margin-right: 6px; letter-spacing: .06em; color: var(--ink-2); }
+.p-wait { font-family: var(--sans); font-size: 14px; color: var(--ink-3); animation: pulse 1.4s ease-in-out infinite; }
+.s-body .steps { margin: 0 0 4px; padding-left: 20px; font-size: 14px; color: var(--ink-2); }
+.steps li { margin: 3px 0; }
+.s-body a { color: var(--accent); font-weight: 600; }
+.fld-label { display: block; margin: 14px 0 6px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.key-in { width: 100%; height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--rule); background: var(--bg); font-family: var(--mono); font-size: 16px; -webkit-appearance: none; }
+.key-in:focus { outline: none; border-color: var(--accent); }
+.key-in::placeholder { color: var(--ink-3); font-family: var(--sans); }
+.s-body .key-err { margin: 8px 0 0; font-size: 13px; color: var(--danger); }
+#jsonNote { margin: 0; }
 @media (max-width: 500px) {
   .stage { padding: 0; background: var(--bg); }
   .phone { width: 100%; height: 100%; border-radius: 0; box-shadow: none; transform: none; }
@@ -331,8 +360,8 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   .toast { bottom: calc(228px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sheet, .overlay, .scrim, .toast, .marquee, .v, .switch .knob, .switch .knob::after { transition: none; }
-  .loading .bar { animation: none; }
+  .sheet, .overlay, .scrim, .toast, .marquee, .v, .switch .knob, .switch .knob::after, .tr-switch::before, .tr-switch span { transition: none; }
+  .loading .bar, .p-wait, .tr-switch[aria-busy="true"]::before { animation: none; }
 }
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap">
@@ -351,7 +380,7 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   <header class="topbar">
     <button class="tb-btn" id="aboutBtn" aria-label="About this prototype"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5" stroke-linecap="round"/></svg></button>
     <button class="tb-btn" id="studyBtn" aria-label="My Study: your highlights, bookmarks, notes and tags"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><rect x="4.5" y="3" width="15" height="18" rx="2.5"/><path d="M9 3v18M12.5 8h4M12.5 11.5h4"/></svg></button>
-    <button class="title" id="titleBtn" aria-label="Choose book and chapter"><span class="t-main"><span id="titleText">John 3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span><span class="t-tag" id="previewTag" title="Preview text: Berean Standard Bible. The app launches with the NIV.">BSB preview</span></button>
+    <div class="title"><button class="title-btn" id="titleBtn" aria-label="Choose book and chapter"><span class="t-main"><span id="titleText">John 3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button><button class="tr-switch" id="trSwitch" role="switch" aria-checked="false" aria-busy="false" aria-label="Show the NIV" title="Showing the Berean Standard Bible. Tap for the NIV."><span class="ts-bsb" aria-hidden="true">BSB</span><span class="ts-niv" aria-hidden="true">NIV</span></button></div>
     <button class="tb-btn" id="jsonBtn" aria-label="Show the JSON behind this verse" style="font-family: var(--mono)">{ }</button>
     <button class="tb-btn" id="searchBtn" aria-label="Search a reference"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></button>
     <form class="searchrow" id="searchRow" hidden>
@@ -359,6 +388,7 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
       <button type="button" class="cancel" id="searchCancel">Cancel</button>
     </form>
   </header>
+  <div class="tr-banner" id="nivBanner" role="alert" hidden><p><b>Showing the BSB.</b> <span id="nivReason"></span></p><div class="tb-acts"><button class="primary" data-niv="retry">Try again</button><button data-niv="key" id="nivKeyBtn">Change key</button><button data-niv="bsb">Use BSB</button></div></div>
   <main class="reader" id="reader" aria-live="polite">
     <div class="loading"><div class="bar" style="width:40%"></div><div class="bar"></div><div class="bar" style="width:85%"></div><div class="bar" style="width:70%"></div></div>
   </main>
@@ -401,10 +431,11 @@ textarea.json { width: 100%; min-height: 240px; font-family: var(--mono); font-s
   <section class="sheet" id="peekSheet" role="dialog" aria-modal="true" aria-label="Connection"><div class="grab"></div><div class="s-head"><h2 id="peekTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot" id="peekBody"></div><div class="s-foot"><div class="actions"><button class="btn primary" id="peekGo">Go</button><button class="btn" id="peekAll">See all</button><button class="btn sq" id="peekJson" aria-label="Show JSON for this verse">{ }</button></div></div></section>
   <section class="sheet tall" id="listSheet" role="dialog" aria-modal="true" aria-label="All connections"><div class="grab"></div><div class="s-head"><h2 id="listTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body list" id="listBody"></div></section>
   <section class="sheet tall" id="pickerSheet" role="dialog" aria-modal="true" aria-label="Books and chapters"><div class="grab"></div><div class="s-head"><button class="x-btn" id="pickerBack" aria-label="Back to books" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="pickerTitle">Books</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body" id="pickerBody"></div></section>
-  <section class="sheet tall" id="jsonSheet" role="dialog" aria-modal="true" aria-label="JSON"><div class="grab"></div><div class="s-head"><h2 id="jsonTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body"><pre class="json" id="jsonPre"></pre><textarea class="json" id="jsonTa" readonly hidden aria-label="JSON text"></textarea><div class="actions"><button class="btn primary" id="jsonCopy">Copy JSON</button></div></div></section>
+  <section class="sheet tall" id="jsonSheet" role="dialog" aria-modal="true" aria-label="JSON"><div class="grab"></div><div class="s-head"><h2 id="jsonTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body"><p class="fine" id="jsonNote" hidden></p><pre class="json" id="jsonPre"></pre><textarea class="json" id="jsonTa" readonly hidden aria-label="JSON text"></textarea><div class="actions"><button class="btn primary" id="jsonCopy">Copy JSON</button></div></div></section>
   <section class="sheet" id="noteSheet" role="dialog" aria-modal="true" aria-label="Note"><div class="grab"></div><div class="s-head"><h2 id="noteTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><textarea class="ntext" id="noteText" rows="5" placeholder="Write a note, add a tag, or both" aria-label="Note text"></textarea><div class="tagbox" id="noteTagBox"><input class="tag-in" id="noteTagIn" type="text" placeholder="Add a tag" autocomplete="off" autocapitalize="none" enterkeyhint="done" aria-label="Add a tag, then press Enter"></div><div class="tsugg" id="noteTagSugg"></div><p class="fld-hint">A note, a tag, or both. Only what you type is saved; the verse text is never copied in.</p></div><div class="s-foot"><div class="actions"><button class="btn danger" id="noteDelete">Delete</button><button class="btn primary" id="noteSave">Save</button></div></div></section>
   <section class="sheet" id="tagSheet" role="dialog" aria-modal="true" aria-label="Tags"><div class="grab"></div><div class="s-head"><h2 id="tagsTitle"></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><div class="tagbox" id="tagsTagBox"><input class="tag-in" id="tagsTagIn" type="text" placeholder="Add a tag" autocomplete="off" autocapitalize="none" enterkeyhint="done" aria-label="Add a tag, then press Enter"></div><div class="tsugg" id="tagsTagSugg"></div></div><div class="s-foot"><div class="actions"><button class="btn primary" id="tagsSave">Save</button></div></div></section>
   <section class="sheet tall" id="studySheet" role="dialog" aria-modal="true" aria-label="My Study"><div class="grab"></div><div class="s-head"><button class="x-btn" id="studyBack" aria-label="Back to all tags" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><h2 id="studyTitle">My Study</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="filters tabs" id="studyTabs" role="group" aria-label="My Study sections"><button data-tab="highlights" aria-pressed="true">Highlights <span class="n num">0</span></button><button data-tab="bookmarks" aria-pressed="false">Bookmarks <span class="n num">0</span></button><button data-tab="notes" aria-pressed="false">Notes <span class="n num">0</span></button><button data-tab="tags" aria-pressed="false">Tags <span class="n num">0</span></button></div><div class="s-body" id="studyBody"></div></section>
+  <section class="sheet" id="keySheet" role="dialog" aria-modal="true" aria-label="Show the NIV"><div class="grab"></div><div class="s-head"><h2>Show the NIV</h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body has-foot"><p id="keyLead">The NIV loads live from YouVersion with your free app key.</p><ol class="steps"><li>Go to <a href="https://platform.youversion.com" target="_blank" rel="noopener noreferrer">platform.youversion.com</a> and sign in.</li><li>Register this app as non-commercial.</li><li>Accept the NIV license, then copy your app key.</li></ol><label class="fld-label" for="keyInput">App key</label><input class="key-in" id="keyInput" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="Paste your app key"><p class="key-err" id="keyErr" role="alert" hidden></p><p class="fld-hint" id="keyHint">The key stays in this browser. NIV text is never saved.</p></div><div class="s-foot"><div class="actions"><button class="btn primary" id="keyLoad">Load NIV</button></div></div></section>
   <section class="sheet" id="aboutSheet" role="dialog" aria-modal="true" aria-label="About"><div class="grab"></div><div class="s-head"><h2>Dynamic Study Bible<span class="sub">Interactive prototype</span></h2><button class="x-btn" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="s-body about" id="aboutBody"></div></section>
 
   <section class="overlay" id="webOverlay" role="dialog" aria-modal="true" aria-label="Trail web">
@@ -440,11 +471,14 @@ const S = {
   motion: { defaultMode: 'hold', baseSeconds: 3.0, perWeightSeconds: 3.0 }, motionOn: false, prefersReduced: false, filter: 'all', match: 0, matchSlider: { min: 0, max: 100, step: 5, default: 0 }, listItems: [],
   ticker: { all: [], items: [], x: 0, seqW: 0, widths: [], cum: [], dwell: [], raf: 0, lastT: 0, gen: 0, holdPointer: false, drag: null, suppressClick: false, wheelAt: 0 },
   trail: null, peekItem: null, peekFocus: null, sheet: null, pickerBook: 0, jsonMode: null,
-  ann: null, annSeed: null, annIdx: new Map(), sel: null, editing: null, draftTags: [], draftNames: {}, study: { tab: 'highlights', tag: null, confirm: false }
+  ann: null, annSeed: null, annIdx: new Map(), sel: null, editing: null, draftTags: [], draftNames: {}, study: { tab: 'highlights', tag: null, confirm: false },
+  // tr is the text on screen, trPref the reader's choice; NIV text lives only in nivCur and the in-memory LRU, never in storage or JSON.
+  tr: 'bsb', trPref: 'bsb', renderedTr: 'bsb', navGen: 0, peekGen: 0, nivCur: null, yv: { key: null, version: null, versionP: null, error: null, pending: 0 }
 };
 const store = {
   get(k) { try { return JSON.parse(localStorage.getItem('asb.' + k)); } catch (e) { return null; } },
-  set(k, v) { try { localStorage.setItem('asb.' + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
+  set(k, v) { try { localStorage.setItem('asb.' + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } },
+  del(k) { try { localStorage.removeItem('asb.' + k); } catch (e) { /* storage unavailable */ } }
 };
 const reader = $('#reader'), track = $('#track'), marquee = $('#marquee');
 const nowIso = () => new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
@@ -626,14 +660,20 @@ function currentHop() { const T = S.trail; return T.hops[T.cursor] || null; }
 /* ---------- rendering the reader ---------- */
 function verseOf(vid) { return S.bundle && S.bundle.chapterId === vid - (vid % 1000) ? S.bundle.verses[(vid % 1000) - 1] : null; }
 function renderChapter(bundle) {
-  S.bundle = bundle; S.bookNo = bundle.book.bookNo; S.chapter = bundle.chapter;
+  S.bundle = bundle; S.bookNo = bundle.book.bookNo; S.chapter = bundle.chapter; S.renderedTr = S.tr;
   $('#titleText').textContent = `${bundle.book.name} ${bundle.chapter}`;
   const nav = id => { if (!id) return ''; const p = split(id), b = S.bookByNo[p.book]; return `${b.name} ${p.chapter}`; };
   const prev = bundle.prevChapter, next = bundle.nextChapter;
   let html = `<div class="chapter-head"><div class="book">${esc(bundle.book.name)}</div><div class="num-big num">${bundle.chapter}</div></div>`;
   for (const v of bundle.verses) {
-    html += `<p class="v${v.omitted ? ' omitted' : ''}${v.paragraphStart && !v.omitted ? ' para' : ''}" data-vid="${v.vid}">${verseInner(v)}</p>`;
+    const gone = S.tr === 'niv' ? !shownText(v.vid) : v.omitted;
+    html += `<p class="v${gone ? (S.tr === 'niv' ? ' missing' : ' omitted') : ''}${v.paragraphStart && !gone ? ' para' : ''}" data-vid="${v.vid}">${verseInner(v)}</p>`;
   }
+  // Verse numbers the NIV has beyond the BSB's count get plain rows (read-only; marks and connections key off BSB verse ids).
+  const niv = S.tr === 'niv' ? nivEntry(bundle.chapterId) : null;
+  if (niv) Array.from(niv.verses.keys()).filter(k => k > bundle.verses.length).sort((a, b) => a - b)
+    .forEach(k => { html += `<p class="v extra" data-vid="${vidOf(bundle.book.bookNo, bundle.chapter, k)}"><sup class="vn">${k}</sup><span class="vt">${esc(niv.verses.get(k))}</span></p>`; });
+  if (niv && S.yv.version) html += `<p class="tr-credit" id="nivCredit"><b>NIV</b>${esc(S.yv.version.copyright)}</p>`;
   html += `<div class="chapter-foot">${prev ? `<button class="nav-btn" data-chapter="${prev}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>${esc(nav(prev))}</button>` : '<span></span>'}${next ? `<button class="nav-btn" data-chapter="${next}">${esc(nav(next))}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>` : '<span></span>'}</div>`;
   reader.innerHTML = html;
   S.focusVid = 0;
@@ -662,7 +702,7 @@ function setFocus(vid, opts = {}) {
   S.focusVid = vid; S.pinned = !!opts.pin;
   const hop = currentHop(); if (hop && S.trail.rules.scrollUpdatesCurrentHop && hop.scroll.chapter === vid - (vid % 1000)) hop.scroll.anchor = vid;
   renderStrip(verseOf(vid));
-  store.set('position', vid);
+  if (verseOf(vid)) store.set('position', vid);
 }
 function onScroll() {
   S.scrollRaf = 0;
@@ -680,12 +720,14 @@ function flashRange(start, end) {
 async function navigate({ bookNo, chapter, vid, kind = null, via = null, highlight = null }) {
   const book = S.bookByNo[bookNo]; if (!book) return false;
   if (!hasChapter(bookNo, chapter)) { toast(`${book.name} ${chapter} is not available in this preview`); return false; }
+  const gen = ++S.navGen;
   let bundle;
   try { bundle = await buildBundle(bookNo, chapter); }
   catch (e) { console.warn(e); toast(`${book.name} ${chapter} could not be loaded`); return false; }
+  if (!(await prepareText(bookNo, chapter, gen))) return false;
   if (kind) pushHop(kind, vid, via, highlight);
   closeBar();
-  if (bundle !== S.bundle) renderChapter(bundle);
+  if (bundle !== S.bundle || S.renderedTr !== S.tr) renderChapter(bundle);
   scrollToVerse(vid); setFocus(vid, { force: true, pin: true });
   if (highlight) flashRange(highlight.start, highlight.end);
   renderTrail();
@@ -694,9 +736,11 @@ async function navigate({ bookNo, chapter, vid, kind = null, via = null, highlig
 async function restoreHop(hop) {
   const p = split(hop.scroll.chapter);
   if (!hasChapter(p.book, p.chapter)) { toast(`${bookOf(hop.vid).name} ${p.chapter} is not available in this preview`); return; }
+  const gen = ++S.navGen;
   const bundle = await buildBundle(p.book, p.chapter);
+  if (!(await prepareText(p.book, p.chapter, gen))) return;
   closeBar();
-  if (bundle !== S.bundle) renderChapter(bundle);
+  if (bundle !== S.bundle || S.renderedTr !== S.tr) renderChapter(bundle);
   scrollToVerse(hop.scroll.anchor); setFocus(hop.scroll.anchor, { force: true, pin: true });
   renderTrail();
 }
@@ -735,7 +779,7 @@ function pillHtml(reason, lg) {
   const p = pctOf(reason), word = lg ? reason.label : (REASON[reason.kind] || REASON.topic).pill;
   return `<span class="rpill ${reason.kind}${lg ? ' lg' : ''}" title="${esc(reason.label)}${p !== null ? `, ${p}% match` : ''}"><span class="k">${esc(word)}</span>${p !== null ? `<span class="pct">${p}%${lg ? ' match' : ''}</span>` : ''}</span>`;
 }
-// Strip chips: line 1 is glyph, label, tier dot and reason pill; line 2 is the first words of the target verse.
+// Strip chips: line 1 is glyph, label, tier dot and reason pill; line 2 is the first words of the target verse (BSB mode).
 // See all rows (inList) keep the because sentence on line 2. The because sentence is always in the aria-label and title.
 function chipAria(it) {
   const r = it.reason, because = r ? r.because : 'Cross reference';
@@ -743,7 +787,8 @@ function chipAria(it) {
 }
 function chipHtml(it, inList) {
   const r = it.reason, because = r ? r.because : 'Cross reference', mine = hasMarks(it.to.start, it.to.end);
-  const line2 = inList ? `<span class="because">${esc(because)}</span>`
+  // NIV mode shows the because line (our own words) in place of verse words: no partial NIV previews, no extra calls.
+  const line2 = inList || S.tr === 'niv' ? `<span class="because">${esc(because)}</span>`
     : it.snippet ? `<span class="snip">${esc(it.snippet)}</span>` : '<span class="snip none">Verse omitted in this translation</span>';
   return `<button class="chip${it.sameBook ? '' : ' cross'}${mine ? ' mine' : ''}" data-rank="${it.rank}" style="opacity:${(0.35 + 0.65 * it.weight).toFixed(3)}" title="${esc(because)}" aria-label="${esc(chipAria(it))}">${mine ? '<span class="mine-dot" aria-hidden="true"></span>' : ''}` +
     `<span class="top">${inList ? `<span class="rank num">${it.rank}</span>` : ''}<span class="dir" aria-hidden="true">${GLYPH[it.direction]}</span><span class="lbl" style="font-weight:${Math.round(400 + 300 * it.weight)}">${esc(it.to.label)}</span><span class="dot ${it.tier}" title="${it.tier}"></span>${pillHtml(r)}</span>` +
@@ -882,19 +927,39 @@ function openPeek(item) {
   if (!T.web.peekOnlyEdges.some(e => e[0] === focus.vid && e[1] === item.to.start) && !T.web.edges.some(e => e[0] === focus.vid && e[1] === item.to.start)) T.web.peekOnlyEdges.push([focus.vid, item.to.start]);
   recomputeWeb();
   $('#peekTitle').innerHTML = `<span class="dir" style="color:var(--${item.sameBook ? 'accent' : 'cross'})">${GLYPH[item.direction]}</span> ${esc(item.to.label)}`;
-  const passage = passageHtml(item.to.start, item.to.end), tr = (S.text && S.text.translation) || {};
+  const niv = S.tr === 'niv', passage = niv ? null : passageHtml(item.to.start, item.to.end), tr = (S.text && S.text.translation) || {};
   const lines = [];
   if (item.votesOut) lines.push(`<li><span>${esc(focus.label)} cites it</span><b>${item.votesOut} votes</b></li>`);
   if (item.votesIn) lines.push(`<li><span>Cites ${esc(focus.label)} back</span><b>${item.votesIn} votes</b></li>`);
   const r = item.reason;
   $('#peekBody').innerHTML =
     (r ? `<div class="reason-line" id="peekReason">${pillHtml(r, true)}<span class="because-lg">${esc(r.because)}</span></div>` : '') +
-    `<p class="passage" id="peekPassage">${passage || esc(item.snippet)}</p><p class="caption">${esc(tr.name || 'Berean Standard Bible')} (preview text)</p>` + mineHtml(item.to.start, item.to.end) +
+    (niv ? '<p class="passage" id="peekPassage"><span class="p-wait">Loading the NIV\u2026</span></p><p class="caption" id="peekCaption">NIV</p><p class="fine" id="peekRest" hidden></p>'
+      : `<p class="passage" id="peekPassage">${passage || esc(item.snippet)}</p><p class="caption">${esc(tr.name || 'Berean Standard Bible')} (preview text)</p>`) + mineHtml(item.to.start, item.to.end) +
     `<ul class="votes-list">${lines.join('')}</ul>` +
     (item.viaRange ? `<p class="via">Points at ${esc(item.viaRange.label)} (${item.viaRange.span} verses), which covers ${esc(focus.label)}.</p>` : '') +
     `<p class="fine num">${item.sameBook ? 'Same book' : esc(bookOf(item.to.start).name)} \u00b7 ${item.tier} \u00b7 rank ${item.rank} of ${focus.counts.unique} \u00b7 score ${item.score}</p>`;
   $('#peekAll').textContent = `See all ${S.match > 0 ? atOrAbove(focus, S.match) : focus.counts.unique}`;
   openSheet('peekSheet');
+  if (niv) fillPeekNiv(item, ++S.peekGen);
+}
+// The peek fetches only its target: one verse, or a range inside one chapter. A cross-chapter range shows the first chapter's part.
+async function fillPeekNiv(item, gen) {
+  const a = split(item.to.start), b = split(item.to.end), book = S.bookByNo[a.book], same = a.book === b.book && a.chapter === b.chapter;
+  const last = same ? b.verse : book.verseCounts[a.chapter - 1];
+  let html, cap, rest = '';
+  try {
+    const e = nivEntry(vidOf(a.book, a.chapter, 0)) || await nivPassage(a.book, a.chapter, a.verse, last);
+    html = nivVersesHtml(e, a.verse, last);
+    cap = `NIV \u00b7 ${esc(S.yv.version.copyright)}`;
+    if (!same) rest = `This passage runs on to ${esc(item.to.label.split('\u2013').pop())}. Tap Go to read the rest.`;
+  } catch (err) {
+    html = passageHtml(item.to.start, item.to.end) || esc(item.snippet);
+    cap = `BSB \u00b7 The NIV did not load. ${esc(yvError(err).message)}`;
+  }
+  if (gen !== S.peekGen || S.sheet !== 'peekSheet' || S.peekItem !== item) return;
+  $('#peekPassage').innerHTML = html; $('#peekCaption').innerHTML = cap;
+  const r = $('#peekRest'); r.hidden = !rest; r.innerHTML = rest;
 }
 // See all lists every loaded connection that passes the Match slider, and says how many more the full dataset holds.
 function openList(verse) {
@@ -915,6 +980,8 @@ function openJson(title, obj, mode) {
   S.jsonMode = mode; const text = JSON.stringify(obj, null, 2);
   $('#jsonTitle').innerHTML = `${esc(title)}<span class="sub">${{ trail: 'asb.trail/2 document', annotations: 'asb.annotations/1 document' }[mode] || 'asb.chapter/2 verse object'}</span>`;
   const pre = $('#jsonPre'), ta = $('#jsonTa'); pre.innerHTML = highlightJson(text); ta.value = text; pre.hidden = false; ta.hidden = true;
+  const note = $('#jsonNote'); note.hidden = !(mode === 'verse' && S.tr === 'niv');
+  note.textContent = 'You are reading the NIV. The text field here is the BSB: NIV words are never stored in our data.';
   openSheet('jsonSheet');
 }
 function copyText(text) {
@@ -924,7 +991,7 @@ function copyText(text) {
   navigator.clipboard.writeText(text).then(done, fail);
 }
 function openJsonFallback(text) {
-  if (S.sheet !== 'jsonSheet') { $('#jsonTitle').innerHTML = `Copy manually<span class="sub">Select the text below</span>`; openSheet('jsonSheet'); }
+  if (S.sheet !== 'jsonSheet') { $('#jsonTitle').innerHTML = `Copy manually<span class="sub">Select the text below</span>`; $('#jsonNote').hidden = true; openSheet('jsonSheet'); }
   const pre = $('#jsonPre'), ta = $('#jsonTa'); ta.value = text; pre.hidden = true; ta.hidden = false; ta.focus(); ta.select();
   toast('Clipboard blocked here. The text is selected for you.');
 }
@@ -935,6 +1002,9 @@ function openAbout() {
     `<p class="lead">Read a chapter, and the strip below it shows the other verses across the Bible that connect to the verse in focus, with the reason for each link. Tap a connection to read it, tap Go to jump, and the trail remembers your path so you can spiderweb back.</p>` +
     `<h4>Display</h4><div class="seg" id="themeSeg"><button data-theme="" aria-pressed="false">Auto</button><button data-theme="light" aria-pressed="false">Light</button><button data-theme="dark" aria-pressed="false">Dark</button></div>` +
     `<h4>Bible text</h4><p id="aboutPreview">Preview text: ${esc(tr.name || 'Berean Standard Bible')}. The app launches with the NIV.</p><p id="aboutNivPreview">In the app, chip previews will show the NIV if YouVersion allows partial-verse previews; otherwise they show the reference and reason only.</p><p>${esc(tr.attribution || att.text)}</p>${notice ? `<p class="fine" id="aboutNotice">${esc(notice)}</p>` : ''}` +
+    `<h4>NIV</h4><p id="aboutNiv">${S.yv.key ? 'Your YouVersion app key is saved in this browser.' : 'Add your free YouVersion app key to read the NIV here.'} NIV text loads live and is never saved.</p>` +
+    (S.yv.version ? `<p class="fine" id="aboutNivCopy">NIV \u00b7 ${esc(S.yv.version.copyright)}</p>` : '') +
+    `<div class="actions"><button class="btn" id="aboutKeyChange">${S.yv.key ? 'Change key' : 'Add key'}</button>${S.yv.key ? '<button class="btn danger" id="aboutKeyForget">Forget key</button>' : ''}</div>` +
     `<h4>Cross references</h4><p id="aboutXref">${esc(att.crossReferences)}</p>` +
     `<h4>Connection reasons</h4><p id="aboutReasons">Connection reasons are computed by rules from the public-domain text, not by AI.</p>` +
     `<p id="aboutMatch">Match percentage: 100% means the same words or the same account; lower means a looser topical or word match. It blends shared wording, names and themes with OpenBible.info reader votes.</p>` +
@@ -942,6 +1012,8 @@ function openAbout() {
     `<h4>Your marks</h4><p id="aboutMarks">Highlights, bookmarks, notes and tags are saved in this browser. In the app they stay on your iPhone and sync through your private iCloud. A note holds only what you type.</p>` +
     `<h4>Dataset</h4><p class="fine num">${m ? `Version ${esc(m.datasetVersion)} \u00b7 built ${esc(String(m.builtAt || '').slice(0, 10))} \u00b7 ${esc(m.pipeline || '')}<br>${m.graph ? `${m.graph.edges.toLocaleString()} cross references \u00b7 ${m.graph.mergedTickerItems.toLocaleString()} ranked connections \u00b7 ` : ''}ranking ${esc(m.ranking ? m.ranking.version : '')}` : 'manifest.json not found; showing built-in attribution'}</p>`;
   const cur = document.documentElement.getAttribute('data-theme') || '';
+  $('#aboutKeyChange').onclick = openKeySheet;
+  if ($('#aboutKeyForget')) $('#aboutKeyForget').onclick = forgetKey;
   $$('#themeSeg button').forEach(b => { b.setAttribute('aria-pressed', String(b.dataset.theme === cur)); b.onclick = () => { applyTheme(b.dataset.theme); store.set('theme', b.dataset.theme); $$('#themeSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); }; });
   openSheet('aboutSheet');
 }
@@ -962,6 +1034,163 @@ function openPicker(bookNo) {
   openSheet('pickerSheet');
 }
 
+/* ---------- NIV mode: live text from the YouVersion Platform, held in memory only ---------- */
+// NIV text never reaches localStorage, the JSON views, the trail or the marks: it sits in S.nivCur and this small LRU, and fetches use no-store.
+const YV = { base: 'https://api.youversion.com', bible: 111, keyStore: 'yvp.key.v1', trStore: 'translation.v1', keep: 6 };
+const nivLru = new Map();
+function lruGet(k) { if (!nivLru.has(k)) return null; const v = nivLru.get(k); nivLru.delete(k); nivLru.set(k, v); return v; }
+function lruPut(k, v) { nivLru.delete(k); nivLru.set(k, v); while (nivLru.size > YV.keep) nivLru.delete(nivLru.keys().next().value); }
+function nivEntry(chapterId) { return S.nivCur && S.nivCur.chapterId === chapterId ? S.nivCur : nivLru.get(`c:${chapterId}`) || null; }
+// The text on screen for a verse: the BSB, or the NIV once its chapter is loaded (undefined when the NIV lacks the verse).
+function shownText(vid) {
+  if (S.tr !== 'niv') return verseText(vid);
+  const e = nivEntry(vid - (vid % 1000)), t = e && e.verses.get(vid % 1000);
+  return typeof t === 'string' ? t : undefined;
+}
+async function yvGet(path) {
+  const url = YV.base + path; let r;
+  try { r = await fetch(url, { headers: { 'X-YVP-App-Key': S.yv.key || '', Accept: 'application/json' }, cache: 'no-store' }); }
+  catch (e) { S.missing.push(url); throw Object.assign(new Error('network'), { kind: 'network' }); }
+  if (!r.ok) { S.missing.push(url); throw Object.assign(new Error(`HTTP ${r.status}`), { kind: 'http', status: r.status }); }
+  try { return await r.json(); } catch (e) { throw Object.assign(new Error('bad json'), { kind: 'http', status: 'unreadable reply' }); }
+}
+function yvError(e) {
+  if (e && (e.status === 401 || e.status === 403)) return { kind: 'auth', status: e.status, message: 'YouVersion didn’t accept this key, or the NIV license isn’t accepted yet.' };
+  if (e && e.kind === 'network') return { kind: 'network', message: 'This page can’t reach YouVersion from here. Open the preview on your Mac: the steps are under “See the NIV” in the project README.' };
+  return { kind: 'http', status: e && e.status, message: `YouVersion returned an error (${(e && e.status) || 'unknown'}).` };
+}
+const plainText = s => s ? (new DOMParser().parseFromString(String(s), 'text/html').body.textContent || '').replace(/\s+/g, ' ').trim() : '';
+// Version info (for the copyright line) once per page load. No copyright means no NIV on screen.
+function nivVersion() {
+  if (S.yv.version) return Promise.resolve(S.yv.version);
+  if (!S.yv.versionP) S.yv.versionP = yvGet(`/v1/bibles/${YV.bible}`).then(d => {
+    const copyright = plainText(d && d.copyright) || plainText(d && d.promotional_content);
+    if (!copyright) throw Object.assign(new Error('no copyright'), { kind: 'http', status: 'no copyright line' });
+    S.yv.version = { abbreviation: plainText(d.localized_abbreviation) || plainText(d.abbreviation) || 'NIV', title: plainText(d.title), copyright };
+    return S.yv.version;
+  }).catch(e => { S.yv.versionP = null; throw e; });
+  return S.yv.versionP;
+}
+// Passage HTML to verse text, without ever inserting the API's HTML: a .yv-v marker starts a verse ("16-17" starts 16 and folds 17 in),
+// text runs across block elements until the next marker, and labels (.yv-vlbl) and notes (.yv-n) are skipped.
+// Headings use the same classes YouVersion's own web SDK skips; one that somehow holds a verse marker is kept.
+const NIV_HEADINGS = '.yv-h, .s, .s1, .s2, .s3, .s4, .ms, .ms1, .ms2, .ms3, .ms4, .mr, .sp, .sr, .qa, .r';
+const NIV_MARKER = '.yv-v[v], .verse[v]';
+function parseNiv(html) {
+  const doc = new DOMParser().parseFromString(String(html || ''), 'text/html');
+  doc.querySelectorAll('.yv-n, script, style').forEach(n => n.remove());
+  doc.querySelectorAll(NIV_HEADINGS).forEach(n => { if (!n.querySelector(NIV_MARKER)) n.remove(); });
+  const parts = new Map(), joined = new Map(), block = /^(DIV|P|BR|LI|TR|BLOCKQUOTE|H[1-6])$/;
+  const num = s => { const m = /(\d+)\s*$/.exec(String(s).split('.').pop()); return m ? +m[1] : null; };
+  let cur = null;
+  const walk = doc.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+  for (let n = walk.nextNode(); n; n = walk.nextNode()) {
+    if (n.nodeType === 1) {
+      if (n.matches(NIV_MARKER)) {
+        const ends = String(n.getAttribute('v') || '').split('-'), a = num(ends[0]), b = num(ends[ends.length - 1]);
+        if (a) { cur = a; if (!parts.has(a)) parts.set(a, []); for (let k = a + 1; b && k <= b; k++) joined.set(k, a); }
+      } else if (cur !== null && block.test(n.tagName)) parts.get(cur).push(' ');
+      continue;
+    }
+    if (cur === null || (n.parentElement && n.parentElement.closest('.yv-vlbl'))) continue;
+    parts.get(cur).push(n.nodeValue);
+  }
+  const verses = new Map();
+  parts.forEach((p, k) => { const t = p.join('').replace(/\s+/g, ' ').trim(); if (t) verses.set(k, t); });
+  return { verses, joined };
+}
+const passagePath = id => `/v1/bibles/${YV.bible}/passages/${encodeURIComponent(id)}?format=html&include_headings=false&include_notes=false`;
+function usfmOf(bookNo) {
+  const b = S.bookByNo[bookNo];
+  if (!b || !b.usfm) throw Object.assign(new Error('no usfm'), { kind: 'http', status: 'no YouVersion book code in books.json' });
+  return b.usfm;
+}
+async function nivChapter(bookNo, chapter) {
+  const chapterId = vidOf(bookNo, chapter, 0), hit = lruGet(`c:${chapterId}`);
+  if (hit) { await nivVersion(); return hit; }
+  const [, d] = await Promise.all([nivVersion(), yvGet(passagePath(`${usfmOf(bookNo)}.${chapter}`))]);
+  const e = { chapterId, ...parseNiv(d && d.content) };
+  if (!e.verses.size) throw Object.assign(new Error('empty'), { kind: 'http', status: 'no verses' });
+  lruPut(`c:${chapterId}`, e);
+  return e;
+}
+async function nivPassage(bookNo, chapter, v1, v2) {
+  const id = `${usfmOf(bookNo)}.${chapter}.${v1}${v2 > v1 ? '-' + v2 : ''}`, hit = lruGet(`p:${id}`);
+  if (hit) { await nivVersion(); return hit; }
+  const [, d] = await Promise.all([nivVersion(), yvGet(passagePath(id))]);
+  const e = { chapterId: null, ...parseNiv(d && d.content) };
+  if (!e.verses.size) throw Object.assign(new Error('empty'), { kind: 'http', status: 'no verses' });
+  lruPut(`p:${id}`, e);
+  return e;
+}
+function nivVersesHtml(e, from, to) {
+  const out = [];
+  for (let n = from; n <= to; n++) {
+    const t = e.verses.get(n), j = e.joined.get(n);
+    out.push(`<sup class="vn">${n}</sup>${t ? esc(t) : `<span class="v-missing">${j ? `Included in verse ${j}` : 'Not in the NIV main text'}</span>`}`);
+  }
+  return out.join(' ');
+}
+function syncSwitch() {
+  const sw = $('#trSwitch'), niv = S.tr === 'niv';
+  sw.setAttribute('aria-checked', String(niv));
+  sw.setAttribute('aria-busy', String(S.yv.pending > 0));
+  sw.title = niv ? 'Showing the NIV from YouVersion. Tap for the BSB.' : 'Showing the Berean Standard Bible. Tap for the NIV.';
+  syncBanner();
+}
+// Decides the text for the next chapter render: the NIV when chosen and keyed, else the BSB. A failure keeps the BSB and records the reason.
+async function prepareText(bookNo, chapter, gen) {
+  let tr = 'bsb', entry = null;
+  if (S.trPref === 'niv' && S.yv.key && !S.yv.error) {
+    S.yv.pending++; syncSwitch();
+    try { entry = await nivChapter(bookNo, chapter); tr = 'niv'; }
+    catch (e) { if (gen === S.navGen) { S.yv.error = yvError(e); console.warn('NIV fallback:', S.yv.error.message); } }
+    S.yv.pending--;
+  }
+  if (gen !== S.navGen) { syncSwitch(); return false; }
+  S.tr = tr; S.nivCur = entry;
+  indexAnn(); syncSwitch();
+  return true;
+}
+// Re-renders the chapter on screen in the chosen text, keeping the verse in focus.
+async function reloadChapter() {
+  if (!S.bundle) return;
+  const gen = ++S.navGen, f = verseOf(S.focusVid) ? S.focusVid : S.bundle.verses[0].vid;
+  if (!(await prepareText(S.bookNo, S.chapter, gen))) return;
+  closeBar(); renderChapter(S.bundle); scrollToVerse(f); setFocus(f, { force: true, pin: true });
+}
+function setTranslation(tr) {
+  if (tr === 'niv' && !S.yv.key) { openKeySheet(); return Promise.resolve(); }
+  S.trPref = tr === 'niv' ? 'niv' : 'bsb'; store.set(YV.trStore, S.trPref); S.yv.error = null;
+  return reloadChapter();
+}
+// The fallback banner sits between the top bar and the text, so the reason stays in view while reading the BSB.
+function syncBanner() {
+  const e = S.trPref === 'niv' ? S.yv.error : null, el = $('#nivBanner'), was = !el.hidden;
+  if (e) { $('#nivReason').textContent = e.message; $('#nivKeyBtn').hidden = e.kind !== 'auth'; }
+  el.hidden = !e;
+  if (was !== !!e) fit();
+}
+function openKeySheet() {
+  $('#keyInput').value = ''; $('#keyErr').hidden = true;
+  openSheet('keySheet');
+  setTimeout(() => { if (S.sheet === 'keySheet') $('#keyInput').focus({ preventScroll: true }); }, 350);
+}
+async function loadKey() {
+  const key = $('#keyInput').value.trim();
+  if (!key) { const e = $('#keyErr'); e.textContent = 'Paste your app key first.'; e.hidden = false; return; }
+  S.yv.key = key; store.set(YV.keyStore, key);
+  S.yv.version = null; S.yv.versionP = null; nivLru.clear();
+  closeSheet();
+  await setTranslation('niv');
+  if (S.tr === 'niv') toast('Showing the NIV');
+}
+function forgetKey() {
+  S.yv.key = null; store.del(YV.keyStore);
+  S.trPref = 'bsb'; store.set(YV.trStore, 'bsb'); S.yv.error = null; S.yv.version = null; S.yv.versionP = null; nivLru.clear();
+  closeSheet(); reloadChapter(); toast('Key forgotten. Showing the BSB.');
+}
+
 /* ---------- the reader's marks: highlights, bookmarks, notes, tags (spec 2.13) ---------- */
 const PALETTE = [{ id: 'yellow', label: 'Yellow', hex: '#ffe27a' }, { id: 'green', label: 'Green', hex: '#b8e6a0' }, { id: 'blue', label: 'Blue', hex: '#a9d3f5' }, { id: 'pink', label: 'Pink', hex: '#f6b8d1' }, { id: 'orange', label: 'Orange', hex: '#ffc98a' }];
 const ANN_KEY = 'annotations.v1';
@@ -980,8 +1209,8 @@ const STUDY_TABS = {
 const emptyAnn = () => ({ schema: 'asb.annotations/1', palette: PALETTE.map(p => ({ ...p })), tags: [], items: [], rules: {} });
 const validAnn = d => !!d && typeof d === 'object' && d.schema === 'asb.annotations/1' && Array.isArray(d.items) && Array.isArray(d.tags);
 const cloneJson = o => JSON.parse(JSON.stringify(o));
-const shownTranslation = () => (S.text && S.text.translation && S.text.translation.id) || 'bsb';
-const wordsOf = vid => { const t = verseText(vid); return t ? t.split(/\s+/) : []; };
+const shownTranslation = () => S.tr;
+const wordsOf = vid => { const t = shownText(vid); return t ? t.split(/\s+/) : []; };
 const paletteOf = () => (S.ann && Array.isArray(S.ann.palette) && S.ann.palette.length ? S.ann.palette : PALETTE);
 const colorOf = id => paletteOf().find(p => p.id === id) || null;
 const colorLabel = id => { const c = colorOf(id); return c ? c.label : 'Highlight'; };
@@ -1049,8 +1278,8 @@ function tagsAt(vid) {
 }
 
 /* verse markup: every word is a span with its 0-based index in text.split(/\s+/), so part-of-verse marks land on exact words */
-function wordsHtml(v, m, sel) {
-  const toks = v.text.split(/(\s+)/), n = Math.ceil(toks.length / 2);
+function wordsHtml(text, m, sel) {
+  const toks = text.split(/(\s+)/), n = Math.ceil(toks.length / 2);
   const col = new Array(n).fill(null), under = new Array(n).fill(false), pick = new Array(n).fill(false);
   if (m) {
     m.hl.forEach(sp => { for (let i = sp.from; i <= sp.to; i++) col[i] = sp.it.color; });
@@ -1074,9 +1303,15 @@ function wordsHtml(v, m, sel) {
   close();
   return out;
 }
+function missingHtml(vid) {
+  if (S.tr !== 'niv') return '<span class="tag">omitted</span>';
+  const e = nivEntry(vid - (vid % 1000)), j = e && e.joined.get(vid % 1000);
+  return `<span class="v-missing">${j ? `Included in verse ${j}` : 'Not in the NIV main text'}</span>`;
+}
 function verseInner(v) {
   const m = S.annIdx.get(v.vid), sel = S.sel && S.sel.vid === v.vid ? S.sel : null;
-  let html = `<sup class="vn">${v.verse}</sup>` + (v.omitted ? '<span class="tag">omitted</span>' : `<span class="vt">${wordsHtml(v, m, sel)}</span>`);
+  const text = shownText(v.vid);
+  let html = `<sup class="vn">${v.verse}</sup>` + (text ? `<span class="vt">${wordsHtml(text, m, sel)}</span>` : missingHtml(v.vid));
   if (!m) return html;
   m.cover.filter(it => it.kind === 'note' && it.anchor.start.vid === v.vid).forEach(it => {
     html += `<button class="v-note" data-note="${esc(it.id)}" aria-label="Open your note on ${esc(it.anchor.label)}">${ICON.note}</button>`;
@@ -1187,17 +1422,17 @@ function endPart() { const s = S.sel; if (s && s.part) { s.part = false; s.a = s
 function barAnchor() { const s = S.sel; if (!s) return null; if (!s.part) return makeAnchor(s.vid, null); const r = pickRange(); return r ? makeAnchor(s.vid, r) : null; }
 function renderBar() {
   const s = S.sel, v = verseOf(s.vid); if (!v) return;
-  const m = S.annIdx.get(s.vid), r = pickRange(), wait = s.part && !r, bm = !!(m && m.bm.length), hl = !!(m && m.hl.length);
+  const m = S.annIdx.get(s.vid), r = pickRange(), wait = s.part && !r, bm = !!(m && m.bm.length), hl = !!(m && m.hl.length), noText = !shownText(s.vid);
   const whole = m && m.hl.filter(h => h.whole).map(h => h.it.color).pop();
   $('#abLabel').textContent = v.label;
   $('#abHint').textContent = !s.part ? '' : s.a === null ? 'Tap the first word' : s.b === null ? 'Tap the last word' : `${r[1] - r[0] + 1} word${r[1] === r[0] ? '' : 's'} selected`;
   $('#actionBar').setAttribute('aria-label', `Mark ${v.label}`);
-  $('#abSwatches').innerHTML = paletteOf().map(p => `<button class="sw" data-color="${esc(p.id)}" style="--sw:${esc(p.hex)}" aria-label="Highlight ${esc(p.label.toLowerCase())}${s.part ? ', selected words' : ''}" aria-pressed="${!s.part && p.id === whole}"${wait || v.omitted ? ' disabled' : ''}></button>`).join('');
+  $('#abSwatches').innerHTML = paletteOf().map(p => `<button class="sw" data-color="${esc(p.id)}" style="--sw:${esc(p.hex)}" aria-label="Highlight ${esc(p.label.toLowerCase())}${s.part ? ', selected words' : ''}" aria-pressed="${!s.part && p.id === whole}"${wait || noText ? ' disabled' : ''}></button>`).join('');
   const clr = $('#abClear'); clr.disabled = !hl; clr.setAttribute('aria-label', `Clear the highlight on ${v.label}`);
   const b = $('#abBookmark'); b.disabled = s.part; b.setAttribute('aria-pressed', String(bm)); b.setAttribute('aria-label', bm ? `Remove the bookmark on ${v.label}` : `Bookmark ${v.label}`);
   const n = $('#abNote'); n.disabled = wait; n.setAttribute('aria-label', s.part ? 'Write a note on the selected words' : `Write a note on ${v.label}`);
   const t = $('#abTag'); t.disabled = wait; t.setAttribute('aria-label', s.part ? 'Tag the selected words' : `Tag ${v.label}`);
-  const p = $('#abPart'); p.disabled = v.omitted; p.setAttribute('aria-pressed', String(s.part)); p.setAttribute('aria-label', s.part ? 'Back to the whole verse' : 'Mark part of the verse: tap the first word, then the last');
+  const p = $('#abPart'); p.disabled = noText; p.setAttribute('aria-pressed', String(s.part)); p.setAttribute('aria-label', s.part ? 'Back to the whole verse' : 'Mark part of the verse: tap the first word, then the last');
   $('#abPartLbl').textContent = s.part ? 'Whole verse' : 'Part of verse';
 }
 
@@ -1287,7 +1522,8 @@ function saveTags() {
 }
 
 /* My Study: every mark, newest first; tapping a row jumps there and pushes a trail hop */
-const newestFirst = (a, b) => String(b.updatedAt || b.createdAt).localeCompare(String(a.updatedAt || a.createdAt));
+// Ties (two marks in the same second) go to the one saved later.
+const newestFirst = (a, b) => String(b.updatedAt || b.createdAt).localeCompare(String(a.updatedAt || a.createdAt)) || S.ann.items.indexOf(b) - S.ann.items.indexOf(a);
 function tagGroups(id) {
   const groups = new Map();
   S.ann.items.filter(it => (it.tags || []).includes(id)).sort(newestFirst).forEach(it => { const k = anchorKey(it.anchor); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(it); });
@@ -1486,6 +1722,11 @@ $('#studyBody').addEventListener('click', e => {
   else if (act === 'clearYes') clearAllMarks();
 });
 $('#titleBtn').addEventListener('click', () => openPicker(0));
+$('#trSwitch').addEventListener('click', () => setTranslation(S.tr === 'niv' ? 'bsb' : 'niv'));
+$('#keyLoad').addEventListener('click', loadKey);
+$('#keyInput').addEventListener('input', () => { $('#keyErr').hidden = true; });
+$('#nivBanner').addEventListener('click', e => { const b = e.target.closest('[data-niv]'); if (!b) return; if (b.dataset.niv === 'retry') { S.yv.error = null; reloadChapter(); } else if (b.dataset.niv === 'key') openKeySheet(); else setTranslation('bsb'); });
+$('#keyInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); loadKey(); } });
 $('#pickerBack').addEventListener('click', () => openPicker(0));
 $('#pickerBody').addEventListener('click', async e => {
   const b = e.target.closest('[data-book]'); if (b) { openPicker(+b.dataset.book); return; }
@@ -1518,11 +1759,14 @@ async function boot() {
     const f = !mo && manifest && manifest.ranking && String(manifest.ranking.dwellSeconds || '').match(/([\d.]+)\s*\+\s*([\d.]+)\s*\*\s*weight/);
     if (mo && isFinite(mo.baseSeconds) && isFinite(mo.perWeightSeconds)) S.motion = { defaultMode: mo.defaultMode || 'hold', baseSeconds: +mo.baseSeconds, perWeightSeconds: +mo.perWeightSeconds };
     else if (f) S.motion = { defaultMode: 'hold', baseSeconds: +f[1], perWeightSeconds: +f[2] };
-    if (text.translation && text.translation.abbr) $('#previewTag').textContent = `${text.translation.abbr} preview`;
   } catch (e) {
     reader.innerHTML = `<div class="loading"><p>The Bible data could not be loaded.</p><p class="fine">${esc(e.message)}</p></div>`;
     console.warn(e); return;
   }
+  const key = store.get(YV.keyStore);
+  S.yv.key = typeof key === 'string' && key.trim() ? key.trim() : null;
+  S.trPref = S.yv.key && store.get(YV.trStore) === 'niv' ? 'niv' : 'bsb';
+  syncSwitch();
   const ms = S.manifest && S.manifest.ranking && S.manifest.ranking.matchSlider;
   if (ms) S.matchSlider = { min: isFinite(ms.min) ? +ms.min : 0, max: isFinite(ms.max) ? +ms.max : 100, step: isFinite(ms.step) && ms.step > 0 ? +ms.step : 5, default: isFinite(ms.default) ? +ms.default : 0 };
   const sl = $('#matchSlider'); sl.min = S.matchSlider.min; sl.max = S.matchSlider.max; sl.step = S.matchSlider.step;
@@ -1539,9 +1783,9 @@ async function boot() {
   if (!hasChapter(p.book, p.chapter)) { target = 43003016; p = split(target); }
   fit();
   const ok = await navigate({ bookNo: p.book, chapter: p.chapter, vid: target, kind: 'open' });
-  if (!ok) reader.innerHTML = '<div class="loading"><p>No chapter text is available in this preview.</p></div>';
+  if (!ok && !S.bundle) reader.innerHTML = '<div class="loading"><p>No chapter text is available in this preview.</p></div>';
 }
-window.asb = { state: S, parseRef, navigate, expandChip, snippetOf, labelOf, refOf, buildBundle, openPeek, goBack, goForward, verseOf, setFilter, setMatch, poolOf, atOrAbove, setMotion, openStudy, openBar, closeBar, annotations: () => S.ann };
+window.asb = { state: S, parseRef, navigate, expandChip, snippetOf, labelOf, refOf, buildBundle, openPeek, goBack, goForward, verseOf, setFilter, setMatch, poolOf, atOrAbove, setMotion, openStudy, openBar, closeBar, annotations: () => S.ann, setTranslation, parseNiv, nivCacheKeys: () => Array.from(nivLru.keys()) };
 boot();
 </script>
 </body>

@@ -67,11 +67,11 @@ const evalState = expr => page.evaluate(expr);
 const focusVid = () => page.evaluate(() => +(document.querySelector('.v.focus') || {}).dataset?.vid || 0);
 const title = () => page.textContent('#titleText');
 const crumbs = () => page.evaluate(() => Array.from(document.querySelectorAll('#crumbs .crumb')).map(c => c.textContent).join(' → '));
-async function shot(name) {
-  await page.evaluate(() => { const t = document.getElementById('toast'); t.style.transition = 'none'; t.classList.remove('on'); void t.offsetWidth; t.style.transition = ''; });
-  const bb = await page.locator('#phone').boundingBox();
+async function shot(name, p = page) {
+  await p.evaluate(() => { const t = document.getElementById('toast'); t.style.transition = 'none'; t.classList.remove('on'); void t.offsetWidth; t.style.transition = ''; });
+  const bb = await p.locator('#phone').boundingBox();
   const file = path.join(shots, name);
-  await page.screenshot({ path: file, clip: { x: bb.x - 26, y: bb.y - 26, width: bb.width + 52, height: bb.height + 52 } });
+  await p.screenshot({ path: file, clip: { x: bb.x - 26, y: bb.y - 26, width: bb.width + 52, height: bb.height + 52 } });
   console.log('  shot', file);
 }
 async function scrollVerseToFocus(vid) {
@@ -128,7 +128,7 @@ try {
   // 1. Name, opening state, hold mode by default.
   check((await page.title()) === 'Dynamic Study Bible', `document title is "${await page.title()}"`);
   check((await page.textContent('#aboutSheet h2')).startsWith('Dynamic Study Bible'), 'About sheet carries the new name');
-  check((await page.textContent('#previewTag')) === 'BSB preview', 'a "BSB preview" tag sits under the chapter title');
+  check(await page.evaluate(() => { const s = document.getElementById('trSwitch'); return s.getAttribute('role') === 'switch' && s.getAttribute('aria-checked') === 'false' && s.textContent === 'BSBNIV'; }), 'a BSB / NIV switch sits under the chapter title, on BSB');
   check((await title()) === 'John 3', 'opens on John 3');
   check((await focusVid()) === 43003016, 'verse 16 is in focus at rest');
   await waitStrip();
@@ -785,7 +785,200 @@ try {
   check(sxSeed.length === 1 && (await hlGroups(sp, 43003015)).length === 1, 'when storage throws the page still seeds the examples and takes new marks');
   await sx.close();
 
-  // 19. Console errors.
+  // 19. NIV mode. The YouVersion API is faked with page.route and placeholder words; no NIV text appears anywhere in this test.
+  const booksPack = JSON.parse(fs.readFileSync(path.join(root, 'data', 'books.json'), 'utf8')).books;
+  const byUsfm = Object.fromEntries(booksPack.filter(b => b.usfm).map(b => [b.usfm, b]));
+  check(booksPack.length === 66 && Object.keys(byUsfm).length === 66 && byUsfm.JHN.bookNo === 43 && byUsfm['1JN'].bookNo === 62 && byUsfm.SNG.bookNo === 22 && byUsfm.PSA.bookNo === 19, 'books.json carries a YouVersion usfm code for all 66 books');
+  const FAKE_COPY = 'Fake copyright line for the smoke test. Not a real notice.';
+  const fakeVerse = (usfm, c, v) => `Niv placeholder ${usfm.toLowerCase()} ${c} ${v} word alpha beta gamma.`;
+  const T16 = 'Niv placeholder word one two three four five six on a new line';
+  function fakePassage(usfm, c, v1, v2) {
+    let h = '<div class="p">';
+    for (let v = v1; v <= v2; v++) {
+      if (usfm === 'JHN' && c === 3 && v === 16) { h += '<span class="yv-v" v="16"></span><span class="yv-vlbl">16</span>Niv placeholder word one two<span class="yv-n f"><span class="fr">3:16 </span><span class="ft">Fake footnote words</span></span> three four</div><div class="q1">five six on a new line</div><div class="p">'; continue; }
+      if (usfm === 'JHN' && c === 3 && v === 30) continue;
+      if (usfm === 'JHN' && c === 3 && v === 33) { h += '<span class="yv-v" v="33-34"></span><span class="yv-vlbl">33-34</span>Niv placeholder joined verses word. '; continue; }
+      if (usfm === 'JHN' && c === 3 && v === 34) continue;
+      h += `<span class="yv-v" v="${v}"></span><span class="yv-vlbl">${v}</span>${fakeVerse(usfm, c, v)} `;
+    }
+    return h + '</div>';
+  }
+  const api = { mode: 'ok', calls: [] };
+  const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'x-yvp-app-key, accept', 'access-control-allow-methods': 'GET, OPTIONS' };
+  const nctx = await browser.newContext({ viewport: { width: 1200, height: 1000 }, deviceScaleFactor: 2, ignoreHTTPSErrors: true });
+  await nctx.route('https://api.youversion.com/**', async route => {
+    const req = route.request();
+    if (req.method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
+    const u = new URL(req.url());
+    api.calls.push({ path: decodeURIComponent(u.pathname), query: u.search, headers: req.headers() });
+    if (api.mode === 'abort') return route.abort('failed');
+    const json = (status, body) => route.fulfill({ status, headers: cors, contentType: 'application/json', body: JSON.stringify(body) });
+    if (api.mode === '401') return json(401, { message: 'unauthorized' });
+    if (u.pathname === '/v1/bibles/111') return json(200, { id: 111, abbreviation: 'NIV', localized_abbreviation: 'NIV', title: 'Fake version title', copyright: FAKE_COPY, promotional_content: 'Fake promotional words', books: Object.keys(byUsfm) });
+    const m = decodeURIComponent(u.pathname).match(/^\/v1\/bibles\/111\/passages\/([0-9A-Z]+)\.(\d+)(?:\.(\d+)(?:-(\d+))?)?$/);
+    if (!m || !byUsfm[m[1]]) return json(404, { message: 'not found' });
+    const c = +m[2], v1 = m[3] ? +m[3] : 1, v2 = m[4] ? +m[4] : m[3] ? +m[3] : byUsfm[m[1]].verseCounts[c - 1];
+    return json(200, { id: `${m[1]}.${c}${m[3] ? '.' + m[3] : ''}${m[4] ? '-' + m[4] : ''}`, content: fakePassage(m[1], c, v1, v2), reference: `${byUsfm[m[1]].name} ${c}` });
+  });
+  const np = await nctx.newPage();
+  const nErrors = [];
+  np.on('console', msg => { if (msg.type() === 'error') nErrors.push({ text: msg.text(), url: (msg.location() || {}).url || '' }); });
+  np.on('pageerror', err => nErrors.push({ text: `pageerror: ${err.message}`, url: '' }));
+  const swState = () => np.evaluate(() => { const s = document.getElementById('trSwitch'); return { checked: s.getAttribute('aria-checked'), role: s.getAttribute('role'), name: s.getAttribute('aria-label'), text: s.textContent }; });
+  const vt = vid => np.evaluate(v => document.querySelector(`.v[data-vid="${v}"] .vt`)?.textContent ?? null, vid);
+  const nivShown = () => np.waitForFunction(() => document.getElementById('trSwitch').getAttribute('aria-checked') === 'true' && /Niv placeholder/.test(document.querySelector('.v[data-vid="43003016"]')?.textContent || ''), null, { timeout: 6000 });
+  const nivLast = async () => { const d = await np.evaluate(() => JSON.parse(localStorage.getItem('asb.annotations.v1'))); return d.items[d.items.length - 1]; };
+  const nivChips = () => np.evaluate(() => { const v = window.asb.verseOf(window.asb.state.focusVid); return Array.from(document.querySelectorAll('#track .chip')).map(c => { const it = window.asb.poolOf(v).find(x => x.rank === +c.dataset.rank); return { because: c.querySelector('.because')?.textContent ?? null, want: it.reason.because, snip: !!c.querySelector('.snip') }; }); });
+  const stripSettled = p => p.waitForFunction(() => !document.getElementById('marquee').classList.contains('fading') && document.querySelector('#track').children.length > 0, null, { timeout: 3000 });
+  await np.goto(url, { waitUntil: 'load' });
+  await np.waitForSelector('.v[data-vid="43003016"]', { timeout: 20000 });
+  await sleep(600);
+  const sw0 = await swState();
+  check(sw0.role === 'switch' && sw0.checked === 'false' && sw0.name === 'Show the NIV' && sw0.text === 'BSBNIV' && api.calls.length === 0, `the BSB / NIV switch is a labelled switch that starts on BSB, and nothing calls YouVersion (${JSON.stringify(sw0)})`);
+  await np.focus('#trSwitch');
+  await np.keyboard.press('Space');
+  await np.waitForSelector('#keySheet.on', { timeout: 3000 });
+  await sleep(400);
+  const keyText = await np.textContent('#keySheet');
+  check((await np.textContent('#keySheet h2')) === 'Show the NIV' && keyText.includes('The NIV loads live from YouVersion with your free app key.') && keyText.includes('platform.youversion.com') && /non-commercial/.test(keyText) && /Accept the NIV license/.test(keyText) && keyText.includes('The key stays in this browser. NIV text is never saved.'), 'choosing NIV from the keyboard with no key opens "Show the NIV" with the plain-words steps');
+  check((await swState()).checked === 'false' && api.calls.length === 0, 'the switch stays on BSB until a key is loaded');
+  await np.click('#keyLoad');
+  check(await np.evaluate(() => !document.getElementById('keyErr').hidden && document.getElementById('keyErr').textContent === 'Paste your app key first.'), 'Load NIV with an empty field asks for the key');
+  await np.fill('#keyInput', 'test-key-123');
+  await shot('18-niv-key-sheet.png', np);
+  await np.click('#keyLoad');
+  await nivShown();
+  await sleep(500);
+  const vCalls = api.calls.filter(c => c.path === '/v1/bibles/111'), chCalls = api.calls.filter(c => c.path === '/v1/bibles/111/passages/JHN.3');
+  check(vCalls.length === 1 && chCalls.length === 1 && api.calls.length === 2, `NIV mode makes two calls: version info and the JHN.3 chapter (${api.calls.map(c => c.path).join(', ')})`);
+  check(api.calls.every(c => c.headers['x-yvp-app-key'] === 'test-key-123' && c.headers.accept === 'application/json'), 'every call sends X-YVP-App-Key and Accept: application/json');
+  const q = new URLSearchParams(chCalls[0] ? chCalls[0].query : '');
+  check(q.get('format') === 'html' && q.get('include_headings') === 'false' && q.get('include_notes') === 'false', `the chapter call asks for html without headings or notes (${chCalls[0] && chCalls[0].query})`);
+  check((await vt(43003016)) === T16, `verse text runs across div blocks with the label and footnote stripped: "${await vt(43003016)}"`);
+  check((await vt(43003001)) === fakeVerse('JHN', 3, 1) && (await vt(43003036)) === fakeVerse('JHN', 3, 36), 'every verse row shows its NIV (placeholder) text, keyed by verse id');
+  check(await np.evaluate(() => { const el = document.querySelector('.v[data-vid="43003030"]'); return el.classList.contains('missing') && el.querySelector('.vn').textContent === '30' && el.querySelector('.v-missing').textContent === 'Not in the NIV main text'; }), 'a verse the NIV lacks shows its number and "Not in the NIV main text"');
+  check((await vt(43003033)) === 'Niv placeholder joined verses word.' && (await np.textContent('.v[data-vid="43003034"] .v-missing')) === 'Included in verse 33', 'a combined marker (33-34) puts the text on 33 and says 34 is included in it');
+  const credit = await np.textContent('#nivCredit');
+  check(credit === `NIV${FAKE_COPY}` && await np.$('#nivCredit b') !== null, `under the chapter: "NIV" and the copyright string from /v1/bibles/111 (${credit})`);
+  const sw1 = await swState();
+  check(sw1.checked === 'true' && (await np.evaluate(() => [localStorage.getItem('asb.yvp.key.v1'), localStorage.getItem('asb.translation.v1')])).join('|') === '"test-key-123"|"niv"', 'the switch reads NIV; the key and the choice are saved under asb.yvp.key.v1 and asb.translation.v1');
+  await stripSettled(np);
+  await sleep(200);
+  const nc = await nivChips();
+  check(nc.length === 12 && nc.every(c => c.because === c.want && !c.snip), 'NIV chips show the reason’s because line on line 2, never verse words');
+  check(api.calls.length === 2, 'moving focus does not fetch chip previews');
+  await shot('17-niv-reader.png', np);
+  await np.click('#track .chip[data-rank="1"]');
+  await np.waitForSelector('#peekSheet.on', { timeout: 3000 });
+  await np.waitForFunction(() => /Niv placeholder/.test(document.getElementById('peekPassage').textContent), null, { timeout: 5000 });
+  const peekCap = await np.textContent('#peekCaption');
+  check((await np.textContent('#peekPassage')) === '8' + fakeVerse('ROM', 5, 8) && peekCap === `NIV · ${FAKE_COPY}` && api.calls.some(c => c.path === '/v1/bibles/111/passages/ROM.5.8'), `the peek fetches ROM.5.8 and shows it with "NIV" and the copyright (${peekCap})`);
+  await np.click('#peekSheet [data-close]');
+  await sleep(300);
+  await np.click('#track .chip[data-rank="2"]');
+  await np.waitForSelector('#peekSheet.on', { timeout: 3000 });
+  await np.waitForFunction(() => /Niv placeholder/.test(document.getElementById('peekPassage').textContent), null, { timeout: 5000 });
+  const rangeTxt = await np.textContent('#peekPassage');
+  check(api.calls.some(c => c.path === '/v1/bibles/111/passages/1JN.4.9-10') && rangeTxt.includes(fakeVerse('1JN', 4, 9)) && rangeTxt.includes(fakeVerse('1JN', 4, 10)), 'a range inside one chapter is one call (1JN.4.9-10) showing whole verses');
+  await np.click('#peekSheet [data-close]');
+  await sleep(300);
+  // Marks made on NIV text store translation "niv" and NIV word counts.
+  const n16 = T16.split(/\s+/).length;
+  const seedNiv = await hlGroups(np, 43003016);
+  check(seedNiv.length === 1 && seedNiv[0].text === T16, 'the seeded whole-verse NIV highlight covers the whole NIV verse');
+  await np.click('.v[data-vid="43003017"] .w[data-w="0"]');
+  await np.waitForSelector('#actionBar:not([hidden])', { timeout: 3000 });
+  await np.click('#abSwatches .sw[data-color="green"]');
+  await sleep(250);
+  const w17 = await nivLast();
+  check(w17.kind === 'highlight' && w17.anchor.translation === 'niv' && !w17.anchor.partial && w17.anchor.start.word === null && w17.anchor.start.of === null && w17.sync.youversion === 'off', `a whole-verse NIV highlight stores translation "niv" and youversion "off" (${JSON.stringify(w17.anchor.start)}, ${w17.sync.youversion})`);
+  await np.click('.v[data-vid="43003016"] .w[data-w="0"]');
+  await sleep(200);
+  await np.click('#abPart');
+  await np.click('.v[data-vid="43003016"] .w[data-w="2"]');
+  await np.click('.v[data-vid="43003016"] .w[data-w="5"]');
+  await np.click('#abSwatches .sw[data-color="pink"]');
+  await sleep(250);
+  const p16 = await nivLast(), g16 = await hlGroups(np, 43003016);
+  check(p16.anchor.translation === 'niv' && p16.anchor.partial && same(p16.anchor.start, { vid: 43003016, word: 2, of: n16 }) && same(p16.anchor.end, { vid: 43003016, word: 5, of: n16 }) && p16.sync.youversion === 'notEligible', `a partial NIV highlight stores NIV word positions 2–5 of ${n16} (${JSON.stringify(p16.anchor.start)})`);
+  check(g16.some(g => g.text === 'word one two three' && g.bg === 'rgb(246, 184, 209)'), `the pink lands on exactly those NIV words (${g16.map(g => g.text).join(' | ')})`);
+  await np.click('#abClose');
+  await np.click('#jsonBtn');
+  await np.waitForSelector('#jsonSheet.on', { timeout: 3000 });
+  const jn = await np.evaluate(() => ({ note: document.getElementById('jsonNote').hidden ? '' : document.getElementById('jsonNote').textContent, pre: document.getElementById('jsonPre').textContent }));
+  check(jn.note === 'You are reading the NIV. The text field here is the BSB: NIV words are never stored in our data.' && !/placeholder/i.test(jn.pre) && jn.pre.includes(JSON.stringify(bsb(43003016))), 'the verse JSON in NIV mode keeps the BSB text and says NIV words are never stored');
+  await np.click('#jsonSheet [data-close]');
+  await sleep(250);
+  const stored = await np.evaluate(() => ({ ls: Object.keys(localStorage).map(k => localStorage.getItem(k)).join('\n'), trail: JSON.stringify(window.asb.state.trail), ann: JSON.stringify(window.asb.annotations()), lru: window.asb.nivCacheKeys().length }));
+  check(!/placeholder/i.test(stored.ls) && !/placeholder/i.test(stored.trail) && !/placeholder/i.test(stored.ann) && stored.lru <= 6, `no NIV words in localStorage, the trail or the marks; the in-memory cache holds ${stored.lru} of at most 6 entries`);
+  // Back to BSB and to NIV again.
+  const callsBefore = api.calls.length;
+  await np.click('#trSwitch');
+  await np.waitForFunction(() => document.getElementById('trSwitch').getAttribute('aria-checked') === 'false', null, { timeout: 3000 });
+  await sleep(300);
+  const wide = await hlGroups(np, 43003016);
+  check((await vt(43003016)) === bsb(43003016) && await np.$('#nivCredit') === null && (await np.evaluate(() => localStorage.getItem('asb.translation.v1'))) === '"bsb"', 'switching back shows the BSB, drops the NIV line and saves the choice');
+  check(wide.length === 1 && wide[0].text === bsb(43003016) && wide[0].bg === 'rgb(246, 184, 209)', 'the partial NIV mark widens to the whole verse in the BSB');
+  await stripSettled(np);
+  check(await np.evaluate(() => document.querySelectorAll('#track .chip .snip').length > 0), 'BSB chips show verse words again');
+  await np.click('#trSwitch');
+  await nivShown();
+  check(api.calls.length === callsBefore && !(await np.evaluate(() => document.getElementById('keySheet').classList.contains('on'))), 'switching to NIV again uses the key and the in-memory chapter: no sheet, no new call');
+  // Reload: the key persists, the NIV text does not.
+  api.calls = [];
+  await np.reload({ waitUntil: 'load' });
+  await nivShown();
+  await sleep(300);
+  check(api.calls.some(c => c.path === '/v1/bibles/111') && api.calls.some(c => c.path === '/v1/bibles/111/passages/JHN.3') && !/placeholder/i.test(await np.evaluate(() => Object.keys(localStorage).map(k => localStorage.getItem(k)).join('\n'))), 'after a reload the saved key brings the NIV back by fetching it again; storage still holds no NIV words');
+  // A failed peek fetch shows the BSB, labelled, with the reason.
+  await stripSettled(np);
+  api.mode = 'abort';
+  await np.click('#track .chip[data-rank="1"]');
+  await np.waitForSelector('#peekSheet.on', { timeout: 3000 });
+  await np.waitForFunction(() => /^BSB/.test(document.getElementById('peekCaption').textContent), null, { timeout: 5000 });
+  check((await np.textContent('#peekPassage')).includes(bsb(45005008)) && (await np.textContent('#peekCaption')).startsWith('BSB · The NIV did not load. This page can’t reach YouVersion'), 'if the peek fetch fails it shows the BSB verse labelled BSB, with the reason');
+  await np.click('#peekSheet [data-close]');
+  await sleep(300);
+  // 401: fall back to the BSB with a plain reason and Try again.
+  api.mode = '401';
+  await np.reload({ waitUntil: 'load' });
+  await np.waitForSelector('#nivBanner', { timeout: 6000 });
+  await sleep(300);
+  const b401 = await np.evaluate(() => ({ text: document.getElementById('nivReason').textContent, acts: Array.from(document.querySelectorAll('#nivBanner button')).filter(b => !b.hidden).map(b => b.textContent), rows: document.querySelectorAll('.v').length }));
+  check(b401.text === 'YouVersion didn’t accept this key, or the NIV license isn’t accepted yet.' && same(b401.acts, ['Try again', 'Change key', 'Use BSB']) && (await vt(43003016)) === bsb(43003016) && b401.rows > 30 && (await swState()).checked === 'false', `a 401 falls back to the BSB with the reason and Try again (${JSON.stringify(b401.acts)})`);
+  api.mode = 'ok';
+  await np.click('#nivBanner [data-niv="retry"]');
+  await nivShown();
+  check(await np.evaluate(() => document.getElementById('nivBanner').hidden), 'Try again loads the NIV once YouVersion answers');
+  // A network error (or a blocked request): the same fallback with the reason the founder will see on the published page.
+  api.mode = 'abort';
+  await np.evaluate(() => window.asb.navigate({ bookNo: 45, chapter: 5, vid: 45005008, kind: 'open' }));
+  await np.waitForSelector('#nivBanner', { timeout: 6000 });
+  await sleep(400);
+  check((await np.textContent('#nivReason')) === 'This page can’t reach YouVersion from here. Open the preview on your Mac: the steps are under “See the NIV” in the project README.' && (await np.textContent('#titleText')) === 'Romans 5' && (await vt(45005008)) === bsb(45005008), 'a network error falls back to the BSB chapter with the plain reason, never an empty screen');
+  const bannerBox = await np.evaluate(() => { const b = document.getElementById('nivBanner').getBoundingClientRect(), r = document.getElementById('reader').getBoundingClientRect(), t = document.querySelector('.topbar').getBoundingClientRect(); return { top: b.top, bottom: b.bottom, readerTop: r.top, barBottom: t.bottom, acts: Array.from(document.querySelectorAll('#nivBanner button')).filter(x => !x.hidden).map(x => x.textContent) }; });
+  check(bannerBox.top >= bannerBox.barBottom && bannerBox.bottom <= bannerBox.readerTop && same(bannerBox.acts, ['Try again', 'Use BSB']), `the banner stays in view between the top bar and the text (${JSON.stringify(bannerBox)})`);
+  await shot('19-niv-fallback.png', np);
+  await np.click('#nivBanner [data-niv="bsb"]');
+  await sleep(300);
+  check(await np.evaluate(() => document.getElementById('nivBanner').hidden) && (await np.evaluate(() => localStorage.getItem('asb.translation.v1'))) === '"bsb"' && (await swState()).checked === 'false', 'Use BSB clears the banner and saves the BSB choice');
+  // About: Change key and Forget key.
+  api.mode = 'ok';
+  await np.click('#aboutBtn');
+  await np.waitForSelector('#aboutSheet.on', { timeout: 3000 });
+  check((await np.textContent('#aboutKeyChange')) === 'Change key' && await np.$('#aboutKeyForget') !== null, 'About offers Change key and Forget key');
+  await np.click('#aboutKeyForget');
+  await sleep(400);
+  check((await np.evaluate(() => localStorage.getItem('asb.yvp.key.v1'))) === null && (await swState()).checked === 'false', 'Forget key removes the key from this browser');
+  const nReal = nErrors.filter(e => !(/Failed to load resource/.test(e.text) && (/api\.youversion\.com/.test(e.url) || /fonts\.(googleapis|gstatic)\.com/.test(e.url))));
+  check(nReal.length === 0, nReal.length ? `NIV mode console errors: ${JSON.stringify(nReal)}` : 'no console errors in NIV mode beyond the failed calls the test forced');
+  await nctx.close();
+
+  // The NIV parser skips the heading classes YouVersion's web SDK skips and accepts the Swift SDK's .verse marker.
+  const headParsed = await page.evaluate(() => { const r = window.asb.parseNiv('<div class="s1">Placeholder heading</div><div class="p"><span class="verse" v="1"></span><span class="yv-vlbl">1</span>Fake one.</div><div class="r">(Fake 1:1)</div><div class="q1"><span class="yv-v" v="2"></span>Fake two</div><div class="ms1">Book Two</div><div class="q2">continues.</div>'); return Object.fromEntries(r.verses); });
+  check(same(headParsed, { 1: 'Fake one.', 2: 'Fake two continues.' }), `headings (s1, r, ms1) are dropped and a .verse marker counts (${JSON.stringify(headParsed)})`);
+
+  // 20. Console errors.
   const handled = await page.evaluate(() => window.asb.state.missing);
   const fontNoise = consoleErrors.filter(e => /Failed to load resource/.test(e.text) && /fonts\.(googleapis|gstatic)\.com/.test(e.url));
   if (fontNoise.length) console.log(`  note  ${fontNoise.length} Google Fonts request(s) failed in this sandbox (the page falls back to the system serif); not counted as app errors`);
