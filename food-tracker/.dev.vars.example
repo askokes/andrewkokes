@@ -1,0 +1,8 @@
+# Copy to .dev.vars for `wrangler dev`. Never deployed, never committed.
+
+# Pretend to be this user locally. Only honored when the request host is
+# localhost / 127.0.0.1, so it cannot take effect on the deployed site.
+DEV_USER_EMAIL=you@example.com
+
+# USDA FoodData Central key. DEMO_KEY works but is heavily rate limited.
+USDA_API_KEY=DEMO_KEY
