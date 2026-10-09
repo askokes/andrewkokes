@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { bodyLimit } from "hono/body-limit";
 import { accessKeys, devUserEmail, verifyAccessJwt, type KeyResolver } from "./auth";
 import type { AppEnv } from "./env";
+import { foodRoutes } from "./food/routes";
 import { profileRoutes } from "./profile";
 
 export interface AppDeps {
@@ -51,6 +52,7 @@ export function createApp(overrides: Partial<AppDeps> = {}) {
   );
 
   api.route("/", profileRoutes);
+  api.route("/", foodRoutes(deps));
 
   // Registered last so unknown API paths get JSON, never the SPA's index.html.
   api.all("*", (c) => c.json({ error: "not_found", message: "No such endpoint." }, 404));

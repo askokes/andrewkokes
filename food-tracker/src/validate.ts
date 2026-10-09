@@ -19,10 +19,10 @@ export interface ProfileInput {
   currentWeightLb: number | null;
 }
 
-const isObject = (v: unknown): v is Record<string, unknown> =>
+export const isObject = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null && !Array.isArray(v);
 
-const isBlank = (v: unknown) => v === undefined || v === null || v === "";
+export const isBlank = (v: unknown) => v === undefined || v === null || v === "";
 
 function wholeNumber(
   v: unknown,

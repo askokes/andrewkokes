@@ -3,7 +3,7 @@ import { localDate } from "./dates";
 import type { AppEnv } from "./env";
 import { parseGoals, parseProfile, type FieldErrors, type GoalsInput } from "./validate";
 
-interface UserRow {
+export interface UserRow {
   id: number;
   email: string;
   display_name: string;
@@ -35,6 +35,24 @@ function currentGoals(db: D1Database, userId: number, today: string) {
        WHERE user_id = ? ORDER BY (effective_from <= ?) DESC, effective_from DESC, id DESC LIMIT 1`,
     )
     .bind(userId, today)
+    .first<GoalRow>();
+}
+
+/**
+ * Goals in effect on a past or future `date` (goal history): the latest row
+ * that had started by then, else the earliest row, since a day logged before
+ * the first goals were set is best judged against those.
+ */
+export function goalsOn(db: D1Database, userId: number, date: string) {
+  return db
+    .prepare(
+      `SELECT calories, protein_g, carbs_g, fat_g, goal_weight_lb, effective_from FROM goals
+       WHERE user_id = ?
+       ORDER BY (effective_from <= ?) DESC, CASE WHEN effective_from <= ? THEN effective_from END DESC,
+         effective_from ASC, id DESC
+       LIMIT 1`,
+    )
+    .bind(userId, date, date)
     .first<GoalRow>();
 }
 
@@ -90,7 +108,7 @@ async function loadMe(db: D1Database, email: string) {
   };
 }
 
-async function readJson(c: Context<AppEnv>): Promise<unknown> {
+export async function readJson(c: Context<AppEnv>): Promise<unknown> {
   try {
     return await c.req.json();
   } catch {
@@ -101,7 +119,7 @@ async function readJson(c: Context<AppEnv>): Promise<unknown> {
 const invalid = (c: Context<AppEnv>, fields: FieldErrors) =>
   c.json({ error: "invalid_input", message: "Please check the highlighted fields.", fields }, 400);
 
-const noProfile = (c: Context<AppEnv>) =>
+export const noProfile = (c: Context<AppEnv>) =>
   c.json({ error: "no_profile", message: "Set up your profile first.", email: c.get("email") }, 404);
 
 export const profileRoutes = new Hono<AppEnv>();

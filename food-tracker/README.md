@@ -8,6 +8,17 @@ API so far: `GET /api/me` (profile and current goals, 404 before setup), `POST /
 (create or update the profile, optionally with new goals and today's weight), `POST /api/goals`
 (new goals effective today; older rows are kept as history and unchanged goals add no row).
 
+Food logging (Phase 3, `src/food/routes.ts`; shapes in `src/food/types.ts`): `POST /api/parse`
+(meal phrase in, up to 8 items with ranked USDA matches priced for the spoken amount; a USDA
+problem only marks the affected item), `GET /api/foods/search?q=&quantity=&unit=`,
+`GET /api/entries?date=` (the day's entries, totals and the goals in effect that day; no date
+means today), `POST /api/entries` (save confirmed items, all or nothing), `PATCH /api/entries/:id`
+and `DELETE /api/entries/:id` (both answer with the updated day). Every food the app uses is cached
+in D1, so repeat lookups never call USDA.
+
+`npm run dev:mock` runs the same app with USDA replaced by the recorded fixtures in
+`test/fixtures/usda`, so no USDA key is needed (run `npm run db:migrate:local` once first).
+
 ## Layout
 
 ```
