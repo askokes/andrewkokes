@@ -25,7 +25,7 @@
       "binding": "DB",
       "database_name": "food-tracker",
       // Filled in after `wrangler d1 create food-tracker`.
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "9297d3a5-725b-4354-b095-10e4f794d1dd",
       "migrations_dir": "migrations"
     }
   ],
@@ -33,9 +33,9 @@
   "vars": {
     // Zero Trust team domain, e.g. "yourteam.cloudflareaccess.com".
     // scripts/setup-access.mjs fills in both of these.
-    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_TEAM_DOMAIN": "soft-violet-454e.cloudflareaccess.com",
     // Application Audience (AUD) tag from the Access application.
-    "ACCESS_AUD": ""
+    "ACCESS_AUD": "442d6a6d440d13cc279a3fdb679058013b18c26fc57be549310f618ee9d61013"
   },
 
   "observability": { "enabled": true }
