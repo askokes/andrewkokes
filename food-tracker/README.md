@@ -2,12 +2,16 @@
 
 Voice-first food logging for family and friends. `SPEC.md` is the source of truth.
 
-**Status:** Phase 1 (scaffold, D1, migrations, Access JWT validation, "Hello, email" page).
+**Status:** Phase 2 (first-run profile setup, settings, goals with history). Live at https://food.pivotaiglobal.com.
+
+API so far: `GET /api/me` (profile and current goals, 404 before setup), `POST /api/me`
+(create or update the profile, optionally with new goals and today's weight), `POST /api/goals`
+(new goals effective today; older rows are kept as history and unchanged goals add no row).
 
 ## Layout
 
 ```
-src/            Worker (Hono). app.ts = routes, auth.ts = Access JWT validation
+src/            Worker (Hono). app.ts = API shell, auth.ts = Access JWT, profile.ts = /me and /goals
 web/            Frontend (Vite, vanilla TS). Built to dist/, served as static assets
 migrations/     D1 migrations (wrangler)
 test/           Vitest, runs inside the Workers runtime with a local D1

@@ -10,3 +10,6 @@ export interface Env {
   /** Local dev only, from .dev.vars. Ignored unless the request host is localhost. */
   DEV_USER_EMAIL?: string;
 }
+
+/** Hono context types shared by the app and its route modules. */
+export type AppEnv = { Bindings: Env; Variables: { email: string } };

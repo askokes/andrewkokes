@@ -7,7 +7,7 @@
     "setup": "node scripts/setup.mjs",
     "access": "node scripts/setup-access.mjs",
     "build": "vite build",
-    "dev": "npm run build && wrangler dev",
+    "dev": "npm run build && wrangler dev --local-upstream localhost:8787",
     "dev:ui": "vite",
     "typecheck": "tsc -p tsconfig.json && tsc -p web/tsconfig.json",
     "test": "vitest run",

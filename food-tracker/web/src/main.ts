@@ -1,75 +1,55 @@
 import "./styles.css";
-
-interface WhoAmI {
-  email: string;
-  hasProfile: boolean;
-  displayName: string | null;
-}
+import { api, ApiError, type Me } from "./api";
+import { el } from "./dom";
+import { homeView } from "./views/home";
+import { settingsView } from "./views/settings";
+import { setupView } from "./views/setup";
 
 const root = document.getElementById("app")!;
+let me: Me | null = null;
 
-function el<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  props: Partial<HTMLElementTagNameMap[K]> = {},
-  ...children: (Node | string)[]
-): HTMLElementTagNameMap[K] {
-  const node = Object.assign(document.createElement(tag), props);
-  node.append(...children);
-  return node;
+function render(nodes: Node[]) {
+  root.replaceChildren(...nodes);
+  window.scrollTo(0, 0);
 }
 
-function render(...children: Node[]) {
-  root.replaceChildren(...children);
+function go(path: string) {
+  if (location.pathname !== path) history.pushState(null, "", path);
+  route();
 }
 
-function showHello(me: WhoAmI) {
-  const name = me.displayName ?? me.email;
-  render(
-    el("h1", {}, "Hello, ", el("span", { className: "who", textContent: name })),
-    el("p", { className: "muted", textContent: `Signed in as ${me.email}` }),
-    el(
-      "ul",
-      { className: "checks" },
-      el("li", { textContent: "Sign-in works" }),
-      el("li", { textContent: "Database connected" }),
-    ),
-    el("p", {
-      className: "muted",
-      textContent: me.hasProfile
-        ? "Your profile is set up."
-        : "Profile setup comes next. Nothing else to do here yet.",
-    }),
-    el("a", { className: "button secondary", href: "/cdn-cgi/access/logout", textContent: "Sign out" }),
-  );
+function saved(next: Me) {
+  me = next;
+  go("/");
+}
+
+function route() {
+  if (!me) {
+    render(setupView(saved));
+    return;
+  }
+  if (location.pathname === "/settings") render(settingsView(me, go, saved));
+  else render(homeView(me, go));
 }
 
 function showError(message: string) {
   const retry = el("button", { className: "button", type: "button", textContent: "Try again" });
   retry.addEventListener("click", () => location.reload());
-  render(el("h1", { textContent: "Hmm, that didn't load" }), el("p", { textContent: message }), retry);
+  render([el("h1", { textContent: "Hmm, that didn't load" }), el("p", { textContent: message }), retry]);
 }
 
 async function start() {
   try {
-    // When the Access session lapses, Access answers API calls with a redirect
-    // to its login page. Reloading the page lets Access show that login.
-    const res = await fetch("/api/whoami", { headers: { Accept: "application/json" }, redirect: "manual" });
-    if (res.type === "opaqueredirect") {
-      location.reload();
+    me = await api<Me>("GET", "/api/me");
+  } catch (err) {
+    if (!(err instanceof ApiError && err.code === "no_profile")) {
+      showError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
       return;
     }
-    if (res.status === 401) {
-      showError("Your sign-in has expired. Tap Try again to sign back in.");
-      return;
-    }
-    if (!res.ok) {
-      showError("The server had a problem. Give it a minute and try again.");
-      return;
-    }
-    showHello((await res.json()) as WhoAmI);
-  } catch {
-    showError("Couldn't reach the server. Check your connection and try again.");
+    me = null;
   }
+  route();
 }
 
+window.addEventListener("popstate", route);
 start();

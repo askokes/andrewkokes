@@ -18,18 +18,18 @@ async function authed(path: string, claims?: Record<string, unknown>) {
 
 describe("API auth", () => {
   it("returns 401 JSON with no token", async () => {
-    const res = await call("/api/whoami");
+    const res = await call("/api/me");
     expect(res.status).toBe(401);
     expect(await res.json()).toMatchObject({ error: "unauthorized" });
   });
 
   it("returns 401 for an invalid token", async () => {
-    const res = await call("/api/whoami", { headers: { "Cf-Access-Jwt-Assertion": "garbage" } });
+    const res = await call("/api/me", { headers: { "Cf-Access-Jwt-Assertion": "garbage" } });
     expect(res.status).toBe(401);
   });
 
   it("does not trust the email header on its own", async () => {
-    const res = await call("/api/whoami", {
+    const res = await call("/api/me", {
       headers: { "Cf-Access-Authenticated-User-Email": "someone@example.com" },
     });
     expect(res.status).toBe(401);
@@ -37,7 +37,7 @@ describe("API auth", () => {
 
   it("returns 401 for a token minted for another Access app", async () => {
     const token = await signer.sign(undefined, { aud: "other-app" });
-    const res = await call("/api/whoami", { headers: { "Cf-Access-Jwt-Assertion": token } });
+    const res = await call("/api/me", { headers: { "Cf-Access-Jwt-Assertion": token } });
     expect(res.status).toBe(401);
   });
 
@@ -49,7 +49,7 @@ describe("API auth", () => {
   });
 
   it("ignores DEV_USER_EMAIL on a non-local host", async () => {
-    const res = await call("/api/whoami", {}, "https://food.example.com", {
+    const res = await call("/api/me", {}, "https://food.example.com", {
       ...testEnv,
       DEV_USER_EMAIL: "dev@example.com",
     });
@@ -57,29 +57,12 @@ describe("API auth", () => {
   });
 
   it("honors DEV_USER_EMAIL on localhost", async () => {
-    const res = await call("/api/whoami", {}, "http://localhost:8787", {
+    const res = await call("/api/me", {}, "http://localhost:8787", {
       ...testEnv,
       DEV_USER_EMAIL: "dev@example.com",
     });
-    expect(res.status).toBe(200);
-    expect(await res.json()).toMatchObject({ email: "dev@example.com" });
-  });
-});
-
-describe("GET /api/whoami", () => {
-  it("returns the verified email and no profile for a new user", async () => {
-    const res = await authed("/api/whoami", { email: "New.Person@Example.com" });
-    expect(res.status).toBe(200);
-    expect(res.headers.get("Cache-Control")).toBe("no-store");
-    expect(await res.json()).toEqual({ email: "new.person@example.com", hasProfile: false, displayName: null });
-  });
-
-  it("reads the profile from D1 when one exists", async () => {
-    await env.DB.prepare("INSERT INTO users (email, display_name) VALUES (?, ?)")
-      .bind("ava@example.com", "Ava")
-      .run();
-    const res = await authed("/api/whoami", { email: "ava@example.com" });
-    expect(await res.json()).toEqual({ email: "ava@example.com", hasProfile: true, displayName: "Ava" });
+    expect(res.status).toBe(404);
+    expect(await res.json()).toMatchObject({ error: "no_profile", email: "dev@example.com" });
   });
 });
 

@@ -1,8 +1,8 @@
 import { Hono } from "hono";
+import { bodyLimit } from "hono/body-limit";
 import { accessKeys, devUserEmail, verifyAccessJwt, type KeyResolver } from "./auth";
-import type { Env } from "./env";
-
-type AppEnv = { Bindings: Env; Variables: { email: string } };
+import type { AppEnv } from "./env";
+import { profileRoutes } from "./profile";
 
 export interface AppDeps {
   keys: KeyResolver;
@@ -38,18 +38,15 @@ export function createApp(deps: AppDeps = { keys: accessKeys }) {
     return next();
   });
 
-  // Phase 1 proof of life: who am I, and can we reach D1?
-  api.get("/whoami", async (c) => {
-    const email = c.get("email");
-    const user = await c.env.DB.prepare("SELECT display_name FROM users WHERE email = ?")
-      .bind(email)
-      .first<{ display_name: string }>();
-    return c.json({
-      email,
-      hasProfile: user !== null,
-      displayName: user?.display_name ?? null,
-    });
-  });
+  api.use(
+    "*",
+    bodyLimit({
+      maxSize: 32 * 1024,
+      onError: (c) => c.json({ error: "too_large", message: "That request is too big." }, 413),
+    }),
+  );
+
+  api.route("/", profileRoutes);
 
   // Registered last so unknown API paths get JSON, never the SPA's index.html.
   api.all("*", (c) => c.json({ error: "not_found", message: "No such endpoint." }, 404));
