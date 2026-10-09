@@ -1,12 +1,15 @@
-import type { Candidate, CreateEntriesBody, DayView, EntryInput, LookupStatus, Meal, ParseItemResult, ParseResponse, SearchResponse } from "../../../src/food/types";
+import type { Candidate, CreateEntriesBody, DayView, EntryInput, LookupStatus, Meal, ParseItemResult, ParseResponse, SearchResponse, UnitOption } from "../../../src/food/types";
 import { api, ApiError } from "../api";
 import { el, segmented } from "../dom";
 import {
   amountText,
+  capitalize,
   convertQuantity,
   formatQuantity,
+  friendlyName,
   fullDate,
   gramsFor,
+  isWeightUnit,
   macroText,
   MEAL_LABELS,
   MEAL_ORDER,
@@ -18,6 +21,12 @@ import {
   whole,
 } from "../food";
 
+/** What a successful Add saved, for the note on Today. */
+export interface Added {
+  count: number;
+  meal: Meal | null;
+}
+
 interface ConfirmOpts {
   parsed: ParseResponse;
   /** What the user typed (or said), sent along as spokenText. */
@@ -25,7 +34,7 @@ interface ConfirmOpts {
   date: string;
   today: string;
   onCancel: () => void;
-  onAdded: (day: DayView) => void;
+  onAdded: (day: DayView, added: Added) => void;
 }
 
 interface Pick {
@@ -35,11 +44,8 @@ interface Pick {
 }
 
 const SOMETHING_WRONG = "Something went wrong. Please try again.";
+const NAME_MAX = 100;
 let nextId = 0;
-
-function capitalize(s: string) {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
 
 /** Drops the nulls from a list of optional parts. */
 function parts(...nodes: (Node | null)[]): Node[] {
@@ -48,6 +54,30 @@ function parts(...nodes: (Node | null)[]): Node[] {
 
 function errorText(err: unknown) {
   return err instanceof ApiError ? err.message : SOMETHING_WRONG;
+}
+
+/** Units that are one whole thing: a breast, a slice, a large egg. */
+const WHOLE_ITEM = new Set(["each", "piece", "slice", "large", "medium", "small"]);
+
+/**
+ * Up to three sizes to offer when the amount was guessed: whole items first
+ * ("1 breast"), then the food's other portions in the server's order. Spoon
+ * sizes are dropped for foods that come whole (a tablespoon of chicken isn't a
+ * size anyone means), and teaspoons when tablespoons are there.
+ */
+function sizeChoices(units: UnitOption[]) {
+  const portions = sortUnits(units).filter((u) => !isWeightUnit(u.unit) && u.grams > 0);
+  const whole = portions.some((u) => WHOLE_ITEM.has(u.unit));
+  const tbsp = portions.some((u) => u.unit === "tbsp");
+  return portions
+    .filter((u) => !(whole && (u.unit === "tbsp" || u.unit === "tsp")) && !(tbsp && u.unit === "tsp"))
+    .sort((a, b) => Number(WHOLE_ITEM.has(b.unit)) - Number(WHOLE_ITEM.has(a.unit)))
+    .slice(0, 3);
+}
+
+/** The plain name for what the user said or searched: "chicken  breast" -> "Chicken breast". */
+function plainName(phrase: string) {
+  return capitalize(phrase.trim().replace(/\s+/g, " ")).slice(0, NAME_MAX);
 }
 
 /** A blank manual number counts as 0; anything else must be a plain number from 0 to max. */
@@ -59,7 +89,18 @@ function readNumber(raw: string, max: number, required: boolean): number | null 
   return n <= max ? n : "bad";
 }
 
-function smallField(label: string, value: string, opts: { inputmode?: string; suffix?: string; onInput: (v: string) => void; validate?: (v: string) => boolean }) {
+function smallField(
+  label: string,
+  value: string,
+  opts: {
+    inputmode?: string;
+    suffix?: string;
+    onInput: (v: string) => void;
+    validate?: (v: string) => boolean;
+    /** Shown when the box is left empty; return null when empty is fine right now. */
+    emptyMsg?: () => string | null;
+  },
+) {
   const id = `m-${++nextId}`;
   const input = el("input", {
     id,
@@ -69,15 +110,19 @@ function smallField(label: string, value: string, opts: { inputmode?: string; su
     attrs: { inputmode: opts.inputmode ?? "text", autocomplete: "off", "aria-describedby": `${id}-msg` },
   });
   const msg = el("p", { id: `${id}-msg`, className: "field-msg" });
-  const check = () => {
-    const bad = opts.validate ? !opts.validate(input.value) : false;
-    if (bad) input.setAttribute("aria-invalid", "true");
+  const show = (text: string) => {
+    if (text) input.setAttribute("aria-invalid", "true");
     else input.removeAttribute("aria-invalid");
-    msg.textContent = bad ? "Numbers only" : "";
+    msg.textContent = text;
   };
+  const check = () => show(opts.validate && !opts.validate(input.value) ? "Numbers only" : "");
   input.addEventListener("input", () => {
     opts.onInput(input.value);
     check();
+  });
+  input.addEventListener("blur", () => {
+    const empty = input.value.trim() === "" ? opts.emptyMsg?.() : null;
+    if (empty) show(empty);
   });
   check();
   return el(
@@ -96,11 +141,14 @@ function smallField(label: string, value: string, opts: { inputmode?: string; su
  */
 function itemCard(item: ParseItemResult, changed: () => void) {
   const found = item.status === "ok" && item.candidates.length > 0;
+  const spoken = plainName(item.food) || plainName(item.text);
   const s = {
     status: (found ? "ok" : item.status === "ok" ? "not_found" : item.status) as LookupStatus,
     message: item.message,
     pool: item.candidates,
     selected: found ? item.candidates[0] : (null as Candidate | null),
+    /** The plain name saved with the entry: what was said, or the search that found the pick. */
+    name: spoken,
     qty: "",
     unit: "",
     guessed: false,
@@ -113,8 +161,16 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     results: null as Candidate[] | null,
     searchMsg: "",
     searching: false,
-    manual: { name: capitalize(item.food), calories: "", protein: "", carbs: "", fat: "" },
+    manual: { name: spoken, calories: "", protein: "", carbs: "", fat: "" },
   };
+  /** Plain name per candidate: the spoken phrase for the parse's matches, the search text for search results. */
+  const names = new Map<number, string>(item.candidates.map((c) => [c.fdcId, spoken]));
+  /**
+   * Which control gets focus after the next render, since render() rebuilds the
+   * card and the pressed button goes away. A data-role value, or "name" for the heading.
+   */
+  let focusNext: string | null = null;
+
   if (s.selected) setPick(s.selected.amount);
 
   const node = el("article", { className: "card item-card" });
@@ -125,12 +181,18 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     s.guessed = p.guessed;
   }
 
-  /** The amount a candidate gets if picked: keep what the user set when that food has the same unit, else the same weight. */
+  /**
+   * The amount a candidate gets if picked: the amount on the card when that food
+   * has the same unit (so alternatives compare like for like), else the same
+   * weight once the user has set one, else the candidate's own reading of what
+   * was said. A guessed 100 g is only a placeholder, so it never carries over.
+   */
   function pickFor(c: Candidate): Pick {
     const q = parseQuantity(s.qty);
     const cur = s.selected?.units.find((u) => u.unit === s.unit);
-    if (!s.edited || q === null || !cur) return c.amount;
+    if (q === null || !cur || s.guessed) return c.amount;
     if (c.units.some((u) => u.unit === s.unit)) return { quantity: q, unit: s.unit, guessed: false };
+    if (!s.edited) return c.amount;
     return { quantity: gramsFor(q, cur), unit: "g", guessed: false };
   }
 
@@ -142,12 +204,14 @@ function itemCard(item: ParseItemResult, changed: () => void) {
   function select(c: Candidate) {
     setPick(pickFor(c));
     s.selected = c;
+    s.name = names.get(c.fdcId) ?? spoken;
     if (!s.pool.some((p) => p.fdcId === c.fdcId)) s.pool = [c, ...s.pool];
     s.status = "ok";
     s.mode = "match";
     s.changeOpen = false;
     s.results = null;
     s.searchMsg = "";
+    focusNext = "name";
     render();
     changed();
   }
@@ -175,6 +239,9 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     try {
       const res = await api<SearchResponse>("GET", `/api/foods/search?${params}`);
       s.searching = false;
+      // Retrying the spoken phrase keeps the spoken name; a typed search names the food after the search.
+      const name = retry ? spoken : plainName(q);
+      for (const c of res.candidates) names.set(c.fdcId, name);
       if (retry) {
         if (res.status === "ok" && res.candidates.length > 0) {
           s.pool = res.candidates;
@@ -183,16 +250,20 @@ function itemCard(item: ParseItemResult, changed: () => void) {
         }
         s.status = res.status === "ok" ? "not_found" : res.status;
         s.message = res.message;
+        focusNext = "retry";
       } else if (res.status === "ok" && res.candidates.length > 0) {
         s.results = res.candidates;
+        focusNext = "result";
       } else {
         s.results = null;
         s.searchMsg = res.status === "ok" || res.status === "not_found" ? `No matches for “${q}”. Try a shorter name, or enter it yourself.` : (res.message ?? SOMETHING_WRONG);
+        focusNext = "search";
       }
     } catch (err) {
       s.searching = false;
       if (retry) s.message = errorText(err);
       else s.searchMsg = errorText(err);
+      focusNext = retry ? "retry" : "search";
     }
     render();
   }
@@ -201,7 +272,7 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     if (s.removed) return null;
     if (s.mode === "match" && s.selected) {
       const q = parseQuantity(s.qty);
-      return q === null ? null : { fdcId: s.selected.fdcId, quantity: q, unit: s.unit };
+      return q === null ? null : { fdcId: s.selected.fdcId, quantity: q, unit: s.unit, name: s.name };
     }
     if (s.mode === "manual") {
       const name = s.manual.name.trim();
@@ -211,28 +282,31 @@ function itemCard(item: ParseItemResult, changed: () => void) {
       const fatG = readNumber(s.manual.fat, 2000, false);
       const nums = [calories, proteinG, carbsG, fatG];
       if (!name || nums.some((n) => n === null || n === "bad")) return null;
-      return { manual: { name: name.slice(0, 100), calories: calories as number, proteinG: proteinG as number, carbsG: carbsG as number, fatG: fatG as number } };
+      return { manual: { name: name.slice(0, NAME_MAX), calories: calories as number, proteinG: proteinG as number, carbsG: carbsG as number, fatG: fatG as number } };
     }
     return null;
   }
 
   // ---- pieces
 
-  const textButton = (label: string, extra: string, onClick: () => void) => {
-    const b = el("button", { type: "button", className: `text-button ${extra}`.trim(), textContent: label });
+  const textButton = (label: string, role: string, extra: string, onClick: () => void) => {
+    const b = el("button", { type: "button", className: `text-button ${extra}`.trim(), textContent: label, dataset: { role } });
     b.addEventListener("click", onClick);
     return b;
   };
 
+  const heading = (text: string) => el("h2", { className: "food-name", textContent: text, tabIndex: -1 });
+
   const removeButton = () =>
-    textButton("Remove", "quiet", () => {
+    textButton("Remove", "remove", "quiet", () => {
       s.removed = true;
+      focusNext = "undo";
       render();
       changed();
     });
 
   const manualButton = () =>
-    textButton("Enter it yourself", "", () => {
+    textButton("Enter it yourself", "manual", "", () => {
       s.mode = "manual";
       render();
       changed();
@@ -243,13 +317,13 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     return el(
       "ul",
       { className: "choices" },
-      ...cands.map((c) => {
+      ...cands.map((c, i) => {
         const p = pickFor(c);
         const label = c.units.find((u) => u.unit === p.unit)?.label ?? p.unit;
         const b = el(
           "button",
-          { type: "button", className: "choice" },
-          el("span", { className: "choice-name", textContent: c.name }),
+          { type: "button", className: "choice", dataset: i === 0 ? { role: "result" } : {} },
+          el("span", { className: "choice-name", textContent: friendlyName(c.name) }),
           c.brand ? el("span", { className: "choice-meta", textContent: c.brand }) : null,
           el("span", { className: "choice-meta", textContent: `${amountText(p.quantity, label)} · ${whole(caloriesFor(c, p))} cal` }),
         );
@@ -268,7 +342,7 @@ function itemCard(item: ParseItemResult, changed: () => void) {
       attrs: { enterkeyhint: "search", autocomplete: "off", "aria-label": "Search for a food" },
     });
     input.addEventListener("input", () => (s.query = input.value));
-    const go = el("button", { type: "submit", className: "button secondary", textContent: s.searching ? "Searching…" : "Search", disabled: s.searching });
+    const go = el("button", { type: "submit", className: "button secondary", textContent: s.searching ? "Searching…" : "Search", disabled: s.searching, dataset: { role: "search" } });
     const form = el("form", { className: "input-row", noValidate: true, attrs: { role: "search" } }, input, go);
     form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -284,21 +358,50 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     );
   }
 
+  /** When no portion matched, one-tap sizes from this food's own portions ("1 slice · 82 cal"). */
+  function guessParts(c: Candidate): HTMLElement | null {
+    if (!s.guessed) return null;
+    const sizes = sizeChoices(c.units);
+    const grams = parseQuantity(s.qty) ?? 100 * item.quantity;
+    const oz = Math.round((grams / 28.3495) * 10) / 10;
+    const note = el("p", {
+      className: "note",
+      textContent:
+        `We weren't sure how much “${item.text}” is, so we used ${whole(grams)} g (about ${formatQuantity(oz)} oz). ` +
+        (sizes.length ? "Pick a size below if that's off." : "Change the amount below if that's off."),
+    });
+    if (sizes.length === 0) return el("div", { className: "guess" }, note);
+    const chips = sizes.map((u) => {
+      const cal = nutritionFor(c.per100g, gramsFor(item.quantity, u)).calories;
+      const b = el("button", { type: "button", className: "chip", textContent: `${amountText(item.quantity, u.label)} · ${whole(cal)} cal` });
+      // Same as choosing the unit in the picker: a real unit starts from the number that was said.
+      b.addEventListener("click", () => {
+        s.qty = formatQuantity(item.quantity);
+        s.unit = u.unit;
+        s.guessed = false;
+        s.edited = true;
+        focusNext = "unit";
+        render();
+        changed();
+      });
+      return b;
+    });
+    return el("div", { className: "guess" }, note, el("div", { className: "chips", attrs: { role: "group", "aria-label": `Sizes for ${s.name}` } }, ...chips));
+  }
+
   function matchParts(c: Candidate): Node[] {
     const qty = el("input", {
       type: "text",
       className: "control qty",
       value: s.qty,
-      attrs: { inputmode: "decimal", autocomplete: "off", enterkeyhint: "done", "aria-label": "Amount" },
+      attrs: { inputmode: "decimal", autocomplete: "off", enterkeyhint: "done", "aria-label": `Amount of ${s.name}` },
     });
     const unit = el(
       "select",
-      { className: "control", attrs: { "aria-label": "Unit" } },
+      { className: "control", dataset: { role: "unit" }, attrs: { "aria-label": `Unit for ${s.name}` } },
       ...sortUnits(c.units).map((u) => el("option", { value: u.unit, textContent: unitOptionLabel(u), selected: u.unit === s.unit })),
     );
-    const note = s.guessed
-      ? el("p", { className: "note", textContent: item.quantity === 1 ? "We guessed 100 g. Check the amount." : "We guessed 100 g each. Check the amount." })
-      : null;
+    const guess = guessParts(c);
     const calOut = el("span", { className: "item-cal" });
     const gramsOut = el("span", { className: "muted" });
     const macrosOut = el("p", { className: "macros muted" });
@@ -324,7 +427,7 @@ function itemCard(item: ParseItemResult, changed: () => void) {
       s.edited = true;
       if (s.guessed) {
         s.guessed = false;
-        note?.remove();
+        guess?.remove();
       }
       update();
       changed();
@@ -347,20 +450,17 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     });
     update();
 
-    const change = el("button", {
-      type: "button",
-      className: "text-button",
-      textContent: s.changeOpen ? "Close" : "Change",
-      attrs: { "aria-expanded": String(s.changeOpen) },
-    });
-    change.addEventListener("click", () => {
+    // Opens other matches and search. Named for what it fixes, so it doesn't read as "change the amount".
+    const change = textButton(s.changeOpen ? "Close" : "Wrong food?", "change", "", () => {
       s.changeOpen = !s.changeOpen;
       if (!s.changeOpen) {
         s.results = null;
         s.searchMsg = "";
       }
+      focusNext = "change";
       render();
     });
+    change.setAttribute("aria-expanded", String(s.changeOpen));
 
     // Once the user searches, the results take the place of the original matches.
     const others = s.results ? [] : s.pool.filter((p) => p.fdcId !== c.fdcId);
@@ -376,10 +476,11 @@ function itemCard(item: ParseItemResult, changed: () => void) {
         )
       : null;
 
+    const usda = friendlyName(c.name);
     return parts(
-      el("h2", { className: "food-name", textContent: c.name }),
+      el("div", { className: "name-block" }, heading(s.name), usda !== s.name ? el("p", { className: "usda-name", textContent: usda }) : null),
       c.brand ? el("p", { className: "muted small", textContent: c.brand }) : null,
-      note,
+      guess,
       el("div", { className: "amount-row" }, qty, unit),
       el("div", { className: "item-cal-row" }, calOut, gramsOut),
       macrosOut,
@@ -391,16 +492,22 @@ function itemCard(item: ParseItemResult, changed: () => void) {
   function missingParts(): Node[] {
     if (s.status === "not_found") {
       return [
-        el("h2", { className: "food-name", textContent: `We couldn't find “${item.food}”` }),
+        heading(`We couldn't find “${item.food}”`),
         el("p", { className: "hint", textContent: "Try another name, or enter it yourself." }),
         ...searchBlock(),
         el("div", { className: "card-actions" }, manualButton(), removeButton()),
       ];
     }
-    const retry = el("button", { type: "button", className: "button secondary wide", textContent: s.searching ? "Trying…" : "Try again", disabled: s.searching });
+    const retry = el("button", {
+      type: "button",
+      className: "button secondary wide",
+      textContent: s.searching ? "Trying…" : "Try again",
+      disabled: s.searching,
+      dataset: { role: "retry" },
+    });
     retry.addEventListener("click", () => search(item.food, true));
     return [
-      el("h2", { className: "food-name", textContent: capitalize(item.food) }),
+      heading(spoken),
       el("p", { className: "note", textContent: s.message ?? "We couldn't look that up just now." }),
       retry,
       el("div", { className: "card-actions" }, manualButton(), removeButton()),
@@ -410,19 +517,26 @@ function itemCard(item: ParseItemResult, changed: () => void) {
   function manualParts(): Node[] {
     const m = s.manual;
     const okNumber = (v: string) => readNumber(v, 20000, false) !== "bad";
-    const back = textButton(s.selected ? "Back to matches" : "Back to search", "", () => {
+    const back = textButton(s.selected ? "Back to matches" : "Back to search", "back", "", () => {
       s.mode = s.selected ? "match" : "missing";
+      focusNext = "name";
       render();
       changed();
     });
     return [
-      el("h2", { className: "food-name", textContent: "Enter it yourself" }),
+      heading("Enter it yourself"),
       el("p", { className: "hint", textContent: "Use the numbers for the whole amount you had. A food label works great." }),
       el(
         "div",
         { className: "manual stack" },
         smallField("Name", m.name, { onInput: (v) => ((m.name = v), changed()) }),
-        smallField("Calories", m.calories, { inputmode: "decimal", suffix: "cal", onInput: (v) => ((m.calories = v), changed()), validate: okNumber }),
+        smallField("Calories (needed)", m.calories, {
+          inputmode: "decimal",
+          suffix: "cal",
+          onInput: (v) => ((m.calories = v), changed()),
+          validate: okNumber,
+          emptyMsg: () => (m.name.trim() ? "Add the calories to save this one" : null),
+        }),
         el(
           "div",
           { className: "grid3" },
@@ -437,19 +551,25 @@ function itemCard(item: ParseItemResult, changed: () => void) {
 
   function render() {
     if (s.removed) {
-      const undo = textButton("Undo", "", () => {
+      const undo = textButton("Undo", "undo", "", () => {
         s.removed = false;
+        focusNext = "name";
         render();
         changed();
       });
       node.className = "card item-card removed";
       node.replaceChildren(el("p", { className: "muted", textContent: `Removed “${item.text}”` }), undo);
-      return;
+    } else {
+      node.className = "card item-card";
+      const said = el("p", { className: "said-small", textContent: `“${item.text}”` });
+      const body = s.mode === "match" && s.selected ? matchParts(s.selected) : s.mode === "manual" ? manualParts() : missingParts();
+      node.replaceChildren(said, ...body);
     }
-    node.className = "card item-card";
-    const said = el("p", { className: "said-small", textContent: `“${item.text}”` });
-    const body = s.mode === "match" && s.selected ? matchParts(s.selected) : s.mode === "manual" ? manualParts() : missingParts();
-    node.replaceChildren(said, ...body);
+    if (focusNext) {
+      const target = node.querySelector<HTMLElement>(focusNext === "name" ? ".food-name" : `[data-role="${focusNext}"]`);
+      focusNext = null;
+      target?.focus();
+    }
   }
   render();
 
@@ -468,11 +588,14 @@ export function confirmView({ parsed, text, date, today, onCancel, onAdded }: Co
   const refresh = () => {
     const ready = cards.filter((c) => c.entry() !== null).length;
     const waiting = cards.filter((c) => !c.isRemoved() && c.entry() === null).length;
-    add.textContent = saving ? "Adding…" : ready === 0 ? "Add" : `Add ${ready} ${ready === 1 ? "item" : "items"}`;
+    add.textContent = saving ? "Adding…" : ready === 0 ? "Add" : `Add ${ready} ${ready === 1 ? "food" : "foods"}`;
     add.disabled = saving || ready === 0;
     cancel.disabled = saving;
     skipped.hidden = waiting === 0;
-    skipped.textContent = waiting === 1 ? "We'll skip 1 item that isn't ready." : `We'll skip ${waiting} items that aren't ready.`;
+    skipped.textContent =
+      ready === 0
+        ? "Pick a match or enter the numbers to add."
+        : `${waiting} ${waiting === 1 ? "food needs" : "foods need"} a match below. Add saves the other ${ready}.`;
   };
   const changed = () => {
     footMsg.textContent = "";
@@ -491,7 +614,7 @@ export function confirmView({ parsed, text, date, today, onCancel, onAdded }: Co
     refresh();
     try {
       const day = await api<DayView>("POST", "/api/entries", body);
-      onAdded(day);
+      onAdded(day, { count: items.length, meal });
     } catch (err) {
       footMsg.textContent = errorText(err);
     } finally {

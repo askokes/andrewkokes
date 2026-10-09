@@ -143,8 +143,15 @@ export interface GoalsSnapshot {
 export interface EntryView {
   id: number;
   meal: Meal | null;
+  /** food_entries.food_name: the plain name the user knows the food by ("Chicken breast"), or a manual name. */
   foodName: string;
   fdcId: number | null;
+  /**
+   * The USDA description for fdcId (usda_cache.description), shown under the
+   * plain name in the edit sheet so the match can still be checked. Null or
+   * absent for manual entries.
+   */
+  usdaName?: string | null;
   quantity: number;
   unit: string;
   /** Label for the unit, e.g. "large", "cup", "oz", "serving". */
@@ -176,7 +183,19 @@ export interface CreateEntriesBody {
 }
 
 export type EntryInput =
-  | { fdcId: number; quantity: number; unit: string }
+  | {
+      fdcId: number;
+      quantity: number;
+      unit: string;
+      /**
+       * Plain name to store in food_entries.food_name, e.g. "Chicken breast"
+       * (the client sends the spoken food phrase or search text, capitalized).
+       * Trimmed, up to 100 characters. When absent or blank the Worker stores
+       * the USDA description. The description stays reachable via fdc_id and
+       * usda_cache either way.
+       */
+      name?: string;
+    }
   | {
       manual: { name: string; calories: number; proteinG: number; carbsG: number; fatG: number };
       quantity?: number;

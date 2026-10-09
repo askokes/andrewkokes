@@ -8,6 +8,10 @@ export const MEAL_LABELS: Record<Meal, string> = { breakfast: "Breakfast", lunch
 
 const WEIGHT_UNITS = new Set(["oz", "lb", "g"]);
 
+export function isWeightUnit(unit: string) {
+  return WEIGHT_UNITS.has(unit);
+}
+
 const round1 = (n: number) => Math.round(n * 10) / 10;
 
 /** Same math as the Worker: grams = quantity x grams per unit, rounded to 0.1 g. */
@@ -32,6 +36,19 @@ export function scaleNutrition(n: Nutrition, factor: number): Nutrition {
     carbsG: round1(n.carbsG * factor),
     fatG: round1(n.fatG * factor),
   };
+}
+
+export function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+/**
+ * A food name without USDA's program notes: "Apples, raw, with skin (Includes
+ * foods for USDA's Food Distribution Program)" -> "Apples, raw, with skin".
+ * Plain names pass through unchanged.
+ */
+export function friendlyName(name: string) {
+  return name.replace(/\s*\(Includes[^)]*\)?/gi, "").trim() || name.trim();
 }
 
 /** Whole numbers for display: "1,240". */
@@ -135,11 +152,12 @@ export function addDays(isoDate: string, days: number) {
   return d.toISOString().slice(0, 10);
 }
 
-/** "Today", "Yesterday", or "Wed, Oct 7". */
+/** "Today", "Yesterday", or "Wednesday, Oct 7" (with the year when it isn't this year). */
 export function dayTitle(date: string, today: string) {
   if (date === today) return "Today";
   if (date === addDays(today, -1)) return "Yesterday";
-  return formatDay(date, { weekday: "short", month: "short", day: "numeric" });
+  const sameYear = date.slice(0, 4) === today.slice(0, 4);
+  return formatDay(date, { weekday: "long", month: "short", day: "numeric", ...(sameYear ? {} : { year: "numeric" }) });
 }
 
 /** "Friday, October 9", with the year when it isn't this year. */

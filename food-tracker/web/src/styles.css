@@ -5,7 +5,10 @@
   --muted: #5e6661;
   --accent: #2f7d5b;
   --accent-text: #ffffff;
+  /* Card outlines and dividers. */
   --border: #dde1dc;
+  /* Edges of things you tap or type in: at least 3:1 against the page and cards (WCAG 1.4.11). */
+  --control-border: #858d88;
   --input-bg: #ffffff;
   --note-bg: #eef4f0;
   --warn: #9a5b00;
@@ -27,6 +30,7 @@
     --accent: #5cbf8f;
     --accent-text: #0f1a14;
     --border: #33383b;
+    --control-border: #6b726e;
     --input-bg: #16181a;
     --note-bg: #1f2a24;
     --warn: #f0b45c;
@@ -80,11 +84,25 @@ p { margin: 0; }
 .button.secondary {
   background: transparent;
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
 }
 
 h2 { font-size: 1.1rem; margin: 0; }
 [hidden] { display: none !important; }
+/* Read by screen readers, not shown. `.sr-only-empty` only hides while it has nothing to say. */
+.sr-only, .sr-only-empty:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+/* Headings take focus when a screen opens (for screen readers); no ring needed. */
+h1[tabindex="-1"]:focus { outline: none; }
 
 .stack { display: flex; flex-direction: column; gap: 16px; }
 .card {
@@ -116,7 +134,7 @@ h2 { font-size: 1.1rem; margin: 0; }
   width: 100%;
   min-height: 52px;
   padding: 0 14px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
   border-radius: 12px;
   background: var(--input-bg);
   color: var(--text);
@@ -177,7 +195,7 @@ input[role="switch"]:focus-visible { outline: 2px solid var(--accent); outline-o
   min-width: 0;
   min-height: 52px;
   padding: 0 14px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
   border-radius: 12px;
   background: var(--input-bg);
   color: var(--text);
@@ -226,14 +244,15 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .segmented button {
   min-width: 0;
   min-height: 48px;
-  padding: 0 2px;
+  padding: 0 4px;
   border: 0;
   border-radius: 10px;
   background: transparent;
   color: var(--muted);
   font: inherit;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 3.7vw, 0.85rem);
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
 }
 .segmented button[aria-checked="true"] {
@@ -243,15 +262,25 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 }
 .segmented button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .meal-pick { display: flex; flex-direction: column; gap: 8px; }
+/* Narrowest phones (320px, or Display Zoom): "Breakfast" no longer fits a quarter, so 2 x 2. */
+@media (max-width: 340px) {
+  .segmented { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 /* Today */
-.daybar { display: flex; align-items: center; gap: 8px; }
+/* Top-aligned so the arrows stay put under the thumb when the title block grows on past days. */
+.daybar { display: flex; align-items: flex-start; gap: 8px; }
 .daytitle { flex: 1; min-width: 0; }
 .daytitle h1 { margin: 0; font-size: 1.6rem; }
-.daytitle p { font-size: 0.9rem; }
+.daytitle h1.long { font-size: 1.35rem; }
+.daytitle p { font-size: 0.9rem; text-wrap: balance; }
+.back-today { margin-left: -12px; font-size: 0.95rem; }
+.icon-gear { width: 22px; height: 22px; stroke-width: 2; }
 .daynav { display: flex; gap: 4px; }
 
 .summary { display: flex; flex-direction: column; gap: 14px; }
+.summary:focus { outline: none; }
+.summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cal-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
 .cal-head p:not([class]), .cal-head .muted { font-size: 0.95rem; margin-top: 4px; }
 .cal-left { text-align: right; }
@@ -284,6 +313,12 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
   cursor: pointer;
 }
 .entry:active { background: var(--track); }
+/* Rows just added from the confirm screen: a soft tint that fades out. */
+.entry.new { animation: fresh-row 3s ease-out; }
+@keyframes fresh-row {
+  0%, 40% { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+  100% { background: transparent; }
+}
 .entry:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .entry-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .entry-name {
@@ -299,6 +334,17 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .entry-cal { flex: none; font-weight: 600; white-space: nowrap; }
 .entry .icon { flex: none; width: 18px; height: 18px; color: var(--muted); }
 .empty { display: flex; flex-direction: column; gap: 6px; text-align: center; padding: 28px 20px; }
+/* "Added 2 foods to Lunch. Nice!" above the totals; fades and folds away. */
+.notice {
+  max-height: 6em;
+  overflow: hidden;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--note-bg);
+  font-weight: 600;
+  transition: opacity 0.3s ease, max-height 0.3s ease 0.2s, padding 0.3s ease 0.2s, margin 0.3s ease 0.2s;
+}
+.notice.gone { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: -16px; }
 
 /* Confirm */
 .confirm-head h1 { margin-top: 8px; }
@@ -314,6 +360,29 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .said-small { color: var(--muted); font-size: 0.9rem; font-style: italic; overflow-wrap: anywhere; margin-bottom: -6px; }
 .food-name { font-size: 1.1rem; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; text-wrap: pretty; }
 .food-name:focus { outline: none; }
+.name-block { display: flex; flex-direction: column; gap: 2px; }
+/* The USDA description under the plain name, in full, so the match can be checked. */
+.usda-name { color: var(--muted); font-size: 0.9rem; line-height: 1.35; overflow-wrap: anywhere; }
+.guess { display: flex; flex-direction: column; gap: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  min-height: 48px;
+  max-width: 100%;
+  padding: 6px 16px;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--input-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.chip:active { border-color: var(--accent); background: var(--track); }
+.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .item-card .note { background: var(--guess-bg); }
 .amount-row { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 8px; }
 .qty { text-align: center; }
@@ -332,7 +401,7 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
   align-items: flex-start;
   gap: 2px;
   padding: 10px 14px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--control-border);
   border-radius: 12px;
   background: var(--input-bg);
   color: inherit;
@@ -386,3 +455,7 @@ dialog.sheet::backdrop { background: var(--backdrop); }
 .confirm-remove { display: flex; flex-direction: column; gap: 10px; }
 .confirm-q { font-weight: 700; text-align: center; }
 body:has(dialog[open]) { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .notice, .bar-fill { transition: none; }
+}

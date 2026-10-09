@@ -1,10 +1,30 @@
 import type { DayView, EntryView, Meal, UnitOption, UpdateEntryBody } from "../../../src/food/types";
 import { api, ApiError } from "../api";
 import { el, segmented } from "../dom";
-import { convertQuantity, formatQuantity, gramsFor, macroText, MEAL_LABELS, MEAL_ORDER, parseQuantity, scaleNutrition, sortUnits, unitOptionLabel, whole } from "../food";
+import {
+  convertQuantity,
+  formatQuantity,
+  friendlyName,
+  gramsFor,
+  macroText,
+  MEAL_LABELS,
+  MEAL_ORDER,
+  parseQuantity,
+  scaleNutrition,
+  sortUnits,
+  unitOptionLabel,
+  whole,
+} from "../food";
+import { overlayClosed, pushOverlay } from "../nav";
 
-/** Bottom sheet to change an entry's amount or meal, or remove it. Every write answers with the new day. */
-export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day: DayView) => void) {
+/**
+ * Bottom sheet to change an entry's amount or meal, or remove it. Every write
+ * answers with the new day. The sheet is its own history entry, so the back
+ * gesture closes it.
+ */
+export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day: DayView, kind: "saved" | "removed") => void) {
+  const name = friendlyName(entry.foodName);
+  const usda = entry.usdaName ? friendlyName(entry.usdaName) : null;
   const units: UnitOption[] = sortUnits(entry.units);
   if (!units.some((u) => u.unit === entry.unit)) {
     units.unshift({ unit: entry.unit, label: entry.unitLabel, grams: entry.quantity > 0 ? entry.grams / entry.quantity : 0 });
@@ -14,11 +34,11 @@ export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day
     type: "text",
     className: "control qty",
     value: formatQuantity(entry.quantity),
-    attrs: { inputmode: "decimal", autocomplete: "off", enterkeyhint: "done", "aria-label": "Amount" },
+    attrs: { inputmode: "decimal", autocomplete: "off", enterkeyhint: "done", "aria-label": `Amount of ${name}` },
   });
   const unit = el(
     "select",
-    { className: "control", attrs: { "aria-label": "Unit" } },
+    { className: "control", attrs: { "aria-label": `Unit for ${name}` } },
     ...units.map((u) => el("option", { value: u.unit, textContent: unitOptionLabel(u), selected: u.unit === entry.unit })),
   );
   const calOut = el("span", { className: "item-cal" });
@@ -83,14 +103,14 @@ export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day
   const no = el("button", { type: "button", className: "button secondary", textContent: "Keep it" });
   const confirmRemove = el("div", { className: "confirm-remove", hidden: true }, el("p", { className: "confirm-q", textContent: "Remove this?" }), el("div", { className: "sheet-actions" }, no, yes));
 
-  const heading = el("h2", { className: "food-name", textContent: entry.foodName, tabIndex: -1, attrs: { autofocus: "" } });
+  const heading = el("h2", { className: "food-name", textContent: name, tabIndex: -1, attrs: { autofocus: "" } });
   const dialog = el(
     "dialog",
-    { className: "sheet", attrs: { "aria-label": `Edit ${entry.foodName}` } },
+    { className: "sheet", attrs: { "aria-label": `Edit ${name}` } },
     el(
       "div",
       { className: "sheet-body" },
-      heading,
+      el("div", { className: "name-block" }, heading, usda && usda !== name ? el("p", { className: "usda-name", textContent: usda }) : null),
       el("div", { className: "amount-row" }, qty, unit),
       el("div", { className: "item-cal-row" }, calOut, gramsOut),
       macrosOut,
@@ -131,7 +151,7 @@ export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day
     try {
       const day = await api<DayView>("PATCH", `/api/entries/${entry.id}`, body);
       dialog.close();
-      onSaved(day);
+      onSaved(day, "saved");
     } catch (err) {
       fail(err);
     } finally {
@@ -158,7 +178,7 @@ export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day
     try {
       const day = await api<DayView>("DELETE", `/api/entries/${entry.id}`);
       dialog.close();
-      onSaved(day);
+      onSaved(day, "removed");
     } catch (err) {
       fail(err);
     } finally {
@@ -172,8 +192,12 @@ export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
-  dialog.addEventListener("close", () => dialog.remove());
 
   host.append(dialog);
   dialog.showModal();
+  const overlay = pushOverlay(() => dialog.close());
+  dialog.addEventListener("close", () => {
+    dialog.remove();
+    overlayClosed(overlay);
+  });
 }
