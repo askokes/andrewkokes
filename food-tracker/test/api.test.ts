@@ -71,6 +71,6 @@ describe("schema", () => {
     const { results } = await env.DB.prepare(
       "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE '\\_%' ESCAPE '\\' AND name NOT LIKE 'd1_%' AND name NOT LIKE 'sqlite_%' ORDER BY name",
     ).all<{ name: string }>();
-    expect(results.map((r) => r.name)).toEqual(["food_entries", "goals", "usda_cache", "users", "weight_entries"]);
+    expect(results.map((r) => r.name)).toEqual(["food_entries", "goals", "usda_cache", "usda_search_cache", "users", "weight_entries"]);
   });
 });

@@ -5,10 +5,14 @@ import type { AppEnv } from "./env";
 import { profileRoutes } from "./profile";
 
 export interface AppDeps {
+  /** Access signing keys. Tests pass a local key set. */
   keys: KeyResolver;
+  /** fetch used for USDA FoodData Central. Tests and dev:mock pass a fake. */
+  usdaFetch: typeof fetch;
 }
 
-export function createApp(deps: AppDeps = { keys: accessKeys }) {
+export function createApp(overrides: Partial<AppDeps> = {}) {
+  const deps: AppDeps = { keys: accessKeys, usdaFetch: (input, init) => fetch(input, init), ...overrides };
   const app = new Hono<AppEnv>();
   const api = new Hono<AppEnv>();
 
