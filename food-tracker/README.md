@@ -29,32 +29,28 @@ It lives in `.dev.vars`, which wrangler never uploads, so it can't switch on in 
 
 ## First deploy (food.pivotaiglobal.com)
 
-Needs `pivotaiglobal.com` active as a zone in your Cloudflare account, and Zero Trust
-opened once at one.dash.cloudflare.com so a team name exists (free plan is fine).
+Needs Node 20+ and `pivotaiglobal.com` active as a site in your Cloudflare account.
+Open https://one.dash.cloudflare.com once first and pick a team name (Free plan).
 
-1. **API token:** Cloudflare dashboard > My Profile > API Tokens > Create Token >
-   use the **Edit Cloudflare Workers** template, then add these rows (skip any already there):
-   - Account > D1 > Edit
-   - Account > Access: Apps and Policies > Edit
-   - Account > Access: Organizations, Identity Providers, and Groups > Edit
-   - Zone > DNS > Edit
+```sh
+git clone https://github.com/askokes/andrewkokes.git
+cd andrewkokes/food-tracker
+git checkout claude/phase-1-scaffold-deploy-rwsafu
+npm install
+npm run setup
+```
 
-   Zone resources: pivotaiglobal.com. Keep the token on your laptop only.
-2. **Shell setup** (from `food-tracker/`):
-   ```sh
-   npm install
-   export CLOUDFLARE_API_TOKEN=...      # from step 1
-   export CLOUDFLARE_ACCOUNT_ID=...     # dashboard home, right sidebar
-   ```
-3. **Access app** (do this before deploying, so the site is never public):
-   ```sh
-   ALLOWED_EMAILS="you@example.com,her@example.com" node scripts/setup-access.mjs
-   ```
-   Turns on one-time PIN login, creates the allow list, and writes `ACCESS_TEAM_DOMAIN`
-   and `ACCESS_AUD` into `wrangler.jsonc`. Re-run any time to change the email list.
-4. **Database:** `npx wrangler d1 create food-tracker`, then paste the `database_id` into `wrangler.jsonc`.
-5. **USDA key:** `npx wrangler secret put USDA_API_KEY` and enter `DEMO_KEY` for now.
-6. **Ship:** `npm run deploy` (builds, applies remote migrations, deploys).
-7. Commit the updated `wrangler.jsonc` (the AUD tag and database id are not secrets).
+`npm run setup` asks for the API token (hidden), the allowed emails, and the USDA key
+(Enter = `DEMO_KEY`). Then it sets up one-time PIN sign-in, creates the database and
+tables, deploys, and waits until the site answers behind the sign-in page. Safe to re-run.
+
+API token: Cloudflare dashboard > My Profile > API Tokens > Create Token > **Edit Cloudflare
+Workers** template, plus Account > D1 > Edit, Account > Access: Apps and Policies > Edit,
+Account > Access: Organizations, Identity Providers, and Groups > Edit, Zone > DNS > Edit.
+
+Afterwards, commit the updated `wrangler.jsonc` (the AUD tag and database id are not secrets).
+
+**Change who's allowed in:** `export CLOUDFLARE_API_TOKEN=...` then `npm run access`.
+**Later deploys:** `npm run deploy`.
 
 The Worker has `workers_dev` and preview URLs turned off, so the only way in is the Access-protected subdomain.
