@@ -56,6 +56,8 @@ const VULGAR_FRACTIONS = new Map([
   ["⅛", 1 / 8], ["⅜", 3 / 8], ["⅝", 5 / 8], ["⅞", 7 / 8],
 ]);
 const VAGUE_COUNTS = new Map([["couple", 2], ["few", 3], ["several", 3]]);
+/** A number before one of these is a size, not a count: "a 6 inch sub" is one sub. */
+const LENGTHS = words("inch inches foot feet ft cm centimeter centimeters centimetre centimetres");
 
 const UNIT_SPELLINGS: Record<SpokenUnit, string> = {
   oz: "oz ozs ounce ounces",
@@ -291,7 +293,7 @@ function readQuantity(t: Token[], i: number): Read | null {
   if (article) j++;
   let value: number | null = null;
   const card = readCardinal(t, j);
-  if (card) {
+  if (card && !LENGTHS.has(wordAt(t, card.end))) {
     value = card.value;
     j = card.end;
   }
@@ -355,7 +357,8 @@ function skipContainer(t: Token[], i: number): number {
 /** A boundary after a meal word: end, punctuation, a new clause, or an amount. */
 function boundaryAt(t: Token[], k: number): boolean {
   const tok = t[k];
-  return !tok || tok.kind === "sep" || BOUNDARY_WORDS.has(tok.w) || readQuantity(t, k) !== null;
+  if (!tok || tok.kind === "sep" || BOUNDARY_WORDS.has(tok.w)) return true;
+  return isCardinalToken(t, k) || readQuantity(t, k) !== null;
 }
 
 function mealHintAt(t: Token[], j: number): { meal: Meal | null; end: number } | null {
@@ -437,7 +440,7 @@ function skipLeadingFiller(t: Token[], i: number): number {
     const n = phraseAt(t, i, LEADING_FILLER);
     if (n) i += n;
     // "like" is a hedge only before an amount: "like 2 eggs".
-    else if (wordAt(t, i) === "like" && readQuantity(t, i + 1)) i++;
+    else if (wordAt(t, i) === "like" && (isCardinalToken(t, i + 1) || readQuantity(t, i + 1))) i++;
     else return i;
   }
 }
