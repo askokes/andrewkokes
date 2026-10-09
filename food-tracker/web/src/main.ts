@@ -51,7 +51,13 @@ function showError(message: string) {
 
 async function start() {
   try {
-    const res = await fetch("/api/whoami", { headers: { Accept: "application/json" } });
+    // When the Access session lapses, Access answers API calls with a redirect
+    // to its login page. Reloading the page lets Access show that login.
+    const res = await fetch("/api/whoami", { headers: { Accept: "application/json" }, redirect: "manual" });
+    if (res.type === "opaqueredirect") {
+      location.reload();
+      return;
+    }
     if (res.status === 401) {
       showError("Your sign-in has expired. Tap Try again to sign back in.");
       return;
