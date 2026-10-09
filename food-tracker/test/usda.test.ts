@@ -123,6 +123,18 @@ describe("rankHits", () => {
     expect(ids(rankHits("eggs", coreHits("eggs")))[0]).toBe(748967);
   });
 
+  it("prefers cooked over raw unless the query says otherwise, and plain cooking over fried", () => {
+    // "chicken breast": USDA lists raw records first; people log what they ate.
+    expect(ids(rankHits("chicken breast", coreHits("chicken breast")))[0]).toBe(171477); // roasted, meat only
+    expect(ids(rankHits("rice", coreHits("rice")))[0]).not.toBe(2512381); // not dry raw rice
+    expect(ids(rankHits("broccoli", coreHits("broccoli")))[0]).toBe(169967); // cooked, boiled
+    expect([2646170, 2727569]).toContain(ids(rankHits("raw chicken breast", coreHits("chicken breast")))[0]);
+    expect(ids(rankHits("fried chicken breast", coreHits("chicken breast")))[0]).toBe(171078);
+    // Nothing cooked on offer: raw stays fine.
+    expect(ids(rankHits("spinach", coreHits("spinach")))[0]).toBe(168462);
+    expect(ids(rankHits("eggs", coreHits("eggs")))[0]).toBe(748967);
+  });
+
   it("keeps USDA's order for ties and doesn't touch the input", () => {
     const hits = coreHits("milk");
     const before = ids(hits);

@@ -127,6 +127,25 @@ export interface RankableHit {
   brand?: string | null;
 }
 
+const COOKING = /\b(cooked|roasted|grilled|baked|broiled|boiled|steamed|braised|stewed|poached|scrambled|toasted|brewed|prepared|sauteed|microwaved|heated|fried)\b/;
+const UNCOOKED = /\b(raw|uncooked|unprepared|dry)\b/;
+const FRIED = /\b(fried|breaded)\b/;
+
+/**
+ * People log food as eaten: "chicken breast" means cooked chicken, and dry rice
+ * has about three times the calories of cooked. Unless the query names a
+ * preparation, a raw record loses to a cooked one when the hits offer both,
+ * and fried loses to plainer cooking. Records that are neither (milk, "Eggs,
+ * whole") are left alone. 2 = keep, 1 = fried, 0 = raw while cooked exists.
+ */
+function prepScore(description: string, queryNamesPrep: boolean, anyCooked: boolean): number {
+  if (queryNamesPrep) return 2;
+  const d = description.toLowerCase();
+  const cooked = COOKING.test(d);
+  if (!cooked && UNCOOKED.test(d)) return anyCooked ? 0 : 2;
+  return FRIED.test(d) ? 1 : 2;
+}
+
 function queryShape(query: string) {
   const tokens = contentWords(normalizeQuery(query));
   const head = [...tokens].reverse().find((w) => !PREP_WORDS.has(w)) ?? tokens[tokens.length - 1];
@@ -142,7 +161,7 @@ function isReasonable(query: string, hit: RankableHit): boolean {
 
 /**
  * Best match first. In priority order: names the head noun at all; Foundation
- * or SR Legacy over Branded; description starts with the query words ("Peanut
+ * or SR Legacy over Branded; cooked over raw (see prepScore); description starts with the query words ("Peanut
  * butter, smooth" over "Candies, ... peanut butter"); first comma segment ends
  * with or contains the head noun ("Oranges, raw" over "Orange juice"); has
  * every query word; fewer comma segments. USDA's order breaks ties.
@@ -150,6 +169,8 @@ function isReasonable(query: string, hit: RankableHit): boolean {
 export function rankHits<T extends RankableHit>(query: string, hits: readonly T[]): T[] {
   const { tokens, head } = queryShape(query);
   if (!head) return [...hits];
+  const queryNamesPrep = tokens.some((t) => PREP_WORDS.has(t) || t === "dry" || t === "uncooked");
+  const anyCooked = hits.some((h) => COOKING.test(h.description.toLowerCase()));
 
   const scored = hits.map((hit, index) => {
     const description = hit.description.replace(/\([^)]*\)/g, " ");
@@ -168,6 +189,7 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
     const score = [
       has(head) ? 1 : 0,
       hit.dataType === "Branded" ? 0 : 1,
+      prepScore(hit.description, queryNamesPrep, anyCooked),
       lead,
       segmentHead,
       tokens.every(has) ? 1 : 0,

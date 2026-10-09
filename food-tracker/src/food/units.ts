@@ -13,8 +13,12 @@ const WEIGHT_OPTIONS: readonly UnitOption[] = [
 
 /** Order portion units are listed in after the weights. */
 const LIST_ORDER = ["each", "small", "medium", "large", "slice", "piece", "serving", "cup", "tbsp", "tsp"];
-/** What a unitless amount ("two eggs", "a banana") means, best first. */
-const COUNT_ORDER = ["each", "medium", "large", "small", "piece", "slice", "serving"];
+/**
+ * What a unitless amount ("two eggs", "a banana") means, best first. A cup comes
+ * last: "a glass of milk" or "a bowl of oatmeal" reach here with no unit, and one
+ * cup is a far better guess than 100 g.
+ */
+const COUNT_ORDER = ["each", "medium", "large", "small", "piece", "slice", "serving", "cup"];
 const SIZES = new Set(["large", "medium", "small"]);
 
 const VOLUME: Record<string, "cup" | "tbsp" | "tsp"> = {

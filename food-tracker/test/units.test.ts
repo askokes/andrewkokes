@@ -211,3 +211,11 @@ describe("toCandidate", () => {
     });
   });
 });
+
+describe("unitless amounts for poured or scooped foods", () => {
+  it("uses one cup rather than a 100 g guess when the food only has a cup portion", () => {
+    // "a glass of milk", "a bowl of oatmeal": the parser drops the container and passes no unit.
+    expect(resolveAmount(food(746782), 1, null)).toMatchObject({ quantity: 1, unit: "cup", guessed: false });
+    expect(resolveAmount(food(173905), 1, null)).toMatchObject({ quantity: 1, unit: "cup", guessed: false });
+  });
+});
