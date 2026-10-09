@@ -2,11 +2,13 @@
 
 Voice-first food logging for family and friends. `SPEC.md` is the source of truth.
 
-**Status:** Phase 2 (first-run profile setup, settings, goals with history). Live at https://food.pivotaiglobal.com.
+**Status:** Phase 3 (food logging by text: parser, USDA lookup with caching, confirm screen, Today with totals). Live at https://food.pivotaiglobal.com.
 
-API so far: `GET /api/me` (profile and current goals, 404 before setup), `POST /api/me`
-(create or update the profile, optionally with new goals and today's weight), `POST /api/goals`
-(new goals effective today; older rows are kept as history and unchanged goals add no row).
+API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/foods/search`,
+`GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`. Shapes live in `src/food/types.ts`.
+Every write must be `Content-Type: application/json` from the app's own origin.
+
+`npm run dev:mock` runs the app locally with recorded USDA data (no API key needed).
 
 Food logging (Phase 3, `src/food/routes.ts`; shapes in `src/food/types.ts`): `POST /api/parse`
 (meal phrase in, every item back with ranked USDA matches priced for the spoken amount; the first

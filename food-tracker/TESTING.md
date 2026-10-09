@@ -4,6 +4,27 @@ Plain steps. If anything looks wrong, take a screenshot and send it to Andrew.
 
 Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com".
 
+## Phase 3: Log food by typing
+
+1. Open **https://food.pivotaiglobal.com**. You should see **Today** with your calorie goal and a box that says **What did you eat?**
+2. Type **two eggs and a slice of toast** and tap **Add**. A **Check and add** screen should show two cards: eggs and toast, each with an amount and calories.
+3. Check the meal buttons at the top. Pick the right one.
+4. On the toast card, change the amount to 2. The calories should update right away.
+5. Tap **Add 2 foods**. You should land back on Today with both foods listed and the calorie total going up.
+6. Tap the eggs row. Change it to 3 and tap **Save**. The calories should go up.
+7. Tap the toast row, tap **Remove**, then **Yes, remove**. It should disappear and the total should drop.
+8. Try a meal word: **a banana for a snack**. The confirm screen should already have **Snack** picked.
+9. Try something made up, like **a zorblax bar**. It should say it couldn't find it. Tap **Enter it yourself**, type 200 for calories, and add it.
+10. Try a few real things you actually ate today. For each one, check: is it the right food? Is the amount about right? If a match looks wrong, tap **Change** and pick a better one.
+11. Tap the **back arrow** at the top to go to yesterday, then come back to today.
+12. Try typing **I had six ounces of chicken breast and a cup of rice for dinner**. Both should show up, under Dinner.
+
+### Tell Andrew
+
+- Any food that matched something weird? Write down exactly what you typed.
+- Any amount that seemed way off (like a cup of rice showing 700 calories)?
+- Was anything confusing on the Check and add screen?
+
 ## Phase 2: Set up your profile
 
 1. Open **https://food.pivotaiglobal.com** and sign in with your email and code.
