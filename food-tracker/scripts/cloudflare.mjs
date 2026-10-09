@@ -74,6 +74,9 @@ export async function ensureAccess(cf, account, hostname, emails) {
     type: "self_hosted",
     domain: hostname,
     session_duration: "720h",
+    // Keep the sign-in cookie off requests that other sites start, such as a
+    // form posted to /api from another page. Links into the app still work.
+    same_site_cookie_attribute: "lax",
     allowed_idps: [otp.id],
     auto_redirect_to_identity: true,
     app_launcher_visible: false,

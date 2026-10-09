@@ -43,6 +43,26 @@ export function createApp(overrides: Partial<AppDeps> = {}) {
     return next();
   });
 
+  // Writes must come from the app's own pages. A page on another site can make
+  // the browser send a form POST with the Access cookie attached (Access then
+  // adds a valid JWT), and c.req.json() would read a text/plain body that
+  // happens to be JSON. A form can't send application/json, and a script on
+  // another origin can't either without a CORS preflight, which this API never
+  // answers. Sec-Fetch-Site also catches same-site pages (other subdomains),
+  // which SameSite=Lax cookies don't stop.
+  api.use("*", async (c, next) => {
+    if (c.req.method === "GET" || c.req.method === "HEAD" || c.req.method === "OPTIONS") return next();
+    const site = c.req.header("Sec-Fetch-Site");
+    if (site !== undefined && site !== "same-origin" && site !== "none") {
+      return c.json({ error: "forbidden", message: "That request didn't come from this app." }, 403);
+    }
+    const type = (c.req.header("Content-Type") ?? "").split(";")[0].trim().toLowerCase();
+    if (c.req.method !== "DELETE" && type !== "application/json") {
+      return c.json({ error: "unsupported_media_type", message: "Send the request as JSON." }, 415);
+    }
+    return next();
+  });
+
   api.use(
     "*",
     bodyLimit({

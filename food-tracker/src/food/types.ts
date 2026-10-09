@@ -11,6 +11,20 @@ export type SpokenUnit = WeightUnit | PortionUnit;
 
 export const GRAMS_PER: Record<WeightUnit, number> = { oz: 28.3495, lb: 453.592, g: 1 };
 
+// ---------------------------------------------------------------- limits
+
+/** Least amount in an entry, in any unit. Anything smaller rounds to nothing. */
+export const MIN_QUANTITY = 0.01;
+/** Most of one unit in an entry: 1,000 cups or eggs is already far past a meal. Grams go up to MAX_GRAMS. */
+export const MAX_QUANTITY = 1000;
+/** Most of one USDA food in an entry, by weight: 5 kg, about 11 lb. */
+export const MAX_GRAMS = 5000;
+/** Most of a typed-in food in an entry, in its own unit. */
+export const MAX_MANUAL_QUANTITY = 100;
+
+/** The most of `unit` a USDA food entry can hold before MAX_GRAMS is checked. */
+export const maxQuantityFor = (unit: string | null | undefined) => (unit === "g" ? MAX_GRAMS : MAX_QUANTITY);
+
 // ---------------------------------------------------------------- parser
 
 export interface ParsedItem {
@@ -87,15 +101,24 @@ export interface Amount {
   unit: string;
   grams: number;
   /**
-   * True when the spoken unit matched no portion and we fell back to 100 g per
-   * unit (spec section 7). Then unit is "g" and quantity is 100 x spoken quantity.
+   * True when this isn't the amount that was said, so the confirm card should
+   * ask the user to check it. Either the spoken unit matched no portion and we
+   * fell back to 100 g per unit (spec section 7: unit is "g" and quantity is
+   * 100 x spoken quantity), or the amount was outside what an entry can hold
+   * (MIN_QUANTITY up to MAX_GRAMS) and was brought within it. Every candidate
+   * amount can be saved as offered.
    */
   guessed: boolean;
 }
 
 // ---------------------------------------------------------------- HTTP API
 
-export type LookupStatus = "ok" | "not_found" | "rate_limited" | "unavailable";
+/**
+ * "skipped" means we didn't look the food up: the sentence had more foods than
+ * one parse looks up, or the lookups before it used up this request's share of
+ * the USDA key. The message asks the user to search for it separately.
+ */
+export type LookupStatus = "ok" | "not_found" | "rate_limited" | "unavailable" | "skipped";
 
 export interface Candidate {
   fdcId: number;
@@ -111,7 +134,11 @@ export interface Candidate {
   nutrition: Nutrition;
 }
 
-/** POST /api/parse { text } -> ParseResponse */
+/**
+ * POST /api/parse { text } -> ParseResponse. Every food in the sentence comes
+ * back, in order. Only the first 8 are looked up; the rest have status
+ * "skipped", a message and no candidates.
+ */
 export interface ParseResponse {
   meal: Meal | null;
   items: ParseItemResult[];
@@ -202,7 +229,12 @@ export type EntryInput =
       unit?: string;
     };
 
-/** PATCH /api/entries/:id body. */
+/**
+ * PATCH /api/entries/:id body. `unit` alone converts the amount: the weight
+ * stays the same and the quantity is worked out in the new unit, to 2 decimals
+ * ("150 g" to cups is "0.74 cup"). Send `quantity` too to set both. A typed-in
+ * food keeps its own unit; only its quantity can change.
+ */
 export interface UpdateEntryBody {
   quantity?: number;
   unit?: string;

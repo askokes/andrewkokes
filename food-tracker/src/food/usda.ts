@@ -14,7 +14,8 @@ const TIMEOUT_MS = 10_000;
 type Scope = "core" | "branded";
 const DATA_TYPES: Record<Scope, string> = { core: "Foundation,SR Legacy", branded: "Branded" };
 
-export type UsdaErrorKind = "rate_limited" | "unavailable";
+/** "skipped": the caller's beforeCall refused the request before it was made (see UsdaDeps). */
+export type UsdaErrorKind = "rate_limited" | "unavailable" | "skipped";
 
 /** Any USDA failure. Messages are for server logs and never include the API key or a request URL. */
 export class UsdaError extends Error {
@@ -35,6 +36,12 @@ export interface UsdaDeps {
   db: D1Database;
   /** Clock for cache timestamps. Tests inject one to check the 30-day search expiry. */
   now?: () => Date;
+  /**
+   * Runs before every request to USDA (never for a cache hit). Throws a
+   * UsdaError to refuse it. The routes use it to share out the key's hourly
+   * limit, which every user shares (see routes.ts).
+   */
+  beforeCall?: () => Promise<void>;
 }
 
 // ---------------------------------------------------------------- query text
@@ -216,6 +223,7 @@ async function callUsda(deps: UsdaDeps, path: string, params: Record<string, str
     console.warn("USDA_API_KEY is not set, so food lookups are unavailable.");
     throw new UsdaError("unavailable", "USDA API key is not set");
   }
+  if (deps.beforeCall) await deps.beforeCall();
   const query = Object.entries({ ...params, api_key: deps.apiKey })
     .map(([k, v]) => `${k}=${encodeURIComponent(v).replace(/%2C/g, ",")}`)
     .join("&");

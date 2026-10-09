@@ -203,6 +203,23 @@ describe("toCandidate", () => {
     expect(candidate.nutrition).toEqual(nutritionFor(candidate.per100g, 100));
   });
 
+  it("keeps every amount within what an entry can hold, and flags the ones it changed", () => {
+    const chicken = food(ROASTED_CHICKEN);
+    const egg = food(FOUNDATION_EGG);
+    // Over 5 kg: as much as fits, rounded down so it never goes over.
+    expect(toCandidate(egg, 200, null).amount).toEqual({ quantity: 99.4, unit: "each", grams: 4999.8, guessed: true });
+    expect(toCandidate(chicken, 1000, "lb").amount).toEqual({ quantity: 11.02, unit: "lb", grams: 4998.6, guessed: true });
+    expect(toCandidate(chicken, 60, "slice").amount).toEqual({ quantity: 5000, unit: "g", grams: 5000, guessed: true });
+    // Up to 5 kg, guessed or spoken grams pass through as they are.
+    expect(toCandidate(chicken, 12, "slice").amount).toEqual({ quantity: 1200, unit: "g", grams: 1200, guessed: true });
+    expect(toCandidate(chicken, 2000, "g").amount).toEqual({ quantity: 2000, unit: "g", grams: 2000, guessed: false });
+    expect(toCandidate(chicken, 5000, "g").amount).toEqual({ quantity: 5000, unit: "g", grams: 5000, guessed: false });
+    // Under 0.01 of a unit rounds to nothing.
+    expect(toCandidate(chicken, 0.001, "cup").amount).toEqual({ quantity: 0.01, unit: "cup", grams: 1.4, guessed: true });
+    const capped = toCandidate(egg, 200, null);
+    expect(capped.nutrition).toEqual(nutritionFor(capped.per100g, 4999.8));
+  });
+
   it("carries the brand for Branded foods", () => {
     expect(toCandidate(food(9900001), 1, null)).toMatchObject({
       brand: "CHOBANI",

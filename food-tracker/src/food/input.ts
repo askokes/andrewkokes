@@ -2,14 +2,11 @@
 // a unit fits a food is checked against its USDA record in routes.ts.
 import { addDays, isCalendarDate } from "../dates";
 import { isBlank, isObject, type FieldErrors, type Result } from "../validate";
-import { MEALS, type Meal, type Nutrition } from "./types";
+import { MAX_MANUAL_QUANTITY, maxQuantityFor, MEALS, MIN_QUANTITY, type Meal, type Nutrition } from "./types";
 
 export const FIRST_DATE = "2000-01-01";
 export const DATE_ERROR = "Pick a real date, no later than tomorrow.";
 export const MAX_ITEMS = 20;
-/** Most of one food in one entry: 1,000 oz, cups or eggs is already far past a meal. */
-export const MAX_QUANTITY = 1000;
-export const MAX_MANUAL_QUANTITY = 100;
 
 export interface FdcItem {
   kind: "fdc";
@@ -56,7 +53,10 @@ export function checkDate(raw: unknown, today: string): string | null {
   return date;
 }
 
-/** An amount: more than 0, at most `max`. Blank means `fallback` when there is one. */
+/**
+ * An amount from MIN_QUANTITY to `max`. Blank means `fallback` when there is
+ * one. Smaller amounts round to nothing, and rescaling from them overflows.
+ */
 export function readQuantity(
   v: unknown,
   field: string,
@@ -66,8 +66,8 @@ export function readQuantity(
 ): number | undefined {
   if (fallback !== undefined && isBlank(v)) return fallback;
   const n = decimal(v);
-  if (n === undefined || n <= 0 || n > max) {
-    errors[field] = `Enter an amount more than 0, up to ${plural(max)}.`;
+  if (n === undefined || n < MIN_QUANTITY || n > max) {
+    errors[field] = `Enter an amount from ${MIN_QUANTITY} to ${plural(max)}.`;
     return undefined;
   }
   return n;
@@ -136,8 +136,8 @@ function readItem(raw: unknown, i: number, errors: FieldErrors): FdcItem | Manua
   if (fdcId === undefined || !Number.isSafeInteger(fdcId) || fdcId <= 0) {
     errors[`${at}.fdcId`] = "Pick a food from the list.";
   }
-  const quantity = readQuantity(raw.quantity, `${at}.quantity`, MAX_QUANTITY, errors);
   const unit = readUnit(raw.unit, `${at}.unit`, errors);
+  const quantity = readQuantity(raw.quantity, `${at}.quantity`, maxQuantityFor(unit), errors);
   if (Object.keys(errors).length > before || fdcId === undefined || quantity === undefined || unit === undefined) {
     return null;
   }
@@ -178,14 +178,23 @@ export function parseNewEntries(raw: unknown, today: string): Result<NewEntries>
   return { ok: true, value: { date, meal, spokenText, items } };
 }
 
-/** PATCH /api/entries/:id. `maxQuantity` depends on whether the entry is a USDA food or typed in. */
-export function parseEntryChanges(raw: unknown, maxQuantity: number): Result<EntryChanges> {
+/**
+ * PATCH /api/entries/:id. `maxQuantity` gives the most of a unit the entry can
+ * hold (undefined: the unit isn't changing); it depends on whether the entry is
+ * a USDA food or typed in.
+ */
+export function parseEntryChanges(
+  raw: unknown,
+  maxQuantity: (unit: string | undefined) => number,
+): Result<EntryChanges> {
   if (!isObject(raw)) return { ok: false, errors: { body: "Expected a JSON object." } };
   const errors: FieldErrors = {};
   const changes: EntryChanges = {};
 
-  if (raw.quantity !== undefined) changes.quantity = readQuantity(raw.quantity, "quantity", maxQuantity, errors);
   if (raw.unit !== undefined) changes.unit = readUnit(raw.unit, "unit", errors);
+  if (raw.quantity !== undefined) {
+    changes.quantity = readQuantity(raw.quantity, "quantity", maxQuantity(changes.unit), errors);
+  }
   if (raw.meal !== undefined) changes.meal = readMeal(raw.meal, errors);
 
   if (raw.quantity === undefined && raw.unit === undefined && raw.meal === undefined) {

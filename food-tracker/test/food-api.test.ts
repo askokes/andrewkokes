@@ -5,7 +5,17 @@ import { createApp } from "../src/app";
 import { addDays, localDate } from "../src/dates";
 import devMock from "../src/dev-mock";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
-import type { DayView, EntryView, FoodRecord, Nutrition, ParseResponse, SearchResponse } from "../src/food/types";
+import { USDA_CALLS_PER_REQUEST, USDA_CALLS_PER_USER_HOUR } from "../src/food/routes";
+import {
+  MAX_GRAMS,
+  type Candidate,
+  type DayView,
+  type EntryView,
+  type FoodRecord,
+  type Nutrition,
+  type ParseResponse,
+  type SearchResponse,
+} from "../src/food/types";
 import { createFakeUsda, type FakeUsdaOptions } from "./fixtures/usda/fake-fetch";
 import foodsFile from "./fixtures/usda/foods.json";
 import { makeSigner } from "./helpers";
@@ -20,6 +30,7 @@ const today = () => localDate(TZ);
 const EMPTY = 'Tell me what you ate, like "two eggs and a slice of toast".';
 const BUSY = "The food database is busy right now. Try again in a minute, or enter it yourself.";
 const DOWN = "We couldn't reach the food database. Try again in a minute, or enter it yourself.";
+const SKIPPED = "That's a lot of foods at once. Search for this one separately, or enter it yourself.";
 
 const fixtureFoods = new Map(
   foodsFile.foods.map((raw) => extractFood(raw)).filter((f): f is FoodRecord => f !== null).map((f) => [f.fdcId, f]),
@@ -28,6 +39,7 @@ const food = (id: number) => fixtureFoods.get(id)!;
 const ROAST_CHICKEN = 171477; // Chicken breast, cooked, roasted: 1 breast = 172 g, 1 cup chopped = 140 g
 const BRAISED_CHICKEN = 331960; // Foundation chicken breast with a 174 g "piece" and no cup
 const LARGE_EGG = 748967; // 1 egg = 50.3 g
+const BROWN_RICE = 169704; // Rice, brown, long-grain, cooked: 1 cup = 202 g
 
 /** Every response body seen in this file. The last test checks none of them holds the USDA key. */
 const bodies: string[] = [];
@@ -35,15 +47,26 @@ const bodies: string[] = [];
 let counter = 0;
 const newEmail = () => `eater${++counter}-${crypto.randomUUID().slice(0, 8)}@example.com`;
 
-type Call = (email: string, method: string, path: string, body?: unknown) => Promise<Response>;
+/** `headers` are added to the defaults; null removes one (e.g. the JSON Content-Type a body gets). */
+type Call = (
+  email: string,
+  method: string,
+  path: string,
+  body?: unknown,
+  headers?: Record<string, string | null>,
+) => Promise<Response>;
 
 /** An app with its own fake USDA, so a test can count the USDA calls it causes. */
 function client(options: FakeUsdaOptions = {}, e: Cloudflare.Env = testEnv, usdaFetch?: typeof fetch) {
   const usda = createFakeUsda(options);
   const app = createApp({ keys: signer.keys, usdaFetch: usdaFetch ?? usda.fetch });
-  const as: Call = async (email, method, path, body) => {
+  const as: Call = async (email, method, path, body, extra = {}) => {
     const headers: Record<string, string> = { "Cf-Access-Jwt-Assertion": await signer.sign({ email }) };
     if (body !== undefined) headers["Content-Type"] = "application/json";
+    for (const [name, value] of Object.entries(extra)) {
+      if (value === null) delete headers[name];
+      else headers[name] = value;
+    }
     const res = await app.request(
       `https://food.example.com${path}`,
       { method, headers, body: body === undefined ? undefined : typeof body === "string" ? body : JSON.stringify(body) },
@@ -220,13 +243,96 @@ describe("POST /api/parse", () => {
     }
   });
 
-  it("looks up at most 8 items", async () => {
-    const { as } = client();
+  it("looks up the first 8 foods and says which ones it skipped", async () => {
+    const { as, usda } = client();
     const email = await signUp(as);
     const text = "an apple, a banana, an orange, two eggs, a bagel, toast, rice, milk, butter and spinach";
     const { items } = await (await as(email, "POST", "/api/parse", { text })).json<ParseResponse>();
-    expect(items.map((i) => i.food)).toEqual(["apple", "banana", "orange", "eggs", "bagel", "toast", "rice", "milk"]);
-    for (const item of items) expect(item.status).toBe("ok");
+    expect(items.map((i) => i.food)).toEqual([
+      "apple", "banana", "orange", "eggs", "bagel", "toast", "rice", "milk", "butter", "spinach",
+    ]);
+    // Eight foods never seen before fit in one request's share of the USDA key.
+    for (const item of items.slice(0, 8)) expect(item.status, item.food).toBe("ok");
+    expect(usda.calls.length).toBeLessThanOrEqual(USDA_CALLS_PER_REQUEST);
+    for (const item of items.slice(8)) {
+      expect(item).toEqual({
+        quantity: 1,
+        unit: null,
+        food: item.food,
+        text: item.food,
+        status: "skipped",
+        message: SKIPPED,
+        candidates: [],
+      });
+    }
+    expect(usda.calls.filter((url) => /query=(butter|spinach)\b/.test(url))).toEqual([]);
+  });
+
+  it("spends at most one request's share of the USDA key, however many foods miss", async () => {
+    // Every search answers with foods that don't name what was asked for, so each
+    // lookup would also try the Branded fallback: up to 4 USDA calls per food.
+    const fake = createFakeUsda();
+    let calls = 0;
+    const unhelpful = (async (input: RequestInfo | URL, init?: RequestInit) => {
+      calls++;
+      const url = new URL(input instanceof Request ? input.url : String(input));
+      if (url.pathname.endsWith("/foods/search")) {
+        url.searchParams.set("query", url.searchParams.get("dataType")?.includes("Branded") ? "egg" : "rice");
+        url.searchParams.set("dataType", "Foundation,SR Legacy");
+      }
+      return fake.fetch(url.toString(), init);
+    }) as typeof fetch;
+    const { as } = client({}, testEnv, unhelpful);
+    const email = await signUp(as);
+    const res = await as(email, "POST", "/api/parse", { text: "a qwv, a plx, a zrk, a mnb, a vcx, a lkj, a hgf, a dsa" });
+    expect(res.status).toBe(200);
+    const { items } = await res.json<ParseResponse>();
+    expect(items).toHaveLength(8);
+    expect(calls).toBeLessThanOrEqual(USDA_CALLS_PER_REQUEST);
+    const skipped = items.filter((i) => i.status === "skipped");
+    expect(skipped.length).toBeGreaterThan(0);
+    for (const item of skipped) expect(item).toMatchObject({ message: SKIPPED, candidates: [] });
+    for (const item of items) expect(["ok", "skipped"]).toContain(item.status);
+  });
+
+  it("stops one user from spending the shared key, without stopping anyone else", async () => {
+    const { as, usda } = client();
+    const heavy = await signUp(as);
+    const other = await signUp(as);
+    const hour = () => new Date().toISOString().slice(0, 13);
+    const usage = async (email: string) =>
+      (await env.DB.prepare("SELECT hour, calls FROM usda_usage WHERE user_id = ?").bind(await userId(email)).first()) ??
+      null;
+    const parse = async (email: string, text: string) =>
+      (await (await as(email, "POST", "/api/parse", { text })).json<ParseResponse>()).items[0];
+
+    // Every USDA call is counted against the user who caused it; cache hits are free.
+    expect((await parse(other, "two eggs")).status).toBe("ok");
+    expect(usda.calls.length).toBeGreaterThan(0);
+    expect(await usage(other)).toEqual({ hour: hour(), calls: usda.calls.length });
+    const before = usda.calls.length;
+    expect((await parse(other, "two eggs")).status).toBe("ok");
+    expect(usda.calls.length).toBe(before);
+
+    // At the hourly limit, a user's new lookups wait, and USDA isn't called.
+    await env.DB.prepare("INSERT INTO usda_usage (user_id, hour, calls) VALUES (?, ?, ?)")
+      .bind(await userId(heavy), hour(), USDA_CALLS_PER_USER_HOUR)
+      .run();
+    expect(await parse(heavy, "a banana")).toMatchObject({ status: "rate_limited", message: BUSY, candidates: [] });
+    const search = await as(heavy, "GET", "/api/foods/search?q=salmon");
+    expect(await search.json()).toMatchObject({ status: "rate_limited", message: BUSY });
+    expect(usda.calls.length).toBe(before);
+    expect(await usage(heavy)).toEqual({ hour: hour(), calls: USDA_CALLS_PER_USER_HOUR });
+
+    // Foods already cached still work for them, and everyone else is unaffected.
+    expect((await parse(heavy, "two eggs")).status).toBe("ok");
+    expect((await parse(other, "a banana")).status).toBe("ok");
+
+    // A new hour starts a new count.
+    await env.DB.prepare("UPDATE usda_usage SET hour = '2000-01-01T00' WHERE user_id = ?").bind(await userId(heavy)).run();
+    const calls = usda.calls.length;
+    expect((await parse(heavy, "some salmon")).status).toBe("ok");
+    expect(await usage(heavy)).toEqual({ hour: hour(), calls: usda.calls.length - calls });
   });
 
   it.each([{ text: "" }, { text: "  " }, { text: "um, uh" }, { text: "for lunch" }, {}, { text: 42 }])(
@@ -480,6 +586,10 @@ describe("entries", () => {
     [{ items: [{ ...chickenItem, quantity: 0 }] }, "items.0.quantity"],
     [{ items: [{ ...chickenItem, quantity: -2 }] }, "items.0.quantity"],
     [{ items: [{ ...chickenItem, quantity: 1001 }] }, "items.0.quantity"],
+    [{ items: [{ ...chickenItem, quantity: 0.009 }] }, "items.0.quantity"],
+    [{ items: [{ ...chickenItem, quantity: 177 }] }, "items.0.quantity"], // 5,018 g
+    [{ items: [{ ...chickenItem, quantity: 5001, unit: "g" }] }, "items.0.quantity"],
+    [{ items: [{ ...chickenItem, quantity: 1000, unit: "lb" }] }, "items.0.quantity"],
     [{ items: [{ ...chickenItem, quantity: "lots" }] }, "items.0.quantity"],
     [{ items: [{ ...chickenItem, fdcId: 0 }] }, "items.0.fdcId"],
     [{ items: [{ ...chickenItem, fdcId: "chicken" }] }, "items.0.fdcId"],
@@ -493,6 +603,9 @@ describe("entries", () => {
     [{ items: [{ ...cookieItem, manual: { ...cookieItem.manual, proteinG: 1001 } }] }, "items.0.manual.proteinG"],
     [{ items: [{ ...cookieItem, manual: { ...cookieItem.manual, fatG: -1 } }] }, "items.0.manual.fatG"],
     [{ items: [{ ...cookieItem, quantity: 101 }] }, "items.0.quantity"],
+    [{ items: [{ ...cookieItem, quantity: 1e-307 }] }, "items.0.quantity"],
+    [{ items: [{ ...cookieItem, quantity: "1e-308" }] }, "items.0.quantity"],
+    [{ items: [{ ...cookieItem, quantity: 0.001 }] }, "items.0.quantity"],
     [{ items: [{ ...cookieItem, unit: "x".repeat(31) }] }, "items.0.unit"],
     [{ items: [] }, "items"],
     [{ items: Array.from({ length: 21 }, () => eggsItem) }, "items"],
@@ -566,6 +679,125 @@ describe("entries", () => {
   });
 });
 
+describe("parse and search to entries", () => {
+  it("only offer amounts that can be saved as offered", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    const offered: { text: string; candidate: Candidate }[] = [];
+    const sentences = [
+      "6 oz of chicken breast and two eggs",
+      "12 slices of chicken breast", // no slice portion: guessed at 1,200 g
+      "60 slices of chicken breast", // a 6 kg guess, brought down to 5 kg
+      "2000 grams of rice",
+      "200 eggs",
+      "0.001 cups of milk",
+    ];
+    for (const text of sentences) {
+      const { items } = await (await as(email, "POST", "/api/parse", { text })).json<ParseResponse>();
+      for (const item of items) {
+        expect(item.status, text).toBe("ok");
+        for (const candidate of item.candidates) offered.push({ text, candidate });
+      }
+    }
+    for (const query of ["q=steak&quantity=11&unit=slice", "q=steak&quantity=1000&unit=lb", "q=rice&quantity=5000&unit=g"]) {
+      const { candidates } = await (await as(email, "GET", `/api/foods/search?${query}`)).json<SearchResponse>();
+      expect(candidates.length, query).toBeGreaterThan(0);
+      for (const candidate of candidates) offered.push({ text: query, candidate });
+    }
+
+    for (const { text, candidate } of offered) {
+      const { quantity, unit, grams } = candidate.amount;
+      expect(grams, text).toBeLessThanOrEqual(MAX_GRAMS);
+      const res = await as(email, "POST", "/api/entries", {
+        date: today(),
+        meal: null,
+        items: [{ fdcId: candidate.fdcId, quantity, unit }],
+      });
+      expect(res.status, `${text}: ${candidate.name} ${quantity} ${unit}`).toBe(201);
+      const saved = (await res.json<DayView>()).entries.at(-1)!;
+      expect(saved, text).toMatchObject({ fdcId: candidate.fdcId, quantity, unit, grams, nutrition: candidate.nutrition });
+    }
+
+    const amountOf = (text: string) => offered.find((o) => o.text === text)!.candidate.amount;
+    expect(amountOf("12 slices of chicken breast")).toEqual({ quantity: 1200, unit: "g", grams: 1200, guessed: true });
+    expect(amountOf("60 slices of chicken breast")).toEqual({ quantity: 5000, unit: "g", grams: 5000, guessed: true });
+    expect(amountOf("2000 grams of rice")).toEqual({ quantity: 2000, unit: "g", grams: 2000, guessed: false });
+    expect(amountOf("200 eggs")).toMatchObject({ guessed: true });
+    expect(amountOf("0.001 cups of milk")).toMatchObject({ quantity: 0.01, unit: "cup", guessed: true });
+  });
+});
+
+describe("writes from other pages", () => {
+  // The body a page on another site can send with <form enctype="text/plain">.
+  const forged = () => JSON.stringify({ date: today(), items: [{ manual: { name: "csrf", calories: 5000 } }], x: "=1" });
+
+  it("need a JSON content type, which a form on another site can't send", async () => {
+    const { as, usda } = client();
+    const email = await signUp(as);
+    const { id } = (await logFoods(as, email, [cookieItem])).entries[0];
+    const before = await dayOf(as, email);
+    const me = await (await as(email, "GET", "/api/me")).json();
+
+    const writes: [string, string, unknown][] = [
+      ["POST", "/api/entries", forged()],
+      ["POST", "/api/entries", { date: today(), meal: null, items: [eggsItem] }],
+      ["POST", "/api/parse", { text: "two eggs" }],
+      ["PATCH", `/api/entries/${id}`, { quantity: 3 }],
+      ["POST", "/api/goals", { calories: 900 }],
+      ["POST", "/api/me", { ...profile, displayName: "Mallory" }],
+    ];
+    const types = ["text/plain", "text/plain;charset=UTF-8", "application/x-www-form-urlencoded", "multipart/form-data; boundary=x", ""];
+    for (const [method, path, body] of writes) {
+      for (const type of types) {
+        const res = await as(email, method, path, body, { "Content-Type": type });
+        expect(res.status, `${method} ${path} as "${type}"`).toBe(415);
+        expect(await res.json()).toEqual({ error: "unsupported_media_type", message: "Send the request as JSON." });
+      }
+      const none = await as(email, method, path, body, { "Content-Type": null });
+      expect(none.status, `${method} ${path} with no type`).toBe(415);
+    }
+    expect(await dayOf(as, email)).toEqual(before);
+    expect(await (await as(email, "GET", "/api/me")).json()).toEqual(me);
+    expect(usda.calls).toEqual([]);
+
+    // JSON with a charset is still JSON.
+    const ok = await as(email, "POST", "/api/entries", { date: today(), meal: null, items: [cookieItem] }, {
+      "Content-Type": "Application/JSON; charset=utf-8",
+    });
+    expect(ok.status).toBe(201);
+  });
+
+  it("are refused when the browser says another site started them", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    const { id } = (await logFoods(as, email, [cookieItem])).entries[0];
+    const before = await dayOf(as, email);
+
+    for (const site of ["cross-site", "same-site"]) {
+      const headers = { "Sec-Fetch-Site": site };
+      const writes: [string, string, unknown?][] = [
+        ["POST", "/api/entries", { date: today(), meal: null, items: [cookieItem] }],
+        ["PATCH", `/api/entries/${id}`, { quantity: 3 }],
+        ["DELETE", `/api/entries/${id}`],
+        ["POST", "/api/goals", { calories: 900 }],
+      ];
+      for (const [method, path, body] of writes) {
+        const res = await as(email, method, path, body, headers);
+        expect(res.status, `${method} ${path} from ${site}`).toBe(403);
+        expect(await res.json()).toMatchObject({ error: "forbidden" });
+      }
+      // Reading is fine: another site can't read the response anyway.
+      expect((await as(email, "GET", "/api/entries", undefined, headers)).status).toBe(200);
+    }
+    expect(await dayOf(as, email)).toEqual(before);
+
+    // The app's own pages, and requests the user typed in, still work.
+    const own = await as(email, "PATCH", `/api/entries/${id}`, { quantity: 3 }, { "Sec-Fetch-Site": "same-origin" });
+    expect(own.status).toBe(200);
+    expect((await as(email, "DELETE", `/api/entries/${id}`, undefined, { "Sec-Fetch-Site": "none" })).status).toBe(200);
+  });
+});
+
 describe("PATCH /api/entries/:id", () => {
   async function entryIn(day: DayView, id: number) {
     const entry = day.entries.find((e) => e.id === id);
@@ -599,15 +831,120 @@ describe("PATCH /api/entries/:id", () => {
       grams: 172,
       nutrition: nutritionFor(per100g, 172),
     });
-    // The amount stays when only the unit changes.
+    // A new unit alone keeps the weight: one 172 g breast is 1.23 cups at 140 g a cup.
     expect(await patch({ unit: "cup" })).toMatchObject({
-      quantity: 1,
+      quantity: 1.23,
       unit: "cup",
       unitLabel: "cup, chopped",
-      grams: 140,
-      nutrition: nutritionFor(per100g, 140),
+      grams: 172.2,
+      nutrition: nutritionFor(per100g, 172.2),
     });
     expect(await patch({ quantity: "1.5", unit: "LB" })).toMatchObject({ quantity: 1.5, unit: "lb", grams: 680.4 });
+  });
+
+  it("converts the amount when only the unit changes, so the food weighs the same", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    const day = await logFoods(as, email, [{ fdcId: BROWN_RICE, quantity: 150, unit: "g" }]);
+    const { id } = day.entries[0];
+    const per100g = food(BROWN_RICE).per100g;
+    expect(day.totals.calories).toBe(nutritionFor(per100g, 150).calories);
+
+    const patch = async (body: unknown) => {
+      const res = await as(email, "PATCH", `/api/entries/${id}`, body);
+      expect(res.status).toBe(200);
+      return res.json<DayView>();
+    };
+    // 150 g is 0.74 of a 202 g cup, not 150 cups (30 kg).
+    const cups = await patch({ unit: "cup" });
+    expect(await entryIn(cups, id)).toMatchObject({
+      quantity: 0.74,
+      unit: "cup",
+      grams: 149.5,
+      nutrition: nutritionFor(per100g, 149.5),
+    });
+    expect(cups.totals.calories).toBeLessThan(200);
+    expect(await entryIn(await patch({ unit: "oz" }), id)).toMatchObject({ quantity: 5.27, unit: "oz", grams: 149.4 });
+    expect(await entryIn(await patch({ unit: "g" }), id)).toMatchObject({ quantity: 149.4, unit: "g", grams: 149.4 });
+
+    // Converting to a unit too small or too big to hold the amount asks for another unit.
+    const tiny = (await logFoods(as, email, [{ fdcId: BROWN_RICE, quantity: 1, unit: "g" }])).entries[1];
+    const tooSmall = await as(email, "PATCH", `/api/entries/${tiny.id}`, { unit: "lb" });
+    expect(tooSmall.status).toBe(400);
+    expect(await tooSmall.json()).toMatchObject({ fields: { unit: expect.stringContaining("Pick a smaller unit") } });
+    const big = (await logFoods(as, email, [{ fdcId: BROWN_RICE, quantity: 4500, unit: "g" }])).entries[2];
+    const tooBig = await as(email, "PATCH", `/api/entries/${big.id}`, { unit: "tsp" });
+    expect(tooBig.status).toBe(400);
+    expect(await tooBig.json()).toMatchObject({ fields: { unit: expect.stringContaining("Pick a bigger unit") } });
+    expect((await dayOf(as, email)).entries.map((e) => [e.quantity, e.unit])).toEqual([
+      [149.4, "g"],
+      [1, "g"],
+      [4500, "g"],
+    ]);
+  });
+
+  it("gives back the same numbers however often an amount is changed", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    const cookie = { manual: { name: "cookie", calories: 45, proteinG: 0.4, carbsG: 6.8, fatG: 2.3 }, quantity: 1 };
+    const { id } = (await logFoods(as, email, [cookie])).entries[0];
+    const patch = async (quantity: number) => {
+      const res = await as(email, "PATCH", `/api/entries/${id}`, { quantity });
+      expect(res.status).toBe(200);
+      const day = await res.json<DayView>();
+      expect(day.totals).toEqual(sumOf(day.entries));
+      return (await entryIn(day, id)).nutrition;
+    };
+    const one = { calories: 45, proteinG: 0.4, carbsG: 6.8, fatG: 2.3 };
+    expect(await patch(0.25)).toEqual({ calories: 11.3, proteinG: 0.1, carbsG: 1.7, fatG: 0.6 });
+    expect(await patch(1)).toEqual(one);
+    expect(await patch(0.1)).toEqual({ calories: 4.5, proteinG: 0, carbsG: 0.7, fatG: 0.2 });
+    expect(await patch(1)).toEqual(one);
+    expect(await patch(0.01)).toEqual({ calories: 0.5, proteinG: 0, carbsG: 0.1, fatG: 0 });
+    // The same as logging two cookies in the first place.
+    const fresh = (await logFoods(as, email, [{ ...cookie, quantity: 2 }])).entries[1];
+    expect(await patch(2)).toEqual(fresh.nutrition);
+    expect(fresh.nutrition).toEqual({ calories: 90, proteinG: 0.8, carbsG: 13.6, fatG: 4.6 });
+  });
+
+  it("rescales a USDA food whose record lost the entry's unit, without drifting", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    const before = (await logFoods(as, email, [{ fdcId: ROAST_CHICKEN, quantity: 1, unit: "each" }])).entries[0];
+    expect(before).toMatchObject({ unit: "each", grams: 172 });
+    await env.DB.prepare("UPDATE usda_cache SET portions_json = '[]' WHERE fdc_id = ?").bind(ROAST_CHICKEN).run();
+
+    const patch = async (quantity: number) => {
+      const res = await as(email, "PATCH", `/api/entries/${before.id}`, { quantity });
+      expect(res.status).toBe(200);
+      return entryIn(await res.json<DayView>(), before.id);
+    };
+    expect(await patch(2)).toMatchObject({ quantity: 2, unit: "each", grams: 344 });
+    await patch(0.3);
+    await patch(0.07);
+    const back = await patch(1);
+    expect(back).toMatchObject({ quantity: 1, unit: "each", grams: 172, nutrition: before.nutrition });
+
+    // Past 5 kg is too much here too: 30 breasts.
+    const res = await as(email, "PATCH", `/api/entries/${before.id}`, { quantity: 30 });
+    expect(res.status).toBe(400);
+    expect(await res.json()).toMatchObject({ fields: { quantity: expect.stringContaining("5 kg") } });
+  });
+
+  it("won't rescale a row saved with a vanishingly small amount, rather than failing", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    // Rows like this could be saved before amounts had a 0.01 minimum.
+    const row = await env.DB.prepare(
+      `INSERT INTO food_entries (user_id, log_date, food_name, quantity, unit, grams, calories, protein_g, carbs_g, fat_g)
+       VALUES (?, ?, 'x', 1e-320, 'serving', 0, 0.1, 0, 0, 0) RETURNING id`,
+    )
+      .bind(await userId(email), today())
+      .first<{ id: number }>();
+    const res = await as(email, "PATCH", `/api/entries/${row!.id}`, { quantity: 100 });
+    expect(res.status).toBe(400);
+    expect(await res.json()).toMatchObject({ error: "invalid_input", fields: { quantity: expect.any(String) } });
+    expect((await dayOf(as, email)).entries[0]).toMatchObject({ quantity: 1e-320, nutrition: { calories: 0.1 } });
   });
 
   it("scales a typed-in food and keeps its unit", async () => {
@@ -654,6 +991,10 @@ describe("PATCH /api/entries/:id", () => {
     [{}, "body"],
     [{ quantity: 0 }, "quantity"],
     [{ quantity: 1001 }, "quantity"],
+    [{ quantity: 177 }, "quantity"], // 177 oz is over 5 kg
+    [{ quantity: 5001, unit: "g" }, "quantity"],
+    [{ quantity: 1e-307 }, "quantity"],
+    [{ quantity: 0.009 }, "quantity"],
     [{ quantity: null }, "quantity"],
     [{ unit: "slice" }, "unit"],
     [{ unit: "" }, "unit"],

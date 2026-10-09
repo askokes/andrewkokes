@@ -9,12 +9,18 @@ API so far: `GET /api/me` (profile and current goals, 404 before setup), `POST /
 (new goals effective today; older rows are kept as history and unchanged goals add no row).
 
 Food logging (Phase 3, `src/food/routes.ts`; shapes in `src/food/types.ts`): `POST /api/parse`
-(meal phrase in, up to 8 items with ranked USDA matches priced for the spoken amount; a USDA
-problem only marks the affected item), `GET /api/foods/search?q=&quantity=&unit=`,
-`GET /api/entries?date=` (the day's entries, totals and the goals in effect that day; no date
-means today), `POST /api/entries` (save confirmed items, all or nothing), `PATCH /api/entries/:id`
-and `DELETE /api/entries/:id` (both answer with the updated day). Every food the app uses is cached
-in D1, so repeat lookups never call USDA.
+(meal phrase in, every item back with ranked USDA matches priced for the spoken amount; the first
+8 are looked up and the rest come back "skipped"; a USDA problem only marks the affected item),
+`GET /api/foods/search?q=&quantity=&unit=`, `GET /api/entries?date=` (the day's entries, totals
+and the goals in effect that day; no date means today), `POST /api/entries` (save confirmed items,
+all or nothing; amounts from 0.01 up to 1,000 of a unit and 5 kg of a food), `PATCH /api/entries/:id`
+(a new unit alone keeps the weight) and `DELETE /api/entries/:id` (both answer with the updated
+day). Every food the app uses is cached in D1, so repeat lookups never call USDA, and the shared
+USDA key is rationed: 16 calls per request and 150 per user per hour.
+
+Every write (POST, PUT, PATCH) must send `Content-Type: application/json`, and writes a browser
+marks as started by another site (`Sec-Fetch-Site`) are refused, so other pages can't post to the
+API with a family member's sign-in.
 
 `npm run dev:mock` runs the same app with USDA replaced by the recorded fixtures in
 `test/fixtures/usda`, so no USDA key is needed (run `npm run db:migrate:local` once first).

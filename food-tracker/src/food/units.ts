@@ -2,7 +2,17 @@
 // slices and whole items ("2 eggs") use the food's USDA portions. When nothing
 // matches we assume 100 g per unit and flag the amount as guessed.
 import { nutritionFor } from "./nutrition";
-import { GRAMS_PER, type Amount, type Candidate, type FoodRecord, type RawPortion, type UnitOption } from "./types";
+import {
+  GRAMS_PER,
+  MAX_GRAMS,
+  maxQuantityFor,
+  MIN_QUANTITY,
+  type Amount,
+  type Candidate,
+  type FoodRecord,
+  type RawPortion,
+  type UnitOption,
+} from "./types";
 import { sameWord, words } from "./words";
 
 const WEIGHT_OPTIONS: readonly UnitOption[] = [
@@ -188,10 +198,24 @@ export function resolveAmount(food: FoodRecord, quantity: number, unit: string |
   return resolveWith(unitOptions(food), quantity, unit);
 }
 
-/** The HTTP Candidate for a food and a spoken amount. */
+/**
+ * An offered amount that POST /api/entries takes as is: at least MIN_QUANTITY,
+ * at most the unit's limit and MAX_GRAMS ("200 eggs" becomes 99.4 eggs, 5 kg).
+ * A changed amount is flagged guessed so the confirm card asks the user to check it.
+ */
+function withinLimits(amount: Amount, options: UnitOption[]): Amount {
+  const each = options.find((o) => o.unit === amount.unit)?.grams ?? 1;
+  const most = Math.min(maxQuantityFor(amount.unit), each > 0 ? MAX_GRAMS / each : Infinity);
+  const quantity =
+    amount.quantity > most ? Math.floor(most * 100) / 100 : Math.max(amount.quantity, MIN_QUANTITY);
+  if (quantity === amount.quantity) return amount;
+  return { quantity, unit: amount.unit, grams: round1(quantity * each), guessed: true };
+}
+
+/** The HTTP Candidate for a food and a spoken amount, always one that can be saved as offered. */
 export function toCandidate(food: FoodRecord, quantity: number, unit: string | null): Candidate {
   const units = unitOptions(food);
-  const amount = resolveWith(units, quantity, unit);
+  const amount = withinLimits(resolveWith(units, quantity, unit), units);
   return {
     fdcId: food.fdcId,
     name: food.description,
