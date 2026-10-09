@@ -472,6 +472,7 @@ describe("entries", () => {
       meal: "lunch",
       foodName: "Grandma's cookie",
       fdcId: null,
+      usdaName: null,
       quantity: 2,
       unit: "serving",
       unitLabel: "serving",
@@ -624,6 +625,27 @@ describe("entries", () => {
     expect(Object.keys(body.fields)).toEqual([field]);
     expect(body.message).toBe(body.fields[field]);
     expect((await dayOf(as, email)).entries).toEqual([]);
+  });
+
+  it("stores the plain name the client sends and still reports the USDA name", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    const day = await logFoods(as, email, [
+      { ...chickenItem, name: "  Chicken   breast " },
+      { ...eggsItem, name: "   " },
+      { ...eggsItem, name: 42 },
+      { ...eggsItem, name: "x".repeat(150) },
+    ]);
+    const [chicken, blank, wrongType, long] = day.entries;
+    expect(chicken).toMatchObject({ foodName: "Chicken breast", usdaName: food(ROAST_CHICKEN).description });
+    // A missing, blank or odd name never fails the save; it falls back to the USDA description.
+    expect(blank.foodName).toBe(food(LARGE_EGG).description);
+    expect(wrongType.foodName).toBe(food(LARGE_EGG).description);
+    expect(long.foodName).toHaveLength(100);
+    expect(day.entries.every((e) => e.usdaName === food(e.fdcId!).description)).toBe(true);
+
+    const manual = await logFoods(as, email, [cookieItem]);
+    expect(manual.entries.at(-1)).toMatchObject({ foodName: "Grandma's cookie", fdcId: null, usdaName: null });
   });
 
   it("saves nothing when one item of several is wrong", async () => {

@@ -13,6 +13,8 @@ export interface FdcItem {
   fdcId: number;
   quantity: number;
   unit: string;
+  /** The plain name to show ("Chicken breast"), or null to fall back to the USDA description. */
+  name: string | null;
 }
 
 export interface ManualItem {
@@ -138,10 +140,12 @@ function readItem(raw: unknown, i: number, errors: FieldErrors): FdcItem | Manua
   }
   const unit = readUnit(raw.unit, `${at}.unit`, errors);
   const quantity = readQuantity(raw.quantity, `${at}.quantity`, maxQuantityFor(unit), errors);
+  // Optional and cosmetic: a bad value falls back to the USDA description instead of failing the save.
+  const name = typeof raw.name === "string" ? raw.name.trim().replace(/\s+/g, " ").slice(0, 100) || null : null;
   if (Object.keys(errors).length > before || fdcId === undefined || quantity === undefined || unit === undefined) {
     return null;
   }
-  return { kind: "fdc", fdcId, quantity, unit };
+  return { kind: "fdc", fdcId, quantity, unit, name };
 }
 
 /** POST /api/entries. `today` is the user's today, for the date range. */

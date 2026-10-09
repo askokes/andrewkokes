@@ -221,6 +221,7 @@ function entryView(row: EntryRow, food: FoodRecord | undefined): EntryView {
     meal: toMeal(row.meal),
     foodName: row.food_name,
     fdcId: row.fdc_id,
+    usdaName: food?.description ?? null,
     quantity: row.quantity,
     unit: row.unit,
     unitLabel: units.find((u) => u.unit === row.unit)?.label ?? row.unit,
@@ -397,7 +398,7 @@ export function foodRoutes(deps: AppDeps): Hono<AppEnv> {
       else if (measured.amount.grams > MAX_GRAMS) errors[`items.${i}.quantity`] = TOO_MUCH;
       else {
         const { quantity, unit, grams } = measured.amount;
-        rows.push({ name: food.description, fdcId: food.fdcId, quantity, unit, grams, nutrition: measured.nutrition });
+        rows.push({ name: item.name ?? food.description, fdcId: food.fdcId, quantity, unit, grams, nutrition: measured.nutrition });
       }
     });
     if (Object.keys(errors).length) return invalid(c, errors);
