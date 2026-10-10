@@ -38,6 +38,7 @@ const fixtureFoods = new Map(
 const food = (id: number) => fixtureFoods.get(id)!;
 const ROAST_CHICKEN = 171477; // Chicken breast, cooked, roasted: 1 breast = 172 g, 1 cup chopped = 140 g
 const BRAISED_CHICKEN = 331960; // Foundation chicken breast with a 174 g "piece" and no cup
+const GRILLED_CHICKEN = 171534; // SR grilled breast with a 196 g "piece": an alternative in the common-foods table
 const LARGE_EGG = 748967; // 1 egg = 50.3 g
 const BROWN_RICE = 169704; // Rice, brown, long-grain, cooked: 1 cup = 202 g
 
@@ -154,10 +155,13 @@ describe("POST /api/parse", () => {
 
     expect(eggs).toMatchObject({ quantity: 2, unit: null, food: "eggs", status: "ok" });
     const egg = eggs.candidates[0];
-    expect(egg.name).toMatch(/^Eggs?\b/);
-    expect(egg.amount).toMatchObject({ quantity: 2, unit: "each", guessed: false });
-    expect(egg.amount.grams).toBe(round1(2 * egg.units.find((u) => u.unit === "each")!.grams));
+    // The common-foods table's whole egg, read as large eggs (eggs are sold large).
+    expect(egg.name).toBe("Egg, whole, raw, fresh");
+    expect(egg.amount).toEqual({ quantity: 2, unit: "large", grams: 100, guessed: false });
+    expect(egg.amount.grams).toBe(round1(2 * egg.units.find((u) => u.unit === "large")!.grams));
     for (const c of eggs.candidates) expect(c.amount.guessed).toBe(false);
+    // The table's cooked eggs come next, still as large eggs.
+    expect(eggs.candidates[1]).toMatchObject({ fdcId: 172187, amount: { quantity: 2, unit: "large", grams: 122 } });
   });
 
   it("serves a repeat parse from the cache, with zero USDA calls", async () => {
@@ -230,11 +234,12 @@ describe("POST /api/parse", () => {
     const parse = async (text: string) =>
       (await (await as(email, "POST", "/api/parse", { text })).json<ParseResponse>()).items[0].candidates;
 
-    // By weight, the roasted SR Legacy record ranks first; only the Foundation one has a "piece".
-    expect((await parse("6 oz of chicken breast"))[0].fdcId).not.toBe(BRAISED_CHICKEN);
+    // By weight, the table's roasted breast comes first. Fewer foods have a "piece": the table's grilled
+    // breast is the first of them, and the search's Foundation breast is among them too.
+    expect((await parse("6 oz of chicken breast"))[0].fdcId).toBe(171477);
     const piece = await parse("a piece of chicken breast");
-    expect(piece[0].fdcId).toBe(BRAISED_CHICKEN);
-    expect(piece[0].amount).toEqual({ quantity: 1, unit: "piece", grams: 174, guessed: false });
+    expect(piece[0].fdcId).toBe(GRILLED_CHICKEN);
+    expect(piece[0].amount).toEqual({ quantity: 1, unit: "piece", grams: 196, guessed: false });
 
     for (const text of ["a piece of chicken breast", "a cup of banana", "a cup of chicken breast", "a slice of toast"]) {
       const guessed = (await parse(text)).map((c) => c.amount.guessed);
@@ -386,7 +391,9 @@ describe("GET /api/foods/search", () => {
     const { as } = client();
     const email = await signUp(as);
     const body = await (await as(email, "GET", "/api/foods/search?q=chicken%20breast&unit=piece")).json<SearchResponse>();
-    expect(body.candidates[0].fdcId).toBe(BRAISED_CHICKEN);
+    expect(body.candidates[0].fdcId).toBe(GRILLED_CHICKEN);
+    const pieces = body.candidates.filter((c) => !c.amount.guessed).map((c) => c.fdcId);
+    expect(pieces).toContain(BRAISED_CHICKEN);
   });
 
   it.each([
@@ -713,6 +720,7 @@ describe("parse and search to entries", () => {
       "2000 grams of rice",
       "200 eggs",
       "0.001 cups of milk",
+      "a coke and fries", // units only the common-foods table gives: a can, a medium order
     ];
     for (const text of sentences) {
       const { items } = await (await as(email, "POST", "/api/parse", { text })).json<ParseResponse>();
@@ -746,6 +754,30 @@ describe("parse and search to entries", () => {
     expect(amountOf("2000 grams of rice")).toEqual({ quantity: 2000, unit: "g", grams: 2000, guessed: false });
     expect(amountOf("200 eggs")).toMatchObject({ guessed: true });
     expect(amountOf("0.001 cups of milk")).toMatchObject({ quantity: 0.01, unit: "cup", guessed: true });
+    expect(amountOf("a coke and fries")).toEqual({ quantity: 1, unit: "can", grams: 370, guessed: false });
+  });
+
+  it("offers the common-foods table's units and saves entries in them", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    const { items } = await (await as(email, "POST", "/api/parse", { text: "a coke and some fries" })).json<ParseResponse>();
+    const [coke, fries] = items.map((i) => i.candidates[0]);
+    expect(coke).toMatchObject({ fdcId: 174852, amount: { quantity: 1, unit: "can", grams: 370, guessed: false } });
+    expect(coke.units.map((u) => u.unit)).toEqual(expect.arrayContaining(["can", "bottle", "small", "medium", "large"]));
+    expect(fries).toMatchObject({ fdcId: 170698, amount: { quantity: 1, unit: "medium", grams: 117, guessed: false } });
+
+    const day = await logFoods(as, email, [
+      { fdcId: 174852, quantity: 2, unit: "can", name: "Coke" },
+      { fdcId: 170698, quantity: 1, unit: "large", name: "Fries" },
+    ]);
+    expect(day.entries.map((e) => [e.unit, e.unitLabel, e.grams])).toEqual([
+      ["can", "can (12 fl oz)", 740],
+      ["large", "large order", 154],
+    ]);
+    // Changing the unit keeps the weight, to 2 decimals of a unit: two cans (740 g) are 1.21 bottles.
+    const res = await as(email, "PATCH", `/api/entries/${day.entries[0].id}`, { unit: "bottle" });
+    expect(res.status).toBe(200);
+    expect((await res.json<DayView>()).entries[0]).toMatchObject({ quantity: 1.21, unit: "bottle", grams: 742.9 });
   });
 });
 

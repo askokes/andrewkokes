@@ -23,7 +23,9 @@ export interface CommonFood {
   /**
    * What a unitless mention means ("a glass of milk" is a cup) when the record's
    * own portions don't resolve it well. A key unitOptions returns for the
-   * record, or one of this entry's `portions`.
+   * record, or one of this entry's `portions`. The app tries it first for every
+   * food offered for the phrase (the alternatives too), and for this record
+   * wherever it is offered (see commonUnit).
    */
   unit?: string;
   /** Common variants the confirm screen should offer next, most likely first (at most 4). */
@@ -138,8 +140,8 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["cheese", "cheddar", "cheddar cheese"], fdcId: 173414, alternatives: [170853, 171244, 171251] },
   // Cheese, pasteurized process, American, fortified with vitamin D: 1 slice = 28 g, 103 kcal
   { names: ["american cheese"], fdcId: 170853, alternatives: [171289, 173414] },
-  // Cheese, mozzarella, low moisture, part-skim: 1 slice = 28 g, 83 kcal
-  { names: ["mozzarella", "mozzarella cheese"], fdcId: 171244, alternatives: [170845, 170900] },
+  // Cheese, mozzarella, low moisture, part-skim: 1 oz = 28.3 g, 84 kcal
+  { names: ["mozzarella", "mozzarella cheese"], fdcId: 171244, unit: "oz", alternatives: [170845, 170900] },
   // Cheese, mozzarella, low moisture, part-skim: 1 stick (1 oz) = 28 g, 83 kcal
   {
     names: ["string cheese", "cheese stick"],
@@ -205,17 +207,18 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["whipped cream"], fdcId: 170860, unit: "tbsp" },
 
   // ---------------------------------------------------------------- frozen desserts
-  // Ice creams, vanilla: 1 serving (66 g) = 66 g, 137 kcal
+  // Ice creams, vanilla: 1 cup = 132 g, 274 kcal
   {
     names: ["ice cream", "vanilla ice cream"],
     fdcId: 167575,
+    unit: "cup",
     alternatives: [168809, 168810, 168105],
     portions: [{ unit: "cup", label: "cup", grams: 132 }],
   },
   // Ice creams, chocolate: 1 cup = 132 g, 285 kcal
-  { names: ["chocolate ice cream"], fdcId: 168809, alternatives: [167575, 168810] },
+  { names: ["chocolate ice cream"], fdcId: 168809, unit: "cup", alternatives: [167575, 168810] },
   // Frozen yogurts, flavors other than chocolate: 1 cup = 174 g, 221 kcal
-  { names: ["frozen yogurt", "froyo"], fdcId: 168105, alternatives: [168815, 167575] },
+  { names: ["frozen yogurt", "froyo"], fdcId: 168105, unit: "cup", alternatives: [168815, 167575] },
   // Ice cream sandwich: 1 serving (70 g) = 70 g, 166 kcal
   { names: ["ice cream sandwich"], fdcId: 172226 },
   // Fast foods, sundae, hot fudge: 1 sundae = 158 g, 284 kcal
@@ -230,18 +233,32 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
   // Chicken, broiler or fryers, breast, skinless, boneless, meat only, cooked, grilled: 1 piece = 196 g, 296 kcal
   { names: ["grilled chicken", "grilled chicken breast"], fdcId: 171534, alternatives: [171477, 171140] },
-  // Chicken, broilers or fryers, thigh, meat and skin, cooked, roasted: 1 thigh = 137 g, 318 kcal
-  { names: ["chicken thigh"], fdcId: 173625, alternatives: [172388, 170359] },
+  // Chicken, broilers or fryers, thigh, meat only, cooked, roasted: 1 thigh without skin = 116 g, 208 kcal
+  // Thighs are mostly bought boneless and skinless; with skin (232 kcal per 100 g) is the first alternative.
+  // USDA's portions file the 116 g thigh without skin and the 137 g one with skin under the same
+  // word, which unitOptions reads as one "thigh" (137 g), so the skinless one is a unit of its own.
+  {
+    names: ["chicken thigh"],
+    fdcId: 172388,
+    unit: "piece",
+    alternatives: [173625, 170359],
+    portions: [{ unit: "piece", label: "thigh without skin", grams: 116 }],
+  },
   // Chicken, broilers or fryers, drumstick, meat and skin, cooked, roasted: 1 drumstick = 96 g, 183 kcal
   { names: ["chicken drumstick", "drumstick", "chicken leg"], fdcId: 173612, alternatives: [170757, 331897] },
-  // Chicken, broilers or fryers, wing, meat and skin, cooked, fried, flour: 1 wing = 32 g, 103 kcal
+  // Chicken, broilers or fryers, wing, meat and skin, cooked, roasted: 1 wing = 32 g, 81 kcal
+  // Six wings come to about 490 kcal, close to a restaurant's six plain wings; flour-fried (321 kcal
+  // per 100 g) is an alternative. USDA gives no weight per wing for the roasted record (its "piece" is
+  // 85 g), so a wing is the 32 g USDA gives for a fried wing without its bone.
   {
     names: ["chicken wings", "wings", "buffalo wings", "hot wings"],
-    fdcId: 173629,
-    alternatives: [171523, 172830, 170360],
+    fdcId: 173630,
+    unit: "each",
+    alternatives: [173629, 170360, 171523, 172830],
+    portions: [{ unit: "each", label: "wing (bone removed)", grams: 32 }],
   },
-  // Fast foods, chicken, breaded and fried, boneless pieces, plain: 1 piece = 16 g, 49 kcal
-  { names: ["chicken nuggets", "nuggets"], fdcId: 170718, alternatives: [173346, 173321] },
+  // Chicken, nuggets, white meat, precooked, frozen, not reheated: 1 piece = 20 g, 52 kcal
+  { names: ["chicken nuggets", "nuggets"], fdcId: 172112, alternatives: [170718, 173346, 173321] },
   // Fast foods, chicken tenders: 1 piece (tender (strip)) = 30 g, 81 kcal
   {
     names: ["chicken tenders", "chicken strips", "chicken fingers", "tenders"],
@@ -320,7 +337,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Pork, fresh, loin, top loin (chops), boneless, separable lean only, cooked, broiled: 1 chop = 145 g, 251 kcal
   { names: ["pork chop"], fdcId: 168253, alternatives: [168240] },
   // Pulled pork in barbecue sauce: 1 cup = 249 g, 418 kcal
-  { names: ["pulled pork", "bbq pulled pork"], fdcId: 173344 },
+  { names: ["pulled pork", "bbq pulled pork"], fdcId: 173344, unit: "cup" },
   // Meatballs, frozen, Italian style: 1 piece = 18.7 g, 54 kcal
   { names: ["meatballs"], fdcId: 171638 },
   // Frankfurter, beef, heated: 1 frankfurter = 48 g, 155 kcal
@@ -360,11 +377,20 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     names: ["tuna", "canned tuna", "tuna fish"],
     fdcId: 334194,
     unit: "can",
-    alternatives: [173709, 173708],
+    alternatives: [173708],
+    portions: [{ unit: "can", label: "can (5 oz), drained", grams: 107 }],
+  },
+  // Fish, tuna, light, canned in oil, drained solids: 1 can (5 oz), drained = 107 g, 212 kcal
+  // USDA gives this record only a cup; the can is the water-packed can's drained weight.
+  {
+    names: ["tuna in oil", "oil packed tuna"],
+    fdcId: 173708,
+    unit: "can",
+    alternatives: [334194],
     portions: [{ unit: "can", label: "can (5 oz), drained", grams: 107 }],
   },
   // Fish, tuna salad: 1 cup = 205 g, 383 kcal
-  { names: ["tuna salad"], fdcId: 175160 },
+  { names: ["tuna salad"], fdcId: 175160, unit: "cup" },
   // Crustaceans, shrimp, mixed species, cooked, moist heat (may contain additives to retain moisture): 1 large = 5.5 g, 7 kcal
   { names: ["shrimp", "cooked shrimp", "grilled shrimp", "boiled shrimp"], fdcId: 171971, alternatives: [171970] },
   // Crustaceans, shrimp, mixed species, cooked, breaded and fried: 1 large = 7.5 g, 18 kcal
@@ -382,25 +408,26 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
 
   // ---------------------------------------------------------------- beans, tofu, nuts, spreads
-  // Tofu, raw, firm, prepared with calcium sulfate: 1 serving (3 oz) = 85 g, 122 kcal
+  // Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari): 1 serving (3 oz) = 85 g, 66 kcal
+  // Store firm tofu is about 80 kcal per 100 g; "Tofu, raw, firm, prepared with calcium sulfate" (144) is a denser kind.
   {
     names: ["tofu", "firm tofu"],
-    fdcId: 172475,
+    fdcId: 172448,
     unit: "serving",
     portions: [{ unit: "serving", label: "serving (3 oz)", grams: 85 }],
   },
   // Beans, black, mature seeds, cooked, boiled, without salt: 1 cup = 172 g, 227 kcal
-  { names: ["black beans"], fdcId: 173735, alternatives: [175200, 175194] },
+  { names: ["black beans"], fdcId: 173735, unit: "cup", alternatives: [175200, 175194] },
   // Beans, pinto, mature seeds, cooked, boiled, without salt: 1 cup = 171 g, 245 kcal
-  { names: ["pinto beans"], fdcId: 175200, alternatives: [173735, 175194] },
+  { names: ["pinto beans"], fdcId: 175200, unit: "cup", alternatives: [173735, 175194] },
   // Beans, kidney, red, mature seeds, cooked, boiled, without salt: 1 cup = 177 g, 225 kcal
-  { names: ["kidney beans"], fdcId: 175194, alternatives: [173735, 175200] },
+  { names: ["kidney beans"], fdcId: 175194, unit: "cup", alternatives: [173735, 175200] },
   // Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt: 1 cup = 164 g, 269 kcal
-  { names: ["chickpeas", "garbanzo beans"], fdcId: 173757, alternatives: [173735, 175194] },
+  { names: ["chickpeas", "garbanzo beans"], fdcId: 173757, unit: "cup", alternatives: [173735, 175194] },
   // Refried beans, canned, traditional style: 1 cup = 238 g, 214 kcal
-  { names: ["refried beans"], fdcId: 172438, alternatives: [174296, 172465] },
+  { names: ["refried beans"], fdcId: 172438, unit: "cup", alternatives: [174296, 172465] },
   // Beans, baked, canned, with pork: 1 cup = 253 g, 268 kcal
-  { names: ["baked beans"], fdcId: 175185, alternatives: [173731] },
+  { names: ["baked beans"], fdcId: 175185, unit: "cup", alternatives: [173731] },
   // Hummus, commercial: 1 tbsp = 15 g, 36 kcal
   { names: ["hummus", "hommus"], fdcId: 174289, unit: "tbsp", alternatives: [172454] },
   // Peanut butter, smooth style, with salt (Includes foods for USDA's Food Distribution Program): 1 tbsp = 16 g, 96 kcal
@@ -485,8 +512,16 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     unit: "cup",
     alternatives: [173342, 173325],
   },
-  // Lasagna with meat & sauce, frozen entree: 1 piece, center = 278 g, 345 kcal
-  { names: ["lasagna", "lasagne", "meat lasagna"], fdcId: 173334, alternatives: [169850, 173333] },
+  // Restaurant, Italian, lasagna with meat: 1 piece (about 1 cup) = 250 g, 463 kcal
+  // Homemade and restaurant lasagna is about 185 kcal per 100 g; frozen entrees (124) are the
+  // alternative. USDA's one portion is a 457 g restaurant plate, so a piece is my estimate.
+  {
+    names: ["lasagna", "lasagne", "meat lasagna"],
+    fdcId: 169850,
+    unit: "piece",
+    alternatives: [173334],
+    portions: [{ unit: "piece", label: "piece (about 1 cup)", grams: 250 }],
+  },
   // Soup, ramen noodle, any flavor, dry: 1 package (3 oz, with seasoning) = 87 g, 383 kcal
   {
     names: ["ramen", "ramen noodles", "instant ramen", "instant noodles"],
@@ -507,7 +542,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     names: ["instant oatmeal", "maple brown sugar oatmeal"],
     fdcId: 173920,
     unit: "packet",
-    alternatives: [173905, 171662],
+    alternatives: [173905],
     portions: [{ unit: "packet", label: "packet (1.5 oz)", grams: 43 }],
   },
   // Cereals, corn grits, white, regular and quick, enriched, cooked with water, without salt: 1 cup = 257 g, 183 kcal
@@ -594,7 +629,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Fast foods, french toast sticks: 1 piece = 21.8 g, 74 kcal
   { names: ["french toast sticks"], fdcId: 172035, alternatives: [174998] },
   // Fast foods, potatoes, hash browns, round pieces or patty: 1 patty = 53 g, 144 kcal
-  { names: ["hash browns", "hashbrowns"], fdcId: 173273, alternatives: [170036] },
+  { names: ["hash browns", "hashbrowns"], fdcId: 173273 },
 
   // ---------------------------------------------------------------- fast food and takeout
   // Fast foods, hamburger; single, regular patty; with condiments: 1 sandwich = 97 g, 255 kcal
@@ -734,7 +769,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
   // Fast foods, submarine sandwich, cold cut on white bread with lettuce and tomato: 1 6-inch sub = 196 g, 418 kcal
   {
-    names: ["sub", "sub sandwich", "submarine sandwich", "italian sub", "cold cut sub"],
+    names: ["sub", "sub sandwich", "submarine sandwich", "italian sub", "cold cut sub", "sandwich", "deli sandwich"],
     fdcId: 170696,
     unit: "each",
     alternatives: [170706, 170707],
@@ -769,11 +804,15 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["egg rolls"], fdcId: 167667, alternatives: [172103] },
 
   // ---------------------------------------------------------------- soups and dinners
-  // Soup, chicken noodle, canned, prepared with equal volume water: 1 serving (248 g) = 248 g, 60 kcal
+  // Soup, chunky chicken noodle, canned, ready-to-serve: 1 cup = 243 g, 100 kcal
+  // Ready-to-serve, deli and homemade chicken noodle soups are about 40 kcal per 100 g; condensed
+  // soup made up with water (24) is the alternative.
   {
     names: ["chicken noodle soup", "chicken soup"],
-    fdcId: 172909,
-    portions: [{ unit: "cup", label: "cup", grams: 248 }],
+    fdcId: 171148,
+    unit: "cup",
+    alternatives: [172909, 174064],
+    portions: [{ unit: "can", label: "can (18.7 oz)", grams: 530 }],
   },
   // Soup, tomato, canned, prepared with equal volume water, commercial: 1 serving (248 g) = 248 g, 79 kcal
   {
@@ -783,13 +822,13 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     portions: [{ unit: "cup", label: "cup", grams: 248 }],
   },
   // Chili with beans, canned: 1 cup = 256 g, 264 kcal
-  { names: ["chili", "chili with beans"], fdcId: 175207, alternatives: [172098] },
+  { names: ["chili", "chili with beans"], fdcId: 175207, unit: "cup", alternatives: [172098] },
   // Chicken pot pie, frozen entree, prepared: 1 pie = 302 g, 616 kcal
   { names: ["chicken pot pie", "pot pie"], fdcId: 173331 },
 
   // ---------------------------------------------------------------- vegetables and sides
   // Broccoli, cooked, boiled, drained, without salt: 1 cup, chopped = 156 g, 55 kcal
-  { names: ["broccoli", "steamed broccoli", "cooked broccoli"], fdcId: 169967, alternatives: [170379] },
+  { names: ["broccoli", "steamed broccoli", "cooked broccoli"], fdcId: 169967, unit: "cup", alternatives: [170379] },
   // Broccoli, raw: 1 serving (148 g) = 148 g, 50 kcal
   { names: ["raw broccoli"], fdcId: 170379, alternatives: [169967] },
   // Carrots, raw: 1 medium = 61 g, 25 kcal
@@ -799,9 +838,9 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Carrots, baby, raw: 1 medium = 10 g, 4 kcal
   { names: ["baby carrots"], fdcId: 168568, alternatives: [170393, 170394] },
   // Spinach, raw: 1 cup = 30 g, 7 kcal
-  { names: ["spinach", "raw spinach", "baby spinach"], fdcId: 168462, alternatives: [168463, 169247] },
+  { names: ["spinach", "raw spinach", "baby spinach"], fdcId: 168462, unit: "cup", alternatives: [168463, 169247] },
   // Spinach, cooked, boiled, drained, without salt: 1 cup = 180 g, 41 kcal
-  { names: ["cooked spinach"], fdcId: 168463, alternatives: [168462, 168421] },
+  { names: ["cooked spinach"], fdcId: 168463, unit: "cup", alternatives: [168462, 168421] },
   // Lettuce, cos or romaine, raw: 1 cup, shredded = 47 g, 8 kcal
   { names: ["lettuce", "romaine", "romaine lettuce"], fdcId: 169247, unit: "cup", alternatives: [169248, 168462] },
   // Lettuce, iceberg (includes crisphead types), raw: 1 cup, chopped = 57 g, 8 kcal
@@ -820,13 +859,13 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     portions: [{ unit: "each", label: "ear, medium", grams: 103 }],
   },
   // Beans, snap, green, cooked, boiled, drained, without salt: 1 cup = 125 g, 44 kcal
-  { names: ["green beans", "string beans"], fdcId: 169141 },
+  { names: ["green beans", "string beans"], fdcId: 169141, unit: "cup" },
   // Peas, green, frozen, cooked, boiled, drained, without salt: 1 cup = 160 g, 125 kcal
-  { names: ["peas", "green peas"], fdcId: 170017 },
+  { names: ["peas", "green peas"], fdcId: 170017, unit: "cup" },
   // Potatoes, baked, flesh and skin, without salt: 1 medium potato = 173 g, 161 kcal
   { names: ["potato", "baked potato"], fdcId: 170093, alternatives: [168555, 168483] },
   // Potatoes, mashed, home-prepared, whole milk and butter added: 1 cup = 210 g, 237 kcal
-  { names: ["mashed potatoes"], fdcId: 168555, alternatives: [170699, 170093] },
+  { names: ["mashed potatoes"], fdcId: 168555, unit: "cup", alternatives: [170699, 170093] },
   // Sweet potato, cooked, baked in skin, flesh, without salt: 1 medium = 114 g, 103 kcal
   { names: ["sweet potato", "baked sweet potato", "yam"], fdcId: 168483, alternatives: [170093] },
   // Onions, raw: 1 medium = 110 g, 44 kcal
@@ -845,29 +884,29 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     portions: [{ unit: "each", label: "stalk, medium", grams: 40 }],
   },
   // Cauliflower, cooked, boiled, drained, without salt: 1 cup = 124 g, 29 kcal
-  { names: ["cauliflower"], fdcId: 170397, alternatives: [169986] },
+  { names: ["cauliflower"], fdcId: 170397, unit: "cup", alternatives: [169986] },
   // Squash, summer, zucchini, includes skin, cooked, boiled, drained, without salt: 1 cup, sliced = 180 g, 27 kcal
-  { names: ["zucchini"], fdcId: 169292, alternatives: [169291] },
+  { names: ["zucchini"], fdcId: 169292, unit: "cup", alternatives: [169291] },
   // Asparagus, cooked, boiled, drained: 1 cup = 180 g, 40 kcal
-  { names: ["asparagus"], fdcId: 168390 },
+  { names: ["asparagus"], fdcId: 168390, unit: "cup" },
   // Brussels sprouts, cooked, boiled, drained, without salt: 1 cup = 156 g, 56 kcal
   { names: ["brussels sprouts"], fdcId: 169971, unit: "cup" },
   // Kale, raw: 1 cup = 21 g, 7 kcal
-  { names: ["kale"], fdcId: 168421 },
+  { names: ["kale"], fdcId: 168421, unit: "cup" },
   // Cabbage, raw: 1 cup, chopped = 89 g, 22 kcal
-  { names: ["cabbage"], fdcId: 169975 },
+  { names: ["cabbage"], fdcId: 169975, unit: "cup" },
   // Fast foods, coleslaw: 1 cup = 191 g, 292 kcal
-  { names: ["coleslaw", "cole slaw", "slaw"], fdcId: 170300 },
+  { names: ["coleslaw", "cole slaw", "slaw"], fdcId: 170300, unit: "cup" },
   // Edamame, frozen, prepared: 1 cup = 155 g, 188 kcal
-  { names: ["edamame"], fdcId: 168411 },
+  { names: ["edamame"], fdcId: 168411, unit: "cup" },
   // Vegetables, mixed, frozen, cooked, boiled, drained, without salt: 1 cup = 182 g, 118 kcal
-  { names: ["mixed vegetables", "mixed veggies", "vegetables", "veggies"], fdcId: 170472 },
+  { names: ["mixed vegetables", "mixed veggies", "vegetables", "veggies"], fdcId: 170472, unit: "cup" },
   // Pickles, cucumber, dill or kosher dill: 1 large = 135 g, 16 kcal
   { names: ["pickle", "dill pickle"], fdcId: 168558 },
   // Olives, ripe, canned (small-extra large): 1 large = 4.4 g, 5 kcal
   { names: ["olives", "black olives"], fdcId: 169094, alternatives: [169096] },
   // Potato salad, home-prepared: 1 cup = 250 g, 358 kcal
-  { names: ["potato salad"], fdcId: 169269, alternatives: [173343] },
+  { names: ["potato salad"], fdcId: 169269, unit: "cup", alternatives: [173343] },
   // Avocados, raw, California: 1 fruit = 136 g, 227 kcal
   { names: ["avocado"], fdcId: 171706, alternatives: [171705] },
 
@@ -881,11 +920,11 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Strawberries, raw: 1 medium = 12 g, 4 kcal
   { names: ["strawberries"], fdcId: 167762 },
   // Blueberries, raw: 1 cup = 148 g, 84 kcal
-  { names: ["blueberries"], fdcId: 171711 },
+  { names: ["blueberries"], fdcId: 171711, unit: "cup" },
   // Raspberries, raw: 1 cup = 123 g, 64 kcal
   { names: ["raspberries"], fdcId: 167755, unit: "cup" },
   // Blackberries, raw: 1 cup = 144 g, 62 kcal
-  { names: ["blackberries"], fdcId: 173946 },
+  { names: ["blackberries"], fdcId: 173946, unit: "cup" },
   // Grapes, red or green (European type, such as Thompson seedless), raw: 1 cup = 151 g, 104 kcal
   { names: ["grapes"], fdcId: 174683, unit: "cup" },
   // Cherries, sweet, raw: 1 cup, without pits = 154 g, 97 kcal
@@ -1329,11 +1368,13 @@ export function commonKey(text: string): string {
 
 const byKey = new Map<string, CommonFood>();
 const portionsById = new Map<number, CommonPortion[]>();
+const unitById = new Map<number, string>();
 for (const food of COMMON_FOODS) {
   for (const name of food.names) {
     const key = commonKey(name);
     if (key && !byKey.has(key)) byKey.set(key, food);
   }
+  if (food.unit && !unitById.has(food.fdcId)) unitById.set(food.fdcId, food.unit);
   if (food.portions?.length) {
     const list = portionsById.get(food.fdcId) ?? [];
     for (const p of food.portions) if (!list.some((q) => q.unit === p.unit)) list.push(p);
@@ -1350,6 +1391,15 @@ for (const food of COMMON_FOODS) {
 export function commonMatch(text: string): CommonFood | null {
   const key = commonKey(text);
   return (key && byKey.get(key)) || null;
+}
+
+/**
+ * What a unitless mention of a table food means ("a soda" is a can), from the
+ * first entry for its fdcId that names a unit; null for foods with none. An
+ * alternative offered for another entry keeps its own entry's unit here.
+ */
+export function commonUnit(fdcId: number): string | null {
+  return unitById.get(fdcId) ?? null;
 }
 
 /**

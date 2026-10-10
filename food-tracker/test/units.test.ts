@@ -104,8 +104,14 @@ describe("unitOptions", () => {
   });
 
   it("skips weight portions, so a food with only oz and lb portions offers just the weights", () => {
-    expect(keys(food(174054))).toEqual(["oz", "lb", "g"]); // steak: "3 oz", "lb"
+    expect(unitOptions(food(174054), false).map((o) => o.unit)).toEqual(["oz", "lb", "g"]); // steak: "3 oz", "lb"
     expect(keys(food(323604))).toEqual(["oz", "lb", "g", "serving"]); // Foundation measureUnit "oz"
+  });
+
+  it("adds the units the common-foods table gives a food, after USDA's", () => {
+    // Steak is in the table with a 6 oz cooked steak; whole milk has nothing to add.
+    expect(unitOptions(food(174054)).slice(3)).toEqual([{ unit: "each", label: "steak (6 oz cooked)", grams: 170 }]);
+    expect(unitOptions(food(171265))).toEqual(unitOptions(food(171265), false));
   });
 
   it("prefers a plain portion over a qualified one, and a qualified one over a dense form", () => {
@@ -160,11 +166,23 @@ describe("resolveAmount", () => {
 
   it("tries each, medium, large, small, piece, slice, serving in that order", () => {
     expect(resolveAmount(food(SR_BANANA), 1, null)).toMatchObject({ unit: "medium", grams: 118 });
-    expect(resolveAmount(food(SR_EGG), 2, null)).toMatchObject({ unit: "medium", grams: 88 });
+    // Without its table unit the SR egg would be medium; see the next test.
+    expect(resolveAmount(food(SR_EGG), 2, null, ["medium"])).toMatchObject({ unit: "medium", grams: 88 });
     expect(resolveAmount(food(173423), 1, null)).toMatchObject({ unit: "large", grams: 46 }); // fried egg: large only
     expect(resolveAmount(food(331960), 1, null)).toMatchObject({ unit: "piece", grams: 174 });
     expect(resolveAmount(food(172688), 2, null)).toMatchObject({ unit: "slice", grams: 64 });
     expect(resolveAmount(food(9900001), 1, null)).toMatchObject({ unit: "serving", grams: 170 });
+  });
+
+  it("uses the caller's unit, then the food's own common-foods unit, before that order", () => {
+    // "eggs" in the table are large (50 g): eggs are sold by the dozen as large.
+    expect(resolveAmount(food(SR_EGG), 2, null)).toEqual({ quantity: 2, unit: "large", grams: 100, guessed: false });
+    expect(resolveAmount(food(SR_EGG), 2, null, ["can"])).toMatchObject({ unit: "large" }); // not offered: skipped
+    expect(resolveAmount(food(174054), 1, null)).toEqual({ quantity: 1, unit: "each", grams: 170, guessed: false });
+    // A food the table offers under another entry takes that entry's unit: "a cup of rice" for brown rice.
+    expect(resolveAmount(food(169704), 1, null, ["cup"])).toMatchObject({ unit: "cup", guessed: false });
+    // A spoken unit always wins.
+    expect(resolveAmount(food(SR_EGG), 1, "small", ["medium"])).toMatchObject({ unit: "small", grams: 38 });
   });
 
   it("uses the whole item for a size the food doesn't list ('a large egg')", () => {
@@ -176,7 +194,7 @@ describe("resolveAmount", () => {
     expect(resolveAmount(chicken, 1, "slice")).toEqual({ quantity: 100, unit: "g", grams: 100, guessed: true });
     expect(resolveAmount(chicken, 2, "slice")).toEqual({ quantity: 200, unit: "g", grams: 200, guessed: true });
     expect(resolveAmount(food(171304), 1, null)).toEqual({ quantity: 100, unit: "g", grams: 100, guessed: true }); // no portions
-    expect(resolveAmount(food(174054), 1 / 3, null)).toEqual({ quantity: 33.3, unit: "g", grams: 33.3, guessed: true });
+    expect(resolveAmount(food(171304), 1 / 3, null)).toEqual({ quantity: 33.3, unit: "g", grams: 33.3, guessed: true });
     expect(resolveAmount(food(171890), 1, "large")).toMatchObject({ unit: "g", guessed: true }); // "a large coffee"
   });
 });
@@ -230,9 +248,17 @@ describe("toCandidate", () => {
 });
 
 describe("unitless amounts for poured or scooped foods", () => {
-  it("uses one cup rather than a 100 g guess when the food only has a cup portion", () => {
+  it("uses the cup the common-foods table gives poured and scooped staples", () => {
     // "a glass of milk", "a bowl of oatmeal": the parser drops the container and passes no unit.
-    expect(resolveAmount(food(746782), 1, null)).toMatchObject({ quantity: 1, unit: "cup", guessed: false });
+    expect(resolveAmount(food(171265), 1, null)).toMatchObject({ quantity: 1, unit: "cup", grams: 244, guessed: false });
     expect(resolveAmount(food(173905), 1, null)).toMatchObject({ quantity: 1, unit: "cup", guessed: false });
+  });
+
+  it("never guesses a cup for a food outside the table, since a cup-only food can be a powder", () => {
+    // Updated: this test used to expect a cup here. A cup at the end of the unitless order also turned
+    // "two eggs" into 2 cups of dried egg white (about 800 kcal) when that record was picked. A flagged
+    // 100 g guess asks the user to check; a cup looked certain.
+    expect(resolveAmount(food(746782), 1, null)).toEqual({ quantity: 100, unit: "g", grams: 100, guessed: true });
+    expect(resolveAmount(food(746782), 1, "cup")).toMatchObject({ quantity: 1, unit: "cup", guessed: false });
   });
 });

@@ -4181,6 +4181,372 @@
     }
    ]
   },
+  "quinoa": {
+   "totalHits": 3,
+   "currentPage": 1,
+   "totalPages": 1,
+   "foodSearchCriteria": {
+    "query": "quinoa",
+    "dataType": [
+     "Foundation",
+     "SR Legacy"
+    ],
+    "pageSize": 10
+   },
+   "foods": [
+    {
+     "fdcId": 168874,
+     "description": "Quinoa, uncooked",
+     "dataType": "SR Legacy",
+     "foodNutrients": [
+      {
+       "nutrientId": 1079,
+       "nutrientName": "Fiber, total dietary",
+       "nutrientNumber": "291",
+       "unitName": "G",
+       "value": 7.0
+      },
+      {
+       "nutrientId": 1093,
+       "nutrientName": "Sodium, Na",
+       "nutrientNumber": "307",
+       "unitName": "MG",
+       "value": 5.0
+      },
+      {
+       "nutrientId": 1003,
+       "nutrientName": "Protein",
+       "nutrientNumber": "203",
+       "unitName": "G",
+       "value": 14.1
+      },
+      {
+       "nutrientId": 1004,
+       "nutrientName": "Total lipid (fat)",
+       "nutrientNumber": "204",
+       "unitName": "G",
+       "value": 6.07
+      },
+      {
+       "nutrientId": 1005,
+       "nutrientName": "Carbohydrate, by difference",
+       "nutrientNumber": "205",
+       "unitName": "G",
+       "value": 64.2
+      },
+      {
+       "nutrientId": 1008,
+       "nutrientName": "Energy",
+       "nutrientNumber": "208",
+       "unitName": "KCAL",
+       "value": 368
+      }
+     ]
+    },
+    {
+     "fdcId": 168917,
+     "description": "Quinoa, cooked",
+     "dataType": "SR Legacy",
+     "foodNutrients": [
+      {
+       "nutrientId": 1003,
+       "nutrientName": "Protein",
+       "nutrientNumber": "203",
+       "unitName": "G",
+       "value": 4.4
+      },
+      {
+       "nutrientId": 1079,
+       "nutrientName": "Fiber, total dietary",
+       "nutrientNumber": "291",
+       "unitName": "G",
+       "value": 2.8
+      },
+      {
+       "nutrientId": 1093,
+       "nutrientName": "Sodium, Na",
+       "nutrientNumber": "307",
+       "unitName": "MG",
+       "value": 7.0
+      },
+      {
+       "nutrientId": 1004,
+       "nutrientName": "Total lipid (fat)",
+       "nutrientNumber": "204",
+       "unitName": "G",
+       "value": 1.92
+      },
+      {
+       "nutrientId": 1005,
+       "nutrientName": "Carbohydrate, by difference",
+       "nutrientNumber": "205",
+       "unitName": "G",
+       "value": 21.3
+      },
+      {
+       "nutrientId": 1008,
+       "nutrientName": "Energy",
+       "nutrientNumber": "208",
+       "unitName": "KCAL",
+       "value": 120
+      }
+     ]
+    },
+    {
+     "fdcId": 172027,
+     "description": "Pasta, gluten-free, corn flour and quinoa flour, cooked, ANCIENT HARVEST",
+     "dataType": "SR Legacy",
+     "foodNutrients": [
+      {
+       "nutrientId": 1003,
+       "nutrientName": "Protein",
+       "nutrientNumber": "203",
+       "unitName": "G",
+       "value": 3.23
+      },
+      {
+       "nutrientId": 1079,
+       "nutrientName": "Fiber, total dietary",
+       "nutrientNumber": "291",
+       "unitName": "G",
+       "value": 3.3
+      },
+      {
+       "nutrientId": 1093,
+       "nutrientName": "Sodium, Na",
+       "nutrientNumber": "307",
+       "unitName": "MG",
+       "value": 4.0
+      },
+      {
+       "nutrientId": 1004,
+       "nutrientName": "Total lipid (fat)",
+       "nutrientNumber": "204",
+       "unitName": "G",
+       "value": 2.07
+      },
+      {
+       "nutrientId": 1005,
+       "nutrientName": "Carbohydrate, by difference",
+       "nutrientNumber": "205",
+       "unitName": "G",
+       "value": 31.1
+      },
+      {
+       "nutrientId": 1008,
+       "nutrientName": "Energy",
+       "nutrientNumber": "208",
+       "unitName": "KCAL",
+       "value": 152
+      }
+     ]
+    }
+   ]
+  },
+  "lentils": {
+   "totalHits": 4,
+   "currentPage": 1,
+   "totalPages": 1,
+   "foodSearchCriteria": {
+    "query": "lentils",
+    "dataType": [
+     "Foundation",
+     "SR Legacy"
+    ],
+    "pageSize": 10
+   },
+   "foods": [
+    {
+     "fdcId": 172420,
+     "description": "Lentils, raw",
+     "dataType": "SR Legacy",
+     "foodNutrients": [
+      {
+       "nutrientId": 1004,
+       "nutrientName": "Total lipid (fat)",
+       "nutrientNumber": "204",
+       "unitName": "G",
+       "value": 1.06
+      },
+      {
+       "nutrientId": 1093,
+       "nutrientName": "Sodium, Na",
+       "nutrientNumber": "307",
+       "unitName": "MG",
+       "value": 6.0
+      },
+      {
+       "nutrientId": 1079,
+       "nutrientName": "Fiber, total dietary",
+       "nutrientNumber": "291",
+       "unitName": "G",
+       "value": 10.7
+      },
+      {
+       "nutrientId": 1003,
+       "nutrientName": "Protein",
+       "nutrientNumber": "203",
+       "unitName": "G",
+       "value": 24.6
+      },
+      {
+       "nutrientId": 1005,
+       "nutrientName": "Carbohydrate, by difference",
+       "nutrientNumber": "205",
+       "unitName": "G",
+       "value": 63.4
+      },
+      {
+       "nutrientId": 1008,
+       "nutrientName": "Energy",
+       "nutrientNumber": "208",
+       "unitName": "KCAL",
+       "value": 352
+      }
+     ]
+    },
+    {
+     "fdcId": 168427,
+     "description": "Lentils, sprouted, raw",
+     "dataType": "SR Legacy",
+     "foodNutrients": [
+      {
+       "nutrientId": 1004,
+       "nutrientName": "Total lipid (fat)",
+       "nutrientNumber": "204",
+       "unitName": "G",
+       "value": 0.55
+      },
+      {
+       "nutrientId": 1005,
+       "nutrientName": "Carbohydrate, by difference",
+       "nutrientNumber": "205",
+       "unitName": "G",
+       "value": 22.1
+      },
+      {
+       "nutrientId": 1008,
+       "nutrientName": "Energy",
+       "nutrientNumber": "208",
+       "unitName": "KCAL",
+       "value": 106
+      },
+      {
+       "nutrientId": 1003,
+       "nutrientName": "Protein",
+       "nutrientNumber": "203",
+       "unitName": "G",
+       "value": 8.96
+      },
+      {
+       "nutrientId": 1093,
+       "nutrientName": "Sodium, Na",
+       "nutrientNumber": "307",
+       "unitName": "MG",
+       "value": 11.0
+      }
+     ]
+    },
+    {
+     "fdcId": 172421,
+     "description": "Lentils, mature seeds, cooked, boiled, without salt",
+     "dataType": "SR Legacy",
+     "foodNutrients": [
+      {
+       "nutrientId": 1005,
+       "nutrientName": "Carbohydrate, by difference",
+       "nutrientNumber": "205",
+       "unitName": "G",
+       "value": 20.1
+      },
+      {
+       "nutrientId": 1008,
+       "nutrientName": "Energy",
+       "nutrientNumber": "208",
+       "unitName": "KCAL",
+       "value": 116
+      },
+      {
+       "nutrientId": 1003,
+       "nutrientName": "Protein",
+       "nutrientNumber": "203",
+       "unitName": "G",
+       "value": 9.02
+      },
+      {
+       "nutrientId": 1079,
+       "nutrientName": "Fiber, total dietary",
+       "nutrientNumber": "291",
+       "unitName": "G",
+       "value": 7.9
+      },
+      {
+       "nutrientId": 1093,
+       "nutrientName": "Sodium, Na",
+       "nutrientNumber": "307",
+       "unitName": "MG",
+       "value": 2.0
+      },
+      {
+       "nutrientId": 1004,
+       "nutrientName": "Total lipid (fat)",
+       "nutrientNumber": "204",
+       "unitName": "G",
+       "value": 0.38
+      }
+     ]
+    },
+    {
+     "fdcId": 174284,
+     "description": "Lentils, pink or red, raw",
+     "dataType": "SR Legacy",
+     "foodNutrients": [
+      {
+       "nutrientId": 1005,
+       "nutrientName": "Carbohydrate, by difference",
+       "nutrientNumber": "205",
+       "unitName": "G",
+       "value": 63.1
+      },
+      {
+       "nutrientId": 1008,
+       "nutrientName": "Energy",
+       "nutrientNumber": "208",
+       "unitName": "KCAL",
+       "value": 358
+      },
+      {
+       "nutrientId": 1003,
+       "nutrientName": "Protein",
+       "nutrientNumber": "203",
+       "unitName": "G",
+       "value": 23.9
+      },
+      {
+       "nutrientId": 1004,
+       "nutrientName": "Total lipid (fat)",
+       "nutrientNumber": "204",
+       "unitName": "G",
+       "value": 2.17
+      },
+      {
+       "nutrientId": 1079,
+       "nutrientName": "Fiber, total dietary",
+       "nutrientNumber": "291",
+       "unitName": "G",
+       "value": 10.8
+      },
+      {
+       "nutrientId": 1093,
+       "nutrientName": "Sodium, Na",
+       "nutrientNumber": "307",
+       "unitName": "MG",
+       "value": 7.0
+      }
+     ]
+    }
+   ]
+  },
   "zzzz": {
    "totalHits": 0,
    "currentPage": 1,

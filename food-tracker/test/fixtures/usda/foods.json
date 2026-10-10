@@ -6751,6 +6751,673 @@
      "value": 0
     }
    }
+  },
+  {
+   "fdcId": 168874,
+   "dataType": "SR Legacy",
+   "description": "Quinoa, uncooked",
+   "foodCategory": {
+    "description": "Cereal Grains and Pasta"
+   },
+   "foodNutrients": [
+    {
+     "type": "FoodNutrient",
+     "id": 1395385,
+     "amount": 7.0,
+     "nutrient": {
+      "id": 1079,
+      "number": "291",
+      "name": "Fiber, total dietary",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1395389,
+     "amount": 5.0,
+     "nutrient": {
+      "id": 1093,
+      "number": "307",
+      "name": "Sodium, Na",
+      "unitName": "mg"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1395404,
+     "amount": 14.1,
+     "nutrient": {
+      "id": 1003,
+      "number": "203",
+      "name": "Protein",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1395407,
+     "amount": 6.07,
+     "nutrient": {
+      "id": 1004,
+      "number": "204",
+      "name": "Total lipid (fat)",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1395446,
+     "amount": 64.2,
+     "nutrient": {
+      "id": 1005,
+      "number": "205",
+      "name": "Carbohydrate, by difference",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1395447,
+     "amount": 368,
+     "nutrient": {
+      "id": 1008,
+      "number": "208",
+      "name": "Energy",
+      "unitName": "kcal"
+     }
+    }
+   ],
+   "foodPortions": [
+    {
+     "id": 83924,
+     "amount": 1.0,
+     "gramWeight": 170.0,
+     "modifier": "cup",
+     "sequenceNumber": 1,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    }
+   ]
+  },
+  {
+   "fdcId": 168917,
+   "dataType": "SR Legacy",
+   "description": "Quinoa, cooked",
+   "foodCategory": {
+    "description": "Cereal Grains and Pasta"
+   },
+   "foodNutrients": [
+    {
+     "type": "FoodNutrient",
+     "id": 1398900,
+     "amount": 4.4,
+     "nutrient": {
+      "id": 1003,
+      "number": "203",
+      "name": "Protein",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1398910,
+     "amount": 2.8,
+     "nutrient": {
+      "id": 1079,
+      "number": "291",
+      "name": "Fiber, total dietary",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1398914,
+     "amount": 7.0,
+     "nutrient": {
+      "id": 1093,
+      "number": "307",
+      "name": "Sodium, Na",
+      "unitName": "mg"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1398924,
+     "amount": 1.92,
+     "nutrient": {
+      "id": 1004,
+      "number": "204",
+      "name": "Total lipid (fat)",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1398957,
+     "amount": 21.3,
+     "nutrient": {
+      "id": 1005,
+      "number": "205",
+      "name": "Carbohydrate, by difference",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1398958,
+     "amount": 120,
+     "nutrient": {
+      "id": 1008,
+      "number": "208",
+      "name": "Energy",
+      "unitName": "kcal"
+     }
+    }
+   ],
+   "foodPortions": [
+    {
+     "id": 83990,
+     "amount": 1.0,
+     "gramWeight": 185.0,
+     "modifier": "cup",
+     "sequenceNumber": 1,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    }
+   ]
+  },
+  {
+   "fdcId": 172027,
+   "dataType": "SR Legacy",
+   "description": "Pasta, gluten-free, corn flour and quinoa flour, cooked, ANCIENT HARVEST",
+   "foodCategory": {
+    "description": "Cereal Grains and Pasta"
+   },
+   "foodNutrients": [
+    {
+     "type": "FoodNutrient",
+     "id": 1659441,
+     "amount": 3.23,
+     "nutrient": {
+      "id": 1003,
+      "number": "203",
+      "name": "Protein",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1659449,
+     "amount": 3.3,
+     "nutrient": {
+      "id": 1079,
+      "number": "291",
+      "name": "Fiber, total dietary",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1659453,
+     "amount": 4.0,
+     "nutrient": {
+      "id": 1093,
+      "number": "307",
+      "name": "Sodium, Na",
+      "unitName": "mg"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1659483,
+     "amount": 2.07,
+     "nutrient": {
+      "id": 1004,
+      "number": "204",
+      "name": "Total lipid (fat)",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1659484,
+     "amount": 31.1,
+     "nutrient": {
+      "id": 1005,
+      "number": "205",
+      "name": "Carbohydrate, by difference",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1659485,
+     "amount": 152,
+     "nutrient": {
+      "id": 1008,
+      "number": "208",
+      "name": "Energy",
+      "unitName": "kcal"
+     }
+    }
+   ],
+   "foodPortions": [
+    {
+     "id": 89769,
+     "amount": 1.0,
+     "gramWeight": 111.0,
+     "modifier": "cup elbows not packed not packed",
+     "sequenceNumber": 3,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    },
+    {
+     "id": 89767,
+     "amount": 1.0,
+     "gramWeight": 166.0,
+     "modifier": "cup spaghetti packed",
+     "sequenceNumber": 1,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    },
+    {
+     "id": 89768,
+     "amount": 1.0,
+     "gramWeight": 132.0,
+     "modifier": "cup(not packed) not packed",
+     "sequenceNumber": 2,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    }
+   ]
+  },
+  {
+   "fdcId": 172420,
+   "dataType": "SR Legacy",
+   "description": "Lentils, raw",
+   "foodCategory": {
+    "description": "Legumes and Legume Products"
+   },
+   "foodNutrients": [
+    {
+     "type": "FoodNutrient",
+     "id": 1693696,
+     "amount": 1.06,
+     "nutrient": {
+      "id": 1004,
+      "number": "204",
+      "name": "Total lipid (fat)",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693709,
+     "amount": 6.0,
+     "nutrient": {
+      "id": 1093,
+      "number": "307",
+      "name": "Sodium, Na",
+      "unitName": "mg"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693723,
+     "amount": 10.7,
+     "nutrient": {
+      "id": 1079,
+      "number": "291",
+      "name": "Fiber, total dietary",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693727,
+     "amount": 24.6,
+     "nutrient": {
+      "id": 1003,
+      "number": "203",
+      "name": "Protein",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693748,
+     "amount": 63.4,
+     "nutrient": {
+      "id": 1005,
+      "number": "205",
+      "name": "Carbohydrate, by difference",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693749,
+     "amount": 352,
+     "nutrient": {
+      "id": 1008,
+      "number": "208",
+      "name": "Energy",
+      "unitName": "kcal"
+     }
+    }
+   ],
+   "foodPortions": [
+    {
+     "id": 90595,
+     "amount": 1.0,
+     "gramWeight": 12.0,
+     "modifier": "tablespoon",
+     "sequenceNumber": 2,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    },
+    {
+     "id": 90594,
+     "amount": 1.0,
+     "gramWeight": 192.0,
+     "modifier": "cup",
+     "sequenceNumber": 1,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    }
+   ]
+  },
+  {
+   "fdcId": 168427,
+   "dataType": "SR Legacy",
+   "description": "Lentils, sprouted, raw",
+   "foodCategory": {
+    "description": "Vegetables and Vegetable Products"
+   },
+   "foodNutrients": [
+    {
+     "type": "FoodNutrient",
+     "id": 1359638,
+     "amount": 0.55,
+     "nutrient": {
+      "id": 1004,
+      "number": "204",
+      "name": "Total lipid (fat)",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1359639,
+     "amount": 22.1,
+     "nutrient": {
+      "id": 1005,
+      "number": "205",
+      "name": "Carbohydrate, by difference",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1359640,
+     "amount": 106,
+     "nutrient": {
+      "id": 1008,
+      "number": "208",
+      "name": "Energy",
+      "unitName": "kcal"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1359664,
+     "amount": 8.96,
+     "nutrient": {
+      "id": 1003,
+      "number": "203",
+      "name": "Protein",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1359669,
+     "amount": 11.0,
+     "nutrient": {
+      "id": 1093,
+      "number": "307",
+      "name": "Sodium, Na",
+      "unitName": "mg"
+     }
+    }
+   ],
+   "foodPortions": [
+    {
+     "id": 83076,
+     "amount": 1.0,
+     "gramWeight": 77.0,
+     "modifier": "cup",
+     "sequenceNumber": 1,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    }
+   ]
+  },
+  {
+   "fdcId": 172421,
+   "dataType": "SR Legacy",
+   "description": "Lentils, mature seeds, cooked, boiled, without salt",
+   "foodCategory": {
+    "description": "Legumes and Legume Products"
+   },
+   "foodNutrients": [
+    {
+     "type": "FoodNutrient",
+     "id": 1693799,
+     "amount": 20.1,
+     "nutrient": {
+      "id": 1005,
+      "number": "205",
+      "name": "Carbohydrate, by difference",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693800,
+     "amount": 116,
+     "nutrient": {
+      "id": 1008,
+      "number": "208",
+      "name": "Energy",
+      "unitName": "kcal"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693807,
+     "amount": 9.02,
+     "nutrient": {
+      "id": 1003,
+      "number": "203",
+      "name": "Protein",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693809,
+     "amount": 7.9,
+     "nutrient": {
+      "id": 1079,
+      "number": "291",
+      "name": "Fiber, total dietary",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693813,
+     "amount": 2.0,
+     "nutrient": {
+      "id": 1093,
+      "number": "307",
+      "name": "Sodium, Na",
+      "unitName": "mg"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1693834,
+     "amount": 0.38,
+     "nutrient": {
+      "id": 1004,
+      "number": "204",
+      "name": "Total lipid (fat)",
+      "unitName": "g"
+     }
+    }
+   ],
+   "foodPortions": [
+    {
+     "id": 90596,
+     "amount": 1.0,
+     "gramWeight": 198.0,
+     "modifier": "cup",
+     "sequenceNumber": 1,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    },
+    {
+     "id": 90597,
+     "amount": 1.0,
+     "gramWeight": 12.3,
+     "modifier": "tbsp",
+     "sequenceNumber": 2,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    }
+   ]
+  },
+  {
+   "fdcId": 174284,
+   "dataType": "SR Legacy",
+   "description": "Lentils, pink or red, raw",
+   "foodCategory": {
+    "description": "Legumes and Legume Products"
+   },
+   "foodNutrients": [
+    {
+     "type": "FoodNutrient",
+     "id": 1846304,
+     "amount": 63.1,
+     "nutrient": {
+      "id": 1005,
+      "number": "205",
+      "name": "Carbohydrate, by difference",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1846305,
+     "amount": 358,
+     "nutrient": {
+      "id": 1008,
+      "number": "208",
+      "name": "Energy",
+      "unitName": "kcal"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1846314,
+     "amount": 23.9,
+     "nutrient": {
+      "id": 1003,
+      "number": "203",
+      "name": "Protein",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1846328,
+     "amount": 2.17,
+     "nutrient": {
+      "id": 1004,
+      "number": "204",
+      "name": "Total lipid (fat)",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1846332,
+     "amount": 10.8,
+     "nutrient": {
+      "id": 1079,
+      "number": "291",
+      "name": "Fiber, total dietary",
+      "unitName": "g"
+     }
+    },
+    {
+     "type": "FoodNutrient",
+     "id": 1846339,
+     "amount": 7.0,
+     "nutrient": {
+      "id": 1093,
+      "number": "307",
+      "name": "Sodium, Na",
+      "unitName": "mg"
+     }
+    }
+   ],
+   "foodPortions": [
+    {
+     "id": 94081,
+     "amount": 1.0,
+     "gramWeight": 192.0,
+     "modifier": "cup",
+     "sequenceNumber": 1,
+     "measureUnit": {
+      "id": 9999,
+      "name": "undetermined",
+      "abbreviation": "undetermined"
+     }
+    }
+   ]
   }
  ]
 }

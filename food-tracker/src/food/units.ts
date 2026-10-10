@@ -1,6 +1,9 @@
 // Unit conversion (SPEC section 7): weights convert directly; cups, sizes,
-// slices and whole items ("2 eggs") use the food's USDA portions. When nothing
-// matches we assume 100 g per unit and flag the amount as guessed.
+// slices and whole items ("2 eggs") use the food's USDA portions, plus the
+// everyday units the common-foods table adds (a can of soda, a container of
+// yogurt). When nothing matches we assume 100 g per unit and flag the amount
+// as guessed.
+import { commonPortions, commonUnit } from "./common";
 import { nutritionFor } from "./nutrition";
 import {
   GRAMS_PER,
@@ -24,11 +27,14 @@ const WEIGHT_OPTIONS: readonly UnitOption[] = [
 /** Order portion units are listed in after the weights. */
 const LIST_ORDER = ["each", "small", "medium", "large", "slice", "piece", "serving", "cup", "tbsp", "tsp"];
 /**
- * What a unitless amount ("two eggs", "a banana") means, best first. A cup comes
- * last: "a glass of milk" or "a bowl of oatmeal" reach here with no unit, and one
- * cup is a far better guess than 100 g.
+ * What a unitless amount ("two eggs", "a banana") means when the food has no
+ * unit of its own in the common-foods table, best first. There is no cup here:
+ * a food whose only portion is a cup is as often a powder as a drink ("two
+ * eggs" once became 2 cups of dried egg white, 800 kcal). A guessed 100 g is
+ * flagged for the user to check; a cup is not. Poured and scooped staples
+ * ("a glass of milk", "a bowl of oatmeal") get their cup from the table.
  */
-const COUNT_ORDER = ["each", "medium", "large", "small", "piece", "slice", "serving", "cup"];
+const COUNT_ORDER = ["each", "medium", "large", "small", "piece", "slice", "serving"];
 const SIZES = new Set(["large", "medium", "small"]);
 
 const VOLUME: Record<string, "cup" | "tbsp" | "tsp"> = {
@@ -142,12 +148,14 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match 
 /**
  * The units a food can be measured in: oz, lb and g first, then its portion
  * units in a fixed order (each, small, medium, large, slice, piece, serving,
- * cup, tbsp, tsp). When USDA lists several portions for one unit, a plain one
- * ("slice") beats a qualified one ("slice, thin"), which beats a dense form
- * ("cup, melted"); otherwise USDA's order wins.
- * Missing cup/tbsp/tsp are derived from whichever of them exists.
+ * cup, tbsp, tsp), then any other unit the common-foods table adds for it
+ * ("can", "bottle", "pack"). When USDA lists several portions for one unit, a
+ * plain one ("slice") beats a qualified one ("slice, thin"), which beats a dense
+ * form ("cup, melted"); otherwise USDA's order wins. Missing cup/tbsp/tsp are
+ * derived from whichever of them USDA gives. The table only adds units USDA's
+ * portions lack (see commonPortions); `withCommon: false` leaves them out.
  */
-export function unitOptions(food: FoodRecord): UnitOption[] {
+export function unitOptions(food: FoodRecord, withCommon = true): UnitOption[] {
   const foodWords = words(food.description);
   const found = new Map<string, { label: string; grams: number; rank: number }>();
 
@@ -170,17 +178,37 @@ export function unitOptions(food: FoodRecord): UnitOption[] {
   derive("tbsp", cup !== undefined ? cup / 16 : tsp !== undefined ? tsp * 3 : undefined);
   derive("tsp", tbsp !== undefined ? tbsp / 3 : cup !== undefined ? cup / 48 : undefined);
 
+  const extra: UnitOption[] = [];
+  if (withCommon) {
+    for (const p of commonPortions(food.fdcId)) {
+      if (found.has(p.unit) || WEIGHT_OPTIONS.some((o) => o.unit === p.unit)) continue;
+      if (LIST_ORDER.includes(p.unit)) found.set(p.unit, { label: p.label, grams: p.grams, rank: 2 });
+      else extra.push({ unit: p.unit, label: p.label, grams: round2(p.grams) });
+    }
+  }
+
   const portionOptions = LIST_ORDER.flatMap((unit) => {
     const option = found.get(unit);
     return option ? [{ unit, label: option.label, grams: round2(option.grams) }] : [];
   });
-  return [...WEIGHT_OPTIONS.map((o) => ({ ...o })), ...portionOptions];
+  return [...WEIGHT_OPTIONS.map((o) => ({ ...o })), ...portionOptions, ...extra];
 }
 
-function resolveWith(options: UnitOption[], quantity: number, unit: string | null): Amount {
+/**
+ * Units to try, best first, when none was spoken: the ones the caller prefers
+ * (the unit of the table entry the spoken phrase matched, so "a soda" is a can
+ * whichever cola record is offered), then the food's own table unit, then
+ * COUNT_ORDER.
+ */
+function unitlessOrder(food: FoodRecord, preferred: readonly (string | null | undefined)[]): string[] {
+  const own = commonUnit(food.fdcId);
+  return [...preferred, own, ...COUNT_ORDER].filter((u): u is string => typeof u === "string" && u !== "");
+}
+
+function resolveWith(options: UnitOption[], quantity: number, unit: string | null, order: readonly string[]): Amount {
   const key = unit?.trim().toLowerCase() || null;
   const find = (u: string) => options.find((o) => o.unit === u);
-  let option = key === null ? COUNT_ORDER.map(find).find(Boolean) : find(key);
+  let option = key === null ? order.map(find).find(Boolean) : find(key);
   // "a large egg" when the egg record only has a whole-egg portion: one egg beats a 100 g guess.
   if (!option && key !== null && SIZES.has(key)) option = find("each");
 
@@ -191,11 +219,18 @@ function resolveWith(options: UnitOption[], quantity: number, unit: string | nul
 
 /**
  * Grams for a spoken amount of a food. `unit` is a weight, one of the food's
- * unit keys, or null when no unit was spoken ("two eggs"). Anything that
- * doesn't match falls back to 100 g per unit with `guessed: true`.
+ * unit keys, or null when no unit was spoken ("two eggs"): then the first of
+ * `preferred` the food offers, its own common-foods unit ("eggs" are large), or
+ * COUNT_ORDER. Anything that doesn't match falls back to 100 g per unit with
+ * `guessed: true`.
  */
-export function resolveAmount(food: FoodRecord, quantity: number, unit: string | null): Amount {
-  return resolveWith(unitOptions(food), quantity, unit);
+export function resolveAmount(
+  food: FoodRecord,
+  quantity: number,
+  unit: string | null,
+  preferred: readonly (string | null | undefined)[] = [],
+): Amount {
+  return resolveWith(unitOptions(food), quantity, unit, unitlessOrder(food, preferred));
 }
 
 /**
@@ -212,10 +247,18 @@ function withinLimits(amount: Amount, options: UnitOption[]): Amount {
   return { quantity, unit: amount.unit, grams: round1(quantity * each), guessed: true };
 }
 
-/** The HTTP Candidate for a food and a spoken amount, always one that can be saved as offered. */
-export function toCandidate(food: FoodRecord, quantity: number, unit: string | null): Candidate {
+/**
+ * The HTTP Candidate for a food and a spoken amount, always one that can be
+ * saved as offered. `preferred` as for resolveAmount.
+ */
+export function toCandidate(
+  food: FoodRecord,
+  quantity: number,
+  unit: string | null,
+  preferred: readonly (string | null | undefined)[] = [],
+): Candidate {
   const units = unitOptions(food);
-  const amount = withinLimits(resolveWith(units, quantity, unit), units);
+  const amount = withinLimits(resolveWith(units, quantity, unit, unitlessOrder(food, preferred)), units);
   return {
     fdcId: food.fdcId,
     name: food.description,

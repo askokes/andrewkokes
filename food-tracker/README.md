@@ -20,6 +20,12 @@ all or nothing; amounts from 0.01 up to 1,000 of a unit and 5 kg of a food), `PA
 day). Every food the app uses is cached in D1, so repeat lookups never call USDA, and the shared
 USDA key is rationed: 16 calls per request and 150 per user per hour.
 
+Matching: everyday phrases ("rice", "two eggs", "a coke") go straight to the record people mean
+through the common-foods table (`src/food/common.ts`), with its alternatives and everyday units (a
+can, a container); anything else is USDA's search, reranked by `rankHits` in `src/food/usda.ts`.
+`test/eval-live.test.ts` scores both against independently labeled live USDA results
+(`test/fixtures/usda/live`).
+
 Every write (POST, PUT, PATCH) must send `Content-Type: application/json`, and writes a browser
 marks as started by another site (`Sec-Fetch-Site`) are refused, so other pages can't post to the
 API with a family member's sign-in.

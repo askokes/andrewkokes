@@ -7,6 +7,7 @@ import {
   looksLikeBrand,
   normalizeQuery,
   rankHits,
+  SEARCH_PAGE_SIZE,
   searchFoods,
   UsdaError,
   type UsdaDeps,
@@ -150,6 +151,52 @@ describe("rankHits", () => {
     expect(ranked[0].dataType).toBe("SR Legacy");
   });
 
+  const sr = (...descriptions: string[]) => descriptions.map((description) => ({ description, dataType: "SR Legacy" }));
+  const top = (query: string, hits: { description: string; dataType: string }[]) => rankHits(query, hits)[0].description;
+
+  it("prefers the food itself over records where the word only describes another food", () => {
+    expect(top("eggs", sr("Bagels, egg", "Bread, egg", "Egg, whole, raw, fresh"))).toBe("Egg, whole, raw, fresh");
+    expect(top("milk", sr("Crackers, milk", "Candies, milk chocolate", "Milk, reduced fat, fluid, 2% milkfat")))
+      .toBe("Milk, reduced fat, fluid, 2% milkfat");
+    expect(top("rice", sr("Rice crackers", "Alcoholic beverage, rice (sake)", "Rice, white, cooked"))).toBe("Rice, white, cooked");
+    expect(top("orange", sr("Marmalade, orange", "Orange juice, raw", "Oranges, raw, navels"))).toBe("Oranges, raw, navels");
+    // Filing words and restaurant names come before the food: "Snacks, potato chips" is chips.
+    expect(top("chips", sr("Cookies, chocolate chip", "Snacks, potato chips, plain, salted")))
+      .toBe("Snacks, potato chips, plain, salted");
+    expect(top("salad", sr("Fish, tuna salad", "Salad dressing, ranch dressing", "McDONALD'S, Side Salad")))
+      .toBe("McDONALD'S, Side Salad");
+    // A cut named in a later segment is the food; a flavor of a sauce isn't.
+    expect(top("steak", sr("Sauce, steak, tomato based", "Beef, top sirloin, steak, cooked, broiled")))
+      .toBe("Beef, top sirloin, steak, cooked, broiled");
+  });
+
+  it("demotes dried, powdered, mixed, part and baby food forms unless the query names them", () => {
+    expect(top("banana", sr("Bananas, dehydrated, or banana powder", "Bananas, raw"))).toBe("Bananas, raw");
+    expect(top("banana powder", sr("Bananas, raw", "Bananas, dehydrated, or banana powder")))
+      .toBe("Bananas, dehydrated, or banana powder");
+    expect(top("eggs", sr("Egg, white, dried", "Eggs, Grade A, Large, egg white", "Eggs, Grade A, Large, egg whole")))
+      .toBe("Eggs, Grade A, Large, egg whole");
+    expect(top("bacon", sr("Bacon, meatless", "Pork, bacon, rendered fat, cooked", "Pork, cured, bacon, cooked, baked")))
+      .toBe("Pork, cured, bacon, cooked, baked");
+    expect(top("carrots", sr("Babyfood, carrots, strained", "Carrots, raw"))).toBe("Carrots, raw");
+    expect(top("milk", sr("Milk, sheep, fluid", "Milk, dry, nonfat", "Milk, lowfat, fluid, 1% milkfat")))
+      .toBe("Milk, lowfat, fluid, 1% milkfat");
+    // Made up as the label says, a mix or concentrate is eaten as is.
+    expect(top("lemonade", sr("Lemonade, frozen concentrate, white", "Lemonade, frozen concentrate, white, prepared with water")))
+      .toBe("Lemonade, frozen concentrate, white, prepared with water");
+  });
+
+  it("lets raw lose only to the same food cooked", () => {
+    expect(top("rice", sr("Rice, black, unenriched, raw", "Wild rice, cooked"))).toBe("Wild rice, cooked");
+    expect(top("orange", sr("Fish, roughy, orange, cooked, dry heat", "Oranges, raw"))).toBe("Oranges, raw");
+    expect(top("banana", sr("Bread, banana, prepared from recipe", "Bananas, raw"))).toBe("Bananas, raw");
+    // Canned loses to cooked of the very same name, not to another dish.
+    expect(top("black beans", sr("Beans, black, mature seeds, canned", "Beans, black, mature seeds, cooked, boiled")))
+      .toBe("Beans, black, mature seeds, cooked, boiled");
+    expect(top("refried beans", sr("Refried beans, canned, traditional", "Beans, pinto, mature seeds, cooked, boiled")))
+      .toBe("Refried beans, canned, traditional");
+  });
+
   it("counts the brand name as part of a Branded description", () => {
     const [branded] = (searchFile.branded as Record<string, { foods: Json[] }>).chobani.foods;
     const hit = extractSearchHit(branded)!;
@@ -159,44 +206,50 @@ describe("rankHits", () => {
 });
 
 describe("searchFoods", () => {
+  // Lentils and quinoa aren't in the common-foods table, so these go straight to USDA's search.
   it("searches and fetches details once, then serves repeats from D1 with no API calls", async () => {
     const fake = createFakeUsda();
-    const first = await searchFoods(deps(fake), "peanut butter");
-    expect(ids(first)).toEqual([174266, 172470, 167546]);
+    const first = await searchFoods(deps(fake), "lentils");
+    expect(ids(first)).toEqual([172421, 172420, 168427, 174284]); // cooked first
     expect(first[0].portions.length).toBeGreaterThan(0); // details, not bare search hits
 
     expect(fake.calls).toHaveLength(2);
     const search = call(fake, 0);
     expect(search.pathname).toBe("/fdc/v1/foods/search");
-    expect(search.searchParams.get("query")).toBe("peanut butter");
+    expect(search.searchParams.get("query")).toBe("lentils");
     expect(search.searchParams.get("dataType")).toBe("Foundation,SR Legacy");
-    expect(search.searchParams.get("pageSize")).toBe("10");
+    expect(search.searchParams.get("pageSize")).toBe(String(SEARCH_PAGE_SIZE));
     const details = call(fake, 1);
     expect(details.pathname).toBe("/fdc/v1/foods");
-    expect(details.searchParams.get("fdcIds")).toBe("174266,172470,167546");
+    expect(details.searchParams.get("fdcIds")).toBe("172421,172420,168427,174284");
     expect(details.searchParams.get("format")).toBe("full");
 
-    expect(await searchFoods(deps(fake), "peanut butter")).toEqual(first);
-    expect(await searchFoods(deps(fake), "  Peanut   Butter ")).toEqual(first);
+    expect(await searchFoods(deps(fake), "lentils")).toEqual(first);
+    expect(await searchFoods(deps(fake), "  Lentils ")).toEqual(first);
     expect(fake.calls).toHaveLength(2);
+  });
+
+  it("asks USDA for 50 hits to rank, so the right food is among them", () => {
+    expect(SEARCH_PAGE_SIZE).toBe(50);
   });
 
   it("returns at most `limit` foods and fetches details only for those", async () => {
     const fake = createFakeUsda();
-    const top = await searchFoods(deps(fake), "chicken breast", { limit: 2 });
-    expect(top).toHaveLength(2);
+    const top = await searchFoods(deps(fake), "lentils", { limit: 2 });
+    expect(ids(top)).toEqual([172421, 172420]);
     expect(call(fake, 1).searchParams.get("fdcIds")?.split(",")).toHaveLength(2);
-    expect(await searchFoods(deps(fake), "chicken breast")).toHaveLength(5);
+    expect(await searchFoods(deps(fake), "lentils")).toHaveLength(4);
+    expect(await searchFoods(deps(fake), "lentils", { limit: 50 })).toHaveLength(4); // at most 10 anyway
   });
 
   it("reuses cached foods across different searches", async () => {
     const fake = createFakeUsda();
     await searchFoods(deps(fake), "egg");
-    expect(fake.calls).toHaveLength(2);
+    const calls = fake.calls.length;
     const eggs = await searchFoods(deps(fake), "eggs");
-    expect(eggs[0].fdcId).toBe(748967);
-    expect(fake.calls).toHaveLength(3); // the new search only; every food was already cached
-    expect(call(fake, 2).pathname).toBe("/fdc/v1/foods/search");
+    expect(eggs[0].fdcId).toBe(171287); // the table's whole egg
+    expect(fake.calls).toHaveLength(calls + 1); // the new search only; every food was already cached
+    expect(call(fake, calls).pathname).toBe("/fdc/v1/foods/search");
   });
 
   it("returns real foods ahead of distractors end to end", async () => {
@@ -204,19 +257,22 @@ describe("searchFoods", () => {
     expect((await searchFoods(deps(fake), "banana"))[0].description).toBe("Bananas, raw");
     expect((await searchFoods(deps(fake), "toast"))[0].fdcId).toBe(174925);
     expect((await searchFoods(deps(fake), "butter"))[0].fdcId).toBe(173410);
+    expect((await searchFoods(deps(fake), "quinoa"))[0].description).toBe("Quinoa, cooked");
   });
 
   it("searches oatmeal as cooked oats", async () => {
     const fake = createFakeUsda();
     const found = await searchFoods(deps(fake), "oatmeal");
-    expect(ids(found)).toEqual([173905]);
-    expect(call(fake, 0).searchParams.get("query")).toBe("oats cooked");
+    expect(ids(found)).toEqual([173905, 171662, 173920]); // the table's entry; the search adds nothing new
+    const search = fake.calls.map((c) => new URL(c)).find((u) => u.pathname === "/fdc/v1/foods/search");
+    expect(search?.searchParams.get("query")).toBe("oats cooked");
   });
 
   it("stays with Foundation and SR Legacy when they name the food", async () => {
     const fake = createFakeUsda();
     const found = await searchFoods(deps(fake), "greek yogurt");
-    expect(ids(found)).toEqual([2259794, 171304]);
+    // The table's Greek yogurts, then the search's, without 2259794 twice.
+    expect(ids(found)).toEqual([330137, 170902, 330415, 2259794, 171304]);
     expect(fake.calls.some((c) => c.includes("Branded"))).toBe(false);
   });
 
@@ -257,8 +313,13 @@ describe("searchFoods", () => {
 
   it("goes back to core foods when a brand hint finds nothing branded", async () => {
     const fake = createFakeUsda();
-    const found = await searchFoods(deps(fake), "greek yogurt", { brandHint: true });
-    expect(ids(found)).toEqual([2259794, 171304]);
+    const found = await searchFoods(deps(fake), "quinoa", { brandHint: true });
+    expect(ids(found)).toEqual([168917, 172027, 168874]);
+    expect(fake.calls.map((c) => new URL(c).searchParams.get("dataType"))).toEqual([
+      "Branded",
+      "Foundation,SR Legacy",
+      null, // details
+    ]);
   });
 
   it("returns [] when USDA has nothing, and remembers that", async () => {
@@ -276,26 +337,84 @@ describe("searchFoods", () => {
     const start = Date.parse("2026-03-01T12:00:00Z");
     const on = (day: number) => deps(fake, { now: () => new Date(start + day * DAY) });
 
-    await searchFoods(on(0), "salmon");
+    await searchFoods(on(0), "quinoa");
     expect(fake.calls).toHaveLength(2);
-    await searchFoods(on(29), "salmon");
+    await searchFoods(on(29), "quinoa");
     expect(fake.calls).toHaveLength(2);
 
-    const refreshed = await searchFoods(on(31), "salmon");
-    expect(ids(refreshed)).toEqual([175168]);
+    const refreshed = await searchFoods(on(31), "quinoa");
+    expect(ids(refreshed)).toEqual([168917, 172027, 168874]);
     expect(fake.calls).toHaveLength(3);
     expect(call(fake, 2).pathname).toBe("/fdc/v1/foods/search");
 
-    await searchFoods(on(32), "salmon");
+    await searchFoods(on(32), "quinoa");
     expect(fake.calls).toHaveLength(3);
   });
 
   it("serves cached searches even while USDA is failing", async () => {
-    const found = await searchFoods(deps(createFakeUsda()), "apple");
-    const limited = createFakeUsda({ rateLimited: true });
-    expect(await searchFoods(deps(limited), "apple")).toEqual(found);
-    expect(await searchFoods(deps(limited, { apiKey: "" }), "apple")).toEqual(found);
-    expect(limited.calls).toHaveLength(0);
+    for (const food of ["quinoa", "apple"]) {
+      const found = await searchFoods(deps(createFakeUsda()), food);
+      const limited = createFakeUsda({ rateLimited: true });
+      expect(await searchFoods(deps(limited), food)).toEqual(found);
+      expect(await searchFoods(deps(limited, { apiKey: "" }), food)).toEqual(found);
+      expect(limited.calls).toHaveLength(0);
+    }
+  });
+});
+
+describe("searchFoods with the common-foods table", () => {
+  it("starts with the table's food and its alternatives, then fills from the search without repeats", async () => {
+    const fake = createFakeUsda();
+    const found = await searchFoods(deps(fake), "rice");
+    // Cooked white rice, then brown and fried rice, then the search's dry rice (its cooked rice is already there).
+    expect(ids(found)).toEqual([168878, 169704, 334536, 2512381]);
+    // Two calls, like any new food: the search, then one details call for the table's foods and the search's.
+    expect(fake.calls.map((c) => new URL(c).pathname)).toEqual(["/fdc/v1/foods/search", "/fdc/v1/foods"]);
+    expect(call(fake, 1).searchParams.get("fdcIds")).toBe("168878,169704,334536,2512381");
+
+    expect(await searchFoods(deps(fake), "Rice")).toEqual(found);
+    expect(fake.calls).toHaveLength(2);
+  });
+
+  it("skips the search when the table's foods fill the limit", async () => {
+    const fake = createFakeUsda();
+    const found = await searchFoods(deps(fake), "eggs", { limit: 3 });
+    expect(ids(found)).toEqual([171287, 172187, 173423]);
+    expect(fake.calls).toHaveLength(1);
+    expect(call(fake, 0).pathname).toBe("/fdc/v1/foods");
+  });
+
+  it("matches the phrase as spoken or as normalizeQuery rewrites it", async () => {
+    const fake = createFakeUsda();
+    expect((await searchFoods(deps(fake), "OJ", { limit: 1 }))[0].fdcId).toBe(169100);
+    expect((await searchFoods(deps(fake), "Mac & Cheese", { limit: 1 }))[0].fdcId).toBe(169770);
+    expect((await searchFoods(deps(fake), "hot dogs", { limit: 1 }))[0].fdcId).toBe(174614);
+  });
+
+  it("still returns the table's foods when the search fails", async () => {
+    const fake = createFakeUsda();
+    const searchDown: typeof fetch = async (input, init) => {
+      const url = new URL(new Request(input, init).url);
+      if (url.pathname.endsWith("/foods/search")) return new Response("Service Unavailable", { status: 503 });
+      return fake.fetch(input, init);
+    };
+    expect(ids(await searchFoods(deps(searchDown), "rice"))).toEqual([168878, 169704, 334536]);
+    // The failed search isn't cached: once USDA is back, the search runs.
+    expect(ids(await searchFoods(deps(fake), "rice"))).toEqual([168878, 169704, 334536, 2512381]);
+  });
+
+  it("fails like any search when the table's foods can't be fetched", async () => {
+    const err = await caught(searchFoods(deps(createFakeUsda({ rateLimited: true })), "rice"));
+    expect(err).toMatchObject({ kind: "rate_limited", status: 429 });
+  });
+
+  it("shares fetched records between entries: whole milk is one of milk's alternatives", async () => {
+    const fake = createFakeUsda();
+    await searchFoods(deps(fake), "milk", { limit: 4 });
+    const calls = fake.calls.length;
+    const whole = await searchFoods(deps(fake), "whole milk", { limit: 4 });
+    expect(ids(whole)).toEqual([171265, 171267, 170872, 171269]);
+    expect(fake.calls).toHaveLength(calls); // all four came with "milk"
   });
 });
 
@@ -343,7 +462,7 @@ describe("getFoods", () => {
 
 describe("USDA errors", () => {
   it("turns 429 into rate_limited", async () => {
-    const err = await caught(searchFoods(deps(createFakeUsda({ rateLimited: true })), "rice"));
+    const err = await caught(searchFoods(deps(createFakeUsda({ rateLimited: true })), "quinoa"));
     expect(err).toMatchObject({ kind: "rate_limited", status: 429 });
     expectNoKey(err);
     const bulk = await caught(getFoods(deps(createFakeUsda({ rateLimited: true })), [171477]));
@@ -351,7 +470,7 @@ describe("USDA errors", () => {
   });
 
   it("turns 5xx into unavailable", async () => {
-    const err = await caught(searchFoods(deps(createFakeUsda({ down: true })), "rice"));
+    const err = await caught(searchFoods(deps(createFakeUsda({ down: true })), "quinoa"));
     expect(err).toMatchObject({ kind: "unavailable", status: 503 });
     expectNoKey(err);
   });
@@ -360,14 +479,14 @@ describe("USDA errors", () => {
     const failing: typeof fetch = async (input) => {
       throw new TypeError(`fetch failed: ${new Request(input).url}`);
     };
-    const err = await caught(searchFoods(deps(failing), "rice"));
+    const err = await caught(searchFoods(deps(failing), "quinoa"));
     expect(err.kind).toBe("unavailable");
     expectNoKey(err);
   });
 
   it("turns a response that isn't JSON into unavailable", async () => {
     const html: typeof fetch = async () => new Response("<html>Maintenance</html>", { status: 200 });
-    const err = await caught(searchFoods(deps(html), "rice"));
+    const err = await caught(searchFoods(deps(html), "quinoa"));
     expect(err.kind).toBe("unavailable");
     expectNoKey(err);
   });
@@ -375,7 +494,7 @@ describe("USDA errors", () => {
   it("turns a rejected key (403) into unavailable and warns without the key", async () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const forbidden: typeof fetch = async () => Response.json({ error: { code: "API_KEY_INVALID" } }, { status: 403 });
-    const err = await caught(searchFoods(deps(forbidden), "rice"));
+    const err = await caught(searchFoods(deps(forbidden), "quinoa"));
     expect(err).toMatchObject({ kind: "unavailable", status: 403 });
     expectNoKey(err);
     expect(warn).toHaveBeenCalledOnce();
@@ -385,16 +504,16 @@ describe("USDA errors", () => {
   it("doesn't call USDA at all without a key", async () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const fake = createFakeUsda();
-    const err = await caught(searchFoods(deps(fake, { apiKey: "" }), "rice"));
+    const err = await caught(searchFoods(deps(fake, { apiKey: "" }), "quinoa"));
     expect(err.kind).toBe("unavailable");
     expect(fake.calls).toHaveLength(0);
     expect(warn).toHaveBeenCalled();
   });
 
   it("doesn't cache a failed search", async () => {
-    await caught(searchFoods(deps(createFakeUsda({ rateLimited: true })), "rice"));
+    await caught(searchFoods(deps(createFakeUsda({ rateLimited: true })), "quinoa"));
     const fake = createFakeUsda();
-    expect((await searchFoods(deps(fake), "rice")).length).toBeGreaterThan(0);
+    expect((await searchFoods(deps(fake), "quinoa")).length).toBeGreaterThan(0);
     expect(fake.calls).toHaveLength(2);
   });
 });

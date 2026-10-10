@@ -1,0 +1,1229 @@
+{
+  "_note": "Ground-truth labels for the 153 live USDA search queries in search-core.json, written by a labeler who did not see src/food/common.ts: they were labeled independently of the curated table. Per query: best is the record people most likely mean (null when no SR Legacy or Foundation record fits), acceptable lists records within about 25% of best's calories in the same as-eaten form, disasters lists live hits that would log the wrong food or a badly wrong amount (dried, raw where cooked is meant, a different food sharing a word), defaultAmount is what a unitless mention means. Saved verbatim; test/eval-live.test.ts scores the app against them.",
+  "labels": [
+    {
+      "query": "eggs",
+      "best": 748967,
+      "acceptable": [748967, 171287, 173424, 172187, 172186, 172185],
+      "disasters": [747997, 748236, 174901, 172673, 172674, 172741, 173429, 323793, 172204, 172188, 329490, 173428, 329716, 173307, 173343, 175027, 172183, 172184, 171365, 172812, 168772, 172071, 172068, 169731, 169755, 169732, 172203, 323697, 329596, 173421, 171364, 170971, 172076, 172104, 172103, 172105],
+      "defaultAmount": "2 large eggs",
+      "note": "whole chicken egg; raw/boiled/scrambled whole-egg records are nutritionally equivalent; whites, yolks, dried, baked goods are wrong"
+    },
+    {
+      "query": "egg",
+      "best": 748967,
+      "acceptable": [748967, 171287, 173424, 172187, 172186, 172185],
+      "disasters": [747997, 748236, 174901, 172673, 172674, 172741, 173429, 323793, 172204, 172188, 329490, 173428, 329716, 173307, 173343, 175027, 172183, 172184, 171365, 172812, 168772, 172071, 172068, 169731, 169755, 169732, 172203, 323697, 329596, 173421, 171364, 170971, 172076, 172104, 172103, 172105],
+      "defaultAmount": "1 large egg",
+      "note": "whole chicken egg (~50 g); whites/yolks/dried/egg-containing products are wrong"
+    },
+    {
+      "query": "scrambled eggs",
+      "best": 172187,
+      "acceptable": [172187, 748967, 171287, 172185],
+      "disasters": [747997, 748236, 174901, 172673, 172674, 172741, 173429, 323793, 172204, 172188, 329490, 173428, 329716, 173307, 173343, 175027, 172183, 172184, 171365, 172812, 168772, 172071, 172068, 169731, 169755, 169732, 172203, 323697, 329596, 173421, 171364, 170971, 172076, 172104, 172103, 172105],
+      "defaultAmount": "2 large eggs",
+      "note": "SR scrambled (61 g per large egg); plain whole-egg records within 25%"
+    },
+    {
+      "query": "fried egg",
+      "best": 173423,
+      "acceptable": [173423, 748967],
+      "disasters": [172451, 169009, 167672, 170721, 168199, 170726, 169267, 747997, 748236, 174901, 172673, 170327, 167719, 167669, 168077, 168435, 169253, 173240, 172784, 175064, 169833, 169834, 168444, 168445, 172674, 172741, 173429, 323793, 172204, 172188, 329490, 173428, 329716, 173307, 173343, 175027, 168383, 172037, 173878, 168200, 169836, 174304, 171103, 174879, 170117, 169268, 171058, 169842],
+      "defaultAmount": "1 large egg",
+      "note": "SR fried egg 196 kcal; Foundation whole egg 148 is borderline-acceptable; fries/tofu/fried foods are disasters"
+    },
+    {
+      "query": "hard boiled egg",
+      "best": 173424,
+      "acceptable": [173424, 748967, 171287],
+      "disasters": [171119, 168216, 167990, 168390, 169146, 170145, 170848, 2759005, 169719, 168493, 169313, 168506, 168509, 168510, 169334, 169338, 169339, 168520, 169341, 169342, 168523, 169371, 169352, 171633, 169355, 169357, 168534, 170166, 170168, 168589, 170098, 170100, 170508, 170526, 170121, 170528, 170529, 170531, 167632, 170547, 174146, 172197, 172947, 175031, 172938, 174291, 168889, 168890, 747997],
+      "defaultAmount": "1 large egg",
+      "note": "hard-boiled = whole egg nutritionally; other boiled foods and hard cheeses are unrelated"
+    },
+    {
+      "query": "rice",
+      "best": 168878,
+      "acceptable": [168878, 169753, 168935, 169757, 168930, 168880, 168932, 168882, 169708, 169759, 169710, 169712],
+      "disasters": [173161, 167967, 169679, 169680, 168855, 167966, 168951, 170251, 170252, 170250, 167557, 174923, 1104812, 1104867, 171013, 169713, 168898, 168914, 169742, 169726, 168107, 170652, 171942, 167723, 169054, 169865, 167728, 175044, 173900, 790214, 168783, 168782, 173006, 169714, 2710825, 173155, 2710821, 174099, 173264, 171862, 170969, 170974, 172260, 173500, 172269, 172285],
+      "defaultAmount": "1 cup",
+      "note": "cooked white rice; no cooked plain rice in live top 50; brown rice cooked is OK-ish but not default"
+    },
+    {
+      "query": "white rice",
+      "best": 168878,
+      "acceptable": [168878, 169753, 168935, 169757, 168930, 168880, 168932, 168882, 169708, 169759, 169710, 169712],
+      "disasters": [790214, 169714, 168883, 168964, 2512381, 168879, 169760, 168881, 168931, 174099, 171862, 169707, 169758, 168877, 169756, 169709, 174100, 174101, 174103, 173161, 167967, 169679, 169680, 168855, 167966, 171861, 171863, 168951, 170251, 170252, 170250, 167557, 174923, 1104812, 1104867, 171013],
+      "defaultAmount": "1 cup",
+      "note": "cooked long-grain white rice; raw/uncooked/flour forms are ~2.8x calories"
+    },
+    {
+      "query": "brown rice",
+      "best": 169704,
+      "acceptable": [169704, 168875, 173263],
+      "disasters": [1104812, 168898, 167967, 169679, 169680, 168855, 167966, 169865, 173155, 170251, 170252, 170250, 167557, 169864, 170652, 169048, 2512380, 168876, 167698, 172026, 174101, 168833, 174102, 169703, 169706, 171864, 171861, 171863, 169025, 171565, 173298, 174907, 170304, 171588, 173161, 170036, 168951, 747433, 172078, 168434, 167604, 169848, 170675, 172801, 170043, 174923, 1104867],
+      "defaultAmount": "1 cup",
+      "note": "cooked long-grain brown rice; raw/flour/rice cakes/hash browns/brown sugar wrong"
+    },
+    {
+      "query": "milk",
+      "best": 171267,
+      "acceptable": [171267, 746778, 172205, 170870, 172193, 170871, 171265, 746782, 172217, 170872, 746772, 173441, 170873, 171268, 170875],
+      "disasters": [174980, 167686, 173459, 171942, 167587, 174650, 171274, 170882, 2758990, 170890, 173460, 168754, 170845, 746766, 170851, 170883, 170884, 171275, 171280, 167946, 172208, 170887, 2259793, 171284, 168554, 2257045, 168001, 169576, 168755, 168765, 167984, 2259796, 170847, 171248, 172194, 171273, 2257046, 2257044, 170905, 2259794, 171304, 174160, 170446],
+      "defaultAmount": "1 cup",
+      "note": "fluid cow's milk, 2% as the most common US default; whole and 1% within 25%; live top 50 has no plain 2%/whole fluid milk"
+    },
+    {
+      "query": "skim milk",
+      "best": 171269,
+      "acceptable": [171269, 746776, 169868, 171270, 173432, 171271],
+      "disasters": [170887, 170847, 171248, 329370, 171244, 170900, 174980, 167686, 173459, 171942, 167587, 174650, 171274, 170882, 2758990, 170890, 173460, 168754, 170845, 746766, 170851, 170883, 170884, 171275, 171280, 167946, 172208, 2259793, 171284, 168554, 2257045, 168001, 169576, 168755, 168765, 167984, 2259796, 172194, 170910, 171273],
+      "defaultAmount": "1 cup",
+      "note": "fluid nonfat milk; mozzarella/ricotta/yogurt 'part skim' are disasters"
+    },
+    {
+      "query": "2% milk",
+      "best": 171267,
+      "acceptable": [171267, 746778, 172205, 170870, 172193, 170871],
+      "disasters": [168787, 169611, 169612, 168789, 168790, 169621, 171302, 167588, 167589, 167998, 168780, 168786, 168788, 168781, 169615, 174909, 174910, 174927, 170866, 174998, 172768, 175005, 172764, 174546, 172810, 174540, 172898, 174655, 173341, 174539, 328841, 172182, 173311, 168838, 170864, 172199, 170909, 173009, 173008, 170912, 171260, 170646, 173434, 170891],
+      "defaultAmount": "1 cup",
+      "note": "fluid reduced-fat 2% milk; 'prepared with 2% milk' recipes are disasters"
+    },
+    {
+      "query": "chocolate milk",
+      "best": 170880,
+      "acceptable": [170880, 173450, 170879, 170881, 171303, 170910, 174118, 174160, 171879],
+      "disasters": [167587, 168754, 170883, 172208, 167686, 168001, 169576, 168755, 168765, 167984, 169622, 169637, 168003, 167545, 168804, 167947, 168789, 169617, 172221, 168103, 168095, 167998, 169600, 168780, 169604, 169584, 174159, 169628, 169583, 173324, 173464, 174980, 169591, 168806, 169630],
+      "defaultAmount": "1 cup",
+      "note": "ready-to-drink reduced-fat chocolate milk (best not in live top 50; 173450 is); milk-chocolate candies are the main trap"
+    },
+    {
+      "query": "almond milk",
+      "best": 2257045,
+      "acceptable": [2257045, 1999631, 174832],
+      "disasters": [168754, 174820, 169622, 167947, 2261420, 170567, 171031, 2262074, 169060, 170160, 170568, 174980, 170656, 2346393, 167686, 173459, 171942, 167587, 174650, 171274, 170882, 2758990, 170890, 173460, 167562, 167979, 169627, 168592, 169673, 167543, 170845, 746766, 170851, 170883, 170884, 172225, 171275, 167730, 171280, 170875, 167946, 172208, 170887, 2259793, 171284],
+      "defaultAmount": "1 cup",
+      "note": "unsweetened plain almond milk; sweetened vanilla (38 kcal) is a plausible alternative; almonds/flour/butter/candy are disasters"
+    },
+    {
+      "query": "oat milk",
+      "best": 2257046,
+      "acceptable": [2257046],
+      "disasters": [173576, 172666, 172676, 172769, 168873, 168872, 174626, 172677, 2261421, 169741, 175028, 172978, 174627, 173904, 172682, 172989, 2346397, 174640, 172683, 171661, 2346396, 174980, 169039, 171664, 173149, 169705, 167686, 173459, 171942, 167725, 169859, 173921, 174632, 174620, 173891, 173920, 173906, 173908, 167587, 174650, 171274, 170882, 2758990, 170890, 173460, 173659, 169063, 171679, 173020],
+      "defaultAmount": "1 cup",
+      "note": "only Foundation oat milk record exists; oats/oat bran/cereal are disasters"
+    },
+    {
+      "query": "chicken breast",
+      "best": 171477,
+      "acceptable": [171477, 171478, 171140, 331960, 171534, 171536, 171535, 171518, 171445, 171075, 171076, 171123, 171125, 171078, 170356, 170748, 170344, 170739],
+      "disasters": [2759004, 171515, 172962, 172963, 172941, 174474, 172829, 172567, 174469, 172831, 171098, 173858, 169886, 173564, 171624, 169187, 173634],
+      "defaultAmount": "1 breast half (~4 oz cooked)",
+      "note": "cooked skinless breast meat; raw is ~30% low; deli/lunchmeat breast is a different product; other birds/fat/veal are disasters"
+    },
+    {
+      "query": "grilled chicken",
+      "best": 171534,
+      "acceptable": [171534, 171536, 171477, 171478, 171140, 331960, 171518, 171445, 171535],
+      "disasters": [170724, 173312, 169857, 170368, 170786, 169243, 170752, 169030, 173877, 167670, 171634, 170778, 168086, 169853, 169377, 169036, 172650, 172644, 173858, 169886, 173564, 171624, 172651, 174881, 173321, 174880, 173873, 172957, 171119, 169022, 171600, 171567, 170737, 173297, 170725, 169841, 169054, 172248, 173483, 173872, 172970, 170731, 170790, 171513, 171512, 174465],
+      "defaultAmount": "1 breast half (~4 oz cooked)",
+      "note": "grilled skinless chicken breast; sandwiches/salads/wraps and breaded nuggets/tenders are disasters"
+    },
+    {
+      "query": "chicken thigh",
+      "best": 172388,
+      "acceptable": [172388, 172389, 172853, 172858, 174500, 171120, 171118, 172387, 170358, 170351, 170742, 170741, 172862, 174505],
+      "disasters": [172855, 172854, 174496, 174502, 174501, 174503, 171533, 174518, 171502, 171137, 172877, 171531, 171532, 171129, 171131, 173858, 169886, 173564],
+      "defaultAmount": "1 thigh",
+      "note": "cooked thigh meat (boneless skinless default); with-skin roasted (232) slightly outside 25%; skin-only, turkey thighs, raw are wrong"
+    },
+    {
+      "query": "chicken nuggets",
+      "best": 172112,
+      "acceptable": [172112, 172111, 170795, 173297, 170725],
+      "disasters": [173721, 173722, 171294, 173858, 169886, 173564, 171624, 173873, 172957, 171110, 171119, 171116, 171600, 171567, 169054, 172248, 173483, 173872, 172970, 174465, 2514746, 167719, 172396, 173641, 170765, 2759004, 172928, 167678, 167674, 167679, 168087, 172287, 172288],
+      "defaultAmount": "6 nuggets",
+      "note": "breaded chicken nuggets (generic frozen white meat; McNuggets 302 also fine); tenders/strips are close cousins; salmon nuggets/ice cream 'nugget' are disasters"
+    },
+    {
+      "query": "chicken wings",
+      "best": 173630,
+      "acceptable": [173630, 173631, 172830, 171523, 171508, 171115, 171111, 172391, 172392, 171121, 170754, 170352, 170743, 170342, 170347, 170360, 171516],
+      "disasters": [170478, 170070, 170476, 174283, 171497, 167617, 171495, 171132, 174517, 171498, 167709, 172477, 171094, 171133, 172872, 170550, 172453, 170477, 171526, 171527, 173858, 169886, 173564, 171624],
+      "defaultAmount": "6 wings",
+      "note": "cooked chicken wing with skin; breaded fried (320-340) slightly above 25%; winged beans and turkey wings are disasters"
+    },
+    {
+      "query": "banana",
+      "best": 173944,
+      "acceptable": [173944, 1105073, 1105314],
+      "disasters": [173945, 167629, 169394, 168849, 171351, 167732, 170962, 167733, 170999, 170965, 171361, 170974, 169872, 168135, 170951, 170998, 172282, 171335, 169792, 170960, 172285, 169648, 169650, 175230, 168090, 170966, 171362, 170970, 170953, 170954, 170956, 174829, 168213, 2747660, 172777, 170967, 173530, 171363, 172297, 173534, 174168, 171934, 174906, 174638, 167799, 168214, 168866],
+      "defaultAmount": "1 medium",
+      "note": "raw banana; dehydrated/chips/babyfood/smoothies/banana peppers are disasters"
+    },
+    {
+      "query": "apple",
+      "best": 171688,
+      "acceptable": [171688, 171689, 1750340, 1750341, 1750343, 1750342, 1750339, 168202, 167793, 168204, 168203, 168201],
+      "disasters": [174988, 175032, 170959, 168816, 168171, 171691, 171351, 173517, 173511, 167729, 171381, 171352, 171353, 170985, 171355, 167728, 169909, 168822, 168175, 167690, 167733, 170977, 170976, 172287, 170958, 170957, 171346, 171345, 169042, 170960, 171725, 175012, 167522, 173931, 170952, 170956, 174140, 169601],
+      "defaultAmount": "1 medium",
+      "note": "raw apple with skin (generic SR not in live top 50, Foundation varieties are); dried/juice/pie/babyfood/rose-apple are disasters"
+    },
+    {
+      "query": "orange",
+      "best": 169097,
+      "acceptable": [169097, 746771, 169918, 169916],
+      "disasters": [168819, 167577, 171354, 174854, 169103, 170502, 171355, 170961, 170962, 170963, 169043, 171356, 169044, 173962, 175133, 169099, 167792, 2258591, 167679, 169792, 170960, 173178, 168113, 171374, 173223, 173225, 174251, 169100, 169923, 169104, 170973, 174868, 173235, 174166, 2003591, 2003597, 2346404, 175105, 169920, 169922, 173533],
+      "defaultAmount": "1 medium",
+      "note": "raw orange fruit; juices/drinks/marmalade/sherbet/orange chicken/orange roughy/orange peppers are disasters; tangerines neutral"
+    },
+    {
+      "query": "strawberries",
+      "best": 167762,
+      "acceptable": [167762, 2346409, 168173],
+      "disasters": [168758, 173045, 168810, 172062, 172036, 171301, 175228, 168174, 171300, 330415, 170901, 170998, 174111, 175102, 167583, 175230, 174869, 171297, 175076, 174829, 168213, 171299, 174168, 171931, 171934, 167799, 168214, 168172, 170912, 170915, 174164, 170664, 175035, 174137, 174870, 173019, 172825, 170662, 169635, 167927, 167928, 170775, 172755],
+      "defaultAmount": "1 cup",
+      "note": "raw strawberries; sweetened frozen/canned in syrup are ~3x calories"
+    },
+    {
+      "query": "blueberries",
+      "best": 171711,
+      "acceptable": [171711, 2346411, 173950, 173949, 167640, 169799],
+      "disasters": [168158, 172766, 172767, 167738, 172778, 173781, 170914, 175078, 168134, 170958, 170957, 175045, 172773, 172779, 167929, 173919, 172765, 171683, 175035, 169652, 171678, 167927, 167928, 172997, 173138, 172768],
+      "defaultAmount": "1 cup",
+      "note": "raw blueberries; dried/muffins/pie/syrup forms wrong"
+    },
+    {
+      "query": "grapes",
+      "best": 174683,
+      "acceptable": [174683, 2346413, 2346412, 174682, 173040],
+      "disasters": [169393, 168575, 321360, 171381, 173203, 171916, 168144, 173213, 174132, 171902, 174150, 171647, 171648, 168197, 173041, 168207, 173042, 168198, 2003592, 2003593, 170259, 173028, 174668, 173027, 174667, 173029, 173026, 167805, 173165],
+      "defaultAmount": "1 cup",
+      "note": "raw seedless table grapes; grape leaves, grape tomatoes, juices, Grape-Nuts are disasters"
+    },
+    {
+      "query": "watermelon",
+      "best": 167765,
+      "acceptable": [167765],
+      "disasters": [169407, 2747676, 2747675],
+      "defaultAmount": "1 cup diced",
+      "note": "raw watermelon; Foundation flesh-only record has no energy value (unusable for calories); seeds and rind are disasters"
+    },
+    {
+      "query": "pineapple",
+      "best": 169124,
+      "acceptable": [169124, 2346398, 168193, 168194, 167767, 169126, 169127],
+      "disasters": [169665, 170963, 167792, 171344, 171343, 171347, 170955, 170982, 170953, 170954, 173224, 173225, 168847, 169948, 170909, 174166, 172703, 168187, 169947, 169128, 168205, 173028, 174668, 173027, 174667, 174670, 174671, 174669, 167764, 173029, 173026, 174672],
+      "defaultAmount": "1 cup chunks",
+      "note": "raw pineapple; canned in juice/light syrup within 25%; juices/fruit cocktail/toppings/cake are disasters"
+    },
+    {
+      "query": "mango",
+      "best": 169910,
+      "acceptable": [169910, 2710834, 2710833],
+      "disasters": [167785, 169091, 171341, 173186, 172199, 172254, 174165, 171933, 167795, 173173],
+      "defaultAmount": "1 cup sliced",
+      "note": "raw mango; dried (319) and nectar/smoothies wrong"
+    },
+    {
+      "query": "peach",
+      "best": 169928,
+      "acceptable": [169928, 325430, 169930, 169931],
+      "disasters": [175020, 168133, 171337, 171336, 171352, 171349, 169934, 169116, 173779, 171376, 171375, 170981, 170980, 171311, 174149, 173186, 168185, 169933, 169932, 169115, 174855, 174165, 171933, 173924, 169117, 169113, 173215, 173028, 174668, 173027, 174667, 174670, 174671, 174669, 173029, 173026, 174672],
+      "defaultAmount": "1 medium",
+      "note": "raw yellow peach; canned juice pack fine; syrup-packed/dried/pie/nectar wrong"
+    },
+    {
+      "query": "pear",
+      "best": 169118,
+      "acceptable": [169118, 746773, 167777, 2710836, 167776, 167778, 167779, 169936, 169938, 169937],
+      "disasters": [167718, 167750, 170943, 171338, 171342, 169121, 171347, 170955, 170956, 168393, 168186, 169123, 169817, 169816, 168391, 169940, 169122, 167731, 168496, 168198, 168495, 168394, 168392, 173028, 174668, 173027, 174667, 174670, 174671, 174669, 173029, 173026, 174672, 167782],
+      "defaultAmount": "1 medium",
+      "note": "raw pear; prickly pear/balsam-pear are different foods; dried pears ~4.6x"
+    },
+    {
+      "query": "avocado",
+      "best": 171705,
+      "acceptable": [171705, 171706, 2710824],
+      "disasters": [173573],
+      "defaultAmount": "1/2 avocado",
+      "note": "raw avocado (all varieties 160; Foundation Hass 206 is the same fruit, slightly outside 25%); avocado oil is the disaster"
+    },
+    {
+      "query": "toast",
+      "best": 174925,
+      "acceptable": [174925, 172826, 172687, 172689, 174914, 174911, 172685, 172679, 172691, 174924],
+      "disasters": [174981, 172665, 174977, 174979, 172077, 171854, 172035, 172763, 175045, 172822, 174978, 170579, 170151, 167517, 175048, 172974, 173896, 175046, 168594, 170154, 172760, 169416, 172986, 174635, 174995, 170152, 167928, 174900, 174998, 170189],
+      "defaultAmount": "1 slice",
+      "note": "toasted sliced white bread; melba/rusk crackers, French toast, toaster pastries, toasted seeds/coconut are disasters"
+    },
+    {
+      "query": "bread",
+      "best": 174924,
+      "acceptable": [174924, 167532, 172686, 172688, 168013, 174913, 172675, 172684, 172678, 167943, 172672, 174918, 172818, 174926, 174927, 174925, 172687, 172689, 174914],
+      "disasters": [167719, 168913, 174930, 174928, 172806, 2758995, 2758993, 2758994],
+      "defaultAmount": "1 slice",
+      "note": "sliced white sandwich bread; most bread varieties are fine-to-neutral; flour, dry crumbs, stuffing mix, and Foundation commercial breads lacking energy values are disasters"
+    },
+    {
+      "query": "white bread",
+      "best": 174924,
+      "acceptable": [174924, 167532, 172818, 174926, 174927, 174925, 172826, 174913, 172675],
+      "disasters": [2758993, 790146, 168896, 170708, 170316, 170709, 170312, 170315, 170713, 170307, 170711, 170313, 170707, 170299, 170712, 170314, 170696, 170298, 170706, 170310, 170309, 170311, 170308, 170705],
+      "defaultAmount": "1 slice",
+      "note": "commercial white sandwich bread; flour and Subway subs are disasters; Foundation 'Bread, white, commercial' has no energy value in the API"
+    },
+    {
+      "query": "whole wheat bread",
+      "best": 172688,
+      "acceptable": [172688, 172689, 172690, 172691, 172686, 168013, 172672, 174914, 172687, 174091],
+      "disasters": [2758994, 172749, 168944, 168913, 172742, 790085, 168896, 172823, 167933, 171846, 171853, 172776, 168916, 168915, 171359, 174641, 171667, 167942, 175010, 174085, 170795, 170794, 171677, 167965, 171668, 168910],
+      "defaultAmount": "1 slice",
+      "note": "commercial whole-wheat sliced bread; flours, crackers, dry pancake mixes, pasta, cereals are disasters"
+    },
+    {
+      "query": "bagel",
+      "best": 174899,
+      "acceptable": [174899, 175050, 175049, 175051, 174900, 167533, 171852, 174092, 174901, 172666, 172664, 172665],
+      "disasters": [173150, 173323, 173322],
+      "defaultAmount": "1 medium bagel",
+      "note": "plain bagel; all bagel varieties within 25%; bagel chips and breakfast bagel sandwiches are wrong"
+    },
+    {
+      "query": "english muffin",
+      "best": 174994,
+      "acceptable": [174994, 175063, 172828, 173238, 167515, 172761, 172762, 174093, 174996, 174997, 174995, 172760],
+      "disasters": [172032, 172034, 172033, 170187, 172765, 2346394, 172769, 172766, 172767, 175002, 175004, 175078, 167936, 175045, 175003, 172770, 167929, 175046, 174908, 172815, 172997, 173256, 172768, 175005, 172764],
+      "defaultAmount": "1 muffin",
+      "note": "plain English muffin; fast-food English muffin sandwiches, English walnuts, and sweet muffins are disasters"
+    },
+    {
+      "query": "tortilla",
+      "best": 167535,
+      "acceptable": [167535, 175037, 173242, 175082, 174081],
+      "disasters": [2758997, 167656, 167559, 167560, 167970, 173143, 2758996, 170254, 168116, 169724, 168137, 168858, 167558, 168859, 170785, 170786, 168863, 170256, 172364],
+      "defaultAmount": "1 medium (8-inch) tortilla",
+      "note": "flour tortilla (burrito/wrap default); corn tortillas (~220) slightly outside 25%; chips are disasters"
+    },
+    {
+      "query": "pasta",
+      "best": 169737,
+      "acceptable": [169737, 169751, 172014, 168928, 169728, 169730, 168901, 168902, 168916, 172024, 168910],
+      "disasters": [169736, 168927, 172266, 2758998, 168954, 168955, 172100, 2759000, 169727, 169729, 168899, 169858, 168953, 168062, 332282, 171192, 168958, 172091, 172094, 169857, 171597, 168915, 169738, 172025, 170683, 170682, 170684, 169739, 169740, 170283, 170285, 170284, 170286, 170687],
+      "defaultAmount": "1 cup",
+      "note": "cooked plain pasta; dry pasta (371) is the classic 2.3x trap; sauces/mixes/barley/amaranth are disasters"
+    },
+    {
+      "query": "spaghetti",
+      "best": 167680,
+      "acceptable": [167680, 168085, 168086, 169852, 169853, 169033, 172099, 172089, 169737, 169751, 172014, 168928, 168912, 172024, 168916, 168910],
+      "disasters": [168911, 2758998, 169298, 2759000, 2727579, 173492, 173493, 332282, 171192, 171597, 168934, 168937, 170539, 169299, 169738, 169736, 168927, 172025, 168915],
+      "defaultAmount": "1 cup",
+      "note": "judgment call: spaghetti as a dish with meat/tomato sauce (~121); plain cooked spaghetti (158) also acceptable; dry pasta, sauce alone, spaghetti squash are disasters"
+    },
+    {
+      "query": "macaroni and cheese",
+      "best": 173341,
+      "acceptable": [173341, 169770, 169849, 167671, 168078, 169839, 169010, 173342],
+      "disasters": [172259, 173325, 172270, 173503, 169776, 169769, 172965, 173340, 169774, 168904, 168903, 173491, 173490, 168953, 168125, 172090, 169081, 167944, 172175, 172176, 172177, 172178, 173413, 328637, 173415, 173416, 173418, 173419, 173420, 170843, 171240, 171241, 171242, 171243, 170844, 171245, 171246, 170850, 171249, 171250],
+      "defaultAmount": "1 cup",
+      "note": "boxed mac and cheese prepared with milk and margarine; unprepared mixes (300-390), babyfood, canned (82), cheeses are disasters"
+    },
+    {
+      "query": "oatmeal",
+      "best": 173905,
+      "acceptable": [173905, 171675, 171662, 173908, 172980, 172979],
+      "disasters": [172678, 172679, 174963, 174919, 174960, 171865, 174961, 333008, 175074, 171360, 171361, 170968, 171842, 172725, 174962, 174660, 175072, 175075, 173531, 171362, 174622, 172972, 172726, 172734, 173246, 175070, 171363, 172297, 172298, 174623, 171663, 174638, 174636, 172991, 173926, 172807, 173509, 171367, 173014, 174662, 173016, 171682, 174624, 173907, 174625, 171684, 171683, 173925, 173924, 171685],
+      "defaultAmount": "1 cup",
+      "note": "cooked oatmeal (oats cooked with water); no cooked oatmeal in live top 50; dry oats/instant packets (~370), oatmeal cookies/bread, babyfood are disasters"
+    },
+    {
+      "query": "cereal",
+      "best": 173884,
+      "acceptable": [173884, 173889, 174639, 169039, 171650, 171647, 169040, 173921, 172987, 172996, 169862, 174659, 172985, 172986, 173007, 169075, 169076, 172997, 173013, 173893, 172974, 172990, 174648, 174646, 171681, 174644],
+      "disasters": [174641, 171667, 171665, 174650, 172998, 171677, 171365, 173900, 173916, 171666, 173006, 171668, 172999, 171358, 170964, 170965, 171360, 171361, 170968, 170969, 170974, 171364, 170971, 168755, 171660, 172989, 171676, 174096, 172296],
+      "defaultAmount": "1 cup",
+      "note": "ready-to-eat cold cereal (dry weight, milk logged separately); Cheerios as generic default; dry hot cereals (farina/Wheatena/cream of rice), babyfood, cereal bars are disasters"
+    },
+    {
+      "query": "cheerios",
+      "best": 173884,
+      "acceptable": [173884],
+      "disasters": [],
+      "defaultAmount": "1 cup",
+      "note": "only one hit and it is correct"
+    },
+    {
+      "query": "granola",
+      "best": 171646,
+      "acceptable": [171646, 173892, 172976, 174658, 174654, 172975],
+      "disasters": [170355, 174996, 173313],
+      "defaultAmount": "1/2 cup",
+      "note": "loose granola cereal; granola bars are a different form (neutral); parfaits and English muffins are disasters"
+    },
+    {
+      "query": "pancakes",
+      "best": 175009,
+      "acceptable": [175009, 175047, 172773, 174086, 174106, 175006, 175008, 167601, 172771, 175010, 167926],
+      "disasters": [170092, 169578, 172774, 172775, 167584, 171853, 172776, 169577, 168838, 172772, 175007, 170646],
+      "defaultAmount": "3 pancakes (4-inch)",
+      "note": "prepared plain pancakes; syrups, dry mixes (340-370), potato pancakes are disasters"
+    },
+    {
+      "query": "waffles",
+      "best": 175048,
+      "acceptable": [175048, 167516, 175038, 175039, 168011, 167518, 167517, 167519, 167524, 174105, 174085],
+      "disasters": [174628],
+      "defaultAmount": "2 waffles",
+      "note": "frozen toaster waffles as eaten (toasted); all waffle records within 25%; Waffle Crisp cereal is the only disaster"
+    },
+    {
+      "query": "french toast",
+      "best": 174998,
+      "acceptable": [174998, 172763],
+      "disasters": [174911, 172795, 172674, 172679, 172685, 172687, 174981, 169009, 167672, 170721, 170726, 172665, 172677, 172681, 175044, 171851, 174977, 174979, 169205, 170327, 172756, 175232, 171577, 169833, 172809, 174925, 171854, 175045, 168387, 173738, 172675, 174091, 169836, 171416, 172683, 172689, 172822, 174978, 170579, 170151, 167517, 175048, 167981, 173261, 171414, 171420],
+      "defaultAmount": "2 slices",
+      "note": "French toast slices; sticks (~345) are a fried variant; plain toast, French fries, French bread/dressing are disasters"
+    },
+    {
+      "query": "bacon",
+      "best": 168322,
+      "acceptable": [168322, 749420, 167914, 168321, 167712],
+      "disasters": [172439, 174602, 169893, 174592, 167869, 168324, 172345, 167911, 167704, 168383, 173266, 172069, 173300, 171366, 172029, 173269, 172072, 173312, 172073, 171586, 173899, 172033, 172058, 170312, 170313, 170753, 170752],
+      "defaultAmount": "2 slices",
+      "note": "cooked pork bacon; rendered fat/grease (~900), Canadian bacon (~3.5x lower), meatless, turkey bacon unprepared, sandwiches are disasters"
+    },
+    {
+      "query": "sausage",
+      "best": 174578,
+      "acceptable": [174578, 173876, 174616, 746779, 174584, 174585, 174577, 174618, 172939, 173882, 170606, 172953, 172954, 174579, 171632, 172955, 173883, 174586, 746780, 171636, 167694, 746781],
+      "disasters": [171618, 174269, 173310, 172070, 172063, 172059, 173308, 171621, 172031, 173870, 172071, 172068, 173316, 172028, 172060, 169781, 173315, 173271, 172032, 172057, 172944],
+      "defaultAmount": "2 links",
+      "note": "cooked pork breakfast sausage link/patty; smoked/Polish sausages also within 25%; liver/blood sausage, meatless, breakfast sandwiches are disasters"
+    },
+    {
+      "query": "ham",
+      "best": 173864,
+      "acceptable": [173864, 168296, 168295, 167886, 167885, 168110, 168284, 167876, 167872, 168283, 168367, 168358, 169177, 172946, 173881, 746952, 174611, 167874, 169174, 169176, 168360],
+      "disasters": [171629, 173866, 173517, 173480, 172247, 172030, 171628, 173267, 172108, 2759002, 173270, 171549, 171157, 169155, 169156, 171144, 173327, 171555, 172994, 170707, 172951],
+      "defaultAmount": "2 oz (about 3 slices)",
+      "note": "sliced/roasted cured ham; spreads, separable fat (~510), Spam, sandwiches, soups, babyfood are disasters"
+    },
+    {
+      "query": "turkey",
+      "best": 171481,
+      "acceptable": [171481, 171479, 171091, 171491, 171496, 171089, 171492, 171529, 174516, 172869, 172871, 171095, 174514, 174519, 171101],
+      "disasters": [173857, 173571, 171625, 171504, 171639, 174592, 171569, 172937, 171500, 172251, 172250, 171640, 172970, 174609, 174610, 171590, 174604, 173871, 174617, 174606, 171083, 173500, 172269, 173502, 173501, 169049, 173484, 172192, 171568, 174607, 2759001, 171632, 172092, 171103, 171484, 171486, 171085, 171084, 172286, 172268],
+      "defaultAmount": "3 oz",
+      "note": "roasted turkey meat (none in live top 50 except canned); deli turkey ~106 is a lower-calorie neutral; fat, bacon, gravy, bologna, sausages, babyfood are disasters"
+    },
+    {
+      "query": "ground beef",
+      "best": 172161,
+      "acceptable": [172161, 169447, 174032, 169474, 168651, 171801, 174038, 171800, 171797, 174035, 171795, 174031, 174754, 174752, 174034, 169473, 168650, 174040, 174039, 171799, 171798, 174033, 171794, 171793, 174755, 174753, 174028],
+      "disasters": [167657, 170292, 167658, 2262075, 2727571],
+      "defaultAmount": "3 oz cooked",
+      "note": "cooked ground beef (unspecified fat, ~80-85% lean); raw is neutral; tacos, nachos, flaxseed, bison are disasters"
+    },
+    {
+      "query": "steak",
+      "best": 168727,
+      "acceptable": [168727, 168729, 169552, 169457, 169458, 168633, 173118, 168635, 174054, 168634, 172144, 171237, 171238, 173381, 174701, 174702, 167673, 167670, 169016, 169831, 169014, 169435, 169554, 168611, 168610, 169434],
+      "disasters": [167669, 168965, 171825, 170335, 170733, 169782, 169783, 173323, 167874, 168947, 168444, 170310, 170311, 168445],
+      "defaultAmount": "1 steak (about 6 oz cooked)",
+      "note": "cooked beef sirloin steak; restaurant sirloin also fine; raw cuts/pork/game neutral; Salisbury steak, steak sauce, steak fries, steak sandwiches/burritos, ham steak are disasters"
+    },
+    {
+      "query": "hamburger",
+      "best": 170694,
+      "acceptable": [170694, 170717, 170328, 170324, 170722, 170322, 170323, 170710, 170693, 172080, 173317, 173318],
+      "disasters": [169386, 172796, 172797, 167923, 174090, 174089, 174094],
+      "defaultAmount": "1 burger",
+      "note": "a hamburger sandwich (bun + patty); ground beef patty records are neutral (regional 'hamburger' = ground beef); buns alone and pickle relish are disasters"
+    },
+    {
+      "query": "cheeseburger",
+      "best": 170691,
+      "acceptable": [170320, 170329, 172065, 170374, 173320, 173319, 170294, 172082, 170691, 170690, 170293, 170692, 172083, 172081, 172084],
+      "disasters": [168953],
+      "defaultAmount": "1 burger",
+      "note": "single-patty fast-food cheeseburger; only the unprepared cheeseburger-macaroni pasta mix is wrong"
+    },
+    {
+      "query": "hot dog",
+      "best": 174614,
+      "acceptable": [174614, 173862, 323121, 172964, 172968, 174615, 168131, 173875, 171633, 171634, 174591],
+      "disasters": [168560, 174090, 174089, 173301, 173302, 169766, 171186, 174606, 173276, 168570, 170497, 170106, 174527, 172953, 174808, 171277, 171887, 171667, 172107, 171605, 171187, 171188, 171604, 173327, 174124, 172998, 171677, 170107, 170772, 171668, 173326, 170426, 172999, 167696, 172949, 169866, 171886, 174122, 174123, 175092],
+      "defaultAmount": "1 hot dog",
+      "note": "no frank-in-bun record exists; heated beef frankfurter is best (bun adds ~120 kcal); buns, relish, hot fudge, hot peppers/sauces, cocoa, low-fat franks (~2.5x lower) are disasters"
+    },
+    {
+      "query": "pizza",
+      "best": 173292,
+      "acceptable": [172041, 173280, 173291, 170774, 172053, 170372, 172040, 173279, 173290, 172052, 170769, 170704, 172042, 173281, 172051, 170369, 170768, 172054, 173292, 170773, 173293, 173294, 173295, 173296, 170762, 170367, 170365, 170366, 172055, 170702, 170703, 170305, 172043, 170370, 170371, 173289, 173284, 173287, 173285, 173286, 170317, 170714, 170373, 172095, 172096, 170701],
+      "disasters": [168957, 170789, 172880, 167596],
+      "defaultAmount": "1 slice",
+      "note": "cheese pizza slice (chain, 14-inch regular crust); all chain/frozen/school pizzas within 25%; pizza rolls unprepared, breadsticks, sauce, Goldfish are disasters"
+    },
+    {
+      "query": "pepperoni pizza",
+      "best": 173295,
+      "acceptable": [173280, 172053, 173279, 172052, 170369, 173295, 173296, 170762, 170370, 173285, 172096, 170760, 172044, 172045, 170759, 170761, 172048, 173288, 170703, 170701, 170781, 170780],
+      "disasters": [2759006, 174575, 174593, 168957, 170789, 172880],
+      "defaultAmount": "1 slice",
+      "note": "pepperoni pizza slice; cheese/sausage pizzas are neutral; pepperoni slices alone (504), pizza rolls unprepared, breadsticks, sauce are disasters"
+    },
+    {
+      "query": "salmon",
+      "best": 175168,
+      "acceptable": [175168, 171999, 171998, 173716, 175137, 173692, 172000, 172001],
+      "disasters": [172343, 168054, 168023, 167616, 167615],
+      "defaultAmount": "4 oz fillet",
+      "note": "cooked (dry heat) farmed Atlantic salmon; raw/canned/smoked are neutral; fish oil, dried, brined, liver, fermented are disasters"
+    },
+    {
+      "query": "tuna",
+      "best": 334194,
+      "acceptable": [334194, 173709, 171986],
+      "disasters": [175160, 173708, 175157, 170316, 170299, 174227, 171987],
+      "defaultAmount": "1 can (5 oz), drained",
+      "note": "canned light tuna in water; albacore in water (128) is a plausible neutral; oil-packed (~190, 2x), tuna salad, tuna subs are disasters"
+    },
+    {
+      "query": "shrimp",
+      "best": 175180,
+      "acceptable": [175180, 171971, 171972],
+      "disasters": [173160, 169008, 168077, 168080, 172037, 171159, 169832, 168074, 169838, 171970, 172918, 172898],
+      "defaultAmount": "3 oz",
+      "note": "cooked plain shrimp; raw shrimp neutral; breaded/fried shrimp (240-320, ~3x), shrimp crackers, cream of shrimp soup are disasters"
+    },
+    {
+      "query": "tilapia",
+      "best": 175177,
+      "acceptable": [175177],
+      "disasters": [],
+      "defaultAmount": "1 fillet",
+      "note": "cooked tilapia; raw records are ~25% lower"
+    },
+    {
+      "query": "tofu",
+      "best": 172448,
+      "acceptable": [172448, 173788, 172461, 174290, 175236, 175235, 172476, 173783, 173763, 175233, 173762, 173785, 172449, 173787],
+      "disasters": [167722, 172451, 167695, 172450, 174304, 174303],
+      "defaultAmount": "1/2 cup",
+      "note": "plain firm tofu (~80 kcal); silken lite and dense/hard tofus are neutral; fried tofu, dried-frozen koyadofu, tofu yogurt/mayo are disasters"
+    },
+    {
+      "query": "black beans",
+      "best": 173735,
+      "acceptable": [173735, 175237, 175239, 175187, 2644285],
+      "disasters": [173734, 747444, 168068, 171141, 175186, 172903, 170931, 169885, 173963, 170186, 2710837, 2710825, 2644281, 175207, 169222, 169793, 174144, 174188, 2759002, 173780, 2758983, 168574, 169965, 2346400, 169961, 169320, 173336, 173335, 172102, 172110, 172098, 171832, 172038, 2758984, 2758985],
+      "defaultAmount": "1/2 cup",
+      "note": "cooked black beans; canned with liquid (~91) neutral; raw/dry (~340), soups, black pepper, other 'black' foods are disasters"
+    },
+    {
+      "query": "refried beans",
+      "best": 172438,
+      "acceptable": [172438, 174298, 174296, 172465],
+      "disasters": [2758984, 2758985, 169885, 2644281, 169222, 2758983, 168574, 169965, 2346400, 169961, 169320, 173336, 173335, 172102, 172098, 172038, 170734, 170478, 170070, 169049, 172273, 173504, 172272, 172271, 2758982, 173727, 173734, 747444, 747433, 747436, 747437, 747441, 747439, 747445],
+      "defaultAmount": "1/2 cup",
+      "note": "canned traditional refried beans; restaurant versions (~150) neutral; Foundation canned refried records lack energy; raw/dry beans, snap beans, burritos, babyfood are disasters"
+    },
+    {
+      "query": "hummus",
+      "best": 174289,
+      "acceptable": [174289, 321358, 172454],
+      "disasters": [],
+      "defaultAmount": "2 tbsp",
+      "note": "commercial hummus; home-prepared (177) at the 25% edge"
+    },
+    {
+      "query": "peanut butter",
+      "best": 2262072,
+      "acceptable": [2262072, 169869, 172471, 174265, 172458, 172469, 172460, 172470, 172459, 174294, 174266],
+      "disasters": [2758989, 167570, 167546, 168763, 174965, 172729, 174070, 173252, 170275, 171836, 174969, 172727, 174964, 172730, 172748, 169681, 167578, 172728, 171843, 174976, 167955, 171848, 174984, 171855, 168095, 169628, 168769, 171644, 172985, 167548, 167689, 169630, 167547, 173133, 171314, 173257, 170669, 1750348],
+      "defaultAmount": "2 tbsp",
+      "note": "creamy peanut butter; candies/cookies/crackers/bars/cereal with PB, peanut sauce, ghee, peanut oil are disasters"
+    },
+    {
+      "query": "almonds",
+      "best": 170567,
+      "acceptable": [170567, 170568, 2346393, 168592, 168596, 323294, 168602, 169419, 170158, 170159, 169420],
+      "disasters": [171031, 169060, 168754, 2257045, 167562, 167979, 169627, 169673, 167543, 1999631, 174820, 174832, 169622, 169579, 167994, 168818, 167947, 173148, 168751, 169859, 173924, 169652, 168108, 173005, 174658, 171680, 173256, 174782, 173187, 169688],
+      "defaultAmount": "1 oz",
+      "note": "whole almonds (raw or roasted); almond flour/butter/paste neutral; almond oil, almond milk (~19), candy bars, cereals are disasters"
+    },
+    {
+      "query": "peanuts",
+      "best": 174262,
+      "acceptable": [174262, 174261, 172430, 2515376, 174263, 172432, 172434, 172431, 172433, 174264, 173807, 173808, 173809],
+      "disasters": [1750348, 169585, 2758989, 174267, 171575, 174070, 167737, 171410, 172435, 167570, 167546, 168763, 174965, 172729, 167551, 173252, 170275, 169586, 171836, 174969, 172727, 174964, 172730, 172748],
+      "defaultAmount": "1 oz",
+      "note": "dry-roasted salted peanuts; peanut butter neutral; peanut oil, defatted flour, sauces, candies, cookies are disasters"
+    },
+    {
+      "query": "cashews",
+      "best": 169421,
+      "acceptable": [2515374, 170162, 169421, 169422, 170571, 170572],
+      "disasters": [],
+      "defaultAmount": "1 oz",
+      "note": "roasted cashews; cashew butter neutral"
+    },
+    {
+      "query": "walnuts",
+      "best": 170187,
+      "acceptable": [170187, 2346394, 170594, 170186],
+      "disasters": [171030, 174625, 171684],
+      "defaultAmount": "1 oz",
+      "note": "English walnuts; walnut oil and oatmeal packets are disasters"
+    },
+    {
+      "query": "butter",
+      "best": 173410,
+      "acceptable": [173410, 173430, 173411],
+      "disasters": [174987, 2262074, 790508, 789828, 168816, 171421, 172335, 173570, 2262072, 2758989, 2262073, 169869, 170191, 169894, 167570, 167546, 168763, 169690, 174950, 172819, 174965, 172729, 172471, 174265, 172458, 170038, 167584, 173252, 170275, 174079, 171836, 174969, 172727, 174964, 172730, 172748, 168603, 168597, 172469, 172460, 172470, 172459],
+      "defaultAmount": "1 tbsp",
+      "note": "salted butter; Foundation stick butter records have no energy value; croissants, nut/fruit butters, oils, cookies are disasters"
+    },
+    {
+      "query": "olive oil",
+      "best": 171413,
+      "acceptable": [171413],
+      "disasters": [171443, 2747652, 172926, 169851, 1750351, 748608, 748278, 748323, 1750348, 1750350, 748366, 1750349],
+      "defaultAmount": "1 tbsp",
+      "note": "olive oil (884); other oils have identical calories (neutral); Foundation oils lack energy values; mayo, anchovies, olive loaf, lasagna are disasters"
+    },
+    {
+      "query": "cream cheese",
+      "best": 173418,
+      "acceptable": [173418, 2346385, 169081],
+      "disasters": [172180, 172207, 172179, 169619, 170857, 170860, 2346386, 167531, 167534, 171263, 171257, 172226, 168809, 168810, 167575, 173443, 169664, 172229, 173199, 173900, 167530, 173453, 172214, 168097, 167688, 171255, 170859, 170858, 171308, 2346387, 172227, 171306, 167585, 168136, 167572, 167573, 175041, 171307, 173444, 170869, 173442, 167944],
+      "defaultAmount": "2 tbsp",
+      "note": "regular cream cheese; Neufchatel/low-fat neutral; fat-free (105), cottage cheese, creams, sour cream, ice cream, frosting are disasters"
+    },
+    {
+      "query": "cheddar cheese",
+      "best": 328637,
+      "acceptable": [328637, 170899, 173414, 173440, 171292],
+      "disasters": [171295, 173439, 170896, 172955, 174599, 173898, 167964, 172108, 170989, 167944, 174989, 167925, 168005, 169770, 169769, 174789, 172699],
+      "defaultAmount": "1 oz",
+      "note": "cheddar cheese; other natural cheeses are neutral; fat-free/low-fat cheddar (~160-175), snacks, crackers, sausages, mac and cheese are disasters"
+    },
+    {
+      "query": "mozzarella",
+      "best": 171244,
+      "acceptable": [171244, 329370, 170900, 170845, 170846, 167735, 170847],
+      "disasters": [169051, 172109, 172107],
+      "defaultAmount": "1 oz",
+      "note": "low-moisture part-skim mozzarella; fried mozzarella sticks and substitute are neutral; nonfat (141) and Hot/Lean Pockets are disasters"
+    },
+    {
+      "query": "string cheese",
+      "best": 171244,
+      "acceptable": [171244, 329370, 170900, 170847, 170846, 170845, 167735],
+      "disasters": [169081, 167944, 174989, 167925, 169770, 169769, 172699, 169078, 174975, 172754, 171629, 173869, 169854, 169034, 169051],
+      "defaultAmount": "1 stick",
+      "note": "string cheese = low-moisture part-skim mozzarella (~28 g stick); no 'string cheese' record in live hits; other natural cheeses neutral; spreads, crackers, mac and cheese, pastries, nonfat mozzarella are disasters"
+    },
+    {
+      "query": "cottage cheese",
+      "best": 172179,
+      "acceptable": [172179, 2346384, 328841, 172182, 172180, 169078],
+      "disasters": [169265, 169266, 170117, 169081, 167944, 172175, 172176, 172177, 172178, 173413, 328637, 173415, 173416, 173418, 173419, 173420, 170843, 171240, 171241, 171242, 171243, 170844, 171245, 171246, 170850, 171249, 171250, 746767, 171251, 170852, 174989, 167925, 169770, 169769, 172699, 172198, 747429, 2647443, 171288],
+      "defaultAmount": "1/2 cup",
+      "note": "regular (4%) cottage cheese; 2% within 25%, 1% (72) just outside; cottage-cut fries and hard cheeses (~4x) are disasters"
+    },
+    {
+      "query": "greek yogurt",
+      "best": 170903,
+      "acceptable": [170903, 330137, 170894, 171312, 171296, 170902, 330415, 170901, 171311, 171313, 171309, 171310, 171299, 171298, 170912, 170915, 170913, 170914],
+      "disasters": [171578, 168104, 168133, 167569],
+      "defaultAmount": "1 container (5.3 oz)",
+      "note": "plain low-fat Greek yogurt as middle default; plain nonfat and most flavored nonfat within 25%; regular/soy yogurts neutral; soup, frozen yogurt, babyfood, yogurt coating are disasters"
+    },
+    {
+      "query": "yogurt",
+      "best": 171285,
+      "acceptable": [171285, 170889, 171286, 173457, 173456, 169898, 173458, 170888, 172219, 170906, 2259793, 170914, 171300, 330415, 170901, 170907, 170902, 170905, 171311, 171313, 2259794, 171304, 171297, 171309, 172208],
+      "disasters": [167569, 168104, 168848, 168815, 168105, 168133, 167690, 168135, 168134, 167726, 168090, 173520],
+      "defaultAmount": "1 container (6 oz)",
+      "note": "flavored low-fat fruit yogurt cup; plain yogurts (~50-63) and soy/tofu yogurts are neutral; frozen yogurt, yogurt coating candy, babyfood, yogurt melts are disasters"
+    },
+    {
+      "query": "ice cream",
+      "best": 167575,
+      "acceptable": [167575, 168809, 168810, 168136, 167573, 173465, 167981, 167585, 167572, 171307, 170270, 170671, 169633, 169631, 170261, 170262, 170268, 170660, 170663, 170662, 172085, 173324],
+      "disasters": [167534, 175000, 175001, 169823, 168977],
+      "defaultAmount": "1 cup",
+      "note": "vanilla ice cream (regular and light all reasonable); cones alone (~410), cream puffs, Alaskan agutuk are disasters; bars/sandwiches neutral"
+    },
+    {
+      "query": "broccoli",
+      "best": 169967,
+      "acceptable": [169967, 168510, 170379, 747447, 168511, 168512, 169969, 170380, 169330],
+      "disasters": [172288, 170989, 171178, 173326],
+      "defaultAmount": "1 cup",
+      "note": "cooked broccoli (raw/frozen within 25%); broccoli raab/Chinese broccoli neutral; babyfood, broccoli cheese soup, Hot Pockets are disasters"
+    },
+    {
+      "query": "carrots",
+      "best": 170393,
+      "acceptable": [170393, 2258587, 168568, 746764, 2258586, 169339, 170394, 168519, 169984, 169983],
+      "disasters": [170500, 169871, 170491, 173518, 169043, 173507, 173506, 171184, 174932, 173487],
+      "defaultAmount": "1/2 cup",
+      "note": "raw carrots (cooked/frozen within 25%); canned carrots and peas-and-carrots neutral; dehydrated (341), juice, babyfood, carrot cake mix are disasters"
+    },
+    {
+      "query": "baby carrots",
+      "best": 168568,
+      "acceptable": [168568, 2258587, 170393, 746764, 169983, 169339, 170394, 168519, 169984],
+      "disasters": [1999632, 2710822, 170500, 171368, 168565, 169871, 170491, 167582, 173518, 169043, 173507, 173506, 171001, 171827, 171184, 169955, 174932, 174255, 173487, 169318, 173803, 170013, 169956, 172422, 167690, 171351, 173517, 173511, 169047, 167733],
+      "defaultAmount": "10 baby carrots (about 3 oz)",
+      "note": "raw baby carrots; baby spinach/arugula/zucchini/lima beans, Baby Ruth, Sweet Baby Ray's, babyfood are disasters"
+    },
+    {
+      "query": "spinach",
+      "best": 168462,
+      "acceptable": [168462, 1999632, 1999633, 170531, 168463, 169286, 170123, 169285],
+      "disasters": [170494, 168912, 168911, 170941, 169734, 169733, 169729, 169730],
+      "defaultAmount": "1 cup",
+      "note": "raw spinach (cooked/canned similar per 100 g); frozen cooked (34) slightly above; spinach souffle, spinach pasta/noodles, babyfood are disasters"
+    },
+    {
+      "query": "salad",
+      "best": 172074,
+      "acceptable": [172074, 169247, 746769, 2346389, 169249, 2346391],
+      "disasters": [175160, 173866, 173343, 169056, 171024, 171413, 171410, 171016, 171411, 169269, 174581, 167704, 169895, 173594, 171009, 171044, 171005, 169875, 170736, 169055, 171045, 169877, 168109, 171416, 169057, 171043, 171406, 171444, 173592, 172072, 173312, 172073, 171433, 171012, 171414, 171420, 167693, 171404, 171417, 2758987, 171019, 173590, 168096, 171002, 171403, 171407, 167700, 168093, 173591],
+      "defaultAmount": "1 side salad (about 1.5 cups)",
+      "note": "plain garden/side salad without dressing (McDonald's side salad is the only garden-salad record; romaine/leaf lettuce equivalent); dressings, oils, tuna/potato/ham salads, taco salad, bacon ranch salads are disasters"
+    },
+    {
+      "query": "lettuce",
+      "best": 169247,
+      "acceptable": [2346388, 169247, 746769, 169249, 2346391, 2346390, 168431, 2346389, 169248, 168429],
+      "disasters": [170763, 170764, 167657, 170316, 170332, 170333, 170732, 170318, 170689, 167658, 170312, 170315, 170713, 170307, 170711, 170785, 170368, 170786, 170313, 170707, 170299, 170712, 170314, 170696, 170298, 170706, 170310, 170753, 170752, 170309, 170311, 170308, 170705, 170306],
+      "defaultAmount": "1 cup shredded",
+      "note": "raw lettuce (romaine default; all lettuces equivalent); tacos and subs 'with lettuce' are disasters"
+    },
+    {
+      "query": "tomato",
+      "best": 170457,
+      "acceptable": [170457, 1999634, 170050, 170137, 170096, 170502, 170051, 170138, 333281],
+      "disasters": [170461, 170463, 2685582, 168567, 174547, 167704, 171825, 172882, 171882, 172100, 172881, 171557, 171591, 172099, 167708, 170458, 170055, 170056, 170089, 173491, 173490, 173492, 173493, 172257, 173733, 171595, 171160, 171587, 174569, 170545, 170546, 170057, 2685580],
+      "defaultAmount": "1 medium",
+      "note": "raw red tomato (year-round SR record not in live top 50; roma is); tomato powder, sun-dried, paste, soups, sauces with additions, juices, babyfood are disasters"
+    },
+    {
+      "query": "cucumber",
+      "best": 168409,
+      "acceptable": [168409, 2346406],
+      "disasters": [167618, 169378, 169380],
+      "defaultAmount": "1/2 cup sliced",
+      "note": "raw cucumber with peel; peeled (10) and dill/sour pickles neutral; sweet pickles and sea cucumber are disasters"
+    },
+    {
+      "query": "corn",
+      "best": 169999,
+      "acceptable": [169999, 168525, 168539, 168540, 169998, 168538, 2710826, 169348, 168399, 169364, 168545, 169349, 168401, 169367, 169366, 169216, 169347, 168542, 168543, 168398, 168544, 169365, 168400],
+      "disasters": [748323, 168920, 170288, 170289, 167631, 169867, 168857, 168836, 168837, 167525, 173345, 170492, 168037, 173860, 175002, 175004, 167737, 167664, 167637, 169659, 2758997, 172317, 173510, 171334, 172280, 170602, 169830, 169694, 169696, 169748, 170290, 169695, 169749, 167656, 175003, 167627, 168900, 168899, 168044, 169829, 175036, 173332, 170200, 170199],
+      "defaultAmount": "1 medium ear",
+      "note": "cooked sweet corn (raw sweet corn 86 in live list is fine); corn grain/flour/meal (~365), oil, syrups, corn dogs, corned beef, tortillas, muffins are disasters"
+    },
+    {
+      "query": "green beans",
+      "best": 169141,
+      "acceptable": [169141, 169321, 169965, 2346400, 169961, 169964, 169325, 169963, 169962],
+      "disasters": [169049, 172273, 173504, 172272, 172271, 169885, 2710823, 170375, 2747653, 2346407, 169389, 169992, 169226, 327046, 168153, 169256, 170419, 168216, 168199, 168215, 169282, 170456, 170061, 167745, 2727585, 2644281, 175207, 169032, 169391, 2346413, 169249, 2346391, 2346389, 169258],
+      "defaultAmount": "1/2 cup",
+      "note": "cooked snap green beans; canned (~21) neutral; other 'green' foods (kiwi, peas, plantains, greens), babyfood, dry beans are disasters"
+    },
+    {
+      "query": "peas",
+      "best": 170420,
+      "acceptable": [170420, 170102, 170105, 170017, 170419, 170104, 170015, 170013, 170016, 2644291],
+      "disasters": [2644284, 169865, 170940, 170939, 171182, 173157, 171554, 172428, 171157, 172436, 172896, 174561, 171592, 171555, 172916],
+      "defaultAmount": "1/2 cup",
+      "note": "cooked green peas; snap peas, split peas cooked, peas-and-carrots neutral; dry blackeye/split/pigeon peas (~350), wasabi peas, pea soups, babyfood are disasters"
+    },
+    {
+      "query": "potato",
+      "best": 170093,
+      "acceptable": [170093, 170112, 170111, 170033, 170435, 170030, 170434, 170114, 170438, 170520, 170440, 170522, 170441, 170521, 170094],
+      "disasters": [167943, 2261422, 168446, 170092, 173508, 173343, 170032, 168854, 168853, 174804, 169678, 167553, 170036, 170047, 169269, 170454, 169303, 169305, 168864, 167554, 172317, 169042, 173504, 172276, 172277, 167656, 169779, 170048, 171608, 170113, 170034, 170449],
+      "defaultAmount": "1 medium",
+      "note": "baked potato with skin; raw/canned/plain mashed neutral; potato flour, chips, skins only (198), potato salad, puffs, hash browns, sweet potato items, babyfood are disasters"
+    },
+    {
+      "query": "baked potato",
+      "best": 170093,
+      "acceptable": [170093, 170112, 170111, 170033, 170435, 170030, 170434],
+      "disasters": [170113, 170034, 169046, 172738, 169131, 172800, 175025, 167943, 2261422, 168446, 170092, 167999, 167567, 167568, 2758983, 175183, 175184, 175185, 173731, 172106, 175040, 173720, 172667, 174962, 172735, 167930, 172790, 175036, 2758982, 168128, 175182, 167914, 170537, 170673, 169584, 169581, 173508, 173343, 170032],
+      "defaultAmount": "1 medium",
+      "note": "baked potato flesh and skin; baked sweet potato neutral; skin only (198), baked chips, pastry, baked beans, other 'baked' foods are disasters"
+    },
+    {
+      "query": "mashed potatoes",
+      "best": 168555,
+      "acceptable": [168555, 170037, 169768, 170042, 168554, 170446, 169372, 170040, 170699, 170493],
+      "disasters": [170989, 170041, 170445, 170039, 173338, 170129, 170538, 169294, 169297, 167943, 2261422, 168446, 170092, 173508, 173343, 170032, 168854, 168853, 174804, 169678, 167553, 170036, 170047, 169269, 170454, 169303, 168864, 167554, 172317, 169042, 173504, 172276],
+      "defaultAmount": "1 cup",
+      "note": "home-style mashed potatoes with milk and butter; dehydrated flakes/granules dry form (~360), chips, squash, babyfood, TV dinner are disasters"
+    },
+    {
+      "query": "french fries",
+      "best": 170698,
+      "acceptable": [170698, 169009, 167672, 170721, 170726, 170327, 169833, 169836, 169268, 167669],
+      "disasters": [168444, 168445, 168442, 170523, 169265, 168947, 170436, 172451, 172795, 168199, 167719, 168077, 173423, 168435, 169253, 173240, 172784, 175064, 169834, 169205, 172756, 175232, 171577, 168383, 172037, 173878, 168200],
+      "defaultAmount": "1 medium order",
+      "note": "restaurant/fast-food fries fried in oil; oven-heated frozen fries (160-220) neutral; frozen as-purchased fries at <=156 (2x low), French rolls/toast/crullers, other fried foods are disasters"
+    },
+    {
+      "query": "sweet potato",
+      "best": 168483,
+      "acceptable": [168483, 170134, 170542, 169307, 168484, 170541, 168485, 169305],
+      "disasters": [169303, 172317, 169042, 172276, 172277, 174783, 173521, 170952, 170133, 169304, 168015, 167606, 167943, 2261422, 168446, 170092, 167977, 171719, 170008, 168561, 174107, 175033, 171283, 171282, 173508, 173343, 170032, 168854, 168853, 174804, 169678, 167553, 170036, 168538, 169998],
+      "defaultAmount": "1 medium",
+      "note": "baked sweet potato; raw/candied neutral; sweet potato chips/fries, leaves, babyfood, regular-potato and other 'sweet' foods are disasters"
+    },
+    {
+      "query": "onion",
+      "best": 170000,
+      "acceptable": [170000, 790577, 170008, 1104962, 790646, 170100, 170001, 170412],
+      "disasters": [169844, 170002, 170004, 171327, 169840, 170771, 172812, 171172, 170003, 170020, 171551, 171165, 170019, 169027, 171552, 170056, 170705, 169021, 170697, 169397, 167948, 174568, 170306, 170414, 170514, 174788, 167963, 2727585, 170021, 174541, 174559, 170462, 174899, 175050],
+      "defaultAmount": "1/4 cup chopped",
+      "note": "raw onion; onion rings, dehydrated/powder (~345), sauteed (123), soups, gravy mix, onion-flavored snacks are disasters"
+    },
+    {
+      "query": "bell pepper",
+      "best": 170108,
+      "acceptable": [170427, 2258588, 2258591, 2258590, 2258589, 170108, 169383, 170022, 168547, 170109],
+      "disasters": [170336, 170734, 170337, 170736, 170735, 170334, 170335, 170733, 170332, 170333, 170732, 169396, 168579, 170931, 170933, 174574, 170024, 168550, 170932, 168570, 169373, 174527, 174528, 173209, 169218],
+      "defaultAmount": "1/2 cup chopped",
+      "note": "raw sweet bell pepper (red default; any color 20-27 kcal is fine); hot peppers neutral; Taco Bell items, dried/freeze-dried peppers, spices, sauteed (116-133), hot sauces, pepper-type soda are disasters"
+    },
+    {
+      "query": "mushrooms",
+      "best": 169251,
+      "acceptable": [169251, 1999629, 2003601, 168434, 2003598, 169255, 169254, 169253, 169376, 168557, 170143, 168537, 169252],
+      "disasters": [171170, 168436, 171171, 170097, 168435, 172901, 168437, 171175, 174522, 171155, 171154, 170055, 171156, 171611, 172887, 171572, 171573, 172915, 171607],
+      "defaultAmount": "1/2 cup sliced",
+      "note": "white button mushrooms (raw; boiled 28 also fine); other species neutral; gravies, dried shiitake (296), soups, cooked shiitake (56) are disasters"
+    },
+    {
+      "query": "celery",
+      "best": 169988,
+      "acceptable": [169988, 2346405, 169342, 169989],
+      "disasters": [170920, 171540, 172893, 172907, 170462],
+      "defaultAmount": "1 stalk",
+      "note": "raw celery; celery seed (392) and cream of celery soups are disasters"
+    },
+    {
+      "query": "coffee",
+      "best": 171890,
+      "acceptable": [171890, 171881, 171889, 174130, 171894, 174134, 171891, 174125],
+      "disasters": [175224, 171897, 174133, 174135, 171893, 175097, 173665, 174126, 168122, 169634, 169637, 175098, 174138, 171880, 171898, 170857, 174119, 174127, 174154, 171877, 172367, 173648],
+      "defaultAmount": "1 cup (8 fl oz)",
+      "note": "black brewed coffee (~1-2 kcal/100 g; ratio tolerance not meaningful near zero); instant powders (~350), liqueurs, sweetened ready-to-drink coffees, coffee candies, creamers are disasters"
+    },
+    {
+      "query": "latte",
+      "best": 171880,
+      "acceptable": [171880, 174119],
+      "disasters": [],
+      "defaultAmount": "1 grande (16 fl oz)",
+      "note": "no latte record in SR/Foundation and zero live hits; closest is ready-to-drink milk-based sweetened coffee (71); an unsweetened 2% latte is ~40 kcal/100 g, so the light RTD (171877, 36) or 2% milk are nutritionally closer but different foods"
+    },
+    {
+      "query": "tea",
+      "best": 173227,
+      "acceptable": [173227, 174155, 174871, 174120, 171917, 171910, 174156, 173232, 171946, 169828, 167620, 174873, 174144, 171911, 171924, 173211, 171885, 173231, 174129, 171892, 174855, 173218, 173215, 174121],
+      "disasters": [174872, 175088, 173230, 175110, 173212, 174128, 173228, 173229, 175089, 174847, 171888, 175090, 171918, 168014, 175111, 171883, 175091, 174143],
+      "defaultAmount": "1 cup (8 fl oz)",
+      "note": "brewed unsweetened tea (~1 kcal); sweetened ready-to-drink teas (27-45) and instant tea powders (315-400) are disasters relative to plain tea; animal crackers 'tea biscuits' wrong"
+    },
+    {
+      "query": "orange juice",
+      "best": 169100,
+      "acceptable": [169100, 169099, 2003591, 2003597, 169920, 169102, 169098, 169101, 167794, 169921],
+      "disasters": [171354, 171355, 170961, 170962, 170963, 169043, 171356, 170960, 173178, 168113, 169923, 169106, 174166, 168184, 169922, 175100, 168819, 167577, 167721, 174854, 169103, 169918, 746771, 169919, 170502, 168206, 167796, 167795, 168214, 171687, 170959, 167718, 173947, 170491],
+      "defaultAmount": "1 cup (8 fl oz)",
+      "note": "100% orange juice (chilled); undiluted frozen concentrate (~148), light OJ (21), babyfood juices, marmalade, sherbet, soda, whole oranges are disasters"
+    },
+    {
+      "query": "apple juice",
+      "best": 173933,
+      "acceptable": [173933, 167771, 2003590, 167800, 167775, 173935],
+      "disasters": [170959, 171351, 167729, 171381, 171352, 171353, 170985, 171355, 169042, 170960, 174112, 174857, 168188, 173934, 168123, 174988, 175032, 167721, 168816, 168171, 171687, 171354, 167718, 167747, 168156, 168217, 171691],
+      "defaultAmount": "1 cup (8 fl oz)",
+      "note": "100% apple juice; other 100% fruit juices/blends neutral; undiluted concentrate (166), light juice drinks (~20), babyfood juices, pastries, dried apples are disasters"
+    },
+    {
+      "query": "soda",
+      "best": 174852,
+      "acceptable": [174852, 175093, 174851, 173209, 171871, 173205, 173206, 173203, 171921, 174854, 173199, 174846],
+      "disasters": [174842, 175040, 174912, 172746, 175056, 175057, 175099, 174850, 171876, 173204, 173207, 175113],
+      "defaultAmount": "12 fl oz can",
+      "note": "regular sugar-sweetened cola; any regular soft drink within 25%; diet/club soda (~0), baking soda, soda bread, saltine crackers are disasters"
+    },
+    {
+      "query": "coke",
+      "best": 174852,
+      "acceptable": [174852, 175093, 174851],
+      "disasters": [],
+      "defaultAmount": "12 fl oz can",
+      "note": "zero live hits; Coca-Cola = regular cola (SR 'Beverages, carbonated, cola, regular')"
+    },
+    {
+      "query": "sprite",
+      "best": 173206,
+      "acceptable": [173206, 173205],
+      "disasters": [],
+      "defaultAmount": "12 fl oz can",
+      "note": "single live hit is correct; generic lemon-lime soda equivalent"
+    },
+    {
+      "query": "lemonade",
+      "best": 173217,
+      "acceptable": [173217, 173667, 171884],
+      "disasters": [174858, 173666, 173216, 174859, 174860, 174141],
+      "defaultAmount": "1 cup (8 fl oz)",
+      "note": "ready-to-drink/prepared lemonade (~40-46); powders (~380), undiluted concentrates (~195), sugar-free powder prepared (14), hard lemonade are disasters"
+    },
+    {
+      "query": "gatorade",
+      "best": 173660,
+      "acceptable": [173660, 175108],
+      "disasters": [173659, 174178],
+      "defaultAmount": "20 fl oz bottle",
+      "note": "regular ready-to-drink Gatorade (26); powder (388) and G2 low-calorie (8) are disasters"
+    },
+    {
+      "query": "water",
+      "best": 174158,
+      "acceptable": [174158, 173233, 173647, 175103, 175096, 173234, 173657, 175106, 173655, 171922, 173658],
+      "disasters": [169301, 171856, 171869, 171666, 174859, 171662, 170132, 171676, 175299, 174862, 171591, 169302, 174123, 174831, 171890, 171894, 174130, 174873, 173914, 173917, 167769, 173022, 175300, 169596, 173217, 170174, 169929, 169119, 169125, 172923, 174568, 174569, 171698, 175092, 171889, 173667, 174861, 174155],
+      "defaultAmount": "16.9 fl oz bottle",
+      "note": "plain drinking water (0 kcal); tonic/coconut water, foods 'prepared with water', water convolvulus, water biscuits, water buffalo are disasters"
+    },
+    {
+      "query": "beer",
+      "best": 168746,
+      "acceptable": [168746, 168747, 174145],
+      "disasters": [171616, 171871, 172011, 174141],
+      "defaultAmount": "12 fl oz can",
+      "note": "regular beer (43); light beers (~28) neutral; beerwurst, root beer, hard lemonade are disasters"
+    },
+    {
+      "query": "wine",
+      "best": 173185,
+      "acceptable": [173185, 173190, 174837, 171908, 173191, 173208, 174840, 173194, 171872, 174838, 171925, 174109, 174839, 174836, 173192, 174110, 174843, 174849, 173200, 174845, 174834, 174833, 173193, 174835, 173195, 173196, 173198, 174848, 173201, 174841],
+      "disasters": [172240, 174157],
+      "defaultAmount": "5 fl oz glass",
+      "note": "table wine (red/white/rose ~80-88); dessert/late-harvest/light/cooking wines neutral; vinegar and non-alcoholic wine are disasters"
+    },
+    {
+      "query": "chips",
+      "best": 169677,
+      "acceptable": [169677, 167962, 169682, 174805, 170649, 169683, 170253, 168853, 174804, 169678, 167553, 167554, 167963, 170248, 170648, 169046, 173143, 167558, 168116, 167559, 167560, 167970, 170256, 168137, 168858, 168859, 170254, 167537, 168127, 167538],
+      "disasters": [174952, 174953, 174095, 174954, 174097, 173260, 167951, 167952, 167524, 172717, 172732, 169674, 175071, 172715, 172808],
+      "defaultAmount": "1 oz (snack bag)",
+      "note": "plain salted potato chips (tortilla/corn chips equally fine); other snack chips neutral; chocolate chip cookies, granola bars, waffles are disasters"
+    },
+    {
+      "query": "potato chips",
+      "best": 169677,
+      "acceptable": [169677, 167962, 169682, 174805, 170649, 169683, 170253, 168853, 174804, 169678, 167553, 167554, 167963, 170248, 170648, 169046],
+      "disasters": [168864, 167943, 2261422, 168446, 170092, 173508, 173343, 170032, 170036, 170699, 170047, 169269, 170112, 170444, 170443, 170026, 169768, 170454, 170453, 170498, 169303, 169305, 170043, 172317, 169042, 173504, 172276],
+      "defaultAmount": "1 oz (snack bag)",
+      "note": "plain salted potato chips; fat-free/olestra and other chips neutral; potato flour/bread/salad/raw/baked potatoes and babyfood are disasters (olestra 253 is ~2x low)"
+    },
+    {
+      "query": "tortilla chips",
+      "best": 173143,
+      "acceptable": [173143, 167558, 168116, 167559, 167560, 167970, 170256, 168137, 168858, 168859, 170254],
+      "disasters": [2758997, 167656, 169829, 2758996, 175036, 175037, 174081, 169724, 168041, 167535, 173241, 173242, 170785, 170786, 175082, 172364, 174952, 174953, 174095, 174954, 174097, 173260],
+      "defaultAmount": "1 oz (about 10 chips)",
+      "note": "plain salted tortilla chips; soft tortillas (~220-325), tortilla wraps, flour mix, shortening, cookies are disasters"
+    },
+    {
+      "query": "popcorn",
+      "best": 170247,
+      "acceptable": [170247, 169861, 173141, 167960, 167549, 174785, 168139, 174778, 173131, 167959, 170246],
+      "disasters": [170737, 173596],
+      "defaultAmount": "3 cups popped",
+      "note": "popped popcorn (oil-popped generic; microwave and air-popped within 25%); caramel corn/popcorn cakes neutral; popcorn chicken and industrial oil are disasters"
+    },
+    {
+      "query": "pretzels",
+      "best": 167555,
+      "acceptable": [167555, 170249, 170650, 170651, 167965, 174806],
+      "disasters": [171370, 170678],
+      "defaultAmount": "1 oz",
+      "note": "hard salted pretzels; soft and chocolate-coated pretzels neutral; babyfood pretzels and M&M pretzel candies are disasters"
+    },
+    {
+      "query": "crackers",
+      "best": 174982,
+      "acceptable": [174982, 173258, 174985, 172749, 171838, 174975, 175060, 167941, 174084, 174098, 175059, 167934, 172823, 167933, 167529, 167531, 167530, 168004, 174104, 172747, 167925, 172746, 175056, 175057, 167942, 172740, 172741, 172812, 174981, 171856, 172750, 171854, 173161, 174977, 172822, 174980],
+      "disasters": [170972, 169843, 167669, 167670, 169849, 169842, 168074, 168075, 169021],
+      "defaultAmount": "5 crackers",
+      "note": "standard snack crackers (Ritz-type); saltines/wheat/cheese crackers all within 25%; graham crackers, rye crispbreads, shrimp crackers neutral; Cracker Barrel restaurant items and babyfood crackers are disasters"
+    },
+    {
+      "query": "cookies",
+      "best": 172716,
+      "acceptable": [172716, 172820, 172717, 172715, 172808, 174955, 174954, 175071, 172722, 174956, 172724, 172714, 171847, 171867, 174963, 173251, 174080, 171837, 333008, 174966, 174087, 175073, 175074, 174950, 172819, 174096, 171858, 171859, 174958, 171842, 172725, 174962, 174965, 174968, 174967, 174088, 172735, 172737, 174974, 174973, 173245],
+      "disasters": [170975, 171369, 171368, 172227, 173304, 174960, 174948, 174952],
+      "defaultAmount": "2 cookies",
+      "note": "chocolate chip cookies as the default; virtually any baked cookie is within 25%; dry mixes, babyfood cookies, ice cream cookie sandwich, McFlurry are disasters"
+    },
+    {
+      "query": "chocolate chip cookie",
+      "best": 172716,
+      "acceptable": [172716, 172820, 172717, 172715, 172808, 174955, 174954, 175071, 172732],
+      "disasters": [174952, 174097, 167951, 167952, 167524, 167521, 167545, 169674, 168102, 170663, 169675, 167548, 167969, 170655, 170975, 169689, 171369],
+      "defaultAmount": "1 medium cookie",
+      "note": "baked chocolate chip cookie; dough neutral, dry mix a disaster; granola bars, crisped rice bars, waffles, ice cream, trail mix, pie crust, babyfood are disasters"
+    },
+    {
+      "query": "brownie",
+      "best": 172713,
+      "acceptable": [172713, 174949, 171840],
+      "disasters": [174948, 172731, 175080],
+      "defaultAmount": "1 brownie (2-inch square)",
+      "note": "prepared brownie; dry brownie mixes are disasters"
+    },
+    {
+      "query": "cake",
+      "best": 174934,
+      "acceptable": [174934, 174944, 174945, 174943, 174942, 172697, 172698, 172709, 172710, 172702, 174941, 174936, 172699, 174937, 172703, 171839, 174082, 172707],
+      "disasters": [168857, 167550, 168107, 172701, 174947, 173244, 175055, 169723, 174932, 174935, 174946, 172057, 175000, 170647, 167967, 169679, 169680, 168855, 172708, 175054, 171967],
+      "defaultAmount": "1 slice",
+      "note": "frosted layer cake (chocolate or yellow); cheesecake/angel food/doughnuts neutral; dry cake mixes, cake flour, rice/corn/popcorn cakes, crab cakes, griddle-cake sandwich, cones are disasters"
+    },
+    {
+      "query": "donut",
+      "best": 172758,
+      "acceptable": [174993, 174990, 174991, 174992, 172756, 172758, 175062, 172757, 172759],
+      "disasters": [],
+      "defaultAmount": "1 doughnut",
+      "note": "glazed yeast doughnut; all doughnut records within 25%"
+    },
+    {
+      "query": "muffin",
+      "best": 172765,
+      "acceptable": [172765, 172767, 175002, 175004, 175045, 175003, 175046, 172768, 175005, 172764, 167936],
+      "disasters": [172766, 175078, 172770, 174908, 172815, 172997, 173256, 172032, 172034, 172033],
+      "defaultAmount": "1 medium muffin",
+      "note": "sweet bakery muffin (blueberry); English muffins neutral; dry muffin/cornbread mixes, English-muffin breakfast sandwiches, cereal are disasters"
+    },
+    {
+      "query": "chocolate",
+      "best": 167587,
+      "acceptable": [167587, 167976, 167977, 167571, 167993, 168760, 169592, 167984, 168754, 168755, 168001, 168765, 169690, 169059],
+      "disasters": [174117, 168104, 168809, 173770, 174293, 170681, 168834, 173182, 167585, 168136, 170883, 168778, 173773, 168835, 172208, 170677, 174824, 173222, 171921, 174952, 174953, 172228],
+      "defaultAmount": "1 bar (1.5 oz)",
+      "note": "milk chocolate candy bar; baking chocolate, hazelnut spread, cakes/cookies neutral; chocolate syrups, ice cream, soymilk, cocoa powders, pudding, shakes, soda are disasters"
+    },
+    {
+      "query": "candy",
+      "best": 169583,
+      "acceptable": [167975, 168759, 168764, 168770, 167985, 167562, 169624, 167972, 167974, 167990, 167991, 170678, 167564, 167996, 168801, 167587, 169060, 169585, 169623, 167976, 169588, 167977, 167571, 168776, 168108, 168814, 169583, 169582, 168843, 169667, 167580, 170680, 167993, 168754, 167565, 170278, 167586, 170656, 167982, 169591, 167689, 169643],
+      "disasters": [],
+      "defaultAmount": "1 oz",
+      "note": "generic candy: M&M's-type chocolate candy as the middle default; nearly all sweets 370-615 kcal fall within 25%; marshmallows/licorice/candied fruit (~320-350) neutral"
+    },
+    {
+      "query": "granola bar",
+      "best": 167954,
+      "acceptable": [167543, 167542, 174800, 168861, 169863, 167952, 169681, 167954, 167544, 169063, 174794, 174797, 173154, 173148, 169674, 169676, 167955, 168095, 173145, 174793, 173144, 174795, 174802, 169675, 167548, 173153, 167545, 167547, 174801, 169688, 173146],
+      "disasters": [170355, 173313, 174996],
+      "defaultAmount": "1 bar",
+      "note": "chewy granola bar; all granola bar variants within 25%; protein/energy/candy bars neutral; yogurt parfaits and English muffins are disasters"
+    },
+    {
+      "query": "protein bar",
+      "best": 173158,
+      "acceptable": [173158, 174786, 173137, 174787, 174792, 173159, 173139, 174781, 174780, 173132, 173136, 173134, 167946],
+      "disasters": [174276, 173181, 173180, 173177, 174917, 172809, 174302, 174813, 173167, 174301, 172447, 173528, 170973, 174181, 173459, 174279],
+      "defaultAmount": "1 bar",
+      "note": "formulated protein/nutrition bar; granola, cereal and candy bars neutral; protein powders, soy protein isolates, protein bread, babyfood, soy sauce are disasters"
+    },
+    {
+      "query": "protein shake",
+      "best": 174814,
+      "acceptable": [174814, 173170],
+      "disasters": [174181, 173174, 170700, 170883, 170884, 173226, 175102, 174276, 174917, 173181, 173180, 173177, 172809, 174302, 173172, 167514, 174813, 173167, 173158, 174301, 172447, 173528, 170973, 173459, 174279, 171261, 173460, 168934, 168937, 172018, 172019, 168938, 168939, 168940, 168941, 168942, 172020, 172021, 172022, 172016, 172017, 171286, 173533, 172474, 170889, 171285],
+      "defaultAmount": "1 bottle (11 fl oz)",
+      "note": "ready-to-drink protein shake (Muscle Milk RTD, not in live top 50; SlimFast high-protein RTD is); dry protein powders/shake mixes (~350-450), milkshakes, soy isolates, Shake 'N Bake, flours are disasters"
+    },
+    {
+      "query": "smoothie",
+      "best": 170775,
+      "acceptable": [170775, 168206, 167796, 167795, 168214, 167799, 167798, 168208, 168213],
+      "disasters": [],
+      "defaultAmount": "16 fl oz",
+      "note": "fruit smoothie with yogurt (fast-food strawberry banana); bottled fruit smoothies within 25%; V8 Splash smoothie drinks neutral"
+    },
+    {
+      "query": "burrito",
+      "best": 173278,
+      "acceptable": [173278, 173277, 170735, 170334, 170335, 172038, 170734, 172039, 173336],
+      "disasters": [],
+      "defaultAmount": "1 burrito",
+      "note": "fast-food beef, bean and cheese burrito; frozen microwaved and breakfast burritos neutral (~240-300)"
+    },
+    {
+      "query": "taco",
+      "best": 170689,
+      "acceptable": [170689, 170332, 170333, 170763, 170733, 170732, 170764, 167657, 167658],
+      "disasters": [170336, 172800, 170734, 170337, 172243, 167970, 170735, 170334, 170335, 175067, 175082],
+      "defaultAmount": "1 taco",
+      "note": "beef taco with cheese and lettuce (hard or soft shell); taco shells alone (~470), seasoning mix, taco chips, nachos, burritos, plain tortillas are disasters"
+    },
+    {
+      "query": "quesadilla",
+      "best": 169035,
+      "acceptable": [169035, 169034, 170765],
+      "disasters": [167526],
+      "defaultAmount": "1 quesadilla",
+      "note": "cheese quesadilla; Salvadoran 'quesadilla' sweet cheese bread is a different food"
+    },
+    {
+      "query": "sandwich",
+      "best": 170696,
+      "acceptable": [170696, 170315, 170312, 170313, 170316, 170299, 170310, 170311, 173306, 170790, 170723, 170724, 170330, 170296, 170791, 170695, 170295, 170368, 170708, 170709, 170297, 170770, 173305, 170318],
+      "disasters": [172226, 169069, 172227, 174581, 174583, 171842, 174965, 172737, 172747, 174095, 172718, 172720, 174969, 167925, 172743, 172748, 171841, 172733, 171857, 171860, 171868, 174976, 174983, 170666, 172230, 167597, 168007, 171409, 168041, 172719, 171848, 174984, 171855],
+      "defaultAmount": "1 sandwich",
+      "note": "generic deli/sub sandwich (cold cut sub on white); fast-food chicken/fish/roast beef sandwiches within 25%; ice cream sandwiches, sandwich cookies/crackers, sandwich spreads, sandwich bread are disasters"
+    },
+    {
+      "query": "turkey sandwich",
+      "best": 170706,
+      "acceptable": [170706, 170711, 170308, 170307],
+      "disasters": [173857, 173571, 171625, 172927, 171504, 171639, 174592, 171569, 172937, 171500, 171506, 171505, 172226, 173305, 169069, 172251, 172250, 171640, 172970, 174609, 174610, 171590, 174604, 173871, 174617, 174606, 171083, 170790, 172227, 174581, 174583, 170770, 173500, 172269, 173502, 173501, 169049, 173484, 172192, 171568, 174607, 171632, 172092, 171103, 171484, 171486, 2759001],
+      "defaultAmount": "1 sandwich",
+      "note": "turkey breast sub/sandwich on white bread; sliced deli turkey alone neutral; other turkey products (bologna, bacon, sausage, fat, gravy), ice cream sandwich, chicken sandwiches, babyfood are disasters"
+    },
+    {
+      "query": "grilled cheese",
+      "best": null,
+      "acceptable": [],
+      "disasters": [169036, 169243, 170786, 169030, 173877, 170752, 167670, 171634, 170778, 170724, 168086, 169853, 173312, 169377, 169857, 172650, 172644, 170368, 172651, 174881, 171534, 174880, 171536, 169081, 174702, 174703, 171785, 171786, 168731, 168732],
+      "defaultAmount": "1 sandwich",
+      "note": "no grilled cheese sandwich record in SR Legacy or Foundation (would be ~330-350 kcal/100 g); plain cheeses are neutral components; grilled meats/mushrooms/chicken sandwiches and Carrabba's dishes are disasters"
+    },
+    {
+      "query": "soup",
+      "best": 171148,
+      "acceptable": [171148, 174064, 174545, 172899, 172900, 171578, 171182, 171184, 171183, 171821, 171594, 171546, 172906],
+      "disasters": [171165, 171608, 171571, 171166, 171561, 171563, 171562, 171180, 174536, 173496, 171143, 171142, 171150, 174522, 168068, 171541, 171146, 171552, 171141],
+      "defaultAmount": "1 cup",
+      "note": "ready-to-serve chicken noodle soup as generic default (~41); condensed (undiluted) soups neutral; dry mixes/bouillon (170-450), plain broths (~6), babyfood, bean/chili/cream soups >=2x are disasters"
+    },
+    {
+      "query": "chicken noodle soup",
+      "best": 171148,
+      "acceptable": [171148, 174064, 174545, 174548],
+      "disasters": [171571, 171615, 171177, 171614, 171822, 172264, 172263, 172265, 173499, 173496, 171563, 171562, 171542, 174536, 171609, 174566, 172924, 174551, 172888, 171146, 171160, 174537, 174522],
+      "defaultAmount": "1 cup",
+      "note": "ready-to-serve canned chicken noodle soup (41); condensed undiluted (47-48) and condensed-prepared-with-water (24) are neutral judgment calls; dry mixes, ramen, bouillon, broths, babyfood are disasters"
+    },
+    {
+      "query": "ramen",
+      "best": 171177,
+      "acceptable": [171177, 171614, 171615, 171822],
+      "disasters": [],
+      "defaultAmount": "1 package (3 oz dry)",
+      "note": "instant ramen; only dry-block records exist, which are correct when logged by the package (water adds no calories); per-100 g of prepared soup would be ~5x lower"
+    },
+    {
+      "query": "sushi",
+      "best": null,
+      "acceptable": [],
+      "disasters": [],
+      "defaultAmount": "6 pieces (1 roll)",
+      "note": "zero live hits and no sushi record in SR Legacy or Foundation"
+    },
+    {
+      "query": "fried rice",
+      "best": 167668,
+      "acceptable": [167668, 334536],
+      "disasters": [172451, 169009, 167672, 170721, 168199, 170726, 169267, 170327, 167719, 167669, 168077, 173423, 168435, 169253, 173240, 172784, 175064, 169833, 169834, 168444, 168445, 168383, 172037, 173878, 168200, 169836, 174304, 171103, 174879, 170117, 169268, 173161, 167967, 169679, 169680, 168855, 167966, 171058, 169842, 168074, 169024, 170697, 174187, 171957, 168551, 174213, 171979],
+      "defaultAmount": "1 cup",
+      "note": "Chinese restaurant fried rice; rice cakes/crackers and other 'fried' foods (fries, fried pies, fried shrimp) are disasters"
+    },
+    {
+      "query": "orange chicken",
+      "best": 167679,
+      "acceptable": [167679],
+      "disasters": [168819, 167577, 171354, 174854, 169103, 169918, 746771, 169919, 170502, 171355, 170961, 170962, 170963, 169043, 171356, 169044, 173962, 175133, 169099, 167792, 169916, 2258591, 169105, 173858, 169886, 173564, 171624, 169792, 170960, 173178, 168113, 169097, 173873, 172957, 171110, 171119, 171116, 171600, 171567, 171374, 173223, 173225, 174251, 169100],
+      "defaultAmount": "1 cup",
+      "note": "Chinese restaurant orange chicken (top live hit); breaded chicken pieces neutral; oranges, juices, marmalade, sherbet, chicken fat/spread/gravy, babyfood are disasters"
+    },
+    {
+      "query": "lasagna",
+      "best": 169850,
+      "acceptable": [169850, 169851, 169030, 172106],
+      "disasters": [173489, 168955, 168958, 169738, 169736, 168927, 172025, 168915],
+      "defaultAmount": "1 piece (about 1 cup)",
+      "note": "lasagna with meat (restaurant/homemade ~185); frozen entrees prepared (124-135) slightly below 25% and neutral; unprepared lasagna pasta mixes, dry pasta, babyfood are disasters"
+    },
+    {
+      "query": "meatballs",
+      "best": 171638,
+      "acceptable": [171638],
+      "disasters": [172109, 172107, 170708, 170709, 172099],
+      "defaultAmount": "3 meatballs",
+      "note": "Italian-style beef/pork meatballs; meatless meatballs and spaghetti-and-meatballs plates neutral; Hot/Lean Pockets, meatball subs, canned spaghetti with meatballs are disasters"
+    },
+    {
+      "query": "honey",
+      "best": 169640,
+      "acceptable": [169640],
+      "disasters": [168138, 174611, 172943, 170968, 167546, 171046, 168592, 171043, 167940, 174083, 172945, 173532, 172298, 172300, 167564, 167947, 174957, 171034, 171883, 174642, 169859, 173894, 174621, 172758, 175062, 172995, 171681, 171679, 174644, 173020, 173015, 174663, 173019, 173007, 171680, 173892, 171653, 173134, 172975],
+      "defaultAmount": "1 tbsp",
+      "note": "plain honey; honey-flavored cereals, ham, sausage, dressings, candies, nuts, babyfood are disasters"
+    },
+    {
+      "query": "jelly",
+      "best": 169642,
+      "acceptable": [169642, 169641, 170645, 170280],
+      "disasters": [173860, 170202, 167989, 172759, 167804, 169879],
+      "defaultAmount": "1 tbsp",
+      "note": "fruit jelly (jam/preserves equivalent); reduced-sugar neutral; jellied meats, gumdrops, jelly doughnut, cranberry sauce, sugar-free jelly (121) are disasters"
+    },
+    {
+      "query": "ketchup",
+      "best": 168556,
+      "acceptable": [747693, 168556, 169381],
+      "disasters": [],
+      "defaultAmount": "1 tbsp",
+      "note": "all three hits are ketchup/catsup"
+    },
+    {
+      "query": "ranch dressing",
+      "best": 173592,
+      "acceptable": [173592],
+      "disasters": [2758988, 173591, 173593, 171420, 167693, 171404, 2758987, 173590, 168096, 171007, 167692, 171034, 171405, 171036, 172356, 171008, 167736, 167699, 171021, 171023, 171003, 171004, 170777, 170778, 167560, 169065, 172072, 173312, 172073, 169895, 173594, 171009, 169875, 171046, 171045, 169877, 168109],
+      "defaultAmount": "2 tbsp",
+      "note": "regular ranch dressing; other full-fat dressings neutral; reduced-fat (196) and fat-free (119) ranch are >2x low; Foundation ranch lacks energy; ranch snack wraps, salads, chips, beans are disasters"
+    },
+    {
+      "query": "mayonnaise",
+      "best": 171009,
+      "acceptable": [171009, 167736, 171010, 171418],
+      "disasters": [2758986, 168112, 167695, 173594, 173306, 171406, 171444, 168115, 168094, 171002, 171403, 171407, 167700, 170318, 171003, 172083, 172081, 172080, 173317, 171037, 170753, 170752],
+      "defaultAmount": "1 tbsp",
+      "note": "regular mayonnaise (~680-717); light/reduced/fat-free mayos and Miracle Whip-type (~250) are >2x lower; Foundation mayo lacks energy; sandwiches/burgers 'with mayonnaise' are disasters"
+    },
+    {
+      "query": "sugar",
+      "best": 169655,
+      "acceptable": [169655, 746784, 168833, 170674, 169656],
+      "disasters": [174970, 169878, 170656, 174972, 172457, 168169, 168175, 168144, 174824, 174822, 174088, 172735, 167706, 168145, 170910, 172801, 171693, 173943, 171886, 171936, 171938, 174079, 172731, 172736, 174993, 174992, 173422, 170266, 170258, 170267, 175001, 170264, 169633, 169631, 169879, 169115, 169123, 167752, 169685, 168839, 173730],
+      "defaultAmount": "1 tsp",
+      "note": "granulated white sugar; brown/turbinado/powdered within 25%; sugar-free/no-sugar-added items, sugar cookies, candies, stewed fruits, energy drinks are disasters"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { COMMON_FOODS, commonKey, commonMatch, commonPortions, type CommonFood } from "../src/food/common";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
-import type { FoodRecord, UnitOption } from "../src/food/types";
+import type { FoodRecord } from "../src/food/types";
 import { resolveAmount, unitOptions } from "../src/food/units";
 import { normalizeQuery } from "../src/food/usda";
 import { createFakeUsda } from "./fixtures/usda/fake-fetch";
@@ -17,15 +17,15 @@ function record(fdcId: number): FoodRecord {
 }
 
 const label = (entry: CommonFood) => `${entry.names[0]} (${entry.fdcId})`;
-const withPortions = (food: FoodRecord): UnitOption[] => [...unitOptions(food), ...commonPortions(food.fdcId)];
 
-/** Grams for `quantity` of a table food said with no unit, the way the table says to read it. */
+/** Grams for `quantity` of a table food said with no unit, the way the app reads it (see routes.ts lookup). */
 function unitless(entry: CommonFood, quantity = 1): { unit: string; grams: number; guessed: boolean } {
   const food = record(entry.fdcId);
-  if (!entry.unit) return resolveAmount(food, quantity, null);
-  const option = withPortions(food).find((o) => o.unit === entry.unit);
-  if (!option) throw new Error(`${label(entry)}: unit ${entry.unit} not offered`);
-  return { unit: option.unit, grams: quantity * option.grams, guessed: false };
+  if (entry.unit && !unitOptions(food).some((o) => o.unit === entry.unit)) {
+    throw new Error(`${label(entry)}: unit ${entry.unit} not offered`);
+  }
+  const { unit, grams, guessed } = resolveAmount(food, quantity, null, [entry.unit]);
+  return { unit, grams, guessed };
 }
 
 function calories(name: string, quantity = 1): number {
@@ -167,10 +167,11 @@ describe("commonMatch", () => {
   });
 
   it("covers the live USDA search queries that have a sensible core record", () => {
-    // No SR Legacy or Foundation record is a fair stand-in for these.
+    // No SR Legacy or Foundation record is a fair stand-in for these; the ranked search answers them
+    // (test/eval-live.test.ts scores it). "Sandwich" is the cold cut sub: the search's top hit for it
+    // is an ice cream sandwich, and the independent labels pick the sub too.
     const uncovered = [
-      "cereal", "salad", "latte", "candy", "protein bar", "protein shake",
-      "sandwich", "grilled cheese", "soup", "sushi",
+      "cereal", "salad", "latte", "candy", "protein bar", "protein shake", "grilled cheese", "soup", "sushi",
     ];
     const queries = Object.keys(liveSearch.queries);
     expect(queries).toHaveLength(153);
@@ -193,8 +194,9 @@ describe("default amounts", () => {
 
   it("only names units the food offers or the entry adds", () => {
     for (const entry of COMMON_FOODS.filter((e) => e.unit)) {
-      const keys = [...unitOptions(record(entry.fdcId)), ...(entry.portions ?? [])].map((o) => o.unit);
+      const keys = [...unitOptions(record(entry.fdcId), false), ...(entry.portions ?? [])].map((o) => o.unit);
       expect(keys, label(entry)).toContain(entry.unit);
+      expect(unitOptions(record(entry.fdcId)).map((o) => o.unit), label(entry)).toContain(entry.unit);
     }
   });
 
@@ -202,11 +204,10 @@ describe("default amounts", () => {
     for (const entry of COMMON_FOODS) {
       for (const alt of entry.alternatives ?? []) {
         const food = record(alt);
-        const options = withPortions(food).map((o) => o.unit);
-        const ownUnits = COMMON_FOODS.filter((e) => e.fdcId === alt && e.unit).map((e) => e.unit);
-        const named = [entry.unit, ...ownUnits].some((u) => u && options.includes(u));
-        const ok = named || !resolveAmount(food, 1, null).guessed;
-        expect(ok, `${label(entry)} -> ${alt} ${food.description}`).toBe(true);
+        // The order the app uses: the matched entry's unit, then the food's own table unit, then its portions.
+        const amount = resolveAmount(food, 1, null, [entry.unit]);
+        expect(amount.guessed, `${label(entry)} -> ${alt} ${food.description}`).toBe(false);
+        expect(amount.grams, `${label(entry)} -> ${alt} ${food.description}`).toBeLessThanOrEqual(700);
       }
     }
   });
@@ -256,7 +257,7 @@ describe("default amounts", () => {
 describe("commonPortions", () => {
   it("adds only units USDA's portions lack, with short keys and sane weights", () => {
     for (const entry of COMMON_FOODS) {
-      const usda = unitOptions(record(entry.fdcId)).map((o) => o.unit);
+      const usda = unitOptions(record(entry.fdcId), false).map((o) => o.unit);
       for (const p of entry.portions ?? []) {
         expect(p.unit, label(entry)).toMatch(/^[a-z]{2,8}$/);
         expect(usda, `${label(entry)} ${p.unit}`).not.toContain(p.unit);

@@ -32,7 +32,7 @@ import {
   type UnitOption,
 } from "./types";
 import { resolveAmount, toCandidate, unitOptions } from "./units";
-import { getFoods, looksLikeBrand, searchFoods, UsdaError, type UsdaDeps, type UsdaErrorKind } from "./usda";
+import { commonFor, getFoods, looksLikeBrand, searchFoods, UsdaError, type UsdaDeps, type UsdaErrorKind } from "./usda";
 
 type Ctx = Context<AppEnv>;
 
@@ -138,7 +138,9 @@ async function lookup(
     return { status: kind, message: USDA_MESSAGES[kind], candidates: [] };
   }
   if (!foods.length) return { status: "not_found", message: notFoundMessage(food), candidates: [] };
-  return { status: "ok", candidates: preferSpokenUnit(foods.map((f) => toCandidate(f, quantity, unit)), unit) };
+  // "A soda" is a can and "two eggs" are large, whichever record the user picks (see toCandidate).
+  const preferred = [commonFor(food)?.unit];
+  return { status: "ok", candidates: preferSpokenUnit(foods.map((f) => toCandidate(f, quantity, unit, preferred)), unit) };
 }
 
 /** Grams and nutrition for an amount of a food, or null if the unit isn't one of the food's units. */
