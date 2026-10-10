@@ -407,3 +407,12 @@ describe("fake USDA bulk endpoint", () => {
     expect(extractFood(foods[2])?.description).toBe("Oat milk, unsweetened, plain, refrigerated");
   });
 });
+
+describe("spoken units the table fills in", () => {
+  it("gives Greek yogurt a cup, which USDA's plain Greek records lack", () => {
+    const greek = record(commonMatch("greek yogurt")!.fdcId);
+    expect(resolveAmount(greek, 1, "cup")).toEqual({ quantity: 1, unit: "cup", grams: 227, guessed: false });
+    expect(nutritionFor(greek.per100g, 227).calories).toBeGreaterThan(120);
+    expect(nutritionFor(greek.per100g, 227).calories).toBeLessThan(160);
+  });
+});

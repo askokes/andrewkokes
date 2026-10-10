@@ -189,10 +189,12 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Cheese, cottage, creamed, large or small curd: 1 cup, large curd = 210 g, 206 kcal
   { names: ["cottage cheese"], fdcId: 172179, unit: "cup", alternatives: [172182, 173417] },
   // Yogurt, Greek, plain, nonfat: 1 serving (170 g) = 170 g, 104 kcal
+  // USDA lists no cup for any plain Greek yogurt; brand labels give 3/4 cup = 170 g, so 1 cup = 227 g (139 kcal).
   {
     names: ["greek yogurt", "plain greek yogurt", "nonfat greek yogurt"],
     fdcId: 330137,
     alternatives: [170902, 330415, 2259794],
+    portions: [{ unit: "cup", label: "cup", grams: 227 }],
   },
   // Yogurt, Greek, vanilla, nonfat: 1 container (5.3 oz) = 150 g, 117 kcal
   {
