@@ -28,6 +28,12 @@ export interface CommonFood {
    * wherever it is offered (see commonUnit).
    */
   unit?: string;
+  /**
+   * What a plural with no count means, when that isn't `unit`: "dumplings",
+   * "mozzarella sticks" and "a bag of gummy bears" are a serving, where "six
+   * dumplings" and "a gummy bear" count `unit`s. See spokenUnits.
+   */
+  plural?: string;
   /** Common variants the confirm screen should offer next, most likely first (at most 4). */
   alternatives?: number[];
   /**
@@ -129,10 +135,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     names: ["smoothie", "fruit smoothie", "strawberry banana smoothie"],
     fdcId: 170775,
     unit: "each",
-    portions: [
-      { unit: "each", label: "smoothie (12 fl oz)", grams: 347 },
-      { unit: "cup", label: "cup (8 fl oz)", grams: 231 },
-    ],
+    portions: [{ unit: "each", label: "smoothie (12 fl oz)", grams: 347 }],
   },
 
   // ---------------------------------------------------------------- cheese, yogurt, butter, cream
@@ -158,8 +161,31 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["parmesan", "parmesan cheese"], fdcId: 171247, unit: "tbsp" },
   // Cheese, feta: 1 oz = 28.3 g, 75 kcal
   { names: ["feta", "feta cheese"], fdcId: 173420, unit: "oz" },
-  // Cheese, cream: 1 tbsp = 14.5 g, 51 kcal
-  { names: ["cream cheese"], fdcId: 173418, unit: "tbsp", alternatives: [169079, 172207] },
+  // Cheese, cream: 1 serving (2 tbsp) = 29 g, 102 kcal
+  // A bagel's worth and the label serving; the independent labels' default too.
+  {
+    names: ["cream cheese"],
+    fdcId: 173418,
+    unit: "serving",
+    alternatives: [169079, 172207],
+    portions: [{ unit: "serving", label: "serving (2 tbsp)", grams: 29 }],
+  },
+  // Cheese, cream, low fat: 1 serving (2 tbsp) = 30 g, 62 kcal
+  {
+    names: ["low fat cream cheese", "light cream cheese", "neufchatel"],
+    fdcId: 169079,
+    unit: "serving",
+    alternatives: [173418, 172207],
+    portions: [{ unit: "serving", label: "serving (2 tbsp)", grams: 30 }],
+  },
+  // Cheese, cream, fat free: 1 serving (2 tbsp) = 36 g, 38 kcal
+  {
+    names: ["fat free cream cheese"],
+    fdcId: 172207,
+    unit: "serving",
+    alternatives: [169079, 173418],
+    portions: [{ unit: "serving", label: "serving (2 tbsp)", grams: 36 }],
+  },
   // Cheese, cottage, creamed, large or small curd: 1 cup, large curd = 210 g, 206 kcal
   { names: ["cottage cheese"], fdcId: 172179, unit: "cup", alternatives: [172182, 173417] },
   // Yogurt, Greek, plain, nonfat: 1 serving (170 g) = 170 g, 104 kcal
@@ -184,6 +210,8 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     alternatives: [170888, 170886, 330137],
     portions: [{ unit: "each", label: "container (6 oz)", grams: 170 }],
   },
+  // Yogurt parfait, lowfat, with fruit and granola: 1 item = 149 g, 125 kcal
+  { names: ["yogurt parfait", "parfait", "fruit and yogurt parfait", "granola parfait"], fdcId: 170355, unit: "each" },
   // Yogurt, vanilla, low fat.: 1 cup = 245 g, 208 kcal
   { names: ["vanilla yogurt"], fdcId: 170888, unit: "cup", alternatives: [170889, 170886] },
   // Yogurt, plain, low fat: 1 cup = 245 g, 154 kcal
@@ -196,6 +224,21 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["sour cream"], fdcId: 171257, unit: "tbsp", alternatives: [171256] },
   // Cream, fluid, half and half: 1 tbsp = 15 g, 20 kcal
   { names: ["half and half"], fdcId: 171255, unit: "tbsp", alternatives: [173453, 171267] },
+  // Cream, fluid, light (coffee cream or table cream): 1 tbsp = 15 g, 29 kcal
+  // "Coffee with cream"; on its own USDA's search for "cream" ranks cream cheese first.
+  {
+    names: ["cream", "coffee cream", "light cream", "table cream"],
+    fdcId: 170857,
+    unit: "tbsp",
+    alternatives: [171255, 170859],
+  },
+  // Cream, fluid, heavy whipping: 1 tbsp = 15 g, 51 kcal
+  {
+    names: ["heavy cream", "heavy whipping cream", "whipping cream"],
+    fdcId: 170859,
+    unit: "tbsp",
+    alternatives: [170857],
+  },
   // Cream substitute, flavored, liquid: 1 tbsp = 15 g, 38 kcal
   {
     names: ["coffee creamer", "creamer", "flavored creamer"],
@@ -221,6 +264,14 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["frozen yogurt", "froyo"], fdcId: 168105, unit: "cup", alternatives: [168815, 167575] },
   // Ice cream sandwich: 1 serving (70 g) = 70 g, 166 kcal
   { names: ["ice cream sandwich"], fdcId: 172226 },
+  // Fast foods, vanilla, light, soft-serve ice cream, with cone: 1 item = 120 g, 196 kcal
+  // The cone with its ice cream; "Ice cream cones, cake or wafer-type" is the empty 4 g cone.
+  {
+    names: ["ice cream cone", "cone", "soft serve", "soft serve cone", "soft serve ice cream", "vanilla cone"],
+    fdcId: 173274,
+    unit: "each",
+    alternatives: [172061, 167575],
+  },
   // Fast foods, sundae, hot fudge: 1 sundae = 158 g, 284 kcal
   { names: ["sundae", "hot fudge sundae"], fdcId: 173276, alternatives: [173275] },
 
@@ -246,26 +297,36 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
   // Chicken, broilers or fryers, drumstick, meat and skin, cooked, roasted: 1 drumstick = 96 g, 183 kcal
   { names: ["chicken drumstick", "drumstick", "chicken leg"], fdcId: 173612, alternatives: [170757, 331897] },
-  // Chicken, broilers or fryers, wing, meat and skin, cooked, roasted: 1 wing = 32 g, 81 kcal
+  // Chicken, broilers or fryers, wing, meat and skin, cooked, roasted: 1 order (6 wings) = 192 g, 488 kcal
+  // (1 wing = 32 g, 81 kcal).
   // Six wings come to about 490 kcal, close to a restaurant's six plain wings; flour-fried (321 kcal
   // per 100 g) is an alternative. USDA gives no weight per wing for the roasted record (its "piece" is
   // 85 g), so a wing is the 32 g USDA gives for a fried wing without its bone.
+  // "Wings" with no count are an order of six.
   {
     names: ["chicken wings", "wings", "buffalo wings", "hot wings"],
     fdcId: 173630,
     unit: "each",
+    plural: "order",
     alternatives: [173629, 170360, 171523, 172830],
-    portions: [{ unit: "each", label: "wing (bone removed)", grams: 32 }],
+    portions: [
+      { unit: "each", label: "wing (bone removed)", grams: 32 },
+      { unit: "order", label: "order (6 wings)", grams: 192 },
+    ],
   },
-  // Chicken, nuggets, white meat, precooked, frozen, not reheated: 1 piece = 20 g, 52 kcal
-  { names: ["chicken nuggets", "nuggets"], fdcId: 172112, alternatives: [170718, 173346, 173321] },
-  // Fast foods, chicken tenders: 1 piece (tender (strip)) = 30 g, 81 kcal
+  // Chicken, nuggets, white meat, precooked, frozen, not reheated: 1 serving = 82 g, 214 kcal; 1 piece = 20 g, 52 kcal
+  // "Nuggets" with no count are USDA's serving, about 4 nuggets.
+  { names: ["chicken nuggets", "nuggets"], fdcId: 172112, plural: "serving", alternatives: [170718, 173346, 173321] },
+  // Fast foods, chicken tenders: 1 serving = 184 g, 499 kcal; 1 piece (tender) = 45 g, 122 kcal
+  // USDA's 30 g strip is light for the tenders sold at chains (Chick-fil-A's and Cane's are 45 to 55 g);
+  // "chicken tenders" with no count are USDA's serving, about 4 tenders.
   {
     names: ["chicken tenders", "chicken strips", "chicken fingers", "tenders"],
     fdcId: 173321,
     unit: "piece",
+    plural: "serving",
     alternatives: [173346, 170718],
-    portions: [{ unit: "piece", label: "tender (strip)", grams: 30 }],
+    portions: [{ unit: "piece", label: "tender", grams: 45 }],
   },
   // Fast Foods, Fried Chicken, Breast, meat and skin and breading: 1 breast = 203 g, 467 kcal
   { names: ["fried chicken", "fried chicken breast"], fdcId: 170756, alternatives: [170359, 170757, 170360] },
@@ -304,7 +365,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["ham", "sliced ham", "deli ham", "ham slice"], fdcId: 173864, alternatives: [173863, 746952] },
   // Beef, ground, 80% lean meat / 20% fat, crumbles, cooked, pan-browned: 1 serving (3 oz cooked) = 85 g, 231 kcal
   {
-    names: ["ground beef", "hamburger meat"],
+    names: ["ground beef", "hamburger meat", "beef", "cooked beef"],
     fdcId: 171799,
     unit: "serving",
     alternatives: [174034, 171506],
@@ -430,17 +491,39 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["baked beans"], fdcId: 175185, unit: "cup", alternatives: [173731] },
   // Hummus, commercial: 1 tbsp = 15 g, 36 kcal
   { names: ["hummus", "hommus"], fdcId: 174289, unit: "tbsp", alternatives: [172454] },
-  // Peanut butter, smooth style, with salt (Includes foods for USDA's Food Distribution Program): 1 tbsp = 16 g, 96 kcal
+  // Peanut butter, smooth style, with salt (Includes foods for USDA's Food Distribution Program): 1 serving (2 tbsp) = 32 g, 191 kcal
+  // Spread on an apple or toast, peanut butter is the label's 2 tbsp; "a spoonful" is 1 tbsp.
   {
     names: ["peanut butter", "pb", "creamy peanut butter", "smooth peanut butter"],
     fdcId: 174266,
-    unit: "tbsp",
+    unit: "serving",
     alternatives: [174265, 172458, 168588],
+    portions: [{ unit: "serving", label: "serving (2 tbsp)", grams: 32 }],
   },
-  // Peanut butter, chunk style, with salt: 1 tbsp = 16 g, 94 kcal
-  { names: ["crunchy peanut butter", "chunky peanut butter"], fdcId: 174265, unit: "tbsp", alternatives: [174266] },
-  // Nuts, almond butter, plain, without salt added: 1 tbsp = 16 g, 98 kcal
-  { names: ["almond butter"], fdcId: 168588, unit: "tbsp", alternatives: [174266] },
+  // Peanut butter, chunk style, with salt: 1 serving (2 tbsp) = 32 g, 189 kcal
+  {
+    names: ["crunchy peanut butter", "chunky peanut butter"],
+    fdcId: 174265,
+    unit: "serving",
+    alternatives: [174266],
+    portions: [{ unit: "serving", label: "serving (2 tbsp)", grams: 32 }],
+  },
+  // Peanut butter, smooth, reduced fat: 1 serving (2 tbsp) = 36 g, 187 kcal
+  {
+    names: ["reduced fat peanut butter"],
+    fdcId: 172458,
+    unit: "serving",
+    alternatives: [174266],
+    portions: [{ unit: "serving", label: "serving (2 tbsp)", grams: 36 }],
+  },
+  // Nuts, almond butter, plain, without salt added: 1 serving (2 tbsp) = 32 g, 197 kcal
+  {
+    names: ["almond butter"],
+    fdcId: 168588,
+    unit: "serving",
+    alternatives: [174266],
+    portions: [{ unit: "serving", label: "serving (2 tbsp)", grams: 32 }],
+  },
   // Chocolate-flavored hazelnut spread: 1 serving (37 g) = 37 g, 199 kcal
   {
     names: ["nutella", "hazelnut spread", "chocolate hazelnut spread"],
@@ -463,6 +546,15 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["trail mix"], fdcId: 167561, unit: "oz", alternatives: [167969] },
   // Seeds, sunflower seed kernels, dry roasted, with salt added: 1 oz = 28.3 g, 165 kcal
   { names: ["sunflower seeds"], fdcId: 169418, unit: "oz" },
+  // Beverages, Protein powder whey based: 1 scoop = 32 g, 113 kcal
+  // USDA's portion is "1/3 cup" at the same 32 g; isolate and soy powders list their own scoops.
+  {
+    names: ["protein powder", "whey protein", "whey protein powder", "whey", "protein scoop"],
+    fdcId: 173180,
+    unit: "scoop",
+    alternatives: [173177, 173181],
+    portions: [{ unit: "scoop", label: "scoop", grams: 32 }],
+  },
 
   // ---------------------------------------------------------------- rice, pasta, grains
   // Rice, white, long-grain, regular, enriched, cooked: 1 cup = 158 g, 205 kcal
@@ -547,10 +639,24 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
   // Cereals, corn grits, white, regular and quick, enriched, cooked with water, without salt: 1 cup = 257 g, 183 kcal
   { names: ["grits"], fdcId: 171655, unit: "cup" },
-  // Cereals ready-to-eat, granola, homemade: 1 cup = 122 g, 597 kcal
-  { names: ["granola"], fdcId: 171646, unit: "cup" },
+  // Cereals ready-to-eat, granola, homemade: 1 serving (1/2 cup) = 61 g, 298 kcal
+  // Granola is eaten by the half cup, and less on yogurt ("yogurt with granola"); a cup is 597 kcal.
+  {
+    names: ["granola"],
+    fdcId: 171646,
+    unit: "serving",
+    portions: [{ unit: "serving", label: "serving (1/2 cup)", grams: 61 }],
+  },
   // Cereals ready-to-eat, GENERAL MILLS, CHEERIOS: 1 cup = 28 g, 104 kcal
   { names: ["cheerios"], fdcId: 173884, unit: "cup", alternatives: [174648, 172990] },
+  // Cereals ready-to-eat, GENERAL MILLS, CHEERIOS: 1 cup = 28 g, 104 kcal
+  // "A bowl of cereal": the independent labels' generic cold cereal, dry, with milk logged on its own.
+  {
+    names: ["cereal", "cold cereal", "breakfast cereal", "bowl of cereal"],
+    fdcId: 173884,
+    unit: "cup",
+    alternatives: [172990, 174648, 171650],
+  },
   // Cereals ready-to-eat, MALT-O-MEAL, Frosted Flakes: 1 cup = 41.3 g, 161 kcal
   { names: ["frosted flakes"], fdcId: 172990, unit: "cup", alternatives: [174648, 173884] },
   // Cereals ready-to-eat, RALSTON Corn Flakes: 1 cup = 28 g, 108 kcal
@@ -640,10 +746,20 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     fdcId: 170691,
     unit: "each",
     alternatives: [170694, 173319, 170690],
-    portions: [{ unit: "each", label: "cheeseburger", grams: 127 }],
   },
   // Fast foods, cheeseburger; double, regular patty; with condiments: 1 sandwich = 155 g, 437 kcal
   { names: ["double cheeseburger", "double cheese burger"], fdcId: 173319, alternatives: [170691, 170694] },
+  // McDONALD'S, BIG MAC: 1 item = 219 g, 563 kcal
+  { names: ["big mac"], fdcId: 170720, unit: "each", alternatives: [170719, 170321] },
+  // McDONALD'S, QUARTER POUNDER: 1 item = 171 g, 417 kcal
+  { names: ["quarter pounder"], fdcId: 170321, unit: "each", alternatives: [170719, 170720] },
+  // McDONALD'S, QUARTER POUNDER with Cheese: 1 item = 199 g, 513 kcal
+  {
+    names: ["quarter pounder with cheese", "qpc"],
+    fdcId: 170719,
+    unit: "each",
+    alternatives: [170321, 170720],
+  },
   // Fast foods, chicken fillet sandwich, plain with pickles: 1 sandwich = 187 g, 468 kcal
   {
     names: ["chicken sandwich", "fried chicken sandwich", "crispy chicken sandwich"],
@@ -658,7 +774,15 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   {
     names: ["egg mcmuffin", "breakfast sandwich"],
     fdcId: 172033,
-    alternatives: [170787, 172031],
+    alternatives: [170787, 172031, 172029],
+  },
+  // Fast foods, biscuit, with egg, cheese, and bacon: 1 item = 145 g, 436 kcal
+  // A deli "bacon egg and cheese"; the McGriddle (449) and croissant (370) versions are alternatives.
+  {
+    names: ["bacon egg and cheese", "bacon egg and cheese sandwich", "bacon egg and cheese biscuit", "bec"],
+    fdcId: 172029,
+    unit: "each",
+    alternatives: [173300, 173269, 172033],
   },
   // Fast foods, biscuit, with sausage: 1 biscuit sandwich = 111 g, 412 kcal
   {
@@ -666,7 +790,6 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     fdcId: 172031,
     unit: "each",
     alternatives: [172033],
-    portions: [{ unit: "each", label: "biscuit sandwich", grams: 111 }],
   },
   // Fast foods, breakfast burrito, with egg, cheese, and sausage: 1 burrito = 109 g, 302 kcal
   { names: ["breakfast burrito"], fdcId: 170787, alternatives: [172033] },
@@ -757,7 +880,6 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     fdcId: 170706,
     unit: "each",
     alternatives: [170707, 170696],
-    portions: [{ unit: "each", label: "6-inch sub", grams: 184 }],
   },
   // Fast foods, submarine sandwich, ham on white bread with lettuce and tomato: 1 6-inch sub = 184 g, 278 kcal
   {
@@ -765,7 +887,13 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     fdcId: 170707,
     unit: "each",
     alternatives: [170706, 170696],
-    portions: [{ unit: "each", label: "6-inch sub", grams: 184 }],
+  },
+  // Fast foods, submarine sandwich, tuna on white bread with lettuce and tomato: 1 6-inch sub = 237 g, 517 kcal
+  {
+    names: ["tuna sandwich", "tuna sub", "tuna salad sandwich"],
+    fdcId: 170299,
+    unit: "each",
+    alternatives: [170706, 170696],
   },
   // Fast foods, submarine sandwich, cold cut on white bread with lettuce and tomato: 1 6-inch sub = 196 g, 418 kcal
   {
@@ -773,14 +901,12 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     fdcId: 170696,
     unit: "each",
     alternatives: [170706, 170707],
-    portions: [{ unit: "each", label: "6-inch sub", grams: 196 }],
   },
   // Fast foods, submarine sandwich, bacon, lettuce, and tomato on white bread: 1 6-inch sub = 148 g, 303 kcal
   {
     names: ["blt", "blt sandwich"],
     fdcId: 170313,
     unit: "each",
-    portions: [{ unit: "each", label: "6-inch sub", grams: 148 }],
   },
   // Restaurant, Chinese, orange chicken: 1 serving (1/4 order, about 5.7 oz) = 162 g, 424 kcal
   {
@@ -802,6 +928,47 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["lo mein", "vegetable lo mein"], fdcId: 167677, unit: "cup" },
   // Restaurant, Chinese, egg rolls, assorted: 1 piece = 89 g, 223 kcal
   { names: ["egg rolls"], fdcId: 167667, alternatives: [172103] },
+  // Restaurant, Chinese, beef and vegetables: 1 serving (1/2 order, about 2 cups) = 287 g, 301 kcal
+  // Beef and broccoli is USDA's beef and vegetables; a takeout order (574 g) is two servings.
+  {
+    names: ["beef and broccoli", "beef with broccoli", "beef and vegetables", "beef broccoli"],
+    fdcId: 168072,
+    unit: "serving",
+    alternatives: [167678],
+    portions: [
+      { unit: "serving", label: "serving (1/2 order, about 2 cups)", grams: 287 },
+      { unit: "order", label: "order", grams: 574 },
+    ],
+  },
+  // Restaurant, Chinese, chicken and vegetables: 1 serving (1/2 order, about 2 cups) = 347 g, 330 kcal
+  {
+    names: ["chicken and broccoli", "chicken with broccoli", "chicken and vegetables"],
+    fdcId: 167678,
+    unit: "serving",
+    alternatives: [168072],
+    portions: [
+      { unit: "serving", label: "serving (1/2 order, about 2 cups)", grams: 347 },
+      { unit: "order", label: "order", grams: 693 },
+    ],
+  },
+  // Potsticker or wonton, pork and vegetable, frozen, unprepared: 1 serving (6 dumplings) = 174 g, 237 kcal
+  // Asian dumplings, the ones people mean; pierogi are the alternative. "Dumplings" with no count are six.
+  {
+    names: ["dumplings", "potstickers", "pot stickers", "gyoza", "wontons", "pork dumplings"],
+    fdcId: 169773,
+    unit: "piece",
+    plural: "serving",
+    alternatives: [169779],
+    portions: [{ unit: "serving", label: "serving (6 dumplings)", grams: 174 }],
+  },
+  // Restaurant, Latino, chicken and rice, entree, prepared: 1 plate (about 1 3/4 cups) = 247 g, 430 kcal
+  // USDA gives only a cup (141 g), and a plate of chicken and rice is more like 1 1/2 to 2 cups.
+  {
+    names: ["chicken and rice", "chicken with rice", "arroz con pollo"],
+    fdcId: 167659,
+    unit: "serving",
+    portions: [{ unit: "serving", label: "plate (about 1 3/4 cups)", grams: 247 }],
+  },
 
   // ---------------------------------------------------------------- soups and dinners
   // Soup, chunky chicken noodle, canned, ready-to-serve: 1 cup = 243 g, 100 kcal
@@ -815,16 +982,29 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     portions: [{ unit: "can", label: "can (18.7 oz)", grams: 530 }],
   },
   // Soup, tomato, canned, prepared with equal volume water, commercial: 1 serving (248 g) = 248 g, 79 kcal
-  {
-    names: ["tomato soup"],
-    fdcId: 171176,
-    alternatives: [174546],
-    portions: [{ unit: "cup", label: "cup", grams: 248 }],
-  },
+  { names: ["tomato soup"], fdcId: 171176, alternatives: [174546] },
   // Chili with beans, canned: 1 cup = 256 g, 264 kcal
   { names: ["chili", "chili with beans"], fdcId: 175207, unit: "cup", alternatives: [172098] },
   // Chicken pot pie, frozen entree, prepared: 1 pie = 302 g, 616 kcal
   { names: ["chicken pot pie", "pot pie"], fdcId: 173331 },
+  // Pizza rolls, frozen, unprepared: 1 serving (6 rolls) = 80 g, 262 kcal
+  // "Pizza rolls" with no count are USDA's serving of six; a counted roll is 13 g.
+  {
+    names: ["pizza rolls", "totinos pizza rolls", "pizza bites"],
+    fdcId: 168957,
+    unit: "piece",
+    plural: "serving",
+    portions: [{ unit: "piece", label: "roll", grams: 13.3 }],
+  },
+  // Restaurant, family style, fried mozzarella sticks: 1 order (5 sticks) = 155 g, 504 kcal
+  // USDA's serving (245 g) is a family-style platter; an order at most places is 4 to 6 sticks.
+  {
+    names: ["mozzarella sticks", "mozz sticks", "fried mozzarella sticks"],
+    fdcId: 169015,
+    unit: "piece",
+    plural: "order",
+    portions: [{ unit: "order", label: "order (5 sticks)", grams: 155 }],
+  },
 
   // ---------------------------------------------------------------- vegetables and sides
   // Broccoli, cooked, boiled, drained, without salt: 1 cup, chopped = 156 g, 55 kcal
@@ -1022,7 +1202,6 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     portions: [
       { unit: "can", label: "can (12 fl oz)", grams: 370 },
       { unit: "bottle", label: "bottle (20 fl oz)", grams: 614 },
-      { unit: "cup", label: "cup (8 fl oz)", grams: 246 },
       { unit: "small", label: "small (16 fl oz)", grams: 492 },
       { unit: "medium", label: "medium (22 fl oz)", grams: 676 },
       { unit: "large", label: "large (32 fl oz)", grams: 984 },
@@ -1101,26 +1280,72 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     names: ["gatorade", "sports drink", "powerade"],
     fdcId: 173660,
     unit: "bottle",
-    portions: [
-      { unit: "bottle", label: "bottle (20 fl oz)", grams: 609 },
-      { unit: "cup", label: "cup (8 fl oz)", grams: 244 },
-    ],
+    portions: [{ unit: "bottle", label: "bottle (20 fl oz)", grams: 609 }],
   },
   // Beverages, Energy drink, RED BULL: 1 can (8.4 fl oz) = 258 g, 111 kcal
   {
     names: ["red bull"],
     fdcId: 173210,
     unit: "can",
-    alternatives: [174821],
+    alternatives: [171935, 174822],
     portions: [{ unit: "can", label: "can (8.4 fl oz)", grams: 258 }],
   },
-  // Beverages, Energy Drink with carbonated water and high fructose corn syrup: 1 can (16 fl oz) = 480 g, 298 kcal
+  // Beverages, Energy Drink, Monster, fortified with vitamins C, B2, B3, B6, B12: 1 can (16 fl oz) = 480 g, 226 kcal
+  // Monster is the energy drink teens name most; USDA's generic HFCS energy drink (62 kcal/100 g, 298 a can)
+  // is denser than any mainstream brand. Red Bull and sugar-free cans are the alternatives.
   {
-    names: ["energy drink"],
-    fdcId: 174821,
+    names: ["energy drink", "monster", "monster energy", "monster energy drink", "monster drink"],
+    fdcId: 171935,
     unit: "can",
-    alternatives: [173210],
+    alternatives: [173210, 174822, 173162],
     portions: [{ unit: "can", label: "can (16 fl oz)", grams: 480 }],
+  },
+  // Beverages, MONSTER energy drink, low carb: 1 can (16 fl oz) = 480 g, 24 kcal
+  {
+    names: ["monster zero", "monster low carb", "lo carb monster", "low carb monster", "sugar free monster"],
+    fdcId: 173162,
+    unit: "can",
+    alternatives: [174822, 171935],
+    portions: [{ unit: "can", label: "can (16 fl oz)", grams: 480 }],
+  },
+  // Beverages, Energy Drink, sugar free: 1 can (16 fl oz) = 480 g, 19 kcal
+  {
+    names: ["sugar free energy drink", "zero sugar energy drink", "diet energy drink"],
+    fdcId: 174822,
+    unit: "can",
+    alternatives: [173162, 171935],
+    portions: [{ unit: "can", label: "can (16 fl oz)", grams: 480 }],
+  },
+  // SILK Chai, soymilk: 1 medium (16 fl oz) = 486 g, 258 kcal
+  // USDA's only chai latte: spiced chai with soy milk, within a few percent of a cafe's grande chai
+  // latte with 2% milk (about 240 kcal). The powders Branded search finds are 400+ kcal per 100 g.
+  {
+    names: ["chai latte", "chai tea latte", "chai", "iced chai", "iced chai latte", "dirty chai"],
+    fdcId: 173776,
+    unit: "medium",
+    portions: [
+      { unit: "small", label: "small (12 fl oz)", grams: 365 },
+      { unit: "medium", label: "medium (16 fl oz)", grams: 486 },
+      { unit: "large", label: "large (20 fl oz)", grams: 608 },
+    ],
+  },
+  // Beverages, fruit juice drink, reduced sugar, with vitamin E added: 1 pouch (6 fl oz) = 182 g, 71 kcal
+  // A reduced-sugar juice drink blend, which is what Capri Sun is (about 50 to 60 kcal a pouch).
+  {
+    names: ["capri sun", "capri sun pouch", "juice pouch"],
+    fdcId: 174176,
+    unit: "pouch",
+    alternatives: [171914],
+    portions: [{ unit: "pouch", label: "pouch (6 fl oz)", grams: 182 }],
+  },
+  // Beverages, carbonated, cola, regular: 1 medium (22 fl oz) = 676 g, 284 kcal
+  // A Slurpee or ICEE is frozen soda; USDA has no slush drink, and cola is the flavor sold most.
+  {
+    names: ["slurpee", "slushie", "icee", "frozen coke", "slush"],
+    fdcId: 174852,
+    unit: "medium",
+    alternatives: [173205, 171914],
+    portions: [{ unit: "medium", label: "medium (22 fl oz)", grams: 676 }],
   },
   // Beverages, Coconut water, ready-to-drink, unsweetened: 1 cup = 245 g, 44 kcal
   { names: ["coconut water"], fdcId: 174831, unit: "cup" },
@@ -1287,7 +1512,8 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Cake, cheesecake, commercially prepared: 1 piece = 80 g, 257 kcal
   { names: ["cheesecake"], fdcId: 172711 },
   // Pie, apple, commercially prepared, enriched flour: 1 piece = 125 g, 296 kcal
-  { names: ["apple pie"], fdcId: 175011, alternatives: [175012] },
+  // Plain "pie" is apple, the pie sold most; pecan (541 a slice) is nearly twice as much.
+  { names: ["apple pie", "pie"], fdcId: 175011, alternatives: [175012, 172787] },
   // Pie, pumpkin, commercially prepared: 1 slice = 133 g, 323 kcal
   { names: ["pumpkin pie"], fdcId: 172787, unit: "slice", alternatives: [172788] },
   // Candies, milk chocolate: 1 bar (1.55 oz) = 44 g, 235 kcal
@@ -1334,6 +1560,27 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["skittles"], fdcId: 168843, unit: "serving" },
   // Candies, hard: 1 piece = 6 g, 24 kcal
   { names: ["hard candy"], fdcId: 167990 },
+  // Candies, gumdrops, starch jelly pieces: 1 bag (1.4 oz, about 17 bears) = 39 g, 154 kcal
+  // USDA's gummy candy; it lists 10 gummy bears at 22 g. "Gummy bears" with no count are a snack bag
+  // (Haribo's 1.4 oz serving), "ten gummy bears" are ten.
+  {
+    names: ["gummy bears", "gummies", "gummy candy", "gumdrops"],
+    fdcId: 167989,
+    unit: "piece",
+    plural: "bag",
+    portions: [
+      { unit: "piece", label: "gummy bear", grams: 2.2 },
+      { unit: "bag", label: "bag (1.4 oz)", grams: 39 },
+    ],
+  },
+  // Gelatin desserts, dry mix, prepared with water: 1 serving (1/2 cup) = 135 g, 81 kcal
+  // Jell-O as eaten; USDA's own "serving" (21 g) is the dry mix it is made from.
+  {
+    names: ["jello", "jell o", "jello cup", "gelatin", "gelatin dessert"],
+    fdcId: 169596,
+    unit: "each",
+    portions: [{ unit: "each", label: "serving (1/2 cup)", grams: 135 }],
+  },
 ];
 
 // ---------------------------------------------------------------- matching
@@ -1382,15 +1629,40 @@ for (const food of COMMON_FOODS) {
   }
 }
 
+/** Leading words that don't change which food it is: "a spicy chicken sandwich" is a chicken sandwich. */
+const IGNORABLE = new Set(
+  ["spicy", "homemade", "fresh", "classic", "original", "regular", "plain", "warm", "leftover"].map(singular),
+);
+
 /**
  * The table entry for a food phrase, or null. The whole phrase must match a
  * name, ignoring case, punctuation and simple plurals: "Eggs" and "egg" match,
- * "rice crackers" doesn't match "rice". Takes the spoken phrase or
- * normalizeQuery's output ("oats cooked" and "catsup" are names too).
+ * "rice crackers" doesn't match "rice". Leading words like "spicy" or
+ * "homemade" are dropped when the phrase has no entry as said. Takes the
+ * spoken phrase or normalizeQuery's output ("oats cooked" and "catsup" are
+ * names too).
  */
 export function commonMatch(text: string): CommonFood | null {
   const key = commonKey(text);
-  return (key && byKey.get(key)) || null;
+  if (!key) return null;
+  const exact = byKey.get(key);
+  if (exact) return exact;
+  const ws = key.split(" ");
+  let i = 0;
+  while (i < ws.length - 1 && IGNORABLE.has(ws[i])) i++;
+  return (i > 0 && byKey.get(ws.slice(i).join(" "))) || null;
+}
+
+/**
+ * The units to try first for a unitless mention of a table food: the entry's
+ * `plural` unit when the phrase is a plural with no count ("dumplings", "a bag
+ * of gummy bears"), then its `unit`. "Six dumplings" and "a dumpling" count.
+ */
+export function spokenUnits(entry: CommonFood | null, food: string, quantity: number): string[] {
+  if (!entry) return [];
+  const last = food.trim().toLowerCase().split(/\s+/).pop() ?? "";
+  const uncounted = quantity === 1 && last.endsWith("s") && singular(last) !== last;
+  return [uncounted ? entry.plural : undefined, entry.unit].filter((u): u is string => !!u);
 }
 
 /**

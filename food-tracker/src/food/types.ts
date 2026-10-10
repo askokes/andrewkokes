@@ -6,7 +6,8 @@ export const MEALS: readonly Meal[] = ["breakfast", "lunch", "dinner", "snack"];
 
 /** Units the parser can produce. Weight units convert directly; the rest go through USDA portions. */
 export type WeightUnit = "oz" | "lb" | "g";
-export type PortionUnit = "cup" | "tbsp" | "tsp" | "slice" | "piece" | "large" | "medium" | "small" | "serving";
+export type PortionUnit =
+  | "cup" | "tbsp" | "tsp" | "slice" | "piece" | "large" | "medium" | "small" | "serving" | "scoop";
 export type SpokenUnit = WeightUnit | PortionUnit;
 
 export const GRAMS_PER: Record<WeightUnit, number> = { oz: 28.3495, lb: 453.592, g: 1 };

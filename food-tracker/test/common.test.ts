@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { COMMON_FOODS, commonKey, commonMatch, commonPortions, type CommonFood } from "../src/food/common";
+import { COMMON_FOODS, commonKey, commonMatch, commonPortions, spokenUnits, type CommonFood } from "../src/food/common";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
 import type { FoodRecord } from "../src/food/types";
 import { resolveAmount, unitOptions } from "../src/food/units";
@@ -18,20 +18,23 @@ function record(fdcId: number): FoodRecord {
 
 const label = (entry: CommonFood) => `${entry.names[0]} (${entry.fdcId})`;
 
-/** Grams for `quantity` of a table food said with no unit, the way the app reads it (see routes.ts lookup). */
-function unitless(entry: CommonFood, quantity = 1): { unit: string; grams: number; guessed: boolean } {
+/**
+ * Grams for `quantity` of a table food said with no unit, the way the app reads it (see routes.ts lookup):
+ * `spoken` is the phrase as said, its first name by default ("gummy bears" with no count is a bag).
+ */
+function unitless(entry: CommonFood, quantity = 1, spoken = entry.names[0]): { unit: string; grams: number; guessed: boolean } {
   const food = record(entry.fdcId);
-  if (entry.unit && !unitOptions(food).some((o) => o.unit === entry.unit)) {
-    throw new Error(`${label(entry)}: unit ${entry.unit} not offered`);
+  for (const unit of [entry.unit, entry.plural]) {
+    if (unit && !unitOptions(food).some((o) => o.unit === unit)) throw new Error(`${label(entry)}: unit ${unit} not offered`);
   }
-  const { unit, grams, guessed } = resolveAmount(food, quantity, null, [entry.unit]);
+  const { unit, grams, guessed } = resolveAmount(food, quantity, null, spokenUnits(entry, spoken, quantity));
   return { unit, grams, guessed };
 }
 
 function calories(name: string, quantity = 1): number {
   const entry = commonMatch(name);
   if (!entry) throw new Error(`no table entry for "${name}"`);
-  return nutritionFor(record(entry.fdcId).per100g, unitless(entry, quantity).grams).calories;
+  return nutritionFor(record(entry.fdcId).per100g, unitless(entry, quantity, name).grams).calories;
 }
 
 describe("COMMON_FOODS records", () => {
@@ -145,7 +148,7 @@ describe("commonMatch", () => {
     expect(commonMatch("egg rolls")).not.toBe(commonMatch("egg"));
     expect(commonMatch("apple juice")).not.toBe(commonMatch("apple"));
     expect(commonMatch("peanut butter cookies")).toBeNull();
-    expect(commonMatch("pizza rolls")).toBeNull();
+    expect(commonMatch("pizza rolls")).not.toBe(commonMatch("pizza")); // its own entry: Totino's-style rolls
     expect(commonMatch("chicken noodle")).toBeNull();
     expect(commonMatch("big rice")).toBeNull();
     for (const empty of ["", "   ", "!!", "&"]) expect(commonMatch(empty), JSON.stringify(empty)).toBeNull();
@@ -170,9 +173,7 @@ describe("commonMatch", () => {
     // No SR Legacy or Foundation record is a fair stand-in for these; the ranked search answers them
     // (test/eval-live.test.ts scores it). "Sandwich" is the cold cut sub: the search's top hit for it
     // is an ice cream sandwich, and the independent labels pick the sub too.
-    const uncovered = [
-      "cereal", "salad", "latte", "candy", "protein bar", "protein shake", "grilled cheese", "soup", "sushi",
-    ];
+    const uncovered = ["salad", "latte", "candy", "protein bar", "protein shake", "grilled cheese", "soup", "sushi"];
     const queries = Object.keys(liveSearch.queries);
     expect(queries).toHaveLength(153);
     for (const query of queries) {
@@ -193,10 +194,12 @@ describe("default amounts", () => {
   });
 
   it("only names units the food offers or the entry adds", () => {
-    for (const entry of COMMON_FOODS.filter((e) => e.unit)) {
-      const keys = [...unitOptions(record(entry.fdcId), false), ...(entry.portions ?? [])].map((o) => o.unit);
-      expect(keys, label(entry)).toContain(entry.unit);
-      expect(unitOptions(record(entry.fdcId)).map((o) => o.unit), label(entry)).toContain(entry.unit);
+    for (const entry of COMMON_FOODS) {
+      for (const unit of [entry.unit, entry.plural].filter((u): u is string => !!u)) {
+        const keys = [...unitOptions(record(entry.fdcId), false), ...(entry.portions ?? [])].map((o) => o.unit);
+        expect(keys, label(entry)).toContain(unit);
+        expect(unitOptions(record(entry.fdcId)).map((o) => o.unit), label(entry)).toContain(unit);
+      }
     }
   });
 
@@ -220,7 +223,7 @@ describe("default amounts", () => {
       ["banana", 1, 100, 110],
       ["apple", 1, 90, 100],
       ["bread", 1, 70, 85],
-      ["peanut butter", 2, 180, 200],
+      ["peanut butter", 1, 180, 200], // a serving, 2 tbsp
       ["chicken breast", 1, 270, 300],
       ["pizza", 1, 270, 300],
       ["coke", 1, 140, 160],
@@ -238,6 +241,31 @@ describe("default amounts", () => {
       ["steak", 1, 280, 320],
       ["almonds", 1, 155, 170],
       ["beer", 1, 145, 160],
+      // Found by the adversarial live test (see test/eval-live.test.ts).
+      ["gummy bears", 1, 130, 160], // a snack bag, not bear meat
+      ["monster", 1, 200, 240], // a 16 fl oz can of regular Monster
+      ["energy drink", 1, 200, 240],
+      ["cream cheese", 1, 95, 110], // 2 tbsp
+      ["protein powder", 1, 100, 125], // a scoop
+      ["ice cream cone", 1, 170, 250], // with its ice cream
+      ["big mac", 1, 540, 600],
+      ["quarter pounder", 1, 400, 430],
+      ["jello", 1, 60, 90],
+      ["pie", 1, 280, 330], // apple, not pecan
+      ["beef and broccoli", 1, 250, 350],
+      ["bacon egg and cheese", 1, 400, 500],
+      ["dumplings", 1, 200, 300], // six
+      ["mozzarella sticks", 1, 400, 600], // an order
+      ["pizza rolls", 1, 200, 280], // six
+      ["chicken and rice", 1, 360, 500], // a plate
+      ["chicken tenders", 2, 220, 280],
+      ["chai latte", 1, 200, 280], // a 16 fl oz cup
+      ["capri sun", 1, 40, 90], // a 6 fl oz pouch
+      ["slurpee", 1, 150, 300], // a medium
+      ["yogurt parfait", 1, 120, 130],
+      ["tuna sandwich", 1, 450, 550], // a 6-inch sub
+      ["cereal", 1, 100, 110], // a cup, dry
+      ["granola", 1, 280, 310], // half a cup
     ];
     for (const [name, quantity, low, high] of cases) {
       const kcal = calories(name, quantity);
@@ -251,6 +279,86 @@ describe("default amounts", () => {
     expect(unitless(commonMatch("white rice")!)).toEqual({ unit: "cup", grams: 158, guessed: false });
     expect(unitless(commonMatch("soda")!).unit).toBe("can");
     expect(unitless(commonMatch("pizza")!).unit).toBe("slice");
+  });
+});
+
+describe("plural phrases and spoken modifiers", () => {
+  it("reads a plural with no count as a serving, and counts what is counted", () => {
+    const dumplings = commonMatch("dumplings")!;
+    expect(spokenUnits(dumplings, "dumplings", 1)).toEqual(["serving", "piece"]);
+    expect(spokenUnits(dumplings, "dumplings", 6)).toEqual(["piece"]);
+    expect(spokenUnits(dumplings, "dumpling", 1)).toEqual(["piece"]);
+    expect(unitless(dumplings, 6, "dumplings")).toMatchObject({ unit: "piece", guessed: false });
+    expect(unitless(commonMatch("gummy bears")!, 1, "gummy bears")).toMatchObject({ unit: "bag", grams: 39 });
+    expect(unitless(commonMatch("gummy bears")!, 10, "gummy bears")).toMatchObject({ unit: "piece", grams: 22 });
+    expect(unitless(commonMatch("mozzarella sticks")!, 1, "mozzarella stick")).toMatchObject({ unit: "piece", grams: 31 });
+    expect(unitless(commonMatch("wings")!, 1, "wings")).toMatchObject({ unit: "order", grams: 192 });
+    // Entries without a plural unit read the same either way; "hummus" is not a plural.
+    expect(spokenUnits(commonMatch("eggs")!, "eggs", 1)).toEqual(["large"]);
+    expect(spokenUnits(commonMatch("hummus")!, "hummus", 1)).toEqual(["tbsp"]);
+    expect(spokenUnits(null, "anything", 1)).toEqual([]);
+  });
+
+  it("ignores leading words that don't change the food", () => {
+    expect(commonMatch("spicy chicken sandwich")).toBe(commonMatch("chicken sandwich"));
+    expect(commonMatch("homemade lasagna")).toBe(commonMatch("lasagna"));
+    expect(commonMatch("regular coke")).toBe(commonMatch("coke"));
+    expect(commonMatch("plain bagel")).toBe(commonMatch("bagel")); // a name of its own
+    expect(commonMatch("plain yogurt")).not.toBe(commonMatch("yogurt")); // its own entry wins
+    expect(commonMatch("spicy")).toBeNull();
+    expect(commonMatch("big rice")).toBeNull();
+    expect(commonMatch("hot cheetos")).toBeNull();
+  });
+
+  it("keeps whole dishes whole and maps the snacks and drinks the adversarial test named", () => {
+    const id = (name: string) => commonMatch(name)?.fdcId;
+    expect(id("gummy bears")).toBe(167989); // not game meat
+    expect(id("monster energy drink")).toBe(171935); // regular, not low carb
+    expect(id("beef")).toBe(171799); // cooked ground beef, not bologna
+    expect(id("beef and broccoli")).toBe(168072);
+    expect(id("cereal")).toBe(173884);
+    expect(id("ice cream cone")).toBe(173274); // not the empty cone
+    expect(id("pie")).toBe(175011);
+    expect(id("jello")).toBe(169596); // prepared, not the dry mix
+    expect(id("protein powder")).toBe(173180);
+    expect(id("nutella")).toBe(168000);
+    expect(id("capri sun")).toBe(174176);
+    expect(id("chai latte")).toBe(173776);
+    expect(id("bacon egg and cheese")).toBe(172029);
+  });
+});
+
+describe("USDA portions the unit matcher reads", () => {
+  const units = (fdcId: number) => unitOptions(record(fdcId), false);
+  const unit = (fdcId: number, key: string) => units(fdcId).find((o) => o.unit === key);
+
+  it("reads fast food's '1 item' as one of it", () => {
+    expect(unit(170321, "each")).toEqual({ unit: "each", label: "item", grams: 171 }); // Quarter Pounder
+    expect(unit(170720, "each")?.grams).toBe(219); // Big Mac, "item 7.6 oz"
+    expect(unit(170355, "each")?.grams).toBe(149); // yogurt parfait
+    expect(unit(173300, "each")?.grams).toBe(165); // McGriddle
+  });
+
+  it("reads a sub's length as one sub, the 6-inch first", () => {
+    expect(unit(170299, "each")).toEqual({ unit: "each", label: "6-inch sub", grams: 237 });
+  });
+
+  it("reads '8 fl oz' as a cup", () => {
+    expect(unit(173162, "cup")).toEqual({ unit: "cup", label: "cup (8 fl oz)", grams: 240 });
+    expect(unit(174852, "cup")?.grams).toBeCloseTo(245.6, 1); // cola: "1 fl oz" 30.7 g
+  });
+
+  it("reads scoops, and takes a label serving for a scoop the food doesn't list", () => {
+    expect(unit(173181, "scoop")?.grams).toBe(45);
+    expect(unit(173177, "scoop")?.grams).toBeCloseTo(28.67, 1); // "3 scoop" 86 g
+    expect(resolveAmount(record(167575), 2, "scoop")).toEqual({ quantity: 2, unit: "serving", grams: 132, guessed: false });
+  });
+
+  it("takes a piece for a slice of cake or pie, but never a piece of chicken for a slice", () => {
+    expect(resolveAmount(record(174944), 1, "slice")).toEqual({ quantity: 1, unit: "piece", grams: 144, guessed: false });
+    expect(resolveAmount(record(175011), 1, "slice")).toMatchObject({ unit: "piece", grams: 125, guessed: false });
+    expect(resolveAmount(record(173292), 1, "piece")).toMatchObject({ unit: "slice", grams: 107, guessed: false });
+    expect(resolveAmount(record(171534), 12, "slice")).toMatchObject({ unit: "g", guessed: true });
   });
 });
 

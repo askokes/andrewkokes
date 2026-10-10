@@ -8,6 +8,7 @@ import { localDate } from "../dates";
 import type { AppEnv } from "../env";
 import { getUser, goalsOn, noProfile, readJson, type UserRow } from "../profile";
 import { isObject, type FieldErrors } from "../validate";
+import { spokenUnits } from "./common";
 import { checkDate, DATE_ERROR, parseEntryChanges, parseNewEntries, readQuantity } from "./input";
 import { nutritionFor } from "./nutrition";
 import { parseMeal } from "./parse";
@@ -121,8 +122,11 @@ function preferSpokenUnit(candidates: Candidate[], unit: string | null): Candida
   return [...candidates.filter((c) => !c.amount.guessed), ...candidates.filter((c) => c.amount.guessed)];
 }
 
-/** Candidates for a food phrase. Never throws: a USDA failure becomes a status. */
-async function lookup(
+/**
+ * Candidates for a food phrase, as /api/parse and /api/foods/search offer them.
+ * Never throws: a USDA failure becomes a status.
+ */
+export async function lookup(
   usda: UsdaDeps,
   food: string,
   quantity: number,
@@ -138,8 +142,9 @@ async function lookup(
     return { status: kind, message: USDA_MESSAGES[kind], candidates: [] };
   }
   if (!foods.length) return { status: "not_found", message: notFoundMessage(food), candidates: [] };
-  // "A soda" is a can and "two eggs" are large, whichever record the user picks (see toCandidate).
-  const preferred = [commonFor(food)?.unit];
+  // "A soda" is a can, "two eggs" are large and "dumplings" are a serving, whichever record the user
+  // picks (see toCandidate).
+  const preferred = spokenUnits(commonFor(food), food, quantity);
   return { status: "ok", candidates: preferSpokenUnit(foods.map((f) => toCandidate(f, quantity, unit, preferred)), unit) };
 }
 

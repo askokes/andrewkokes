@@ -25,7 +25,7 @@ const WEIGHT_OPTIONS: readonly UnitOption[] = [
 ];
 
 /** Order portion units are listed in after the weights. */
-const LIST_ORDER = ["each", "small", "medium", "large", "slice", "piece", "serving", "cup", "tbsp", "tsp"];
+const LIST_ORDER = ["each", "small", "medium", "large", "slice", "piece", "serving", "scoop", "cup", "tbsp", "tsp"];
 /**
  * What a unitless amount ("two eggs", "a banana") means when the food has no
  * unit of its own in the common-foods table, best first. There is no cup here:
@@ -49,20 +49,24 @@ const VOLUME: Record<string, "cup" | "tbsp" | "tsp"> = {
   teaspoons: "tsp",
 };
 
-/** Weights are always offered as oz/lb/g, so weight portions are skipped. "fl" is "fl oz". */
-const WEIGHT_WORDS = new Set(["oz", "ounce", "ounces", "lb", "lbs", "pound", "pounds", "g", "gram", "grams", "kg", "fl"]);
+/** Weights are always offered as oz/lb/g, so weight portions are skipped. "fl oz" is a volume (see classify). */
+const WEIGHT_WORDS = new Set(["oz", "ounce", "ounces", "lb", "lbs", "pound", "pounds", "g", "gram", "grams", "kg"]);
+/** Fluid ounces in a cup: a drink whose only portion is "8 fl oz" has a cup. */
+const FL_OZ_PER_CUP = 8;
 
 /** Portion words that name a whole item even when the food's description doesn't use them. */
 const ITEM_WORDS = [
   "fruit", "bar", "pastry", "waffle", "cookie", "cracker", "muffin", "bagel", "biscuit", "roll", "bun",
   "fillet", "breast", "thigh", "drumstick", "wing", "leg", "patty", "link", "sausage", "egg", "whole",
   "pancake", "tortilla", "sandwich", "burrito", "taco", "donut", "doughnut", "croissant", "nugget", "chop",
+  // Fast-food records weigh "1 item" (a Big Mac, a parfait, a side salad) and "1 sub".
+  "item", "sub",
 ];
 
 /** Containers and odd measures that are never "one of the food", even if the description mentions them. */
 const NOT_ITEMS = new Set([
   "unit", "package", "container", "bunch", "stalk", "spear", "leaf", "pat", "stick", "cubic", "quart", "pint",
-  "gallon", "liter", "ml", "can", "bottle", "jar", "box", "bag", "packet", "envelope", "scoop", "dash", "pinch",
+  "gallon", "liter", "ml", "can", "bottle", "jar", "box", "bag", "packet", "envelope", "dash", "pinch",
   "extra", "jumbo", "mini", "serving", "nlea", "racc", "yield", "yields",
 ]);
 
@@ -77,6 +81,8 @@ interface Match {
    * plain one ("slice"), 1 qualified ("slice, thin"), 0 a dense form ("cup, melted").
    */
   rank: number;
+  /** Grams in one unit, when not the portion's grams per amount ("8 fl oz" is a cup; "6 inch sub" is one sub). */
+  grams?: number;
 }
 
 const rankOf = (qualified: boolean, text: string) => (!qualified ? 2 : DENSE_FORMS.test(text) ? 0 : 1);
@@ -117,6 +123,20 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match 
   const [first, second] = words(text);
   if (!first) return null;
 
+  // "8 fl oz" (amount 8) is a cup: the only volume many drinks list. Ranked below a real cup.
+  if (first === "fl" && (second === "oz" || second === "ounce" || second === "ounces")) {
+    return { unit: "cup", label: "cup (8 fl oz)", rank: 1, grams: gramsEach * FL_OZ_PER_CUP };
+  }
+  // "6 inch sub" and "12 inch sub" (amounts 6 and 12): the amount is the length, the weight is one sub.
+  if (first === "inch" && second && p.amount > 1) {
+    const rest = text.split(",")[0].replace(/^inch\s+/, "");
+    return { unit: "each", label: `${p.amount}-inch ${rest}`, rank: p.amount === 6 ? 2 : 1, grams: p.gramWeight };
+  }
+  if (first === "scoop" || first === "scoops") {
+    const rest = qualifier(text);
+    return { unit: "scoop", label: rest ? `scoop, ${rest}` : "scoop", rank: rankOf(rest !== "", rest) };
+  }
+
   if (first === "racc" || first === "serving" || first === "servings" || (first === "nlea" && second?.startsWith("serving"))) {
     // Branded label servings keep their household text: "serving (1 container)".
     const label = namedUnit && unitName === "serving" && p.description
@@ -148,7 +168,7 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match 
 /**
  * The units a food can be measured in: oz, lb and g first, then its portion
  * units in a fixed order (each, small, medium, large, slice, piece, serving,
- * cup, tbsp, tsp), then any other unit the common-foods table adds for it
+ * scoop, cup, tbsp, tsp), then any other unit the common-foods table adds for it
  * ("can", "bottle", "pack"). When USDA lists several portions for one unit, a
  * plain one ("slice") beats a qualified one ("slice, thin"), which beats a dense
  * form ("cup, melted"); otherwise USDA's order wins. Missing cup/tbsp/tsp are
@@ -165,7 +185,9 @@ export function unitOptions(food: FoodRecord, withCommon = true): UnitOption[] {
     const match = classify(p, gramsEach, foodWords);
     if (!match) continue;
     const prev = found.get(match.unit);
-    if (!prev || match.rank > prev.rank) found.set(match.unit, { label: match.label, grams: gramsEach, rank: match.rank });
+    if (!prev || match.rank > prev.rank) {
+      found.set(match.unit, { label: match.label, grams: match.grams ?? gramsEach, rank: match.rank });
+    }
   }
 
   const cup = found.get("cup")?.grams;
@@ -205,9 +227,31 @@ function unitlessOrder(food: FoodRecord, preferred: readonly (string | null | un
   return [...preferred, own, ...COUNT_ORDER].filter((u): u is string => typeof u === "string" && u !== "");
 }
 
-function resolveWith(options: UnitOption[], quantity: number, unit: string | null, order: readonly string[]): Amount {
+/** Foods cut into slices or pieces of one size, so either word means the same cut. */
+const SLICED =
+  /\b(cakes?|cheesecakes?|pies?|pizzas?|breads?|loaf|cornbread|quiche|lasagna|tarts?|tortes?|brownies?|strudel)\b/;
+
+/**
+ * Spoken units that mean another unit when the food lacks them: a scoop of
+ * protein powder is its label serving, and a slice of cake is the record's
+ * "piece (1/12 of a cake)" (a piece of pizza its "slice"). Only for foods cut
+ * that way: a piece of chicken is no slice of it.
+ */
+function standsIn(food: FoodRecord): Record<string, string> {
+  const sliced = SLICED.test(food.description.toLowerCase());
+  return sliced ? { scoop: "serving", slice: "piece", piece: "slice" } : { scoop: "serving" };
+}
+
+function resolveWith(
+  options: UnitOption[],
+  quantity: number,
+  unit: string | null,
+  order: readonly string[],
+  stands: Record<string, string> = {},
+): Amount {
   const key = unit?.trim().toLowerCase() || null;
-  const find = (u: string) => options.find((o) => o.unit === u);
+  const own = (u: string) => options.find((o) => o.unit === u);
+  const find = (u: string) => own(u) ?? (stands[u] ? own(stands[u]) : undefined);
   let option = key === null ? order.map(find).find(Boolean) : find(key);
   // "a large egg" when the egg record only has a whole-egg portion: one egg beats a 100 g guess.
   if (!option && key !== null && SIZES.has(key)) option = find("each");
@@ -230,7 +274,7 @@ export function resolveAmount(
   unit: string | null,
   preferred: readonly (string | null | undefined)[] = [],
 ): Amount {
-  return resolveWith(unitOptions(food), quantity, unit, unitlessOrder(food, preferred));
+  return resolveWith(unitOptions(food), quantity, unit, unitlessOrder(food, preferred), standsIn(food));
 }
 
 /**
@@ -258,7 +302,7 @@ export function toCandidate(
   preferred: readonly (string | null | undefined)[] = [],
 ): Candidate {
   const units = unitOptions(food);
-  const amount = withinLimits(resolveWith(units, quantity, unit, unitlessOrder(food, preferred)), units);
+  const amount = withinLimits(resolveWith(units, quantity, unit, unitlessOrder(food, preferred), standsIn(food)), units);
   return {
     fdcId: food.fdcId,
     name: food.description,

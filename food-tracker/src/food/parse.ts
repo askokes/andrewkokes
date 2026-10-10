@@ -5,9 +5,11 @@
 //   -> { meal: "breakfast", items: [{ 2, null, "eggs" }, { 1, "slice", "toast" }] }
 //
 // Pipeline: tokenize (keeping offsets into the original text), drop "um"/"uh",
-// pull out meal hints, split into items, then read each item as
+// pull out meal hints, split into items (on punctuation, "and", "plus", "with"),
+// then read each item as
 //   [filler] [quantity] [container of] [unit] [of] food [trailing filler]
 
+import { commonMatch } from "./common";
 import type { Meal, ParseResult, ParsedItem, SpokenUnit } from "./types";
 
 interface Token {
@@ -64,7 +66,8 @@ const UNIT_SPELLINGS: Record<SpokenUnit, string> = {
   lb: "lb lbs pound pounds",
   g: "g gm gms gram grams gramme grammes",
   cup: "cup cups",
-  tbsp: "tbsp tbsps tbs tbl tablespoon tablespoons tablespoonful tablespoonfuls",
+  // "A spoonful of nutella" is a tablespoon, the spoon people eat spreads with.
+  tbsp: "tbsp tbsps tbs tbl tablespoon tablespoons tablespoonful tablespoonfuls spoonful spoonfuls",
   tsp: "tsp tsps teaspoon teaspoons teaspoonful teaspoonfuls",
   slice: "slice slices",
   piece: "piece pieces pc pcs",
@@ -72,6 +75,7 @@ const UNIT_SPELLINGS: Record<SpokenUnit, string> = {
   medium: "medium",
   small: "small",
   serving: "serving servings portion portions",
+  scoop: "scoop scoops scoopful scoopfuls",
 };
 const UNITS = new Map<string, SpokenUnit>(
   (Object.keys(UNIT_SPELLINGS) as SpokenUnit[]).flatMap((unit) =>
@@ -99,7 +103,8 @@ const COMPOUNDS = phrases([
   "spaghetti and meatballs", "pork and beans", "franks and beans", "shrimp and grits",
   "chicken and waffles", "chicken and dumplings", "bangers and mash", "surf and turf", "sweet and sour",
   "cookies and cream", "peaches and cream", "strawberries and cream", "corned beef and cabbage",
-  "liver and onions",
+  "liver and onions", "beef and broccoli", "chicken and broccoli", "bacon egg and cheese", "sausage egg and cheese",
+  "ham egg and cheese", "steak egg and cheese",
 ]);
 const NUMBER_LIKE_FOODS = phrases(["half and half", "quarter pounder"]);
 
@@ -122,6 +127,23 @@ const TRAILING_FILLER = phrases([
 const FOOD_LEAD = words("of a an the some my");
 
 const SPLIT_PHRASES = phrases(["with a side of", "along with", "as well as", "plus", "then"]);
+
+/** Who a meal is shared with: "pizza with my friends" is pizza. */
+const COMPANIONS = words(
+  "friends friend family mom mum dad parents brother brothers sister sisters kids roommate roommates team " +
+    "teammates coworkers grandma grandpa boyfriend girlfriend everyone",
+);
+const COMPANION_LEAD = words("my the a an some all of");
+/** "with no cheese", "with nothing on it": what follows isn't eaten. */
+const NOTHING = words("no none nothing out");
+/** Hot drinks whose milk or cream is a splash, not a glass: "coffee with milk". */
+const HOT_DRINKS = words("coffee tea latte chai espresso cappuccino americano");
+const SPLASHES = new Set([
+  "milk", "cream", "creamer", "half and half", "oat milk", "almond milk", "soy milk", "2% milk", "whole milk",
+  "skim milk",
+]);
+/** Tablespoons in a splash of milk or cream. */
+const SPLASH_TBSP = 2;
 
 const MEAL_WORDS = new Map<string, Meal | null>([
   ["breakfast", "breakfast"], ["brunch", "breakfast"],
@@ -505,15 +527,41 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
   };
 }
 
+/**
+ * "A bagel with cream cheese" is two foods, read as two items ("a bagel",
+ * "cream cheese"), each with its own amount ("toast with 2 tablespoons of
+ * peanut butter"). A dish the common-foods table names whole stays one item
+ * ("spaghetti with meat sauce", "nachos with cheese"); company and what was
+ * left off are dropped ("pizza with my friends", "a burger with no pickles");
+ * and milk or cream in a hot drink is a splash ("coffee with milk" is 2 tbsp).
+ */
+function itemsOf(seg: Token[], source: string): ParsedItem[] {
+  const whole = parseItem(seg, source);
+  const k = seg.findIndex((tok, i) => i > 0 && tok.w === "with");
+  if (k < 0 || k === seg.length - 1 || (whole && commonMatch(whole.food))) return whole ? [whole] : [];
+
+  const left = itemsOf(seg.slice(0, k), source);
+  let tail = seg.slice(k + 1);
+  if (NOTHING.has(tail[0].w)) return left;
+  let j = 0;
+  while (j < tail.length - 1 && COMPANION_LEAD.has(tail[j].w)) j++;
+  if (COMPANIONS.has(tail[j].w)) return left;
+  if (tail[0].w === "extra" && tail.length > 1) tail = tail.slice(1);
+
+  const added = itemsOf(tail, source);
+  const drink = left[left.length - 1];
+  const splash = added[0];
+  if (drink && splash && HOT_DRINKS.has(drink.food.split(" ").pop() ?? "") && SPLASHES.has(splash.food)) {
+    if (splash.unit === null && splash.quantity === 1) added[0] = { ...splash, quantity: SPLASH_TBSP, unit: "tbsp" };
+  }
+  return [...left, ...added];
+}
+
 /** Parses a voice transcript or typed text into a meal hint and food items. Never throws. */
 export function parseMeal(text: string): ParseResult {
   if (typeof text !== "string") return { meal: null, items: [] };
   const tokens = tokenize(text).filter((tok) => !HESITATIONS.has(tok.w));
   const { meal, rest } = extractMeal(tokens);
-  const items: ParsedItem[] = [];
-  for (const segment of splitItems(rest)) {
-    const item = parseItem(segment, text);
-    if (item) items.push(item);
-  }
+  const items = splitItems(rest).flatMap((segment) => itemsOf(segment, text));
   return { meal, items };
 }

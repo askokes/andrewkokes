@@ -1,6 +1,7 @@
 // A stand-in for api.nal.usda.gov, serving the recorded fixtures. Used by the
 // tests and by `npm run dev:mock`. Never imported by the production entry point.
 import foodsFile from "./foods.json";
+import adversarialFile from "./live/adversarial.json";
 import commonFile from "./live/common-foods.json";
 import searchFile from "./search.json";
 
@@ -10,6 +11,44 @@ const foods = new Map<number, Json>((foodsFile.foods as Json[]).map((f) => [f.fd
 const common = new Map<number, Json>((commonFile.foods as Json[]).map((f) => [f.fdcId as number, f]));
 const core = searchFile.foundationAndSr as Record<string, Json>;
 const branded = searchFile.branded as Record<string, Json>;
+
+// Live responses for the adversarial phrases in test/eval-live.test.ts, compacted (see its _note).
+// search.json, foods.json and common-foods.json win on overlap, so other tests see what they always did.
+type Text = string | null;
+type Row = [number, string, string, Text, Text, number | null, Text, Text, ...(number | null)[]];
+type LiveFood = { fdcId: number; dataType: string; description: string; nutrients: (number | null)[] };
+const live = adversarialFile as unknown as {
+  search: Record<"core" | "branded", Record<string, { totalHits: number; hits: Row[] }>>;
+  foods: LiveFood[];
+};
+const NUTRIENT_IDS = [1008, 1003, 1005, 1004];
+/** Search hits carry { nutrientId, value }; detail records { nutrient: { id }, amount }. */
+const nutrients = (values: (number | null)[], key: "value" | "amount") =>
+  values.flatMap((v, i) => {
+    if (v === null) return [];
+    const id = NUTRIENT_IDS[i];
+    return [key === "value" ? { nutrientId: id, value: v } : { nutrient: { id }, amount: v }];
+  });
+
+function liveSearch(scope: "core" | "branded", query: string): Json | undefined {
+  const found = live.search[scope][query];
+  if (!found) return undefined;
+  const hits = found.hits.map(([fdcId, dataType, description, brandName, brandOwner, size, sizeUnit, household, ...values]) => ({
+    fdcId,
+    dataType,
+    description,
+    brandName,
+    brandOwner,
+    servingSize: size,
+    servingSizeUnit: sizeUnit,
+    householdServingFullText: household,
+    foodNutrients: nutrients(values, "value"),
+  }));
+  return { totalHits: found.totalHits, currentPage: 1, totalPages: 1, foodSearchCriteria: { query }, foods: hits };
+}
+const liveFoods = new Map<number, Json>(
+  live.foods.map(({ nutrients: values, ...food }) => [food.fdcId, { ...food, foodNutrients: nutrients(values, "amount") }]),
+);
 
 export interface FakeUsdaOptions {
   /** Answer every request with 429, like an exhausted API key. */
@@ -51,8 +90,9 @@ export function createFakeUsda(options: FakeUsdaOptions = {}): FakeUsda {
     if (path === "/fdc/v1/foods/search") {
       const query = (url.searchParams.get("query") ?? "").trim().toLowerCase();
       const types = url.searchParams.getAll("dataType").flatMap((t) => t.split(",")).map((t) => t.trim());
-      const table = types.includes("Branded") ? branded : core;
-      return json(table[query] ?? emptySearch(query));
+      const scope = types.includes("Branded") ? "branded" : "core";
+      const table = scope === "branded" ? branded : core;
+      return json(table[query] ?? liveSearch(scope, query) ?? emptySearch(query));
     }
     if (path === "/fdc/v1/foods") {
       const ids = url.searchParams
@@ -60,7 +100,7 @@ export function createFakeUsda(options: FakeUsdaOptions = {}): FakeUsda {
         .flatMap((v) => v.split(","))
         .map((v) => Number(v.trim()))
         .filter(Number.isFinite);
-      return json(ids.map((id) => foods.get(id) ?? common.get(id)).filter(Boolean));
+      return json(ids.map((id) => foods.get(id) ?? common.get(id) ?? liveFoods.get(id)).filter(Boolean));
     }
     const one = path.match(/^\/fdc\/v1\/food\/(\d+)$/);
     if (one) {

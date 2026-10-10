@@ -94,6 +94,10 @@ describe("parseMeal: units", () => {
     ["2 tsp honey", one(2, "tsp", "honey", "2 tsp honey")],
     ["two slices of toast", one(2, "slice", "toast", "two slices of toast")],
     ["a slice of pizza", one(1, "slice", "pizza", "a slice of pizza")],
+    ["a scoop of protein powder", one(1, "scoop", "protein powder", "a scoop of protein powder")],
+    ["two scoops of ice cream", one(2, "scoop", "ice cream", "two scoops of ice cream")],
+    ["a spoonful of nutella", one(1, "tbsp", "nutella", "a spoonful of nutella")],
+    ["2 spoonfuls of peanut butter", one(2, "tbsp", "peanut butter", "2 spoonfuls of peanut butter")],
     ["three pieces of chicken", one(3, "piece", "chicken", "three pieces of chicken")],
     ["a large egg", one(1, "large", "egg", "a large egg")],
     ["two large eggs", one(2, "large", "eggs", "two large eggs")],
@@ -175,9 +179,47 @@ describe("parseMeal: several items", () => {
     ["bacon and eggs", result(null, item(1, null, "bacon", "bacon"), item(1, null, "eggs", "eggs"))],
     ["eggs and bacon", result(null, item(1, null, "eggs", "eggs"), item(1, null, "bacon", "bacon"))],
     ["eggs + toast", result(null, item(1, null, "eggs", "eggs"), item(1, null, "toast", "toast"))],
-    // Plain "with" keeps one item; only "with a side of" splits.
-    ["toast with butter", one(1, null, "toast with butter", "toast with butter")],
-    ["a burger with fries", one(1, null, "burger with fries", "a burger with fries")],
+    // "With" joins two foods, each with its own amount.
+    ["toast with butter", result(null, item(1, null, "toast", "toast"), item(1, null, "butter", "butter"))],
+    ["a burger with fries", result(null, item(1, null, "burger", "a burger"), item(1, null, "fries", "fries"))],
+    [
+      "a bagel with cream cheese",
+      result(null, item(1, null, "bagel", "a bagel"), item(1, null, "cream cheese", "cream cheese")),
+    ],
+    [
+      "an apple with peanut butter",
+      result(null, item(1, null, "apple", "an apple"), item(1, null, "peanut butter", "peanut butter")),
+    ],
+    [
+      "toast with 2 tablespoons of peanut butter",
+      result(null, item(1, null, "toast", "toast"), item(2, "tbsp", "peanut butter", "2 tablespoons of peanut butter")),
+    ],
+    [
+      "pancakes with butter with syrup",
+      result(
+        null,
+        item(1, null, "pancakes", "pancakes"),
+        item(1, null, "butter", "butter"),
+        item(1, null, "syrup", "syrup"),
+      ),
+    ],
+    // Milk or cream in a hot drink is a splash.
+    [
+      "a cup of coffee with milk",
+      result(null, item(1, "cup", "coffee", "a cup of coffee"), item(2, "tbsp", "milk", "milk")),
+    ],
+    [
+      "tea with a cup of milk",
+      result(null, item(1, null, "tea", "tea"), item(1, "cup", "milk", "a cup of milk")),
+    ],
+    // A dish the common-foods table names whole stays one item.
+    ["spaghetti with meat sauce", one(1, null, "spaghetti with meat sauce", "spaghetti with meat sauce")],
+    ["nachos with cheese", one(1, null, "nachos with cheese", "nachos with cheese")],
+    ["beef with broccoli", one(1, null, "beef with broccoli", "beef with broccoli")],
+    // Company and leftouts aren't food.
+    ["pizza with my friends", one(1, null, "pizza", "pizza")],
+    ["a burger with no pickles", one(1, null, "burger", "a burger")],
+    ["a burger with extra cheese", result(null, item(1, null, "burger", "a burger"), item(1, null, "cheese", "cheese"))],
   ])("%j", (text, expected) => {
     expect(parseMeal(text)).toEqual(expected);
   });
@@ -203,7 +245,13 @@ describe("parseMeal: compound foods stay whole", () => {
     ],
     ["half a cup of mac and cheese", one(0.5, "cup", "mac and cheese", "half a cup of mac and cheese")],
     ["half and half", one(1, null, "half and half", "half and half")],
-    ["coffee with half and half", one(1, null, "coffee with half and half", "coffee with half and half")],
+    [
+      "coffee with half and half",
+      result(null, item(1, null, "coffee", "coffee"), item(2, "tbsp", "half and half", "half and half")),
+    ],
+    ["beef and broccoli", one(1, null, "beef and broccoli", "beef and broccoli")],
+    ["a bacon egg and cheese", one(1, null, "bacon egg and cheese", "a bacon egg and cheese")],
+    ["a sausage egg & cheese", one(1, null, "sausage egg and cheese", "a sausage egg & cheese")],
     ["two tablespoons of half and half", one(2, "tbsp", "half and half", "two tablespoons of half and half")],
     [
       "fish and chips and a coke",
@@ -288,7 +336,7 @@ describe("parseMeal: meal hints", () => {
     ],
     [
       "a bowl of cereal with milk for breakfast",
-      result("breakfast", item(1, null, "cereal with milk", "a bowl of cereal with milk")),
+      result("breakfast", item(1, null, "cereal", "a bowl of cereal"), item(1, null, "milk", "milk")),
     ],
     ["a granola bar as a snack", result("snack", item(1, null, "granola bar", "a granola bar"))],
     ["a protein bar as a snack", result("snack", item(1, null, "protein bar", "a protein bar"))],
@@ -322,7 +370,10 @@ describe("parseMeal: meal hints", () => {
     // Dessert is removed from the food but doesn't pick a meal.
     ["ice cream for dessert", one(1, null, "ice cream", "ice cream")],
     // Meal words that are part of the food stay in the food.
-    ["pancakes with breakfast sausage", one(1, null, "pancakes with breakfast sausage", "pancakes with breakfast sausage")],
+    [
+      "pancakes with breakfast sausage",
+      result(null, item(1, null, "pancakes", "pancakes"), item(1, null, "breakfast sausage", "breakfast sausage")),
+    ],
     ["a breakfast burrito", one(1, null, "breakfast burrito", "a breakfast burrito")],
     ["two dinner rolls", one(2, null, "dinner rolls", "two dinner rolls")],
     ["a snack bar", one(1, null, "snack bar", "a snack bar")],
