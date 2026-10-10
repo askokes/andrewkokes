@@ -26,6 +26,11 @@ can, a container); anything else is USDA's search, reranked by `rankHits` in `sr
 `test/eval-live.test.ts` scores both against independently labeled live USDA results
 (`test/fixtures/usda/live`).
 
+**Deviations from SPEC.md (pending Andrew's OK):** section 6 says to search with `pageSize=10`; the app
+asks for 50, because USDA's ranking often leaves the everyday food out of the top 10 (still one call).
+And the common-foods table above is an addition: it answers everyday phrases before USDA's search.
+SPEC.md itself is unchanged.
+
 Every write (POST, PUT, PATCH) must send `Content-Type: application/json`, and writes a browser
 marks as started by another site (`Sec-Fetch-Site`) are refused, so other pages can't post to the
 API with a family member's sign-in.

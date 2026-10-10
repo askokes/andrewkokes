@@ -114,11 +114,10 @@ Use Wrangler migrations (`migrations/0001_init.sql`).
 ## 6. USDA integration
 
 Endpoints used:
-- `GET https://api.nal.usda.gov/fdc/v1/foods/search?query=...&dataType=Foundation,SR Legacy&pageSize=50&api_key=...` (50 hits to rank; details are fetched only for the few shown)
+- `GET https://api.nal.usda.gov/fdc/v1/foods/search?query=...&dataType=Foundation,SR Legacy&pageSize=10&api_key=...`
 - `GET https://api.nal.usda.gov/fdc/v1/food/{fdcId}?api_key=...` for portion data
 
 Rules:
-- Everyday phrases in the common-foods table (`src/food/common.ts`: "rice", "milk", "a coke") go straight to the record people mean, followed by its alternatives; search results fill the rest of the list. USDA's own ranking is poor for short words ("rice" has no cooked rice in its top 50).
 - Search Foundation and SR Legacy first (generic foods like "chicken breast"). Only fall back to Branded if nothing reasonable comes back, or if the user names a brand.
 - Nutrient IDs: energy kcal `1008` (if absent on Foundation foods, use `2047` or `2048`), protein `1003`, total fat `1004`, carbohydrate `1005`. Values are per 100 g for Foundation and SR Legacy.
 - Cache every food the app uses in `usda_cache` so repeat lookups never hit the API.
@@ -141,7 +140,7 @@ Flow:
 
 Unit conversion:
 - Weight units convert directly (1 oz = 28.3495 g, 1 lb = 453.592 g).
-- Volume and count units ("cup", "large", "slice", unitless "egg") use the USDA `foodPortions` gram weights for that food, plus the everyday units the common-foods table adds (a can of soda, a container of yogurt). A unitless mention of a table food uses the table's unit ("two eggs" are large eggs, "a soda" is a can). If no portion matches, default to one standard serving (100 g) and flag it on the confirm card so the user can fix it.
+- Volume and count units ("cup", "large", "slice", unitless "egg") use the USDA `foodPortions` gram weights for that food. If no portion matches, default to one standard serving (100 g) and flag it on the confirm card so the user can fix it.
 
 Parsing should be deterministic rule-based code with unit tests. No LLM in v1.
 
