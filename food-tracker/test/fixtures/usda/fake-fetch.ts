@@ -1,10 +1,13 @@
 // A stand-in for api.nal.usda.gov, serving the recorded fixtures. Used by the
 // tests and by `npm run dev:mock`. Never imported by the production entry point.
 import foodsFile from "./foods.json";
+import commonFile from "./live/common-foods.json";
 import searchFile from "./search.json";
 
 type Json = Record<string, unknown>;
 const foods = new Map<number, Json>((foodsFile.foods as Json[]).map((f) => [f.fdcId as number, f]));
+/** Real records for every food in src/food/common.ts. Only the bulk endpoint serves them; foods.json wins on overlap. */
+const common = new Map<number, Json>((commonFile.foods as Json[]).map((f) => [f.fdcId as number, f]));
 const core = searchFile.foundationAndSr as Record<string, Json>;
 const branded = searchFile.branded as Record<string, Json>;
 
@@ -57,7 +60,7 @@ export function createFakeUsda(options: FakeUsdaOptions = {}): FakeUsda {
         .flatMap((v) => v.split(","))
         .map((v) => Number(v.trim()))
         .filter(Number.isFinite);
-      return json(ids.map((id) => foods.get(id)).filter(Boolean));
+      return json(ids.map((id) => foods.get(id) ?? common.get(id)).filter(Boolean));
     }
     const one = path.match(/^\/fdc\/v1\/food\/(\d+)$/);
     if (one) {
