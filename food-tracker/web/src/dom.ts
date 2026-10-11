@@ -27,6 +27,8 @@ const ICONS = {
   back: "M15 5l-7 7 7 7",
   forward: "M9 5l7 7-7 7",
   chevron: "M9 6l6 6-6 6",
+  // Feather "mic" (MIT): capsule, cradle, stand.
+  mic: "M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" + "M19 10v2a7 7 0 0 1-14 0v-2" + "M12 19v3" + "M8 22h8",
   // Feather "settings" (MIT): the hub circle, then the toothed rim.
   gear:
     "M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" +

@@ -4,6 +4,24 @@ Plain steps. If anything looks wrong, take a screenshot and send it to Andrew.
 
 Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com".
 
+## Voice and drinks
+
+1. On Today, find the round **mic button** between the food box and **Add**.
+2. Tap it. The first time, your phone asks to use the microphone. Tap **Allow**.
+3. The mic turns solid green and pulses. Say **two eggs and a banana for breakfast**. Your words should show up in the box as you talk.
+4. Stop talking. After a second the **Check and add** screen should open with eggs and a banana, and **Breakfast** picked. Nothing is saved until you tap **Add**.
+5. Tap the mic and say nothing. It should say it didn't catch that.
+6. Tap the mic, start talking, then tap it again. It should stop and use what it heard.
+7. Say a few drinks: **a Blue Moon**, **two Bud Lights**, **a pint of Michelob Ultra**, **a glass of wine**, **a White Claw**. Each should come up as a beer, wine or seltzer with calories, not soda or something random.
+8. Typing still works the same as before.
+
+If the mic button is missing, your browser doesn't support voice. Use Safari on iPhone or Chrome on Android. If you tapped **Don't Allow** by mistake on iPhone: tap **aA** in the address bar, then **Website Settings**, then set **Microphone** to **Allow**.
+
+### Tell Andrew
+
+- Did it hear you right? Write down anything it got wrong, word for word.
+- Did any drink match something weird?
+
 ## Dashboard and weight
 
 1. Open the app. Under the date you should see **Today | Week | Month**.

@@ -6,6 +6,7 @@ import type { Go } from "../nav";
 import type { Period } from "../progress";
 import { clearProgressCache, progressCard, weighInCard } from "./dashboard";
 import { openEditSheet } from "./editEntry";
+import { listen, voiceErrorMessage, voiceSupported, type Listening } from "../voice";
 
 // Days already seen this session, so going back to one paints instantly while it refreshes.
 const days = new Map<string, DayView>();
@@ -247,25 +248,70 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
     attrs: { enterkeyhint: "send", autocomplete: "off", "aria-describedby": "food-text-msg" },
   });
   const add = el("button", { type: "submit", className: "button", textContent: "Add" });
+  // Voice: hidden where the browser has no speech recognition; the text box does the same job.
+  const mic = el(
+    "button",
+    { type: "button", className: "mic", hidden: !voiceSupported(), attrs: { "aria-label": "Say what you ate", "aria-pressed": "false" } },
+    icon("mic"),
+  );
   const formMsg = el("p", { id: "food-text-msg", className: "form-msg", attrs: { "aria-live": "polite" } });
   const working = el("p", { className: "hint sr-only-empty", attrs: { role: "status" } });
   const form = el(
     "form",
     { className: "card add-form", noValidate: true },
     el("label", { htmlFor: "food-text", className: "add-label", textContent: "What did you eat?" }),
-    el(
-      "div",
-      { className: "input-row" },
-      input,
-      // Phase 4: the mic button goes here, between the text box and Add.
-      add,
-    ),
+    el("div", { className: "input-row" }, input, mic, add),
     working,
     formMsg,
   );
   input.addEventListener("input", () => {
     draft = input.value;
     formMsg.textContent = "";
+  });
+
+  let listening: Listening | null = null;
+  const setListening = (on: boolean) => {
+    mic.classList.toggle("listening", on);
+    mic.setAttribute("aria-pressed", String(on));
+    mic.setAttribute("aria-label", on ? "Stop listening" : "Say what you ate");
+    input.placeholder = on ? "Listening…" : "two eggs and toast";
+    working.textContent = on ? "Listening. Say what you ate, like “two eggs and toast”." : "";
+  };
+  mic.addEventListener("click", () => {
+    if (listening) {
+      listening.stop();
+      return;
+    }
+    formMsg.textContent = "";
+    input.value = "";
+    setListening(true);
+    listening = listen({
+      // Words appear in the box as they're heard.
+      onWords: (text) => {
+        input.value = text;
+        draft = text;
+      },
+      // The same path as typing: straight to the confirm screen.
+      onDone: (text) => {
+        if (!form.isConnected) return;
+        if (!text) {
+          formMsg.textContent = voiceErrorMessage("no-speech");
+          return;
+        }
+        input.value = text;
+        draft = text;
+        form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true }));
+      },
+      onError: (code) => {
+        const message = voiceErrorMessage(code);
+        if (message) formMsg.textContent = message;
+      },
+      onEnd: () => {
+        listening = null;
+        setListening(false);
+      },
+    });
+    if (!listening) setListening(false);
   });
   form.addEventListener("submit", async (event) => {
     event.preventDefault();

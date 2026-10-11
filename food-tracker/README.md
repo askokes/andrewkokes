@@ -2,7 +2,13 @@
 
 Voice-first food logging for family and friends. `SPEC.md` is the source of truth.
 
-**Status:** Phase 3 (food logging by text: parser, USDA lookup with caching, confirm screen, Today with totals). Live at https://food.pivotaiglobal.com.
+**Status:** Phases 1 to 5 (voice, and weight with the dashboard) are live at https://food.pivotaiglobal.com.
+Phase 6 (history, export CSV, delete account, polish) is next.
+
+Voice (`web/src/voice.ts`): a round mic button between the food box and Add, hidden where the browser
+has no `SpeechRecognition` / `webkitSpeechRecognition`. Words show in the box as they're heard, and
+the final transcript goes through the same `POST /api/parse` and confirm screen as typing. The mic
+sits beside the text box at the same height as Add rather than as a separate, larger button.
 
 API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/foods/search`,
 `GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/summary`, `GET/POST /api/weight`,
