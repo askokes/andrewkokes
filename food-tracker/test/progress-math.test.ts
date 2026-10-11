@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { DaySummary, WeightEntry } from "../src/food/types";
-import { macroCalories, movingAverage, periodStats, summarySentence } from "../web/src/progress";
+import { greeting, loggedStreak, macroCalories, movingAverage, periodStats, summarySentence } from "../web/src/progress";
 
 const day = (date: string, calories: number, entries = calories > 0 ? 1 : 0, proteinG = 0): DaySummary => ({
   date, calories, proteinG, carbsG: 0, fatG: 0, entries, goal: { calories: 2000, proteinG: 120, carbsG: null, fatG: null },
@@ -65,5 +65,31 @@ describe("summarySentence", () => {
 describe("macroCalories", () => {
   it("uses 4, 4 and 9 calories per gram", () => {
     expect(macroCalories({ ...day("2026-10-11", 0), proteinG: 10, carbsG: 20, fatG: 5 })).toEqual({ protein: 40, carbs: 80, fat: 45 });
+  });
+});
+
+describe("loggedStreak", () => {
+  const days = (logged: boolean[]) => logged.map((l, i) => day(`2026-10-${String(i + 1).padStart(2, "0")}`, l ? 1500 : 0));
+
+  it("counts back from today when today is logged", () => {
+    expect(loggedStreak(days([false, true, true, true]), "2026-10-04")).toBe(3);
+  });
+
+  it("counts back from yesterday while today is still empty", () => {
+    expect(loggedStreak(days([true, true, true, false]), "2026-10-04")).toBe(3);
+  });
+
+  it("is zero after a missed day", () => {
+    expect(loggedStreak(days([true, true, false, false]), "2026-10-04")).toBe(0);
+  });
+});
+
+describe("greeting", () => {
+  it("follows the clock and uses the first name", () => {
+    expect(greeting(8, "Emma Kokes")).toBe("Good morning, Emma");
+    expect(greeting(13, "Emma")).toBe("Good afternoon, Emma");
+    expect(greeting(19, "Emma")).toBe("Good evening, Emma");
+    expect(greeting(2, "Emma")).toBe("Hi, Emma");
+    expect(greeting(8, "  ")).toBe("Good morning!");
   });
 });

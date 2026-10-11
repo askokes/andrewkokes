@@ -4,25 +4,29 @@ Plain steps. If anything looks wrong, take a screenshot and send it to Andrew.
 
 Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com".
 
-## New layout: three tabs
+## New layout: three tabs and a big mic
 
-1. Open the app. You should land on **Overview**, with three tabs along the bottom: **Overview**, **Diary** and **Goals**. The app is always light, even if your phone is in dark mode.
-2. Tap **Diary**. You should see today's total, the food box with the mic, and what you've eaten so far.
-3. Tap the back arrow to see yesterday. Tap **Diary** at the bottom again: it goes back to today.
-4. Tap **Goals**. Change your calorie goal and tap **Save changes**. It should say **Saved.** Tap **Overview**: the new goal shows there.
-5. Tap in the food box on Diary. While the keyboard is up, the tabs hide so you have room to type.
-6. Add a food. The **Check and add** screen has no tabs; after **Add** you're back on Diary.
+1. Open the app. You should land on **Overview**, with three tabs along the bottom: **Overview**, **Diary** and **Goals**, and a big green **mic** just above them in the middle. The app is always light, even if your phone is in dark mode.
+2. The top should greet you by name ("Good morning, ..."). Once you've logged two days in a row, a small 🌱 count shows under the date.
+3. On **Today**, a big ring shows calories, and three smaller rings show protein (mint), carbs (apricot) and fat (lavender). Past a goal, a ring closes in a soft tan, never red.
+4. Tap **Diary**. You should see today's total, the food box, and what you've eaten so far, each food with a little picture (🥚 eggs, 🍌 banana, 🍺 beer). Foods it has no picture for get a plate.
+5. Tap the back arrow to see yesterday. Tap **Diary** at the bottom again: it goes back to today.
+6. Log something for breakfast, lunch and dinner on the same day. When the third one goes in, a little confetti burst should pop once.
+7. Tap **Goals**. Change your calorie goal and tap **Save changes**. It should say **Saved.** Tap **Overview**: the new goal shows there.
+8. Tap in the food box on Diary. While the keyboard is up, the tabs and mic hide so you have room to type.
+9. Add a food. The **Check and add** screen has no tabs; after **Add** you're back on Diary.
 
 ### Tell Andrew
 
 - Is it obvious where to go to log food?
 - Anything you looked for and couldn't find?
+- Any food with a silly picture? Write down the food.
 
 ## Voice and drinks
 
-1. On the **Diary** tab, find the round **mic button** between the food box and **Add**.
-2. Tap it. The first time, your phone asks to use the microphone. Tap **Allow**.
-3. The mic turns solid green and pulses. Say **two eggs and a banana for breakfast**. Your words should show up in the box as you talk.
+1. Tap the big green **mic** above the tabs. It works from any tab: it jumps to **Diary** and starts listening.
+2. The first time, your phone asks to use the microphone. Tap **Allow**.
+3. The mic pulses. Say **two eggs and a banana for breakfast**. Your words should show up in the box as you talk.
 4. Stop talking. After a second the **Check and add** screen should open with eggs and a banana, and **Breakfast** picked. Nothing is saved until you tap **Add**.
 5. Tap the mic and say nothing. It should say it didn't catch that.
 6. Tap the mic, start talking, then tap it again. It should stop and use what it heard.

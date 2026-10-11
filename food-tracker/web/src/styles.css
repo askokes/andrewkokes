@@ -170,8 +170,6 @@ input[role="switch"]:checked { background: var(--accent); }
 input[role="switch"]:checked::after { transform: translateX(24px); }
 input[role="switch"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.big-number { font-size: 2.5rem; font-weight: 700; line-height: 1; margin: 0; }
-.mid-number { font-size: 1.75rem; font-weight: 700; line-height: 1; margin: 0; }
 .unit { font-size: 0.85em; font-weight: 500; color: var(--muted); }
 .account { margin-top: 8px; }
 .small { font-size: 0.9rem; }
@@ -265,16 +263,6 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .back-today { margin-left: -12px; font-size: 0.95rem; }
 .daynav { display: flex; gap: 4px; }
 
-.summary { display: flex; flex-direction: column; gap: 14px; }
-.summary:focus { outline: none; }
-.summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cal-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; }
-.cal-head p:not([class]), .cal-head .muted { font-size: 0.95rem; margin-top: 4px; }
-.cal-left { text-align: right; }
-.macros-list { display: flex; flex-direction: column; gap: 12px; padding-top: 14px; border-top: 1px solid var(--border); }
-.macro { display: flex; flex-direction: column; gap: 6px; }
-.macro-line { display: flex; justify-content: space-between; gap: 8px; font-size: 0.95rem; }
-.macro-name { font-weight: 600; }
 
 .add-form { display: flex; flex-direction: column; gap: 10px; }
 .add-label { font-size: 1.1rem; font-weight: 700; }
@@ -291,7 +279,7 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
   gap: 10px;
   width: 100%;
   min-height: 64px;
-  padding: 10px 10px 10px 16px;
+  padding: 10px 10px 10px 12px;
   border: 0;
   background: transparent;
   color: inherit;
@@ -307,6 +295,18 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
   100% { background: transparent; }
 }
 .entry:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.food-emoji {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--note-bg);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+.meal-emoji { margin-right: 8px; }
 .entry-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .entry-name {
   font-weight: 600;
@@ -483,28 +483,34 @@ body:has(dialog[open]) { overflow: hidden; }
 .data-table thead th { color: var(--muted); font-weight: 600; border-top: 0; }
 .weigh-in-current { margin: 0 0 8px; font-size: 0.9rem; }
 
-/* Voice: a round mic between the food box and Add */
-.mic {
-  flex: none;
-  width: 52px;
-  height: 52px;
+/* Voice: the big mic floats in the middle, just above the tabs */
+.mic-fab {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  transform: translateX(-50%);
+  width: 68px;
+  height: 68px;
+  border: 0;
   border-radius: 50%;
-  border: 2px solid var(--accent);
-  background: var(--surface);
-  color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
   display: grid;
   place-items: center;
   cursor: pointer;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 35%, transparent), 0 2px 4px rgba(0, 0, 0, 0.12);
+  -webkit-tap-highlight-color: transparent;
 }
-.mic[hidden] { display: none; }
-.mic .icon { width: 24px; height: 24px; }
-.mic:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.mic.listening { background: var(--accent); color: var(--accent-text); animation: mic-pulse 1.4s ease-in-out infinite; }
+.mic-fab[hidden] { display: none; }
+.mic-fab .icon { width: 30px; height: 30px; }
+.mic-fab:active { transform: translateX(-50%) scale(0.94); }
+.mic-fab:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.mic-fab.listening { animation: mic-pulse 1.4s ease-in-out infinite; }
 @keyframes mic-pulse {
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); }
-  50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 0%, transparent); }
+  50% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--accent) 0%, transparent); }
 }
-@media (prefers-reduced-motion: reduce) { .mic.listening { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .mic-fab.listening { animation: none; } }
 
 /* Page titles on Overview and Goals, sized like the Diary's day title. */
 .page-head h1 { margin: 0; font-size: 1.6rem; }
@@ -522,7 +528,8 @@ body:has(dialog[open]) { overflow: hidden; }
 .compact-macros strong { color: var(--text); font-weight: 600; }
 
 /* Bottom tab bar: Overview, Diary, Goals */
-body.has-tabs .screen { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+/* Room for the tabs and the mic above them, so the last row can scroll clear. */
+body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)); }
 .tabbar {
   position: fixed;
   left: 0;
@@ -560,3 +567,55 @@ body.has-tabs .screen { padding-bottom: calc(96px + env(safe-area-inset-bottom))
   body:has(.screen input:focus, .screen select:focus) .tabbar { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .tab-icon { transition: none; } }
+
+/* Overview: today's rings */
+.rings { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.ring { display: block; width: 100%; height: 100%; }
+.ring-track { stroke: color-mix(in srgb, var(--ring-color) 16%, var(--surface)); }
+.ring-arc { stroke: var(--ring-color); transition: stroke-dashoffset 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), stroke 0.3s; }
+.ring-arc.over { stroke: var(--over); }
+.ring-big, .ring-small { position: relative; }
+.ring-big { width: 196px; height: 196px; margin-top: 4px; }
+.ring-small { width: 84px; height: 84px; }
+.ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.ring-number { font-size: 2.6rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.ring-of { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+.ring-left { color: var(--accent); font-size: 0.95rem; font-weight: 600; }
+.ring-left.over-text { color: var(--over-text); }
+.ring-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; padding-top: 16px; border-top: 1px solid var(--border); }
+.ring-macro { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
+.ring-grams { font-size: 1.15rem; font-weight: 700; line-height: 1; }
+.ring-grams small { color: var(--muted); font-size: 0.75rem; font-weight: 600; }
+.ring-name { font-size: 0.9rem; font-weight: 600; margin-top: 8px; }
+.ring-sub { color: var(--muted); font-size: 0.8rem; }
+@media (prefers-reduced-motion: reduce) { .ring-arc { transition: none; } }
+
+/* Overview: days logged in a row */
+.page-head .streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--note-bg);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* All three meals logged */
+.confetti { position: fixed; inset: 0; z-index: 30; overflow: hidden; pointer-events: none; }
+.confetti i {
+  position: absolute;
+  top: -16px;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.25, 0.6, 0.5, 1);
+  animation-fill-mode: forwards;
+}
+@keyframes confetti-fall {
+  to { transform: translate(var(--drift), calc(100vh + 32px)) rotate(var(--spin)); }
+}

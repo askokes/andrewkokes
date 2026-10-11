@@ -96,3 +96,26 @@ export function macroCalories(d: DaySummary) {
 }
 
 export { shift as shiftDate };
+
+/**
+ * Days logged in a row, ending today, or yesterday while today is still empty
+ * (so the count doesn't vanish each morning before breakfast is logged).
+ * `days` is in date order and ends on `today`.
+ */
+export function loggedStreak(days: DaySummary[], today: string): number {
+  const logged = new Set(days.filter((d) => d.entries > 0).map((d) => d.date));
+  let date = logged.has(today) ? today : shift(today, -1);
+  let count = 0;
+  while (logged.has(date)) {
+    count++;
+    date = shift(date, -1);
+  }
+  return count;
+}
+
+/** Morning, afternoon or evening, from the hour on the phone. */
+export function greeting(hour: number, displayName: string): string {
+  const part = hour < 5 ? "Hi" : hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+  const first = displayName.trim().split(/\s+/)[0];
+  return first ? `${part}, ${first}` : `${part}!`;
+}

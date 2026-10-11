@@ -1,5 +1,6 @@
 import { el, icon } from "../dom";
 import type { Go } from "../nav";
+import { voiceSupported } from "../voice";
 
 export type Tab = "overview" | "diary" | "goals";
 
@@ -30,9 +31,16 @@ export function tabBar(go: Go) {
     });
     return { tab: t.tab as Tab, a };
   });
-  const nav = el("nav", { className: "tabbar", hidden: true, attrs: { "aria-label": "Main" } }, el("div", { className: "tabbar-inner" }, ...links.map((l) => l.a)));
+  // The big mic floats in the middle, just above the tabs. Hidden where the browser can't listen.
+  const mic = el(
+    "button",
+    { type: "button", className: "mic-fab", hidden: !voiceSupported(), attrs: { "aria-label": "Say what you ate", "aria-pressed": "false" } },
+    icon("mic"),
+  );
+  const nav = el("nav", { className: "tabbar", hidden: true, attrs: { "aria-label": "Main" } }, mic, el("div", { className: "tabbar-inner" }, ...links.map((l) => l.a)));
   return {
     nav,
+    mic,
     /** Mark the current tab, or hide the bar (first-run setup, the confirm screen). */
     show(active: Tab | null) {
       nav.hidden = active === null;

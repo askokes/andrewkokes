@@ -1,12 +1,12 @@
-import type { DayView } from "../../../src/food/types";
+import type { DayView, SummaryResponse } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
 import { el, segmented } from "../dom";
 import { fullDate, todayIn } from "../food";
 import type { Go } from "../nav";
-import type { Period } from "../progress";
+import { greeting, loggedStreak, shiftDate, type Period } from "../progress";
 import { progressCard, weighInCard } from "./dashboard";
 import { cachedDay, rememberDay } from "./diary";
-import { summaryContent } from "./summary";
+import { todayRings } from "./summary";
 
 const PERIOD_KEY = "food.period";
 
@@ -31,8 +31,12 @@ function savePeriod(p: Period) {
 
 /** Today's totals against the goals, from the same day data the Diary uses. */
 function todayCard(today: string): HTMLElement {
-  const card = el("section", { className: "card summary", attrs: { "aria-label": "Today's totals" } });
-  const paint = (day: DayView) => card.replaceChildren(...summaryContent(day));
+  const card = el("section", { className: "card today-card", attrs: { "aria-label": "Today's totals" } });
+  const rings = todayRings();
+  const paint = (day: DayView) => {
+    if (rings.node.parentNode !== card) card.replaceChildren(rings.node);
+    rings.paint(day);
+  };
   const load = async () => {
     const cached = cachedDay(today);
     if (cached) paint(cached);
@@ -54,6 +58,23 @@ function todayCard(today: string): HTMLElement {
   };
   load();
   return card;
+}
+
+/** How far back the days-in-a-row count looks; longer shows as "60+". */
+const STREAK_DAYS = 60;
+
+/** "🌱 5 days in a row", once there are two. Counts logging, nothing about amounts. */
+function streakPill(today: string): HTMLElement {
+  const pill = el("p", { className: "streak", hidden: true });
+  api<SummaryResponse>("GET", `/api/summary?from=${shiftDate(today, -(STREAK_DAYS - 1))}&to=${today}`)
+    .then((r) => {
+      const n = loggedStreak(r.days, r.today);
+      if (n < 2) return;
+      pill.replaceChildren(el("span", { textContent: "🌱", attrs: { "aria-hidden": "true" } }), ` ${n >= STREAK_DAYS - 1 ? `${STREAK_DAYS}+` : n} days logged in a row`);
+      pill.hidden = false;
+    })
+    .catch(() => {});
+  return pill;
 }
 
 /** The home tab: today's totals or the Week / Month chart, and the weigh-in when weight tracking is on. */
@@ -83,7 +104,13 @@ export function overviewView({ me, go }: { me: Me; go: Go }): Node[] {
   const weighIn = me.trackWeight ? weighInCard({ today, onSaved: () => period !== "today" && show() }) : null;
 
   return [
-    el("header", { className: "page-head" }, el("h1", { textContent: "Overview" }), el("p", { className: "muted", textContent: fullDate(today, today) })),
+    el(
+      "header",
+      { className: "page-head" },
+      el("h1", { textContent: greeting(new Date().getHours(), me.displayName) }),
+      el("p", { className: "muted", textContent: fullDate(today, today) }),
+      streakPill(today),
+    ),
     el("div", { className: "stack" }, switcher, slot, weighIn),
   ];
 }

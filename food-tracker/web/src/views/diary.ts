@@ -1,6 +1,8 @@
 import type { DayView, EntryView, Meal, ParseResponse } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
 import { el, icon } from "../dom";
+import { confetti } from "../confetti";
+import { foodEmoji, MEAL_EMOJI, OTHER_MEAL_EMOJI } from "../emoji";
 import { addDays, amountText, dayPath, dayTitle, friendlyName, fullDate, MEAL_LABELS, MEAL_ORDER, todayIn, whole } from "../food";
 import type { Go } from "../nav";
 import { listen, voiceErrorMessage, voiceSupported, type Listening } from "../voice";
@@ -14,6 +16,20 @@ const days = new Map<string, DayView>();
 let draft = "";
 // Set when the confirm screen saves; the next Diary render for that date shows it once.
 let justAdded: { date: string; count: number; meal: Meal | null; ids: number[]; at: number } | null = null;
+
+// The diary on screen answers the center mic in the tab bar; each new diary takes it over.
+let voice: { toggle(): void; stop(): void } | null = null;
+let voiceSession = 0;
+
+/** The center mic was tapped: start listening on the diary on screen, or stop if it already is. */
+export function toggleDiaryVoice() {
+  voice?.toggle();
+}
+
+/** Leaving the screen: stop listening (what was heard so far is dropped). */
+export function stopDiaryVoice() {
+  voice?.stop();
+}
 
 /** How long the "Added" note stays; the `.entry.new` highlight in styles.css lasts as long. */
 const NOTICE_MS = 3000;
@@ -35,10 +51,39 @@ export function noteAdded(date: string, info: { count: number; meal: Meal | null
   justAdded = { date, ...info, at: performance.now() };
 }
 
+const CELEBRATED_KEY = "food.celebrated";
+// Also kept in memory, for when the browser won't store it.
+const celebrated = new Set<string>();
+
+function allThreeMeals(day: DayView) {
+  return (["breakfast", "lunch", "dinner"] as const).every((m) => day.entries.some((e) => e.meal === m));
+}
+
+/** True the first time `date` gets its confetti on this phone. */
+function firstCelebration(date: string) {
+  let stored: string[] = [];
+  try {
+    stored = JSON.parse(localStorage.getItem(CELEBRATED_KEY) ?? "[]");
+    if (!Array.isArray(stored)) stored = [];
+  } catch {
+    stored = [];
+  }
+  if (celebrated.has(date) || stored.includes(date)) return false;
+  celebrated.add(date);
+  try {
+    localStorage.setItem(CELEBRATED_KEY, JSON.stringify([...stored, date].slice(-14)));
+  } catch {
+    // Remembered for this visit only.
+  }
+  return true;
+}
+
 interface DiaryOpts {
   me: Me;
   date: string;
   go: Go;
+  /** The center mic in the tab bar, which shows when it's listening. */
+  mic: HTMLButtonElement;
   openConfirm: (parsed: ParseResponse, text: string, date: string, today: string) => void;
 }
 
@@ -46,6 +91,7 @@ function entryRow(entry: EntryView, onTap: (entry: EntryView) => void, highlight
   const button = el(
     "button",
     { type: "button", className: "entry", dataset: { id: String(entry.id) } },
+    el("span", { className: "food-emoji", textContent: foodEmoji(entry.foodName, entry.usdaName), attrs: { "aria-hidden": "true" } }),
     el(
       "span",
       { className: "entry-main" },
@@ -84,14 +130,19 @@ function entryGroups(day: DayView, onTap: (entry: EntryView) => void, highlight:
       el(
         "section",
         { className: "meal-group" },
-        el("div", { className: "meal-head" }, el("h2", { textContent: label }), el("span", { className: "muted", textContent: `${whole(calories)} cal` })),
+        el(
+          "div",
+          { className: "meal-head" },
+          el("h2", {}, el("span", { className: "meal-emoji", textContent: meal ? MEAL_EMOJI[meal] : OTHER_MEAL_EMOJI, attrs: { "aria-hidden": "true" } }), label),
+          el("span", { className: "muted", textContent: `${whole(calories)} cal` }),
+        ),
         el("ul", { className: "card entry-list" }, ...entries.map((e) => entryRow(e, onTap, highlight))),
       ),
     ];
   });
 }
 
-export function diaryView({ me, date, go, openConfirm }: DiaryOpts): Node[] {
+export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[] {
   let today = days.get(date)?.today ?? todayIn(me.timezone);
   const added = justAdded?.date === date ? justAdded : null;
   justAdded = null;
@@ -139,19 +190,14 @@ export function diaryView({ me, date, go, openConfirm }: DiaryOpts): Node[] {
     attrs: { enterkeyhint: "send", autocomplete: "off", "aria-describedby": "food-text-msg" },
   });
   const add = el("button", { type: "submit", className: "button", textContent: "Add" });
-  // Voice: hidden where the browser has no speech recognition; the text box does the same job.
-  const mic = el(
-    "button",
-    { type: "button", className: "mic", hidden: !voiceSupported(), attrs: { "aria-label": "Say what you ate", "aria-pressed": "false" } },
-    icon("mic"),
-  );
   const formMsg = el("p", { id: "food-text-msg", className: "form-msg", attrs: { "aria-live": "polite" } });
   const working = el("p", { className: "hint sr-only-empty", attrs: { role: "status" } });
   const form = el(
     "form",
     { className: "card add-form", noValidate: true },
     el("label", { htmlFor: "food-text", className: "add-label", textContent: "What did you eat?" }),
-    el("div", { className: "input-row" }, input, mic, add),
+    el("div", { className: "input-row" }, input, add),
+    voiceSupported() ? el("p", { className: "hint", textContent: "Or tap the green mic below and say it." }) : null,
     working,
     formMsg,
   );
@@ -160,6 +206,7 @@ export function diaryView({ me, date, go, openConfirm }: DiaryOpts): Node[] {
     formMsg.textContent = "";
   });
 
+  // ---- voice, from the center mic
   let listening: Listening | null = null;
   const setListening = (on: boolean) => {
     mic.classList.toggle("listening", on);
@@ -168,11 +215,13 @@ export function diaryView({ me, date, go, openConfirm }: DiaryOpts): Node[] {
     input.placeholder = on ? "Listening…" : "two eggs and toast";
     working.textContent = on ? "Listening. Say what you ate, like “two eggs and toast”." : "";
   };
-  mic.addEventListener("click", () => {
+  const toggle = () => {
     if (listening) {
       listening.stop();
       return;
     }
+    if (add.disabled) return; // still looking up the last one
+    const mine = ++voiceSession;
     formMsg.textContent = "";
     input.value = "";
     setListening(true);
@@ -199,11 +248,14 @@ export function diaryView({ me, date, go, openConfirm }: DiaryOpts): Node[] {
       },
       onEnd: () => {
         listening = null;
-        setListening(false);
+        // A newer session (on another diary) owns the mic now; leave it alone.
+        if (mine === voiceSession) setListening(false);
       },
     });
-    if (!listening) setListening(false);
-  });
+    if (!listening && mine === voiceSession) setListening(false);
+  };
+  voice = { toggle, stop: () => listening?.stop() };
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const text = input.value.trim();
@@ -241,8 +293,16 @@ export function diaryView({ me, date, go, openConfirm }: DiaryOpts): Node[] {
   const page = el("div", { className: "stack" }, summary, form, list);
 
   if (added) {
-    const what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}${added.meal ? ` to ${MEAL_LABELS[added.meal]}` : ""}. Nice!`;
-    const notice = el("p", { className: "notice", textContent: what, attrs: { "aria-hidden": "true" } });
+    let what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}${added.meal ? ` to ${MEAL_LABELS[added.meal]}` : ""}. Nice!`;
+    let shown = what;
+    // Breakfast, lunch and dinner all in: a little party, once per day.
+    const day = days.get(date);
+    if (day && allThreeMeals(day) && firstCelebration(date)) {
+      what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}. That's breakfast, lunch and dinner!`;
+      shown = `${what} 🎉`;
+      confetti();
+    }
+    const notice = el("p", { className: "notice", textContent: shown, attrs: { "aria-hidden": "true" } });
     page.prepend(notice);
     announce(what);
     setTimeout(() => {

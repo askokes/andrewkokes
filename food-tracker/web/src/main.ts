@@ -6,7 +6,7 @@ import { isIsoDate, todayIn } from "./food";
 import { handleOverlayPop, type Go, type NavState } from "./nav";
 import { confirmView, type Added } from "./views/confirm";
 import { clearProgressCache } from "./views/dashboard";
-import { cachedDay, clearDraft, diaryView, noteAdded, rememberDay } from "./views/diary";
+import { cachedDay, clearDraft, diaryView, noteAdded, rememberDay, stopDiaryVoice, toggleDiaryVoice } from "./views/diary";
 import { goalsView } from "./views/goals";
 import { overviewView } from "./views/overview";
 import { setupView } from "./views/setup";
@@ -52,6 +52,12 @@ const go: Go = (path, opts = {}) => {
 
 const tabs = tabBar(go);
 document.body.append(tabs.nav);
+tabs.mic.addEventListener("click", () => {
+  // From Overview or Goals, the mic opens today's Diary and listens there, all in this tap
+  // (browsers only start the microphone from a tap).
+  if (!location.pathname.startsWith("/diary")) go("/diary", { replace: true });
+  toggleDiaryVoice();
+});
 
 /** Profile saved: first run moves on to the Overview; on the Goals tab the form stays and says so. */
 function saved(next: Me) {
@@ -90,6 +96,7 @@ function openConfirm(parsed: ParseResponse, text: string, date: string, today: s
 }
 
 function route() {
+  stopDiaryVoice();
   if (!me) {
     tabs.show(null);
     render(setupView(saved));
@@ -133,7 +140,7 @@ function route() {
   // Today (or a day that hasn't come yet) lives at /diary; a day that isn't a date goes home.
   if (date !== undefined && !(isIsoDate(date) && date < today)) return go(isIsoDate(date) ? "/diary" : "/", { replace: true });
   tabs.show("diary");
-  render(diaryView({ me, date: date ?? today, go, openConfirm }));
+  render(diaryView({ me, date: date ?? today, go, mic: tabs.mic, openConfirm }));
 }
 
 function showError(message: string) {

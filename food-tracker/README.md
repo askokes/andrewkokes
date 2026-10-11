@@ -5,10 +5,17 @@ Voice-first food logging for family and friends. `SPEC.md` is the source of trut
 **Status:** Phases 1 to 5 (voice, and weight with the dashboard) are live at https://food.pivotaiglobal.com.
 Phase 6 (history, export CSV, delete account, polish) is next.
 
-Voice (`web/src/voice.ts`): a round mic button between the food box and Add, hidden where the browser
-has no `SpeechRecognition` / `webkitSpeechRecognition`. Words show in the box as they're heard, and
-the final transcript goes through the same `POST /api/parse` and confirm screen as typing. The mic
-sits beside the text box at the same height as Add rather than as a separate, larger button.
+Voice (`web/src/voice.ts`): a big round mic floats in the middle, just above the tabs, hidden where
+the browser has no `SpeechRecognition` / `webkitSpeechRecognition`. From any tab it opens the Diary
+and listens in the same tap. Words show in the food box as they're heard, and the final transcript
+goes through the same `POST /api/parse` and confirm screen as typing.
+
+Fun touches Andrew picked: Overview greets by first name and time of day, shows "N days logged in a
+row" once there are two (it counts logging, never amounts), and draws today as a big calorie ring with
+protein, carbs and fat rings in the chart colors (past a goal a ring closes in the neutral "over"
+color). The Diary gives each meal and food a little emoji (`web/src/emoji.ts`, decoration only), and
+a short confetti burst plays once per day when breakfast, lunch and dinner are all logged (skipped for
+reduced motion).
 
 API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/foods/search`,
 `GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/summary`, `GET/POST /api/weight`,
