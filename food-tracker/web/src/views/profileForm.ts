@@ -1,5 +1,6 @@
 import { api, ApiError, type Me } from "../api";
 import { el } from "../dom";
+import { US_TIME_ZONES, usZoneFor } from "../timezones";
 
 const LOW_CALORIE_NOTE =
   "That's lower than most adults need. It's worth checking with a doctor or dietitian. You can still save it.";
@@ -12,18 +13,16 @@ function browserTimeZone() {
   }
 }
 
-function timeZoneOptions(selected: string) {
-  let zones: string[] = [];
-  try {
-    zones = (Intl as unknown as { supportedValuesOf?: (k: string) => string[] }).supportedValuesOf?.("timeZone") ?? [];
-  } catch {
-    zones = [];
-  }
-  if (zones.length === 0) {
-    zones = ["America/New_York", "America/Chicago", "America/Denver", "America/Phoenix", "America/Los_Angeles", "America/Anchorage", "Pacific/Honolulu"];
-  }
-  if (!zones.includes(selected)) zones = [selected, ...zones];
-  return zones.map((tz) => el("option", { value: tz, textContent: tz.replace(/_/g, " ").replace(/\//g, " / "), selected: tz === selected }));
+/**
+ * The seven US zones. A zone that keeps the same clock as one of them (a phone in Detroit or Boise) shows as
+ * that one; a saved zone outside the US stays at the top so saving doesn't move anyone's day.
+ */
+function timeZoneOptions(current: string) {
+  const selected = usZoneFor(current) ?? current;
+  const option = (zone: string, label: string) => el("option", { value: zone, textContent: label, selected: zone === selected });
+  const options = US_TIME_ZONES.map((z) => option(z.zone, z.label));
+  if (!US_TIME_ZONES.some((z) => z.zone === selected)) options.unshift(option(selected, selected.replace(/_/g, " ").replace(/\//g, " / ")));
+  return options;
 }
 
 interface FieldOpts {
@@ -70,7 +69,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
   const name = field({ label: "Your name", name: "displayName", value: me?.displayName, autocomplete: "given-name" });
 
   const tzId = "f-timezone";
-  const tz = el("select", { id: tzId, name: "timezone" }, ...timeZoneOptions(me?.timezone ?? browserTimeZone()));
+  const tz = el("select", { id: tzId, name: "timezone" }, ...timeZoneOptions(me?.timezone ?? (usZoneFor(browserTimeZone()) ?? "America/Chicago")));
   const tzWrap = el(
     "div",
     { className: "field" },
