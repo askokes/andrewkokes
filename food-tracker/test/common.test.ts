@@ -1,3 +1,4 @@
+import { env } from "cloudflare:workers";
 import { describe, expect, it } from "vitest";
 import {
   COMMON_FOODS,
@@ -9,9 +10,11 @@ import {
   type CommonFood,
 } from "../src/food/common";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
+import { parseMeal } from "../src/food/parse";
+import { lookup } from "../src/food/routes";
 import type { FoodRecord } from "../src/food/types";
 import { resolveAmount, unitOptions } from "../src/food/units";
-import { normalizeQuery } from "../src/food/usda";
+import { commonFor, looksLikeBrand, normalizeQuery } from "../src/food/usda";
 import { createFakeUsda } from "./fixtures/usda/fake-fetch";
 import commonFile from "./fixtures/usda/live/common-foods.json";
 import liveSearch from "./fixtures/usda/live/search-core.json";
@@ -466,5 +469,206 @@ describe("commonTail", () => {
     expect(commonTail("zorbo diet soda")).not.toBe(entry("soda"));
     // Milk tea is no tea: milk is a food of its own.
     expect(commonTail("zorbo milk tea")).not.toBe(entry("tea"));
+  });
+});
+
+// ---------------------------------------------------------------- beer, hard seltzer, cider, wine, liquor
+//
+// USDA has no Blue Moon, White Claw or Corona: before the table named them, "a blue moon beer" was a
+// stevia root beer, "Blue Moon" 100 g of blue cheese, "a michelob ultra" soybean oil, "a glass of white
+// claw" crab claw meat and "a corona" a plum. Each brand maps to the generic record nearest its label.
+
+/** Every record a drink entry maps to. */
+const DRINK_RECORDS = new Set([
+  168746, 168747, 168749, 169572, 169575, 171906, 174146, 173185, 173190, 174837, 171908, 174815, 174818, 174817,
+  174819, 171920, 168752,
+]);
+
+/**
+ * What one serving of each drink should come to, with no unit said: the record, the unit, and the
+ * reference calories, which are the brand's published label for 12 fl oz (as cited in
+ * src/food/common.ts), or for generic drinks the usual figure for the usual pour (NIH's Rethinking
+ * Drinking: 12 fl oz of 5% beer about 150, 5 fl oz of 12% wine about 120, a 1.5 fl oz shot of 80 proof
+ * liquor 97, a 9 fl oz pina colada 490).
+ */
+const DRINKS: [name: string, fdcId: number, unit: string, kcal: number][] = [
+  ["beer", 168746, "can", 150],
+  ["blue moon", 168746, "can", 168],
+  ["coors banquet", 168746, "can", 147],
+  ["corona", 168746, "can", 148],
+  ["modelo", 168746, "can", 144],
+  ["heineken", 168746, "can", 142],
+  ["stella", 168746, "can", 150],
+  ["pacifico", 168746, "can", 145],
+  ["yuengling", 168746, "can", 140],
+  ["sam adams", 168746, "can", 175],
+  ["pbr", 168746, "can", 144],
+  ["shiner bock", 168746, "can", 142],
+  ["miller high life", 168746, "can", 141],
+  ["budweiser", 168747, "can", 145],
+  ["dos equis", 168747, "can", 131],
+  ["bud light", 169572, "can", 110],
+  ["light beer", 168749, "can", 100],
+  ["coors light", 168749, "can", 102],
+  ["miller lite", 168749, "can", 96],
+  ["corona light", 168749, "can", 99],
+  ["busch light", 168749, "can", 95],
+  ["natural light", 168749, "can", 95],
+  ["keystone light", 168749, "can", 101],
+  ["michelob ultra", 169575, "can", 95],
+  ["hard seltzer", 169575, "can", 100],
+  ["white claw", 169575, "can", 100],
+  ["truly", 169575, "can", 100],
+  ["high noon", 169575, "can", 100],
+  ["ipa", 171906, "can", 190],
+  ["lagunitas ipa", 171906, "can", 190],
+  ["hard cider", 174146, "can", 190],
+  ["angry orchard", 174146, "can", 190],
+  ["wine", 173185, "glass", 120],
+  ["red wine", 173190, "glass", 120],
+  ["white wine", 174837, "glass", 120],
+  ["champagne", 174837, "glass", 120],
+  ["rose", 171908, "glass", 120],
+  ["shot", 174815, "shot", 97],
+  ["tequila", 174815, "shot", 97],
+  ["vodka", 174818, "shot", 97],
+  ["vodka soda", 174818, "shot", 97],
+  ["rum", 174817, "shot", 97],
+  ["whiskey", 174819, "shot", 97], // 86 proof: 105
+  ["gin", 171920, "shot", 97], // 90 proof: 110
+  ["pina colada", 168752, "each", 490],
+];
+
+const within15 = (kcal: number, label: number) => Math.abs(kcal - label) / label <= 0.15;
+
+describe("drinks: beer, hard seltzer, cider, wine and liquor", () => {
+  it("lands every drink within 15% of its label, in the can, glass or shot it's poured in", () => {
+    for (const [name, fdcId, unit, label] of DRINKS) {
+      const entry = commonMatch(name);
+      expect(entry?.fdcId, name).toBe(fdcId);
+      expect(unitless(entry!, 1, name), name).toMatchObject({ unit, guessed: false });
+      const kcal = calories(name);
+      expect(within15(kcal, label), `${name}: ${kcal} kcal against ${label} on the label`).toBe(true);
+    }
+  });
+
+  it("checks a label for every drink entry, and every name of it reads the same", () => {
+    const checked = new Set(DRINKS.map(([name]) => commonMatch(name)));
+    for (const entry of COMMON_FOODS.filter((e) => DRINK_RECORDS.has(e.fdcId))) {
+      expect(checked.has(entry), `${label(entry)} has no label in DRINKS`).toBe(true);
+      for (const name of entry.names) {
+        expect(commonMatch(name), name).toBe(entry);
+        expect(calories(name), name).toBe(calories(entry.names[0]));
+      }
+    }
+    // Spellings and full names people say.
+    const same: [string, string][] = [
+      ["blue moon beer", "blue moon"],
+      ["Blue Moon Belgian White", "blue moon"],
+      ["corona extra", "corona"],
+      ["modelo especial", "modelo"],
+      ["stella artois", "stella"],
+      ["pabst blue ribbon", "pbr"],
+      ["samuel adams", "sam adams"],
+      ["bud lite", "bud light"],
+      ["Natty Light", "natural light"],
+      ["mich ultra", "michelob ultra"],
+      ["White Claws", "white claw"],
+      ["hazy IPA", "ipa"],
+      ["cider", "hard cider"],
+      ["prosecco", "champagne"],
+      ["rosé", "rose"],
+      ["bourbon", "whiskey"],
+      ["regular beer", "beer"],
+    ];
+    for (const [a, b] of same) expect(commonMatch(a), `${a} vs ${b}`).toBe(commonMatch(b));
+    // Apple cider without alcohol is apple juice; cider alone is hard cider, with apple juice next.
+    expect(commonMatch("apple cider")).toBe(commonMatch("apple juice"));
+    expect(commonMatch("cider")?.alternatives?.[0]).toBe(commonMatch("apple juice")?.fdcId);
+    // Not a beer: these keep their own entries or none.
+    expect(commonMatch("root beer")?.fdcId).toBe(171871);
+    expect(commonMatch("seltzer")?.fdcId).toBe(174842); // club soda
+    expect(commonMatch("blue cheese")).toBeNull();
+    expect(commonMatch("guinness")).toBeNull(); // no USDA beer within 15% of its 125 cal label
+    expect(commonMatch("margarita")).toBeNull(); // nor a cocktail record near NIH's 168 cal
+  });
+
+  it("reads the phrases that went wrong as the drink, never a guessed 100 g", () => {
+    const cases: [phrase: string, food: string, fdcId: number, quantity: number, unit: string, grams: number][] = [
+      ["a blue moon beer", "blue moon beer", 168746, 1, "can", 356],
+      ["Blue Moon", "blue moon", 168746, 1, "can", 356],
+      ["a michelob ultra", "michelob ultra", 169575, 1, "can", 354],
+      ["a glass of white claw", "white claw", 169575, 1, "can", 354],
+      ["a corona", "corona", 168746, 1, "can", 356],
+      ["a bud light", "bud light", 169572, 1, "can", 354],
+      ["two bud lights", "bud lights", 169572, 2, "can", 708],
+      ["a can of white claw", "white claw", 169575, 1, "can", 354],
+      ["a bottle of corona", "corona", 168746, 1, "can", 356], // the bottle is 12 fl oz too
+      ["a glass of red wine", "red wine", 173190, 1, "glass", 147],
+      ["two glasses of wine", "wine", 173185, 2, "glass", 296],
+      ["a shot", "shot", 174815, 1, "shot", 42],
+      ["three shots", "shots", 174815, 3, "shot", 126],
+      ["a vodka soda", "vodka soda", 174818, 1, "shot", 42],
+      ["an ipa", "ipa", 171906, 1, "can", 355],
+      ["a pina colada", "pina colada", 168752, 1, "each", 283],
+    ];
+    for (const [phrase, food, fdcId, quantity, unit, grams] of cases) {
+      const [item] = parseMeal(phrase).items;
+      expect(item, phrase).toMatchObject({ food, quantity, unit: null });
+      const entry = commonFor(item.food);
+      expect(entry?.fdcId, phrase).toBe(fdcId);
+      const amount = resolveAmount(record(fdcId), item.quantity, item.unit, spokenUnits(entry, item.food, item.quantity));
+      expect(amount, phrase).toEqual({ quantity, unit, grams, guessed: false });
+    }
+  });
+
+  it("answers them with status ok and the table's record first, through lookup", async () => {
+    const usda = { apiKey: "test-key", fetch: createFakeUsda().fetch, db: env.DB };
+    const cases: [phrase: string, fdcId: number, label: number][] = [
+      ["a blue moon beer", 168746, 168],
+      ["Blue Moon", 168746, 168],
+      ["a michelob ultra", 169575, 95],
+      ["a glass of white claw", 169575, 100],
+      ["a corona", 168746, 148],
+      ["a bud light", 169572, 110],
+      ["two bud lights", 169572, 220],
+      ["a glass of red wine", 173190, 120],
+      ["a tequila", 174815, 97],
+    ];
+    for (const [phrase, fdcId, label] of cases) {
+      const [item] = parseMeal(phrase).items;
+      const result = await lookup(usda, item.food, item.quantity, item.unit, { limit: 5, brandHint: looksLikeBrand(item.text) });
+      const top = result.candidates[0];
+      expect(result.status, phrase).toBe("ok");
+      const what = `${phrase} -> ${top.fdcId} ${top.name}, ${top.amount.quantity} ${top.amount.unit} = ${top.nutrition.calories} kcal`;
+      expect(top.fdcId, what).toBe(fdcId);
+      expect(top.amount.guessed, what).toBe(false);
+      expect(within15(top.nutrition.calories, label), what).toBe(true);
+      // Every food offered gets a real amount too: a light or stronger beer, a can or shot of something close.
+      for (const c of result.candidates) expect(c.amount.guessed, `${phrase}: ${c.name}`).toBe(false);
+    }
+  });
+
+  it("offers a pint and a bottle of beer, a bottle of wine and a shot of liquor", () => {
+    // The parser doesn't read "pint" or "shot" yet: "a pint of blue moon" reaches the table only when
+    // the unit is picked on the confirm screen. These are the amounts it then gets.
+    const amount = (name: string, quantity: number, unit: string) => {
+      const food = record(commonMatch(name)!.fdcId);
+      const resolved = resolveAmount(food, quantity, unit);
+      return { ...resolved, kcal: nutritionFor(food.per100g, resolved.grams).calories };
+    };
+    expect(amount("blue moon", 1, "pint")).toMatchObject({ unit: "pint", grams: 475, guessed: false });
+    expect(within15(amount("blue moon", 1, "pint").kcal, (168 * 16) / 12)).toBe(true);
+    expect(amount("bud light", 2, "pint")).toMatchObject({ unit: "pint", grams: 944, guessed: false });
+    expect(amount("budweiser", 1, "bottle")).toMatchObject({ unit: "bottle", grams: 357, guessed: false });
+    expect(amount("ipa", 1, "pint")).toMatchObject({ unit: "pint", grams: 473, guessed: false });
+    expect(amount("white claw", 1, "bottle").grams).toBe(354);
+    expect(amount("wine", 1, "bottle")).toMatchObject({ unit: "bottle", grams: 751, guessed: false });
+    expect(within15(amount("wine", 1, "bottle").kcal, 120 * 5)).toBe(true); // 750 ml is five glasses
+    expect(amount("tequila", 1, "shot")).toMatchObject({ unit: "shot", grams: 42, kcal: 97, guessed: false });
+    expect(amount("whiskey", 2, "shot")).toMatchObject({ unit: "shot", grams: 84, guessed: false });
+    expect(amount("pina colada", 1, "small")).toMatchObject({ unit: "small", grams: 141, guessed: false });
+    // "A cup of beer" still has USDA's own fl oz: 8 fl oz.
+    expect(amount("beer", 1, "cup").grams).toBeCloseTo(237.6, 1);
   });
 });

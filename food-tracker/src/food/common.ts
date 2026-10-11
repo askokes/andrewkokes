@@ -1186,7 +1186,8 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Orange juice, chilled, includes from concentrate: 1 cup = 249 g, 122 kcal
   { names: ["orange juice", "oj"], fdcId: 169100, unit: "cup", alternatives: [169098, 173933] },
   // Apple juice, canned or bottled, unsweetened, without added ascorbic acid: 1 cup = 248 g, 114 kcal
-  { names: ["apple juice"], fdcId: 173933, unit: "cup", alternatives: [169100, 173042] },
+  // Apple cider without alcohol is unfiltered apple juice; USDA has no record of its own ("cider" is hard cider).
+  { names: ["apple juice", "apple cider"], fdcId: 173933, unit: "cup", alternatives: [169100, 173042] },
   // Grape juice, canned or bottled, unsweetened, without added ascorbic acid: 1 cup = 253 g, 152 kcal
   { names: ["grape juice"], fdcId: 173042, unit: "cup", alternatives: [173933, 169100] },
   // Cranberry juice cocktail, bottled: 1 cup = 253 g, 137 kcal
@@ -1351,28 +1352,288 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
   // Beverages, Coconut water, ready-to-drink, unsweetened: 1 cup = 245 g, 44 kcal
   { names: ["coconut water"], fdcId: 174831, unit: "cup" },
+
+  // ---------------------------------------------------------------- beer, hard seltzer, cider, wine, liquor
+  // USDA has no record for most brands (its search answers "blue moon" with blue cheese and "white
+  // claw" with crab), so each brand maps to the generic record nearest the brand's published label
+  // calories for 12 fl oz, and only when that record is within 15% of it (test/common.test.ts checks
+  // each one). Left out, nothing close enough: Guinness Draught (125 cal / 12 fl oz label; beer,
+  // regular is 153, the BUDWEISER record 146, beer, light 103) and margarita (NIH's 4 fl oz is 168 cal;
+  // USDA's nearest, a daiquiri from a recipe, is 225). USDA has no mimosa or Moscow mule; "rum and
+  // coke" and "gin and tonic" are read as two foods, the liquor and the mixer.
+  //
+  // One entry per record gives its unit and sizes; the brand entries on the same record leave them
+  // out and share them (commonUnit, commonPortions), so "a corona" is a can as "a beer" is. Beer,
+  // seltzer and cider come in a 12 fl oz can or bottle (USDA's own weight where the record lists one)
+  // and a 16 fl oz pint; wine in a 5 fl oz glass and a 750 ml bottle; liquor in a 1.5 fl oz shot,
+  // USDA's jigger. The parser drops "a can of", "a bottle of" and "a glass of" (leaving the default
+  // unit) but doesn't read "pint" or "shot" yet, so those two units are picked on the confirm screen.
+
   // Alcoholic beverage, beer, regular, all: 1 can (12 fl oz) = 356 g, 153 kcal
   {
-    names: ["beer"],
+    names: ["beer", "lager"],
     fdcId: 168746,
     unit: "can",
-    alternatives: [168749],
-    portions: [{ unit: "can", label: "can (12 fl oz)", grams: 356 }],
+    alternatives: [168749, 171906, 168747, 169575],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 356 },
+      { unit: "bottle", label: "bottle (12 fl oz)", grams: 356 },
+      { unit: "pint", label: "pint (16 fl oz)", grams: 475 },
+    ],
+  },
+  // Blue Moon Belgian White: 168 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  {
+    names: ["blue moon", "blue moon beer", "blue moon belgian white"],
+    fdcId: 168746,
+    alternatives: [171906, 168749, 168747, 169575],
+  },
+  // Coors Banquet: 147 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  {
+    names: ["coors banquet", "coors original", "banquet beer"],
+    fdcId: 168746,
+    alternatives: [168749, 171906, 168747, 169575],
+  },
+  // Corona Extra: 148 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  { names: ["corona", "corona extra", "corona beer"], fdcId: 168746, alternatives: [168749, 168747, 169575, 171906] },
+  // Modelo Especial: 144 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  {
+    names: ["modelo", "modelo especial", "modelo beer"],
+    fdcId: 168746,
+    alternatives: [168749, 171906, 168747, 169575],
+  },
+  // Heineken: 142 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  { names: ["heineken", "heineken beer"], fdcId: 168746, alternatives: [168749, 171906, 168747, 169575] },
+  // Stella Artois: 150 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  { names: ["stella", "stella artois"], fdcId: 168746, alternatives: [168749, 171906, 168747, 169575] },
+  // Pacifico Clara: 145 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  { names: ["pacifico", "pacifico clara"], fdcId: 168746, alternatives: [168749, 171906, 168747, 169575] },
+  // Yuengling Traditional Lager: 140 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  {
+    names: ["yuengling", "yuengling lager", "yingling"],
+    fdcId: 168746,
+    alternatives: [168749, 171906, 168747, 169575],
+  },
+  // Samuel Adams Boston Lager: 175 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  // (beer, higher alcohol is 206, 18% over).
+  {
+    names: ["sam adams", "samuel adams", "boston lager", "sam adams boston lager"],
+    fdcId: 168746,
+    alternatives: [171906, 168749, 168747, 169575],
+  },
+  // Pabst Blue Ribbon: 144 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  { names: ["pbr", "pabst", "pabst blue ribbon"], fdcId: 168746, alternatives: [168749, 171906, 168747, 169575] },
+  // Shiner Bock: 142 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  { names: ["shiner bock", "shiner"], fdcId: 168746, alternatives: [168749, 171906, 168747, 169575] },
+  // Miller High Life: 141 cal / 12 fl oz label; mapped to beer, regular: 1 can = 356 g, 153 kcal
+  { names: ["miller high life", "high life"], fdcId: 168746, alternatives: [168749, 171906, 168747, 169575] },
+  // Alcoholic beverage, beer, regular, BUDWEISER: 1 can (12 fl oz) = 357 g, 146 kcal
+  // Budweiser: 145 cal / 12 fl oz label.
+  {
+    names: ["budweiser", "bud heavy"],
+    fdcId: 168747,
+    unit: "can",
+    alternatives: [169572, 168746, 168749, 169575],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 357 },
+      { unit: "bottle", label: "bottle (12 fl oz)", grams: 357 },
+      { unit: "pint", label: "pint (16 fl oz)", grams: 476 },
+    ],
+  },
+  // Dos Equis Lager Especial: 131 cal / 12 fl oz label; mapped to the BUDWEISER record, the nearest
+  // lager (beer, regular is 153, 17% over): 1 can = 357 g, 146 kcal
+  { names: ["dos equis", "dos equis lager"], fdcId: 168747, alternatives: [168746, 168749, 169572, 169575] },
+  // Alcoholic beverage, beer, light, BUD LIGHT: 1 can (12 fl oz) = 354 g, 103 kcal
+  // Bud Light: 110 cal / 12 fl oz label.
+  {
+    names: ["bud light", "bud lite"],
+    fdcId: 169572,
+    unit: "can",
+    alternatives: [168749, 168747, 169575, 168746],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 354 },
+      { unit: "bottle", label: "bottle (12 fl oz)", grams: 354 },
+      { unit: "pint", label: "pint (16 fl oz)", grams: 472 },
+    ],
   },
   // Alcoholic beverage, beer, light: 1 can (12 fl oz) = 354 g, 103 kcal
   {
     names: ["light beer", "lite beer"],
     fdcId: 168749,
     unit: "can",
-    alternatives: [168746],
-    portions: [{ unit: "can", label: "can (12 fl oz)", grams: 354 }],
+    alternatives: [169575, 169572, 168746, 168747],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 354 },
+      { unit: "bottle", label: "bottle (12 fl oz)", grams: 354 },
+      { unit: "pint", label: "pint (16 fl oz)", grams: 472 },
+    ],
   },
-  // Alcoholic beverage, wine, table, all: 1 serving (148 g) = 148 g, 123 kcal
-  { names: ["wine"], fdcId: 173185, alternatives: [173190, 174837] },
-  // Alcoholic beverage, wine, table, red: 1 serving (147 g) = 147 g, 125 kcal
-  { names: ["red wine"], fdcId: 173190, alternatives: [174837, 173185] },
-  // Alcoholic beverage, wine, table, white: 1 serving (147 g) = 147 g, 121 kcal
-  { names: ["white wine"], fdcId: 174837, alternatives: [173190, 173185] },
+  // Coors Light: 102 cal / 12 fl oz label; mapped to beer, light: 1 can = 354 g, 103 kcal
+  { names: ["coors light", "coors lite", "coors"], fdcId: 168749, alternatives: [169572, 169575, 168746, 168747] },
+  // Miller Lite: 96 cal / 12 fl oz label; mapped to beer, light: 1 can = 354 g, 103 kcal
+  { names: ["miller lite", "miller light", "miller"], fdcId: 168749, alternatives: [169575, 169572, 168746, 168747] },
+  // Corona Light: 99 cal / 12 fl oz label; mapped to beer, light: 1 can = 354 g, 103 kcal
+  { names: ["corona light"], fdcId: 168749, alternatives: [168746, 169575, 169572, 168747] },
+  // Busch Light: 95 cal / 12 fl oz label; mapped to beer, light: 1 can = 354 g, 103 kcal
+  { names: ["busch light", "busch latte"], fdcId: 168749, alternatives: [169575, 169572, 168746, 168747] },
+  // Natural Light: 95 cal / 12 fl oz label; mapped to beer, light: 1 can = 354 g, 103 kcal
+  { names: ["natural light", "natty light", "natty"], fdcId: 168749, alternatives: [169575, 169572, 168746, 168747] },
+  // Keystone Light: 101 cal / 12 fl oz label; mapped to beer, light: 1 can = 354 g, 103 kcal
+  { names: ["keystone light", "keystone"], fdcId: 168749, alternatives: [169575, 169572, 168746, 168747] },
+  // Alcoholic beverage, beer, light, low carb: 1 can (12 fl oz) = 354 g, 96 kcal
+  // Michelob Ultra: 95 cal / 12 fl oz label.
+  {
+    names: ["michelob ultra", "mich ultra", "michelob"],
+    fdcId: 169575,
+    unit: "can",
+    alternatives: [168749, 169572, 168746, 168747],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 354 },
+      { unit: "bottle", label: "bottle (12 fl oz)", grams: 354 },
+      { unit: "pint", label: "pint (16 fl oz)", grams: 472 },
+    ],
+  },
+  // White Claw, Truly and High Noon: 100 cal / 12 fl oz label each (4.5 to 5% alcohol, about 2 g carbs).
+  // USDA has no hard seltzer; a low-carb light beer has the same alcohol, carbs and calories:
+  // mapped to beer, light, low carb: 1 can = 354 g, 96 kcal
+  {
+    names: ["hard seltzer", "spiked seltzer", "white claw", "truly", "high noon"],
+    fdcId: 169575,
+    alternatives: [168749, 174818, 174146, 168746],
+  },
+  // Alcoholic beverages, beer, higher alcohol: 1 can or bottle (12 fl oz) = 355 g, 206 kcal
+  // IPAs and most craft beer run 6 to 7% alcohol. Lagunitas IPA: 190 cal / 12 fl oz label.
+  {
+    names: ["ipa", "india pale ale", "hazy ipa", "craft beer", "lagunitas", "lagunitas ipa"],
+    fdcId: 171906,
+    unit: "can",
+    alternatives: [168746, 168749, 168747, 169575],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 355 },
+      { unit: "bottle", label: "bottle (12 fl oz)", grams: 355 },
+      { unit: "pint", label: "pint (16 fl oz)", grams: 473 },
+    ],
+  },
+  // Beverages, AMBER, hard cider: 1 can (12 fl oz) = 355 g, 199 kcal
+  // Angry Orchard Crisp Apple: 190 cal / 12 fl oz label. Apple juice comes next, for apple cider without alcohol.
+  {
+    names: ["hard cider", "cider", "angry orchard", "angry orchard crisp apple"],
+    fdcId: 174146,
+    unit: "can",
+    alternatives: [173933, 168746, 169575, 171906],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 355 },
+      { unit: "bottle", label: "bottle (12 fl oz)", grams: 355 },
+      { unit: "pint", label: "pint (16 fl oz)", grams: 473 },
+    ],
+  },
+  // Alcoholic beverage, wine, table, all: 1 glass (5 fl oz) = 148 g, 123 kcal
+  // A 5 fl oz glass of 12% wine is about 120 cal (NIH); USDA's serving is the same glass.
+  {
+    names: ["wine"],
+    fdcId: 173185,
+    unit: "glass",
+    alternatives: [173190, 174837, 171908],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 148 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 751 },
+    ],
+  },
+  // Alcoholic beverage, wine, table, red: 1 glass (5 fl oz) = 147 g, 125 kcal
+  {
+    names: ["red wine"],
+    fdcId: 173190,
+    unit: "glass",
+    alternatives: [174837, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 746 },
+    ],
+  },
+  // Alcoholic beverage, wine, table, white: 1 glass (5 fl oz) = 147 g, 121 kcal
+  {
+    names: ["white wine"],
+    fdcId: 174837,
+    unit: "glass",
+    alternatives: [173190, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 746 },
+    ],
+  },
+  // Brut sparkling wine is still wine at 11 to 12% alcohol, about 120 cal a 5 fl oz glass; USDA has none.
+  // Mapped to wine, table, white: 1 glass = 147 g, 121 kcal
+  { names: ["champagne", "prosecco", "sparkling wine", "cava"], fdcId: 174837, alternatives: [171908, 173185] },
+  // Alcoholic beverages, wine, rose: 1 glass (5 fl oz) = 152 g, 126 kcal
+  // USDA lists only a fl oz (30.3 g) for rose.
+  {
+    names: ["rose", "rose wine", "white zinfandel"],
+    fdcId: 171908,
+    unit: "glass",
+    alternatives: [174837, 173190, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 152 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 771 },
+    ],
+  },
+  // Alcoholic beverage, distilled, all (gin, rum, vodka, whiskey) 80 proof: 1 shot (1.5 fl oz) = 42 g, 97 kcal
+  // A 1.5 fl oz shot of 80 proof liquor is 97 cal on every label that lists one.
+  {
+    names: ["shot", "liquor", "hard liquor"],
+    fdcId: 174815,
+    unit: "shot",
+    alternatives: [174818, 174819, 171920],
+    portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
+  },
+  // Tequila: 80 proof, 97 cal a shot; USDA has no tequila of its own. Mapped to distilled, all, 80 proof:
+  // 1 shot = 42 g, 97 kcal
+  { names: ["tequila"], fdcId: 174815, alternatives: [171920, 174818] },
+  // Alcoholic beverage, distilled, vodka, 80 proof: 1 shot (1.5 fl oz) = 42 g, 97 kcal
+  {
+    names: ["vodka"],
+    fdcId: 174818,
+    unit: "shot",
+    alternatives: [171920],
+    portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
+  },
+  // Club soda has no calories, so a vodka soda is its shot of vodka: 1 shot = 42 g, 97 kcal
+  { names: ["vodka soda", "vodka club soda", "vodka seltzer"], fdcId: 174818, alternatives: [169575, 171920] },
+  // Alcoholic beverage, distilled, rum, 80 proof: 1 shot (1.5 fl oz) = 42 g, 97 kcal
+  {
+    names: ["rum"],
+    fdcId: 174817,
+    unit: "shot",
+    alternatives: [171920],
+    portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
+  },
+  // Alcoholic beverage, distilled, whiskey, 86 proof: 1 shot (1.5 fl oz) = 42 g, 105 kcal
+  // Between the 80 proof bottles (97 cal a shot) and 90 proof ones (110).
+  {
+    names: ["whiskey", "whisky", "bourbon", "scotch"],
+    fdcId: 174819,
+    unit: "shot",
+    alternatives: [174815, 171920],
+    portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
+  },
+  // Alcoholic beverage, distilled, all (gin, rum, vodka, whiskey) 90 proof: 1 shot (1.5 fl oz) = 42 g, 110 kcal
+  // Gin runs 80 to 94 proof (97 to 116 cal a shot); 90 proof is between.
+  {
+    names: ["gin"],
+    fdcId: 171920,
+    unit: "shot",
+    alternatives: [174815],
+    portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
+  },
+  // Alcoholic beverage, pina colada, prepared-from-recipe: 1 cocktail (9 fl oz) = 283 g, 492 kcal
+  // NIH's Rethinking Drinking puts a 9 fl oz pina colada at 490 cal; USDA's own cocktail is half that.
+  {
+    names: ["pina colada"],
+    fdcId: 168752,
+    unit: "each",
+    portions: [
+      { unit: "each", label: "cocktail (9 fl oz)", grams: 283 },
+      { unit: "small", label: "small (4.5 fl oz)", grams: 141 },
+    ],
+  },
 
   // ---------------------------------------------------------------- condiments, spreads, sweeteners
   // Catsup: 1 tbsp = 17 g, 17 kcal
