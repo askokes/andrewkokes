@@ -33,7 +33,16 @@ import {
   type UnitOption,
 } from "./types";
 import { resolveAmount, toCandidate, unitOptions } from "./units";
-import { commonFor, getFoods, looksLikeBrand, searchFoods, UsdaError, type UsdaDeps, type UsdaErrorKind } from "./usda";
+import {
+  commonFor,
+  getFoods,
+  looksLikeBrand,
+  searchFoods,
+  tailFor,
+  UsdaError,
+  type UsdaDeps,
+  type UsdaErrorKind,
+} from "./usda";
 
 type Ctx = Context<AppEnv>;
 
@@ -45,8 +54,9 @@ const WEIGHT_UNITS = new Set(["oz", "lb", "g"]);
 
 /**
  * USDA requests one API request may make. A food not seen before costs a search
- * and a details call, so this covers 8 new foods; a branded fallback for
- * every one of them would double it.
+ * and a details call, so this covers 8 new foods. One that goes on to Branded
+ * costs a second search, and details are fetched only for the search that is
+ * offered, or for the table food a brand backs off to: at most 3 calls a food.
  */
 export const USDA_CALLS_PER_REQUEST = 16;
 /** USDA requests one user may make in an hour. The key allows about 1,000 an hour, shared by everyone. */
@@ -143,8 +153,14 @@ export async function lookup(
   }
   if (!foods.length) return { status: "not_found", message: notFoundMessage(food), candidates: [] };
   // "A soda" is a can, "two eggs" are large and "dumplings" are a serving, whichever record the user
-  // picks (see toCandidate).
-  const preferred = spokenUnits(commonFor(food), food, quantity);
+  // picks (see toCandidate). A phrase that backed off to a table food ("a blue moon beer") is measured
+  // like it: a can.
+  let entry = commonFor(food);
+  if (!entry) {
+    const tail = tailFor(food);
+    if (tail?.fdcId === foods[0].fdcId) entry = tail;
+  }
+  const preferred = spokenUnits(entry, food, quantity);
   return { status: "ok", candidates: preferSpokenUnit(foods.map((f) => toCandidate(f, quantity, unit, preferred)), unit) };
 }
 

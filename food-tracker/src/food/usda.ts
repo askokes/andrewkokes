@@ -1,7 +1,7 @@
 // USDA FoodData Central client (SPEC section 6). Every food and every search is
 // cached in D1 so repeat lookups never hit the API, which is rate limited to
 // roughly 1,000 requests an hour per key.
-import { commonMatch, type CommonFood } from "./common";
+import { commonMatch, commonTail, type CommonFood } from "./common";
 import { extractFood, extractSearchHit } from "./nutrition";
 import type { FoodRecord, RawPortion } from "./types";
 import { contentWords, sameWord, words } from "./words";
@@ -306,6 +306,36 @@ const MODIFIERS = new Set([
   "leftover", "classic", "original", "regular",
 ]);
 
+/**
+ * GENERIC and prep words that still say which food it is when someone says them: "white claw" is no
+ * claw meat, a "red bull" no bull, a "hard seltzer" no seltzer water, "chicken fried rice" no chicken
+ * and rice. USDA writes them where they apply ("Rice, white", "Wine, table, red", "Candies, hard",
+ * "Rice, fried", "Potatoes, mashed"). The other prep words (cooked, raw, fresh, plain, sliced, ...) say
+ * how it was bought or cut, not which food it is.
+ */
+const NAMING_WORDS = new Set([
+  "white", "yellow", "red", "green", "hard", "soft", "fried", "baked", "grilled", "boiled", "roasted", "steamed",
+  "scrambled", "poached", "broiled", "braised", "stewed", "sauteed", "mashed", "dried", "frozen", "canned", "iced",
+]);
+
+/** Company words in a Branded food's brand owner: "Celsius, Inc." is the brand Celsius. */
+const COMPANY_WORDS = new Set(["inc", "llc", "co", "company", "corp", "corporation", "ltd", "lp", "plc", "the"]);
+
+/**
+ * Flavors a drink is made in, which USDA lists as one drink: a caramel frappuccino is a frappuccino, a
+ * mango smoothie a smoothie. Only for these drinks: a peach juice is no apple juice, a coconut milk no
+ * milk, and an orange chicken no plain chicken.
+ */
+const DRINK_FLAVORS = new Set([
+  "caramel", "vanilla", "mocha", "hazelnut", "strawberry", "raspberry", "blueberry", "cherry", "peach", "mango",
+  "pineapple", "banana", "lemon", "lime", "grape", "watermelon", "cinnamon", "peppermint", "mint", "honey",
+  "matcha", "taro",
+]);
+const FLAVORED_DRINKS = new Set([
+  "latte", "cappuccino", "mocha", "macchiato", "frappuccino", "frappe", "coffee", "tea", "chai", "smoothie", "shake",
+  "milkshake", "cocoa", "lemonade", "refresher", "slushie", "slurpee", "soda",
+]);
+
 function queryShape(query: string) {
   const normal = normalizeQuery(query);
   const tokens = contentWords(normal);
@@ -313,7 +343,7 @@ function queryShape(query: string) {
   const main = contentWords(normal.split(/\bwith\b/)[0]);
   const pick = (ws: string[]) => [...ws].reverse().find((w) => !PREP_WORDS.has(w)) ?? ws[ws.length - 1];
   const head = pick(main.length ? main : tokens);
-  return { tokens, head };
+  return { tokens, head, required: requiredWords(tokens, head) };
 }
 
 /** Mostly capitals: a brand or restaurant ("McDONALD'S", "TACO BELL", "KFC"). */
@@ -340,12 +370,15 @@ interface Segment {
   alias: string[];
 }
 
-/** Comma segments, keeping commas inside USDA's (notes) in their segment, without package sizes. */
+/**
+ * Comma segments, keeping commas inside USDA's (notes) in their segment, without package sizes. A dash
+ * between spaces separates like a comma: "PHO - CHICKEN COOKED" is pho, "ham -- water added" is ham.
+ */
 function segmentsOf(description: string): Segment[] {
   const parts: string[] = [];
   let depth = 0;
   let current = "";
-  for (const ch of description) {
+  for (const ch of description.replace(/\s+[-–—]+\s+/g, ", ")) {
     if (ch === "(") depth++;
     if (ch === ")") depth = Math.max(0, depth - 1);
     if (ch === "," && depth === 0) {
@@ -411,7 +444,10 @@ function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, b
     const brand = isBrandSegment(segments[at], ws);
     // A brand that shares a word with the query ("TEA 5" for "milk tea") gives way to a later segment that names it.
     const namedLater = brand && segments.slice(at + 1).some((s) => contentWords(s.text).some(inQuery));
-    if (ws.some(inQuery) && !namedLater) break;
+    // A Branded brand the query only shares a word with is no name for the food: "COSMOS CREATIONS, PREMIUM
+    // PUFFED CORN" is corn, whatever "cosmo" means.
+    const partBrand = brand && brandWords !== null && !ws.every(inQuery);
+    if (ws.some(inQuery) && !namedLater && !partBrand) break;
     if (!FILING.has(ws.join(" ")) && !brand) break;
     branded ||= brand;
     dish ||= brand || DISHES.has(ws.join(" "));
@@ -429,11 +465,23 @@ function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, b
   if (!segment) return result(0);
 
   // "Milk chocolate" is chocolate: the head has to come last if it is there at all. When the head is the
-  // product's brand ("Cheetos Hot" for "hot cheetos"), the flavor may follow it.
-  const headIsBrand = brandWords !== null && brandWords.some((b) => sameWord(b, q.head));
-  const headLast = isHead(headOf(name)) || headIsBrand;
-  if (name.length && name.every(known) && name.some(inQuery)) return result(!name.some(isHead) || headLast ? 4 : 0);
-  if (name.some(isHead)) return result(headLast ? 2 : 0);
+  // product's brand ("Cheetos Hot" for "hot cheetos"), the flavor may follow it, and so it may when the
+  // name starts with the brand and then says the food ("STARBUCKS REFRESHERS ACAI BLUEBERRY"). Branded
+  // names put "cheese" last, where SR files cheeses under it: "SHARP CHEDDAR CHEESE" is cheddar, as
+  // "Cheese, cheddar" is (but "MAC & CHEESE" is no mac).
+  const cheeseLast = /[a-z0-9]\s+cheese$/.test(segment.text) && !/(\band|&)\s+cheese$/.test(segment.text);
+  const dropCheese = brandWords !== null && cheeseLast && !isHead("cheese") && name.length > 1 && name.at(-1) === "cheese";
+  const own = dropCheese ? name.slice(0, -1) : name;
+  let lead = 0;
+  while (brandWords !== null && lead < own.length && brandWords.includes(own[lead])) lead++;
+  // The brand leads the name: "Cheetos Hot", not "RIMMING SALT & CORONA GLASSES".
+  const headIsBrand = brandWords !== null && brandNamed(brandWords, q) && own.slice(0, lead).some(isHead);
+  let said = lead;
+  while (lead > 0 && said < own.length && inQuery(own[said])) said++;
+  const afterBrand = said > lead && isHead(own[said - 1]);
+  const headLast = isHead(headOf(own)) || headIsBrand || afterBrand;
+  if (own.length && own.every(known) && own.some(inQuery)) return result(!own.some(isHead) || headLast ? 4 : 0);
+  if (own.some(isHead)) return result(headLast ? 2 : 0);
 
   // Later segments: a kind or cut of the food ("Beef, top sirloin, steak"), unless the food carries
   // flavors ("Sauce, steak") or the segment is part of a "with ..." list of ingredients.
@@ -456,6 +504,24 @@ function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, b
   return result(mentioned ? 1 : 0);
 }
 
+/** A Branded food's brand as words, without "Inc." and the like; null for other foods. */
+const brandWordsOf = (hit: RankableHit): string[] | null =>
+  hit.dataType === "Branded" ? contentWords(hit.brand ?? "").filter((w) => !COMPANY_WORDS.has(w)) : null;
+
+/**
+ * The query says the whole brand: "mountain dew" names MOUNTAIN DEW and "a celsius" CELSIUS, but "cosmo"
+ * doesn't name COSMOS CREATIONS, nor "liquid death" DEATH WISH COFFEE.
+ */
+function brandNamed(brandWords: string[], q: { tokens: string[] }): boolean {
+  return brandWords.length > 0 && brandWords.every((b) => q.tokens.some((t) => sameWord(b, t)));
+}
+
+/** A Branded product of the brand that was asked for ("chobani", "hot cheetos"): the query names it, head and all. */
+const ofBrandAsked = (hit: RankableHit, q: { tokens: string[]; head: string }) => {
+  const brandWords = brandWordsOf(hit);
+  return brandWords !== null && brandNamed(brandWords, q) && brandWords.some((b) => sameWord(b, q.head));
+};
+
 /** What rankHits and isReasonable read from one hit. */
 function readHit(hit: RankableHit, q: { tokens: string[]; head: string }) {
   const { tokens, head } = q;
@@ -463,7 +529,7 @@ function readHit(hit: RankableHit, q: { tokens: string[]; head: string }) {
   const segments = segmentsOf(hit.description);
   const plain = segments.map((s) => s.text).join(", ");
   const withNotes = hit.description.toLowerCase().replace(/['’]/g, "").replace(/\(includ[^)]*\)/g, " ");
-  const brandWords = hit.dataType === "Branded" ? contentWords(hit.brand ?? "") : null;
+  const brandWords = brandWordsOf(hit);
   const naming = nameScore(segments, q, brandWords);
   const descWords = contentWords(plain);
   // Notes count as words of the food ("(fat free or skim)"), but not as extra words that make it specific.
@@ -487,38 +553,89 @@ function readHit(hit: RankableHit, q: { tokens: string[]; head: string }) {
   /** Not the food as eaten at all: dried, a mix, a part, another animal, a seasoning. */
   const otherFood = derived || tooDense || forms.some((f) => !f.variant);
   const notAsEaten = otherFood || forms.length > 0;
-  /** A Branded product of the brand that was asked for ("chobani", "hot cheetos"). */
-  const brandAsked = brandWords?.some((b) => sameWord(b, head)) ?? false;
+  const brandAsked = ofBrandAsked(hit, q);
   return { segments, plain, descWords, own, naming, has, notAsEaten, otherFood, brandAsked };
 }
+
+/**
+ * The query's words, other than the head, that a match must have too: all but numbers, sizes, words for
+ * how it was bought, cut or cooked plainly, USDA's generic words (NAMING_WORDS excepted), and a drink's
+ * flavor (see DRINK_FLAVORS).
+ */
+function requiredWords(tokens: string[], head: string): string[] {
+  const flavored = [...FLAVORED_DRINKS].some((d) => sameWord(d, head));
+  return tokens.filter(
+    (t) =>
+      !sameWord(t, head) &&
+      !((PREP_WORDS.has(t) || GENERIC.has(t)) && !NAMING_WORDS.has(t)) &&
+      !MODIFIERS.has(t) &&
+      !(flavored && DRINK_FLAVORS.has(t)) &&
+      !/^\d/.test(t),
+  );
+}
+
+/** The hit has the query's required words, all of them or, for a phrase of four words or more, all but one. */
+function coversQuery(q: { tokens: string[]; required: string[] }, has: (w: string) => boolean): boolean {
+  const missing = q.required.filter((t) => !has(t)).length;
+  return missing <= (q.tokens.length >= 4 ? 1 : 0);
+}
+
+/** isReasonable, from what readHit read. */
+const fair = (q: ReturnType<typeof queryShape>, facts: ReturnType<typeof readHit>) =>
+  facts.has(q.head) && !facts.otherFood && (facts.naming.score >= 2 || facts.brandAsked) && coversQuery(q, facts.has);
+
+/** What a product is: the last word of its name that isn't generic ("SPARKLING ORANGE ENERGY DRINK" is a drink). */
+const productKind = (name: string[]) => headOf(name) ?? "";
 
 /**
  * The hit is the food that was asked for, as eaten: it names the head noun as
  * the food itself or a kind of it (nameScore 2 or more, or it is a product of
  * the brand asked for), isn't dried, a mix, a part, a seasoning or another
- * animal (a diet variant is fine), and has at least one of the query's other
- * words that USDA would write ("capri sun" is not Sun Country cereal, "pad
- * thai" not a Thai curry soup, "caesar salad" not a plain side salad). When the
- * core search's best match isn't, Branded is searched (see searchUsda).
+ * animal (a diet variant is fine), and has every other word of the query that
+ * says which food it is (see requiredWords), in its description or brand: "blue
+ * moon beer" is not just any beer, "capri sun" not Sun Country cereal, "white
+ * claw" not claw crab meat, "caesar salad" not a plain side salad. A phrase of
+ * four words or more may miss one ("peanut butter and grape jelly sandwich").
+ * Plurals don't matter. When the core search's best match isn't reasonable,
+ * Branded is searched (see searchUsda).
  */
 export function isReasonable(query: string, hit: RankableHit): boolean {
   const q = queryShape(query);
-  if (!q.head) return false;
-  const facts = readHit(hit, q);
-  if (!facts.has(q.head) || facts.otherFood || (facts.naming.score < 2 && !facts.brandAsked)) return false;
-  const others = q.tokens.filter(
-    (t) => !sameWord(t, q.head) && !PREP_WORDS.has(t) && !GENERIC.has(t) && !MODIFIERS.has(t) && !/^\d/.test(t),
-  );
-  return !others.length || others.some(facts.has);
+  return !!q.head && fair(q, readHit(hit, q));
+}
+
+/**
+ * The first of a ranked list is a fair answer: it is reasonable (see isReasonable), and when the asked-for
+ * word is the brand of some of the hits ("corona", "guinness", "takis"), the user named that brand, so the
+ * first hit is that brand's product or names the word as the food itself ("BARCEL, TAKIS, TORTILLA CHIPS"):
+ * "JOCOTE CORONA" is a plum. A product of the brand whose name doesn't say the word ("a celsius" is
+ * "ARCTIC VIBE ... ENERGY DRINK") counts when it is the food most of the brand's hits are: the brand's
+ * licensed truffles are not "a guinness".
+ */
+export function isReasonableFirst(query: string, ranked: readonly RankableHit[]): boolean {
+  const first = ranked[0];
+  const q = queryShape(query);
+  if (!first || !q.head) return false;
+  const facts = readHit(first, q);
+  if (!fair(q, facts)) return false;
+  const brandHits = ranked.filter((h) => ofBrandAsked(h, q));
+  if (!brandHits.length) return true;
+  if (!facts.brandAsked) return facts.naming.score >= 4;
+  if (facts.naming.score >= 2) return true;
+  const firstKind = productKind(facts.naming.name);
+  const same = brandHits.filter((h) => firstKind !== "" && sameWord(productKind(readHit(h, q).naming.name), firstKind));
+  return 2 * same.length >= brandHits.length;
 }
 
 /**
  * Best match first. In priority order: names the head noun at all; Foundation
  * or SR Legacy over Branded; eaten as is (not dried, powdered, a mix, a part,
  * baby food, another animal, a drink too dense to be one, a diet variant; not
- * raw when the same food is listed cooked); names the food itself or a kind of
- * it and has every query word; how well it
- * names the food (see nameScore); has every query word; cooked for foods that
+ * raw when the same food is listed cooked); has the query's words that say
+ * which food it is and names it (see isReasonable: "hard seltzer" over plain
+ * seltzer); names the food itself or a kind of it and has every query word; how
+ * well it names the food (see nameScore); for a brand asked for by name, the
+ * kind of food most of its hits are; has every query word; cooked for foods that
  * get cooked, and plain cooking over fried; fewest words that are neither the
  * query's nor generic (a plain "Bananas, raw" over "Bananas, overripe, raw"; a
  * restaurant's dish counts one more); starts with the query words; fewer comma
@@ -532,7 +649,7 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
   const askedForPrep = tokens.some((t) => PREP_WORDS.has(t) || t === "dry" || t === "uncooked");
 
   const facts = hits.map((hit, index) => {
-    const { segments, plain, descWords, own, naming, has, notAsEaten } = readHit(hit, q);
+    const { segments, plain, descWords, own, naming, has, notAsEaten, brandAsked } = readHit(hit, q);
     const ownWords = contentWords(own.map((s) => s.text).join(" "));
     return {
       hit,
@@ -541,9 +658,11 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
       descWords,
       name: naming.name,
       named: naming.score,
+      brandAsked,
       hasHead: has(head),
       core: hit.dataType !== "Branded",
       notAsEaten,
+      covers: coversQuery(q, has),
       hasAll: tokens.every(has),
       cooked: COOKED.test(plain),
       raw: UNCOOKED.test(plain) && !COOKED.test(plain),
@@ -554,6 +673,15 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
     };
   });
   type Facts = (typeof facts)[number];
+
+  /**
+   * For a brand that was asked for ("a celsius"), its products whose names don't say the word, of the
+   * kind it mostly sells (energy drinks), come before its odd ones (a dietary supplement): how many of
+   * the brand's hits share the product's kind.
+   */
+  const brandKinds = facts.filter((f) => f.brandAsked).map((f) => productKind(f.name)).filter(Boolean);
+  const usual = (f: Facts) =>
+    f.brandAsked && f.named < 2 ? brandKinds.filter((k) => sameWord(k, productKind(f.name))).length : 0;
 
   /**
    * People log food as eaten. When the hits list the same food both raw and plainly cooked (raw and
@@ -584,8 +712,10 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
       f.hasHead ? 1 : 0,
       f.core ? 1 : 0,
       f.notAsEaten || rawWhileCooked(f) ? 0 : 1,
+      f.covers && f.named >= 2 ? 1 : 0,
       f.named >= 3 && f.hasAll ? 1 : 0,
       f.named,
+      usual(f),
       f.hasAll ? 1 : 0,
       prep(f),
       -f.unexplained,
@@ -811,6 +941,10 @@ export async function getFoods(deps: UsdaDeps, ids: number[]): Promise<Map<numbe
 /**
  * One search scope, ranked, as full records. Searches are cached for 30 days.
  * `alsoFetch` ids ride along in the same details call (the table's foods).
+ *
+ * With `judged`, a search whose best hit isn't a fair answer (see
+ * isReasonableFirst) gives [] and is remembered that way, without fetching any
+ * details: nothing in it will be offered, so it costs one call, once.
  */
 async function searchScope(
   deps: UsdaDeps,
@@ -818,18 +952,30 @@ async function searchScope(
   scope: Scope,
   limit: number,
   alsoFetch: readonly number[],
+  judged: boolean,
 ): Promise<FoodRecord[]> {
   let ids = await readSearch(deps, query, scope);
+  let judgedFirst: number | null = null;
   if (ids === null) {
-    const ranked = rankHits(query, await searchApi(deps, query, scope)).map((h) => h.fdcId);
+    const hits = rankHits(query, await searchApi(deps, query, scope));
+    if (judged && !isReasonableFirst(query, hits)) {
+      await writeSearch(deps, query, scope, []);
+      return [];
+    }
+    judgedFirst = hits[0]?.fdcId ?? null;
+    const ranked = hits.map((h) => h.fdcId);
     const details = await getFoods(deps, [...alsoFetch, ...ranked.slice(0, limit)]);
     // Drop hits whose details USDA couldn't give us, so a repeat search needs no call.
     ids = ranked.filter((id, i) => i >= limit || details.has(id));
     await writeSearch(deps, query, scope, ids);
   }
   const top = ids.slice(0, limit);
-  const foods = await getFoods(deps, [...alsoFetch, ...top]);
-  return top.flatMap((id) => foods.get(id) ?? []);
+  const known = await getFoods(deps, [...alsoFetch, ...top]);
+  const foods = top.flatMap((id) => known.get(id) ?? []);
+  // Judge again when the first food isn't the hit judged above: USDA had no details for that one, or the
+  // search came from the cache, where a table entry's search (`fill`) is kept unjudged.
+  if (judged && foods[0]?.fdcId !== judgedFirst && !isReasonableFirst(query, foods)) return [];
+  return foods;
 }
 
 /**
@@ -841,12 +987,23 @@ export function commonFor(food: string): CommonFood | null {
 }
 
 /**
+ * The table entry a phrase with none of its own backs off to when USDA has no fair answer for it (see
+ * commonTail), as spoken or as normalizeQuery rewrites it; null for a phrase in the table.
+ */
+export function tailFor(food: string): CommonFood | null {
+  if (commonFor(food)) return null;
+  return commonTail(food) ?? commonTail(normalizeQuery(food));
+}
+
+/**
  * USDA's own search: core, then Branded when the best core match isn't the food
  * as eaten (see isReasonable), or the other way with brandHint. "Chicken fried
  * rice" goes on to Branded, whose top hit is chicken fried rice, rather than
- * offer the core search's "fried rice, without meat". A search that only fills
- * out a table entry's list (`fill`) stays in the first scope: the table has
- * already answered, and a second search would spend the USDA key's calls.
+ * offer the core search's "fried rice, without meat". When neither has a fair
+ * answer the result is [], never the nearest junk ("blue moon" is no blue
+ * cheese). A search that only fills out a table entry's list (`fill`) stays in
+ * the first scope and is not judged: the table has already answered, and a
+ * second search would spend the USDA key's calls.
  */
 async function searchUsda(
   deps: UsdaDeps,
@@ -856,14 +1013,10 @@ async function searchUsda(
   alsoFetch: readonly number[] = [],
   fill = false,
 ): Promise<FoodRecord[]> {
-  const reasonable = (foods: FoodRecord[]) => foods.length > 0 && isReasonable(query, foods[0]);
   const order: Scope[] = brandHint ? ["branded", "core"] : ["core", "branded"];
-  const first = await searchScope(deps, query, order[0], limit, alsoFetch);
-  if (fill || reasonable(first)) return first;
-  const second = await searchScope(deps, query, order[1], limit, alsoFetch);
-  if (reasonable(second)) return second;
-  // Nothing names the food. Offer what there is rather than nothing; the user confirms every match.
-  return [...first, ...second].slice(0, limit);
+  const first = await searchScope(deps, query, order[0], limit, alsoFetch, !fill);
+  if (fill || first.length) return first;
+  return searchScope(deps, query, order[1], limit, alsoFetch, true);
 }
 
 /**
@@ -879,7 +1032,11 @@ async function searchUsda(
  *
  * Anything else is searched: Foundation and SR Legacy, falling back to Branded
  * when nothing there names the food, Branded first when `brandHint` is set (see
- * looksLikeBrand). Returns [] when USDA has nothing. Throws UsdaError.
+ * looksLikeBrand). When neither has a fair answer, a brand or variety USDA
+ * doesn't know backs off to the table food its last words name ("blue moon
+ * beer" is beer, see commonTail), with that entry's alternatives and no search
+ * to fill them out. Returns [] when there is nothing, never the nearest junk.
+ * Throws UsdaError.
  */
 export async function searchFoods(
   deps: UsdaDeps,
@@ -891,29 +1048,38 @@ export async function searchFoods(
   if (!words(query).length) return [];
   const brandHint = opts.brandHint ?? false;
 
-  const entry = commonFor(food);
-  if (!entry) return searchUsda(deps, query, limit, brandHint);
-
-  const ids = [entry.fdcId, ...(entry.alternatives ?? [])].slice(0, limit);
-  const tableFoods = async () => {
+  const idsOf = (entry: CommonFood) => [entry.fdcId, ...(entry.alternatives ?? [])].slice(0, limit);
+  const tableFoods = async (entry: CommonFood) => {
+    const ids = idsOf(entry);
     const known = await getFoods(deps, ids);
     return ids.flatMap((id) => known.get(id) ?? []);
   };
-  if (ids.length >= limit) return tableFoods();
+
+  const entry = commonFor(food);
+  if (!entry) {
+    const found = await searchUsda(deps, query, limit, brandHint);
+    const tail = found.length ? null : tailFor(food);
+    return tail ? tableFoods(tail) : found;
+  }
+
+  const ids = idsOf(entry);
+  if (ids.length >= limit) return tableFoods(entry);
 
   let searched: FoodRecord[];
   try {
     searched = await searchUsda(deps, query, limit, brandHint, ids, true);
   } catch (err) {
     if (!(err instanceof UsdaError)) throw err;
-    const curated = await tableFoods();
+    const curated = await tableFoods(entry);
     if (!curated.length) throw err;
     return curated;
   }
-  const curated = await tableFoods(); // cached by the search's details call
+  const curated = await tableFoods(entry); // cached by the search's details call
   const seen = new Set(curated.map((f) => f.fdcId));
   // Never fill with another food: no bear meat after the gummy bears.
   const q = queryShape(query);
   const fill = searched.filter((f) => !seen.has(f.fdcId) && !readHit(f, q).otherFood);
+  // Without the table's own foods (USDA had no details for them), the search leads only if it is fair.
+  if (!curated.length && !isReasonableFirst(query, fill)) return [];
   return [...curated, ...fill].slice(0, limit);
 }

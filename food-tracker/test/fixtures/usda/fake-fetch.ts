@@ -2,6 +2,7 @@
 // tests and by `npm run dev:mock`. Never imported by the production entry point.
 import foodsFile from "./foods.json";
 import adversarialFile from "./live/adversarial.json";
+import brandsFile from "./live/brands.json";
 import commonFile from "./live/common-foods.json";
 import searchFile from "./search.json";
 
@@ -12,15 +13,17 @@ const common = new Map<number, Json>((commonFile.foods as Json[]).map((f) => [f.
 const core = searchFile.foundationAndSr as Record<string, Json>;
 const branded = searchFile.branded as Record<string, Json>;
 
-// Live responses for the adversarial phrases in test/eval-live.test.ts, compacted (see its _note).
-// search.json, foods.json and common-foods.json win on overlap, so other tests see what they always did.
+// Live responses for the adversarial phrases in test/eval-live.test.ts and the brand-name and drink
+// phrases in test/brands.test.ts, compacted (see their _note). search.json, foods.json and
+// common-foods.json win on overlap, then adversarial.json, so other tests see what they always did.
 type Text = string | null;
 type Row = [number, string, string, Text, Text, number | null, Text, Text, ...(number | null)[]];
 type LiveFood = { fdcId: number; dataType: string; description: string; nutrients: (number | null)[] };
-const live = adversarialFile as unknown as {
+type LiveFile = {
   search: Record<"core" | "branded", Record<string, { totalHits: number; hits: Row[] }>>;
   foods: LiveFood[];
 };
+const liveFiles = [adversarialFile, brandsFile] as unknown as LiveFile[];
 const NUTRIENT_IDS = [1008, 1003, 1005, 1004];
 /** Search hits carry { nutrientId, value }; detail records { nutrient: { id }, amount }. */
 const nutrients = (values: (number | null)[], key: "value" | "amount") =>
@@ -31,7 +34,7 @@ const nutrients = (values: (number | null)[], key: "value" | "amount") =>
   });
 
 function liveSearch(scope: "core" | "branded", query: string): Json | undefined {
-  const found = live.search[scope][query];
+  const found = liveFiles.map((live) => live.search[scope][query]).find(Boolean);
   if (!found) return undefined;
   const hits = found.hits.map(([fdcId, dataType, description, brandName, brandOwner, size, sizeUnit, household, ...values]) => ({
     fdcId,
@@ -46,8 +49,9 @@ function liveSearch(scope: "core" | "branded", query: string): Json | undefined 
   }));
   return { totalHits: found.totalHits, currentPage: 1, totalPages: 1, foodSearchCriteria: { query }, foods: hits };
 }
+// Earlier files win: the map keeps the last entry for an id.
 const liveFoods = new Map<number, Json>(
-  live.foods.map(({ nutrients: values, ...food }) => [food.fdcId, { ...food, foodNutrients: nutrients(values, "amount") }]),
+  [...liveFiles].reverse().flatMap((live) => live.foods).map(({ nutrients: values, ...food }) => [food.fdcId, { ...food, foodNutrients: nutrients(values, "amount") }]),
 );
 
 export interface FakeUsdaOptions {

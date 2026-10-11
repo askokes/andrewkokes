@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { COMMON_FOODS, commonKey, commonMatch, commonPortions, spokenUnits, type CommonFood } from "../src/food/common";
+import {
+  COMMON_FOODS,
+  commonKey,
+  commonMatch,
+  commonPortions,
+  commonTail,
+  spokenUnits,
+  type CommonFood,
+} from "../src/food/common";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
 import type { FoodRecord } from "../src/food/types";
 import { resolveAmount, unitOptions } from "../src/food/units";
@@ -414,5 +422,49 @@ describe("spoken units the table fills in", () => {
     expect(resolveAmount(greek, 1, "cup")).toEqual({ quantity: 1, unit: "cup", grams: 227, guessed: false });
     expect(nutritionFor(greek.per100g, 227).calories).toBeGreaterThan(120);
     expect(nutritionFor(greek.per100g, 227).calories).toBeLessThan(160);
+  });
+});
+
+describe("commonTail", () => {
+  const entry = (name: string) => {
+    const found = commonMatch(name);
+    if (!found) throw new Error(`no table entry for "${name}"`);
+    return found;
+  };
+
+  // Made-up brands, so entries added to the table later can't change the answer.
+  it("backs a brand or variety off to the table food its last words name", () => {
+    expect(commonTail("zorbo moon beer")).toBe(entry("beer")); // "zorbo moon beer", "moon beer", "beer"
+    expect(commonTail("Zorbo Moon Beers!")).toBe(entry("beer"));
+    expect(commonTail("zorbo trail mix")).toBe(entry("trail mix"));
+    expect(commonTail("zorbo's cheddar")).toBe(entry("cheddar"));
+    expect(commonTail("zorbo killer bread")).toBe(entry("bread"));
+    expect(commonTail("zorbo energy drink")).toBe(entry("energy drink"));
+  });
+
+  it("tries the longest last words first", () => {
+    // "chocolate milk" is an entry of its own, so a brand of it isn't just milk.
+    expect(commonTail("zorbo chocolate milk")).toBe(entry("chocolate milk"));
+    expect(commonTail("zorbo chocolate milk")).not.toBe(entry("milk"));
+  });
+
+  it("is null for a phrase with an entry of its own, or no entry at its end", () => {
+    expect(commonTail("beer")).toBeNull();
+    expect(commonTail("white claw")).toBeNull(); // never a word left on its own: there is no "claw" entry
+    expect(commonTail("zorbo ultra")).toBeNull();
+    expect(commonTail("")).toBeNull();
+  });
+
+  it("never drops a word that makes another food, or is a food itself", () => {
+    // Hard lemonade is no lemonade, a vodka soda no cola, a protein shake no milkshake: whatever the
+    // table says for the longer phrase, never the bare last word.
+    expect(commonTail("zorbo hard lemonade")).toBe(commonMatch("hard lemonade"));
+    expect(commonTail("zorbo hard lemonade")).not.toBe(entry("lemonade"));
+    expect(commonTail("zorbo vodka soda")).not.toBe(entry("soda"));
+    expect(commonTail("zorbo fried pickles")).not.toBe(commonMatch("pickles") ?? undefined);
+    expect(commonTail("zorbo protein shake")).not.toBe(entry("milkshake"));
+    expect(commonTail("zorbo diet soda")).not.toBe(entry("soda"));
+    // Milk tea is no tea: milk is a food of its own.
+    expect(commonTail("zorbo milk tea")).not.toBe(entry("tea"));
   });
 });

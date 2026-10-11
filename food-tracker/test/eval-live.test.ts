@@ -231,6 +231,19 @@ describe("live USDA search, scored against independent labels", () => {
     for (const query of Object.keys(KNOWN_RANKER_DISASTERS)) expect(commonFor(query), query).not.toBeNull();
   });
 
+  it("never turns away a right answer the table doesn't already give", () => {
+    // isReasonable decides whether the search's first hit is offered at all (otherwise Branded is
+    // searched, then the table's generic food, then nothing). A labeled-acceptable first hit it turns
+    // away is a right answer lost, unless the table answers the query first.
+    const turnedAway = labels.flatMap((label) => {
+      const query = normalizeQuery(label.query);
+      const top = rankHits(query, hitsFor(label.query))[0];
+      return top && label.acceptable.includes(top.fdcId) && !isReasonable(query, top) ? [label.query] : [];
+    });
+    console.log(`acceptable first hits isReasonable turns away: ${turnedAway.length} (${turnedAway.join(", ")}), all in the table`);
+    expect(turnedAway.filter((query) => commonFor(query) === null)).toEqual([]);
+  });
+
   it("keeps its decisions honest: changed records are the label's pick, kept ones are acceptable", () => {
     for (const d of DECISIONS) {
       const label = labels.find((l) => l.query === d.query)!;

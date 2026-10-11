@@ -1656,6 +1656,38 @@ export function commonMatch(text: string): CommonFood | null {
 }
 
 /**
+ * Words that make another food of what follows them: hard lemonade is no lemonade, a vodka soda no soda, a
+ * protein shake no milkshake, fried pickles and dried mango many times the calories of the plain food.
+ * commonTail never drops one.
+ */
+const MAKES_ANOTHER_FOOD = new Set(
+  [
+    "hard", "spiked", "alcoholic", "diet", "light", "lite", "zero", "decaf", "protein", "vodka", "rum", "gin",
+    "whiskey", "whisky", "bourbon", "tequila", "scotch", "brandy", "liquor", "fried", "battered", "breaded",
+    "candied", "dried", "dehydrated", "powdered", "stuffed", "loaded",
+  ].map(singular),
+);
+
+/**
+ * The table entry for the phrase's last words, when the whole phrase has none: "blue moon beer" is tried
+ * as "moon beer", then "beer", the first with an entry wins. For a brand or variety USDA doesn't know,
+ * this is the generic food it is a kind of. Only table entries count, never a word left on its own
+ * ("white claw" has no entry for "claw"), and never past a word that is a food itself or makes another
+ * food of the rest ("vodka soda", "hard lemonade", "milk tea").
+ */
+export function commonTail(text: string): CommonFood | null {
+  if (commonMatch(text)) return null;
+  const ws = commonKey(text).split(" ").filter(Boolean);
+  for (let i = 1; i < ws.length; i++) {
+    const dropped = ws[i - 1];
+    if (MAKES_ANOTHER_FOOD.has(dropped) || byKey.has(dropped)) return null;
+    const entry = commonMatch(ws.slice(i).join(" "));
+    if (entry) return entry;
+  }
+  return null;
+}
+
+/**
  * The units to try first for a unitless mention of a table food: the entry's
  * `plural` unit when the phrase is a plural with no count ("dumplings", "a bag
  * of gummy bears"), then its `unit`. "Six dumplings" and "a dumpling" count.

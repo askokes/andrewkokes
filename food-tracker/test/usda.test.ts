@@ -2,11 +2,16 @@ import { env } from "cloudflare:workers";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { extractFood, extractSearchHit } from "../src/food/nutrition";
 import type { FoodRecord } from "../src/food/types";
+import { commonMatch } from "../src/food/common";
 import {
+  commonFor,
   getFoods,
+  isReasonable,
+  isReasonableFirst,
   looksLikeBrand,
   normalizeQuery,
   rankHits,
+  type RankableHit,
   SEARCH_PAGE_SIZE,
   searchFoods,
   UsdaError,
@@ -358,6 +363,158 @@ describe("searchFoods", () => {
       expect(await searchFoods(deps(limited), food)).toEqual(found);
       expect(await searchFoods(deps(limited, { apiKey: "" }), food)).toEqual(found);
       expect(limited.calls).toHaveLength(0);
+    }
+  });
+});
+
+describe("isReasonable for brand names and longer phrases", () => {
+  const sr = (description: string, kcal = 50): RankableHit => ({ description, dataType: "SR Legacy", per100g: { kcal } });
+  const branded = (description: string, brand: string, kcal = 50): RankableHit =>
+    ({ description, dataType: "Branded", brand, per100g: { kcal } });
+  const BEER = sr("Alcoholic beverage, beer, regular, all", 43);
+  const BUD_LIGHT = sr("Alcoholic beverage, beer, light, BUD LIGHT", 29);
+  const HARD_LEMONADE = sr("Alcoholic beverage, malt beer, hard lemonade", 68);
+
+  it("needs every word that says which food it is, not just the last one", () => {
+    expect(isReasonable("beer", BEER)).toBe(true);
+    expect(isReasonable("blue moon beer", BEER)).toBe(false);
+    expect(isReasonable("bud light", BUD_LIGHT)).toBe(true);
+    expect(isReasonable("coors light", BUD_LIGHT)).toBe(false);
+    expect(isReasonable("hard lemonade", HARD_LEMONADE)).toBe(true);
+    expect(isReasonable("mikes hard lemonade", HARD_LEMONADE)).toBe(false);
+    expect(isReasonable("chicken fried rice", sr("Restaurant, Latino, chicken and rice, entree, prepared", 174))).toBe(false);
+    expect(isReasonable("orange chicken", sr("Chicken, broilers or fryers, meat only, cooked, roasted", 190))).toBe(false);
+  });
+
+  it("counts colors, 'hard' and cooking that makes a dish as words that name the food", () => {
+    expect(isReasonable("white claw", branded("CLAW MEAT", "ARUNA", 80))).toBe(false);
+    expect(isReasonable("hard seltzer", branded("SELTZER", "POLAR", 0))).toBe(false);
+    expect(isReasonable("hard seltzer", branded("REAL JUICE HARD SELTZER", "FRUIT SMASH", 29))).toBe(true);
+    expect(isReasonable("white wine", sr("Alcoholic beverage, wine, table, white", 82))).toBe(true);
+    expect(isReasonable("mashed potatoes", sr("Potatoes, mashed, home-prepared, whole milk and butter added", 113))).toBe(true);
+  });
+
+  it("still lets sizes, cooked and other generic words go unsaid, and a drink's flavor", () => {
+    expect(isReasonable("big salad", sr("McDONALD'S, Side Salad", 20))).toBe(true);
+    expect(isReasonable("cooked lentils", sr("Lentils, mature seeds, cooked, boiled, without salt", 116))).toBe(true);
+    expect(isReasonable("caramel frappuccino", branded("STARBUCKS, FRAPPUCCINO, CHILLED COFFEE DRINK", "STARBUCKS", 71)))
+      .toBe(true);
+  });
+
+  it("reads brand fields, plurals and punctuation", () => {
+    expect(isReasonable("chobani yogurt", branded("GREEK NONFAT YOGURT, PLAIN", "CHOBANI", 59))).toBe(true);
+    expect(isReasonable("starbucks refresher", branded("STARBUCKS REFRESHERS ACAI BLUEBERRY 8.4 OZ CAN", "Starbucks", 24)))
+      .toBe(true);
+    expect(isReasonable("chick fil a sandwich", sr("CHICK-FIL-A, chicken sandwich", 249))).toBe(true);
+    expect(isReasonable("daves killer bread", branded("DAVE'S KILLER BREAD, WHITE BREAD", "DAVE'S KILLER BREAD", 275)))
+      .toBe(true);
+    expect(isReasonable("tillamook cheddar", branded("Tillamook Medium Cheddar Cheese", "Tillamook", 423))).toBe(true);
+    expect(isReasonable("pho", branded("PHO - CHICKEN COOKED, PHO - CHICKEN", "SUSHIC", 69))).toBe(true);
+  });
+
+  it("lets a phrase of four words or more miss one", () => {
+    expect(isReasonable("grilled chicken caesar wrap", branded("CHICKEN CAESAR WRAP", "CHARLIE'S", 231))).toBe(true);
+    expect(isReasonable("chicken caesar wrap", branded("CAESAR WRAP", "CHARLIE'S", 231))).toBe(false);
+    expect(isReasonable("grilled chicken caesar wrap", branded("CAESAR WRAP", "CHARLIE'S", 231))).toBe(false);
+  });
+
+  it("never takes a brand the query only shares a word with", () => {
+    expect(isReasonable("cosmo", branded("COSMOS CREATIONS, PREMIUM PUFFED CORN", "COSMOS CREATIONS", 464))).toBe(false);
+    expect(isReasonable("liquid death", branded("DEATH WISH COFFEE CO LATTE, 8 FL OZ", "DEATH WISH COFFEE CO", 71)))
+      .toBe(false);
+    expect(isReasonable("mountain dew", branded("MOUNTAIN DEW, SODA", "MOUNTAIN DEW", 48))).toBe(true);
+  });
+});
+
+describe("isReasonableFirst", () => {
+  const branded = (description: string, brand: string, kcal = 50): RankableHit =>
+    ({ description, dataType: "Branded", brand, per100g: { kcal } });
+
+  it("wants the brand's own product when the word is a brand among the hits", () => {
+    // "A corona": a plum variety called corona is no answer when Corona is also a brand here.
+    const corona = [
+      branded("JOCOTE CORONA", "MAYA", 86),
+      branded("RIMMING SALT & CORONA GLASSES", "CORONA", 0),
+      branded("BLACKBERRY LIME, TROPICAL LIME, MANGO, & CHERRY HARD SELTZER", "CORONA", 25),
+    ];
+    expect(isReasonable("corona", corona[0])).toBe(true);
+    expect(rankHits("corona", corona)[0]).toBe(corona[0]);
+    expect(isReasonableFirst("corona", rankHits("corona", corona))).toBe(false);
+    // Another maker's product that names the word as the food itself is fine.
+    const takis = [
+      branded("BARCEL, TAKIS, EXPLOSION TORTILLA CHIPS, CHEESE AND CHILLI PEPPER", "BARCEL", 567),
+      branded("TAKIS TORTILLA CHIPS HERO PACK, 1 OZ, 18 COUNT", "TAKIS", 500),
+    ];
+    expect(isReasonableFirst("takis", takis)).toBe(true);
+  });
+
+  it("takes a product of the brand that doesn't say the word only when the brand mostly sells that food", () => {
+    const celsius = ["SPARKLING ORANGE ENERGY DRINK", "SPARKLING WILD BERRY ENERGY DRINK", "PEACH VIBE SPARKLING ENERGY DRINK"]
+      .map((d) => branded(d, "CELSIUS", 3));
+    const supplement = branded("ORANGESICLE DIETARY SUPPLEMENT", "CELSIUS", 3);
+    const ranked = rankHits("celsius", [supplement, ...celsius]);
+    expect(ranked[0].description).toMatch(/ENERGY DRINK/);
+    expect(isReasonableFirst("celsius", ranked)).toBe(true);
+    expect(isReasonableFirst("celsius", [supplement, ...celsius])).toBe(false);
+    // Licensed truffles, cheddar and chips are not "a guinness".
+    const guinness = [
+      branded("LUXURY MILK AND DARK CHOCOLATE TRUFFLES WITH THE DELICIOUS TASTE OF GUINNESS", "GUINNESS", 505),
+      branded("CHEDDAR", "GUINNESS", 400),
+      branded("BURTS THICK CUT HAND COOKED POTATO CHIPS", "GUINNESS", 536),
+    ];
+    expect(isReasonableFirst("guinness", rankHits("guinness", guinness))).toBe(false);
+    expect(isReasonableFirst("heineken", [branded("PREMIUM LARGE BEER", "HEINEKEN", 40)])).toBe(true);
+  });
+
+  it("is false for nothing", () => {
+    expect(isReasonableFirst("beer", [])).toBe(false);
+  });
+});
+
+describe("searchFoods for a phrase USDA has no fair answer for", () => {
+  it("backs a brand off to the table food its last words name, with no search to fill it out", async () => {
+    // Costco's trail mix: USDA's core search has only plain trail mix, Branded only other Kirkland foods.
+    const fake = createFakeUsda();
+    const mix = commonMatch("trail mix")!;
+    const mixes = [mix.fdcId, ...(mix.alternatives ?? [])];
+    const found = await searchFoods(deps(fake), "kirkland trail mix");
+    expect(ids(found)).toEqual(mixes);
+    // The core and Branded searches, then the table's foods: no details for hits nobody is offered.
+    expect(fake.calls.map((c) => new URL(c).searchParams.get("dataType"))).toEqual(["Foundation,SR Legacy", "Branded", null]);
+    expect(call(fake, 2).searchParams.get("fdcIds")).toBe(mixes.join(","));
+    // Remembered: a repeat costs nothing.
+    expect(ids(await searchFoods(deps(fake), "Kirkland Trail Mix"))).toEqual(mixes);
+    expect(fake.calls).toHaveLength(3);
+  });
+
+  it("returns [] rather than the nearest junk, and remembers that", async () => {
+    const fake = createFakeUsda();
+    // USDA's best hits for these: blue cheese, an industrial soy oil, claw crab meat, a plum called corona,
+    // other protein bars, gummy body parts. (Any the table has learned since are its to answer.)
+    const foods = ["blue moon", "michelob ultra", "white claw", "corona", "quest bar", "body armor"].filter(
+      (food) => commonFor(food) === null,
+    );
+    expect(foods.length).toBeGreaterThan(0);
+    for (const food of foods) {
+      const before = fake.calls.length;
+      expect(await searchFoods(deps(fake), food), food).toEqual([]);
+      const made = fake.calls.slice(before).map((c) => new URL(c).pathname);
+      expect(made, food).toEqual(["/fdc/v1/foods/search", "/fdc/v1/foods/search"]); // no details
+    }
+    const calls = fake.calls.length;
+    for (const food of foods) expect(await searchFoods(deps(fake), food)).toEqual([]);
+    expect(fake.calls).toHaveLength(calls);
+  });
+
+  it("still finds a brand USDA has", async () => {
+    const fake = createFakeUsda();
+    const budLight = (await searchFoods(deps(fake), "bud light"))[0];
+    expect(budLight.fdcId).toBe(commonFor("bud light")?.fdcId ?? 169572); // Alcoholic beverage, beer, light, BUD LIGHT
+    // A Branded product whose name covers the phrase: "STARBUCKS REFRESHERS ACAI BLUEBERRY 8.4 OZ CAN".
+    const refresher = await searchFoods(deps(fake), "starbucks refresher", { brandHint: true });
+    if (commonFor("starbucks refresher") === null) {
+      expect(refresher[0]).toMatchObject({ dataType: "Branded", brand: "Starbucks" });
+      expect(refresher[0].description).toMatch(/^STARBUCKS REFRESHERS/);
     }
   });
 });

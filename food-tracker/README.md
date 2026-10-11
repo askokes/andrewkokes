@@ -28,8 +28,12 @@ USDA key is rationed: 16 calls per request and 150 per user per hour.
 Matching: everyday phrases ("rice", "two eggs", "a coke") go straight to the record people mean
 through the common-foods table (`src/food/common.ts`), with its alternatives and everyday units (a
 can, a container); anything else is USDA's search, reranked by `rankHits` in `src/food/usda.ts`.
+A search result is offered only when it is that food (`isReasonable`: it names every word of the
+phrase that says which food it is, so "blue moon beer" is not just any beer and "white claw" not
+claw crab meat); otherwise Branded is searched, then a brand USDA doesn't know falls back to the
+table food its last words name ("blue moon beer" is beer), and failing that the phrase is not found.
 `test/eval-live.test.ts` scores both against independently labeled live USDA results
-(`test/fixtures/usda/live`).
+(`test/fixtures/usda/live`), and `test/brands.test.ts` replays live searches for brand names and drinks.
 
 **Deviations from SPEC.md (pending Andrew's OK):** section 6 says to search with `pageSize=10`; the app
 asks for 50, because USDA's ranking often leaves the everyday food out of the top 10 (still one call).

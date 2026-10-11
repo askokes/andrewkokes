@@ -107,7 +107,7 @@ function isItemWord(word: string, foodWords: string[]): boolean {
  * measureUnit ("cup", "RACC", "egg", "Banana"); SR Legacy foods say
  * "undetermined" there and put the unit in the modifier ("cup, chopped or diced").
  */
-function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match | null {
+function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match[] {
   const unitName = p.unitName?.trim() ?? "";
   const namedUnit = unitName !== "" && unitName.toLowerCase() !== "undetermined";
   const source = namedUnit
@@ -119,22 +119,26 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match 
     .replace(/\s+/g, " ")
     .replace(/\s+,/g, ",")
     .replace(/^[\s,]+|[\s,]+$/g, "");
-  if (!text || text.includes("yield")) return null;
+  if (!text || text.includes("yield")) return [];
   const [first, second] = words(text);
-  if (!first) return null;
+  if (!first) return [];
 
-  // "8 fl oz" (amount 8) is a cup: the only volume many drinks list. Ranked below a real cup.
+  // "8 fl oz" (amount 8) is a cup: the only volume many drinks list. Ranked below a real cup. More than
+  // one fl oz is also the drink's serving, often its can or bottle: "12 fl oz" of Bud Light, "1.5 fl oz"
+  // of vodka. Ranked below a serving USDA names as one.
   if (first === "fl" && (second === "oz" || second === "ounce" || second === "ounces")) {
-    return { unit: "cup", label: "cup (8 fl oz)", rank: 1, grams: gramsEach * FL_OZ_PER_CUP };
+    const cup = { unit: "cup", label: "cup (8 fl oz)", rank: 1, grams: gramsEach * FL_OZ_PER_CUP };
+    if (!(p.amount > 1)) return [cup];
+    return [cup, { unit: "serving", label: `serving (${round2(p.amount)} fl oz)`, rank: 1, grams: p.gramWeight }];
   }
   // "6 inch sub" and "12 inch sub" (amounts 6 and 12): the amount is the length, the weight is one sub.
   if (first === "inch" && second && p.amount > 1) {
     const rest = text.split(",")[0].replace(/^inch\s+/, "");
-    return { unit: "each", label: `${p.amount}-inch ${rest}`, rank: p.amount === 6 ? 2 : 1, grams: p.gramWeight };
+    return [{ unit: "each", label: `${p.amount}-inch ${rest}`, rank: p.amount === 6 ? 2 : 1, grams: p.gramWeight }];
   }
   if (first === "scoop" || first === "scoops") {
     const rest = qualifier(text);
-    return { unit: "scoop", label: rest ? `scoop, ${rest}` : "scoop", rank: rankOf(rest !== "", rest) };
+    return [{ unit: "scoop", label: rest ? `scoop, ${rest}` : "scoop", rank: rankOf(rest !== "", rest) }];
   }
 
   if (first === "racc" || first === "serving" || first === "servings" || (first === "nlea" && second?.startsWith("serving"))) {
@@ -142,27 +146,27 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match 
     const label = namedUnit && unitName === "serving" && p.description
       ? `serving (${p.description.toLowerCase()})`
       : `serving (${gramsText(gramsEach)})`;
-    return { unit: "serving", label, rank: rankOf(!["racc", "serving", "nlea serving"].includes(text), text) };
+    return [{ unit: "serving", label, rank: rankOf(!["racc", "serving", "nlea serving"].includes(text), text) }];
   }
-  if (WEIGHT_WORDS.has(first)) return null;
+  if (WEIGHT_WORDS.has(first)) return [];
 
   const volume = VOLUME[first];
   if (volume || first === "slice" || first === "slices" || first === "piece" || first === "pieces") {
     const unit = volume ?? (first.startsWith("slice") ? "slice" : "piece");
     const rest = qualifier(text);
-    return { unit, label: rest ? `${unit}, ${rest}` : unit, rank: rankOf(rest !== "", rest) };
+    return [{ unit, label: rest ? `${unit}, ${rest}` : unit, rank: rankOf(rest !== "", rest) }];
   }
   if (SIZES.has(first)) {
     // "large (8" to 8-7/8" long)" -> "large"; "medium bagel" stays as is. "extra large" never gets here.
     const label = text.split(",")[0].trim();
-    return { unit: first, label, rank: rankOf(label !== first, label) };
+    return [{ unit: first, label, rank: rankOf(label !== first, label) }];
   }
   if (isItemWord(first, foodWords)) {
     // "potato large" is a size of the item, not the item itself.
-    if (second && SIZES.has(second)) return { unit: second, label: `${second} ${first}`, rank: 1 };
-    return { unit: "each", label: first, rank: 2 };
+    if (second && SIZES.has(second)) return [{ unit: second, label: `${second} ${first}`, rank: 1 }];
+    return [{ unit: "each", label: first, rank: 2 }];
   }
-  return null;
+  return [];
 }
 
 /**
@@ -182,11 +186,11 @@ export function unitOptions(food: FoodRecord, withCommon = true): UnitOption[] {
   for (const p of food.portions) {
     if (!(p.amount > 0) || !(p.gramWeight > 0)) continue;
     const gramsEach = p.gramWeight / p.amount; // "0.5 breast = 86 g" means one breast is 172 g
-    const match = classify(p, gramsEach, foodWords);
-    if (!match) continue;
-    const prev = found.get(match.unit);
-    if (!prev || match.rank > prev.rank) {
-      found.set(match.unit, { label: match.label, grams: match.grams ?? gramsEach, rank: match.rank });
+    for (const match of classify(p, gramsEach, foodWords)) {
+      const prev = found.get(match.unit);
+      if (!prev || match.rank > prev.rank) {
+        found.set(match.unit, { label: match.label, grams: match.grams ?? gramsEach, rank: match.rank });
+      }
     }
   }
 

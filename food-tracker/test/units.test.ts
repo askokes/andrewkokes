@@ -254,6 +254,28 @@ describe("unitless amounts for poured or scooped foods", () => {
     expect(resolveAmount(food(173905), 1, null)).toMatchObject({ quantity: 1, unit: "cup", guessed: false });
   });
 
+  it("takes a drink's 'N fl oz' portion as its serving, so a bottle of beer is no guess", () => {
+    // SR 169572, Alcoholic beverage, beer, light, BUD LIGHT: "1 fl oz" 29.5 g and "12 fl oz" 354 g. "A bud
+    // light" used to be a flagged 100 g guess.
+    const fluid = (amount: number, gramWeight: number) =>
+      ({ amount, gramWeight, unitName: "undetermined", modifier: "fl oz", description: null });
+    const budLight: FoodRecord = {
+      fdcId: 169572,
+      description: "Alcoholic beverage, beer, light, BUD LIGHT",
+      dataType: "SR Legacy",
+      brand: null,
+      per100g: { kcal: 29, protein: 0.25, carbs: 1.3, fat: 0 },
+      portions: [fluid(1, 29.5), fluid(12, 354)],
+    };
+    expect(option(budLight, "serving")).toEqual({ unit: "serving", label: "serving (12 fl oz)", grams: 354 });
+    expect(option(budLight, "cup")).toEqual({ unit: "cup", label: "cup (8 fl oz)", grams: 236 });
+    expect(resolveAmount(budLight, 1, null)).toEqual({ quantity: 1, unit: "serving", grams: 354, guessed: false });
+    // One fl oz is no serving, and a serving USDA names as one wins.
+    expect(option({ ...budLight, portions: [fluid(1, 29.5)] }, "serving")).toBeUndefined();
+    const named = { amount: 1, gramWeight: 330, unitName: "undetermined", modifier: "serving", description: null };
+    expect(option({ ...budLight, portions: [fluid(12, 354), named] }, "serving")?.grams).toBe(330);
+  });
+
   it("never guesses a cup for a food outside the table, since a cup-only food can be a powder", () => {
     // Updated: this test used to expect a cup here. A cup at the end of the unitless order also turned
     // "two eggs" into 2 cups of dried egg white (about 800 kcal) when that record was picked. A flagged

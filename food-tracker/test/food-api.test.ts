@@ -6,6 +6,7 @@ import { addDays, localDate } from "../src/dates";
 import devMock from "../src/dev-mock";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
 import { USDA_CALLS_PER_REQUEST, USDA_CALLS_PER_USER_HOUR } from "../src/food/routes";
+import { commonFor, tailFor } from "../src/food/usda";
 import {
   MAX_GRAMS,
   type Candidate,
@@ -195,6 +196,34 @@ describe("POST /api/parse", () => {
     });
   });
 
+  it("backs a brand USDA doesn't know off to the generic food, and says so rather than offer junk", async () => {
+    // USDA has no Blue Moon beer and no Corona; its nearest hits are blue cheese, root beer soda and a plum.
+    const { as } = client();
+    const email = await signUp(as);
+    const res = await as(email, "POST", "/api/parse", { text: "a blue moon beer and a Corona" });
+    const { items } = await res.json<ParseResponse>();
+    expect(items.map((i) => i.food)).toEqual(["blue moon beer", "corona"]);
+    expect(items[0].status).toBe("ok");
+    expect(items[0].candidates[0]).toMatchObject({
+      fdcId: 168746, // Alcoholic beverage, beer, regular, all
+      amount: { quantity: 1, unit: "can", grams: 356, guessed: false },
+    });
+    // Unless the common-foods table has learned the brand since, there's nothing fair to offer.
+    const table = commonFor("corona");
+    if (table) expect(items[1].candidates[0].fdcId).toBe(table.fdcId);
+    else {
+      expect(items[1]).toEqual({
+        quantity: 1,
+        unit: null,
+        food: "corona",
+        text: "a Corona",
+        status: "not_found",
+        message: `We couldn't find "corona". Try other words, or enter it yourself.`,
+        candidates: [],
+      });
+    }
+  });
+
   it.each([
     [{ rateLimited: true }, "rate_limited", BUSY],
     [{ down: true }, "unavailable", DOWN],
@@ -274,8 +303,8 @@ describe("POST /api/parse", () => {
   });
 
   it("spends at most one request's share of the USDA key, however many foods miss", async () => {
-    // Every search answers with foods that don't name what was asked for, so each
-    // lookup would also try the Branded fallback: up to 4 USDA calls per food.
+    // Every search answers with foods that don't name what was asked for, so each lookup also tries
+    // the Branded fallback. A miss costs those two searches and no details: nothing in them is offered.
     const fake = createFakeUsda();
     let calls = 0;
     const unhelpful = (async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -289,15 +318,34 @@ describe("POST /api/parse", () => {
     }) as typeof fetch;
     const { as } = client({}, testEnv, unhelpful);
     const email = await signUp(as);
-    const res = await as(email, "POST", "/api/parse", { text: "a qwv, a plx, a zrk, a mnb, a vcx, a lkj, a hgf, a dsa" });
-    expect(res.status).toBe(200);
-    const { items } = await res.json<ParseResponse>();
-    expect(items).toHaveLength(8);
+    const parse = async (text: string) => {
+      const res = await as(email, "POST", "/api/parse", { text });
+      expect(res.status).toBe(200);
+      return (await res.json<ParseResponse>()).items;
+    };
+
+    const misses = await parse("a qwv, a plx, a zrk, a mnb, a vcx, a lkj, a hgf, a dsa");
+    expect(misses).toHaveLength(8);
+    expect(calls).toBeLessThanOrEqual(USDA_CALLS_PER_REQUEST);
+    // Rice and egg records are no answer for any of them: not found, never the nearest junk.
+    for (const item of misses) expect(item, item.food).toMatchObject({ status: "not_found", candidates: [] });
+
+    // Each of these backs off to a different table food, which costs a details call more: 24 calls
+    // wanted, 16 made, and the lookups that couldn't make theirs say so.
+    calls = 0;
+    const text = "a qwv beer, a plx wine, a zrk tea, a mnb coffee, a vcx lemonade, a lkj bagel, a hgf yogurt, a dsa granola";
+    const items = await parse(text);
+    expect(items.map((i) => i.food)).toEqual([
+      "qwv beer", "plx wine", "zrk tea", "mnb coffee", "vcx lemonade", "lkj bagel", "hgf yogurt", "dsa granola",
+    ]);
     expect(calls).toBeLessThanOrEqual(USDA_CALLS_PER_REQUEST);
     const skipped = items.filter((i) => i.status === "skipped");
     expect(skipped.length).toBeGreaterThan(0);
     for (const item of skipped) expect(item).toMatchObject({ message: SKIPPED, candidates: [] });
     for (const item of items) expect(["ok", "skipped"]).toContain(item.status);
+    for (const item of items.filter((i) => i.status === "ok")) {
+      expect(item.candidates[0].fdcId, item.food).toBe(tailFor(item.food)?.fdcId);
+    }
   });
 
   it("stops one user from spending the shared key, without stopping anyone else", async () => {
