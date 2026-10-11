@@ -73,7 +73,7 @@ If the mic button is missing, your browser doesn't support voice. Use Safari on 
 7. If **Track my weight** is on in **Goals**: type your weight in **Today's weight** and tap **Save**. On Week or Month, a pink line (your 7-day average) and pink dots (each weigh-in) should show on the right-hand scale.
 8. Save a different weight the same day. It should replace the first one, not add a second.
 
-9. Optional: on **Goals**, fill in **Calories you burn a day** (your baseline, from a fitness watch, your doctor or an online calculator) and save. On **Week** and **Month** a dashed line shows it next to the solid goal line, and the sentence above the chart says how your average compares. On **Today**, under the big ring, it says how far over or under it you are.
+9. On **Goals**, under **Calories you burn a day**, pick your sex, type your age, pick how active you are, and (optional) your height. It should show "You burn about ___ cal a day" as you type. Save. On **Week** and **Month** a dashed line shows it next to the solid goal line, and the sentence above the chart says how your average compares. On **Today**, under the big ring, it says how far over or under it you are.
 
 ### Tell Andrew
 

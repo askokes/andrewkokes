@@ -1,3 +1,4 @@
+import { isActivity, isSex, type Activity, type Sex } from "./burn";
 import { isValidTimeZone } from "./dates";
 
 export type FieldErrors = Record<string, string>;
@@ -9,8 +10,14 @@ export interface GoalsInput {
   carbsG: number | null;
   fatG: number | null;
   goalWeightLb: number | null;
-  /** Calories burned in a normal day (maintenance), optional. Shown next to the goal, never instead of it. */
-  baselineCalories: number | null;
+}
+
+/** What the calories-burned estimate needs besides weight (see burn.ts). Each may be left blank. */
+export interface BurnInput {
+  sex: Sex | null;
+  age: number | null;
+  heightIn: number | null;
+  activity: Activity | null;
 }
 
 export interface ProfileInput {
@@ -18,6 +25,8 @@ export interface ProfileInput {
   timezone: string;
   trackWeight: boolean;
   goals: GoalsInput | null;
+  /** Null when the body says nothing about it: what's saved stays. */
+  burn: BurnInput | null;
   currentWeightLb: number | null;
 }
 
@@ -66,8 +75,7 @@ function readGoals(raw: unknown, errors: FieldErrors, prefix = ""): GoalsInput |
   const carbsG = optionalWholeNumber(raw.carbsG, `${prefix}carbsG`, "Carbs", 0, 1000, errors);
   const fatG = optionalWholeNumber(raw.fatG, `${prefix}fatG`, "Fat", 0, 1000, errors);
   const goalWeightLb = optionalWeight(raw.goalWeightLb, `${prefix}goalWeightLb`, "Goal weight", errors);
-  const baselineCalories = optionalWholeNumber(raw.baselineCalories, `${prefix}baselineCalories`, "Calories you burn", 500, 10000, errors);
-  return calories === null ? null : { calories, proteinG, carbsG, fatG, goalWeightLb, baselineCalories };
+  return calories === null ? null : { calories, proteinG, carbsG, fatG, goalWeightLb };
 }
 
 export function parseGoals(raw: unknown): Result<GoalsInput> {
@@ -94,10 +102,25 @@ export function parseProfile(raw: unknown, requireGoals: boolean): Result<Profil
   let goals: GoalsInput | null = null;
   if (requireGoals || !isBlank(raw.goals)) goals = readGoals(raw.goals, errors, "goals.");
 
-  const currentWeightLb = trackWeight
-    ? optionalWeight(raw.currentWeightLb, "currentWeightLb", "Current weight", errors)
-    : null;
+  // Today's weight, from the weight card, or (tracking off) for the calories-burned estimate.
+  const currentWeightLb = optionalWeight(raw.currentWeightLb, "currentWeightLb", "Weight", errors);
+  const burn = BURN_KEYS.some((k) => k in raw) ? readBurn(raw, errors) : null;
 
   if (Object.keys(errors).length) return { ok: false, errors };
-  return { ok: true, value: { displayName, timezone, trackWeight, goals, currentWeightLb } };
+  return { ok: true, value: { displayName, timezone, trackWeight, goals, burn, currentWeightLb } };
+}
+
+const BURN_KEYS = ["sex", "age", "heightIn", "activity"] as const;
+
+function readBurn(raw: Record<string, unknown>, errors: FieldErrors): BurnInput {
+  const sex = isBlank(raw.sex) ? null : isSex(raw.sex) ? raw.sex : ((errors.sex = "Pick male or female."), null);
+  const age = optionalWholeNumber(raw.age, "age", "Age", 10, 100, errors);
+  let heightIn: number | null = null;
+  if (!isBlank(raw.heightIn)) {
+    const n = typeof raw.heightIn === "string" ? Number(raw.heightIn.trim()) : raw.heightIn;
+    if (typeof n !== "number" || !Number.isFinite(n) || n < 48 || n > 90) errors.heightIn = "Height should be between 4 and 7 1/2 feet.";
+    else heightIn = Math.round(n * 10) / 10;
+  }
+  const activity = isBlank(raw.activity) ? null : isActivity(raw.activity) ? raw.activity : ((errors.activity = "Pick an activity level from the list."), null);
+  return { sex, age, heightIn, activity };
 }

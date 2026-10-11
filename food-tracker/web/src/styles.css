@@ -628,3 +628,10 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 .ring-baseline strong { color: var(--text); font-weight: 600; }
 .ring-baseline strong.over-text { color: var(--over-text); }
 .ring-baseline-mark { display: inline-block; width: 14px; height: 0; margin-right: 6px; vertical-align: middle; border-top: 2px dashed var(--baseline); }
+
+/* Goals: the calories you burn a day */
+.segmented.two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.field-label { font-weight: 600; margin: 0; }
+.height-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: -6px; }
+.burn-estimate { padding: 12px 14px; border-radius: 12px; background: var(--note-bg); font-size: 1rem; }
+.burn-estimate strong { font-size: 1.15rem; }

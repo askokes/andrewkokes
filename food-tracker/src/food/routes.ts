@@ -6,7 +6,7 @@ import { Hono, type Context } from "hono";
 import type { AppDeps } from "../app";
 import { localDate } from "../dates";
 import type { AppEnv } from "../env";
-import { getUser, goalsOn, noProfile, readJson, type UserRow } from "../profile";
+import { baselineOn, getUser, goalsOn, noProfile, readJson, type UserRow } from "../profile";
 import { isObject, type FieldErrors } from "../validate";
 import { spokenUnits } from "./common";
 import { checkDate, DATE_ERROR, parseEntryChanges, parseNewEntries, readQuantity } from "./input";
@@ -282,8 +282,9 @@ async function foodsFor(usda: UsdaDeps, rows: EntryRow[]): Promise<Map<number, F
 
 async function dayView(c: Ctx, usda: UsdaDeps, user: UserRow, date: string): Promise<DayView> {
   const db = c.env.DB;
-  const [goals, { results: rows }] = await Promise.all([
+  const [goals, baseline, { results: rows }] = await Promise.all([
     goalsOn(db, user.id, date),
+    baselineOn(db, user, date),
     db
       .prepare(`SELECT ${ENTRY_COLUMNS} FROM food_entries WHERE user_id = ? AND log_date = ? ORDER BY created_at, id`)
       .bind(user.id, date)
@@ -300,7 +301,7 @@ async function dayView(c: Ctx, usda: UsdaDeps, user: UserRow, date: string): Pro
       proteinG: goals.protein_g,
       carbsG: goals.carbs_g,
       fatG: goals.fat_g,
-      baselineCalories: goals.baseline_calories,
+      baselineCalories: baseline,
     },
     totals: {
       calories: sum((n) => n.calories),

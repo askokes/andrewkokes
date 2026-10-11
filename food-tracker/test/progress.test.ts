@@ -2,6 +2,7 @@ import { env } from "cloudflare:workers";
 import { describe, expect, it } from "vitest";
 import { createApp } from "../src/app";
 import { addDays, localDate } from "../src/dates";
+import { caloriesBurned } from "../src/burn";
 import type { SummaryResponse, WeightResponse } from "../src/food/types";
 import { makeSigner } from "./helpers";
 
@@ -76,26 +77,26 @@ describe("GET /api/summary", () => {
     expect(goalOn(0)).toBe(2200);
   });
 
-  it("shows the first baseline on the days before it was set; later changes start on their day", async () => {
+  it("works out the calories burned for each day from that week's weigh-ins", async () => {
     const email = await signUp();
-    const user = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first<{ id: number }>();
-    const insert = (calories: number, baseline: number | null, offset: number) =>
-      env.DB.prepare("INSERT INTO goals (user_id, calories, baseline_calories, effective_from) VALUES (?, ?, ?, ?)")
-        .bind(user!.id, calories, baseline, addDays(today(), offset))
-        .run();
-    await env.DB.prepare("UPDATE goals SET effective_from = ? WHERE user_id = ?").bind(addDays(today(), -10), user!.id).run();
-    await insert(1800, 2600, -4); // baseline first entered
-    await insert(1800, 2500, -2); // then changed
-    await insert(1700, null, 0); // then cleared
-
+    await as(email, "POST", "/api/me", { displayName: "Ava", timezone: TZ, trackWeight: true, sex: "female", age: 40, activity: "moderate" });
+    for (const [offset, weightLb] of [[-9, 200], [-2, 180], [-1, 182]] as const) {
+      expect((await as(email, "POST", "/api/weight", { date: addDays(today(), offset), weightLb })).status).toBe(201);
+    }
     const body = await (await as(email, "GET", `/api/summary?from=${addDays(today(), -12)}&to=${today()}`)).json<SummaryResponse>();
     const on = (offset: number) => body.days.find((d) => d.date === addDays(today(), offset))!.goal?.baselineCalories;
-    expect(on(-12)).toBe(2600);
-    expect(on(-6)).toBe(2600);
-    expect(on(-4)).toBe(2600);
-    expect(on(-2)).toBe(2500);
-    expect(on(-1)).toBe(2500);
-    expect(on(0)).toBeNull();
+    const burned = (lb: number) => caloriesBurned({ sex: "female", birthYear: Number(today().slice(0, 4)) - 40, heightIn: null, activity: "moderate" }, lb, today());
+    expect(on(-12)).toBe(burned(200)); // before any weigh-in: the first one
+    expect(on(-3)).toBe(burned(200)); // the week ending then holds only the 200
+    expect(on(-2)).toBe(burned(180)); // the 200 is more than a week back
+    expect(on(0)).toBe(burned(181)); // two weigh-ins in the week: their average
+    expect(on(0)).toBeLessThan(on(-12)!);
+  });
+
+  it("has no calories burned until the Goals tab is filled in", async () => {
+    const email = await signUp();
+    const body = await (await as(email, "GET", `/api/summary?from=${today()}&to=${today()}`)).json<SummaryResponse>();
+    expect(body.days[0].goal?.baselineCalories).toBeNull();
   });
 
   it.each([

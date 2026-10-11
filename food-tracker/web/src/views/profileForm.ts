@@ -1,5 +1,7 @@
 import { api, ApiError, type Me } from "../api";
-import { el } from "../dom";
+import { ACTIVITY_LEVELS, caloriesBurned, type Activity, type Sex } from "../../../src/burn";
+import { el, segmented } from "../dom";
+import { whole } from "../food";
 import { US_TIME_ZONES, usZoneFor } from "../timezones";
 
 const LOW_CALORIE_NOTE =
@@ -89,15 +91,6 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
   calories.input.addEventListener("input", updateCalNote);
   updateCalNote();
 
-  const baseline = field({
-    label: "Calories you burn a day",
-    name: "goals.baselineCalories",
-    value: goals?.baselineCalories,
-    inputmode: "numeric",
-    suffix: "cal",
-    hint: "Optional. Your baseline, what you'd burn on a normal day, from a fitness watch, your doctor or an online calculator. The chart shows it as a dashed line next to your goal.",
-  });
-
   const protein = field({ label: "Protein", name: "goals.proteinG", value: goals?.proteinG, inputmode: "numeric", suffix: "g" });
   const carbs = field({ label: "Carbs", name: "goals.carbsG", value: goals?.carbsG, inputmode: "numeric", suffix: "g" });
   const fat = field({ label: "Fat", name: "goals.fatG", value: goals?.fatG, inputmode: "numeric", suffix: "g" });
@@ -113,7 +106,92 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
   });
   const goalWeight = field({ label: "Goal weight", name: "goals.goalWeightLb", value: goals?.goalWeightLb, inputmode: "decimal", suffix: "lb", hint: "Optional." });
   const weightFields = el("div", { className: "stack" }, currentWeight.wrap, goalWeight.wrap);
-  const syncWeight = () => (weightFields.hidden = !track.checked);
+  // ---- the calories you burn a day, worked out (see src/burn.ts)
+  let saved = me?.burn;
+  let sex: Sex | null = saved?.sex ?? null;
+  const sexPicker = segmented<Sex>({
+    label: "Sex",
+    options: [
+      { value: "female", label: "Female" },
+      { value: "male", label: "Male" },
+    ],
+    value: sex,
+    onChange: (v) => {
+      sex = v;
+      fields.sex.msg.textContent = "";
+      showBurn();
+    },
+  });
+  sexPicker.classList.add("two-up");
+  const sexWrap = el("div", { className: "field" }, el("p", { className: "field-label", textContent: "Sex" }), sexPicker, el("p", { className: "field-msg", attrs: { "aria-live": "polite" } }));
+  const age = field({ label: "Age", name: "age", value: saved?.age, inputmode: "numeric", suffix: "yrs" });
+  const feet = field({ label: "Height", name: "heightFt", value: saved?.heightIn ? Math.floor(saved.heightIn / 12) : null, inputmode: "numeric", suffix: "ft" });
+  const inches = field({ label: "\u00a0", name: "heightInches", value: saved?.heightIn ? Math.round((saved.heightIn % 12) * 10) / 10 : null, inputmode: "decimal", suffix: "in" });
+  const heightNote = el("p", { className: "hint", textContent: "Optional. Makes the estimate a little closer." });
+  const activityId = "f-activity";
+  const activity = el(
+    "select",
+    { id: activityId, name: "activity" },
+    el("option", { value: "", textContent: "Pick one", selected: !saved?.activity }),
+    ...ACTIVITY_LEVELS.map((a) => el("option", { value: a.value, textContent: a.label, selected: a.value === saved?.activity })),
+  );
+  const activityWrap = el(
+    "div",
+    { className: "field" },
+    el("label", { htmlFor: activityId, textContent: "How active are you?" }),
+    activity,
+    el("p", { id: `${activityId}-msg`, className: "field-msg" }),
+  );
+  // With weight tracking on, the estimate follows the weigh-ins; with it off, a weight just for this.
+  const burnWeight = field({ label: "Your weight", name: "burnWeightLb", value: saved?.weightLb, inputmode: "decimal", suffix: "lb" });
+  const weightNote = el("p", { className: "hint" });
+  const estimate = el("p", { className: "burn-estimate", attrs: { "aria-live": "polite" } });
+
+  const heightIn = () => {
+    const ft = feet.input.value.trim();
+    const inch = inches.input.value.trim();
+    if (!ft && !inch) return null;
+    const total = Number(ft || 0) * 12 + Number(inch || 0);
+    return Number.isFinite(total) && total > 0 ? total : null;
+  };
+  const weightForBurn = () => {
+    const typed = (track.checked ? currentWeight : burnWeight).input.value.trim();
+    const n = typed ? Number(typed) : saved?.weightLb ?? null;
+    return n !== null && Number.isFinite(n) && n > 0 ? n : null;
+  };
+  const showBurn = () => {
+    burnWeight.wrap.hidden = track.checked;
+    weightNote.hidden = !track.checked;
+    weightNote.textContent = saved?.weightLb
+      ? `Uses your weight trend (${saved.weightLb} lb now).`
+      : "Uses your weight once you log it below.";
+    const ageN = Number(age.input.value.trim());
+    const today = me?.today ?? new Date().toISOString().slice(0, 10);
+    const burned = caloriesBurned(
+      {
+        sex,
+        birthYear: age.input.value.trim() && Number.isInteger(ageN) ? Number(today.slice(0, 4)) - ageN : null,
+        heightIn: heightIn(),
+        activity: (activity.value || null) as Activity | null,
+      },
+      weightForBurn(),
+      today,
+    );
+    estimate.replaceChildren(
+      ...(burned === null
+        ? [el("span", { className: "muted", textContent: "Fill in sex, age, activity and weight to see it." })]
+        : ["You burn about ", el("strong", { textContent: `${whole(burned)} cal` }), " a day"]),
+    );
+  };
+  for (const input of [age.input, feet.input, inches.input, activity, burnWeight.input, currentWeight.input]) {
+    input.addEventListener("input", showBurn);
+    input.addEventListener("change", showBurn);
+  }
+
+  const syncWeight = () => {
+    weightFields.hidden = !track.checked;
+    showBurn();
+  };
   track.addEventListener("change", syncWeight);
   syncWeight();
 
@@ -125,8 +203,11 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     "goals.carbsG": carbs,
     "goals.fatG": fat,
     "goals.goalWeightLb": goalWeight,
-    "goals.baselineCalories": baseline,
     currentWeightLb: currentWeight,
+    sex: { msg: sexWrap.querySelector(".field-msg")!, input: sexPicker },
+    age,
+    heightIn: { msg: inches.msg, input: feet.input },
+    activity: { msg: activityWrap.querySelector(".field-msg")!, input: activity },
   };
 
   const formMsg = el("p", { className: "form-msg", attrs: { role: "alert" } });
@@ -140,9 +221,22 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     { className: "card stack" },
     el("h2", { textContent: "Daily goals" }),
     calories.wrap,
-    baseline.wrap,
     el("p", { className: "subhead", textContent: "Macro goals (optional)" }),
     el("div", { className: "grid3" }, protein.wrap, carbs.wrap, fat.wrap),
+  );
+  const burn = el(
+    "section",
+    { className: "card stack" },
+    el("h2", { textContent: "Calories you burn a day" }),
+    el("p", { className: "hint", textContent: "Worked out for you. The chart shows it as a dashed line next to your goal, so you can see when a day goes over it." }),
+    sexWrap,
+    age.wrap,
+    el("div", { className: "height-row" }, feet.wrap, inches.wrap),
+    heightNote,
+    activityWrap,
+    burnWeight.wrap,
+    weightNote,
+    estimate,
   );
   const weight = el(
     "section",
@@ -159,7 +253,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     "form",
     { className: "stack", noValidate: true },
     // First run starts with who you are; the Goals tab leads with the goals.
-    ...(mode === "setup" ? [about, daily, weight] : [daily, weight, about]),
+    ...(mode === "setup" ? [about, daily, weight, burn] : [daily, burn, weight, about]),
     formMsg,
     savedMsg,
     submit,
@@ -195,10 +289,20 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
         carbsG: carbs.input.value,
         fatG: fat.input.value,
         goalWeightLb: goalWeight.input.value,
-        baselineCalories: baseline.input.value,
       },
-      currentWeightLb: track.checked ? currentWeight.input.value : "",
+      sex: sex ?? "",
+      age: age.input.value,
+      // Something typed that isn't a height goes as is, so the server says what's wrong with it.
+      heightIn: heightIn() ?? (feet.input.value.trim() || inches.input.value.trim() ? `${feet.input.value} ${inches.input.value}` : ""),
+      activity: activity.value,
+      // Today's weight from the weight card, or (tracking off) the weight for the estimate when it was changed.
+      currentWeightLb: track.checked
+        ? currentWeight.input.value
+        : burnWeight.input.value.trim() !== String(saved?.weightLb ?? "")
+          ? burnWeight.input.value
+          : "",
     };
+    fields.currentWeightLb = track.checked ? currentWeight : burnWeight;
 
     submit.disabled = true;
     submit.textContent = "Saving…";
@@ -207,6 +311,8 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
       if (mode === "settings") {
         // Today's weight was logged; leaving it in the box would log it again on the next save.
         currentWeight.input.value = "";
+        saved = next.burn;
+        showBurn();
         savedMsg.textContent = "Saved.";
       }
       onSaved(next);

@@ -57,6 +57,7 @@ describe("first run", () => {
       trackWeight: false,
       today: localDate("America/Chicago"),
       goals: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60, goalWeightLb: null, baselineCalories: null },
+      burn: { sex: null, age: null, heightIn: null, activity: null, weightLb: null },
       latestWeight: null,
     });
     expect((await as(email, "GET", "/api/me")).status).toBe(200);
@@ -81,15 +82,10 @@ describe("first run", () => {
     expect(me.goals.goalWeightLb).toBe(170);
   });
 
-  it("ignores a current weight when tracking is off", async () => {
+  it("keeps a weight given with tracking off, for the calories-burned estimate, without showing it as tracking", async () => {
     const email = newEmail();
-    await as(email, "POST", "/api/me", { ...setup, currentWeightLb: 180 });
-    const row = await env.DB.prepare(
-      "SELECT COUNT(*) AS n FROM weight_entries w JOIN users u ON u.id = w.user_id WHERE u.email = ?",
-    )
-      .bind(email)
-      .first<{ n: number }>();
-    expect(row?.n).toBe(0);
+    const res = await as(email, "POST", "/api/me", { ...setup, currentWeightLb: 180 });
+    expect(await res.json()).toMatchObject({ trackWeight: false, latestWeight: null, burn: { weightLb: 180 } });
   });
 });
 
@@ -103,8 +99,11 @@ describe("validation", () => {
     [{ ...setup, goals: { calories: 1800.5 } }, "goals.calories"],
     [{ ...setup, goals: { calories: "lots" } }, "goals.calories"],
     [{ ...setup, goals: { calories: 1800, proteinG: -5 } }, "goals.proteinG"],
-    [{ ...setup, goals: { calories: 1800, baselineCalories: 300 } }, "goals.baselineCalories"],
-    [{ ...setup, goals: { calories: 1800, baselineCalories: "2400.5" } }, "goals.baselineCalories"],
+    [{ ...setup, sex: "other" }, "sex"],
+    [{ ...setup, age: 5 }, "age"],
+    [{ ...setup, age: "40.5" }, "age"],
+    [{ ...setup, heightIn: 30 }, "heightIn"],
+    [{ ...setup, activity: "couch" }, "activity"],
     [{ ...setup, trackWeight: true, currentWeightLb: 20 }, "currentWeightLb"],
   ])("rejects bad input (%#: %s)", async (body, field) => {
     const res = await as(newEmail(), "POST", "/api/me", body);
@@ -173,21 +172,24 @@ describe("updating", () => {
     expect(await res.json()).toMatchObject({ goals: { calories: 2200 } });
   });
 
-  it("keeps the calories you burn with the goals, with the same history", async () => {
+  it("works out the calories you burn from sex, age, activity and weight, with height if given", async () => {
     const email = newEmail();
-    await as(email, "POST", "/api/me", { ...setup, goals: { ...setup.goals, baselineCalories: "2400" } });
-    expect(await (await as(email, "GET", "/api/me")).json()).toMatchObject({ goals: { calories: 1800, baselineCalories: 2400 } });
-    await env.DB.prepare("UPDATE goals SET effective_from = '2026-01-01' WHERE user_id = (SELECT id FROM users WHERE email = ?)")
-      .bind(email)
-      .run();
-
-    // A new baseline alone is a change: a new row today, the old one kept for earlier days.
-    const res = await as(email, "POST", "/api/goals", { ...setup.goals, baselineCalories: 2300 });
-    expect(await res.json()).toMatchObject({ goals: { calories: 1800, baselineCalories: 2300 } });
-    expect(await goalRows(email)).toHaveLength(2);
-    // Clearing it is allowed.
-    const cleared = await as(email, "POST", "/api/goals", { ...setup.goals, baselineCalories: "" });
-    expect(await cleared.json()).toMatchObject({ goals: { baselineCalories: null } });
+    const burn = { sex: "male", age: "50", heightIn: "", activity: "light" };
+    const res = await as(email, "POST", "/api/me", { ...setup, ...burn, currentWeightLb: "180" });
+    // WHO/FAO with no height: 11.6 x 81.6 kg + 879, x 1.375.
+    expect(await res.json()).toMatchObject({
+      goals: { calories: 1800, baselineCalories: 2510 },
+      burn: { sex: "male", age: 50, heightIn: null, activity: "light", weightLb: 180 },
+    });
+    // With a height, Mifflin-St Jeor.
+    await as(email, "POST", "/api/me", { ...setup, ...burn, heightIn: 70 });
+    expect(await (await as(email, "GET", "/api/me")).json()).toMatchObject({ goals: { baselineCalories: 2310 }, burn: { heightIn: 70 } });
+    // A profile update that says nothing about it keeps it.
+    await as(email, "POST", "/api/me", { displayName: "Ava", timezone: "America/Chicago", trackWeight: false });
+    expect(await (await as(email, "GET", "/api/me")).json()).toMatchObject({ goals: { baselineCalories: 2310 } });
+    // Clearing a part of it clears the estimate.
+    const cleared = await as(email, "POST", "/api/me", { ...setup, ...burn, activity: "" });
+    expect(await cleared.json()).toMatchObject({ goals: { baselineCalories: null }, burn: { activity: null } });
   });
 
   it("POST /api/goals is 404 before setup", async () => {

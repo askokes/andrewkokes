@@ -1,11 +1,12 @@
 // Progress API (SPEC section 9): daily totals for charts, and weigh-ins. Every
 // route needs a profile and is scoped to the signed-in user's id.
 import { Hono, type Context } from "hono";
+import { caloriesBurned, weightOn } from "./burn";
 import { addDays, isCalendarDate, localDate } from "./dates";
 import type { AppEnv } from "./env";
 import type { DaySummary, GoalsSnapshot, SummaryResponse, WeightEntry, WeightResponse } from "./food/types";
 import { checkDate, DATE_ERROR, FIRST_DATE } from "./food/input";
-import { getUser, noProfile, readJson, type UserRow } from "./profile";
+import { burnProfileOf, getUser, noProfile, readJson, weighInsOf, type UserRow } from "./profile";
 import { isBlank, isObject, type FieldErrors } from "./validate";
 
 type Ctx = Context<AppEnv>;
@@ -58,37 +59,31 @@ interface GoalRow {
   protein_g: number | null;
   carbs_g: number | null;
   fat_g: number | null;
-  baseline_calories: number | null;
   effective_from: string;
 }
 
 /**
  * The goals in effect on each date, from the whole goal history in one query.
  * Same rule as goalsOn in profile.ts: the latest row that had started by then,
- * else the earliest row.
+ * else the earliest row. The calories burned are worked out for each day from
+ * that day's weight (see burn.ts), so the line follows the weight.
  */
-function goalsByDate(rows: GoalRow[]) {
+function goalsByDate(rows: GoalRow[], burnedOn: (date: string) => number | null) {
   // rows are ordered by effective_from, id: the last started row wins.
-  const snapshot = (r: GoalRow): GoalsSnapshot => ({
-    calories: r.calories,
-    proteinG: r.protein_g,
-    carbsG: r.carbs_g,
-    fatG: r.fat_g,
-    baselineCalories: r.baseline_calories,
-  });
-  // What a user burns isn't a target they set for a day: the first baseline they enter also stands for the
-  // days before it, so the line shows across the chart at once. A later change (or clearing it) starts on
-  // its own day, like any goal.
-  const firstBaseline = rows.findIndex((r) => r.baseline_calories !== null);
   return (date: string): GoalsSnapshot | null => {
     if (!rows.length) return null;
-    let at = 0;
-    rows.forEach((r, i) => {
-      if (r.effective_from <= date) at = i;
-    });
-    const goals = snapshot(rows[at]);
-    if (firstBaseline > at) goals.baselineCalories = rows[firstBaseline].baseline_calories;
-    return goals;
+    let current = rows[0];
+    for (const r of rows) {
+      if (r.effective_from <= date) current = r;
+      else break;
+    }
+    return {
+      calories: current.calories,
+      proteinG: current.protein_g,
+      carbsG: current.carbs_g,
+      fatG: current.fat_g,
+      baselineCalories: burnedOn(date),
+    };
   };
 }
 
@@ -113,7 +108,7 @@ progressRoutes.get("/summary", async (c) => {
   const { from, to } = range;
 
   const db = c.env.DB;
-  const [totals, goals] = await Promise.all([
+  const [totals, goals, weighIns] = await Promise.all([
     db
       .prepare(
         `SELECT log_date, SUM(calories) AS calories, SUM(protein_g) AS protein_g, SUM(carbs_g) AS carbs_g,
@@ -124,13 +119,15 @@ progressRoutes.get("/summary", async (c) => {
       .all<{ log_date: string; calories: number; protein_g: number; carbs_g: number; fat_g: number; entries: number }>(),
     db
       .prepare(
-        "SELECT calories, protein_g, carbs_g, fat_g, baseline_calories, effective_from FROM goals WHERE user_id = ? ORDER BY effective_from, id",
+        "SELECT calories, protein_g, carbs_g, fat_g, effective_from FROM goals WHERE user_id = ? ORDER BY effective_from, id",
       )
       .bind(user.id)
       .all<GoalRow>(),
+    weighInsOf(db, user.id),
   ]);
   const byDate = new Map(totals.results.map((r) => [r.log_date, r]));
-  const goalOn = goalsByDate(goals.results);
+  const profile = burnProfileOf(user);
+  const goalOn = goalsByDate(goals.results, (date) => caloriesBurned(profile, weightOn(weighIns, date), date));
 
   const days: DaySummary[] = [];
   for (let date = from; date <= to; date = addDays(date, 1)) {

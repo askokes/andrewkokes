@@ -1,4 +1,5 @@
 import { Hono, type Context } from "hono";
+import { ageOn, caloriesBurned, weightOn, type Activity, type BurnProfile, type Sex } from "./burn";
 import { localDate } from "./dates";
 import type { AppEnv } from "./env";
 import { parseGoals, parseProfile, type FieldErrors, type GoalsInput } from "./validate";
@@ -9,6 +10,10 @@ export interface UserRow {
   display_name: string;
   timezone: string;
   track_weight: number;
+  sex: Sex | null;
+  birth_year: number | null;
+  height_in: number | null;
+  activity: Activity | null;
 }
 
 interface GoalRow {
@@ -23,7 +28,7 @@ interface GoalRow {
 
 export function getUser(db: D1Database, email: string) {
   return db
-    .prepare("SELECT id, email, display_name, timezone, track_weight FROM users WHERE email = ?")
+    .prepare("SELECT id, email, display_name, timezone, track_weight, sex, birth_year, height_in, activity FROM users WHERE email = ?")
     .bind(email)
     .first<UserRow>();
 }
@@ -64,6 +69,29 @@ function latestWeight(db: D1Database, userId: number) {
     .first<{ weight_lb: number; log_date: string }>();
 }
 
+export const burnProfileOf = (user: UserRow): BurnProfile => ({
+  sex: user.sex,
+  birthYear: user.birth_year,
+  heightIn: user.height_in,
+  activity: user.activity,
+});
+
+/** Every weigh-in, oldest first, for the calories-burned estimate (see weightOn). */
+export async function weighInsOf(db: D1Database, userId: number) {
+  const { results } = await db
+    .prepare("SELECT log_date, weight_lb FROM weight_entries WHERE user_id = ? ORDER BY log_date")
+    .bind(userId)
+    .all<{ log_date: string; weight_lb: number }>();
+  return results.map((r) => ({ date: r.log_date, weightLb: r.weight_lb }));
+}
+
+/** The calories the user burns in a normal day as of `date`, or null when the Goals tab is missing something. */
+export async function baselineOn(db: D1Database, user: UserRow, date: string): Promise<number | null> {
+  const profile = burnProfileOf(user);
+  if (!profile.sex || profile.birthYear === null || !profile.activity) return null;
+  return caloriesBurned(profile, weightOn(await weighInsOf(db, user.id), date), date);
+}
+
 function sameGoals(row: GoalRow | null, goals: GoalsInput) {
   return (
     row !== null &&
@@ -71,8 +99,7 @@ function sameGoals(row: GoalRow | null, goals: GoalsInput) {
     row.protein_g === goals.proteinG &&
     row.carbs_g === goals.carbsG &&
     row.fat_g === goals.fatG &&
-    row.goal_weight_lb === goals.goalWeightLb &&
-    row.baseline_calories === goals.baselineCalories
+    row.goal_weight_lb === goals.goalWeightLb
   );
 }
 
@@ -80,18 +107,19 @@ function sameGoals(row: GoalRow | null, goals: GoalsInput) {
 function insertGoals(db: D1Database, email: string, goals: GoalsInput, today: string) {
   return db
     .prepare(
-      `INSERT INTO goals (user_id, calories, protein_g, carbs_g, fat_g, goal_weight_lb, baseline_calories, effective_from)
-       SELECT id, ?, ?, ?, ?, ?, ?, ? FROM users WHERE email = ?`,
+      `INSERT INTO goals (user_id, calories, protein_g, carbs_g, fat_g, goal_weight_lb, effective_from)
+       SELECT id, ?, ?, ?, ?, ?, ? FROM users WHERE email = ?`,
     )
-    .bind(goals.calories, goals.proteinG, goals.carbsG, goals.fatG, goals.goalWeightLb, goals.baselineCalories, today, email);
+    .bind(goals.calories, goals.proteinG, goals.carbsG, goals.fatG, goals.goalWeightLb, today, email);
 }
 
 async function loadMe(db: D1Database, email: string) {
   const user = await getUser(db, email);
   if (!user) return null;
   const today = localDate(user.timezone);
-  const [goals, weight] = await Promise.all([currentGoals(db, user.id, today), latestWeight(db, user.id)]);
+  const [goals, weight, weighIns] = await Promise.all([currentGoals(db, user.id, today), latestWeight(db, user.id), weighInsOf(db, user.id)]);
   const trackWeight = user.track_weight === 1;
+  const burnWeight = weightOn(weighIns, today);
   return {
     email: user.email,
     displayName: user.display_name,
@@ -104,8 +132,17 @@ async function loadMe(db: D1Database, email: string) {
       carbsG: goals.carbs_g,
       fatG: goals.fat_g,
       goalWeightLb: goals.goal_weight_lb,
-      baselineCalories: goals.baseline_calories,
+      baselineCalories: caloriesBurned(burnProfileOf(user), burnWeight, today),
       effectiveFrom: goals.effective_from,
+    },
+    // What the Goals tab shows and sends back for the calories-burned estimate.
+    burn: {
+      sex: user.sex,
+      age: user.birth_year === null ? null : ageOn(user.birth_year, today),
+      heightIn: user.height_in,
+      activity: user.activity,
+      /** The weight it uses: the last week's weigh-ins averaged, else the latest. */
+      weightLb: burnWeight === null ? null : Math.round(burnWeight * 10) / 10,
     },
     latestWeight: trackWeight && weight ? { weightLb: weight.weight_lb, date: weight.log_date } : null,
   };
@@ -153,6 +190,14 @@ profileRoutes.post("/me", async (c) => {
       )
       .bind(email, input.displayName, input.timezone, input.trackWeight ? 1 : 0),
   ];
+  if (input.burn) {
+    const b = input.burn;
+    statements.push(
+      db
+        .prepare("UPDATE users SET sex = ?, birth_year = ?, height_in = ?, activity = ? WHERE email = ?")
+        .bind(b.sex, b.age === null ? null : Number(today.slice(0, 4)) - b.age, b.heightIn, b.activity, email),
+    );
+  }
   if (input.goals) {
     const current = existing ? await currentGoals(db, existing.id, today) : null;
     if (!sameGoals(current, input.goals)) statements.push(insertGoals(db, email, input.goals, today));

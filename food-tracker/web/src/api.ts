@@ -1,12 +1,23 @@
+import type { Activity, Sex } from "../../src/burn";
 export interface Goals {
   calories: number;
   proteinG: number | null;
   carbsG: number | null;
   fatG: number | null;
   goalWeightLb: number | null;
-  /** Calories burned in a normal day, if set. */
+  /** Calories burned in a normal day, worked out from `Me.burn` and the weigh-ins; null until those are filled in. */
   baselineCalories: number | null;
   effectiveFrom: string;
+}
+
+/** What the calories-burned estimate uses (see src/burn.ts). */
+export interface BurnSettings {
+  sex: Sex | null;
+  age: number | null;
+  heightIn: number | null;
+  activity: Activity | null;
+  /** The weight it uses now: the last week's weigh-ins averaged, else the latest. */
+  weightLb: number | null;
 }
 
 export interface Me {
@@ -16,6 +27,7 @@ export interface Me {
   trackWeight: boolean;
   today: string;
   goals: Goals | null;
+  burn: BurnSettings;
   latestWeight: { weightLb: number; date: string } | null;
 }
 

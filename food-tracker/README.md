@@ -23,11 +23,15 @@ show no grams. Chipotle publishes ingredients only; its burritos, bowls, salads 
 build per protein, summed from those (the build is in each item's note). To refresh a menu, research it
 into the same JSON shape and run `node scripts/import-menus.mjs <folder>`: ids are kept for good.
 
-Baseline: Goals takes an optional "calories you burn a day" (`goals.baseline_calories`, migration 0007),
-kept with the goals so it has the same history. The chart draws it as a dashed line next to the goal,
-the Week / Month sentence compares the average to it, and Today says how far over or under it the day
-is, so a goal set below it never hides eating above it. The first baseline entered also stands for the
-days before it; later changes start on their own day.
+Calories burned (`src/burn.ts`): worked out, never typed in. Goals asks for sex, age, activity level and,
+optionally, height (`users.sex`, `birth_year`, `height_in`, `activity`, migration 0008); weight comes from
+the weigh-ins, the last week's averaged (with tracking off, Goals asks for a weight and keeps it as a
+weigh-in). Resting calories are Mifflin-St Jeor for an adult with a height, otherwise the WHO/FAO/UNU
+equations (weight, age and sex only, and they cover teenagers), times the usual activity factor (1.2 to
+1.9), to the nearest 10. Each day gets its own number from that week's weight, so the chart's dashed line
+follows the weight; the Week / Month sentence compares the average to it, and Today says how far over or
+under it the day is, so a goal set below it never hides eating above it. The typed-in
+`goals.baseline_calories` from migration 0007 is no longer read.
 
 Fun touches Andrew picked: Overview greets by first name and time of day, shows "N days logged in a
 row" once there are two (it counts logging, never amounts), and draws today as a big calorie ring with
