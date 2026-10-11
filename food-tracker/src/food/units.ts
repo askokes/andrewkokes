@@ -35,6 +35,18 @@ const LIST_ORDER = ["each", "small", "medium", "large", "slice", "piece", "servi
  * ("a glass of milk", "a bowl of oatmeal") get their cup from the table.
  */
 const COUNT_ORDER = ["each", "medium", "large", "small", "piece", "slice", "serving"];
+/**
+ * A drink with no unit said is its can or bottle, before a label serving: "a rockstar energy drink" is the
+ * 16 fl oz can USDA lists (480 g), not the 8 fl oz serving it also lists.
+ */
+const DRINK_ORDER = ["can", "bottle"];
+const DRINKS = /^(beverages?|alcoholic beverages?|carbonated beverage|water)\b|\bdrink\b/i;
+/** A breakfast cereal with no unit said is a cup of it ("a bowl of Fruity Pebbles"), not a guessed 100 g. */
+const CEREALS = /^cereals ready-to-eat\b/i;
+/** Containers a drink is sold in. One is "one of the drink" when the common-foods table gives it no sizes. */
+const CONTAINERS = new Set(["can", "bottle"]);
+/** Of a drink's cans or bottles, the one nearest a 12 fl oz can comes first. */
+const STANDARD_CAN_G = 355;
 const SIZES = new Set(["large", "medium", "small"]);
 
 const VOLUME: Record<string, "cup" | "tbsp" | "tsp"> = {
@@ -85,6 +97,8 @@ interface Match {
   grams?: number;
 }
 
+const CONTAINER_TEXT = /^(can|bottle)\b/;
+
 const rankOf = (qualified: boolean, text: string) => (!qualified ? 2 : DENSE_FORMS.test(text) ? 0 : 1);
 
 const round1 = (n: number) => Math.round(n * 10) / 10;
@@ -107,7 +121,7 @@ function isItemWord(word: string, foodWords: string[]): boolean {
  * measureUnit ("cup", "RACC", "egg", "Banana"); SR Legacy foods say
  * "undetermined" there and put the unit in the modifier ("cup, chopped or diced").
  */
-function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match[] {
+function classify(p: RawPortion, gramsEach: number, foodWords: string[], containers: boolean): Match[] {
   const unitName = p.unitName?.trim() ?? "";
   const namedUnit = unitName !== "" && unitName.toLowerCase() !== "undetermined";
   const source = namedUnit
@@ -135,6 +149,16 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match[
   if (first === "inch" && second && p.amount > 1) {
     const rest = text.split(",")[0].replace(/^inch\s+/, "");
     return [{ unit: "each", label: `${p.amount}-inch ${rest}`, rank: p.amount === 6 ? 2 : 1, grams: p.gramWeight }];
+  }
+  // "can", "can or bottle (12 fl oz)", "bottle 16.9 fl oz": one of the drink, as sold.
+  if (containers && CONTAINERS.has(first) && CONTAINER_TEXT.test(source.toLowerCase().trim())) {
+    const label = source.toLowerCase().replace(/\s+/g, " ").trim();
+    return [{ unit: first, label, rank: 2 }];
+  }
+  // "portion (2 oz mix + 1.5 oz whiskey)": one cocktail as USDA pours it, its serving.
+  if (first === "portion" && text === "portion" && /\([^)]*\)/.test(source) && !/yield/i.test(source)) {
+    const inside = /\(([^)]*)\)/.exec(source)?.[1].trim() ?? "";
+    return [{ unit: "serving", label: `serving (${inside})`, rank: 2 }];
   }
   if (first === "scoop" || first === "scoops") {
     const rest = qualifier(text);
@@ -175,22 +199,30 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[]): Match[
  * scoop, cup, tbsp, tsp), then any other unit the common-foods table adds for it
  * ("can", "bottle", "pack"). When USDA lists several portions for one unit, a
  * plain one ("slice") beats a qualified one ("slice, thin"), which beats a dense
- * form ("cup, melted"); otherwise USDA's order wins. Missing cup/tbsp/tsp are
+ * form ("cup, melted"); otherwise USDA's order wins, except that of several
+ * cans or bottles the one nearest 12 fl oz wins. A drink's can and bottle are
+ * USDA's only when the table gives the food no sizes. Missing cup/tbsp/tsp are
  * derived from whichever of them USDA gives. The table only adds units USDA's
  * portions lack (see commonPortions); `withCommon: false` leaves them out.
  */
 export function unitOptions(food: FoodRecord, withCommon = true): UnitOption[] {
   const foodWords = words(food.description);
   const found = new Map<string, { label: string; grams: number; rank: number }>();
+  // The table's can and bottle sizes stand for a drink it names; USDA's are used for any other.
+  const containers = commonPortions(food.fdcId).length === 0;
+  const nearerCan = (grams: number, than: number) => Math.abs(grams - STANDARD_CAN_G) < Math.abs(than - STANDARD_CAN_G);
 
   for (const p of food.portions) {
     if (!(p.amount > 0) || !(p.gramWeight > 0)) continue;
     const gramsEach = p.gramWeight / p.amount; // "0.5 breast = 86 g" means one breast is 172 g
-    for (const match of classify(p, gramsEach, foodWords)) {
+    for (const match of classify(p, gramsEach, foodWords, containers)) {
       const prev = found.get(match.unit);
-      if (!prev || match.rank > prev.rank) {
-        found.set(match.unit, { label: match.label, grams: match.grams ?? gramsEach, rank: match.rank });
-      }
+      const grams = match.grams ?? gramsEach;
+      const better =
+        !prev ||
+        match.rank > prev.rank ||
+        (match.rank === prev.rank && CONTAINERS.has(match.unit) && nearerCan(grams, prev.grams));
+      if (better) found.set(match.unit, { label: match.label, grams, rank: match.rank });
     }
   }
 
@@ -213,7 +245,7 @@ export function unitOptions(food: FoodRecord, withCommon = true): UnitOption[] {
     }
   }
 
-  const portionOptions = LIST_ORDER.flatMap((unit) => {
+  const portionOptions = [...LIST_ORDER, ...CONTAINERS].flatMap((unit) => {
     const option = found.get(unit);
     return option ? [{ unit, label: option.label, grams: round2(option.grams) }] : [];
   });
@@ -223,12 +255,15 @@ export function unitOptions(food: FoodRecord, withCommon = true): UnitOption[] {
 /**
  * Units to try, best first, when none was spoken: the ones the caller prefers
  * (the unit of the table entry the spoken phrase matched, so "a soda" is a can
- * whichever cola record is offered), then the food's own table unit, then
- * COUNT_ORDER.
+ * whichever cola record is offered), then the food's own table unit, then a
+ * drink's can or bottle, then COUNT_ORDER, then a breakfast cereal's cup.
  */
 function unitlessOrder(food: FoodRecord, preferred: readonly (string | null | undefined)[]): string[] {
   const own = commonUnit(food.fdcId);
-  return [...preferred, own, ...COUNT_ORDER].filter((u): u is string => typeof u === "string" && u !== "");
+  const drink = DRINKS.test(food.description) ? DRINK_ORDER : [];
+  const cereal = CEREALS.test(food.description) ? ["cup"] : [];
+  const order = [...preferred, own, ...drink, ...COUNT_ORDER, ...cereal];
+  return order.filter((u): u is string => typeof u === "string" && u !== "");
 }
 
 /** Foods cut into slices or pieces of one size, so either word means the same cut. */

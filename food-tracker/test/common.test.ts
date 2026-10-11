@@ -507,7 +507,7 @@ describe("commonTail", () => {
 /** Every record a drink entry maps to. */
 const DRINK_RECORDS = new Set([
   168746, 168747, 168749, 169572, 169575, 171906, 174146, 173185, 173190, 174837, 171908, 174815, 174818, 174817,
-  174819, 171920, 168752,
+  174819, 171920, 168752, 174833, 171925, 174835, 174836, 173192, 174110, 174841, 173201, 173200, 174849,
 ]);
 
 /**
@@ -563,6 +563,25 @@ const DRINKS: [name: string, fdcId: number, unit: string, kcal: number][] = [
   ["whiskey", 174819, "shot", 97], // 86 proof: 105
   ["gin", 171920, "shot", 97], // 90 proof: 110
   ["pina colada", 168752, "each", 490],
+  // Found by the drinks adversarial test (see test/drinks.test.ts): ales, grapes and liquor brands.
+  ["sierra nevada", 168746, "can", 175],
+  ["cabernet", 174833, "glass", 120],
+  ["merlot", 171925, "glass", 120],
+  ["pinot noir", 174835, "glass", 120],
+  ["syrah", 174836, "glass", 120],
+  ["zinfandel", 173192, "glass", 120],
+  ["malbec", 173190, "glass", 120],
+  ["chardonnay", 174110, "glass", 120],
+  ["pinot grigio", 174841, "glass", 120],
+  ["sauvignon blanc", 173201, "glass", 120],
+  ["riesling", 173200, "glass", 120],
+  ["moscato", 174849, "glass", 120],
+  ["fireball", 174819, "shot", 107],
+  ["patron", 174815, "shot", 97],
+  ["titos", 174818, "shot", 97],
+  ["captain morgan", 174817, "shot", 86],
+  ["hennessy", 174815, "shot", 97],
+  ["tanqueray", 171920, "shot", 116],
 ];
 
 const within15 = (kcal: number, label: number) => Math.abs(kcal - label) / label <= 0.15;

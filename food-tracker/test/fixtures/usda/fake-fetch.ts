@@ -3,6 +3,7 @@
 import foodsFile from "./foods.json";
 import adversarialFile from "./live/adversarial.json";
 import brandsFile from "./live/brands.json";
+import drinksFile from "./live/drinks.json";
 import commonFile from "./live/common-foods.json";
 import searchFile from "./search.json";
 
@@ -13,9 +14,10 @@ const common = new Map<number, Json>((commonFile.foods as Json[]).map((f) => [f.
 const core = searchFile.foundationAndSr as Record<string, Json>;
 const branded = searchFile.branded as Record<string, Json>;
 
-// Live responses for the adversarial phrases in test/eval-live.test.ts and the brand-name and drink
-// phrases in test/brands.test.ts, compacted (see their _note). search.json, foods.json and
-// common-foods.json win on overlap, then adversarial.json, so other tests see what they always did.
+// Live responses for the adversarial phrases in test/eval-live.test.ts, the brand-name and drink phrases in
+// test/brands.test.ts and the drinks adversarial phrases in test/drinks.test.ts, compacted (see their
+// _note). search.json, foods.json and common-foods.json win on overlap, then adversarial.json, then
+// brands.json, so other tests see what they always did.
 type Text = string | null;
 type Row = [number, string, string, Text, Text, number | null, Text, Text, ...(number | null)[]];
 type LiveFood = { fdcId: number; dataType: string; description: string; nutrients: (number | null)[] };
@@ -23,7 +25,7 @@ type LiveFile = {
   search: Record<"core" | "branded", Record<string, { totalHits: number; hits: Row[] }>>;
   foods: LiveFood[];
 };
-const liveFiles = [adversarialFile, brandsFile] as unknown as LiveFile[];
+const liveFiles = [adversarialFile, brandsFile, drinksFile] as unknown as LiveFile[];
 const NUTRIENT_IDS = [1008, 1003, 1005, 1004];
 /** Search hits carry { nutrientId, value }; detail records { nutrient: { id }, amount }. */
 const nutrients = (values: (number | null)[], key: "value" | "amount") =>

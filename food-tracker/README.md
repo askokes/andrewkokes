@@ -42,14 +42,23 @@ Matching: everyday phrases ("rice", "two eggs", "a coke") go straight to the rec
 through the common-foods table (`src/food/common.ts`), with its alternatives and everyday units (a
 can, a container, a pint, a shot); anything else is USDA's search, reranked by `rankHits` in
 `src/food/usda.ts`. The table also names popular beer, hard seltzer and cider brands USDA has no
-record of ("a blue moon", "a white claw"), each mapped to the generic record nearest its label.
+record of ("a blue moon", "a white claw"), liquor brands ("a shot of Fireball"), wine by its grape
+("a glass of Cabernet") and drinks whose brands USDA's search answers badly ("a Prime", "a fanta",
+"an AriZona"), each mapped to the generic record nearest its label. A flavor around a table drink is
+that drink ("a White Claw Mango", "a cherry coke"), but a juice after a liquor is a mixer ("a vodka
+cranberry"). Mixed drinks USDA has no record of ("a mojito", "a Long Island iced tea") are not found
+without a search: USDA's hits for them are mixers, candies and teas.
 A search result is offered only when it is that food (`isReasonable`: it names every word of the
 phrase that says which food it is, so "blue cheese" is no Blue Moon and "white claw" not claw crab
-meat); otherwise Branded is searched, then a brand USDA doesn't know falls back to the table food
-its last words name ("kirkland trail mix" is trail mix), or to the table food it names before
-saying its kind ("a stella beer" is a Stella), and failing that the phrase is not found.
+meat; a beer grade is no "Prime", a teaspoon of pale ale mustard no pale ale, THE CAPTAIN'S cocktail
+sauce no "captain"); otherwise Branded is searched, then a brand USDA doesn't know falls back to the
+table food its last words name ("kirkland trail mix" is trail mix), or to the table food it names
+before saying its kind ("a stella beer" is a Stella), a shot of an unknown brand to liquor, and
+failing that the phrase is not found. A Branded record whose calories are far off its brand's others
+ranks last. A drink said with no unit is its can or bottle, a breakfast cereal a cup.
 `test/eval-live.test.ts` scores both against independently labeled live USDA results
-(`test/fixtures/usda/live`), and `test/brands.test.ts` replays live searches for brand names and drinks.
+(`test/fixtures/usda/live`), and `test/brands.test.ts` and `test/drinks.test.ts` replay live searches
+for brand names, drinks and the phrases two adversarial live tests found.
 
 **Deviations from SPEC.md (pending Andrew's OK):** section 6 says to search with `pageSize=10`; the app
 asks for 50, because USDA's ranking often leaves the everyday food out of the top 10 (still one call).

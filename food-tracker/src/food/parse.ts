@@ -58,8 +58,11 @@ const VULGAR_FRACTIONS = new Map([
   ["⅛", 1 / 8], ["⅜", 3 / 8], ["⅝", 5 / 8], ["⅞", 7 / 8],
 ]);
 const VAGUE_COUNTS = new Map([["couple", 2], ["few", 3], ["several", 3]]);
-/** A number before one of these is a size, not a count: "a 6 inch sub" is one sub. */
-const LENGTHS = words("inch inches foot feet ft cm centimeter centimeters centimetre centimetres");
+/**
+ * A number before one of these is a size or part of a name, not a count: "a 6 inch sub" is one sub, "a 5 hour
+ * energy" one 5-hour Energy.
+ */
+const LENGTHS = words("inch inches foot feet ft cm centimeter centimeters centimetre centimetres hour");
 
 const UNIT_SPELLINGS: Record<SpokenUnit, string> = {
   oz: "oz ozs ounce ounces",
@@ -127,6 +130,10 @@ const TRAILING_FILLER = phrases([
   "please", "today", "tonight", "yesterday", "earlier", "too", "also", "as well", "like", "maybe",
   "or so", "or something", "i think", "i guess", "this morning", "this afternoon", "this evening",
 ]);
+/** "A little" is filler ("a little rice") except in these names: "a Little Debbie", "a Little Caesars pizza". */
+const LITTLE_NAMES = words("debbie debbie's debbies caesars caesar's caesar bites smokies");
+/** Where the food came from, which says nothing of what it is: "a large fries from McDonald's" is large fries. */
+const SOURCE_LEAD = words("from at");
 /** Left over in front of the food name once the amount is read: "two of the cookies". */
 const FOOD_LEAD = words("of a an the some my");
 
@@ -167,10 +174,11 @@ const BOUNDARY_WORDS = words("and plus then i i'm i've we was is today tonight y
 
 // ---------------------------------------------------------------- tokens
 
-// Groups: 1-2 fraction, 3-4 number (+ "%"), 5 fraction character, 6 word,
-// 7 dash in a range ("2-3", read as "2 to 3"; "1-1/2" stays a mixed number), 8 punctuation.
+// Groups: 1-2 fraction, 3-4 number (+ "%"), 5 fraction character, 6 word (an "&" between short words stays
+// in it: "M&Ms", "A&W", "PB&J"), 7 dash in a range ("2-3", read as "2 to 3"; "1-1/2" stays a mixed number),
+// 8 punctuation.
 const TOKEN_RE =
-  /(\d+)\/(\d+)|(\d*\.\d+|\d+)(%?)|([½⅓⅔¼¾⅛⅜⅝⅞])|(\p{L}[\p{L}\d]*(?:['’-][\p{L}\d]+)*)|((?<=\d)\s?[-–]\s?(?=\d+(?:\.\d+)?(?![/\d])))|(\s[-–—]\s|[–—]|\.(?!\d)|[,;:!?\n&+])/gu;
+  /(\d+)\/(\d+)|(\d*\.\d+|\d+)(%?)|([½⅓⅔¼¾⅛⅜⅝⅞])|((?:\p{L}{1,2}&(?=\p{L}))?\p{L}[\p{L}\d]*(?:['’-][\p{L}\d]+)*(?:&\p{L}{1,2}(?![\p{L}\d]))?)|((?<=\d)\s?[-–]\s?(?=\d+(?:\.\d+)?(?![/\d])))|(\s[-–—]\s|[–—]|\.(?!\d)|[,;:!?\n&+])/gu;
 
 function tokenize(text: string): Token[] {
   const tokens: Token[] = [];
@@ -186,7 +194,8 @@ function tokenize(text: string): Token[] {
     } else if (m[5] !== undefined) {
       tokens.push({ ...base, w: m[5], kind: "num", n: VULGAR_FRACTIONS.get(m[5]) ?? 0, frac: true });
     } else if (m[6] !== undefined) {
-      tokens.push({ ...base, w: m[6].toLowerCase().replace(/’/g, "'"), kind: "word" });
+      // "M&Ms" is "m and ms", one word: the table's name for it, never two foods "m" and "ms".
+      tokens.push({ ...base, w: m[6].toLowerCase().replace(/’/g, "'").replace(/&/g, " and "), kind: "word" });
     } else if (m[7] !== undefined) {
       tokens.push({ ...base, w: "to", kind: "word" });
     } else {
@@ -464,6 +473,7 @@ function splitItems(t: Token[]): Token[][] {
 function skipLeadingFiller(t: Token[], i: number): number {
   for (;;) {
     const n = phraseAt(t, i, LEADING_FILLER);
+    if (n && wordAt(t, i + n - 1) === "little" && LITTLE_NAMES.has(wordAt(t, i + n))) return i;
     if (n) i += n;
     // "like" is a hedge only before an amount: "like 2 eggs".
     else if (wordAt(t, i) === "like" && (isCardinalToken(t, i + 1) || readQuantity(t, i + 1))) i++;
@@ -507,6 +517,9 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
     last -= n;
   }
   let end = last;
+  // "Fries from McDonald's", "a burrito at Chipotle": the food is what comes before.
+  const from = seg.findIndex((tok, k) => k > i && k < end - 1 && SOURCE_LEAD.has(tok.w));
+  if (from > 0) end = from;
   // A typed amount after the food, only when none came first: "chicken breast 6 oz".
   if (!q && !u) {
     for (let k = i + 1; k < end; k++) {

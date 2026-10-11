@@ -651,6 +651,10 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
   // Cereals ready-to-eat, GENERAL MILLS, CHEERIOS: 1 cup = 28 g, 104 kcal
   { names: ["cheerios"], fdcId: 173884, unit: "cup", alternatives: [174648, 172990] },
+  // Cereals ready-to-eat, MOM'S BEST, Honey Nut TOASTY O'S: 1 cup = 30 g, 116 kcal
+  // USDA has no Honey Nut Cheerios (label: 1 cup, 37 g, 140 cal); the honey nut O's it has are nearest, and
+  // its Branded search puts a Cheerios honey nut granola first.
+  { names: ["honey nut cheerios", "honey nut os"], fdcId: 174644, unit: "cup", alternatives: [173884, 171681] },
   // Cereals ready-to-eat, GENERAL MILLS, CHEERIOS: 1 cup = 28 g, 104 kcal
   // "A bowl of cereal": the independent labels' generic cold cereal, dry, with milk logged on its own.
   {
@@ -772,6 +776,8 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["grilled chicken sandwich"], fdcId: 170368, alternatives: [170295, 170318] },
   // Fast foods, fish sandwich, with tartar sauce: 1 sandwich = 220 g, 565 kcal
   { names: ["fish sandwich"], fdcId: 170296, alternatives: [170297] },
+  // McDONALD'S, McCHICKEN Sandwich: 1 sandwich = 131 g, 358 kcal
+  { names: ["mcchicken", "mc chicken", "mcchicken sandwich"], fdcId: 173305, unit: "each", alternatives: [173306, 170295] },
   // Fast foods, english muffin, with egg, cheese, and canadian bacon: 1 sandwich = 126 g, 287 kcal
   {
     names: ["egg mcmuffin", "breakfast sandwich"],
@@ -1246,9 +1252,22 @@ export const COMMON_FOODS: readonly CommonFood[] = [
       { unit: "bottle", label: "bottle (20 fl oz)", grams: 614 },
     ],
   },
-  // Beverages, carbonated, root beer: 1 can (12 fl oz) = 370 g, 152 kcal
+  // Beverages, carbonated, orange: 1 can (12 fl oz) = 372 g, 179 kcal
+  // Fanta Orange: 160 cal / 12 fl oz label. Branded's FANTA record has a 100 ml label serving, 29 kcal.
   {
-    names: ["root beer"],
+    names: ["fanta", "orange soda", "orange fanta", "fanta orange", "sunkist", "orange crush"],
+    fdcId: 174854,
+    unit: "can",
+    alternatives: [174852, 173205],
+    portions: [
+      { unit: "can", label: "can (12 fl oz)", grams: 372 },
+      { unit: "bottle", label: "bottle (20 fl oz)", grams: 620 },
+    ],
+  },
+  // Beverages, carbonated, root beer: 1 can (12 fl oz) = 370 g, 152 kcal
+  // A&W Root Beer: 170 cal / 12 fl oz label. "A&W" is read as "a and w", never "a" and "w".
+  {
+    names: ["root beer", "a and w", "a and w root beer", "barqs", "barqs root beer", "mug root beer"],
     fdcId: 171871,
     unit: "can",
     alternatives: [174852, 173209],
@@ -1290,8 +1309,20 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     names: ["red bull"],
     fdcId: 173210,
     unit: "can",
-    alternatives: [171935, 174822],
+    alternatives: [171870, 171935, 174822],
     portions: [{ unit: "can", label: "can (8.4 fl oz)", grams: 258 }],
+  },
+  // Beverages, Energy drink, RED BULL, sugar free, with added caffeine, niacin, pantothenic acid, vitamins B6
+  // and B12: 1 can (8.4 fl oz) = 250 g, 12 kcal
+  {
+    names: [
+      "sugar free red bull", "red bull sugar free", "sugarfree red bull", "red bull sugarfree", "red bull zero",
+      "diet red bull",
+    ],
+    fdcId: 171870,
+    unit: "can",
+    alternatives: [173210, 174822],
+    portions: [{ unit: "can", label: "can (8.4 fl oz)", grams: 250 }],
   },
   // Beverages, Energy Drink, Monster, fortified with vitamins C, B2, B3, B6, B12: 1 can (16 fl oz) = 480 g, 226 kcal
   // Monster is the energy drink teens name most; USDA's generic HFCS energy drink (62 kcal/100 g, 298 a can)
@@ -1305,7 +1336,10 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   },
   // Beverages, MONSTER energy drink, low carb: 1 can (16 fl oz) = 480 g, 24 kcal
   {
-    names: ["monster zero", "monster low carb", "lo carb monster", "low carb monster", "sugar free monster"],
+    names: [
+      "monster zero", "monster low carb", "lo carb monster", "low carb monster", "sugar free monster", "monster ultra",
+      "ultra monster", "monster zero ultra", "zero ultra", "white monster", "monster ultra white", "monster zero sugar",
+    ],
     fdcId: 173162,
     unit: "can",
     alternatives: [174822, 171935],
@@ -1318,6 +1352,24 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     unit: "can",
     alternatives: [173162, 171935],
     portions: [{ unit: "can", label: "can (16 fl oz)", grams: 480 }],
+  },
+  // 5-hour Energy: a 1.93 fl oz shot, 4 cal on the label; USDA has none, and its searches for it find "happy
+  // hour" snack mixes. Mapped to energy drink, sugar free: 1 shot = 57 g, 2 kcal. "A 5 hour energy" is one.
+  {
+    names: ["5 hour energy", "five hour energy", "5 hour energy shot"],
+    fdcId: 174822,
+    unit: "shot",
+    portions: [{ unit: "shot", label: "shot (1.93 fl oz)", grams: 57 }],
+  },
+  // Beverages, Propel Zero, fruit-flavored, non-carbonated: 1 bottle (16.9 fl oz) = 501 g, 25 kcal
+  // PRIME Hydration: 16.9 fl oz bottle, 20 to 25 cal on the label; USDA has none, and its searches for
+  // "prime" find prime-grade beef and prime rib rubs. A zero-sugar sports drink has the same calories.
+  {
+    names: ["prime", "prime hydration", "prime drink", "prime hydration drink"],
+    fdcId: 175109,
+    unit: "bottle",
+    alternatives: [174178, 171923, 173660, 174158],
+    portions: [{ unit: "bottle", label: "bottle (16.9 fl oz)", grams: 501 }],
   },
   // SILK Chai, soymilk: 1 medium (16 fl oz) = 486 g, 258 kcal
   // USDA's only chai latte: spiced chai with soy milk, within a few percent of a cafe's grande chai
@@ -1349,6 +1401,25 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     unit: "medium",
     alternatives: [173205, 171914],
     portions: [{ unit: "medium", label: "medium (22 fl oz)", grams: 676 }],
+  },
+  // Beverages, ARIZONA, tea, ready-to-drink, lemon: 1 can (23 fl oz) = 694 g, 271 kcal
+  // AriZona Iced Tea with Lemon: 90 cal / 8 fl oz label, so 259 for the 23 fl oz can it is sold in. The
+  // Branded records' 8 fl oz label serving is a third of one.
+  {
+    names: ["arizona", "arizona tea", "arizona iced tea", "arizona lemon tea", "arizona sweet tea"],
+    fdcId: 175110,
+    unit: "can",
+    alternatives: [171883, 171888],
+    portions: [{ unit: "can", label: "can (23 fl oz)", grams: 694 }],
+  },
+  // Beverages, tea, green, ready to drink, ginseng and honey, sweetened: 1 can (23 fl oz) = 694 g, 208 kcal
+  // AriZona Green Tea with Ginseng and Honey: 70 cal / 8 fl oz label, 201 for the 23 fl oz can.
+  {
+    names: ["arizona green tea", "arizona green tea with ginseng and honey", "green tea with ginseng and honey"],
+    fdcId: 171883,
+    unit: "can",
+    alternatives: [175110, 171917],
+    portions: [{ unit: "can", label: "can (23 fl oz)", grams: 694 }],
   },
   // Beverages, Coconut water, ready-to-drink, unsweetened: 1 cup = 245 g, 44 kcal
   { names: ["coconut water"], fdcId: 174831, unit: "cup" },
@@ -1417,6 +1488,14 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // (beer, higher alcohol is 206, 18% over).
   {
     names: ["sam adams", "samuel adams", "boston lager", "sam adams boston lager"],
+    fdcId: 168746,
+    alternatives: [171906, 168749, 168747, 169575],
+  },
+  // Sierra Nevada Pale Ale: 175 cal / 12 fl oz label (5.6%); mapped to beer, regular: 1 can = 356 g, 153 kcal
+  // (beer, higher alcohol is 206, 18% over). Pale ales and other ales run 5 to 6%, the same. USDA's Branded
+  // search for "sierra nevada pale ale" finds Sierra Nevada's pale ale mustard and pale ale barbecue sauces.
+  {
+    names: ["sierra nevada", "sierra nevada pale ale", "pale ale", "ale", "amber ale", "brown ale"],
     fdcId: 168746,
     alternatives: [171906, 168749, 168747, 169575],
   },
@@ -1563,6 +1642,120 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // Brut sparkling wine is still wine at 11 to 12% alcohol, about 120 cal a 5 fl oz glass; USDA has none.
   // Mapped to wine, table, white: 1 glass = 147 g, 121 kcal
   { names: ["champagne", "prosecco", "sparkling wine", "cava"], fdcId: 174837, alternatives: [171908, 173185] },
+  // Wine by its grape. USDA has most varietals (each about 120 cal a 5 fl oz glass, like table wine); its
+  // Branded search for "cabernet" finds cabernet vinegars, steak sauces and a sorbet, never the wine.
+  // Alcoholic Beverage, wine, table, red, Cabernet Sauvignon: 1 glass (5 fl oz) = 147 g, 122 kcal
+  {
+    names: ["cabernet", "cabernet sauvignon", "cab sauv", "cab sav"],
+    fdcId: 174833,
+    unit: "glass",
+    alternatives: [173190, 171925, 174835, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 746 },
+    ],
+  },
+  // Alcoholic Beverage, wine, table, red, Merlot: 1 glass (5 fl oz) = 147 g, 122 kcal
+  {
+    names: ["merlot"],
+    fdcId: 171925,
+    unit: "glass",
+    alternatives: [173190, 174833, 174835, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 746 },
+    ],
+  },
+  // Alcoholic Beverage, wine, table, red, Pinot Noir: 1 glass (5 fl oz) = 147 g, 121 kcal
+  {
+    names: ["pinot noir"],
+    fdcId: 174835,
+    unit: "glass",
+    alternatives: [173190, 171925, 174833, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 746 },
+    ],
+  },
+  // Alcoholic Beverage, wine, table, red, Syrah: 1 glass (5 fl oz) = 147 g, 122 kcal
+  {
+    names: ["syrah", "shiraz"],
+    fdcId: 174836,
+    unit: "glass",
+    alternatives: [173190, 174833, 173192, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 746 },
+    ],
+  },
+  // Alcoholic Beverage, wine, table, red, Zinfandel: 1 glass (5 fl oz) = 147 g, 129 kcal
+  {
+    names: ["zinfandel", "red zinfandel"],
+    fdcId: 173192,
+    unit: "glass",
+    alternatives: [173190, 174836, 174833, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 746 },
+    ],
+  },
+  // Malbec and Chianti have no record of their own; mapped to wine, table, red: 1 glass = 147 g, 125 kcal
+  { names: ["malbec", "chianti", "red blend"], fdcId: 173190, alternatives: [174833, 171925, 174836, 173185] },
+  // Alcoholic beverage, wine, table, white, Chardonnay: 1 glass (5 fl oz) = 147 g, 123 kcal
+  {
+    names: ["chardonnay"],
+    fdcId: 174110,
+    unit: "glass",
+    alternatives: [174837, 174841, 173201, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 743 },
+    ],
+  },
+  // Alcoholic beverage, wine, table, white, Pinot Gris (Grigio): 1 glass (5 fl oz) = 147 g, 122 kcal
+  {
+    names: ["pinot grigio", "pinot gris"],
+    fdcId: 174841,
+    unit: "glass",
+    alternatives: [174837, 174110, 173201, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 743 },
+    ],
+  },
+  // Alcoholic beverage, wine, table, white, Sauvignon Blanc: 1 glass (5 fl oz) = 147 g, 119 kcal
+  {
+    names: ["sauvignon blanc"],
+    fdcId: 173201,
+    unit: "glass",
+    alternatives: [174837, 174841, 174110, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 147 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 743 },
+    ],
+  },
+  // Alcoholic beverage, wine, table, white, Riesling: 1 glass (5 fl oz) = 148 g, 118 kcal
+  {
+    names: ["riesling"],
+    fdcId: 173200,
+    unit: "glass",
+    alternatives: [174837, 174849, 174110, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 148 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 751 },
+    ],
+  },
+  // Alcoholic beverage, wine, table, white, Muscat: 1 glass (5 fl oz) = 150 g, 123 kcal
+  {
+    names: ["moscato", "muscat"],
+    fdcId: 174849,
+    unit: "glass",
+    alternatives: [174837, 173200, 174110, 173185],
+    portions: [
+      { unit: "glass", label: "glass (5 fl oz)", grams: 150 },
+      { unit: "bottle", label: "bottle (750 ml)", grams: 761 },
+    ],
+  },
   // Alcoholic beverages, wine, rose: 1 glass (5 fl oz) = 152 g, 126 kcal
   // USDA lists only a fl oz (30.3 g) for rose.
   {
@@ -1623,6 +1816,43 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     alternatives: [174815],
     portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
   },
+  // Liquor brands, by what they are and their proof. USDA has none, and its searches find namesakes: its
+  // Branded search for "captain" offers THE CAPTAIN'S cocktail sauce.
+  // Fireball Cinnamon Whisky (66 proof, sweetened): about 107 cal a 1.5 fl oz shot. Jameson, Jack Daniel's,
+  // Crown Royal, Jim Beam and Maker's Mark: 80 to 90 proof, 97 to 110 cal. Mapped to whiskey, 86 proof:
+  // 1 shot = 42 g, 105 kcal
+  {
+    names: ["fireball", "jameson", "jack daniels", "crown royal", "jim beam", "makers mark"],
+    fdcId: 174819,
+    alternatives: [174815, 171920, 174818, 174817],
+  },
+  // Patron, Don Julio, Jose Cuervo and Casamigos tequila: 80 proof, 97 cal a shot. Mapped to distilled, all,
+  // 80 proof: 1 shot = 42 g, 97 kcal
+  {
+    names: ["patron", "don julio", "jose cuervo", "casamigos"],
+    fdcId: 174815,
+    alternatives: [171920, 174818, 174819, 174817],
+  },
+  // Tito's, Grey Goose, Smirnoff, Absolut and Ketel One vodka: 80 proof, 97 cal a shot. Mapped to vodka,
+  // 80 proof: 1 shot = 42 g, 97 kcal
+  {
+    names: ["titos", "grey goose", "smirnoff", "absolut", "ketel one"],
+    fdcId: 174818,
+    alternatives: [174815, 171920, 174817, 174819],
+  },
+  // Captain Morgan Original Spiced Rum (70 proof): 86 cal a 1.5 fl oz shot; Bacardi (80 proof) 97. "A captain
+  // and coke" is this and a cola. Mapped to rum, 80 proof: 1 shot = 42 g, 97 kcal
+  {
+    names: ["captain", "captain morgan", "captain morgan spiced rum", "spiced rum", "bacardi"],
+    fdcId: 174817,
+    alternatives: [174815, 171920, 174818, 174819],
+  },
+  // Hennessy and other cognac and brandy: 80 proof, 97 cal a shot. Mapped to distilled, all, 80 proof:
+  // 1 shot = 42 g, 97 kcal
+  { names: ["hennessy", "cognac", "brandy"], fdcId: 174815, alternatives: [174819, 171920, 174818, 174817] },
+  // Tanqueray (94.6 proof) and Bombay Sapphire (94 proof): about 116 cal a shot. Mapped to distilled, all,
+  // 90 proof: 1 shot = 42 g, 110 kcal
+  { names: ["tanqueray", "bombay sapphire"], fdcId: 171920, alternatives: [174815, 174818, 174817, 174819] },
   // Alcoholic beverage, pina colada, prepared-from-recipe: 1 cocktail (9 fl oz) = 283 g, 492 kcal
   // NIH's Rethinking Drinking puts a 9 fl oz pina colada at 490 cal; USDA's own cocktail is half that.
   {
@@ -1688,6 +1918,9 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   { names: ["chips", "potato chips"], fdcId: 169677, unit: "oz", alternatives: [167962, 167558, 167559] },
   // Snacks, potato chips, barbecue-flavor: 1 oz = 28.3 g, 138 kcal
   { names: ["bbq chips", "barbecue chips"], fdcId: 167962, unit: "oz", alternatives: [169677, 167558] },
+  // Snack, potato chips, made from dried potatoes, plain: 1 oz = 28.4 g, 155 kcal
+  // Pringles Original: 150 cal / 28 g label. One Branded Pringles record says half that.
+  { names: ["pringles", "original pringles", "pringles original"], fdcId: 168853, unit: "oz", alternatives: [169677] },
   // Snacks, tortilla chips, plain, white corn, salted: 1 oz = 28.3 g, 134 kcal
   { names: ["tortilla chips"], fdcId: 167558, unit: "oz", alternatives: [167559, 169677] },
   // Snacks, tortilla chips, nacho cheese: 1 oz = 28.3 g, 147 kcal
@@ -1819,6 +2052,13 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     alternatives: [169582],
     portions: [{ unit: "pack", label: "pack (1.69 oz)", grams: 48 }],
   },
+  // Candies, MARS SNACKFOOD US, M&M's Peanut Chocolate Candies: 1 serving (singles bag) = 54 g, 278 kcal
+  {
+    names: ["peanut m and ms", "peanut mms", "peanut m and m", "peanut m and m candies"],
+    fdcId: 169582,
+    unit: "serving",
+    alternatives: [169583],
+  },
   // Candies, MARS SNACKFOOD US, SKITTLES Original Bite Size Candies: 1 serving (62 g) = 62 g, 251 kcal
   { names: ["skittles"], fdcId: 168843, unit: "serving" },
   // Candies, hard: 1 piece = 6 g, 24 kcal
@@ -1913,7 +2153,85 @@ export function commonMatch(text: string): CommonFood | null {
   const ws = key.split(" ");
   let i = 0;
   while (i < ws.length - 1 && IGNORABLE.has(ws[i])) i++;
-  return (i > 0 && byKey.get(ws.slice(i).join(" "))) || null;
+  return (i > 0 && byKey.get(ws.slice(i).join(" "))) || flavoredDrink(ws);
+}
+
+/** Units a drink is sold or poured in: a table food measured in one of these is a drink. */
+const DRINK_UNITS = new Set(["can", "bottle", "glass", "shot", "pouch"]);
+const drinkUnit = (food: CommonFood) => food.unit ?? unitById.get(food.fdcId) ?? "";
+
+/**
+ * Flavors a canned or bottled drink is sold in, which don't change what it is or its calories: a White Claw
+ * Mango is a White Claw, a Bud Light Lime a Bud Light, a Cherry Coke a Coke, a cherry vodka a vodka. Not
+ * "ginger" (ginger beer is a soda) or "coconut" (coconut rum is half as strong).
+ */
+const FLAVORS = [
+  "black cherry", "wild cherry", "passion fruit", "passionfruit", "lemon lime", "blood orange", "green apple",
+  "ruby grapefruit", "mixed berry", "wild berry", "natural lime", "mango", "cherry", "lime", "lemon", "grape",
+  "watermelon", "strawberry", "raspberry", "blackberry", "blueberry", "peach", "pineapple", "orange", "vanilla",
+  "tropical", "citrus", "berry", "grapefruit", "cranberry", "apple", "pomegranate", "kiwi", "cucumber", "pear",
+  "guava", "apricot", "melon",
+]
+  .map((f) => commonKey(f).split(" "))
+  .sort((a, b) => b.length - a.length);
+
+/** The flavor phrase starting at ws[i], as a word count, or 0. */
+function flavorAt(ws: string[], i: number): number {
+  return FLAVORS.find((f) => f.every((w, k) => ws[i + k] === w))?.length ?? 0;
+}
+
+/** The words that aren't flavors, and whether a flavor came after one of them. */
+function withoutFlavors(ws: string[]): { rest: string[]; flavorAfter: boolean } {
+  const rest: string[] = [];
+  let flavorAfter = false;
+  for (let i = 0; i < ws.length; ) {
+    const n = flavorAt(ws, i);
+    if (n) {
+      flavorAfter ||= rest.length > 0;
+      i += n;
+    } else rest.push(ws[i++]);
+  }
+  return { rest, flavorAfter };
+}
+
+/**
+ * A table drink named with flavors around it ("white claw black cherry", "cherry coke", "diet cherry coke"),
+ * or null. A flavor after a liquor is a mixer, not a flavor: a vodka cranberry is a cocktail, where a
+ * cranberry vodka is vodka.
+ */
+function flavoredDrink(ws: string[]): CommonFood | null {
+  const { rest, flavorAfter } = withoutFlavors(ws);
+  if (!rest.length || rest.length === ws.length) return null;
+  const food = byKey.get(rest.join(" "));
+  if (!food || !DRINK_UNITS.has(drinkUnit(food))) return null;
+  return flavorAfter && drinkUnit(food) === "shot" ? null : food;
+}
+
+/**
+ * Mixed drinks USDA has no record of, where its searches find only namesakes: "long island iced tea" is a
+ * Long Island Brand iced tea, "mojito" a frozen pouch mix and mint candies, "moscow mule" mixers, gummies and
+ * barbecue sauce. Not found is the fair answer (the user can type it in), so these are never searched.
+ * USDA's own cocktails (daiquiri, pina colada, whiskey sour, tequila sunrise) and the bottled margaritas
+ * Branded has are not here.
+ */
+const COCKTAILS = new Set(
+  [
+    "long island iced tea", "long island ice tea", "long island tea", "long island", "mojito", "moscow mule", "mule",
+    "kentucky mule", "mimosa", "bellini", "cosmopolitan", "cosmo", "white russian", "black russian", "old fashioned",
+    "manhattan", "martini", "dirty martini", "espresso martini", "appletini", "negroni", "aperol spritz", "spritz",
+    "paloma", "mai tai", "bloody mary", "screwdriver", "tom collins", "gimlet", "sidecar", "lemon drop",
+    "sex on the beach", "hurricane", "sangria", "irish coffee", "hot toddy", "mint julep", "caipirinha", "rum punch",
+    "jungle juice", "french 75", "amaretto sour", "mudslide",
+    // Vodka and cranberry juice cocktail, about 160 cal; no one record is near it.
+    "vodka cranberry", "vodka cran", "cape cod", "cape codder",
+  ].map(commonKey),
+);
+
+/** A mixed drink USDA has no record of (see COCKTAILS), as said or with a flavor ("strawberry mojito"). */
+export function isCocktailUsdaLacks(text: string): boolean {
+  const ws = commonKey(text).split(" ").filter(Boolean);
+  const { rest } = withoutFlavors(ws);
+  return COCKTAILS.has(ws.join(" ")) || (rest.length > 0 && COCKTAILS.has(rest.join(" ")));
 }
 
 /**

@@ -145,7 +145,7 @@ export async function lookup(
 ): Promise<Lookup> {
   let foods: FoodRecord[];
   try {
-    foods = await searchFoods(usda, food, opts);
+    foods = await searchFoods(usda, food, { ...opts, unit });
   } catch (err) {
     if (!(err instanceof UsdaError)) console.error("food lookup failed", err instanceof Error ? err.message : err);
     const kind: UsdaErrorKind = err instanceof UsdaError ? err.kind : "unavailable";

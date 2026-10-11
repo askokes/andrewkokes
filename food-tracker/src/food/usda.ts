@@ -1,7 +1,7 @@
 // USDA FoodData Central client (SPEC section 6). Every food and every search is
 // cached in D1 so repeat lookups never hit the API, which is rate limited to
 // roughly 1,000 requests an hour per key.
-import { commonMatch, commonTail, type CommonFood } from "./common";
+import { commonMatch, commonTail, isCocktailUsdaLacks, type CommonFood } from "./common";
 import { extractFood, extractSearchHit } from "./nutrition";
 import type { FoodRecord, RawPortion } from "./types";
 import { contentWords, sameWord, words } from "./words";
@@ -81,6 +81,9 @@ const SYNONYMS: Record<string, string> = {
   "boba tea": "boba milk tea",
 };
 
+/** Spellings of one word that USDA writes out: "mtn dew" is MOUNTAIN DEW. */
+const WORD_SYNONYMS: Record<string, string> = { mtn: "mountain" };
+
 /** Lowercase, plain characters, single spaces, synonyms applied: " Mac & Cheese! " -> "mac and cheese". */
 export function normalizeQuery(text: string): string {
   const q = text
@@ -93,7 +96,10 @@ export function normalizeQuery(text: string): string {
     .replace(/\s+/g, " ")
     .replace(/^[\s-]+|[\s-]+$/g, "")
     .slice(0, 100)
-    .trim();
+    .trim()
+    .split(" ")
+    .map((w) => WORD_SYNONYMS[w] ?? w)
+    .join(" ");
   return SYNONYMS[q] ?? q;
 }
 
@@ -166,6 +172,8 @@ export interface RankableHit {
   brand?: string | null;
   /** Energy per 100 g, when known: a drink at 400 kcal per 100 g is a dry mix. */
   per100g?: { kcal: number } | null;
+  /** Portions, when known: a Branded search hit carries its label serving (see BOOZY_MIN_SERVING). */
+  portions?: readonly { gramWeight: number; unitName?: string | null }[] | null;
 }
 
 /** Cooked by a method that makes it ready to eat. "Prepared" alone is left out: "prepared from recipe" is a dish. */
@@ -190,7 +198,8 @@ const NOT_AS_EATEN: { form: RegExp; unless?: RegExp; asked: string[]; inNotes?: 
   { form: /\b(dried|dehydrated|desiccated)\b/, asked: DRIED },
   { form: /\bdry\b(?![\s-]*(roasted|heat))/, unless: /\b(prepared|cooked)\b/, asked: DRIED },
   { form: /\bpowder(ed)?\b/, unless: /\bprepared\b/, asked: DRIED },
-  { form: /\bmix(es)?\b/, unless: /\bprepared\b/, asked: ["mix"] },
+  // A cocktail mixer is what a drink is made with: "MOSCOW MULE PREMIUM COCKTAIL MIXER" is no Moscow mule.
+  { form: /\bmix(es|ers?)?\b/, unless: /\bprepared\b/, asked: ["mix", "mixer", "mixers"] },
   { form: /\bdough\b/, unless: /\b(baked|prepared)\b/, asked: ["dough"] },
   { form: /\b(unprepared|as purchased)\b/, asked: [] },
   { form: /\b(concentrate|undiluted)\b/, unless: /\b(prepared|diluted|reconstituted)\b/, asked: ["concentrate"] },
@@ -223,6 +232,15 @@ const NOT_AS_EATEN: { form: RegExp; unless?: RegExp; asked: string[]; inNotes?: 
 ];
 
 /**
+ * Beer, wine and mixed drinks (not straight liquor, which runs past LIQUID_MAX_KCAL at 90 proof). USDA's
+ * Branded foods are almost never these: a search for one finds what is flavored like it.
+ */
+const BOOZY = new Set([
+  "beer", "ale", "lager", "stout", "wine", "cabernet", "merlot", "chardonnay", "seltzer", "cider", "cocktail",
+  "mojito", "mule", "margarita", "mimosa", "sangria", "daiquiri", "colada", "spritz",
+]);
+
+/**
  * Foods eaten poured or sipped. A hit denser than LIQUID_MAX_KCAL per 100 g is
  * a dry mix or a concentrate however it is described: Branded chai latte and
  * cocoa mixes rarely say "powder" (429 kcal per 100 g), and a 7-Eleven
@@ -232,9 +250,17 @@ const NOT_AS_EATEN: { form: RegExp; unless?: RegExp; asked: string[]; inNotes?: 
 const LIQUIDS = new Set([
   "latte", "cappuccino", "mocha", "macchiato", "frappuccino", "frappe", "coffee", "tea", "chai", "juice", "soda",
   "drink", "beverage", "lemonade", "smoothie", "shake", "milkshake", "milk", "cocoa", "water", "punch", "slurpee",
-  "slushie", "kombucha", "cider", "refresher", "cola", "soup", "pho", "broth", "chowder", "bisque",
+  "slushie", "kombucha", "refresher", "cola", "soup", "pho", "broth", "chowder", "bisque",
+  // A 400 kcal "MOJITO IN A BAG" is a frozen pouch mix.
+  ...BOOZY,
 ]);
 const LIQUID_MAX_KCAL = 250;
+/**
+ * The least of a beer, wine or mixed drink a Branded label serves, in g or ml. A label serving under it is
+ * a teaspoon of mustard, a tablespoon of vinegar or a pinch of seasoning flavored like the drink: "MUSTARD
+ * PALE ALE" (5 g) is no pale ale, "CABERNET WINE VINEGAR" (15 ml) no wine.
+ */
+const BOOZY_MIN_SERVING = 30;
 
 /** Derived products, when one names the food or what it carries ("Flour, rice", "Oil, walnut", "Soup, beef broth"). */
 const DERIVED = new Set([
@@ -250,6 +276,8 @@ const FILING = new Set([
   "fish", "salad dressing", "formulated bar", "protein supplement", "frozen novelties", "babyfood", "infant formula",
   "school lunch", "game meat", "sweeteners", "toppings", "cheese", "pizza chain", "chinese", "italian", "mexican",
   "latino", "family style", "japanese", "thai", "greek", "indian",
+  // "Beverages, Energy drink, RED BULL": the brand is the drink.
+  "energy drink",
 ].map((t) => contentWords(t).join(" ")));
 
 /**
@@ -277,8 +305,8 @@ const GENERIC = new Set([
   "braised", "stewed", "poached", "scrambled", "toasted", "brewed", "microwaved", "heated", "prepared", "drained",
   "heat", "moist", "pan", "browned", "oven", "fried", "sauteed",
   "commercially", "commercial", "home", "recipe", "from", "restaurant", "whole", "plain", "regular", "original", "all",
-  "variety", "varieties", "type", "types", "mixed", "species", "grade", "choice", "select", "large", "medium", "small",
-  "extra", "average", "ripe", "enriched", "unenriched", "fortified", "unfortified", "added", "salt", "salted",
+  "variety", "varieties", "type", "types", "mixed", "species", "grade", "prime", "choice", "select", "large", "medium",
+  "small", "extra", "average", "ripe", "enriched", "unenriched", "fortified", "unfortified", "added", "salt", "salted",
   "unsalted", "sodium", "low", "fat", "lowfat", "nonfat", "milkfat", "reduced", "fluid", "vitamin", "vitamins",
   "calcium", "iron", "sulfate", "magnesium", "chloride", "nigari", "propionate", "unsweetened", "solids", "liquids",
   "liquid", "only", "meat", "lean", "separable", "trimmed", "boneless", "skinless", "skin", "bone", "flesh", "pack",
@@ -287,6 +315,9 @@ const GENERIC = new Set([
   "white", "yellow", "red", "green", "chilled", "refrigerated", "shelf", "stable", "moisture", "part", "skim",
   "table", "packed", "bottled", "pasteurized", "fully",
 ]);
+
+/** USDA's grades of beef, which say how good a cut is, never which food it is. */
+const GRADES = new Set(["prime", "choice", "select", "standard", "grade", "grades"]);
 
 /**
  * USDA boilerplate that would otherwise read as words of the food: "Oil, olive, salad or cooking",
@@ -341,7 +372,11 @@ function queryShape(query: string) {
   const tokens = contentWords(normal);
   // "Bagel with cream cheese" is a bagel: the food comes before "with".
   const main = contentWords(normal.split(/\bwith\b/)[0]);
-  const pick = (ws: string[]) => [...ws].reverse().find((w) => !PREP_WORDS.has(w)) ?? ws[ws.length - 1];
+  // "Red bull sugar free" is a Red Bull: "sugar free", "fat free" and the like say which kind, as they do in
+  // front of the food.
+  const variant = (ws: string[], i: number) => ws[i] === "free" || (ws[i + 1] === "free" && i + 1 === ws.length - 1);
+  const pick = (ws: string[]) =>
+    [...ws].reverse().find((w, r) => !PREP_WORDS.has(w) && !variant(ws, ws.length - 1 - r)) ?? ws[ws.length - 1];
   const head = pick(main.length ? main : tokens);
   return { tokens, head, required: requiredWords(tokens, head) };
 }
@@ -357,6 +392,10 @@ const phrase = (text: string) => contentWords(text.split(/\b(?:with|in|on)\b/)[0
 /** A compound's own head is its last word that isn't generic: "Cereals ready-to-eat" is cereals. */
 const headOf = (ws: string[]): string | undefined => [...ws].reverse().find((w) => !GENERIC.has(w)) ?? ws[ws.length - 1];
 const ADDS_INGREDIENTS = /\b(with|in|on)\b/;
+
+/** Branded records of one brand and food to compare energy with, and how far off one may be (see rankHits). */
+const OUTLIER_PEERS = 4;
+const OUTLIER_RATIO = 1.75;
 
 /** Restaurant and fast-food records are someone's dish: a generic record of the same food is more likely meant. */
 const DISHES = new Set(["fast foods", "fast food", "restaurant", "school lunch"]);
@@ -431,10 +470,20 @@ interface Naming {
  */
 function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, brandWords: string[] | null): Naming {
   const inQuery = (w: string) => q.tokens.some((t) => sameWord(w, t));
-  const isHead = (w: string | undefined) => w !== undefined && sameWord(w, q.head);
+  // A possessive names whose something is: "Lance Captain's Wafers" are wafers, not a captain. Unless the
+  // query says it so ("reeses" for "REESE'S").
+  const possessive = new Set(
+    segments.flatMap((s) => [...s.original.matchAll(/([A-Za-z]+)['’][sS]\b/g)].map((m) => `${m[1].toLowerCase()}s`)),
+  );
+  const isHead = (w: string | undefined) =>
+    w !== undefined && sameWord(w, q.head) && !(possessive.has(w) && w !== q.head);
   const known = (w: string) => inQuery(w) || GENERIC.has(w) || /^\d/.test(w);
+  // A Branded segment is the brand when it is made of the brand's words, its first one among them: in "VINEGAR,
+  // CHERRY CABERNET" by NAPA VALLEY VINEGAR CO, the vinegar is the product.
   const isBrandSegment = (s: Segment, ws: string[]) =>
-    brandWords === null ? isBrandText(s.original) : ws.length > 0 && ws.every((w) => brandWords.includes(w));
+    brandWords === null
+      ? isBrandText(s.original)
+      : ws.length > 0 && ws.every((w) => brandWords.includes(w)) && ws.includes(brandWords[0]);
 
   let at = 0;
   let branded = false;
@@ -444,9 +493,9 @@ function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, b
     const brand = isBrandSegment(segments[at], ws);
     // A brand that shares a word with the query ("TEA 5" for "milk tea") gives way to a later segment that names it.
     const namedLater = brand && segments.slice(at + 1).some((s) => contentWords(s.text).some(inQuery));
-    // A Branded brand the query only shares a word with is no name for the food: "COSMOS CREATIONS, PREMIUM
-    // PUFFED CORN" is corn, whatever "cosmo" means.
-    const partBrand = brand && brandWords !== null && !ws.every(inQuery);
+    // A Branded brand the query doesn't name is no name for the food: "COSMOS CREATIONS, PREMIUM PUFFED CORN"
+    // is corn, whatever "cosmo" means, and "THE CAPTAIN'S, GOURMET COCKTAIL SAUCE" a sauce for "captain".
+    const partBrand = brand && brandWords !== null && !brandNamed(brandWords, q);
     if (ws.some(inQuery) && !namedLater && !partBrand) break;
     if (!FILING.has(ws.join(" ")) && !brand) break;
     branded ||= brand;
@@ -464,6 +513,17 @@ function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, b
   });
   if (!segment) return result(0);
 
+  // A restaurant names its own dishes in capitals before saying what they are: "McDONALD'S, McCHICKEN
+  // Sandwich" is a McChicken, as "BURGER KING, WHOPPER" is a Whopper.
+  if (dish && sr) {
+    const caps: string[] = [];
+    for (const token of segment.original.split(/\s+/)) {
+      if (!isBrandText(token)) break;
+      caps.push(...contentWords(token));
+    }
+    if (caps.length && caps.length < name.length && caps.every(inQuery) && caps.some(isHead)) return result(4);
+  }
+
   // "Milk chocolate" is chocolate: the head has to come last if it is there at all. When the head is the
   // product's brand ("Cheetos Hot" for "hot cheetos"), the flavor may follow it, and so it may when the
   // name starts with the brand and then says the food ("STARBUCKS REFRESHERS ACAI BLUEBERRY"). Branded
@@ -474,8 +534,14 @@ function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, b
   const own = dropCheese ? name.slice(0, -1) : name;
   let lead = 0;
   while (brandWords !== null && lead < own.length && brandWords.includes(own[lead])) lead++;
-  // The brand leads the name: "Cheetos Hot", not "RIMMING SALT & CORONA GLASSES".
-  const headIsBrand = brandWords !== null && brandNamed(brandWords, q) && own.slice(0, lead).some(isHead);
+  // The brand leads the name: "Cheetos Hot", not "RIMMING SALT & CORONA GLASSES"; and what follows it is
+  // still the food asked for: "Cheerios Honey Nut Granola" is granola, no honey nut Cheerios.
+  const kindAfterBrand = headOf(own.slice(lead));
+  const headIsBrand =
+    brandWords !== null &&
+    brandNamed(brandWords, q) &&
+    own.slice(0, lead).some(isHead) &&
+    (kindAfterBrand === undefined || known(kindAfterBrand));
   let said = lead;
   while (lead > 0 && said < own.length && inQuery(own[said])) said++;
   const afterBrand = said > lead && isHead(own[said - 1]);
@@ -494,10 +560,13 @@ function nameScore(segments: Segment[], q: { tokens: string[]; head: string }, b
     const laterWords = contentWords(later.text);
     if (laterWords.every((w) => before.has(w))) continue;
     laterWords.forEach((w) => before.add(w));
-    const matched = headOf(phrase(later.text));
+    const laterName = phrase(later.text);
+    const matched = headOf(laterName);
     // "toasted" for "toast": a cooking word that is the asked-for food is a kind even on bread.
     const cookedForm = matched !== undefined && matched !== q.head && COOKED.test(matched);
-    if (sr && !ingredients && isHead(matched) && (!carrier || cookedForm)) return result(3);
+    // A grade is no kind: "Beef, rib, ..., prime, cooked" is no kind of "prime" (a Prime drink).
+    const grade = laterName.length > 0 && laterName.every((w) => GRADES.has(w));
+    if (sr && !ingredients && isHead(matched) && !grade && (!carrier || cookedForm)) return result(3);
     if (contentWords(later.text).some(isHead)) mentioned = true;
     ingredients ||= ADDS_INGREDIENTS.test(later.text);
   }
@@ -513,8 +582,15 @@ const brandWordsOf = (hit: RankableHit): string[] | null =>
  * doesn't name COSMOS CREATIONS, nor "liquid death" DEATH WISH COFFEE.
  */
 function brandNamed(brandWords: string[], q: { tokens: string[] }): boolean {
-  return brandWords.length > 0 && brandWords.every((b) => q.tokens.some((t) => sameWord(b, t)));
+  return brandWords.length > 0 && brandWords.every((b) => q.tokens.some((t) => sameBrandWord(b, t)));
 }
+
+/**
+ * A query word that says a brand's word: as written, or as a plural ("oreos" for OREO). Never a brand word
+ * with one more letter: "captain" says no "THE CAPTAIN'S", a possessive with its apostrophe gone.
+ */
+const sameBrandWord = (brandWord: string, word: string) =>
+  word === brandWord || word === `${brandWord}s` || word === `${brandWord}es`;
 
 /** A Branded product of the brand that was asked for ("chobani", "hot cheetos"): the query names it, head and all. */
 const ofBrandAsked = (hit: RankableHit, q: { tokens: string[]; head: string }) => {
@@ -546,12 +622,15 @@ function readHit(hit: RankableHit, q: { tokens: string[]; head: string }) {
   const derived = derivedAt(own[0]) || (CARRIERS.has(headOf(naming.name) ?? "") && derivedAt(nextAfterName));
   const liquid = [...LIQUIDS].some((w) => sameWord(w, head));
   const tooDense = liquid && (hit.per100g?.kcal ?? 0) > LIQUID_MAX_KCAL && !asked("dry") && !asked("mix");
+  const boozy = [...BOOZY].some((w) => sameWord(w, head));
+  const serving = hit.dataType === "Branded" ? hit.portions?.find((p) => p.unitName === "serving") : undefined;
+  const tooLittle = boozy && serving !== undefined && serving.gramWeight < BOOZY_MIN_SERVING;
   const forms = NOT_AS_EATEN.filter(({ form, unless, asked: words, inNotes }) => {
     const text = inNotes ? withNotes : plain;
     return form.test(text) && !unless?.test(text) && !words.some(asked);
   });
   /** Not the food as eaten at all: dried, a mix, a part, another animal, a seasoning. */
-  const otherFood = derived || tooDense || forms.some((f) => !f.variant);
+  const otherFood = derived || tooDense || tooLittle || forms.some((f) => !f.variant);
   const notAsEaten = otherFood || forms.length > 0;
   const brandAsked = ofBrandAsked(hit, q);
   return { segments, plain, descWords, own, naming, has, notAsEaten, otherFood, brandAsked };
@@ -631,7 +710,8 @@ export function isReasonableFirst(query: string, ranked: readonly RankableHit[])
  * Best match first. In priority order: names the head noun at all; Foundation
  * or SR Legacy over Branded; eaten as is (not dried, powdered, a mix, a part,
  * baby food, another animal, a drink too dense to be one, a diet variant; not
- * raw when the same food is listed cooked); has the query's words that say
+ * raw when the same food is listed cooked); energy in line with its brand's other
+ * records of the food (a Branded data error goes last); has the query's words that say
  * which food it is and names it (see isReasonable: "hard seltzer" over plain
  * seltzer); names the food itself or a kind of it and has every query word; how
  * well it names the food (see nameScore); for a brand asked for by name, the
@@ -699,6 +779,26 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
     const h = headOf(f.name);
     return f.raw && !askedForPrep && h !== undefined && plainlyCooked.some((c) => sameWord(headOf(c.name) ?? "", h));
   };
+  /**
+   * A Branded record whose energy is far off its brand's other records of the food is a data error: one
+   * "PRINGLES, POTATO CRISPS, ORIGINAL" says 250 kcal per 100 g, where Pringles' other crisps all say 516
+   * to 543. It goes after them. It takes at least OUTLIER_PEERS others of the brand to compare with, and a
+   * diet or other variant is never one (see NOT_AS_EATEN).
+   */
+  const brandKey = (f: Facts) => brandWordsOf(f.hit)?.join(" ") ?? "";
+  const comparable = (f: Facts) => !f.core && f.hasHead && !f.notAsEaten && brandKey(f) !== "" && !!f.hit.per100g;
+  const outlier = (f: Facts) => {
+    if (!comparable(f)) return false;
+    const kcal = f.hit.per100g!.kcal;
+    const peers = facts
+      .filter((o) => o !== f && comparable(o) && brandKey(o) === brandKey(f))
+      .map((o) => o.hit.per100g!.kcal)
+      .sort((a, b) => a - b);
+    if (peers.length < OUTLIER_PEERS) return false;
+    const median = peers[Math.floor(peers.length / 2)];
+    return median > 0 && (kcal * OUTLIER_RATIO < median || kcal > median * OUTLIER_RATIO);
+  };
+
   const prep = (f: Facts) => {
     if (askedForPrep) return 1;
     if (f.fried) return 0;
@@ -712,6 +812,7 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
       f.hasHead ? 1 : 0,
       f.core ? 1 : 0,
       f.notAsEaten || rawWhileCooked(f) ? 0 : 1,
+      outlier(f) ? 0 : 1,
       f.covers && f.named >= 2 ? 1 : 0,
       f.named >= 3 && f.hasAll ? 1 : 0,
       f.named,
@@ -996,6 +1097,15 @@ export function tailFor(food: string): CommonFood | null {
 }
 
 /**
+ * The table's liquor for a shot of a name USDA doesn't know, when the name sounds like a brand ("A shot of
+ * Fireball" said before the table named it): a shot is liquor. Not for a shot of a plain word, which may be
+ * wheatgrass or vinegar.
+ */
+function shotFor(unit: string | null | undefined, brandHint: boolean): CommonFood | null {
+  return unit === "shot" && brandHint ? commonMatch("shot") : null;
+}
+
+/**
  * USDA's own search: core, then Branded when the best core match isn't the food
  * as eaten (see isReasonable), or the other way with brandHint. "Chicken fried
  * rice" goes on to Branded, whose top hit is chicken fried rice, rather than
@@ -1035,13 +1145,15 @@ async function searchUsda(
  * looksLikeBrand). When neither has a fair answer, a brand or variety USDA
  * doesn't know backs off to the table food its last words name ("blue moon
  * beer" is beer, see commonTail), with that entry's alternatives and no search
- * to fill them out. Returns [] when there is nothing, never the nearest junk.
- * Throws UsdaError.
+ * to fill them out; a shot of a brand nobody knows ("a shot of Jagermeister",
+ * with `unit` "shot" and `brandHint`) is a shot of liquor. A mixed drink USDA
+ * has no record of ("a mojito", see isCocktailUsdaLacks) is not searched at all.
+ * Returns [] when there is nothing, never the nearest junk. Throws UsdaError.
  */
 export async function searchFoods(
   deps: UsdaDeps,
   food: string,
-  opts: { limit?: number; brandHint?: boolean } = {},
+  opts: { limit?: number; brandHint?: boolean; unit?: string | null } = {},
 ): Promise<FoodRecord[]> {
   const limit = Math.min(MAX_LIMIT, Math.max(1, Math.floor(opts.limit ?? 5)));
   const query = normalizeQuery(food);
@@ -1057,8 +1169,9 @@ export async function searchFoods(
 
   const entry = commonFor(food);
   if (!entry) {
+    if (isCocktailUsdaLacks(food) || isCocktailUsdaLacks(query)) return [];
     const found = await searchUsda(deps, query, limit, brandHint);
-    const tail = found.length ? null : tailFor(food);
+    const tail = found.length ? null : tailFor(food) ?? shotFor(opts.unit, brandHint);
     return tail ? tableFoods(tail) : found;
   }
 
@@ -1076,9 +1189,10 @@ export async function searchFoods(
   }
   const curated = await tableFoods(entry); // cached by the search's details call
   const seen = new Set(curated.map((f) => f.fdcId));
-  // Never fill with another food: no bear meat after the gummy bears.
+  // Never fill with another food: no bear meat after the gummy bears, no cabernet marinara after the
+  // cabernet. Only fair matches fill (see isReasonable).
   const q = queryShape(query);
-  const fill = searched.filter((f) => !seen.has(f.fdcId) && !readHit(f, q).otherFood);
+  const fill = searched.filter((f) => !seen.has(f.fdcId) && !!q.head && fair(q, readHit(f, q)));
   // Without the table's own foods (USDA had no details for them), the search leads only if it is fair.
   if (!curated.length && !isReasonableFirst(query, fill)) return [];
   return [...curated, ...fill].slice(0, limit);
