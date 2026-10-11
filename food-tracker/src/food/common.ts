@@ -1367,7 +1367,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
   // seltzer and cider come in a 12 fl oz can or bottle (USDA's own weight where the record lists one)
   // and a 16 fl oz pint; wine in a 5 fl oz glass and a 750 ml bottle; liquor in a 1.5 fl oz shot,
   // USDA's jigger. The parser drops "a can of", "a bottle of" and "a glass of" (leaving the default
-  // unit) but doesn't read "pint" or "shot" yet, so those two units are picked on the confirm screen.
+  // unit) and reads "a pint of" and "a shot of" as those units.
 
   // Alcoholic beverage, beer, regular, all: 1 can (12 fl oz) = 356 g, 153 kcal
   {
@@ -1592,7 +1592,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     names: ["vodka"],
     fdcId: 174818,
     unit: "shot",
-    alternatives: [171920],
+    alternatives: [174815, 171920],
     portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
   },
   // Club soda has no calories, so a vodka soda is its shot of vodka: 1 shot = 42 g, 97 kcal
@@ -1602,7 +1602,7 @@ export const COMMON_FOODS: readonly CommonFood[] = [
     names: ["rum"],
     fdcId: 174817,
     unit: "shot",
-    alternatives: [171920],
+    alternatives: [174815, 171920],
     portions: [{ unit: "shot", label: "shot (1.5 fl oz)", grams: 42 }],
   },
   // Alcoholic beverage, distilled, whiskey, 86 proof: 1 shot (1.5 fl oz) = 42 g, 105 kcal
@@ -1930,22 +1930,65 @@ const MAKES_ANOTHER_FOOD = new Set(
 );
 
 /**
+ * Whether `tail` says what kind of food `head` is: the same record, one of head's alternatives, or the last
+ * word of one of head's two-word names. A Stella is a beer, a Michelob Ultra a beer too (its alternatives
+ * say so), a tequila a shot, and a White Claw a seltzer, being a "hard seltzer". Milk is no kind of tea,
+ * and nacho cheese no nachos ("nachos with cheese" is three words).
+ */
+function isKindOf(head: CommonFood, tail: CommonFood, tailKey: string): boolean {
+  if (head.fdcId === tail.fdcId || head.alternatives?.includes(tail.fdcId)) return true;
+  return head.names.some((name) => {
+    const ws = commonKey(name).split(" ");
+    return ws.length === 2 && ws[1] === tailKey;
+  });
+}
+
+/**
+ * The table food `ws` names from `start`, ending at `end` or before, when the rest of the phrase says what
+ * kind of food it is ("stella" in "stella beer"), the longest name first.
+ */
+function namedWithKind(ws: string[], start: number, end: number): CommonFood | null {
+  for (let e = Math.min(end, ws.length - 1); e > start; e--) {
+    const head = byKey.get(ws.slice(start, e).join(" "));
+    if (!head) continue;
+    const tailKey = ws.slice(e).join(" ");
+    const tail = commonMatch(tailKey);
+    if (tail && isKindOf(head, tail, tailKey)) return head;
+  }
+  return null;
+}
+
+/**
  * The table entry for the phrase's last words, when the whole phrase has none: "blue moon beer" is tried
  * as "moon beer", then "beer", the first with an entry wins. For a brand or variety USDA doesn't know,
  * this is the generic food it is a kind of. Only table entries count, never a word left on its own
  * ("white claw" has no entry for "claw"), and never past a word that is a food itself or makes another
  * food of the rest ("vodka soda", "hard lemonade", "milk tea").
+ *
+ * A table food the phrase names and then says the kind of is that food: "a stella beer" is a Stella, "a
+ * truly hard seltzer" a Truly and "a white claw seltzer" a White Claw, never club soda. Unless the last
+ * words' entry takes some of its words: "vanilla ice cream cone" is a cone, "whole egg omelet" an omelet.
  */
 export function commonTail(text: string): CommonFood | null {
   if (commonMatch(text)) return null;
   const ws = commonKey(text).split(" ").filter(Boolean);
+  let reach = 0; // the furthest word the phrase can be read from
+  let tail: { food: CommonFood; at: number } | null = null;
   for (let i = 1; i < ws.length; i++) {
     const dropped = ws[i - 1];
-    if (MAKES_ANOTHER_FOOD.has(dropped) || byKey.has(dropped)) return null;
-    const entry = commonMatch(ws.slice(i).join(" "));
-    if (entry) return entry;
+    if (MAKES_ANOTHER_FOOD.has(dropped) || byKey.has(dropped)) break;
+    reach = i;
+    const food = commonMatch(ws.slice(i).join(" "));
+    if (food) {
+      tail = { food, at: i };
+      break;
+    }
   }
-  return null;
+  for (let start = 0; start <= reach; start++) {
+    const named = namedWithKind(ws, start, tail?.at ?? ws.length);
+    if (named) return named;
+  }
+  return tail?.food ?? null;
 }
 
 /**

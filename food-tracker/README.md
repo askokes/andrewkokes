@@ -27,11 +27,14 @@ USDA key is rationed: 16 calls per request and 150 per user per hour.
 
 Matching: everyday phrases ("rice", "two eggs", "a coke") go straight to the record people mean
 through the common-foods table (`src/food/common.ts`), with its alternatives and everyday units (a
-can, a container); anything else is USDA's search, reranked by `rankHits` in `src/food/usda.ts`.
+can, a container, a pint, a shot); anything else is USDA's search, reranked by `rankHits` in
+`src/food/usda.ts`. The table also names popular beer, hard seltzer and cider brands USDA has no
+record of ("a blue moon", "a white claw"), each mapped to the generic record nearest its label.
 A search result is offered only when it is that food (`isReasonable`: it names every word of the
-phrase that says which food it is, so "blue moon beer" is not just any beer and "white claw" not
-claw crab meat); otherwise Branded is searched, then a brand USDA doesn't know falls back to the
-table food its last words name ("blue moon beer" is beer), and failing that the phrase is not found.
+phrase that says which food it is, so "blue cheese" is no Blue Moon and "white claw" not claw crab
+meat); otherwise Branded is searched, then a brand USDA doesn't know falls back to the table food
+its last words name ("kirkland trail mix" is trail mix), or to the table food it names before
+saying its kind ("a stella beer" is a Stella), and failing that the phrase is not found.
 `test/eval-live.test.ts` scores both against independently labeled live USDA results
 (`test/fixtures/usda/live`), and `test/brands.test.ts` replays live searches for brand names and drinks.
 

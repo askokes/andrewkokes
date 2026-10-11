@@ -196,32 +196,38 @@ describe("POST /api/parse", () => {
     });
   });
 
-  it("backs a brand USDA doesn't know off to the generic food, and says so rather than offer junk", async () => {
-    // USDA has no Blue Moon beer and no Corona; its nearest hits are blue cheese, root beer soda and a plum.
+  it("answers the brands the table knows, backs one it doesn't off to the generic food, and offers no junk", async () => {
+    // USDA has no Blue Moon beer, Corona, Kirkland trail mix or Guinness; its nearest hits are blue cheese,
+    // root beer soda, a plum, other trail mixes and Guinness-flavored truffles. The common-foods table maps
+    // Blue Moon and Corona to the beer nearest their labels; Kirkland's trail mix is trail mix; nothing is
+    // a Guinness (no USDA beer is within 15% of its label).
     const { as } = client();
     const email = await signUp(as);
-    const res = await as(email, "POST", "/api/parse", { text: "a blue moon beer and a Corona" });
-    const { items } = await res.json<ParseResponse>();
-    expect(items.map((i) => i.food)).toEqual(["blue moon beer", "corona"]);
-    expect(items[0].status).toBe("ok");
-    expect(items[0].candidates[0]).toMatchObject({
-      fdcId: 168746, // Alcoholic beverage, beer, regular, all
-      amount: { quantity: 1, unit: "can", grams: 356, guessed: false },
+    const res = await as(email, "POST", "/api/parse", {
+      text: "a blue moon beer, a Corona, kirkland trail mix and a guinness",
     });
-    // Unless the common-foods table has learned the brand since, there's nothing fair to offer.
-    const table = commonFor("corona");
-    if (table) expect(items[1].candidates[0].fdcId).toBe(table.fdcId);
-    else {
-      expect(items[1]).toEqual({
-        quantity: 1,
-        unit: null,
-        food: "corona",
-        text: "a Corona",
-        status: "not_found",
-        message: `We couldn't find "corona". Try other words, or enter it yourself.`,
-        candidates: [],
+    const { items } = await res.json<ParseResponse>();
+    expect(items.map((i) => i.food)).toEqual(["blue moon beer", "corona", "kirkland trail mix", "guinness"]);
+    for (const i of items.slice(0, 2)) {
+      expect(commonFor(i.food), i.food).not.toBeNull();
+      expect(i.status, i.food).toBe("ok");
+      expect(i.candidates[0], i.food).toMatchObject({
+        fdcId: 168746, // Alcoholic beverage, beer, regular, all
+        amount: { quantity: 1, unit: "can", grams: 356, guessed: false },
       });
     }
+    expect(commonFor("kirkland trail mix")).toBeNull();
+    expect(items[2].status).toBe("ok");
+    expect(items[2].candidates[0].fdcId).toBe(tailFor("kirkland trail mix")?.fdcId); // Snacks, trail mix, regular
+    expect(items[3]).toEqual({
+      quantity: 1,
+      unit: null,
+      food: "guinness",
+      text: "a guinness",
+      status: "not_found",
+      message: `We couldn't find "guinness". Try other words, or enter it yourself.`,
+      candidates: [],
+    });
   });
 
   it.each([

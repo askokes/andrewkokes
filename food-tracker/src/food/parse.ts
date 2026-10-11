@@ -76,6 +76,10 @@ const UNIT_SPELLINGS: Record<SpokenUnit, string> = {
   small: "small",
   serving: "serving servings portion portions",
   scoop: "scoop scoops scoopful scoopfuls",
+  // "A pint of blue moon", "a shot of tequila": the table gives drinks a pint and a shot (see units.ts for
+  // foods without one). "A shot" alone is a shot of liquor (see parseItem).
+  pint: "pint pints",
+  shot: "shot shots",
 };
 const UNITS = new Map<string, SpokenUnit>(
   (Object.keys(UNIT_SPELLINGS) as SpokenUnit[]).flatMap((unit) =>
@@ -484,6 +488,7 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
   }
   i = skipContainer(seg, i);
   let unit: SpokenUnit | null = null;
+  const unitAt = i;
   const u = readUnit(seg, i);
   if (u) {
     unit = u.unit;
@@ -515,7 +520,17 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
       }
     }
   }
-  if (i >= end) return null;
+  const text = () => source.slice(seg[first].start, seg[last - 1].end).trim();
+  if (i >= end) {
+    // A unit with no food after it is the food when the table names it alone: "three shots" are shots of
+    // liquor. "Two cups" names no food.
+    if (!u) return null;
+    const said = seg
+      .slice(unitAt, u.end)
+      .map((tok) => tok.w)
+      .join(" ");
+    return commonMatch(said) ? { quantity, unit: null, food: said, text: text() } : null;
+  }
   return {
     quantity,
     unit,
@@ -523,7 +538,7 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
       .slice(i, end)
       .map((tok) => tok.w)
       .join(" "),
-    text: source.slice(seg[first].start, seg[last - 1].end).trim(),
+    text: text(),
   };
 }
 

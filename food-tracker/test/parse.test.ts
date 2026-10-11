@@ -110,6 +110,13 @@ describe("parseMeal: units", () => {
     ["a medium-sized banana", one(1, "medium", "banana", "a medium-sized banana")],
     ["two servings of pasta", one(2, "serving", "pasta", "two servings of pasta")],
     ["a serving of pasta please", one(1, "serving", "pasta", "a serving of pasta")],
+    // Drinks poured by the pint or the shot (the common-foods table gives beer a pint, liquor a shot).
+    ["a pint of blue moon", one(1, "pint", "blue moon", "a pint of blue moon")],
+    ["two pints of guinness", one(2, "pint", "guinness", "two pints of guinness")],
+    ["a pint of ice cream", one(1, "pint", "ice cream", "a pint of ice cream")],
+    ["a shot of tequila", one(1, "shot", "tequila", "a shot of tequila")],
+    ["two shots of espresso", one(2, "shot", "espresso", "two shots of espresso")],
+    ["a shot and a half of vodka", one(1.5, "shot", "vodka", "a shot and a half of vodka")],
     // Typed amounts can come after the food.
     ["chicken breast 6oz", one(6, "oz", "chicken breast", "chicken breast 6oz")],
     ["pizza two slices please", one(2, "slice", "pizza", "pizza two slices")],
@@ -135,6 +142,10 @@ describe("parseMeal: no unit", () => {
     ["a 6-inch sub", one(1, null, "6 inch sub", "a 6-inch sub")],
     ["two 6 inch subs", one(2, null, "6 inch subs", "two 6 inch subs")],
     ["a 12 inch pizza", one(1, null, "12 inch pizza", "a 12 inch pizza")],
+    // A unit with nothing after it is the food when the table names it alone: a shot of liquor.
+    ["a shot", one(1, null, "shot", "a shot")],
+    ["three shots", one(3, null, "shots", "three shots")],
+    ["three shots tonight", one(3, null, "shots", "three shots")],
   ])("%j", (text, expected) => {
     expect(parseMeal(text)).toEqual(expected);
   });
@@ -431,6 +442,7 @@ describe("parseMeal: empty and garbage input", () => {
     ["123", result(null)],
     ["I had", result(null)],
     ["two slices", result(null)],
+    ["a pint", result(null)], // a unit, and no food of its own as a shot is
     ["a an the", result(null)],
     ["for lunch", result("lunch")],
     ["Breakfast.", result("breakfast")],

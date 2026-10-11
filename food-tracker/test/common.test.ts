@@ -470,6 +470,32 @@ describe("commonTail", () => {
     // Milk tea is no tea: milk is a food of its own.
     expect(commonTail("zorbo milk tea")).not.toBe(entry("tea"));
   });
+
+  it("reads a table food followed by the kind of food it is as that food", () => {
+    // A Stella is a beer, so "stella beer" is a Stella; the generic beer after it would lose the brand,
+    // and before the brand was in the table the backoff stopped at it.
+    expect(commonTail("stella beer")).toBe(entry("stella"));
+    expect(commonTail("zorbo stella beer")).toBe(entry("stella"));
+    expect(commonTail("truly hard seltzer")).toBe(entry("truly"));
+    expect(commonTail("michelob ultra beer")).toBe(entry("michelob ultra")); // its alternatives are beers
+    expect(commonTail("corona light beer")).toBe(entry("corona light")); // the longest name, not Corona
+    expect(commonTail("tequila shot")).toBe(entry("tequila"));
+    expect(commonTail("vodka shot")).toBe(entry("vodka"));
+    // White Claw is a hard seltzer, so its seltzer is no club soda, though "seltzer" alone is.
+    expect(commonTail("white claw seltzer")).toBe(entry("white claw"));
+    expect(commonTail("white claw seltzer")).not.toBe(entry("seltzer"));
+  });
+
+  it("keeps the last words' food when it takes words from the one before, or is no kind of it", () => {
+    // "Vanilla ice cream" is a table food and a cone goes with it, but a vanilla ice cream cone is a cone.
+    expect(commonTail("vanilla ice cream cone")).toBe(entry("ice cream cone"));
+    expect(commonTail("zorbo bud light beer")).toBe(entry("light beer")); // light beer either way
+    // Ice cream is no kind of beer: Blue Moon ice cream is ice cream.
+    expect(commonTail("blue moon ice cream")).toBe(entry("ice cream"));
+    // Nor tea a kind of milk, nor a cola one of rum.
+    expect(commonTail("milk tea")).toBeNull();
+    expect(commonTail("rum coke")).toBeNull();
+  });
 });
 
 // ---------------------------------------------------------------- beer, hard seltzer, cider, wine, liquor
@@ -650,8 +676,8 @@ describe("drinks: beer, hard seltzer, cider, wine and liquor", () => {
   });
 
   it("offers a pint and a bottle of beer, a bottle of wine and a shot of liquor", () => {
-    // The parser doesn't read "pint" or "shot" yet: "a pint of blue moon" reaches the table only when
-    // the unit is picked on the confirm screen. These are the amounts it then gets.
+    // "A pint of blue moon" and "a shot of tequila" say the unit; "a bottle of" is dropped as a container,
+    // so a bottle is picked on the confirm screen. These are the amounts each gets.
     const amount = (name: string, quantity: number, unit: string) => {
       const food = record(commonMatch(name)!.fdcId);
       const resolved = resolveAmount(food, quantity, unit);

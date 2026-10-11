@@ -246,6 +246,16 @@ function standsIn(food: FoodRecord): Record<string, string> {
   return sliced ? { scoop: "serving", slice: "piece", piece: "slice" } : { scoop: "serving" };
 }
 
+/**
+ * Spoken measures of a set volume, for a food without a unit of that name: a pint is 2 cups ("a pint of
+ * ice cream"), a shot 1.5 fl oz, 3 tbsp. Drinks the common-foods table pours by the pint or shot have
+ * their own (a pint of beer is 16 fl oz of it, a shot of espresso 1 fl oz).
+ */
+const MEASURES = new Map([
+  ["pint", { unit: "cup", times: 2 }],
+  ["shot", { unit: "tbsp", times: 3 }],
+]);
+
 function resolveWith(
   options: UnitOption[],
   quantity: number,
@@ -261,6 +271,12 @@ function resolveWith(
   if (!option && key !== null && SIZES.has(key)) option = find("each");
 
   if (option) return { quantity, unit: option.unit, grams: round1(quantity * option.grams), guessed: false };
+  const measure = key !== null ? MEASURES.get(key) : undefined;
+  const into = measure && own(measure.unit);
+  if (measure && into) {
+    const n = round2(quantity * measure.times);
+    return { quantity: n, unit: into.unit, grams: round1(n * into.grams), guessed: false };
+  }
   const grams = round1(100 * quantity);
   return { quantity: grams, unit: "g", grams, guessed: true };
 }

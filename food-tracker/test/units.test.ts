@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { commonUnit } from "../src/food/common";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
 import type { FoodRecord } from "../src/food/types";
 import { resolveAmount, toCandidate, unitOptions } from "../src/food/units";
@@ -189,6 +190,16 @@ describe("resolveAmount", () => {
     expect(resolveAmount(food(FOUNDATION_EGG), 1, "large")).toEqual({ quantity: 1, unit: "each", grams: 50.3, guessed: false });
   });
 
+  it("measures a pint as 2 cups and a shot as 3 tbsp (1.5 fl oz) for a food without its own", () => {
+    // "A pint of milk", "a shot of olive oil": the table gives beer its own pint and liquor its own shot.
+    expect(option(food(171265), "pint")).toBeUndefined();
+    expect(resolveAmount(food(171265), 1, "pint")).toEqual({ quantity: 2, unit: "cup", grams: 488, guessed: false });
+    expect(resolveAmount(food(171265), 1.5, "pint")).toEqual({ quantity: 3, unit: "cup", grams: 732, guessed: false });
+    expect(resolveAmount(food(171413), 1, "shot")).toEqual({ quantity: 3, unit: "tbsp", grams: 40.5, guessed: false });
+    // A steak has neither: a guess, flagged.
+    expect(resolveAmount(food(174054), 1, "pint")).toEqual({ quantity: 100, unit: "g", grams: 100, guessed: true });
+  });
+
   it("guesses 100 g per unit when nothing matches", () => {
     const chicken = food(ROASTED_CHICKEN);
     expect(resolveAmount(chicken, 1, "slice")).toEqual({ quantity: 100, unit: "g", grams: 100, guessed: true });
@@ -255,25 +266,27 @@ describe("unitless amounts for poured or scooped foods", () => {
   });
 
   it("takes a drink's 'N fl oz' portion as its serving, so a bottle of beer is no guess", () => {
-    // SR 169572, Alcoholic beverage, beer, light, BUD LIGHT: "1 fl oz" 29.5 g and "12 fl oz" 354 g. "A bud
-    // light" used to be a flagged 100 g guess.
+    // SR 168748, Alcoholic beverage, beer, light, BUDWEISER SELECT: "1 fl oz" 29.5 g and "12 fl oz" 355 g.
+    // A drink outside the common-foods table (Bud Light is in it now, as a can) used to be a flagged
+    // 100 g guess.
     const fluid = (amount: number, gramWeight: number) =>
       ({ amount, gramWeight, unitName: "undetermined", modifier: "fl oz", description: null });
-    const budLight: FoodRecord = {
-      fdcId: 169572,
-      description: "Alcoholic beverage, beer, light, BUD LIGHT",
+    const select: FoodRecord = {
+      fdcId: 168748,
+      description: "Alcoholic beverage, beer, light, BUDWEISER SELECT",
       dataType: "SR Legacy",
       brand: null,
-      per100g: { kcal: 29, protein: 0.25, carbs: 1.3, fat: 0 },
-      portions: [fluid(1, 29.5), fluid(12, 354)],
+      per100g: { kcal: 28, protein: 0.2, carbs: 0.87, fat: 0 },
+      portions: [fluid(1, 29.5), fluid(12, 355)],
     };
-    expect(option(budLight, "serving")).toEqual({ unit: "serving", label: "serving (12 fl oz)", grams: 354 });
-    expect(option(budLight, "cup")).toEqual({ unit: "cup", label: "cup (8 fl oz)", grams: 236 });
-    expect(resolveAmount(budLight, 1, null)).toEqual({ quantity: 1, unit: "serving", grams: 354, guessed: false });
+    expect(commonUnit(select.fdcId)).toBeNull();
+    expect(option(select, "serving")).toEqual({ unit: "serving", label: "serving (12 fl oz)", grams: 355 });
+    expect(option(select, "cup")).toEqual({ unit: "cup", label: "cup (8 fl oz)", grams: 236 });
+    expect(resolveAmount(select, 1, null)).toEqual({ quantity: 1, unit: "serving", grams: 355, guessed: false });
     // One fl oz is no serving, and a serving USDA names as one wins.
-    expect(option({ ...budLight, portions: [fluid(1, 29.5)] }, "serving")).toBeUndefined();
+    expect(option({ ...select, portions: [fluid(1, 29.5)] }, "serving")).toBeUndefined();
     const named = { amount: 1, gramWeight: 330, unitName: "undetermined", modifier: "serving", description: null };
-    expect(option({ ...budLight, portions: [fluid(12, 354), named] }, "serving")?.grams).toBe(330);
+    expect(option({ ...select, portions: [fluid(12, 355), named] }, "serving")?.grams).toBe(330);
   });
 
   it("never guesses a cup for a food outside the table, since a cup-only food can be a powder", () => {

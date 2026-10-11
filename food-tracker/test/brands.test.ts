@@ -16,6 +16,7 @@
 // is beer), or not found. Never a record that is some other food.
 import { env } from "cloudflare:workers";
 import { beforeEach, describe, expect, it } from "vitest";
+import { commonMatch } from "../src/food/common";
 import { parseMeal } from "../src/food/parse";
 import { lookup } from "../src/food/routes";
 import type { Amount, Candidate } from "../src/food/types";
@@ -26,7 +27,7 @@ import brandsFile from "./fixtures/usda/live/brands.json";
 type Want =
   /** No fair answer: status not_found, no candidates. */
   | "not_found"
-  /** The table food the phrase's last words name (see commonTail). */
+  /** The table food the phrase's last words name, or the one it names and then says the kind of (see commonTail). */
   | "tail"
   /** USDA's own record of it. */
   | { fdcId?: number; name?: RegExp; kcal?: [number, number]; amount?: Partial<Amount> };
@@ -62,11 +63,12 @@ const PHRASES: [string, Want][] = [
   ["kirkland trail mix", "tail"],
   ["a bang energy drink", "tail"],
   ["a twisted tea", "tail"],
+  // A table food named, then the kind of drink it is: a Truly, never seltzer water.
+  ["a truly hard seltzer", "tail"],
   // Nothing fair: USDA's nearest are other foods or the brand's licensed snacks.
   ["a quest bar", "not_found"],
   ["a fairlife protein shake", "not_found"], // never a milkshake
   ["a mike's hard lemonade", "not_found"], // never plain lemonade
-  ["a truly hard seltzer", "not_found"], // never seltzer water
   ["a white russian", "not_found"], // not white chocolate
   ["a cosmo", "not_found"], // not Cosmos puffed corn
   ["a coors light", "not_found"],
@@ -177,5 +179,123 @@ describe("brand names and drinks, through parse and lookup over live USDA respon
     const [{ item, result }] = await run("a blue moon beer");
     expect(item.food).toBe("blue moon beer");
     expect(result.candidates[0].name).toBe("Alcoholic beverage, beer, regular, all");
+  });
+});
+
+// The common-foods table now names the brands the bug report was about (src/food/common.ts, beer, hard
+// seltzer, cider, wine, liquor), and the brand matching above still runs for everything else. Together:
+// the table answers the drinks it knows, before any search and never by backing off to a generic food,
+// and a drink it doesn't know still gets no junk.
+describe("the drinks table and brand matching together", () => {
+  const clearCache = () =>
+    env.DB.batch([env.DB.prepare("DELETE FROM usda_cache"), env.DB.prepare("DELETE FROM usda_search_cache")]);
+  beforeEach(clearCache);
+
+  const entry = (name: string) => {
+    const found = commonMatch(name);
+    if (!found) throw new Error(`no table entry for "${name}"`);
+    return found;
+  };
+  /** Within 15% of the label, as test/common.test.ts maps each brand. */
+  const nearLabel = (kcal: number, label: number) => Math.abs(kcal - label) / label <= 0.15;
+  const describeTop = (phrase: string, result: Awaited<ReturnType<typeof run>>[number]["result"]) => {
+    const top = result.candidates[0];
+    return `${phrase} -> ${result.status}${top ? ` ${top.fdcId} ${top.name}, ${top.amount.quantity} ${top.amount.unit} = ${top.amount.grams} g, ${top.nutrition.calories} kcal` : ""}`;
+  };
+
+  it("answers 'a blue moon beer' and 'a pint of blue moon' from the Blue Moon entry, not the generic backoff", async () => {
+    const blueMoon = entry("blue moon");
+    const cases = [
+      // Blue Moon Belgian White: 168 cal / 12 fl oz label, so 224 for a 16 fl oz pint.
+      ["a blue moon beer", { quantity: 1, unit: null, food: "blue moon beer" }, { quantity: 1, unit: "can", grams: 356, guessed: false }, 168],
+      ["a pint of blue moon", { quantity: 1, unit: "pint", food: "blue moon" }, { quantity: 1, unit: "pint", grams: 475, guessed: false }, 224],
+    ] as const;
+    for (const [phrase, parsed, amount, label] of cases) {
+      await clearCache();
+      const [{ item, result, calls }] = await run(phrase);
+      const what = describeTop(phrase, result);
+      expect(item, phrase).toMatchObject(parsed);
+      expect(commonFor(item.food), phrase).toBe(blueMoon);
+      expect(tailFor(item.food), phrase).toBeNull();
+      expect(result.status, what).toBe("ok");
+      expect(result.candidates.map((c) => c.fdcId), what).toEqual([blueMoon.fdcId, ...(blueMoon.alternatives ?? [])]);
+      expect(result.candidates[0].amount, what).toEqual(amount);
+      expect(nearLabel(result.candidates[0].nutrition.calories, label), what).toBe(true);
+      expect(calls, what).toBe(1); // the table's records in one details call, no search
+    }
+  });
+
+  it("counts 'two bud lights' as 2 cans of Bud Light", async () => {
+    const [{ item, result }] = await run("two bud lights");
+    const what = describeTop("two bud lights", result);
+    expect(item).toMatchObject({ quantity: 2, unit: null, food: "bud lights" });
+    expect(commonFor(item.food)).toBe(entry("bud light"));
+    expect(result.candidates[0].fdcId, what).toBe(169572); // Alcoholic beverage, beer, light, BUD LIGHT
+    expect(result.candidates[0].amount, what).toEqual({ quantity: 2, unit: "can", grams: 708, guessed: false });
+    expect(nearLabel(result.candidates[0].nutrition.calories, 2 * 110), what).toBe(true);
+  });
+
+  it("reads 'a michelob ultra' as the light, low-carb beer it maps to", async () => {
+    const [{ item, result }] = await run("a michelob ultra");
+    const what = describeTop("a michelob ultra", result);
+    expect(commonFor(item.food)).toBe(entry("michelob ultra"));
+    expect(result.candidates[0], what).toMatchObject({
+      fdcId: 169575,
+      name: "Alcoholic beverage, beer, light, low carb",
+      amount: { quantity: 1, unit: "can", grams: 354, guessed: false },
+    });
+    expect(nearLabel(result.candidates[0].nutrition.calories, 95), what).toBe(true);
+    // Its alternatives are beers too, light ones first.
+    for (const c of result.candidates) expect(c.name, what).toMatch(/^Alcoholic beverages?, beer/);
+  });
+
+  it("reads 'a corona' as beer, never the jocote corona plum", async () => {
+    const [{ item, result }] = await run("a corona");
+    const what = describeTop("a corona", result);
+    expect(commonFor(item.food)).toBe(entry("corona"));
+    expect(result.candidates[0], what).toMatchObject({
+      fdcId: 168746,
+      name: "Alcoholic beverage, beer, regular, all",
+      amount: { quantity: 1, unit: "can", grams: 356, guessed: false },
+    });
+    expect(nearLabel(result.candidates[0].nutrition.calories, 148), what).toBe(true);
+    for (const c of result.candidates) {
+      expect(c.name, what).toMatch(/^Alcoholic beverages?, beer/);
+      expect(c.name, what).not.toMatch(/jocote|plum/i);
+    }
+  });
+
+  it("reads 'a glass of white claw' as the hard seltzer mapping or not found, never crab", async () => {
+    const [{ item, result }] = await run("a glass of white claw");
+    const what = describeTop("a glass of white claw", result);
+    expect(item.food).toBe("white claw");
+    expect(["ok", "not_found"], what).toContain(result.status);
+    if (result.status === "ok") {
+      expect(result.candidates[0].fdcId, what).toBe(entry("hard seltzer").fdcId);
+      expect(result.candidates[0].amount, what).toEqual({ quantity: 1, unit: "can", grams: 354, guessed: false });
+    }
+    for (const c of result.candidates) expect(c.name, what).not.toMatch(/crab|claw/i);
+  });
+
+  it("reads a drink the table names and then says the kind of as that drink, never another food", async () => {
+    // USDA has no fair answer for these (its searches come back empty here), so they back off to the table:
+    // to the brand they name, not the generic food after it, and never club soda for a hard seltzer.
+    const cases: [phrase: string, name: string][] = [
+      ["a truly hard seltzer", "hard seltzer"],
+      ["a white claw seltzer", "hard seltzer"],
+      ["a stella beer", "stella"],
+      ["a michelob ultra beer", "michelob ultra"],
+      ["a corona light beer", "corona light"],
+      ["a tequila shot", "tequila"],
+    ];
+    for (const [phrase, name] of cases) {
+      const [{ item, result }] = await run(phrase);
+      const what = describeTop(phrase, result);
+      expect(commonFor(item.food), what).toBeNull();
+      expect(tailFor(item.food), what).toBe(entry(name));
+      expect(result.status, what).toBe("ok");
+      expect(result.candidates[0].fdcId, what).toBe(entry(name).fdcId);
+      expect(result.candidates[0].amount.guessed, what).toBe(false);
+    }
   });
 });
