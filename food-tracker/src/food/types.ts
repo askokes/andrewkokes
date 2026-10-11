@@ -241,3 +241,46 @@ export interface UpdateEntryBody {
   unit?: string;
   meal?: Meal | null;
 }
+
+// ---------------------------------------------------------------- progress (dashboard, weight)
+
+/** One calendar day in GET /api/summary. Days with nothing logged are included with zeros. */
+export interface DaySummary {
+  date: string;
+  calories: number;
+  proteinG: number;
+  carbsG: number;
+  fatG: number;
+  /** How many food entries the day has. */
+  entries: number;
+  /** Goals in effect that day (goal history), or null if the user has none. */
+  goal: GoalsSnapshot | null;
+}
+
+/** GET /api/summary?from=&to= */
+export interface SummaryResponse {
+  from: string;
+  to: string;
+  today: string;
+  days: DaySummary[];
+}
+
+export interface WeightEntry {
+  id: number;
+  date: string;
+  weightLb: number;
+}
+
+/** GET /api/weight?from=&to=, and the response to every weight write. */
+export interface WeightResponse {
+  from: string;
+  to: string;
+  today: string;
+  entries: WeightEntry[];
+}
+
+/** POST /api/weight body. date defaults to the user's today; one weigh-in per day, the latest wins. */
+export interface LogWeightBody {
+  date?: string;
+  weightLb: number;
+}

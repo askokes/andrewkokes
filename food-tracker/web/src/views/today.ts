@@ -1,8 +1,10 @@
 import type { DayView, EntryView, Meal, ParseResponse } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
-import { el, icon } from "../dom";
+import { el, icon, segmented } from "../dom";
 import { addDays, amountText, dayPath, dayTitle, friendlyName, fullDate, MEAL_LABELS, MEAL_ORDER, todayIn, whole } from "../food";
 import type { Go } from "../nav";
+import type { Period } from "../progress";
+import { clearProgressCache, progressCard, weighInCard } from "./dashboard";
 import { openEditSheet } from "./editEntry";
 
 // Days already seen this session, so going back to one paints instantly while it refreshes.
@@ -11,6 +13,27 @@ const days = new Map<string, DayView>();
 let draft = "";
 // Set when the confirm screen saves; the next Today render for that date shows it once.
 let justAdded: { date: string; count: number; meal: Meal | null; ids: number[]; at: number } | null = null;
+
+const PERIOD_KEY = "food.period";
+
+/** The Today / Week / Month choice, remembered on this device only. */
+function savedPeriod(): Period {
+  try {
+    const v = localStorage.getItem(PERIOD_KEY);
+    if (v === "today" || v === "week" || v === "month") return v;
+  } catch {
+    // Private mode or blocked storage: just start on Today.
+  }
+  return "today";
+}
+
+function savePeriod(p: Period) {
+  try {
+    localStorage.setItem(PERIOD_KEY, p);
+  } catch {
+    // Not remembered; harmless.
+  }
+}
 
 /** How long the "Added" note stays; the `.entry.new` highlight in styles.css lasts as long. */
 const NOTICE_MS = 3000;
@@ -275,10 +298,36 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
     }
   });
 
-  // ---- the day
+  // ---- the day, or on today's page the Week / Month progress instead of the totals
   const summary = el("section", { className: "card summary", tabIndex: -1, attrs: { "aria-label": "Totals" } });
   const list = el("div", { className: "entries" });
-  const page = el("div", { className: "stack" }, summary, form, list);
+  const onToday = date === today;
+  let period: Period = onToday ? savedPeriod() : "today";
+  const slot = el("div", { className: "period-slot" });
+  const showPeriod = () => {
+    if (period === "today") slot.replaceChildren(summary);
+    else slot.replaceChildren(progressCard({ me, period, today, go }));
+  };
+  showPeriod();
+  const switcher = onToday
+    ? segmented<Period>({
+        label: "Show",
+        options: [
+          { value: "today", label: "Today" },
+          { value: "week", label: "Week" },
+          { value: "month", label: "Month" },
+        ],
+        value: period,
+        onChange: (p) => {
+          period = p;
+          savePeriod(p);
+          showPeriod();
+        },
+      })
+    : null;
+  switcher?.classList.add("period-switch");
+  const weighIn = onToday && me.trackWeight ? weighInCard({ today, onSaved: () => period !== "today" && showPeriod() }) : null;
+  const page = el("div", { className: "stack" }, ...[switcher, slot, form, weighIn, list].filter((n): n is HTMLElement => n !== null));
 
   if (added) {
     const what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}${added.meal ? ` to ${MEAL_LABELS[added.meal]}` : ""}. Nice!`;
@@ -302,10 +351,16 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
     rememberDay(day);
     paint(day);
   };
+  // An edit or removal changes the charts too.
+  const changed = (day: DayView) => {
+    saved(day);
+    clearProgressCache();
+    if (period !== "today") showPeriod();
+  };
   // The sheet lives inside this view, so leaving the view also closes it.
   const edit = (entry: EntryView) =>
     openEditSheet(page, entry, (day, kind) => {
-      saved(day);
+      changed(day);
       announce(`${kind === "removed" ? "Removed" : "Saved"}. ${totalsText(day)}`);
       // The row that opened the sheet was just rebuilt; land on its replacement, or on the totals if it's gone.
       const row = list.querySelector<HTMLElement>(`.entry[data-id="${entry.id}"]`);

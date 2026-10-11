@@ -1,0 +1,69 @@
+import { describe, expect, it } from "vitest";
+import type { DaySummary, WeightEntry } from "../src/food/types";
+import { macroCalories, movingAverage, periodStats, summarySentence } from "../web/src/progress";
+
+const day = (date: string, calories: number, entries = calories > 0 ? 1 : 0, proteinG = 0): DaySummary => ({
+  date, calories, proteinG, carbsG: 0, fatG: 0, entries, goal: { calories: 2000, proteinG: 120, carbsG: null, fatG: null },
+});
+const w = (date: string, weightLb: number): WeightEntry => ({ id: 0, date, weightLb });
+const dates = (n: number, end = "2026-10-11") =>
+  Array.from({ length: n }, (_, i) => {
+    const d = new Date(`${end}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() - (n - 1 - i));
+    return d.toISOString().slice(0, 10);
+  });
+
+describe("movingAverage", () => {
+  it("averages the weigh-ins in each 7-day window, using ones before the chart starts", () => {
+    const ds = dates(3);
+    const avg = movingAverage(ds, [w("2026-10-03", 182), w("2026-10-09", 180), w("2026-10-11", 179)]);
+    // Oct 9 window (Oct 3-9): 182 and 180. Oct 10 window (Oct 4-10): only 180. Oct 11: 180 and 179.
+    expect(avg).toEqual([181, 180, 179.5]);
+  });
+
+  it("is null where a window has no weigh-ins", () => {
+    expect(movingAverage(dates(2), [])).toEqual([null, null]);
+  });
+});
+
+describe("periodStats", () => {
+  it("averages only logged days and measures the trend on the 7-day average", () => {
+    const ds = dates(7);
+    const days = ds.map((d, i) => day(d, i === 2 ? 0 : 1800 + i * 10, undefined, 100));
+    const stats = periodStats(days, [182, 181.8, null, 181.5, 181.2, 181, 180.7]);
+    expect(stats.daysLogged).toBe(6);
+    expect(stats.avgCalories).toBe(Math.round((1800 + 1810 + 1830 + 1840 + 1850 + 1860) / 6));
+    expect(stats.avgProtein).toBe(100);
+    expect(stats.weightChange).toBe(-1.3);
+    expect(stats.goalCalories).toBe(2000);
+  });
+
+  it("won't call a trend from averages less than 3 days apart", () => {
+    const stats = periodStats(dates(3).map((d) => day(d, 1500)), [null, 180, 179]);
+    expect(stats.weightChange).toBeNull();
+  });
+
+  it("handles a period with nothing logged", () => {
+    const stats = periodStats(dates(7).map((d) => day(d, 0)), Array(7).fill(null));
+    expect(stats).toMatchObject({ avgCalories: null, daysLogged: 0, weightChange: null });
+  });
+});
+
+describe("summarySentence", () => {
+  const base = { avgCalories: 1846, avgProtein: 110, daysLogged: 6, days: 7, goalCalories: 2000, goalProtein: 120 };
+  it("talks about the 7-day average and the intake, calmly", () => {
+    expect(summarySentence({ ...base, weightChange: -1.2 }, "month", true)).toBe(
+      "Your 7-day average weight is down 1.2 lb over the last 30 days. You averaged 1,846 cal a day on the 6 days you logged.",
+    );
+    expect(summarySentence({ ...base, weightChange: 0.1 }, "week", true)).toMatch(/^Your 7-day average weight held steady this week\./);
+    expect(summarySentence({ ...base, weightChange: null }, "week", true)).toMatch(/Log your weight a few times/);
+    expect(summarySentence({ ...base, weightChange: -3 }, "week", false)).toBe("You averaged 1,846 cal a day on the 6 days you logged.");
+    expect(summarySentence({ ...base, daysLogged: 0, avgCalories: null, weightChange: null }, "week", true)).toMatch(/^Log a few days/);
+  });
+});
+
+describe("macroCalories", () => {
+  it("uses 4, 4 and 9 calories per gram", () => {
+    expect(macroCalories({ ...day("2026-10-11", 0), proteinG: 10, carbsG: 20, fatG: 5 })).toEqual({ protein: 40, carbs: 80, fat: 45 });
+  });
+});

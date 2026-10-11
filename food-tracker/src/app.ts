@@ -4,6 +4,7 @@ import { accessKeys, devUserEmail, verifyAccessJwt, type KeyResolver } from "./a
 import type { AppEnv } from "./env";
 import { foodRoutes } from "./food/routes";
 import { profileRoutes } from "./profile";
+import { progressRoutes } from "./progress";
 
 export interface AppDeps {
   /** Access signing keys. Tests pass a local key set. */
@@ -73,6 +74,7 @@ export function createApp(overrides: Partial<AppDeps> = {}) {
 
   api.route("/", profileRoutes);
   api.route("/", foodRoutes(deps));
+  api.route("/", progressRoutes);
 
   // Registered last so unknown API paths get JSON, never the SPA's index.html.
   api.all("*", (c) => c.json({ error: "not_found", message: "No such endpoint." }, 404));

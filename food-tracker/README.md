@@ -5,7 +5,12 @@ Voice-first food logging for family and friends. `SPEC.md` is the source of trut
 **Status:** Phase 3 (food logging by text: parser, USDA lookup with caching, confirm screen, Today with totals). Live at https://food.pivotaiglobal.com.
 
 API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/foods/search`,
-`GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`. Shapes live in `src/food/types.ts`.
+`GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/summary`, `GET/POST /api/weight`,
+`DELETE /api/weight/:id`. Shapes live in `src/food/types.ts`.
+
+Home is a dashboard: Today / Week / Month. Week and Month show one Chart.js chart, calories stacked by
+macro on the left axis and the 7-day average weight plus weigh-ins on a right axis (Andrew chose the
+combined two-axis chart over two aligned charts). Colors are validated for color-blind separation.
 Every write must be `Content-Type: application/json` from the app's own origin.
 
 `npm run dev:mock` runs the app locally with recorded USDA data (no API key needed).

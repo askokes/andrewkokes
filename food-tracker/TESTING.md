@@ -4,6 +4,22 @@ Plain steps. If anything looks wrong, take a screenshot and send it to Andrew.
 
 Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com".
 
+## Dashboard and weight
+
+1. Open the app. Under the date you should see **Today | Week | Month**.
+2. Tap **Week**. You should see your average calories a day, how many days you logged, and (if weight tracking is on) your weight trend, then a chart with a colored bar for each day.
+3. Each bar is split into protein (mint), carbs (apricot) and fat (lavender). The gray line is your goal.
+4. Tap any bar. The box above the chart should switch to that day's numbers. Tap **Open this day** to see what you ate that day.
+5. Tap **Month**. You should see 30 days. Close the app and open it again: it should still be on Month.
+6. Tap **Show as table**. You should see the same numbers as a list.
+7. If **Track my weight** is on in Settings: type your weight in **Today's weight** and tap **Save**. On Week or Month, a pink line (your 7-day average) and pink dots (each weigh-in) should show on the right-hand scale.
+8. Save a different weight the same day. It should replace the first one, not add a second.
+
+### Tell Andrew
+
+- Are the colors easy to tell apart?
+- Is anything on the chart confusing?
+
 ## Phase 3: Log food by typing
 
 1. Open **https://food.pivotaiglobal.com**. You should see **Today** with your calorie goal and a box that says **What did you eat?**

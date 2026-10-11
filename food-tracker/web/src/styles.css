@@ -18,6 +18,14 @@
   --over-text: #6f6252;
   --guess-bg: #fbf3e4;
   --backdrop: rgba(20, 24, 22, 0.45);
+  /* Charts: soft categorical colors, validated for color-blind separation (dataviz validator). */
+  --protein: #3fb6a0;
+  --carbs: #f2994a;
+  --fat: #8c7ae6;
+  --weight: #c45a92;
+  --goal-line: #858d88;
+  --chart-grid: #edefeb;
+  --chart-cross: #858d88;
   color-scheme: light dark;
 }
 
@@ -39,6 +47,13 @@
     --over-text: #cfc3ae;
     --guess-bg: #2c2719;
     --backdrop: rgba(0, 0, 0, 0.6);
+    --protein: #36a892;
+    --carbs: #d07a36;
+    --fat: #8b7ce4;
+    --weight: #e07fb2;
+    --goal-line: #9aa29d;
+    --chart-grid: #2b2f32;
+    --chart-cross: #9aa29d;
   }
 }
 
@@ -459,3 +474,39 @@ body:has(dialog[open]) { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .notice, .bar-fill { transition: none; }
 }
+
+/* Dashboard: Today / Week / Month */
+.period-switch { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.period-switch button { font-size: 0.95rem; }
+@media (max-width: 340px) { .period-switch { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.progress { display: flex; flex-direction: column; gap: 10px; transition: opacity 0.2s; }
+.progress.stale { opacity: 0.6; }
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.kpi p { margin: 0; }
+.kpi-label, .kpi-sub { font-size: 0.8rem; color: var(--muted); }
+.kpi-value { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.progress-summary { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.readout {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px;
+  padding: 10px 12px; border-radius: 12px; background: var(--bg); font-size: 0.9rem;
+}
+.readout-values { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.readout strong { font-size: 1rem; width: 100%; }
+.open-day { font-size: 0.9rem; margin-left: auto; }
+.chart-title { margin: 6px 0 0; font-size: 1rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 0.82rem; }
+.key { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+.readout .key { color: var(--text); }
+.key-swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.key-line { width: 14px; height: 2px; border-radius: 2px; flex: none; }
+.key-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.axis-units { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-bottom: -6px; }
+/* The plot height includes the x-axis labels, so the card never scrolls inside itself. */
+.plot { position: relative; height: 230px; }
+.plot canvas { cursor: pointer; }
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.data-table th, .data-table td { padding: 6px 4px; text-align: right; border-top: 1px solid var(--border); white-space: nowrap; }
+.data-table th[scope="row"], .data-table thead th:first-child { text-align: left; font-weight: 500; }
+.data-table thead th { color: var(--muted); font-weight: 600; border-top: 0; }
+.weigh-in-current { margin: 0 0 8px; font-size: 0.9rem; }
