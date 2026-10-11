@@ -121,32 +121,37 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
   };
 
   const formMsg = el("p", { className: "form-msg", attrs: { role: "alert" } });
+  // On the Goals tab the form stays put after saving, so say it worked.
+  const savedMsg = el("p", { className: "saved-msg", attrs: { role: "status" } });
   const submit = el("button", { type: "submit", className: "button wide", textContent: mode === "setup" ? "Save and start" : "Save changes" });
 
+  const about = el("section", { className: "card stack" }, el("h2", { textContent: "About you" }), name.wrap, tzWrap);
+  const daily = el(
+    "section",
+    { className: "card stack" },
+    el("h2", { textContent: "Daily goals" }),
+    calories.wrap,
+    el("p", { className: "subhead", textContent: "Macro goals (optional)" }),
+    el("div", { className: "grid3" }, protein.wrap, carbs.wrap, fat.wrap),
+  );
+  const weight = el(
+    "section",
+    { className: "card stack" },
+    el(
+      "label",
+      { className: "switch-row", htmlFor: trackId },
+      el("span", {}, el("strong", { textContent: "Track my weight" }), el("span", { className: "hint", textContent: "Optional. Turn it on or off any time." })),
+      track,
+    ),
+    weightFields,
+  );
   const form = el(
     "form",
     { className: "stack", noValidate: true },
-    el("section", { className: "card stack" }, el("h2", { textContent: "About you" }), name.wrap, tzWrap),
-    el(
-      "section",
-      { className: "card stack" },
-      el("h2", { textContent: "Daily goals" }),
-      calories.wrap,
-      el("p", { className: "subhead", textContent: "Macro goals (optional)" }),
-      el("div", { className: "grid3" }, protein.wrap, carbs.wrap, fat.wrap),
-    ),
-    el(
-      "section",
-      { className: "card stack" },
-      el(
-        "label",
-        { className: "switch-row", htmlFor: trackId },
-        el("span", {}, el("strong", { textContent: "Track my weight" }), el("span", { className: "hint", textContent: "Optional. Turn it on or off any time." })),
-        track,
-      ),
-      weightFields,
-    ),
+    // First run starts with who you are; the Goals tab leads with the goals.
+    ...(mode === "setup" ? [about, daily, weight] : [daily, weight, about]),
     formMsg,
+    savedMsg,
     submit,
   );
 
@@ -158,6 +163,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
       f.input.removeAttribute("aria-invalid");
     }
     if (!Object.values(fields).some((f) => f.msg.textContent)) formMsg.textContent = "";
+    savedMsg.textContent = "";
   });
 
   form.addEventListener("submit", async (event) => {
@@ -167,6 +173,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
       f.input.removeAttribute("aria-invalid");
     }
     formMsg.textContent = "";
+    savedMsg.textContent = "";
 
     const body = {
       displayName: name.input.value,
@@ -185,7 +192,13 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     submit.disabled = true;
     submit.textContent = "Saving…";
     try {
-      onSaved(await api<Me>("POST", "/api/me", body));
+      const next = await api<Me>("POST", "/api/me", body);
+      if (mode === "settings") {
+        // Today's weight was logged; leaving it in the box would log it again on the next save.
+        currentWeight.input.value = "";
+        savedMsg.textContent = "Saved.";
+      }
+      onSaved(next);
     } catch (err) {
       const e = err instanceof ApiError ? err : new ApiError(0, "Something went wrong. Please try again.", "error");
       let first: HTMLElement | null = null;

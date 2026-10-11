@@ -166,6 +166,7 @@ export function fullDate(date: string, today: string) {
   return formatDay(date, sameYear ? undefined : { weekday: "long", month: "long", day: "numeric", year: "numeric" });
 }
 
+/** The Diary's address for a day: /diary for today, /diary/YYYY-MM-DD before that. */
 export function dayPath(date: string, today: string) {
-  return date === today ? "/" : `/day/${date}`;
+  return date === today ? "/diary" : `/diary/${date}`;
 }

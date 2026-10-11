@@ -1,40 +1,19 @@
 import type { DayView, EntryView, Meal, ParseResponse } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
-import { el, icon, segmented } from "../dom";
+import { el, icon } from "../dom";
 import { addDays, amountText, dayPath, dayTitle, friendlyName, fullDate, MEAL_LABELS, MEAL_ORDER, todayIn, whole } from "../food";
 import type { Go } from "../nav";
-import type { Period } from "../progress";
-import { clearProgressCache, progressCard, weighInCard } from "./dashboard";
-import { openEditSheet } from "./editEntry";
 import { listen, voiceErrorMessage, voiceSupported, type Listening } from "../voice";
+import { clearProgressCache } from "./dashboard";
+import { openEditSheet } from "./editEntry";
+import { compactTotals, totalsText } from "./summary";
 
 // Days already seen this session, so going back to one paints instantly while it refreshes.
 const days = new Map<string, DayView>();
 // What's typed in the food box survives a trip to the confirm screen and back.
 let draft = "";
-// Set when the confirm screen saves; the next Today render for that date shows it once.
+// Set when the confirm screen saves; the next Diary render for that date shows it once.
 let justAdded: { date: string; count: number; meal: Meal | null; ids: number[]; at: number } | null = null;
-
-const PERIOD_KEY = "food.period";
-
-/** The Today / Week / Month choice, remembered on this device only. */
-function savedPeriod(): Period {
-  try {
-    const v = localStorage.getItem(PERIOD_KEY);
-    if (v === "today" || v === "week" || v === "month") return v;
-  } catch {
-    // Private mode or blocked storage: just start on Today.
-  }
-  return "today";
-}
-
-function savePeriod(p: Period) {
-  try {
-    localStorage.setItem(PERIOD_KEY, p);
-  } catch {
-    // Not remembered; harmless.
-  }
-}
 
 /** How long the "Added" note stays; the `.entry.new` highlight in styles.css lasts as long. */
 const NOTICE_MS = 3000;
@@ -56,96 +35,11 @@ export function noteAdded(date: string, info: { count: number; meal: Meal | null
   justAdded = { date, ...info, at: performance.now() };
 }
 
-interface TodayOpts {
+interface DiaryOpts {
   me: Me;
   date: string;
   go: Go;
   openConfirm: (parsed: ParseResponse, text: string, date: string, today: string) => void;
-}
-
-/** A progress bar. Past the goal it fills completely in a calm neutral color, never red. */
-function bar(value: number, goal: number, label: string, thin = false) {
-  const fill = el("span", { className: "bar-fill" });
-  fill.style.width = `${goal > 0 ? Math.min(100, (value / goal) * 100) : 100}%`;
-  return el(
-    "div",
-    {
-      className: `bar${thin ? " thin" : ""}${value > goal ? " over" : ""}`,
-      attrs: {
-        role: "progressbar",
-        "aria-label": label,
-        "aria-valuemin": "0",
-        "aria-valuemax": String(goal),
-        "aria-valuenow": String(Math.min(value, goal)),
-        "aria-valuetext": `${whole(value)} of ${whole(goal)}`,
-      },
-    },
-    fill,
-  );
-}
-
-function macroRow(label: string, eaten: number, goal: number | null) {
-  const grams = Math.round(eaten);
-  if (goal === null) {
-    return el("div", { className: "macro" }, el("div", { className: "macro-line" }, el("span", { className: "macro-name", textContent: label }), el("span", { textContent: `${whole(grams)} g` })));
-  }
-  const left = goal - grams;
-  return el(
-    "div",
-    { className: "macro" },
-    el(
-      "div",
-      { className: "macro-line" },
-      el("span", {}, el("span", { className: "macro-name", textContent: label }), el("span", { className: "muted", textContent: ` ${whole(grams)} / ${whole(goal)} g` })),
-      el("span", { className: left < 0 ? "over-text" : "muted", textContent: left < 0 ? `${whole(-left)} g over` : `${whole(left)} g left` }),
-    ),
-    bar(grams, goal, label, true),
-  );
-}
-
-function summaryContent(day: DayView): Node[] {
-  const g = day.goals;
-  const eaten = Math.round(day.totals.calories);
-  const macros = el(
-    "div",
-    { className: "macros-list" },
-    macroRow("Protein", day.totals.proteinG, g?.proteinG ?? null),
-    macroRow("Carbs", day.totals.carbsG, g?.carbsG ?? null),
-    macroRow("Fat", day.totals.fatG, g?.fatG ?? null),
-  );
-  const eatenBlock = el(
-    "div",
-    {},
-    el("p", { className: "big-number", textContent: whole(eaten) }),
-    el("p", { className: "muted", textContent: g ? `of ${whole(g.calories)} cal` : "calories" }),
-  );
-  if (!g) {
-    return [eatenBlock, el("p", { className: "hint", textContent: "Add a daily goal in Settings to see what's left." }), macros];
-  }
-  const left = g.calories - eaten;
-  return [
-    el(
-      "div",
-      { className: "cal-head" },
-      eatenBlock,
-      el(
-        "div",
-        { className: `cal-left${left < 0 ? " over-text" : ""}` },
-        el("p", { className: "mid-number", textContent: whole(Math.abs(left)) }),
-        el("p", { className: left < 0 ? "" : "muted", textContent: left < 0 ? "over" : "left" }),
-      ),
-    ),
-    bar(eaten, g.calories, "Calories"),
-    macros,
-  ];
-}
-
-/** "2,090 of 2,000 calories, 90 over." for the screen reader announcement after a change. */
-function totalsText(day: DayView) {
-  const eaten = Math.round(day.totals.calories);
-  if (!day.goals) return `${whole(eaten)} calories.`;
-  const left = day.goals.calories - eaten;
-  return `${whole(eaten)} of ${whole(day.goals.calories)} calories, ${whole(Math.abs(left))} ${left < 0 ? "over" : "left"}.`;
 }
 
 function entryRow(entry: EntryView, onTap: (entry: EntryView) => void, highlight: { ids: Set<number>; at: number } | null) {
@@ -177,7 +71,7 @@ function entryGroups(day: DayView, onTap: (entry: EntryView) => void, highlight:
         "div",
         { className: "card empty" },
         el("p", { textContent: day.date === day.today ? "Nothing logged yet today." : "Nothing logged on this day." }),
-        el("p", { className: "muted", textContent: "Type what you ate above, like “a banana” or “two eggs and toast”." }),
+        el("p", { className: "muted", textContent: "Tap the mic and say what you ate, or type it, like “a banana” or “two eggs and toast”." }),
       ),
     ];
   }
@@ -197,7 +91,7 @@ function entryGroups(day: DayView, onTap: (entry: EntryView) => void, highlight:
   });
 }
 
-export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
+export function diaryView({ me, date, go, openConfirm }: DiaryOpts): Node[] {
   let today = days.get(date)?.today ?? todayIn(me.timezone);
   const added = justAdded?.date === date ? justAdded : null;
   justAdded = null;
@@ -205,7 +99,6 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
 
   const prev = el("button", { type: "button", className: "icon-button", dataset: { nav: "prev" }, attrs: { "aria-label": "Previous day" } }, icon("back"));
   const next = el("button", { type: "button", className: "icon-button", dataset: { nav: "next" }, attrs: { "aria-label": "Next day" } }, icon("forward"));
-  const settings = el("button", { type: "button", className: "icon-button", attrs: { "aria-label": "Settings" } }, icon("gear"));
   const title = el("h1");
   const subtitle = el("p", { className: "muted" });
   const backToToday = el("button", { type: "button", className: "text-button back-today", textContent: "Back to today" });
@@ -214,9 +107,7 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
   next.addEventListener("click", () => {
     if (date < today) go(dayPath(addDays(date, 1), today), { replace: true, focus: "[data-nav=next]" });
   });
-  backToToday.addEventListener("click", () => go("/", { replace: true }));
-  // Marked so Settings' Back (and saving) pops this entry instead of pushing another.
-  settings.addEventListener("click", () => go("/settings", { state: { fromApp: true } }));
+  backToToday.addEventListener("click", () => go(dayPath(today, today), { replace: true }));
 
   const paintHeader = () => {
     const yesterday = addDays(today, -1);
@@ -344,36 +235,10 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
     }
   });
 
-  // ---- the day, or on today's page the Week / Month progress instead of the totals
-  const summary = el("section", { className: "card summary", tabIndex: -1, attrs: { "aria-label": "Totals" } });
+  // ---- the day: where it stands, the food box, then what was eaten
+  const summary = el("section", { className: "card compact-totals", tabIndex: -1, attrs: { "aria-label": "Totals" } });
   const list = el("div", { className: "entries" });
-  const onToday = date === today;
-  let period: Period = onToday ? savedPeriod() : "today";
-  const slot = el("div", { className: "period-slot" });
-  const showPeriod = () => {
-    if (period === "today") slot.replaceChildren(summary);
-    else slot.replaceChildren(progressCard({ me, period, today, go }));
-  };
-  showPeriod();
-  const switcher = onToday
-    ? segmented<Period>({
-        label: "Show",
-        options: [
-          { value: "today", label: "Today" },
-          { value: "week", label: "Week" },
-          { value: "month", label: "Month" },
-        ],
-        value: period,
-        onChange: (p) => {
-          period = p;
-          savePeriod(p);
-          showPeriod();
-        },
-      })
-    : null;
-  switcher?.classList.add("period-switch");
-  const weighIn = onToday && me.trackWeight ? weighInCard({ today, onSaved: () => period !== "today" && showPeriod() }) : null;
-  const page = el("div", { className: "stack" }, ...[switcher, slot, form, weighIn, list].filter((n): n is HTMLElement => n !== null));
+  const page = el("div", { className: "stack" }, summary, form, list);
 
   if (added) {
     const what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}${added.meal ? ` to ${MEAL_LABELS[added.meal]}` : ""}. Nice!`;
@@ -390,7 +255,7 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
   const paint = (day: DayView) => {
     today = day.today;
     paintHeader();
-    summary.replaceChildren(...summaryContent(day));
+    summary.replaceChildren(...compactTotals(day));
     list.replaceChildren(...entryGroups(day, edit, highlight));
   };
   const saved = (day: DayView) => {
@@ -401,7 +266,6 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
   const changed = (day: DayView) => {
     saved(day);
     clearProgressCache();
-    if (period !== "today") showPeriod();
   };
   // The sheet lives inside this view, so leaving the view also closes it.
   const edit = (entry: EntryView) =>
@@ -433,7 +297,7 @@ export function todayView({ me, date, go, openConfirm }: TodayOpts): Node[] {
   load();
 
   return [
-    el("header", { className: "daybar" }, el("div", { className: "daytitle" }, title, subtitle, backToToday), el("div", { className: "daynav" }, prev, next), settings),
+    el("header", { className: "daybar" }, el("div", { className: "daytitle" }, title, subtitle, backToToday), el("div", { className: "daynav" }, prev, next)),
     status,
     page,
   ];

@@ -7,8 +7,8 @@
 // the entry itself. Neither pop should re-render the screen underneath, so the
 // router asks handleOverlayPop() first.
 
-/** History state. `fromApp` marks a Settings entry pushed by the app, so its Back can pop it. */
-export type NavState = { confirm?: number; overlay?: number; fromApp?: boolean } | null;
+/** History state: the confirm screen's id, or an open overlay's. */
+export type NavState = { confirm?: number; overlay?: number } | null;
 
 export interface GoOpts {
   replace?: boolean;

@@ -4,9 +4,23 @@ Plain steps. If anything looks wrong, take a screenshot and send it to Andrew.
 
 Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com".
 
+## New layout: three tabs
+
+1. Open the app. You should land on **Overview**, with three tabs along the bottom: **Overview**, **Diary** and **Goals**. The app is always light, even if your phone is in dark mode.
+2. Tap **Diary**. You should see today's total, the food box with the mic, and what you've eaten so far.
+3. Tap the back arrow to see yesterday. Tap **Diary** at the bottom again: it goes back to today.
+4. Tap **Goals**. Change your calorie goal and tap **Save changes**. It should say **Saved.** Tap **Overview**: the new goal shows there.
+5. Tap in the food box on Diary. While the keyboard is up, the tabs hide so you have room to type.
+6. Add a food. The **Check and add** screen has no tabs; after **Add** you're back on Diary.
+
+### Tell Andrew
+
+- Is it obvious where to go to log food?
+- Anything you looked for and couldn't find?
+
 ## Voice and drinks
 
-1. On Today, find the round **mic button** between the food box and **Add**.
+1. On the **Diary** tab, find the round **mic button** between the food box and **Add**.
 2. Tap it. The first time, your phone asks to use the microphone. Tap **Allow**.
 3. The mic turns solid green and pulses. Say **two eggs and a banana for breakfast**. Your words should show up in the box as you talk.
 4. Stop talking. After a second the **Check and add** screen should open with eggs and a banana, and **Breakfast** picked. Nothing is saved until you tap **Add**.
@@ -24,13 +38,13 @@ If the mic button is missing, your browser doesn't support voice. Use Safari on 
 
 ## Dashboard and weight
 
-1. Open the app. Under the date you should see **Today | Week | Month**.
+1. Open the app on **Overview**. Under the date you should see **Today | Week | Month**.
 2. Tap **Week**. You should see your average calories a day, how many days you logged, and (if weight tracking is on) your weight trend, then a chart with a colored bar for each day.
 3. Each bar is split into protein (mint), carbs (apricot) and fat (lavender). The gray line is your goal.
 4. Tap any bar. The box above the chart should switch to that day's numbers. Tap **Open this day** to see what you ate that day.
 5. Tap **Month**. You should see 30 days. Close the app and open it again: it should still be on Month.
 6. Tap **Show as table**. You should see the same numbers as a list.
-7. If **Track my weight** is on in Settings: type your weight in **Today's weight** and tap **Save**. On Week or Month, a pink line (your 7-day average) and pink dots (each weigh-in) should show on the right-hand scale.
+7. If **Track my weight** is on in **Goals**: type your weight in **Today's weight** and tap **Save**. On Week or Month, a pink line (your 7-day average) and pink dots (each weigh-in) should show on the right-hand scale.
 8. Save a different weight the same day. It should replace the first one, not add a second.
 
 ### Tell Andrew
@@ -40,11 +54,11 @@ If the mic button is missing, your browser doesn't support voice. Use Safari on 
 
 ## Phase 3: Log food by typing
 
-1. Open **https://food.pivotaiglobal.com**. You should see **Today** with your calorie goal and a box that says **What did you eat?**
+1. Open **https://food.pivotaiglobal.com** and tap **Diary**. You should see **Today** with your calorie goal and a box that says **What did you eat?**
 2. Type **two eggs and a slice of toast** and tap **Add**. A **Check and add** screen should show two cards: eggs and toast, each with an amount and calories.
 3. Check the meal buttons at the top. Pick the right one.
 4. On the toast card, change the amount to 2. The calories should update right away.
-5. Tap **Add 2 foods**. You should land back on Today with both foods listed and the calorie total going up.
+5. Tap **Add 2 foods**. You should land back on Diary with both foods listed and the calorie total going up.
 6. Tap the eggs row. Change it to 3 and tap **Save**. The calories should go up.
 7. Tap the toast row, tap **Remove**, then **Yes, remove**. It should disappear and the total should drop.
 8. Try a meal word: **a banana for a snack**. The confirm screen should already have **Snack** picked.
@@ -70,9 +84,9 @@ If the mic button is missing, your browser doesn't support voice. Use Safari on 
 7. Fill in protein, carbs or fat if you want. Leaving them empty is fine.
 8. Leave **Track my weight** off, or turn it on and enter your weight. Your goal weight is optional.
 9. Tap **Save and start**. You should land on a page that says **Hi,** and your name, with your goals.
-10. Tap the **gear** in the top right. Change your calorie goal and tap **Save changes**. The home page should show the new number.
+10. Tap **Goals** at the bottom. Change your calorie goal and tap **Save changes**. **Overview** should show the new number.
 11. Close the browser completely and open the link again. Your name and goals should still be there.
-12. In Settings, scroll down and tap **Sign out**. Signing back in should bring back the same profile, not the setup screen.
+12. In **Goals**, scroll down and tap **Sign out**. Signing back in should bring back the same profile, not the setup screen.
 
 ### Tell Andrew
 

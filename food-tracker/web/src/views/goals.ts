@@ -2,13 +2,10 @@ import type { Me } from "../api";
 import { el } from "../dom";
 import { profileForm } from "./profileForm";
 
-/** `back` returns to where Settings was opened from (popping its history entry when the app pushed it). */
-export function settingsView(me: Me, back: () => void, onSaved: (me: Me) => void) {
-  const backButton = el("button", { type: "button", className: "back", textContent: "‹ Back" });
-  backButton.addEventListener("click", back);
+/** The Goals tab: daily goals, weight tracking and the profile, then the account. */
+export function goalsView(me: Me, onSaved: (me: Me) => void) {
   return [
-    el("header", { className: "topbar" }, backButton),
-    el("h1", { textContent: "Settings" }),
+    el("header", { className: "page-head" }, el("h1", { textContent: "Goals" }), el("p", { className: "muted", textContent: "Change these any time. New goals start today." })),
     profileForm("settings", me, onSaved),
     el(
       "section",

@@ -47,7 +47,12 @@ saying its kind ("a stella beer" is a Stella), and failing that the phrase is no
 **Deviations from SPEC.md (pending Andrew's OK):** section 6 says to search with `pageSize=10`; the app
 asks for 50, because USDA's ranking often leaves the everyday food out of the top 10 (still one call).
 And the common-foods table above is an addition: it answers everyday phrases before USDA's search.
-SPEC.md itself is unchanged.
+At Andrew's request (October 2026) the screens in section 8 are arranged as three bottom tabs:
+**Overview** (`/`: today's totals or the Week / Month chart, and the weigh-in), **Diary**
+(`/diary`, `/diary/YYYY-MM-DD`: the day, the food box and mic, the meals) and **Goals** (`/goals`:
+goals, weight tracking, profile, sign out; Phase 6 adds export and delete here). The old `/settings`
+and `/day/...` addresses redirect. Section 8 also asks for light and dark mode; Andrew prefers light
+only, so the dark theme is gone. SPEC.md itself is unchanged.
 
 Every write (POST, PUT, PATCH) must send `Content-Type: application/json`, and writes a browser
 marks as started by another site (`Sec-Fetch-Site`) are refused, so other pages can't post to the

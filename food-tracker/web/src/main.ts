@@ -5,9 +5,12 @@ import { el } from "./dom";
 import { isIsoDate, todayIn } from "./food";
 import { handleOverlayPop, type Go, type NavState } from "./nav";
 import { confirmView, type Added } from "./views/confirm";
-import { settingsView } from "./views/settings";
+import { clearProgressCache } from "./views/dashboard";
+import { cachedDay, clearDraft, diaryView, noteAdded, rememberDay } from "./views/diary";
+import { goalsView } from "./views/goals";
+import { overviewView } from "./views/overview";
 import { setupView } from "./views/setup";
-import { cachedDay, clearDraft, noteAdded, rememberDay, todayView } from "./views/today";
+import { tabBar } from "./views/tabs";
 
 const root = document.getElementById("app")!;
 let me: Me | null = null;
@@ -47,15 +50,16 @@ const go: Go = (path, opts = {}) => {
   route();
 };
 
-/** Back to where Settings was opened from: pop the entry the app pushed, else replace it with Today. */
-function leaveSettings() {
-  if (location.pathname === "/settings" && navState()?.fromApp) history.back();
-  else go("/", { replace: true });
-}
+const tabs = tabBar(go);
+document.body.append(tabs.nav);
 
+/** Profile saved: first run moves on to the Overview; on the Goals tab the form stays and says so. */
 function saved(next: Me) {
+  const firstRun = me === null;
   me = next;
-  leaveSettings();
+  // Goals and weight tracking show on the charts.
+  clearProgressCache();
+  if (firstRun) go("/", { replace: true });
 }
 
 function openConfirm(parsed: ParseResponse, text: string, date: string, today: string) {
@@ -80,40 +84,56 @@ function openConfirm(parsed: ParseResponse, text: string, date: string, today: s
   });
   confirmSession = { id, nodes };
   history.pushState({ confirm: id }, "", location.pathname);
+  // Its own Cancel and Add sit at the bottom instead.
+  tabs.show(null);
   render(nodes);
 }
 
 function route() {
   if (!me) {
+    tabs.show(null);
     render(setupView(saved));
     return;
   }
   const path = location.pathname;
-  if (path === "/settings") {
-    render(settingsView(me, leaveSettings, saved));
-    return;
-  }
 
   const state = navState();
   if (state?.confirm) {
     if (confirmSession?.id === state.confirm) {
+      tabs.show(null);
       render(confirmSession.nodes);
       return;
     }
     // Saved already, or the page was reloaded: nothing to confirm any more.
     history.replaceState(null, "", path);
   } else if (state?.overlay) {
-    // Forward onto a closed sheet, or a reload with one open: just show the day.
+    // Forward onto a closed sheet, or a reload with one open: just show the screen.
     history.replaceState(null, "", path);
   }
 
-  const today = todayIn(me.timezone);
-  const match = /^\/day\/(\d{4}-\d{2}-\d{2})$/.exec(path);
-  if (path !== "/" && !(match && isIsoDate(match[1]) && match[1] < today)) {
-    go("/", { replace: true });
+  // Addresses from before the tabs.
+  if (path === "/settings") return go("/goals", { replace: true });
+  const old = /^\/day\/([^/]+)$/.exec(path);
+  if (old) return go(`/diary/${old[1]}`, { replace: true });
+
+  if (path === "/") {
+    tabs.show("overview");
+    render(overviewView({ me, go }));
     return;
   }
-  render(todayView({ me, date: match ? match[1] : today, go, openConfirm }));
+  if (path === "/goals") {
+    tabs.show("goals");
+    render(goalsView(me, saved));
+    return;
+  }
+  const diary = /^\/diary(?:\/(.+))?$/.exec(path);
+  if (!diary) return go("/", { replace: true });
+  const today = todayIn(me.timezone);
+  const date = diary[1];
+  // Today (or a day that hasn't come yet) lives at /diary; a day that isn't a date goes home.
+  if (date !== undefined && !(isIsoDate(date) && date < today)) return go(isIsoDate(date) ? "/diary" : "/", { replace: true });
+  tabs.show("diary");
+  render(diaryView({ me, date: date ?? today, go, openConfirm }));
 }
 
 function showError(message: string) {

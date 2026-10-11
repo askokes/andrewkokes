@@ -29,10 +29,12 @@ const ICONS = {
   chevron: "M9 6l6 6-6 6",
   // Feather "mic" (MIT): capsule, cradle, stand.
   mic: "M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" + "M19 10v2a7 7 0 0 1-14 0v-2" + "M12 19v3" + "M8 22h8",
-  // Feather "settings" (MIT): the hub circle, then the toothed rim.
-  gear:
-    "M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" +
-    "M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z",
+  // Feather "home" (MIT): the house, then the door.
+  home: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" + "M9 22V12h6v10",
+  // Feather "book-open" (MIT): left page, right page.
+  book: "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" + "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z",
+  // Feather "target" (MIT): three rings.
+  target: "M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z" + "M18 12a6 6 0 1 1-12 0 6 6 0 0 1 12 0z" + "M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0z",
 } as const;
 
 /** A stroked 24x24 icon in the current text color. Decorative: label the button, not the icon. */

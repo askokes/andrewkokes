@@ -1,3 +1,4 @@
+/* Light only: Andrew prefers light mode for this app. */
 :root {
   --bg: #f6f7f4;
   --surface: #ffffff;
@@ -26,35 +27,7 @@
   --goal-line: #858d88;
   --chart-grid: #edefeb;
   --chart-cross: #858d88;
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #16181a;
-    --surface: #202326;
-    --text: #eef0ee;
-    --muted: #a3aba6;
-    --accent: #5cbf8f;
-    --accent-text: #0f1a14;
-    --border: #33383b;
-    --control-border: #6b726e;
-    --input-bg: #16181a;
-    --note-bg: #1f2a24;
-    --warn: #f0b45c;
-    --track: #2e3336;
-    --over: #a3967f;
-    --over-text: #cfc3ae;
-    --guess-bg: #2c2719;
-    --backdrop: rgba(0, 0, 0, 0.6);
-    --protein: #36a892;
-    --carbs: #d07a36;
-    --fat: #8b7ce4;
-    --weight: #e07fb2;
-    --goal-line: #9aa29d;
-    --chart-grid: #2b2f32;
-    --chart-cross: #9aa29d;
-  }
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -290,7 +263,6 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .daytitle h1.long { font-size: 1.35rem; }
 .daytitle p { font-size: 0.9rem; text-wrap: balance; }
 .back-today { margin-left: -12px; font-size: 0.95rem; }
-.icon-gear { width: 22px; height: 22px; stroke-width: 2; }
 .daynav { display: flex; gap: 4px; }
 
 .summary { display: flex; flex-direction: column; gap: 14px; }
@@ -511,7 +483,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .data-table thead th { color: var(--muted); font-weight: 600; border-top: 0; }
 .weigh-in-current { margin: 0 0 8px; font-size: 0.9rem; }
 
-/* Voice: a big round mic between the food box and Add */
+/* Voice: a round mic between the food box and Add */
 .mic {
   flex: none;
   width: 52px;
@@ -533,3 +505,58 @@ body:has(dialog[open]) { overflow: hidden; }
   50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent) 0%, transparent); }
 }
 @media (prefers-reduced-motion: reduce) { .mic.listening { animation: none; } }
+
+/* Page titles on Overview and Goals, sized like the Diary's day title. */
+.page-head h1 { margin: 0; font-size: 1.6rem; }
+.page-head p { font-size: 0.9rem; }
+.saved-msg { color: var(--accent); font-weight: 600; margin: 0; }
+.saved-msg:empty { display: none; }
+
+/* Diary: where the day stands, in one line and a bar */
+.compact-totals { display: flex; flex-direction: column; gap: 10px; }
+.compact-totals:focus { outline: none; }
+.compact-totals:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.compact-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.compact-cal { font-size: 1.5rem; }
+.compact-macros { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 0.9rem; }
+.compact-macros strong { color: var(--text); font-weight: 600; }
+
+/* Bottom tab bar: Overview, Diary, Goals */
+body.has-tabs .screen { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  padding: 6px 8px max(6px, env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+}
+.tabbar-inner { max-width: 32rem; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 56px;
+  padding-top: 4px;
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab-icon { display: grid; place-items: center; width: 60px; height: 32px; border-radius: 999px; transition: background 0.2s; }
+.tab .icon { width: 24px; height: 24px; }
+.tab[aria-current="page"] { color: var(--accent); }
+.tab[aria-current="page"] .tab-icon { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* On a phone the keyboard needs the room while typing. */
+@media (pointer: coarse) {
+  body:has(.screen input:focus, .screen select:focus) .tabbar { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .tab-icon { transition: none; } }
