@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#2f7d5b"/><circle cx="32" cy="34" r="16" fill="none" stroke="#fff" stroke-width="5"/><path d="M32 10v10" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c7a58"/><stop offset="1" stop-color="#1b4a37"/></linearGradient></defs>
+<rect width="512" height="512" rx="112" fill="url(#bg)"/>
+<path d="M284.6 108.8A150 150 0 0 1 397.8 304.8" stroke="#4fc9b0" stroke-width="46" stroke-linecap="round" fill="none"/><path d="M369.2 354.4A150 150 0 0 1 142.8 354.4" stroke="#f5a35a" stroke-width="46" stroke-linecap="round" fill="none"/><path d="M114.2 304.8A150 150 0 0 1 227.4 108.8" stroke="#9d8cf0" stroke-width="46" stroke-linecap="round" fill="none"/>
+<circle cx="256" cy="256" r="104" fill="#ffffff"/>
+<g transform="translate(256 264) scale(1.18)">
+  <path d="M0 58V-6" stroke="#2f7d5b" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M-4 6C-10 -34 -44 -52 -78 -46C-74 -12 -42 12 -4 6Z" fill="#3a9a70"/>
+  <path d="M4 -6C10 -52 46 -74 86 -66C82 -26 46 0 4 -6Z" fill="#2f7d5b"/>
+</g>
+</svg>

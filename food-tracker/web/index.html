@@ -7,7 +7,12 @@
     <meta name="theme-color" content="#f6f7f4" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/icon.svg" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <!-- iPhone home screen: iOS only takes a PNG here, and rounds the corners itself. -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Food Tracker" />
+    <!-- Behind Cloudflare Access, so the manifest fetch must carry the sign-in cookie. -->
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials" />
     <title>Food Tracker</title>
   </head>
   <body>

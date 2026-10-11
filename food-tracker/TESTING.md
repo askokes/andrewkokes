@@ -16,6 +16,8 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 8. Tap in the food box on Diary. While the keyboard is up, the tabs and mic hide so you have room to type.
 9. Add a food. The **Check and add** screen has no tabs; after **Add** you're back on Diary.
 
+10. Add it to your home screen: in Safari tap **Share**, then **Add to Home Screen**. The icon should be a green tile with a little sprout inside a mint, apricot and lavender ring. If you added it before, delete the old one first so the new icon shows.
+
 ### Tell Andrew
 
 - Is it obvious where to go to log food?
@@ -112,7 +114,7 @@ Use your phone. Try it once on cellular and once on Wi-Fi if you can.
 6. Close the browser tab completely, then open the link again. You should go straight in, no code this time.
 7. Tap **Sign out**. Open the link again. It should ask for your email again.
 8. Optional: in Safari, tap Share > **Add to Home Screen**. Open it from the icon. Same Hello page.
-9. Optional: switch your phone to dark mode. The page should turn dark and still be easy to read.
+9. Optional: switch your phone to dark mode. The app stays light and easy to read.
 
 ### Things that should NOT work
 
