@@ -10,6 +10,19 @@ the browser has no `SpeechRecognition` / `webkitSpeechRecognition`. From any tab
 and listens in the same tap. Words show in the food box as they're heard, and the final transcript
 goes through the same `POST /api/parse` and confirm screen as typing.
 
+Restaurants (`src/food/menu.ts`, data in `src/food/menus/*.json`): McDonald's, Chick-fil-A, Subway, Jimmy
+John's, Jersey Mike's, Taco Bell, Chipotle, Panera and Panda Express, about 425 items, from each chain's own
+published nutrition (every item cites its source URL; retrieved October 2026). Each size is a food with a
+made-up id from 900,000,000 up, so units, saved entries and the edit sheet treat it like a USDA food, and a
+size keeps the chain's own numbers. A food matches a menu item when the sentence names the chain ("from
+McDonald's", "Panda Express orange chicken", which also covers the sentence's other foods) or says a name
+only one chain uses ("a Big Mac", "a Crunchwrap"); anything else goes to USDA as before. Sizes ("large",
+"footlong", "bread bowl", "#13 giant") and counts ("20 McNuggets", "7 nuggets") are read from the phrase.
+McDonald's, Panera and Jersey Mike's publish no weights, so their items are measured in servings only and
+show no grams. Chipotle publishes ingredients only; its burritos, bowls, salads and tacos are one standard
+build per protein, summed from those (the build is in each item's note). To refresh a menu, research it
+into the same JSON shape and run `node scripts/import-menus.mjs <folder>`: ids are kept for good.
+
 Baseline: Goals takes an optional "calories you burn a day" (`goals.baseline_calories`, migration 0007),
 kept with the goals so it has the same history. The chart draws it as a dashed line next to the goal,
 the Week / Month sentence compares the average to it, and Today says how far over or under it the day
@@ -73,7 +86,8 @@ At Andrew's request (October 2026) the screens in section 8 are arranged as thre
 **Overview** (`/`: today's totals or the Week / Month chart, and the weigh-in), **Diary**
 (`/diary`, `/diary/YYYY-MM-DD`: the day, the food box and mic, the meals) and **Goals** (`/goals`:
 goals, weight tracking, profile, sign out; Phase 6 adds export and delete here). The old `/settings`
-and `/day/...` addresses redirect. Section 8 also asks for light and dark mode; Andrew prefers light
+and `/day/...` addresses redirect. Section 6 names USDA as the food source; at Andrew's request restaurant items come from the chains'
+own published nutrition instead (see Restaurants above). Section 8 also asks for light and dark mode; Andrew prefers light
 only, so the dark theme is gone. SPEC.md itself is unchanged.
 
 Every write (POST, PUT, PATCH) must send `Content-Type: application/json`, and writes a browser

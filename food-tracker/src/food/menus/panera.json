@@ -1,0 +1,1561 @@
+{
+  "chain": "Panera Bread",
+  "chainSays": [
+    "panera",
+    "panera bread",
+    "paneras",
+    "panera's"
+  ],
+  "sources": [
+    "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+    "https://www.panerabread.com/en-us/menu/nutritious-eating/allergen-and-nutrition-information.html",
+    "https://www-api.panerabread.com/www-api/public/menu/item/price/nutrition"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900800080,
+  "items": [
+    {
+      "name": "Broccoli Cheddar Soup",
+      "says": [
+        "broccoli cheddar soup",
+        "broccoli cheddar",
+        "broccoli cheese soup",
+        "broccoli and cheese soup",
+        "broccoli cheddar bread bowl",
+        "broccoli cheddar soup in a bread bowl"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900800001,
+          "size": "cup",
+          "label": "cup (1 cup)",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 8,
+          "carbsG": 17,
+          "fatG": 20,
+          "default": false
+        },
+        {
+          "id": 900800002,
+          "size": "bowl",
+          "label": "bowl (1 1/2 cups)",
+          "grams": null,
+          "calories": 420,
+          "proteinG": 12,
+          "carbsG": 25,
+          "fatG": 31,
+          "default": true
+        },
+        {
+          "id": 900800003,
+          "size": "bread bowl",
+          "label": "bread bowl (soup in sourdough bread bowl)",
+          "grams": null,
+          "calories": 930,
+          "proteinG": 29,
+          "carbsG": 152,
+          "fatG": 23,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Panera publishes serving volume (cup = 1 cup, bowl = 1 1/2 cups), not weight, so grams is null."
+    },
+    {
+      "name": "Homestyle Chicken Noodle Soup",
+      "says": [
+        "homestyle chicken noodle soup",
+        "chicken noodle soup",
+        "chicken noodle",
+        "chicken soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900800004,
+          "size": "cup",
+          "label": "cup",
+          "grams": null,
+          "calories": 120,
+          "proteinG": 10,
+          "carbsG": 14,
+          "fatG": 3,
+          "default": false
+        },
+        {
+          "id": 900800005,
+          "size": "bowl",
+          "label": "bowl",
+          "grams": null,
+          "calories": 180,
+          "proteinG": 14,
+          "carbsG": 21,
+          "fatG": 4.5,
+          "default": true
+        },
+        {
+          "id": 900800006,
+          "size": "bread bowl",
+          "label": "bread bowl (soup in sourdough bread bowl)",
+          "grams": null,
+          "calories": 770,
+          "proteinG": 30,
+          "carbsG": 150,
+          "fatG": 5,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Panera lists the serving only as '1 cup' / '1 bowl' for this soup; no weight published."
+    },
+    {
+      "name": "Creamy Tomato Soup",
+      "says": [
+        "creamy tomato soup",
+        "tomato soup",
+        "creamy tomato",
+        "vegetarian creamy tomato soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900800007,
+          "size": "cup",
+          "label": "cup (1 cup)",
+          "grams": null,
+          "calories": 240,
+          "proteinG": 3,
+          "carbsG": 21,
+          "fatG": 16,
+          "default": false
+        },
+        {
+          "id": 900800008,
+          "size": "bowl",
+          "label": "bowl (1 1/2 cups)",
+          "grams": null,
+          "calories": 340,
+          "proteinG": 4,
+          "carbsG": 30,
+          "fatG": 23,
+          "default": true
+        },
+        {
+          "id": 900800009,
+          "size": "bread bowl",
+          "label": "bread bowl (soup in sourdough bread bowl)",
+          "grams": null,
+          "calories": 880,
+          "proteinG": 24,
+          "carbsG": 157,
+          "fatG": 18,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Nutrition guide name: 'Vegetarian Creamy Tomato Soup with Croissant Croutons' (values include croutons). Panera publishes serving volume (cup = 1 cup, bowl = 1 1/2 cups), not weight, so grams is null."
+    },
+    {
+      "name": "Bistro French Onion Soup",
+      "says": [
+        "bistro french onion soup",
+        "french onion soup",
+        "french onion",
+        "onion soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900800010,
+          "size": "cup",
+          "label": "cup (1 cup)",
+          "grams": null,
+          "calories": 200,
+          "proteinG": 6,
+          "carbsG": 22,
+          "fatG": 10,
+          "default": false
+        },
+        {
+          "id": 900800011,
+          "size": "bowl",
+          "label": "bowl (1 1/2 cups)",
+          "grams": null,
+          "calories": 300,
+          "proteinG": 10,
+          "carbsG": 33,
+          "fatG": 14,
+          "default": true
+        },
+        {
+          "id": 900800012,
+          "size": "bread bowl",
+          "label": "bread bowl (soup in sourdough bread bowl)",
+          "grams": null,
+          "calories": 850,
+          "proteinG": 27,
+          "carbsG": 158,
+          "fatG": 12,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Panera publishes serving volume (cup = 1 cup, bowl = 1 1/2 cups), not weight, so grams is null."
+    },
+    {
+      "name": "Cream of Chicken & Wild Rice Soup",
+      "says": [
+        "cream of chicken and wild rice soup",
+        "chicken and wild rice soup",
+        "chicken wild rice soup",
+        "chicken & wild rice",
+        "wild rice soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900800013,
+          "size": "cup",
+          "label": "cup (1 cup)",
+          "grams": null,
+          "calories": 200,
+          "proteinG": 6,
+          "carbsG": 19,
+          "fatG": 11,
+          "default": false
+        },
+        {
+          "id": 900800014,
+          "size": "bowl",
+          "label": "bowl (1 1/2 cups)",
+          "grams": null,
+          "calories": 300,
+          "proteinG": 9,
+          "carbsG": 29,
+          "fatG": 16,
+          "default": true
+        },
+        {
+          "id": 900800015,
+          "size": "bread bowl",
+          "label": "bread bowl (soup in sourdough bread bowl)",
+          "grams": null,
+          "calories": 850,
+          "proteinG": 27,
+          "carbsG": 155,
+          "fatG": 13,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Panera publishes serving volume (cup = 1 cup, bowl = 1 1/2 cups), not weight, so grams is null."
+    },
+    {
+      "name": "Rustic Baked Potato Soup",
+      "says": [
+        "rustic baked potato soup",
+        "baked potato soup",
+        "potato soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900800016,
+          "size": "cup",
+          "label": "cup (1 cup)",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 9,
+          "carbsG": 25,
+          "fatG": 16,
+          "default": false
+        },
+        {
+          "id": 900800017,
+          "size": "bowl",
+          "label": "bowl (1 1/2 cups)",
+          "grams": null,
+          "calories": 430,
+          "proteinG": 14,
+          "carbsG": 38,
+          "fatG": 26,
+          "default": true
+        },
+        {
+          "id": 900800018,
+          "size": "bread bowl",
+          "label": "bread bowl (soup in sourdough bread bowl)",
+          "grams": null,
+          "calories": 920,
+          "proteinG": 29,
+          "carbsG": 161,
+          "fatG": 19,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Panera publishes serving volume (cup = 1 cup, bowl = 1 1/2 cups), not weight, so grams is null."
+    },
+    {
+      "name": "Mac & Cheese",
+      "says": [
+        "mac and cheese",
+        "mac & cheese",
+        "mac n cheese",
+        "macaroni and cheese",
+        "kids mac and cheese",
+        "mac and cheese bread bowl"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900800019,
+          "size": "cup",
+          "label": "cup (about 1 cup)",
+          "grams": null,
+          "calories": 490,
+          "proteinG": 16,
+          "carbsG": 34,
+          "fatG": 32,
+          "default": false
+        },
+        {
+          "id": 900800020,
+          "size": "bowl",
+          "label": "bowl (about 2 cups)",
+          "grams": null,
+          "calories": 980,
+          "proteinG": 32,
+          "carbsG": 68,
+          "fatG": 64,
+          "default": true
+        },
+        {
+          "id": 900800021,
+          "size": "bread bowl",
+          "label": "bread bowl (mac in sourdough bread bowl)",
+          "grams": null,
+          "calories": 1140,
+          "proteinG": 37,
+          "carbsG": 170,
+          "fatG": 34,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Kids Mac & Cheese is the cup size. Panera publishes volume only, not weight."
+    },
+    {
+      "name": "Bacon Mac & Cheese",
+      "says": [
+        "bacon mac and cheese",
+        "bacon mac & cheese",
+        "bacon mac",
+        "mac and cheese with bacon"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900800022,
+          "size": "cup",
+          "label": "cup (about 1 cup)",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 18,
+          "carbsG": 34,
+          "fatG": 35,
+          "default": false
+        },
+        {
+          "id": 900800023,
+          "size": "bowl",
+          "label": "bowl (about 2 cups)",
+          "grams": null,
+          "calories": 1050,
+          "proteinG": 36,
+          "carbsG": 68,
+          "fatG": 71,
+          "default": true
+        },
+        {
+          "id": 900800024,
+          "size": "bread bowl",
+          "label": "bread bowl (mac in sourdough bread bowl)",
+          "grams": null,
+          "calories": 1170,
+          "proteinG": 39,
+          "carbsG": 170,
+          "fatG": 38,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Panera publishes volume only, not weight."
+    },
+    {
+      "name": "Bacon Turkey Bravo",
+      "says": [
+        "bacon turkey bravo",
+        "turkey bravo",
+        "bravo sandwich",
+        "bacon turkey bravo sandwich"
+      ],
+      "signature": [
+        "bacon turkey bravo",
+        "turkey bravo"
+      ],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800025,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 860,
+          "proteinG": 47,
+          "carbsG": 80,
+          "fatG": 39,
+          "default": true
+        },
+        {
+          "id": 900800026,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 430,
+          "proteinG": 24,
+          "carbsG": 40,
+          "fatG": 20,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Tomato Basil bread. Panera's live online menu shows the whole at 850 cal and the half at 19 g fat (vs 860 cal / 20 g in the PDF guide); PDF values used."
+    },
+    {
+      "name": "Toasted Frontega Chicken",
+      "says": [
+        "toasted frontega chicken",
+        "frontega chicken",
+        "frontega chicken panini",
+        "frontega",
+        "frontega chicken sandwich"
+      ],
+      "signature": [
+        "toasted frontega chicken",
+        "frontega chicken",
+        "frontega chicken panini",
+        "frontega"
+      ],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800027,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 860,
+          "proteinG": 40,
+          "carbsG": 87,
+          "fatG": 39,
+          "default": true
+        },
+        {
+          "id": 900800028,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 430,
+          "proteinG": 20,
+          "carbsG": 43,
+          "fatG": 19,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Black Pepper Focaccia."
+    },
+    {
+      "name": "Chipotle Chicken Avo Melt",
+      "says": [
+        "chipotle chicken avo melt",
+        "chipotle chicken avocado melt",
+        "chicken avo melt",
+        "chipotle chicken melt"
+      ],
+      "signature": [
+        "chipotle chicken avo melt"
+      ],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800029,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 1000,
+          "proteinG": 43,
+          "carbsG": 90,
+          "fatG": 52,
+          "default": true
+        },
+        {
+          "id": 900800030,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 500,
+          "proteinG": 21,
+          "carbsG": 45,
+          "fatG": 26,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Black Pepper Focaccia round."
+    },
+    {
+      "name": "Turkey & Cheddar",
+      "says": [
+        "turkey and cheddar",
+        "turkey & cheddar",
+        "turkey cheddar sandwich",
+        "turkey and cheddar sandwich"
+      ],
+      "signature": [],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800031,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 840,
+          "proteinG": 40,
+          "carbsG": 63,
+          "fatG": 47,
+          "default": true
+        },
+        {
+          "id": 900800032,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 420,
+          "proteinG": 20,
+          "carbsG": 31,
+          "fatG": 24,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Country Rustic Sourdough. Panera's live online menu shows 830 cal / 62 g carbs whole and 410 cal / 23 g fat half (vs 840/63 and 420/24 in the PDF guide); PDF values used."
+    },
+    {
+      "name": "Tuna Salad Sandwich",
+      "says": [
+        "tuna salad sandwich",
+        "tuna sandwich",
+        "tuna salad on sourdough"
+      ],
+      "signature": [],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800033,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 590,
+          "proteinG": 24,
+          "carbsG": 60,
+          "fatG": 29,
+          "default": true
+        },
+        {
+          "id": 900800034,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 300,
+          "proteinG": 12,
+          "carbsG": 30,
+          "fatG": 14,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Country Rustic Sourdough."
+    },
+    {
+      "name": "Mediterranean Veggie",
+      "says": [
+        "mediterranean veggie",
+        "mediterranean veggie sandwich",
+        "veggie sandwich",
+        "mediterranean sandwich"
+      ],
+      "signature": [],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800035,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 520,
+          "proteinG": 18,
+          "carbsG": 83,
+          "fatG": 14,
+          "default": true
+        },
+        {
+          "id": 900800036,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 260,
+          "proteinG": 9,
+          "carbsG": 41,
+          "fatG": 7,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Tomato Basil bread."
+    },
+    {
+      "name": "Grilled Cheese",
+      "says": [
+        "grilled cheese",
+        "grilled cheese sandwich",
+        "kids grilled cheese"
+      ],
+      "signature": [],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800037,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 810,
+          "proteinG": 32,
+          "carbsG": 74,
+          "fatG": 42,
+          "default": true
+        },
+        {
+          "id": 900800038,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 400,
+          "proteinG": 16,
+          "carbsG": 37,
+          "fatG": 21,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Classic White Loaf. Kids Grilled Cheese is the same whole sandwich (810 cal) per the guide."
+    },
+    {
+      "name": "Chicken Bacon Rancher",
+      "says": [
+        "chicken bacon rancher",
+        "chicken bacon ranch sandwich",
+        "chicken bacon rancher sandwich"
+      ],
+      "signature": [
+        "chicken bacon rancher"
+      ],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900800039,
+          "size": "whole",
+          "label": "whole sandwich",
+          "grams": null,
+          "calories": 1010,
+          "proteinG": 52,
+          "carbsG": 87,
+          "fatG": 51,
+          "default": true
+        },
+        {
+          "id": 900800040,
+          "size": "half",
+          "label": "half sandwich",
+          "grams": null,
+          "calories": 510,
+          "proteinG": 26,
+          "carbsG": 44,
+          "fatG": 26,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Black Pepper Focaccia."
+    },
+    {
+      "name": "Caesar Salad",
+      "says": [
+        "caesar salad",
+        "caesar"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900800041,
+          "size": "whole",
+          "label": "whole salad",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 14,
+          "carbsG": 22,
+          "fatG": 44,
+          "default": true
+        },
+        {
+          "id": 900800042,
+          "size": "half",
+          "label": "half salad",
+          "grams": null,
+          "calories": 270,
+          "proteinG": 7,
+          "carbsG": 11,
+          "fatG": 22,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Includes dressing as served."
+    },
+    {
+      "name": "Caesar Salad with Chicken",
+      "says": [
+        "chicken caesar salad",
+        "caesar salad with chicken",
+        "chicken caesar"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900800043,
+          "size": "whole",
+          "label": "whole salad",
+          "grams": null,
+          "calories": 670,
+          "proteinG": 35,
+          "carbsG": 27,
+          "fatG": 47,
+          "default": true
+        },
+        {
+          "id": 900800044,
+          "size": "half",
+          "label": "half salad",
+          "grams": null,
+          "calories": 340,
+          "proteinG": 18,
+          "carbsG": 14,
+          "fatG": 23,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Includes dressing as served."
+    },
+    {
+      "name": "Fuji Apple Chicken Salad",
+      "says": [
+        "fuji apple chicken salad",
+        "fuji apple salad",
+        "apple chicken salad",
+        "fuji salad"
+      ],
+      "signature": [
+        "fuji apple chicken salad"
+      ],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900800045,
+          "size": "whole",
+          "label": "whole salad",
+          "grams": null,
+          "calories": 710,
+          "proteinG": 28,
+          "carbsG": 49,
+          "fatG": 44,
+          "default": true
+        },
+        {
+          "id": 900800046,
+          "size": "half",
+          "label": "half salad",
+          "grams": null,
+          "calories": 350,
+          "proteinG": 14,
+          "carbsG": 24,
+          "fatG": 22,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "With pecans, dressing included. Panera's live online menu shows the whole at 700 cal / 45 g fat (vs 710 / 44 in the PDF guide); PDF values used."
+    },
+    {
+      "name": "Greek Salad",
+      "says": [
+        "greek salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900800047,
+          "size": "whole",
+          "label": "whole salad",
+          "grams": null,
+          "calories": 630,
+          "proteinG": 8,
+          "carbsG": 17,
+          "fatG": 59,
+          "default": true
+        },
+        {
+          "id": 900800048,
+          "size": "half",
+          "label": "half salad",
+          "grams": null,
+          "calories": 310,
+          "proteinG": 4,
+          "carbsG": 9,
+          "fatG": 30,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Without chicken; includes dressing as served."
+    },
+    {
+      "name": "Green Goddess Cobb Salad with Chicken",
+      "says": [
+        "green goddess cobb salad",
+        "green goddess chicken cobb salad",
+        "green goddess cobb",
+        "cobb salad",
+        "green goddess salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900800049,
+          "size": "whole",
+          "label": "whole salad",
+          "grams": null,
+          "calories": 580,
+          "proteinG": 40,
+          "carbsG": 30,
+          "fatG": 34,
+          "default": true
+        },
+        {
+          "id": 900800050,
+          "size": "half",
+          "label": "half salad",
+          "grams": null,
+          "calories": 290,
+          "proteinG": 20,
+          "carbsG": 15,
+          "fatG": 17,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Panera's online menu calls this 'Green Goddess Chicken Cobb Salad'."
+    },
+    {
+      "name": "Asian Sesame Chicken Salad",
+      "says": [
+        "asian sesame chicken salad",
+        "asian sesame salad",
+        "asian chicken salad",
+        "sesame chicken salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900800051,
+          "size": "whole",
+          "label": "whole salad",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 29,
+          "carbsG": 35,
+          "fatG": 31,
+          "default": true
+        },
+        {
+          "id": 900800052,
+          "size": "half",
+          "label": "half salad",
+          "grams": null,
+          "calories": 260,
+          "proteinG": 15,
+          "carbsG": 17,
+          "fatG": 15,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "With almonds, dressing included."
+    },
+    {
+      "name": "Southwest Chicken Ranch Salad",
+      "says": [
+        "southwest chicken ranch salad",
+        "southwest chicken salad",
+        "southwest salad",
+        "chicken ranch salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900800053,
+          "size": "whole",
+          "label": "whole salad",
+          "grams": null,
+          "calories": 810,
+          "proteinG": 30,
+          "carbsG": 40,
+          "fatG": 59,
+          "default": true
+        },
+        {
+          "id": 900800054,
+          "size": "half",
+          "label": "half salad",
+          "grams": null,
+          "calories": 400,
+          "proteinG": 15,
+          "carbsG": 20,
+          "fatG": 30,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Includes dressing as served."
+    },
+    {
+      "name": "Plain Bagel",
+      "says": [
+        "plain bagel",
+        "bagel"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900800055,
+          "size": "bagel",
+          "label": "1 bagel",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 7,
+          "carbsG": 59,
+          "fatG": 1,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Bagel only; spread not included."
+    },
+    {
+      "name": "Everything Bagel",
+      "says": [
+        "everything bagel"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900800056,
+          "size": "bagel",
+          "label": "1 bagel",
+          "grams": null,
+          "calories": 300,
+          "proteinG": 8,
+          "carbsG": 61,
+          "fatG": 2.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Bagel only; spread not included."
+    },
+    {
+      "name": "Cinnamon Crunch Bagel",
+      "says": [
+        "cinnamon crunch bagel",
+        "cinnamon crunch",
+        "cinnamon bagel"
+      ],
+      "signature": [
+        "cinnamon crunch bagel"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900800057,
+          "size": "bagel",
+          "label": "1 bagel",
+          "grams": null,
+          "calories": 430,
+          "proteinG": 13,
+          "carbsG": 78,
+          "fatG": 7,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Bagel only; spread not included."
+    },
+    {
+      "name": "Plain Cream Cheese Spread",
+      "says": [
+        "cream cheese",
+        "plain cream cheese",
+        "cream cheese spread"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900800058,
+          "size": "individual",
+          "label": "1 individual container (1.5 oz)",
+          "grams": 43,
+          "calories": 110,
+          "proteinG": 3,
+          "carbsG": 3,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Grams converted from the published 1.5 oz container (1.5 x 28.35 = 42.5 g)."
+    },
+    {
+      "name": "Bacon, Egg & Cheese on Ciabatta",
+      "says": [
+        "bacon egg and cheese",
+        "bacon egg & cheese",
+        "bacon egg and cheese sandwich",
+        "bacon egg and cheese on ciabatta"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900800059,
+          "size": "sandwich",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 470,
+          "proteinG": 23,
+          "carbsG": 51,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Artisan Ciabatta."
+    },
+    {
+      "name": "Sausage, Egg & Cheese on Ciabatta",
+      "says": [
+        "sausage egg and cheese",
+        "sausage egg & cheese",
+        "sausage egg and cheese sandwich",
+        "sausage egg and cheese on ciabatta"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900800060,
+          "size": "sandwich",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 610,
+          "proteinG": 28,
+          "carbsG": 51,
+          "fatG": 33,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "On Artisan Ciabatta."
+    },
+    {
+      "name": "Steel Cut Oatmeal with Strawberries & Pecans",
+      "says": [
+        "steel cut oatmeal",
+        "oatmeal",
+        "oatmeal with strawberries",
+        "oatmeal with strawberries and pecans"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900800061,
+          "size": "bowl",
+          "label": "1 bowl",
+          "grams": null,
+          "calories": 330,
+          "proteinG": 8,
+          "carbsG": 51,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Includes cinnamon crunch topping. Panera's live online menu shows 14 g fat (vs 13 g in the PDF guide); PDF value used."
+    },
+    {
+      "name": "Chocolate Chipper Cookie",
+      "says": [
+        "chocolate chipper cookie",
+        "chocolate chip cookie",
+        "chocolate chipper"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900800062,
+          "size": "cookie",
+          "label": "1 cookie",
+          "grams": null,
+          "calories": 390,
+          "proteinG": 4,
+          "carbsG": 52,
+          "fatG": 18,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf"
+    },
+    {
+      "name": "Kitchen Sink Cookie",
+      "says": [
+        "kitchen sink cookie",
+        "kitchen sink"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900800063,
+          "size": "cookie",
+          "label": "1 cookie",
+          "grams": null,
+          "calories": 810,
+          "proteinG": 7,
+          "carbsG": 100,
+          "fatG": 42,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf"
+    },
+    {
+      "name": "Cinnamon Roll",
+      "says": [
+        "cinnamon roll"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900800064,
+          "size": "roll",
+          "label": "1 roll",
+          "grams": null,
+          "calories": 580,
+          "proteinG": 7,
+          "carbsG": 97,
+          "fatG": 18,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf"
+    },
+    {
+      "name": "Blueberry Muffin",
+      "says": [
+        "blueberry muffin",
+        "muffin"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900800065,
+          "size": "muffin",
+          "label": "1 muffin",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 7,
+          "carbsG": 75,
+          "fatG": 22,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf"
+    },
+    {
+      "name": "Chocolate Croissant",
+      "says": [
+        "chocolate croissant",
+        "pain au chocolat"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900800066,
+          "size": "croissant",
+          "label": "1 croissant",
+          "grams": null,
+          "calories": 410,
+          "proteinG": 7,
+          "carbsG": 51,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf"
+    },
+    {
+      "name": "Agave Lemonade",
+      "says": [
+        "agave lemonade",
+        "lemonade"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900800067,
+          "size": "20 fl oz",
+          "label": "20 fl oz cup",
+          "grams": null,
+          "calories": 210,
+          "proteinG": 0,
+          "carbsG": 52,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900800068,
+          "size": "30 fl oz",
+          "label": "30 fl oz cup",
+          "grams": null,
+          "calories": 320,
+          "proteinG": 0,
+          "carbsG": 78,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Dine-in cup values. The guide lists lower values for drive-thru cups with ice (130 cal for 20 fl oz, 190 cal for 30 fl oz)."
+    },
+    {
+      "name": "Caffe Latte",
+      "says": [
+        "caffe latte",
+        "latte",
+        "hot latte",
+        "cafe latte"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900800069,
+          "size": "16 fl oz",
+          "label": "16 fl oz",
+          "grams": null,
+          "calories": 130,
+          "proteinG": 8,
+          "carbsG": 12,
+          "fatG": 5,
+          "default": true
+        },
+        {
+          "id": 900800070,
+          "size": "20 fl oz",
+          "label": "20 fl oz",
+          "grams": null,
+          "calories": 160,
+          "proteinG": 10,
+          "carbsG": 15,
+          "fatG": 6,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf"
+    },
+    {
+      "name": "Cafe Blend Dark Roast Coffee",
+      "says": [
+        "coffee",
+        "dark roast coffee",
+        "black coffee",
+        "hot coffee",
+        "dark roast"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900800071,
+          "size": "16 fl oz",
+          "label": "16 fl oz",
+          "grams": null,
+          "calories": 5,
+          "proteinG": 1,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900800072,
+          "size": "20 fl oz",
+          "label": "20 fl oz",
+          "grams": null,
+          "calories": 5,
+          "proteinG": 1,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Black coffee. Light Roast has identical published values. Panera's live online menu shows 0 cal (PDF guide: 5 cal); macro check not meaningful at 5 cal."
+    },
+    {
+      "name": "Signature Hot Chocolate",
+      "says": [
+        "signature hot chocolate",
+        "hot chocolate",
+        "hot cocoa"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900800073,
+          "size": "16 fl oz",
+          "label": "16 fl oz",
+          "grams": null,
+          "calories": 340,
+          "proteinG": 10,
+          "carbsG": 53,
+          "fatG": 10,
+          "default": true
+        },
+        {
+          "id": 900800074,
+          "size": "20 fl oz",
+          "label": "20 fl oz",
+          "grams": null,
+          "calories": 420,
+          "proteinG": 13,
+          "carbsG": 68,
+          "fatG": 11,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf"
+    },
+    {
+      "name": "Pumpkin Spice Latte",
+      "says": [
+        "pumpkin spice latte",
+        "psl",
+        "pumpkin latte"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900800075,
+          "size": "16 fl oz",
+          "label": "16 fl oz",
+          "grams": null,
+          "calories": 340,
+          "proteinG": 10,
+          "carbsG": 55,
+          "fatG": 9,
+          "default": true
+        },
+        {
+          "id": 900800076,
+          "size": "20 fl oz",
+          "label": "20 fl oz",
+          "grams": null,
+          "calories": 420,
+          "proteinG": 12,
+          "carbsG": 69,
+          "fatG": 10,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Seasonal (fall)."
+    },
+    {
+      "name": "Strawberry Banana Smoothie",
+      "says": [
+        "strawberry banana smoothie",
+        "strawberry banana smoothie with greek yogurt"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900800077,
+          "size": "16 fl oz",
+          "label": "16 fl oz",
+          "grams": null,
+          "calories": 250,
+          "proteinG": 7,
+          "carbsG": 51,
+          "fatG": 2.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "Made with Greek yogurt."
+    },
+    {
+      "name": "French Baguette (Side)",
+      "says": [
+        "baguette",
+        "french baguette",
+        "side of bread",
+        "bread side",
+        "baguette side"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900800078,
+          "size": "side",
+          "label": "side portion (3 1/2 inch slice)",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 6,
+          "carbsG": 41,
+          "fatG": 0.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.panerabread.com/content/dam/panerabread/documents/c8-26-nutrition-guide.pdf",
+      "note": "The default side with soups, salads and sandwiches."
+    },
+    {
+      "name": "Kettle Cooked Potato Chips",
+      "says": [
+        "chips",
+        "potato chips",
+        "kettle chips",
+        "kettle cooked chips",
+        "bag of chips"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900800079,
+          "size": "bag",
+          "label": "1 bag",
+          "grams": null,
+          "calories": 150,
+          "proteinG": 2,
+          "carbsG": 17,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www-api.panerabread.com/www-api/public/menu/item/price/nutrition (itemId 49, POST, cafeId 500000)",
+      "note": "Values from Panera's own online-menu nutrition API; they match the PDF guide's calories/fat/carbs (the PDF text row is misaligned, so protein was taken from the API)."
+    }
+  ]
+}

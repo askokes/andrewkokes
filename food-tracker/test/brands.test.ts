@@ -50,7 +50,8 @@ const PHRASES: [string, Want][] = [
   ["a celsius", { name: /SPARKLING ENERGY DRINK/, kcal: [0, 20], amount: { unit: "serving", grams: 355 } }],
   ["a la croix", { name: /^LA CROIX, SPARKLING WATER/, kcal: [0, 1] }],
   ["a starbucks refresher", { name: /^STARBUCKS REFRESHERS/, kcal: [50, 100] }],
-  ["a chick fil a sandwich", { fdcId: 170790, kcal: [440, 490] }],
+  // Chick-fil-A's own published Chicken Sandwich (src/food/menus), ahead of USDA's.
+  ["a chick fil a sandwich", { fdcId: 900200001, kcal: [410, 430] }],
   ["takis", { name: /TAKIS.*TORTILLA CHIPS/ }],
   ["a heineken", { fdcId: 2127272, kcal: [130, 150] }],
   ["a hard seltzer", { name: /HARD SELTZER/, kcal: [90, 110] }],

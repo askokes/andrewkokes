@@ -1,0 +1,1976 @@
+{
+  "chain": "Chick-fil-A",
+  "chainSays": [
+    "chick-fil-a",
+    "chick fil a",
+    "chickfila",
+    "chick-fil-a's",
+    "chik fil a",
+    "chic fil a",
+    "chick fila",
+    "cfa",
+    "chikfila"
+  ],
+  "sources": [
+    "https://www.chick-fil-a.com/nutrition-allergens"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900200092,
+  "items": [
+    {
+      "name": "Chicken Sandwich",
+      "says": [
+        "chicken sandwich",
+        "original chicken sandwich",
+        "original sandwich",
+        "classic chicken sandwich",
+        "fried chicken sandwich",
+        "sandwich",
+        "chick fil a sandwich"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200001,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": 183,
+          "calories": 420,
+          "proteinG": 29,
+          "carbsG": 41,
+          "fatG": 16,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Chicken Sandwich'. Standard build as published."
+    },
+    {
+      "name": "Spicy Chicken Sandwich",
+      "says": [
+        "spicy chicken sandwich",
+        "spicy sandwich",
+        "spicy original"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200002,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": 188,
+          "calories": 450,
+          "proteinG": 28,
+          "carbsG": 44,
+          "fatG": 18,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Deluxe Sandwich",
+      "says": [
+        "deluxe sandwich",
+        "deluxe chicken sandwich",
+        "chicken deluxe",
+        "deluxe"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200003,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": 247,
+          "calories": 490,
+          "proteinG": 32,
+          "carbsG": 43,
+          "fatG": 21,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Deluxe Sandwich'. Standard build as published."
+    },
+    {
+      "name": "Spicy Deluxe Sandwich",
+      "says": [
+        "spicy deluxe sandwich",
+        "spicy deluxe",
+        "spicy chicken deluxe"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200004,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": 259,
+          "calories": 540,
+          "proteinG": 34,
+          "carbsG": 46,
+          "fatG": 24,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Standard build as published."
+    },
+    {
+      "name": "Grilled Chicken Sandwich",
+      "says": [
+        "grilled chicken sandwich",
+        "grilled sandwich"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200005,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": 206,
+          "calories": 390,
+          "proteinG": 28,
+          "carbsG": 45,
+          "fatG": 11,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Grilled Chicken Club Sandwich",
+      "says": [
+        "grilled chicken club sandwich",
+        "grilled chicken club",
+        "grilled club"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200006,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": 237,
+          "calories": 520,
+          "proteinG": 37,
+          "carbsG": 45,
+          "fatG": 22,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Grilled Chicken Club Sandwich'."
+    },
+    {
+      "name": "Nuggets",
+      "says": [
+        "nuggets",
+        "chicken nuggets",
+        "nugs",
+        "5 count nuggets",
+        "8 count nuggets",
+        "12 count nuggets",
+        "30 count nuggets",
+        "8 piece nuggets",
+        "12 piece nuggets",
+        "kids nuggets"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200007,
+          "size": "5-count",
+          "label": "5 count (kid's meal)",
+          "grams": 71,
+          "calories": 160,
+          "proteinG": 17,
+          "carbsG": 7,
+          "fatG": 7,
+          "default": false
+        },
+        {
+          "id": 900200008,
+          "size": "8-count",
+          "label": "8 count",
+          "grams": 113,
+          "calories": 250,
+          "proteinG": 27,
+          "carbsG": 11,
+          "fatG": 11,
+          "default": true
+        },
+        {
+          "id": 900200009,
+          "size": "12-count",
+          "label": "12 count",
+          "grams": 170,
+          "calories": 380,
+          "proteinG": 40,
+          "carbsG": 16,
+          "fatG": 17,
+          "default": false
+        },
+        {
+          "id": 900200010,
+          "size": "30-count",
+          "label": "30 count",
+          "grams": 425,
+          "calories": 950,
+          "proteinG": 100,
+          "carbsG": 41,
+          "fatG": 43,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Nuggets'. Dipping sauce not included. 5-count is the kid's meal entree (entree only, per Chick-fil-A)."
+    },
+    {
+      "name": "Grilled Nuggets",
+      "says": [
+        "grilled nuggets",
+        "grilled chicken nuggets",
+        "5 count grilled nuggets",
+        "8 count grilled nuggets",
+        "12 count grilled nuggets"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200011,
+          "size": "5-count",
+          "label": "5 count (kid's meal)",
+          "grams": 59,
+          "calories": 80,
+          "proteinG": 16,
+          "carbsG": 1,
+          "fatG": 2,
+          "default": false
+        },
+        {
+          "id": 900200012,
+          "size": "8-count",
+          "label": "8 count",
+          "grams": 95,
+          "calories": 130,
+          "proteinG": 25,
+          "carbsG": 1,
+          "fatG": 3,
+          "default": true
+        },
+        {
+          "id": 900200013,
+          "size": "12-count",
+          "label": "12 count",
+          "grams": 142,
+          "calories": 200,
+          "proteinG": 38,
+          "carbsG": 2,
+          "fatG": 4.5,
+          "default": false
+        },
+        {
+          "id": 900200014,
+          "size": "30-count",
+          "label": "30 count",
+          "grams": 369,
+          "calories": 510,
+          "proteinG": 98,
+          "carbsG": 4,
+          "fatG": 11,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Dipping sauce not included. 5-count is the kid's meal entree (entree only, per Chick-fil-A)."
+    },
+    {
+      "name": "Chick-n-Strips",
+      "says": [
+        "chick-n-strips",
+        "chick n strips",
+        "chicken strips",
+        "strips",
+        "chicken tenders",
+        "tenders",
+        "3 count strips",
+        "4 count strips"
+      ],
+      "signature": [
+        "chick-n-strips",
+        "chick n strips"
+      ],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900200015,
+          "size": "2-count",
+          "label": "2 count",
+          "grams": 91,
+          "calories": 200,
+          "proteinG": 19,
+          "carbsG": 11,
+          "fatG": 9,
+          "default": false
+        },
+        {
+          "id": 900200016,
+          "size": "3-count",
+          "label": "3 count",
+          "grams": 136,
+          "calories": 310,
+          "proteinG": 29,
+          "carbsG": 16,
+          "fatG": 14,
+          "default": true
+        },
+        {
+          "id": 900200017,
+          "size": "4-count",
+          "label": "4 count",
+          "grams": 181,
+          "calories": 410,
+          "proteinG": 39,
+          "carbsG": 22,
+          "fatG": 19,
+          "default": false
+        },
+        {
+          "id": 900200018,
+          "size": "10-count",
+          "label": "10 count",
+          "grams": 452,
+          "calories": 1020,
+          "proteinG": 96,
+          "carbsG": 54,
+          "fatG": 46,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Chick-n-Strips'. Dipping sauce not included. The 2-count is also the kid's meal size."
+    },
+    {
+      "name": "Cool Wrap",
+      "says": [
+        "cool wrap",
+        "chicken cool wrap",
+        "grilled chicken wrap",
+        "chicken wrap"
+      ],
+      "signature": [
+        "cool wrap"
+      ],
+      "category": "wrap",
+      "sizes": [
+        {
+          "id": 900200019,
+          "size": "regular",
+          "label": "1 wrap",
+          "grams": 231,
+          "calories": 660,
+          "proteinG": 43,
+          "carbsG": 32,
+          "fatG": 45,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Cool Wrap'. Chick-fil-A publishes 660 Cal and says it 'pairs well with Avocado Lime Ranch dressing'; the page does not say whether the dressing is included in that figure."
+    },
+    {
+      "name": "Cobb Salad",
+      "says": [
+        "cobb salad",
+        "cobb"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900200020,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 411,
+          "calories": 830,
+          "proteinG": 41,
+          "carbsG": 31,
+          "fatG": 60,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Standard build with Nuggets. Chick-fil-A states salad nutrition includes toppings and dressing (pairs with Avocado Lime Ranch)."
+    },
+    {
+      "name": "Market Salad",
+      "says": [
+        "market salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900200021,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 326,
+          "calories": 550,
+          "proteinG": 28,
+          "carbsG": 42,
+          "fatG": 31,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Standard build with Grilled Filet (cold). Chick-fil-A states salad nutrition includes toppings and dressing (pairs with Zesty Apple Cider Vinaigrette)."
+    },
+    {
+      "name": "Spicy Southwest Salad",
+      "says": [
+        "spicy southwest salad",
+        "southwest salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900200022,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 424,
+          "calories": 680,
+          "proteinG": 33,
+          "carbsG": 27,
+          "fatG": 49,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Standard build with Spicy Grilled Filet (cold). Chick-fil-A states salad nutrition includes toppings and dressing (pairs with Creamy Salsa)."
+    },
+    {
+      "name": "Waffle Potato Fries",
+      "says": [
+        "waffle fries",
+        "waffle potato fries",
+        "fries",
+        "french fries",
+        "small fries",
+        "medium fries",
+        "large fries",
+        "small waffle fries",
+        "medium waffle fries",
+        "large waffle fries"
+      ],
+      "signature": [
+        "waffle potato fries"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900200023,
+          "size": "small",
+          "label": "small",
+          "grams": 96,
+          "calories": 320,
+          "proteinG": 4,
+          "carbsG": 35,
+          "fatG": 19,
+          "default": false
+        },
+        {
+          "id": 900200024,
+          "size": "medium",
+          "label": "medium",
+          "grams": 125,
+          "calories": 420,
+          "proteinG": 5,
+          "carbsG": 45,
+          "fatG": 24,
+          "default": true
+        },
+        {
+          "id": 900200025,
+          "size": "large",
+          "label": "large",
+          "grams": 179,
+          "calories": 600,
+          "proteinG": 7,
+          "carbsG": 65,
+          "fatG": 35,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Waffle Potato Fries'."
+    },
+    {
+      "name": "Mac & Cheese",
+      "says": [
+        "mac and cheese",
+        "mac & cheese",
+        "mac n cheese",
+        "macaroni and cheese",
+        "small mac and cheese",
+        "medium mac and cheese"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900200026,
+          "size": "small",
+          "label": "small",
+          "grams": 136,
+          "calories": 270,
+          "proteinG": 12,
+          "carbsG": 17,
+          "fatG": 17,
+          "default": false
+        },
+        {
+          "id": 900200027,
+          "size": "medium",
+          "label": "medium",
+          "grams": 227,
+          "calories": 450,
+          "proteinG": 20,
+          "carbsG": 28,
+          "fatG": 29,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists the Mac & Cheese kid's meal entree at the same values as the medium."
+    },
+    {
+      "name": "Chicken Noodle Soup",
+      "says": [
+        "chicken noodle soup",
+        "chicken soup",
+        "noodle soup",
+        "cup of chicken noodle soup",
+        "bowl of chicken noodle soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900200028,
+          "size": "cup",
+          "label": "1 cup",
+          "grams": 252,
+          "calories": 190,
+          "proteinG": 11,
+          "carbsG": 27,
+          "fatG": 4.5,
+          "default": true
+        },
+        {
+          "id": 900200029,
+          "size": "bowl",
+          "label": "1 bowl",
+          "grams": 476,
+          "calories": 320,
+          "proteinG": 20,
+          "carbsG": 42,
+          "fatG": 8,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Chicken Tortilla Soup",
+      "says": [
+        "chicken tortilla soup",
+        "tortilla soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900200030,
+          "size": "regular",
+          "label": "1 serving",
+          "grams": 265,
+          "calories": 350,
+          "proteinG": 25,
+          "carbsG": 39,
+          "fatG": 11,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists a single size."
+    },
+    {
+      "name": "Fruit Cup",
+      "says": [
+        "fruit cup",
+        "fruit",
+        "fruit bowl",
+        "small fruit cup",
+        "medium fruit cup",
+        "large fruit cup"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900200031,
+          "size": "small",
+          "label": "small",
+          "grams": 107,
+          "calories": 60,
+          "proteinG": 1,
+          "carbsG": 14,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200032,
+          "size": "medium",
+          "label": "medium",
+          "grams": 125,
+          "calories": 70,
+          "proteinG": 1,
+          "carbsG": 16,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200033,
+          "size": "large",
+          "label": "large",
+          "grams": 215,
+          "calories": 120,
+          "proteinG": 1,
+          "carbsG": 28,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Side Salad",
+      "says": [
+        "side salad"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900200034,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 166,
+          "calories": 470,
+          "proteinG": 6,
+          "carbsG": 14,
+          "fatG": 42,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A says it is served with choice of dressing and does not state which dressing, if any, the 470 Cal figure includes."
+    },
+    {
+      "name": "Kale Crunch Side",
+      "says": [
+        "kale crunch side",
+        "kale crunch",
+        "kale salad"
+      ],
+      "signature": [
+        "kale crunch side",
+        "kale crunch"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900200035,
+          "size": "regular",
+          "label": "1 side",
+          "grams": 112,
+          "calories": 170,
+          "proteinG": 4,
+          "carbsG": 13,
+          "fatG": 12,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Buddy Fruits Apple Sauce",
+      "says": [
+        "apple sauce",
+        "applesauce",
+        "buddy fruits",
+        "buddy fruits apple sauce"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900200036,
+          "size": "regular",
+          "label": "1 serving",
+          "grams": 90,
+          "calories": 45,
+          "proteinG": 0,
+          "carbsG": 12,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Chicken Biscuit",
+      "says": [
+        "chicken biscuit",
+        "original chicken biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200037,
+          "size": "regular",
+          "label": "1 biscuit",
+          "grams": 153,
+          "calories": 460,
+          "proteinG": 19,
+          "carbsG": 45,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Chicken Biscuit'."
+    },
+    {
+      "name": "Spicy Chicken Biscuit",
+      "says": [
+        "spicy chicken biscuit",
+        "spicy biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200038,
+          "size": "regular",
+          "label": "1 biscuit",
+          "grams": 153,
+          "calories": 450,
+          "proteinG": 19,
+          "carbsG": 44,
+          "fatG": 22,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Chick-n-Minis",
+      "says": [
+        "chick-n-minis",
+        "chick n minis",
+        "chicken minis",
+        "minis",
+        "4 count minis",
+        "10 count minis"
+      ],
+      "signature": [
+        "chick-n-minis",
+        "chick n minis",
+        "chicken minis"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200039,
+          "size": "4-count",
+          "label": "4 count",
+          "grams": 127,
+          "calories": 360,
+          "proteinG": 20,
+          "carbsG": 41,
+          "fatG": 13,
+          "default": true
+        },
+        {
+          "id": 900200040,
+          "size": "10-count",
+          "label": "10 count",
+          "grams": 318,
+          "calories": 910,
+          "proteinG": 49,
+          "carbsG": 103,
+          "fatG": 34,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Chick-n-Minis'."
+    },
+    {
+      "name": "Egg White Grill",
+      "says": [
+        "egg white grill"
+      ],
+      "signature": [
+        "egg white grill"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200041,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": 172,
+          "calories": 300,
+          "proteinG": 27,
+          "carbsG": 29,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Hash Browns",
+      "says": [
+        "hash browns",
+        "hash brown",
+        "hashbrowns",
+        "small hash browns",
+        "large hash browns"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200042,
+          "size": "small",
+          "label": "small",
+          "grams": 77,
+          "calories": 270,
+          "proteinG": 3,
+          "carbsG": 23,
+          "fatG": 18,
+          "default": true
+        },
+        {
+          "id": 900200043,
+          "size": "large",
+          "label": "large",
+          "grams": 121,
+          "calories": 420,
+          "proteinG": 4,
+          "carbsG": 35,
+          "fatG": 29,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists small and large only."
+    },
+    {
+      "name": "Hash Brown Scramble Burrito",
+      "says": [
+        "hash brown scramble burrito",
+        "scramble burrito",
+        "breakfast burrito",
+        "burrito"
+      ],
+      "signature": [
+        "hash brown scramble burrito"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200044,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 304,
+          "calories": 700,
+          "proteinG": 34,
+          "carbsG": 51,
+          "fatG": 40,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Standard build with Nuggets (Chick-fil-A's default). Other proteins differ."
+    },
+    {
+      "name": "Hash Brown Scramble Bowl",
+      "says": [
+        "hash brown scramble bowl",
+        "scramble bowl",
+        "breakfast bowl"
+      ],
+      "signature": [
+        "hash brown scramble bowl"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200045,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 233,
+          "calories": 470,
+          "proteinG": 29,
+          "carbsG": 19,
+          "fatG": 30,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Standard build with Nuggets (Chick-fil-A's default). Other proteins differ."
+    },
+    {
+      "name": "Bacon, Egg & Cheese Biscuit",
+      "says": [
+        "bacon egg and cheese biscuit",
+        "bacon egg & cheese biscuit",
+        "bacon egg cheese biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200046,
+          "size": "regular",
+          "label": "1 biscuit",
+          "grams": 145,
+          "calories": 420,
+          "proteinG": 15,
+          "carbsG": 38,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Sausage, Egg & Cheese Biscuit",
+      "says": [
+        "sausage egg and cheese biscuit",
+        "sausage egg & cheese biscuit",
+        "sausage egg cheese biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200047,
+          "size": "regular",
+          "label": "1 biscuit",
+          "grams": 192,
+          "calories": 620,
+          "proteinG": 22,
+          "carbsG": 38,
+          "fatG": 42,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Chicken, Egg & Cheese Biscuit",
+      "says": [
+        "chicken egg and cheese biscuit",
+        "chicken egg & cheese biscuit",
+        "chicken egg cheese biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900200048,
+          "size": "regular",
+          "label": "1 biscuit",
+          "grams": 211,
+          "calories": 550,
+          "proteinG": 27,
+          "carbsG": 48,
+          "fatG": 28,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Lemonade",
+      "says": [
+        "lemonade",
+        "small lemonade",
+        "medium lemonade",
+        "large lemonade",
+        "regular lemonade"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200049,
+          "size": "small",
+          "label": "small",
+          "grams": 465,
+          "calories": 190,
+          "proteinG": 0,
+          "carbsG": 49,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200050,
+          "size": "medium",
+          "label": "medium",
+          "grams": 612,
+          "calories": 260,
+          "proteinG": 0,
+          "carbsG": 66,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200051,
+          "size": "large",
+          "label": "large",
+          "grams": 916,
+          "calories": 380,
+          "proteinG": 1,
+          "carbsG": 98,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Lemonade'."
+    },
+    {
+      "name": "Diet Lemonade",
+      "says": [
+        "diet lemonade",
+        "small diet lemonade",
+        "medium diet lemonade",
+        "large diet lemonade"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200052,
+          "size": "small",
+          "label": "small",
+          "grams": 465,
+          "calories": 40,
+          "proteinG": 0,
+          "carbsG": 12,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200053,
+          "size": "medium",
+          "label": "medium",
+          "grams": 612,
+          "calories": 60,
+          "proteinG": 0,
+          "carbsG": 15,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200054,
+          "size": "large",
+          "label": "large",
+          "grams": 916,
+          "calories": 80,
+          "proteinG": 0,
+          "carbsG": 23,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Diet Lemonade'. At these low values, published calories run up to ~20% below 4*carbs (rounding and/or low-calorie sweetener); numbers are as published."
+    },
+    {
+      "name": "Freshly-Brewed Sweetened Iced Tea",
+      "says": [
+        "sweet tea",
+        "sweetened iced tea",
+        "sweet iced tea",
+        "small sweet tea",
+        "medium sweet tea",
+        "large sweet tea"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200055,
+          "size": "small",
+          "label": "small",
+          "grams": 451,
+          "calories": 90,
+          "proteinG": 0,
+          "carbsG": 22,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200056,
+          "size": "medium",
+          "label": "medium",
+          "grams": 604,
+          "calories": 120,
+          "proteinG": 0,
+          "carbsG": 31,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200057,
+          "size": "large",
+          "label": "large",
+          "grams": 893,
+          "calories": 170,
+          "proteinG": 0,
+          "carbsG": 44,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Freshly-Brewed Unsweetened Iced Tea",
+      "says": [
+        "unsweet tea",
+        "unsweetened tea",
+        "unsweetened iced tea",
+        "iced tea"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200058,
+          "size": "small",
+          "label": "small",
+          "grams": 451,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200059,
+          "size": "medium",
+          "label": "medium",
+          "grams": 604,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200060,
+          "size": "large",
+          "label": "large",
+          "grams": 893,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Sunjoy (1/2 Sweet Tea, 1/2 Lemonade)",
+      "says": [
+        "sunjoy",
+        "arnold palmer",
+        "half and half",
+        "half tea half lemonade",
+        "half sweet tea half lemonade"
+      ],
+      "signature": [
+        "sunjoy"
+      ],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200061,
+          "size": "small",
+          "label": "small",
+          "grams": 479,
+          "calories": 180,
+          "proteinG": 0,
+          "carbsG": 45,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200062,
+          "size": "medium",
+          "label": "medium",
+          "grams": 641,
+          "calories": 240,
+          "proteinG": 0,
+          "carbsG": 60,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200063,
+          "size": "large",
+          "label": "large",
+          "grams": 944,
+          "calories": 350,
+          "proteinG": 0,
+          "carbsG": 91,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Sweet tea + regular lemonade version; Chick-fil-A also lists unsweet and diet-lemonade combinations with different values."
+    },
+    {
+      "name": "Coca-Cola",
+      "says": [
+        "coke",
+        "coca-cola",
+        "coca cola",
+        "small coke",
+        "medium coke",
+        "large coke"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200064,
+          "size": "small",
+          "label": "small",
+          "grams": 451,
+          "calories": 130,
+          "proteinG": 0,
+          "carbsG": 35,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200065,
+          "size": "medium",
+          "label": "medium",
+          "grams": 584,
+          "calories": 170,
+          "proteinG": 0,
+          "carbsG": 46,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200066,
+          "size": "large",
+          "label": "large",
+          "grams": 859,
+          "calories": 250,
+          "proteinG": 0,
+          "carbsG": 68,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Dr Pepper",
+      "says": [
+        "dr pepper",
+        "dr. pepper",
+        "doctor pepper"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200067,
+          "size": "small",
+          "label": "small",
+          "grams": 451,
+          "calories": 130,
+          "proteinG": 0,
+          "carbsG": 34,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900200068,
+          "size": "medium",
+          "label": "medium",
+          "grams": 584,
+          "calories": 170,
+          "proteinG": 0,
+          "carbsG": 44,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900200069,
+          "size": "large",
+          "label": "large",
+          "grams": 859,
+          "calories": 250,
+          "proteinG": 0,
+          "carbsG": 64,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Iced Coffee",
+      "says": [
+        "iced coffee"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200070,
+          "size": "regular",
+          "label": "1 drink",
+          "grams": 624,
+          "calories": 110,
+          "proteinG": 7,
+          "carbsG": 11,
+          "fatG": 4,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Plain Iced Coffee as published (Chick-fil-A lists one size); flavored versions (vanilla, mocha, caramel) are higher."
+    },
+    {
+      "name": "1% Chocolate Milk",
+      "says": [
+        "chocolate milk",
+        "1% chocolate milk"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200071,
+          "size": "regular",
+          "label": "1 serving",
+          "grams": 198,
+          "calories": 140,
+          "proteinG": 7,
+          "carbsG": 23,
+          "fatG": 2,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "1% Milk",
+      "says": [
+        "milk",
+        "1% milk",
+        "white milk",
+        "low fat milk"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200072,
+          "size": "regular",
+          "label": "1 serving",
+          "grams": 213,
+          "calories": 90,
+          "proteinG": 7,
+          "carbsG": 10,
+          "fatG": 2,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Simply Orange",
+      "says": [
+        "orange juice",
+        "oj",
+        "simply orange"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200073,
+          "size": "regular",
+          "label": "1 serving",
+          "grams": 326,
+          "calories": 160,
+          "proteinG": 2,
+          "carbsG": 34,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Honest Kids Apple Juice",
+      "says": [
+        "apple juice",
+        "honest kids",
+        "honest kids apple juice",
+        "juice box"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900200074,
+          "size": "regular",
+          "label": "1 serving",
+          "grams": 170,
+          "calories": 35,
+          "proteinG": 0,
+          "carbsG": 9,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Chocolate Milkshake",
+      "says": [
+        "chocolate milkshake",
+        "chocolate shake"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200075,
+          "size": "regular",
+          "label": "1 shake",
+          "grams": 409,
+          "calories": 600,
+          "proteinG": 12,
+          "carbsG": 93,
+          "fatG": 22,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists one milkshake size."
+    },
+    {
+      "name": "Vanilla Milkshake",
+      "says": [
+        "vanilla milkshake",
+        "vanilla shake"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200076,
+          "size": "regular",
+          "label": "1 shake",
+          "grams": 409,
+          "calories": 580,
+          "proteinG": 13,
+          "carbsG": 82,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists one milkshake size."
+    },
+    {
+      "name": "Strawberry Milkshake",
+      "says": [
+        "strawberry milkshake",
+        "strawberry shake"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200077,
+          "size": "regular",
+          "label": "1 shake",
+          "grams": 409,
+          "calories": 560,
+          "proteinG": 10,
+          "carbsG": 92,
+          "fatG": 18,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists one milkshake size."
+    },
+    {
+      "name": "Cookies & Cream Milkshake",
+      "says": [
+        "cookies and cream milkshake",
+        "cookies & cream milkshake",
+        "cookies and cream shake",
+        "oreo shake"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200078,
+          "size": "regular",
+          "label": "1 shake",
+          "grams": 409,
+          "calories": 630,
+          "proteinG": 13,
+          "carbsG": 91,
+          "fatG": 25,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists one milkshake size."
+    },
+    {
+      "name": "Frosted Lemonade",
+      "says": [
+        "frosted lemonade"
+      ],
+      "signature": [
+        "frosted lemonade"
+      ],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200079,
+          "size": "regular",
+          "label": "1 drink",
+          "grams": 383,
+          "calories": 350,
+          "proteinG": 7,
+          "carbsG": 67,
+          "fatG": 7,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Chick-fil-A lists one size."
+    },
+    {
+      "name": "Frosted Coffee",
+      "says": [
+        "frosted coffee"
+      ],
+      "signature": [
+        "frosted coffee"
+      ],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200080,
+          "size": "regular",
+          "label": "1 drink",
+          "grams": 374,
+          "calories": 260,
+          "proteinG": 7,
+          "carbsG": 45,
+          "fatG": 7,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Plain Frosted Coffee; flavored versions are higher. Chick-fil-A lists one size."
+    },
+    {
+      "name": "Icedream Cone",
+      "says": [
+        "icedream cone",
+        "ice cream cone",
+        "icedream",
+        "cone",
+        "ice cream"
+      ],
+      "signature": [
+        "icedream cone",
+        "icedream"
+      ],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200081,
+          "size": "regular",
+          "label": "1 cone",
+          "grams": 135,
+          "calories": 180,
+          "proteinG": 4,
+          "carbsG": 32,
+          "fatG": 4,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Icedream Cone'."
+    },
+    {
+      "name": "Icedream Cup",
+      "says": [
+        "icedream cup",
+        "ice cream cup",
+        "cup of ice cream"
+      ],
+      "signature": [
+        "icedream cup"
+      ],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200082,
+          "size": "regular",
+          "label": "1 cup",
+          "grams": 122,
+          "calories": 140,
+          "proteinG": 4,
+          "carbsG": 24,
+          "fatG": 3.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Menu name 'Chick-fil-A Icedream Cup'."
+    },
+    {
+      "name": "Chocolate Chunk Cookie",
+      "says": [
+        "chocolate chunk cookie",
+        "chocolate chip cookie",
+        "cookie",
+        "cookies"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200083,
+          "size": "regular",
+          "label": "1 cookie",
+          "grams": 78,
+          "calories": 370,
+          "proteinG": 5,
+          "carbsG": 49,
+          "fatG": 17,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Chocolate Fudge Brownie",
+      "says": [
+        "chocolate fudge brownie",
+        "brownie",
+        "fudge brownie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900200084,
+          "size": "regular",
+          "label": "1 brownie",
+          "grams": 85,
+          "calories": 370,
+          "proteinG": 4,
+          "carbsG": 47,
+          "fatG": 21,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Chick-fil-A Sauce",
+      "says": [
+        "chick-fil-a sauce",
+        "chick fil a sauce",
+        "chickfila sauce",
+        "cfa sauce",
+        "chick sauce"
+      ],
+      "signature": [
+        "chick-fil-a sauce",
+        "chick fil a sauce",
+        "chickfila sauce",
+        "cfa sauce"
+      ],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900200085,
+          "size": "regular",
+          "label": "1 packet",
+          "grams": 28,
+          "calories": 140,
+          "proteinG": 0,
+          "carbsG": 6,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "The chain name is part of this product's name."
+    },
+    {
+      "name": "Polynesian Sauce",
+      "says": [
+        "polynesian sauce",
+        "polynesian",
+        "poly sauce"
+      ],
+      "signature": [
+        "polynesian sauce"
+      ],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900200086,
+          "size": "regular",
+          "label": "1 packet",
+          "grams": 28,
+          "calories": 110,
+          "proteinG": 0,
+          "carbsG": 14,
+          "fatG": 6,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Garden Herb Ranch Sauce",
+      "says": [
+        "ranch",
+        "ranch sauce",
+        "garden herb ranch",
+        "garden herb ranch sauce"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900200087,
+          "size": "regular",
+          "label": "1 packet",
+          "grams": 21,
+          "calories": 100,
+          "proteinG": 0,
+          "carbsG": 1,
+          "fatG": 11,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens",
+      "note": "Dipping-sauce packet (21 g); the salad dressing is listed separately by Chick-fil-A."
+    },
+    {
+      "name": "Honey Mustard Sauce",
+      "says": [
+        "honey mustard",
+        "honey mustard sauce"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900200088,
+          "size": "regular",
+          "label": "1 packet",
+          "grams": 28,
+          "calories": 50,
+          "proteinG": 0,
+          "carbsG": 11,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Barbeque Sauce",
+      "says": [
+        "bbq sauce",
+        "barbeque sauce",
+        "barbecue sauce",
+        "bbq"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900200089,
+          "size": "regular",
+          "label": "1 packet",
+          "grams": 28,
+          "calories": 45,
+          "proteinG": 0,
+          "carbsG": 11,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Zesty Buffalo Sauce",
+      "says": [
+        "buffalo sauce",
+        "zesty buffalo",
+        "zesty buffalo sauce"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900200090,
+          "size": "regular",
+          "label": "1 packet",
+          "grams": 21,
+          "calories": 25,
+          "proteinG": 0,
+          "carbsG": 1,
+          "fatG": 2.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    },
+    {
+      "name": "Sweet & Spicy Sriracha Sauce",
+      "says": [
+        "sriracha sauce",
+        "sweet and spicy sriracha",
+        "sweet & spicy sriracha",
+        "sriracha"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900200091,
+          "size": "regular",
+          "label": "1 packet",
+          "grams": 28,
+          "calories": 45,
+          "proteinG": 0,
+          "carbsG": 11,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chick-fil-a.com/nutrition-allergens"
+    }
+  ]
+}

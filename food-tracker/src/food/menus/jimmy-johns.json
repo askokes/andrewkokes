@@ -1,0 +1,1843 @@
+{
+  "chain": "Jimmy John's",
+  "chainSays": [
+    "jimmy john's",
+    "jimmy johns",
+    "jimmy john",
+    "jj's",
+    "jjs",
+    "jimmy john's subs"
+  ],
+  "sources": [
+    "https://restaurant.nutritionix.com/jimmy-johns/landing",
+    "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+    "https://www.jimmyjohns.com/"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900400101,
+  "items": [
+    {
+      "name": "#1 The Pepe",
+      "says": [
+        "the pepe",
+        "pepe",
+        "pepe sub",
+        "number 1",
+        "#1",
+        "number one",
+        "ham and cheese",
+        "ham and cheese sub",
+        "ham sub"
+      ],
+      "signature": [
+        "the pepe",
+        "pepe sub"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400001,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 298,
+          "calories": 590,
+          "proteinG": 30,
+          "carbsG": 50,
+          "fatG": 30,
+          "default": true
+        },
+        {
+          "id": 900400002,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 247,
+          "calories": 370,
+          "proteinG": 21,
+          "carbsG": 8,
+          "fatG": 28,
+          "default": false
+        },
+        {
+          "id": 900400003,
+          "size": "little john",
+          "label": "Little John (6.5\") sub",
+          "grams": 150,
+          "calories": 300,
+          "proteinG": 15,
+          "carbsG": 25,
+          "fatG": 15,
+          "default": false
+        },
+        {
+          "id": 900400004,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 596,
+          "calories": 1180,
+          "proteinG": 59,
+          "carbsG": 99,
+          "fatG": 60,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Take Bread Out, Smoked Ham, Lettuce, Tomato, Provolone Cheese, Hellmann's Mayo - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Little John (6.5\") uses the calculator's Little John item. Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Take Bread Out 81.5 g), not a separately listed item. Note: the calculator's default bread for this Original is 'French Bread - Take Bread Out' (lighter bread portion than the Favorites' 'Leave Bread In'). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#2 Big John",
+      "says": [
+        "big john",
+        "the big john",
+        "big john sub",
+        "roast beef sub",
+        "roast beef",
+        "number 2",
+        "#2",
+        "number two"
+      ],
+      "signature": [
+        "big john",
+        "the big john",
+        "big john sub"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400005,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 271,
+          "calories": 500,
+          "proteinG": 26,
+          "carbsG": 46,
+          "fatG": 23,
+          "default": true
+        },
+        {
+          "id": 900400006,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 220,
+          "calories": 270,
+          "proteinG": 17,
+          "carbsG": 5,
+          "fatG": 21,
+          "default": false
+        },
+        {
+          "id": 900400007,
+          "size": "little john",
+          "label": "Little John (6.5\") sub",
+          "grams": 137,
+          "calories": 250,
+          "proteinG": 13,
+          "carbsG": 23,
+          "fatG": 12,
+          "default": false
+        },
+        {
+          "id": 900400008,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 542,
+          "calories": 990,
+          "proteinG": 51,
+          "carbsG": 93,
+          "fatG": 45,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Take Bread Out, Roast Beef, Lettuce, Tomato, Hellmann's Mayo - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Little John (6.5\") uses the calculator's Little John item. Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Take Bread Out 81.5 g), not a separately listed item. Note: the calculator's default bread for this Original is 'French Bread - Take Bread Out' (lighter bread portion than the Favorites' 'Leave Bread In'). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#3 Totally Tuna",
+      "says": [
+        "totally tuna",
+        "tuna",
+        "tuna sub",
+        "number 3",
+        "#3",
+        "number three"
+      ],
+      "signature": [
+        "totally tuna"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400009,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 325,
+          "calories": 490,
+          "proteinG": 20,
+          "carbsG": 50,
+          "fatG": 23,
+          "default": true
+        },
+        {
+          "id": 900400010,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 273,
+          "calories": 270,
+          "proteinG": 12,
+          "carbsG": 9,
+          "fatG": 21,
+          "default": false
+        },
+        {
+          "id": 900400011,
+          "size": "little john",
+          "label": "Little John (6.5\") sub",
+          "grams": 163,
+          "calories": 250,
+          "proteinG": 10,
+          "carbsG": 25,
+          "fatG": 12,
+          "default": false
+        },
+        {
+          "id": 900400012,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 649,
+          "calories": 990,
+          "proteinG": 40,
+          "carbsG": 101,
+          "fatG": 46,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Tuna Salad, French Bread - Take Bread Out, Lettuce, Tomato, Cucumber. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Little John (6.5\") uses the calculator's Little John item. Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Take Bread Out 81.5 g), not a separately listed item. Note: the calculator's default bread for this Original is 'French Bread - Take Bread Out' (lighter bread portion than the Favorites' 'Leave Bread In'). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#4 Turkey Tom",
+      "says": [
+        "turkey tom",
+        "turkey",
+        "turkey sub",
+        "number 4",
+        "#4",
+        "number four"
+      ],
+      "signature": [
+        "turkey tom"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400013,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 271,
+          "calories": 470,
+          "proteinG": 24,
+          "carbsG": 47,
+          "fatG": 20,
+          "default": true
+        },
+        {
+          "id": 900400014,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 220,
+          "calories": 250,
+          "proteinG": 15,
+          "carbsG": 5,
+          "fatG": 19,
+          "default": false
+        },
+        {
+          "id": 900400015,
+          "size": "little john",
+          "label": "Little John (6.5\") sub",
+          "grams": 137,
+          "calories": 240,
+          "proteinG": 12,
+          "carbsG": 24,
+          "fatG": 11,
+          "default": false
+        },
+        {
+          "id": 900400016,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 542,
+          "calories": 940,
+          "proteinG": 48,
+          "carbsG": 94,
+          "fatG": 41,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Take Bread Out, Turkey, Lettuce, Tomato, Hellmann's Mayo - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Little John (6.5\") uses the calculator's Little John item. Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Take Bread Out 81.5 g), not a separately listed item. Note: the calculator's default bread for this Original is 'French Bread - Take Bread Out' (lighter bread portion than the Favorites' 'Leave Bread In'). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#5 Vito",
+      "says": [
+        "vito",
+        "the vito",
+        "vito sub",
+        "italian",
+        "italian sub",
+        "number 5",
+        "#5",
+        "number five"
+      ],
+      "signature": [
+        "the vito",
+        "vito sub"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400017,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 300,
+          "calories": 550,
+          "proteinG": 33,
+          "carbsG": 51,
+          "fatG": 24,
+          "default": true
+        },
+        {
+          "id": 900400018,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 248,
+          "calories": 330,
+          "proteinG": 24,
+          "carbsG": 10,
+          "fatG": 22,
+          "default": false
+        },
+        {
+          "id": 900400019,
+          "size": "little john",
+          "label": "Little John (6.5\") sub",
+          "grams": 150,
+          "calories": 280,
+          "proteinG": 16,
+          "carbsG": 26,
+          "fatG": 12,
+          "default": false
+        },
+        {
+          "id": 900400020,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 599,
+          "calories": 1110,
+          "proteinG": 65,
+          "carbsG": 103,
+          "fatG": 48,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Take Bread Out, Lettuce, Tomato, Provolone Cheese, Capocollo, Salami, Onion, Oil & Vinegar, Oregano-Basil. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Little John (6.5\") uses the calculator's Little John item. Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Take Bread Out 81.5 g), not a separately listed item. Note: the calculator's default bread for this Original is 'French Bread - Take Bread Out' (lighter bread portion than the Favorites' 'Leave Bread In'). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#6 The Veggie",
+      "says": [
+        "the veggie",
+        "veggie",
+        "veggie sub",
+        "vegetarian sub",
+        "number 6",
+        "#6",
+        "number six"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400021,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 299,
+          "calories": 660,
+          "proteinG": 27,
+          "carbsG": 49,
+          "fatG": 39,
+          "default": true
+        },
+        {
+          "id": 900400022,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 247,
+          "calories": 440,
+          "proteinG": 19,
+          "carbsG": 8,
+          "fatG": 38,
+          "default": false
+        },
+        {
+          "id": 900400023,
+          "size": "little john",
+          "label": "Little John (6.5\") sub",
+          "grams": 150,
+          "calories": 340,
+          "proteinG": 14,
+          "carbsG": 25,
+          "fatG": 20,
+          "default": false
+        },
+        {
+          "id": 900400024,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 597,
+          "calories": 1330,
+          "proteinG": 54,
+          "carbsG": 99,
+          "fatG": 79,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Take Bread Out, Provolone Cheese, Lettuce, Tomato, Hellmann's Mayo - REG, Cucumber, Avocado Spread. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Little John (6.5\") uses the calculator's Little John item. Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Take Bread Out 81.5 g), not a separately listed item. Note: the calculator's default bread for this Original is 'French Bread - Take Bread Out' (lighter bread portion than the Favorites' 'Leave Bread In'). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#7 Spicy East Coast Italian",
+      "says": [
+        "spicy east coast italian",
+        "east coast italian",
+        "spicy italian",
+        "number 7",
+        "#7",
+        "number seven"
+      ],
+      "signature": [
+        "spicy east coast italian",
+        "east coast italian"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400025,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 445,
+          "calories": 990,
+          "proteinG": 52,
+          "carbsG": 77,
+          "fatG": 52,
+          "default": true
+        },
+        {
+          "id": 900400026,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 351,
+          "calories": 650,
+          "proteinG": 39,
+          "carbsG": 13,
+          "fatG": 49,
+          "default": false
+        },
+        {
+          "id": 900400027,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 891,
+          "calories": 1970,
+          "proteinG": 103,
+          "carbsG": 154,
+          "fatG": 104,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Capocollo, Salami, Lettuce, Tomato, Provolone Cheese, Hellmann's Mayo - REG, Jimmy Peppers, Onion, Oil & Vinegar, Oregano-Basil. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#8 Billy Club",
+      "says": [
+        "billy club",
+        "number 8",
+        "#8",
+        "number eight"
+      ],
+      "signature": [
+        "billy club"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400028,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 416,
+          "calories": 810,
+          "proteinG": 50,
+          "carbsG": 72,
+          "fatG": 34,
+          "default": true
+        },
+        {
+          "id": 900400029,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 322,
+          "calories": 470,
+          "proteinG": 37,
+          "carbsG": 9,
+          "fatG": 31,
+          "default": false
+        },
+        {
+          "id": 900400030,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 842,
+          "calories": 1620,
+          "proteinG": 101,
+          "carbsG": 145,
+          "fatG": 69,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Roast Beef, Smoked Ham, Lettuce, Tomato, Provolone Cheese, Hellmann's Mayo - REG, Yellow Mustard. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#9 Italian Night Club",
+      "says": [
+        "italian night club",
+        "italian club",
+        "night club",
+        "number 9",
+        "#9",
+        "number nine"
+      ],
+      "signature": [
+        "italian night club"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400031,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 429,
+          "calories": 910,
+          "proteinG": 49,
+          "carbsG": 77,
+          "fatG": 44,
+          "default": true
+        },
+        {
+          "id": 900400032,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 335,
+          "calories": 570,
+          "proteinG": 36,
+          "carbsG": 13,
+          "fatG": 41,
+          "default": false
+        },
+        {
+          "id": 900400033,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 859,
+          "calories": 1810,
+          "proteinG": 97,
+          "carbsG": 153,
+          "fatG": 89,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Smoked Ham, Lettuce, Tomato, Provolone Cheese, Capocollo, Salami, Hellmann's Mayo - REG, Onion, Oil & Vinegar, Oregano-Basil. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#10 Hunter's Club",
+      "says": [
+        "hunter's club",
+        "hunters club",
+        "hunter club",
+        "number 10",
+        "#10",
+        "number ten"
+      ],
+      "signature": [
+        "hunter's club",
+        "hunters club"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400034,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 417,
+          "calories": 820,
+          "proteinG": 55,
+          "carbsG": 70,
+          "fatG": 36,
+          "default": true
+        },
+        {
+          "id": 900400035,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 323,
+          "calories": 480,
+          "proteinG": 42,
+          "carbsG": 6,
+          "fatG": 33,
+          "default": false
+        },
+        {
+          "id": 900400036,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 834,
+          "calories": 1650,
+          "proteinG": 109,
+          "carbsG": 139,
+          "fatG": 71,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Roast Beef, French Bread - Leave Bread In, Lettuce, Tomato, Provolone Cheese, Hellmann's Mayo - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#11 Country Club",
+      "says": [
+        "country club",
+        "turkey and ham club",
+        "number 11",
+        "#11",
+        "number eleven"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400037,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 411,
+          "calories": 780,
+          "proteinG": 48,
+          "carbsG": 73,
+          "fatG": 32,
+          "default": true
+        },
+        {
+          "id": 900400038,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 317,
+          "calories": 440,
+          "proteinG": 35,
+          "carbsG": 9,
+          "fatG": 29,
+          "default": false
+        },
+        {
+          "id": 900400039,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 822,
+          "calories": 1550,
+          "proteinG": 96,
+          "carbsG": 145,
+          "fatG": 64,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Turkey, Smoked Ham, Lettuce, Tomato, Provolone Cheese, Hellmann's Mayo - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#12 Beach Club",
+      "says": [
+        "beach club",
+        "turkey avocado club",
+        "number 12",
+        "#12",
+        "number twelve"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400040,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 411,
+          "calories": 850,
+          "proteinG": 46,
+          "carbsG": 72,
+          "fatG": 41,
+          "default": true
+        },
+        {
+          "id": 900400041,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 317,
+          "calories": 510,
+          "proteinG": 33,
+          "carbsG": 9,
+          "fatG": 38,
+          "default": false
+        },
+        {
+          "id": 900400042,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 822,
+          "calories": 1700,
+          "proteinG": 91,
+          "carbsG": 145,
+          "fatG": 82,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Turkey, Provolone Cheese, Lettuce, Tomato, Hellmann's Mayo - REG, Cucumber, Avocado Spread. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#13 Jimmy Cubano",
+      "says": [
+        "jimmy cubano",
+        "cubano",
+        "cuban",
+        "cuban sandwich",
+        "number 13",
+        "#13",
+        "number thirteen"
+      ],
+      "signature": [
+        "jimmy cubano"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400043,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 356,
+          "calories": 840,
+          "proteinG": 43,
+          "carbsG": 71,
+          "fatG": 40,
+          "default": true
+        },
+        {
+          "id": 900400044,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 262,
+          "calories": 500,
+          "proteinG": 30,
+          "carbsG": 8,
+          "fatG": 38,
+          "default": false
+        },
+        {
+          "id": 900400045,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 634,
+          "calories": 1660,
+          "proteinG": 85,
+          "carbsG": 142,
+          "fatG": 81,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Sliced Pickles, Smoked Ham, Provolone Cheese, Bacon - REG, Hellmann's Mayo - REG, Yellow Mustard. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#14 Bootlegger Club",
+      "says": [
+        "bootlegger club",
+        "bootlegger",
+        "number 14",
+        "#14",
+        "number fourteen"
+      ],
+      "signature": [
+        "bootlegger club"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400046,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 384,
+          "calories": 680,
+          "proteinG": 44,
+          "carbsG": 69,
+          "fatG": 25,
+          "default": true
+        },
+        {
+          "id": 900400047,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 290,
+          "calories": 340,
+          "proteinG": 31,
+          "carbsG": 6,
+          "fatG": 22,
+          "default": false
+        },
+        {
+          "id": 900400048,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 768,
+          "calories": 1370,
+          "proteinG": 89,
+          "carbsG": 139,
+          "fatG": 49,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Roast Beef, Turkey, Lettuce, Tomato, Hellmann's Mayo - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#15 Club Tuna",
+      "says": [
+        "club tuna",
+        "tuna club",
+        "number 15",
+        "#15",
+        "number fifteen"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400049,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 433,
+          "calories": 840,
+          "proteinG": 42,
+          "carbsG": 74,
+          "fatG": 42,
+          "default": true
+        },
+        {
+          "id": 900400050,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 339,
+          "calories": 500,
+          "proteinG": 29,
+          "carbsG": 10,
+          "fatG": 39,
+          "default": false
+        },
+        {
+          "id": 900400051,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 866,
+          "calories": 1690,
+          "proteinG": 83,
+          "carbsG": 148,
+          "fatG": 84,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Tuna Salad, French Bread - Leave Bread In, Provolone Cheese, Lettuce, Tomato, Cucumber. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#16 Club Lulu",
+      "says": [
+        "club lulu",
+        "lulu",
+        "number 16",
+        "#16",
+        "number sixteen"
+      ],
+      "signature": [
+        "club lulu"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400052,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 332,
+          "calories": 690,
+          "proteinG": 35,
+          "carbsG": 71,
+          "fatG": 28,
+          "default": true
+        },
+        {
+          "id": 900400053,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 238,
+          "calories": 350,
+          "proteinG": 22,
+          "carbsG": 7,
+          "fatG": 25,
+          "default": false
+        },
+        {
+          "id": 900400054,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 664,
+          "calories": 1370,
+          "proteinG": 70,
+          "carbsG": 141,
+          "fatG": 57,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Turkey, Lettuce, Tomato, Hellmann's Mayo - REG, Bacon - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "#17 Ultimate Porker",
+      "says": [
+        "ultimate porker",
+        "porker",
+        "number 17",
+        "#17",
+        "number seventeen"
+      ],
+      "signature": [
+        "ultimate porker"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400055,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 326,
+          "calories": 690,
+          "proteinG": 33,
+          "carbsG": 73,
+          "fatG": 29,
+          "default": true
+        },
+        {
+          "id": 900400056,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 232,
+          "calories": 350,
+          "proteinG": 20,
+          "carbsG": 9,
+          "fatG": 26,
+          "default": false
+        },
+        {
+          "id": 900400057,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 652,
+          "calories": 1380,
+          "proteinG": 65,
+          "carbsG": 145,
+          "fatG": 58,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Smoked Ham, Lettuce, Tomato, Hellmann's Mayo - REG, Bacon - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "J.J.B.L.T.",
+      "says": [
+        "jjblt",
+        "j.j.b.l.t.",
+        "jj blt",
+        "j j b l t",
+        "blt",
+        "b.l.t.",
+        "blt sub"
+      ],
+      "signature": [
+        "jjblt",
+        "j.j.b.l.t.",
+        "jj blt"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400058,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 280,
+          "calories": 710,
+          "proteinG": 28,
+          "carbsG": 71,
+          "fatG": 34,
+          "default": true
+        },
+        {
+          "id": 900400059,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 186,
+          "calories": 370,
+          "proteinG": 15,
+          "carbsG": 7,
+          "fatG": 31,
+          "default": false
+        },
+        {
+          "id": 900400060,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 560,
+          "calories": 1420,
+          "proteinG": 56,
+          "carbsG": 142,
+          "fatG": 68,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Lettuce, Tomato, Bacon - XTRA, Hellmann's Mayo - REG. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "The J.J. Gargantuan",
+      "says": [
+        "gargantuan",
+        "the gargantuan",
+        "jj gargantuan",
+        "j.j. gargantuan"
+      ],
+      "signature": [
+        "gargantuan",
+        "the gargantuan",
+        "jj gargantuan",
+        "j.j. gargantuan"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400061,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 569,
+          "calories": 1070,
+          "proteinG": 79,
+          "carbsG": 78,
+          "fatG": 48,
+          "default": true
+        },
+        {
+          "id": 900400062,
+          "size": "unwich",
+          "label": "Unwich (lettuce wrap, 8\" fillings)",
+          "grams": 475,
+          "calories": 730,
+          "proteinG": 66,
+          "carbsG": 14,
+          "fatG": 46,
+          "default": false
+        },
+        {
+          "id": 900400063,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 1139,
+          "calories": 2130,
+          "proteinG": 158,
+          "carbsG": 156,
+          "fatG": 97,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Roast Beef, Turkey, Smoked Ham, Lettuce, Tomato, Provolone Cheese, Capocollo, Salami, Hellmann's Mayo - REG, Onion, Oil & Vinegar, Oregano-Basil. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Unwich size = the calculator's 8\" default with the bread selection swapped for Unwich® (calculator's Unwich modifier: 2 leaves/30 g); computed from the calculator's own per-ingredient data (removes French Bread - Leave Bread In 124.1 g), not a separately listed item. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Slim 1 - Ham & Provolone",
+      "says": [
+        "slim 1",
+        "slim one",
+        "ham slim",
+        "ham and provolone slim",
+        "plain ham and cheese sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400064,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 221,
+          "calories": 530,
+          "proteinG": 33,
+          "carbsG": 68,
+          "fatG": 13,
+          "default": true
+        },
+        {
+          "id": 900400065,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 442,
+          "calories": 1060,
+          "proteinG": 66,
+          "carbsG": 136,
+          "fatG": 26,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Smoked Ham, Provolone Cheese. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Slim 2 - Roast Beef",
+      "says": [
+        "slim 2",
+        "slim two",
+        "roast beef slim",
+        "plain roast beef sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400066,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 194,
+          "calories": 440,
+          "proteinG": 29,
+          "carbsG": 65,
+          "fatG": 6,
+          "default": true
+        },
+        {
+          "id": 900400067,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 388,
+          "calories": 870,
+          "proteinG": 58,
+          "carbsG": 130,
+          "fatG": 12,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Roast Beef. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Slim 3 - Tuna Salad",
+      "says": [
+        "slim 3",
+        "slim three",
+        "tuna slim",
+        "plain tuna sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400068,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 254,
+          "calories": 590,
+          "proteinG": 24,
+          "carbsG": 69,
+          "fatG": 24,
+          "default": true
+        },
+        {
+          "id": 900400069,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 508,
+          "calories": 1190,
+          "proteinG": 47,
+          "carbsG": 138,
+          "fatG": 48,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Tuna Salad, French Bread - Leave Bread In. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Slim 4 - Turkey",
+      "says": [
+        "slim 4",
+        "slim four",
+        "turkey slim",
+        "plain turkey sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400070,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 194,
+          "calories": 410,
+          "proteinG": 27,
+          "carbsG": 65,
+          "fatG": 3.5,
+          "default": true
+        },
+        {
+          "id": 900400071,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 388,
+          "calories": 820,
+          "proteinG": 55,
+          "carbsG": 131,
+          "fatG": 7,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Turkey. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Slim 5 - Salami, Capocollo & Provolone",
+      "says": [
+        "slim 5",
+        "slim five",
+        "italian slim",
+        "salami capocollo and provolone"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400072,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 221,
+          "calories": 610,
+          "proteinG": 36,
+          "carbsG": 68,
+          "fatG": 21,
+          "default": true
+        },
+        {
+          "id": 900400073,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 442,
+          "calories": 1220,
+          "proteinG": 72,
+          "carbsG": 136,
+          "fatG": 41,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Provolone Cheese, Capocollo, Salami. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Slim 6 - Provolone",
+      "says": [
+        "slim 6",
+        "slim six",
+        "provolone slim",
+        "cheese sub",
+        "plain cheese sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400074,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 190,
+          "calories": 580,
+          "proteinG": 30,
+          "carbsG": 66,
+          "fatG": 20,
+          "default": true
+        },
+        {
+          "id": 900400075,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 380,
+          "calories": 1150,
+          "proteinG": 60,
+          "carbsG": 132,
+          "fatG": 41,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, Provolone Cheese. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Chicken Bacon Ranch",
+      "says": [
+        "chicken bacon ranch",
+        "toasted chicken bacon ranch",
+        "chicken bacon ranch sandwich",
+        "chicken bacon ranch sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400076,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 414,
+          "calories": 920,
+          "proteinG": 46,
+          "carbsG": 73,
+          "fatG": 48,
+          "default": true
+        },
+        {
+          "id": 900400077,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 827,
+          "calories": 1840,
+          "proteinG": 92,
+          "carbsG": 146,
+          "fatG": 96,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": French Bread - Leave Bread In, All-Natural Chicken, Lettuce, Tomato, Provolone Cheese, Ranch, Hellmann's Mayo - REG, Onion, Bacon - EZ. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Ham & Three Cheese Melt",
+      "says": [
+        "ham and three cheese melt",
+        "ham & three cheese melt",
+        "ham three cheese melt",
+        "ham and cheese melt",
+        "ham melt"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400078,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 365,
+          "calories": 990,
+          "proteinG": 59,
+          "carbsG": 73,
+          "fatG": 51,
+          "default": true
+        },
+        {
+          "id": 900400079,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 730,
+          "calories": 1990,
+          "proteinG": 119,
+          "carbsG": 145,
+          "fatG": 102,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Smoked Ham, French Bread - Leave Bread In, Sliced Cheddar Cheese, Provolone Cheese, Hellmann's Mayo - REG, Shaved Parmesan Cheese. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Roast Beef & Cheddar",
+      "says": [
+        "roast beef and cheddar",
+        "roast beef & cheddar",
+        "toasted roast beef",
+        "roast beef cheddar"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400080,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 493,
+          "calories": 1140,
+          "proteinG": 59,
+          "carbsG": 88,
+          "fatG": 61,
+          "default": true
+        },
+        {
+          "id": 900400081,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 985,
+          "calories": 2280,
+          "proteinG": 117,
+          "carbsG": 177,
+          "fatG": 121,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Roast Beef, French Bread - Leave Bread In, Lettuce, Tomato, Sliced Cheddar Cheese, Crispy Fried Onions, Hellmann's Mayo - REG, Horseradish Sauce, Onion. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Ultimate Italian",
+      "says": [
+        "ultimate italian",
+        "toasted italian",
+        "ultimate italian sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900400082,
+          "size": "8-inch",
+          "label": "8\" sub",
+          "grams": 519,
+          "calories": 1100,
+          "proteinG": 69,
+          "carbsG": 81,
+          "fatG": 55,
+          "default": true
+        },
+        {
+          "id": 900400083,
+          "size": "giant",
+          "label": "16\" Giant sub",
+          "grams": 1039,
+          "calories": 2200,
+          "proteinG": 138,
+          "carbsG": 162,
+          "fatG": 110,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Smoked Ham, French Bread - Leave Bread In, Lettuce, Tomato, Provolone Cheese, Capocollo, Salami, Hellmann's Mayo - REG, Onion, Shaved Parmesan Cheese, Bacon - EZ, Oil & Vinegar, Oregano-Basil. Giant (16\") uses the calculator's 16\" item (same ingredients, giant portions). Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Chicken Caesar Wrap",
+      "says": [
+        "chicken caesar wrap",
+        "caesar wrap"
+      ],
+      "signature": [],
+      "category": "wrap",
+      "sizes": [
+        {
+          "id": 900400084,
+          "size": "wrap",
+          "label": "1 wrap",
+          "grams": 373,
+          "calories": 890,
+          "proteinG": 36,
+          "carbsG": 74,
+          "fatG": 50,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Garlic & Herb Wrap, All-Natural Chicken, Lettuce, Tomato, Creamy Caesar Dressing, Mini Croutons, Hellmann's Mayo - REG, Shaved Parmesan Cheese. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Kickin' Ranch Chicken Wrap",
+      "says": [
+        "kickin ranch chicken wrap",
+        "kickin' ranch chicken wrap",
+        "kickin ranch wrap",
+        "kicking ranch chicken wrap"
+      ],
+      "signature": [
+        "kickin ranch chicken wrap",
+        "kickin' ranch chicken wrap"
+      ],
+      "category": "wrap",
+      "sizes": [
+        {
+          "id": 900400085,
+          "size": "wrap",
+          "label": "1 wrap",
+          "grams": 388,
+          "calories": 810,
+          "proteinG": 36,
+          "carbsG": 56,
+          "fatG": 49,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Flour Wrap, All-Natural Chicken, Lettuce, Tomato, Provolone Cheese, Kickin' Ranch®, Hellmann's Mayo - REG, Jimmy Peppers, Onion. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Tuscan Italian Wrap",
+      "says": [
+        "tuscan italian wrap",
+        "italian wrap"
+      ],
+      "signature": [],
+      "category": "wrap",
+      "sizes": [
+        {
+          "id": 900400086,
+          "size": "wrap",
+          "label": "1 wrap",
+          "grams": 403,
+          "calories": 860,
+          "proteinG": 44,
+          "carbsG": 60,
+          "fatG": 50,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator default build. 8\": Garlic & Herb Wrap, Smoked Ham, Lettuce, Tomato, Capocollo, Salami, Shaved Parmesan Cheese, Hellmann's Mayo - REG, Onion, Oil & Vinegar, Oregano-Basil. Values FDA-rounded from the calculator's calculated nutrients."
+    },
+    {
+      "name": "Jimmy Chips Regular",
+      "says": [
+        "jimmy chips",
+        "jimmy chips regular",
+        "regular jimmy chips",
+        "chips",
+        "regular chips",
+        "potato chips",
+        "bag of chips"
+      ],
+      "signature": [
+        "jimmy chips",
+        "jimmy chips regular",
+        "regular jimmy chips"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900400097,
+          "size": "bag",
+          "label": "1 bag (56 g)",
+          "grams": 56,
+          "calories": 300,
+          "proteinG": 3,
+          "carbsG": 33,
+          "fatG": 18,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Jimmy Chips® Regular). Values FDA-rounded."
+    },
+    {
+      "name": "Jimmy Chips BBQ",
+      "says": [
+        "bbq jimmy chips",
+        "jimmy chips bbq",
+        "bbq chips",
+        "barbecue chips"
+      ],
+      "signature": [
+        "bbq jimmy chips",
+        "jimmy chips bbq"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900400098,
+          "size": "bag",
+          "label": "1 bag (56 g)",
+          "grams": 56,
+          "calories": 290,
+          "proteinG": 3,
+          "carbsG": 34,
+          "fatG": 16,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Jimmy Chips® BBQ). Values FDA-rounded."
+    },
+    {
+      "name": "Jimmy Chips Jalapeño",
+      "says": [
+        "jalapeno jimmy chips",
+        "jimmy chips jalapeno",
+        "jalapeno chips",
+        "jalapeño chips"
+      ],
+      "signature": [
+        "jalapeno jimmy chips",
+        "jimmy chips jalapeno"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900400099,
+          "size": "bag",
+          "label": "1 bag (56 g)",
+          "grams": 56,
+          "calories": 290,
+          "proteinG": 3,
+          "carbsG": 33,
+          "fatG": 17,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Jimmy Chips® Jalapeño). Values FDA-rounded."
+    },
+    {
+      "name": "Jimmy Chips Salt & Vinegar",
+      "says": [
+        "salt and vinegar jimmy chips",
+        "jimmy chips salt and vinegar",
+        "salt and vinegar chips",
+        "salt & vinegar chips"
+      ],
+      "signature": [
+        "salt and vinegar jimmy chips",
+        "jimmy chips salt and vinegar"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900400100,
+          "size": "bag",
+          "label": "1 bag (56 g)",
+          "grams": 56,
+          "calories": 290,
+          "proteinG": 3,
+          "carbsG": 33,
+          "fatG": 17,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Jimmy Chips® Salt & Vinegar). Values FDA-rounded."
+    },
+    {
+      "name": "Jimmy Pickle",
+      "says": [
+        "jimmy pickle",
+        "pickle",
+        "dill pickle",
+        "whole pickle",
+        "big pickle"
+      ],
+      "signature": [
+        "jimmy pickle"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900400091,
+          "size": "pickle",
+          "label": "1 Jimmy Pickle (177 g)",
+          "grams": 177,
+          "calories": 20,
+          "proteinG": 0,
+          "carbsG": 1,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Pickle). Values FDA-rounded. Carbs <1 g (stored as 1). Calories (18 raw) don't reconcile with the tiny macros via 4/4/9 - published that way."
+    },
+    {
+      "name": "Homestyle Potato Salad",
+      "says": [
+        "potato salad",
+        "homestyle potato salad"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900400092,
+          "size": "side",
+          "label": "1 side (142 g)",
+          "grams": 142,
+          "calories": 250,
+          "proteinG": 3,
+          "carbsG": 30,
+          "fatG": 12,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Homestyle Potato Salad). Values FDA-rounded."
+    },
+    {
+      "name": "Pesto Bowtie Pasta Salad",
+      "says": [
+        "pasta salad",
+        "pesto pasta salad",
+        "bowtie pasta salad",
+        "pesto bowtie pasta salad"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900400093,
+          "size": "side",
+          "label": "1 side (113 g)",
+          "grams": 113,
+          "calories": 250,
+          "proteinG": 6,
+          "carbsG": 19,
+          "fatG": 17,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Pesto Bowtie Pasta Salad). Values FDA-rounded."
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "says": [
+        "chocolate chip cookie",
+        "cookie",
+        "choc chip cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900400094,
+          "size": "cookie",
+          "label": "1 cookie (85 g)",
+          "grams": 85,
+          "calories": 410,
+          "proteinG": 4,
+          "carbsG": 56,
+          "fatG": 19,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Trip Chip Cookie). Values FDA-rounded."
+    },
+    {
+      "name": "Oatmeal Raisin Cookie",
+      "says": [
+        "oatmeal raisin cookie",
+        "oatmeal cookie",
+        "raisin cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900400095,
+          "size": "cookie",
+          "label": "1 cookie (85 g)",
+          "grams": 85,
+          "calories": 370,
+          "proteinG": 5,
+          "carbsG": 58,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Oatmeal Raisin Cookie). Values FDA-rounded."
+    },
+    {
+      "name": "Fudge Chocolate Brownie",
+      "says": [
+        "brownie",
+        "fudge brownie",
+        "chocolate brownie",
+        "fudge chocolate brownie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900400096,
+          "size": "brownie",
+          "label": "1 brownie (71 g)",
+          "grams": 71,
+          "calories": 350,
+          "proteinG": 4,
+          "carbsG": 46,
+          "fatG": 19,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://nix-vue-inm.s3.amazonaws.com/restaurant/jimmy-johns/data/menu-latest.json.gz",
+      "note": "Jimmy John's official nutrition calculator (Fudge Chocolate Brownie). Values FDA-rounded."
+    }
+  ]
+}

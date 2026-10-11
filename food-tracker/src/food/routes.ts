@@ -32,6 +32,7 @@ import {
   type SearchResponse,
   type UnitOption,
 } from "./types";
+import { menuMatch, menuWeightKnown, withoutChain } from "./menu";
 import { resolveAmount, toCandidate, unitOptions } from "./units";
 import {
   commonFor,
@@ -141,8 +142,18 @@ export async function lookup(
   food: string,
   quantity: number,
   unit: string | null,
-  opts: { limit: number; brandHint: boolean },
+  opts: { limit: number; brandHint: boolean; place?: string | null },
 ): Promise<Lookup> {
+  // A chain's own item ("a spicy deluxe from Chick-fil-A", "a Big Mac") comes from its published menu.
+  const menu = menuMatch(food, { quantity, unit, place: opts.place, limit: opts.limit });
+  if (menu) return { status: "ok", candidates: menu.foods.map((f) => toCandidate(f, menu.quantity, menu.unit)) };
+  // Anything else said with a chain's name is looked up without it: "a panera banana" is a banana.
+  const plain = withoutChain(food);
+  if (plain !== food) {
+    food = plain;
+    opts = { ...opts, brandHint: false };
+  }
+
   let foods: FoodRecord[];
   try {
     foods = await searchFoods(usda, food, { ...opts, unit });
@@ -252,6 +263,7 @@ function entryView(row: EntryRow, food: FoodRecord | undefined): EntryView {
     grams: round1(row.grams),
     nutrition: mapNutrition(rowNutrition(row), round1),
     units,
+    ...(row.fdc_id !== null && food?.dataType === "Restaurant" && !menuWeightKnown(row.fdc_id) ? { noWeight: true } : {}),
     createdAt: isoTime(row.created_at),
   };
 }
@@ -345,7 +357,7 @@ export function foodRoutes(deps: AppDeps): Hono<AppEnv> {
       parsed.items.map(async (item, i): Promise<ParseItemResult> => {
         // Every food comes back, so the confirm screen can say which ones weren't looked up.
         if (i >= MAX_PARSE_ITEMS) return { ...item, status: "skipped", message: USDA_MESSAGES.skipped, candidates: [] };
-        const options = { limit: PARSE_LIMIT, brandHint: looksLikeBrand(item.text) };
+        const options = { limit: PARSE_LIMIT, brandHint: looksLikeBrand(item.text), place: item.place };
         return { ...item, ...(await lookup(usda, item.food, item.quantity, item.unit, options)) };
       }),
     );

@@ -94,9 +94,12 @@ export function convertQuantity(quantity: number, from: UnitOption, to: UnitOpti
   return Math.max(0.25, Math.round(n * 4) / 4);
 }
 
-/** Option text for a unit picker: "large (50 g)", "cup, chopped (140 g)", or just "oz". */
-export function unitOptionLabel(u: UnitOption) {
-  if (WEIGHT_UNITS.has(u.unit) || /\d\s*g\)$/.test(u.label)) return u.label;
+/**
+ * Option text for a unit picker: "large (50 g)", "cup, chopped (140 g)", or just "oz". `noWeight` (a
+ * restaurant that publishes no weight) leaves the grams off: "1 sandwich".
+ */
+export function unitOptionLabel(u: UnitOption, noWeight = false) {
+  if (noWeight || WEIGHT_UNITS.has(u.unit) || /\d\s*g\)$/.test(u.label)) return u.label;
   return `${u.label} (${formatQuantity(Math.round(u.grams * 10) / 10)} g)`;
 }
 
@@ -114,9 +117,13 @@ function pluralWord(word: string) {
   return `${word}s`;
 }
 
-/** "2 large", "6 oz", "2 cups, chopped", "1 slice". Pluralizes only the first word of the label. */
+/**
+ * "2 large", "6 oz", "2 cups, chopped", "1 slice". Pluralizes only the first word of the label. A label that
+ * already counts (a restaurant's "1 sandwich", "8 count") is shown as is for one and "2 × 8 count" for more.
+ */
 export function amountText(quantity: number, label: string) {
   const q = formatQuantity(quantity);
+  if (/^\d/.test(label)) return quantity === 1 ? label : `${q} × ${label}`;
   if (quantity <= 1) return `${q} ${label}`;
   const m = /^([A-Za-z]+)(.*)$/.exec(label);
   return m ? `${q} ${pluralWord(m[1])}${m[2]}` : `${q} ${label}`;

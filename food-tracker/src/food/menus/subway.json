@@ -1,0 +1,1790 @@
+{
+  "chain": "Subway",
+  "chainSays": [
+    "subway",
+    "subway's",
+    "subways"
+  ],
+  "sources": [
+    "https://www.subway.com/en-us/menunutrition/nutrition",
+    "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900300088,
+  "items": [
+    {
+      "name": "Steak Philly",
+      "says": [
+        "steak philly",
+        "steak philly sub",
+        "philly cheesesteak",
+        "philly cheese steak",
+        "philly",
+        "cheesesteak",
+        "steak and cheese",
+        "steak and cheese sub",
+        "steak & cheese"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300001,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 192,
+          "calories": 510,
+          "proteinG": 28,
+          "carbsG": 43,
+          "fatG": 25,
+          "default": true
+        },
+        {
+          "id": 900300002,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 384,
+          "calories": 1020,
+          "proteinG": 56,
+          "carbsG": 86,
+          "fatG": 50,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Chipotle Philly",
+      "says": [
+        "chipotle philly",
+        "chipotle steak philly",
+        "chipotle cheesesteak",
+        "chipotle steak"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300003,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 198,
+          "calories": 490,
+          "proteinG": 30,
+          "carbsG": 44,
+          "fatG": 22,
+          "default": true
+        },
+        {
+          "id": 900300004,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 396,
+          "calories": 980,
+          "proteinG": 60,
+          "carbsG": 88,
+          "fatG": 44,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Steak & Bacon",
+      "says": [
+        "steak and bacon",
+        "steak & bacon",
+        "steak and bacon sub",
+        "steak bacon sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300005,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 213,
+          "calories": 590,
+          "proteinG": 36,
+          "carbsG": 44,
+          "fatG": 30,
+          "default": true
+        },
+        {
+          "id": 900300006,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 426,
+          "calories": 1180,
+          "proteinG": 72,
+          "carbsG": 88,
+          "fatG": 60,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Grilled Chicken",
+      "says": [
+        "grilled chicken",
+        "grilled chicken sub",
+        "chicken sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300007,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 247,
+          "calories": 510,
+          "proteinG": 31,
+          "carbsG": 43,
+          "fatG": 24,
+          "default": true
+        },
+        {
+          "id": 900300008,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 494,
+          "calories": 1020,
+          "proteinG": 62,
+          "carbsG": 86,
+          "fatG": 48,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Chicken & Bacon Ranch",
+      "says": [
+        "chicken and bacon ranch",
+        "chicken & bacon ranch",
+        "chicken bacon ranch",
+        "chicken bacon ranch sub",
+        "cbr"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300009,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 262,
+          "calories": 580,
+          "proteinG": 35,
+          "carbsG": 44,
+          "fatG": 29,
+          "default": true
+        },
+        {
+          "id": 900300010,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 524,
+          "calories": 1160,
+          "proteinG": 70,
+          "carbsG": 88,
+          "fatG": 58,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Honey Mustard Chicken",
+      "says": [
+        "honey mustard chicken",
+        "honey mustard chicken sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300011,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 259,
+          "calories": 480,
+          "proteinG": 30,
+          "carbsG": 47,
+          "fatG": 20,
+          "default": true
+        },
+        {
+          "id": 900300012,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 518,
+          "calories": 960,
+          "proteinG": 60,
+          "carbsG": 94,
+          "fatG": 40,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Sweet Onion Chicken Teriyaki",
+      "says": [
+        "sweet onion chicken teriyaki",
+        "sweet onion teriyaki chicken",
+        "sweet onion chicken",
+        "chicken teriyaki",
+        "teriyaki chicken",
+        "teriyaki chicken sub",
+        "soct"
+      ],
+      "signature": [
+        "sweet onion chicken teriyaki",
+        "sweet onion teriyaki chicken"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300013,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 256,
+          "calories": 430,
+          "proteinG": 29,
+          "carbsG": 55,
+          "fatG": 11,
+          "default": true
+        },
+        {
+          "id": 900300014,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 512,
+          "calories": 860,
+          "proteinG": 58,
+          "carbsG": 110,
+          "fatG": 22,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "B.M.T.",
+      "says": [
+        "bmt",
+        "b.m.t.",
+        "b m t",
+        "italian bmt",
+        "italian b.m.t.",
+        "italian b m t",
+        "bmt sub",
+        "italian sub"
+      ],
+      "signature": [
+        "bmt",
+        "b.m.t.",
+        "italian bmt",
+        "italian b.m.t.",
+        "italian b m t",
+        "b m t",
+        "bmt sub"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300015,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 237,
+          "calories": 590,
+          "proteinG": 26,
+          "carbsG": 44,
+          "fatG": 35,
+          "default": true
+        },
+        {
+          "id": 900300016,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 474,
+          "calories": 1180,
+          "proteinG": 52,
+          "carbsG": 88,
+          "fatG": 70,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'. Listed under 'Italians' (long known as the Italian B.M.T.)."
+    },
+    {
+      "name": "Spicy Italian",
+      "says": [
+        "spicy italian",
+        "spicy italian sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300017,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 236,
+          "calories": 660,
+          "proteinG": 26,
+          "carbsG": 44,
+          "fatG": 43,
+          "default": true
+        },
+        {
+          "id": 900300018,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 472,
+          "calories": 1320,
+          "proteinG": 52,
+          "carbsG": 88,
+          "fatG": 86,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "5 Meat Italian",
+      "says": [
+        "5 meat italian",
+        "five meat italian",
+        "5 meat italian sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300019,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 300,
+          "calories": 660,
+          "proteinG": 39,
+          "carbsG": 46,
+          "fatG": 36,
+          "default": true
+        },
+        {
+          "id": 900300020,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 600,
+          "calories": 1320,
+          "proteinG": 78,
+          "carbsG": 92,
+          "fatG": 72,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Meatball Marinara",
+      "says": [
+        "meatball marinara",
+        "meatball marinara sub",
+        "meatball sub",
+        "meatball",
+        "meatballs"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300021,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 233,
+          "calories": 550,
+          "proteinG": 26,
+          "carbsG": 52,
+          "fatG": 27,
+          "default": true
+        },
+        {
+          "id": 900300022,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 466,
+          "calories": 1100,
+          "proteinG": 52,
+          "carbsG": 104,
+          "fatG": 54,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Meatball Pepperoni",
+      "says": [
+        "meatball pepperoni",
+        "meatball pepperoni sub",
+        "pepperoni meatball sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300023,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 262,
+          "calories": 670,
+          "proteinG": 32,
+          "carbsG": 56,
+          "fatG": 37,
+          "default": true
+        },
+        {
+          "id": 900300024,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 524,
+          "calories": 1340,
+          "proteinG": 64,
+          "carbsG": 112,
+          "fatG": 74,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Oven-Roasted Turkey",
+      "says": [
+        "oven roasted turkey",
+        "oven-roasted turkey",
+        "turkey",
+        "turkey sub",
+        "turkey breast",
+        "turkey breast sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300025,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 229,
+          "calories": 470,
+          "proteinG": 25,
+          "carbsG": 42,
+          "fatG": 22,
+          "default": true
+        },
+        {
+          "id": 900300026,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 458,
+          "calories": 940,
+          "proteinG": 50,
+          "carbsG": 84,
+          "fatG": 44,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Black Forest Ham",
+      "says": [
+        "black forest ham",
+        "black forest ham sub",
+        "ham",
+        "ham sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300027,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 229,
+          "calories": 480,
+          "proteinG": 25,
+          "carbsG": 44,
+          "fatG": 22,
+          "default": true
+        },
+        {
+          "id": 900300028,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 458,
+          "calories": 960,
+          "proteinG": 50,
+          "carbsG": 88,
+          "fatG": 44,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Roast Beef",
+      "says": [
+        "roast beef",
+        "roast beef sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300029,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 244,
+          "calories": 490,
+          "proteinG": 30,
+          "carbsG": 44,
+          "fatG": 22,
+          "default": true
+        },
+        {
+          "id": 900300030,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 488,
+          "calories": 980,
+          "proteinG": 60,
+          "carbsG": 88,
+          "fatG": 44,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Cold Cut Combo",
+      "says": [
+        "cold cut combo",
+        "cold cut combo sub",
+        "cold cut",
+        "cold cuts",
+        "cold cut sub"
+      ],
+      "signature": [
+        "cold cut combo"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300031,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 237,
+          "calories": 520,
+          "proteinG": 24,
+          "carbsG": 43,
+          "fatG": 28,
+          "default": true
+        },
+        {
+          "id": 900300032,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 474,
+          "calories": 1040,
+          "proteinG": 48,
+          "carbsG": 86,
+          "fatG": 56,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Tuna",
+      "says": [
+        "tuna",
+        "tuna sub",
+        "tuna sandwich"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300033,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 233,
+          "calories": 560,
+          "proteinG": 27,
+          "carbsG": 42,
+          "fatG": 32,
+          "default": true
+        },
+        {
+          "id": 900300034,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 466,
+          "calories": 1120,
+          "proteinG": 54,
+          "carbsG": 84,
+          "fatG": 64,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Veggie Delite",
+      "says": [
+        "veggie delite",
+        "veggie delight",
+        "veggie delite sub",
+        "veggie sub",
+        "veggie",
+        "vegetable sub"
+      ],
+      "signature": [
+        "veggie delite",
+        "veggie delight"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300035,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 188,
+          "calories": 310,
+          "proteinG": 16,
+          "carbsG": 40,
+          "fatG": 10,
+          "default": true
+        },
+        {
+          "id": 900300036,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 376,
+          "calories": 620,
+          "proteinG": 32,
+          "carbsG": 80,
+          "fatG": 20,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "All American Club",
+      "says": [
+        "all american club",
+        "all-american club",
+        "all american club sub"
+      ],
+      "signature": [
+        "all american club",
+        "all-american club"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300037,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 242,
+          "calories": 540,
+          "proteinG": 28,
+          "carbsG": 45,
+          "fatG": 28,
+          "default": true
+        },
+        {
+          "id": 900300038,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 484,
+          "calories": 1080,
+          "proteinG": 56,
+          "carbsG": 90,
+          "fatG": 56,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Subway Club",
+      "says": [
+        "club",
+        "club sub",
+        "the club",
+        "club sandwich"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300039,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 263,
+          "calories": 500,
+          "proteinG": 31,
+          "carbsG": 43,
+          "fatG": 23,
+          "default": true
+        },
+        {
+          "id": 900300040,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 526,
+          "calories": 1000,
+          "proteinG": 62,
+          "carbsG": 86,
+          "fatG": 46,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'."
+    },
+    {
+      "name": "Big Hot Pastrami",
+      "says": [
+        "big hot pastrami",
+        "hot pastrami",
+        "pastrami",
+        "pastrami sub"
+      ],
+      "signature": [
+        "big hot pastrami"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300041,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 232,
+          "calories": 620,
+          "proteinG": 27,
+          "carbsG": 43,
+          "fatG": 38,
+          "default": true
+        },
+        {
+          "id": 900300042,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 464,
+          "calories": 1240,
+          "proteinG": 54,
+          "carbsG": 86,
+          "fatG": 76,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'. Local favorite - at participating locations only."
+    },
+    {
+      "name": "B.L.T.",
+      "says": [
+        "blt",
+        "b.l.t.",
+        "blt sub",
+        "bacon lettuce and tomato"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300043,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 171,
+          "calories": 480,
+          "proteinG": 18,
+          "carbsG": 42,
+          "fatG": 26,
+          "default": true
+        },
+        {
+          "id": 900300044,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 342,
+          "calories": 960,
+          "proteinG": 36,
+          "carbsG": 84,
+          "fatG": 52,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'. Local favorite - at participating locations only."
+    },
+    {
+      "name": "Buffalo Chicken",
+      "says": [
+        "buffalo chicken",
+        "buffalo chicken sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300045,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 265,
+          "calories": 460,
+          "proteinG": 29,
+          "carbsG": 45,
+          "fatG": 19,
+          "default": true
+        },
+        {
+          "id": 900300046,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 530,
+          "calories": 920,
+          "proteinG": 58,
+          "carbsG": 90,
+          "fatG": 38,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'. Local favorite - at participating locations only."
+    },
+    {
+      "name": "Oven-Roasted Turkey & Ham",
+      "says": [
+        "turkey and ham",
+        "turkey & ham",
+        "oven roasted turkey and ham",
+        "turkey ham sub",
+        "turkey and ham sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300047,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 230,
+          "calories": 460,
+          "proteinG": 26,
+          "carbsG": 41,
+          "fatG": 22,
+          "default": true
+        },
+        {
+          "id": 900300048,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 460,
+          "calories": 920,
+          "proteinG": 52,
+          "carbsG": 82,
+          "fatG": 44,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'. Local favorite - at participating locations only."
+    },
+    {
+      "name": "Pizza Sub",
+      "says": [
+        "pizza sub",
+        "pizza sub sandwich"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300049,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 173,
+          "calories": 480,
+          "proteinG": 21,
+          "carbsG": 45,
+          "fatG": 24,
+          "default": true
+        },
+        {
+          "id": 900300050,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 346,
+          "calories": 960,
+          "proteinG": 42,
+          "carbsG": 90,
+          "fatG": 48,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'. Local favorite - at participating locations only."
+    },
+    {
+      "name": "Veggie Patty",
+      "says": [
+        "veggie patty",
+        "veggie patty sub",
+        "veggie burger sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300051,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 263,
+          "calories": 470,
+          "proteinG": 19,
+          "carbsG": 58,
+          "fatG": 19,
+          "default": true
+        },
+        {
+          "id": 900300052,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 526,
+          "calories": 940,
+          "proteinG": 38,
+          "carbsG": 116,
+          "fatG": 38,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "6-inch per Subway's standard recipe as published in Subway's U.S. Nutrition Information PDF (October 2026). The PDF does not itemize the standard build (bread/cheese/veggies/sauce) for 6\" subs; totals clearly include more than bread + protein (e.g. 6\" Artisan Italian bread 210 cal), i.e. the recipe's standard cheese, vegetables and sauce. Footlong = 2 x 6-inch, per the PDF's 'Double values for footlong nutrition information (one footlong=two 6\" servings)'. Local favorite - at participating locations only."
+    },
+    {
+      "name": "Fresh Fit Black Forest Ham",
+      "says": [
+        "fresh fit black forest ham",
+        "fresh fit ham"
+      ],
+      "signature": [
+        "fresh fit black forest ham",
+        "fresh fit ham"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300053,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 219,
+          "calories": 280,
+          "proteinG": 19,
+          "carbsG": 42,
+          "fatG": 5,
+          "default": true
+        },
+        {
+          "id": 900300054,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 438,
+          "calories": 560,
+          "proteinG": 38,
+          "carbsG": 84,
+          "fatG": 10,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Fresh Fit build per Subway's PDF: 6\" multigrain bread + protein + all the fresh vegetables (no cheese or sauce listed). Footlong = 2 x 6-inch per the PDF's footlong doubling note."
+    },
+    {
+      "name": "Fresh Fit Grilled Chicken",
+      "says": [
+        "fresh fit grilled chicken",
+        "fresh fit chicken"
+      ],
+      "signature": [
+        "fresh fit grilled chicken",
+        "fresh fit chicken"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300055,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 233,
+          "calories": 300,
+          "proteinG": 26,
+          "carbsG": 40,
+          "fatG": 5,
+          "default": true
+        },
+        {
+          "id": 900300056,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 466,
+          "calories": 600,
+          "proteinG": 52,
+          "carbsG": 80,
+          "fatG": 10,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Fresh Fit build per Subway's PDF: 6\" multigrain bread + protein + all the fresh vegetables (no cheese or sauce listed). Footlong = 2 x 6-inch per the PDF's footlong doubling note."
+    },
+    {
+      "name": "Fresh Fit Oven Roasted Turkey",
+      "says": [
+        "fresh fit oven roasted turkey",
+        "fresh fit turkey"
+      ],
+      "signature": [
+        "fresh fit oven roasted turkey",
+        "fresh fit turkey"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300057,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 219,
+          "calories": 270,
+          "proteinG": 20,
+          "carbsG": 40,
+          "fatG": 4,
+          "default": true
+        },
+        {
+          "id": 900300058,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 438,
+          "calories": 540,
+          "proteinG": 40,
+          "carbsG": 80,
+          "fatG": 8,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Fresh Fit build per Subway's PDF: 6\" multigrain bread + protein + all the fresh vegetables (no cheese or sauce listed). Footlong = 2 x 6-inch per the PDF's footlong doubling note."
+    },
+    {
+      "name": "Fresh Fit Roast Beef",
+      "says": [
+        "fresh fit roast beef"
+      ],
+      "signature": [
+        "fresh fit roast beef"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300059,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 233,
+          "calories": 300,
+          "proteinG": 25,
+          "carbsG": 42,
+          "fatG": 4,
+          "default": true
+        },
+        {
+          "id": 900300060,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 466,
+          "calories": 600,
+          "proteinG": 50,
+          "carbsG": 84,
+          "fatG": 8,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Fresh Fit build per Subway's PDF: 6\" multigrain bread + protein + all the fresh vegetables (no cheese or sauce listed). Footlong = 2 x 6-inch per the PDF's footlong doubling note."
+    },
+    {
+      "name": "Fresh Fit Rotisserie-Style Chicken",
+      "says": [
+        "fresh fit rotisserie-style chicken",
+        "fresh fit rotisserie chicken",
+        "rotisserie chicken sub",
+        "rotisserie-style chicken"
+      ],
+      "signature": [
+        "fresh fit rotisserie-style chicken",
+        "fresh fit rotisserie chicken"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300061,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 233,
+          "calories": 310,
+          "proteinG": 24,
+          "carbsG": 40,
+          "fatG": 6,
+          "default": true
+        },
+        {
+          "id": 900300062,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 466,
+          "calories": 620,
+          "proteinG": 48,
+          "carbsG": 80,
+          "fatG": 12,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Fresh Fit build per Subway's PDF: 6\" multigrain bread + protein + all the fresh vegetables (no cheese or sauce listed). Footlong = 2 x 6-inch per the PDF's footlong doubling note."
+    },
+    {
+      "name": "Fresh Fit Veggie Delite",
+      "says": [
+        "fresh fit veggie delite",
+        "fresh fit veggie delight",
+        "fresh fit veggie"
+      ],
+      "signature": [
+        "fresh fit veggie delite",
+        "fresh fit veggie delight",
+        "fresh fit veggie"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300063,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 162,
+          "calories": 220,
+          "proteinG": 10,
+          "carbsG": 40,
+          "fatG": 3,
+          "default": true
+        },
+        {
+          "id": 900300064,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 324,
+          "calories": 440,
+          "proteinG": 20,
+          "carbsG": 80,
+          "fatG": 6,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Fresh Fit build per Subway's PDF: 6\" multigrain bread + protein + all the fresh vegetables (no cheese or sauce listed). Footlong = 2 x 6-inch per the PDF's footlong doubling note."
+    },
+    {
+      "name": "Fresh Fit Veggie Patty",
+      "says": [
+        "fresh fit veggie patty"
+      ],
+      "signature": [
+        "fresh fit veggie patty"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900300065,
+          "size": "6-inch",
+          "label": "6-inch sub",
+          "grams": 247,
+          "calories": 390,
+          "proteinG": 16,
+          "carbsG": 57,
+          "fatG": 12,
+          "default": true
+        },
+        {
+          "id": 900300066,
+          "size": "footlong",
+          "label": "Footlong sub (2 x 6-inch)",
+          "grams": 494,
+          "calories": 780,
+          "proteinG": 32,
+          "carbsG": 114,
+          "fatG": 24,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Fresh Fit build per Subway's PDF: 6\" multigrain bread + protein + all the fresh vegetables (no cheese or sauce listed). Footlong = 2 x 6-inch per the PDF's footlong doubling note."
+    },
+    {
+      "name": "Kids' Mini Sub Black Forest Ham",
+      "says": [
+        "kids ham sub",
+        "kids mini ham sub",
+        "mini ham sub",
+        "kids ham"
+      ],
+      "signature": [],
+      "category": "kids",
+      "sizes": [
+        {
+          "id": 900300067,
+          "size": "mini",
+          "label": "Kids' mini sub",
+          "grams": 137,
+          "calories": 180,
+          "proteinG": 11,
+          "carbsG": 28,
+          "fatG": 3,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Kids' Mini Sub per Subway's PDF: mini multigrain bread + protein + all the fresh vegetables."
+    },
+    {
+      "name": "Kids' Mini Sub Oven Roasted Turkey",
+      "says": [
+        "kids turkey sub",
+        "kids mini turkey sub",
+        "mini turkey sub",
+        "kids turkey"
+      ],
+      "signature": [],
+      "category": "kids",
+      "sizes": [
+        {
+          "id": 900300068,
+          "size": "mini",
+          "label": "Kids' mini sub",
+          "grams": 137,
+          "calories": 170,
+          "proteinG": 12,
+          "carbsG": 27,
+          "fatG": 2,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Kids' Mini Sub per Subway's PDF: mini multigrain bread + protein + all the fresh vegetables."
+    },
+    {
+      "name": "Kids' Mini Sub Veggie Delite",
+      "says": [
+        "kids veggie sub",
+        "kids mini veggie sub",
+        "mini veggie sub",
+        "kids veggie delite"
+      ],
+      "signature": [],
+      "category": "kids",
+      "sizes": [
+        {
+          "id": 900300069,
+          "size": "mini",
+          "label": "Kids' mini sub",
+          "grams": 108,
+          "calories": 140,
+          "proteinG": 6,
+          "carbsG": 27,
+          "fatG": 2,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Kids' Mini Sub per Subway's PDF: mini multigrain bread + protein + all the fresh vegetables."
+    },
+    {
+      "name": "Bacon, Egg & Cheese",
+      "says": [
+        "bacon egg and cheese",
+        "bacon egg & cheese",
+        "bacon egg and cheese sub",
+        "bacon egg cheese"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900300070,
+          "size": "6-inch",
+          "label": "6-inch breakfast sub",
+          "grams": 193,
+          "calories": 550,
+          "proteinG": 26,
+          "carbsG": 43,
+          "fatG": 30,
+          "default": true
+        },
+        {
+          "id": 900300071,
+          "size": "footlong",
+          "label": "Footlong breakfast sub (2 x 6-inch)",
+          "grams": 386,
+          "calories": 1100,
+          "proteinG": 52,
+          "carbsG": 86,
+          "fatG": 60,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Breakfast (participating locations). Per Subway's PDF: 6\" Artisan Italian bread, egg patty and American cheese (+ the named meat). Footlong = 2 x 6-inch per the PDF. Flatbread version is listed separately in the PDF (not included)."
+    },
+    {
+      "name": "Black Forest Ham, Egg & Cheese",
+      "says": [
+        "ham egg and cheese",
+        "black forest ham egg and cheese",
+        "ham egg & cheese"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900300072,
+          "size": "6-inch",
+          "label": "6-inch breakfast sub",
+          "grams": 214,
+          "calories": 510,
+          "proteinG": 27,
+          "carbsG": 44,
+          "fatG": 25,
+          "default": true
+        },
+        {
+          "id": 900300073,
+          "size": "footlong",
+          "label": "Footlong breakfast sub (2 x 6-inch)",
+          "grams": 428,
+          "calories": 1020,
+          "proteinG": 54,
+          "carbsG": 88,
+          "fatG": 50,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Breakfast (participating locations). Per Subway's PDF: 6\" Artisan Italian bread, egg patty and American cheese (+ the named meat). Footlong = 2 x 6-inch per the PDF. Flatbread version is listed separately in the PDF (not included)."
+    },
+    {
+      "name": "Egg & Cheese",
+      "says": [
+        "egg and cheese",
+        "egg & cheese",
+        "egg and cheese sub",
+        "breakfast sub"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900300074,
+          "size": "6-inch",
+          "label": "6-inch breakfast sub",
+          "grams": 178,
+          "calories": 470,
+          "proteinG": 21,
+          "carbsG": 42,
+          "fatG": 24,
+          "default": true
+        },
+        {
+          "id": 900300075,
+          "size": "footlong",
+          "label": "Footlong breakfast sub (2 x 6-inch)",
+          "grams": 356,
+          "calories": 940,
+          "proteinG": 42,
+          "carbsG": 84,
+          "fatG": 48,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Breakfast (participating locations). Per Subway's PDF: 6\" Artisan Italian bread, egg patty and American cheese (+ the named meat). Footlong = 2 x 6-inch per the PDF. Flatbread version is listed separately in the PDF (not included)."
+    },
+    {
+      "name": "Steak, Egg & Cheese",
+      "says": [
+        "steak egg and cheese",
+        "steak egg & cheese",
+        "steak egg cheese"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900300076,
+          "size": "6-inch",
+          "label": "6-inch breakfast sub",
+          "grams": 214,
+          "calories": 530,
+          "proteinG": 30,
+          "carbsG": 43,
+          "fatG": 26,
+          "default": true
+        },
+        {
+          "id": 900300077,
+          "size": "footlong",
+          "label": "Footlong breakfast sub (2 x 6-inch)",
+          "grams": 428,
+          "calories": 1060,
+          "proteinG": 60,
+          "carbsG": 86,
+          "fatG": 52,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Breakfast (participating locations). Per Subway's PDF: 6\" Artisan Italian bread, egg patty and American cheese (+ the named meat). Footlong = 2 x 6-inch per the PDF. Flatbread version is listed separately in the PDF (not included)."
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "says": [
+        "chocolate chip cookie",
+        "cookie",
+        "choc chip cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900300078,
+          "size": "cookie",
+          "label": "1 cookie (45 g)",
+          "grams": 45,
+          "calories": 210,
+          "proteinG": 2,
+          "carbsG": 30,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026)."
+    },
+    {
+      "name": "Double Chocolate Cookie",
+      "says": [
+        "double chocolate cookie",
+        "double chocolate chip cookie",
+        "chocolate cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900300079,
+          "size": "cookie",
+          "label": "1 cookie (45 g)",
+          "grams": 45,
+          "calories": 210,
+          "proteinG": 2,
+          "carbsG": 29,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026)."
+    },
+    {
+      "name": "Oatmeal Raisin Cookie",
+      "says": [
+        "oatmeal raisin cookie",
+        "oatmeal cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900300080,
+          "size": "cookie",
+          "label": "1 cookie (45 g)",
+          "grams": 45,
+          "calories": 200,
+          "proteinG": 3,
+          "carbsG": 30,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026)."
+    },
+    {
+      "name": "Raspberry Cheesecake Cookie",
+      "says": [
+        "raspberry cheesecake cookie",
+        "raspberry cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900300081,
+          "size": "cookie",
+          "label": "1 cookie (45 g)",
+          "grams": 45,
+          "calories": 210,
+          "proteinG": 2,
+          "carbsG": 29,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026)."
+    },
+    {
+      "name": "White Chip Macadamia Nut Cookie",
+      "says": [
+        "white chip macadamia nut cookie",
+        "white chocolate macadamia nut cookie",
+        "white chip macadamia cookie",
+        "macadamia nut cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900300082,
+          "size": "cookie",
+          "label": "1 cookie (45 g)",
+          "grams": 45,
+          "calories": 210,
+          "proteinG": 2,
+          "carbsG": 28,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026)."
+    },
+    {
+      "name": "Hash Browns",
+      "says": [
+        "hash browns",
+        "hashbrowns",
+        "hash brown"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900300083,
+          "size": "side",
+          "label": "1 order (108 g)",
+          "grams": 108,
+          "calories": 190,
+          "proteinG": 3,
+          "carbsG": 24,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026). At participating locations."
+    },
+    {
+      "name": "Applesauce",
+      "says": [
+        "applesauce",
+        "apple sauce"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900300084,
+          "size": "side",
+          "label": "1 cup (90 g)",
+          "grams": 90,
+          "calories": 70,
+          "proteinG": 0,
+          "carbsG": 16,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026). At participating locations."
+    },
+    {
+      "name": "Broccoli Cheddar Soup",
+      "says": [
+        "broccoli cheddar soup",
+        "broccoli cheese soup",
+        "broccoli cheddar"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900300085,
+          "size": "bowl",
+          "label": "8 oz bowl (227 g)",
+          "grams": 227,
+          "calories": 200,
+          "proteinG": 9,
+          "carbsG": 16,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026). At participating locations."
+    },
+    {
+      "name": "Chicken Noodle Soup",
+      "says": [
+        "chicken noodle soup",
+        "chicken noodle"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900300086,
+          "size": "bowl",
+          "label": "8 oz bowl (227 g)",
+          "grams": 227,
+          "calories": 70,
+          "proteinG": 7,
+          "carbsG": 6,
+          "fatG": 3,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026). At participating locations."
+    },
+    {
+      "name": "Loaded Baked Potato Soup with Bacon",
+      "says": [
+        "loaded baked potato soup",
+        "baked potato soup",
+        "potato soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900300087,
+          "size": "bowl",
+          "label": "8 oz bowl (227 g)",
+          "grams": 227,
+          "calories": 200,
+          "proteinG": 9,
+          "carbsG": 17,
+          "fatG": 14,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://media.subway.com/dam/urn:aaid:aem:f20a4541-8c88-496b-940d-4aa8318cae26/original/as/us-nutrition-en.pdf",
+      "note": "Per Subway's U.S. Nutrition Information PDF (October 2026). At participating locations."
+    }
+  ]
+}

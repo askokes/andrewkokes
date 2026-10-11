@@ -2,6 +2,7 @@
 // cached in D1 so repeat lookups never hit the API, which is rate limited to
 // roughly 1,000 requests an hour per key.
 import { commonMatch, commonTail, isCocktailUsdaLacks, type CommonFood } from "./common";
+import { menuFood } from "./menu";
 import { extractFood, extractSearchHit } from "./nutrition";
 import type { FoodRecord, RawPortion } from "./types";
 import { contentWords, sameWord, words } from "./words";
@@ -1023,7 +1024,13 @@ export async function getFoods(deps: UsdaDeps, ids: number[]): Promise<Map<numbe
   const found = new Map<number, FoodRecord>();
   if (!wanted.length) return found;
 
-  for (const food of await readFoods(deps.db, wanted)) found.set(food.fdcId, food);
+  // Restaurant menu sizes live in the app (see menu.ts), not in USDA or its cache.
+  for (const id of wanted) {
+    const food = menuFood(id);
+    if (food) found.set(id, food);
+  }
+  const fromUsda = wanted.filter((id) => !found.has(id));
+  if (fromUsda.length) for (const food of await readFoods(deps.db, fromUsda)) found.set(food.fdcId, food);
   const missing = wanted.filter((id) => !found.has(id));
   for (let i = 0; i < missing.length; i += BULK_CHUNK) {
     const fetched = await detailsApi(deps, missing.slice(i, i + BULK_CHUNK));

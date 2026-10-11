@@ -1,0 +1,1546 @@
+{
+  "chain": "Jersey Mike's",
+  "chainSays": [
+    "jersey mike's",
+    "jersey mikes",
+    "jersey mike",
+    "jersey mike's subs",
+    "jersey mikes subs"
+  ],
+  "sources": [
+    "https://www.jerseymikes.com/menu/nutrition",
+    "https://subs.jerseymikes.com/nutrition/data",
+    "https://subs.jerseymikes.com/nutrition/{productId}/{sizeId}"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900500082,
+  "items": [
+    {
+      "name": "#1 BLT",
+      "says": [
+        "blt",
+        "b.l.t.",
+        "blt sub",
+        "bacon lettuce and tomato",
+        "number 1",
+        "#1",
+        "number one"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500001,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 19,
+          "carbsG": 42,
+          "fatG": 27,
+          "default": false
+        },
+        {
+          "id": 900500002,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 790,
+          "proteinG": 29,
+          "carbsG": 64,
+          "fatG": 48,
+          "default": true
+        },
+        {
+          "id": 900500003,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1570,
+          "proteinG": 57,
+          "carbsG": 127,
+          "fatG": 95,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/22/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Bacon, Mayo, White Bread, Lettuce, Tomatoes. Size ids on https://subs.jerseymikes.com/nutrition/22/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#2 Jersey Shore's Favorite",
+      "says": [
+        "jersey shore's favorite",
+        "jersey shores favorite",
+        "jersey shore favorite",
+        "number 2",
+        "#2",
+        "number two"
+      ],
+      "signature": [
+        "jersey shore's favorite",
+        "jersey shores favorite",
+        "jersey shore favorite"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500004,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 22,
+          "carbsG": 45,
+          "fatG": 24,
+          "default": false
+        },
+        {
+          "id": 900500005,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 820,
+          "proteinG": 39,
+          "carbsG": 69,
+          "fatG": 44,
+          "default": true
+        },
+        {
+          "id": 900500006,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1550,
+          "proteinG": 68,
+          "carbsG": 134,
+          "fatG": 84,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/1/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Ham, Cappacuolo, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/1/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#3 Ham and Provolone",
+      "says": [
+        "ham and provolone",
+        "ham & provolone",
+        "ham and cheese",
+        "ham and cheese sub",
+        "ham sub",
+        "number 3",
+        "#3",
+        "number three"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500007,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 23,
+          "carbsG": 44,
+          "fatG": 24,
+          "default": false
+        },
+        {
+          "id": 900500008,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 820,
+          "proteinG": 38,
+          "carbsG": 68,
+          "fatG": 44,
+          "default": true
+        },
+        {
+          "id": 900500009,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1550,
+          "proteinG": 68,
+          "carbsG": 133,
+          "fatG": 84,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/2/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Ham, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/2/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#4 The Number Four",
+      "says": [
+        "the number four",
+        "number four",
+        "number 4",
+        "#4",
+        "prosciuttini and cappacuolo"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500010,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 23,
+          "carbsG": 46,
+          "fatG": 23,
+          "default": false
+        },
+        {
+          "id": 900500011,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 810,
+          "proteinG": 37,
+          "carbsG": 70,
+          "fatG": 43,
+          "default": true
+        },
+        {
+          "id": 900500012,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1530,
+          "proteinG": 66,
+          "carbsG": 137,
+          "fatG": 81,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/23/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Cappacuolo, Prosciuttini, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/23/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#5 The Super Sub",
+      "says": [
+        "the super sub",
+        "super sub",
+        "number 5",
+        "#5",
+        "number five"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500013,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 510,
+          "proteinG": 26,
+          "carbsG": 46,
+          "fatG": 25,
+          "default": false
+        },
+        {
+          "id": 900500014,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 840,
+          "proteinG": 42,
+          "carbsG": 70,
+          "fatG": 44,
+          "default": true
+        },
+        {
+          "id": 900500015,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1590,
+          "proteinG": 74,
+          "carbsG": 137,
+          "fatG": 84,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/4/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Ham, Cappacuolo, Prosciuttini, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/4/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#6 Roast Beef and Provolone",
+      "says": [
+        "roast beef and provolone",
+        "roast beef & provolone",
+        "roast beef",
+        "roast beef sub",
+        "number 6",
+        "#6",
+        "number six"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500016,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 560,
+          "proteinG": 38,
+          "carbsG": 43,
+          "fatG": 26,
+          "default": false
+        },
+        {
+          "id": 900500017,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 910,
+          "proteinG": 57,
+          "carbsG": 66,
+          "fatG": 46,
+          "default": true
+        },
+        {
+          "id": 900500018,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1780,
+          "proteinG": 110,
+          "carbsG": 130,
+          "fatG": 89,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/7/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Roast Beef, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/7/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#7 Turkey and Provolone",
+      "says": [
+        "turkey and provolone",
+        "turkey & provolone",
+        "turkey",
+        "turkey sub",
+        "number 7",
+        "#7",
+        "number seven"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500019,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 26,
+          "carbsG": 44,
+          "fatG": 23,
+          "default": false
+        },
+        {
+          "id": 900500020,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 820,
+          "proteinG": 45,
+          "carbsG": 66,
+          "fatG": 41,
+          "default": true
+        },
+        {
+          "id": 900500021,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1550,
+          "proteinG": 80,
+          "carbsG": 131,
+          "fatG": 79,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/5/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Turkey, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/5/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#8 Club Sub",
+      "says": [
+        "club sub",
+        "club",
+        "number 8",
+        "#8",
+        "number eight"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500022,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 660,
+          "proteinG": 31,
+          "carbsG": 45,
+          "fatG": 41,
+          "default": false
+        },
+        {
+          "id": 900500023,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 1160,
+          "proteinG": 50,
+          "carbsG": 68,
+          "fatG": 78,
+          "default": true
+        },
+        {
+          "id": 900500024,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 2220,
+          "proteinG": 87,
+          "carbsG": 134,
+          "fatG": 151,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/9/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Bacon, Ham, Turkey, Provolone, Olive Oil Blend, Red Wine Vinegar, Mayo, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/9/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#9 Club Supreme",
+      "says": [
+        "club supreme",
+        "number 9",
+        "#9",
+        "number nine"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500025,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 680,
+          "proteinG": 36,
+          "carbsG": 44,
+          "fatG": 41,
+          "default": false
+        },
+        {
+          "id": 900500026,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 1190,
+          "proteinG": 59,
+          "carbsG": 67,
+          "fatG": 77,
+          "default": true
+        },
+        {
+          "id": 900500027,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 2270,
+          "proteinG": 101,
+          "carbsG": 131,
+          "fatG": 149,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/10/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Bacon, Turkey, Roast Beef, Swiss, Olive Oil Blend, Red Wine Vinegar, Mayo, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/10/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#10 Tuna Fish",
+      "says": [
+        "tuna fish",
+        "tuna",
+        "tuna sub",
+        "tuna fish sub",
+        "number 10",
+        "#10",
+        "number ten"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500028,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 630,
+          "proteinG": 20,
+          "carbsG": 44,
+          "fatG": 42,
+          "default": false
+        },
+        {
+          "id": 900500029,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 1060,
+          "proteinG": 33,
+          "carbsG": 67,
+          "fatG": 75,
+          "default": true
+        },
+        {
+          "id": 900500030,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 2030,
+          "proteinG": 62,
+          "carbsG": 132,
+          "fatG": 141,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/6/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Made Tuna Salad, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/6/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#11 Stickball Special",
+      "says": [
+        "stickball special",
+        "stickball",
+        "number 11",
+        "#11",
+        "number eleven"
+      ],
+      "signature": [
+        "stickball special"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500031,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 510,
+          "proteinG": 22,
+          "carbsG": 44,
+          "fatG": 27,
+          "default": false
+        },
+        {
+          "id": 900500032,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 890,
+          "proteinG": 39,
+          "carbsG": 68,
+          "fatG": 51,
+          "default": true
+        },
+        {
+          "id": 900500033,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1670,
+          "proteinG": 69,
+          "carbsG": 134,
+          "fatG": 96,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/24/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Ham, Hard Salami, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/24/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#12 Cancro Special",
+      "says": [
+        "cancro special",
+        "cancro",
+        "number 12",
+        "#12",
+        "number twelve"
+      ],
+      "signature": [
+        "cancro special"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500034,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 560,
+          "proteinG": 33,
+          "carbsG": 44,
+          "fatG": 27,
+          "default": false
+        },
+        {
+          "id": 900500035,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 970,
+          "proteinG": 59,
+          "carbsG": 66,
+          "fatG": 51,
+          "default": true
+        },
+        {
+          "id": 900500036,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1810,
+          "proteinG": 102,
+          "carbsG": 130,
+          "fatG": 96,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/25/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Pepperoni, Roast Beef, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/25/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#13 The Original Italian",
+      "says": [
+        "the original italian",
+        "original italian",
+        "original italian sub",
+        "italian",
+        "italian sub",
+        "number 13",
+        "#13",
+        "number thirteen"
+      ],
+      "signature": [
+        "the original italian",
+        "original italian",
+        "original italian sub"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500037,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 570,
+          "proteinG": 29,
+          "carbsG": 46,
+          "fatG": 30,
+          "default": false
+        },
+        {
+          "id": 900500038,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 960,
+          "proteinG": 47,
+          "carbsG": 71,
+          "fatG": 55,
+          "default": true
+        },
+        {
+          "id": 900500039,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1820,
+          "proteinG": 84,
+          "carbsG": 139,
+          "fatG": 104,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/8/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Ham, Cappacuolo, Pepperoni, Prosciuttini, Hard Salami, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/8/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#14 The Veggie",
+      "says": [
+        "the veggie",
+        "veggie",
+        "veggie sub",
+        "vegetarian sub",
+        "number 14",
+        "#14",
+        "number fourteen"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500040,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 570,
+          "proteinG": 24,
+          "carbsG": 45,
+          "fatG": 33,
+          "default": false
+        },
+        {
+          "id": 900500041,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 950,
+          "proteinG": 39,
+          "carbsG": 69,
+          "fatG": 59,
+          "default": true
+        },
+        {
+          "id": 900500042,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1900,
+          "proteinG": 78,
+          "carbsG": 135,
+          "fatG": 117,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/3/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Provolone, Swiss, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Green Bell Pepper, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/3/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "Chipotle Turkey Sub",
+      "says": [
+        "chipotle turkey",
+        "chipotle turkey sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500043,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 630,
+          "proteinG": 26,
+          "carbsG": 45,
+          "fatG": 39,
+          "default": false
+        },
+        {
+          "id": 900500044,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 1090,
+          "proteinG": 42,
+          "carbsG": 68,
+          "fatG": 73,
+          "default": true
+        },
+        {
+          "id": 900500045,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 2130,
+          "proteinG": 81,
+          "carbsG": 134,
+          "fatG": 143,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/219/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Turkey, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, Chipotle Mayo, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/219/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "California Club Sub",
+      "says": [
+        "california club",
+        "california club sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500046,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 560,
+          "proteinG": 29,
+          "carbsG": 46,
+          "fatG": 29,
+          "default": false
+        },
+        {
+          "id": 900500047,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 980,
+          "proteinG": 52,
+          "carbsG": 71,
+          "fatG": 55,
+          "default": true
+        },
+        {
+          "id": 900500048,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1860,
+          "proteinG": 92,
+          "carbsG": 140,
+          "fatG": 106,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/402/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Bacon, Turkey, Provolone, Olive Oil Blend, Red Wine Vinegar, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions, Avocado. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/402/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "Turkey Club Sub",
+      "says": [
+        "turkey club",
+        "turkey club sub"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500049,
+          "size": "mini",
+          "label": "Mini sub",
+          "grams": null,
+          "calories": 650,
+          "proteinG": 29,
+          "carbsG": 44,
+          "fatG": 40,
+          "default": false
+        },
+        {
+          "id": 900500050,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 1130,
+          "proteinG": 47,
+          "carbsG": 67,
+          "fatG": 76,
+          "default": true
+        },
+        {
+          "id": 900500051,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 2200,
+          "proteinG": 89,
+          "carbsG": 132,
+          "fatG": 148,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/574/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Bacon, Turkey, Provolone, Olive Oil Blend, Red Wine Vinegar, Mayo, Oregano, Salt, White Bread, Lettuce, Tomatoes, Onions. This is 'Mike's Way' (onions, lettuce, tomatoes, red wine vinegar, olive oil blend, oregano, salt) on white bread. Size ids on https://subs.jerseymikes.com/nutrition/574/{size}: mini=1, regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#17 Mike's Famous Philly",
+      "says": [
+        "mike's famous philly",
+        "mikes famous philly",
+        "famous philly",
+        "philly",
+        "philly cheesesteak",
+        "cheesesteak",
+        "cheese steak",
+        "steak philly",
+        "number 17",
+        "#17",
+        "number seventeen"
+      ],
+      "signature": [
+        "mike's famous philly",
+        "mikes famous philly"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500052,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 750,
+          "proteinG": 46,
+          "carbsG": 74,
+          "fatG": 30,
+          "default": true
+        },
+        {
+          "id": 900500053,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1500,
+          "proteinG": 92,
+          "carbsG": 148,
+          "fatG": 61,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/11/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Beef, White American Cheese, Red/Green Pepper Strips, White Bread, Grilled Onions. Size ids on https://subs.jerseymikes.com/nutrition/11/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#16 Mike's Chicken Philly",
+      "says": [
+        "mike's chicken philly",
+        "mikes chicken philly",
+        "chicken philly",
+        "chicken cheesesteak",
+        "chicken cheese steak",
+        "number 16",
+        "#16",
+        "number sixteen"
+      ],
+      "signature": [
+        "mike's chicken philly",
+        "mikes chicken philly"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500054,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 680,
+          "proteinG": 48,
+          "carbsG": 73,
+          "fatG": 22,
+          "default": true
+        },
+        {
+          "id": 900500055,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1370,
+          "proteinG": 97,
+          "carbsG": 146,
+          "fatG": 43,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/12/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Chicken, White American Cheese, Red/Green Pepper Strips, White Bread, Grilled Onions. Size ids on https://subs.jerseymikes.com/nutrition/12/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#43 Chipotle Cheese Steak",
+      "says": [
+        "chipotle cheese steak",
+        "chipotle cheesesteak",
+        "chipotle philly",
+        "number 43",
+        "#43"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500056,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 1040,
+          "proteinG": 46,
+          "carbsG": 76,
+          "fatG": 62,
+          "default": true
+        },
+        {
+          "id": 900500057,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 2080,
+          "proteinG": 93,
+          "carbsG": 151,
+          "fatG": 124,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/13/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Beef, White American Cheese, Red/Green Pepper Strips, Chipotle Mayo, White Bread, Grilled Onions. Size ids on https://subs.jerseymikes.com/nutrition/13/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#42 Chipotle Chicken Cheese Steak",
+      "says": [
+        "chipotle chicken cheese steak",
+        "chipotle chicken cheesesteak",
+        "chipotle chicken philly",
+        "number 42",
+        "#42"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500058,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 970,
+          "proteinG": 49,
+          "carbsG": 75,
+          "fatG": 53,
+          "default": true
+        },
+        {
+          "id": 900500059,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1950,
+          "proteinG": 98,
+          "carbsG": 149,
+          "fatG": 107,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/14/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Chicken, White American Cheese, Red/Green Pepper Strips, Chipotle Mayo, White Bread, Grilled Onions. Size ids on https://subs.jerseymikes.com/nutrition/14/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#56 Big Kahuna Cheese Steak",
+      "says": [
+        "big kahuna cheese steak",
+        "big kahuna cheesesteak",
+        "big kahuna",
+        "number 56",
+        "#56"
+      ],
+      "signature": [
+        "big kahuna cheese steak",
+        "big kahuna cheesesteak"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500060,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 800,
+          "proteinG": 49,
+          "carbsG": 76,
+          "fatG": 35,
+          "default": true
+        },
+        {
+          "id": 900500061,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1610,
+          "proteinG": 97,
+          "carbsG": 152,
+          "fatG": 69,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/15/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Beef, White American Cheese, Jalapeño Peppers, Mushrooms, Red/Green Pepper Strips, White Bread, Grilled Onions. Size ids on https://subs.jerseymikes.com/nutrition/15/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#55 Big Kahuna Chicken Cheese Steak",
+      "says": [
+        "big kahuna chicken cheese steak",
+        "big kahuna chicken cheesesteak",
+        "big kahuna chicken",
+        "number 55",
+        "#55"
+      ],
+      "signature": [
+        "big kahuna chicken cheese steak",
+        "big kahuna chicken cheesesteak",
+        "big kahuna chicken"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500062,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 740,
+          "proteinG": 51,
+          "carbsG": 75,
+          "fatG": 26,
+          "default": true
+        },
+        {
+          "id": 900500063,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1480,
+          "proteinG": 102,
+          "carbsG": 150,
+          "fatG": 52,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/16/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Chicken, White American Cheese, Jalapeño Peppers, Mushrooms, Red/Green Pepper Strips, White Bread, Grilled Onions. Size ids on https://subs.jerseymikes.com/nutrition/16/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#26 Bacon Ranch Chicken Cheese Steak",
+      "says": [
+        "bacon ranch chicken cheese steak",
+        "bacon ranch chicken cheesesteak",
+        "bacon ranch chicken",
+        "chicken bacon ranch",
+        "number 26",
+        "#26"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500064,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 920,
+          "proteinG": 55,
+          "carbsG": 71,
+          "fatG": 47,
+          "default": true
+        },
+        {
+          "id": 900500065,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1840,
+          "proteinG": 110,
+          "carbsG": 142,
+          "fatG": 94,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/573/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Bacon, Philly Chicken, White American Cheese, Ranch, White Bread, Lettuce, Tomatoes. Size ids on https://subs.jerseymikes.com/nutrition/573/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#44 Buffalo Chicken Cheese Steak",
+      "says": [
+        "buffalo chicken cheese steak",
+        "buffalo chicken cheesesteak",
+        "buffalo chicken",
+        "buffalo chicken sub",
+        "number 44",
+        "#44"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500066,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 890,
+          "proteinG": 50,
+          "carbsG": 73,
+          "fatG": 44,
+          "default": true
+        },
+        {
+          "id": 900500067,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1790,
+          "proteinG": 100,
+          "carbsG": 145,
+          "fatG": 89,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/571/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Chicken, White American Cheese, Blue Cheese, Buffalo Sauce, White Bread, Lettuce, Tomatoes. Size ids on https://subs.jerseymikes.com/nutrition/571/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#31 California Chicken Cheese Steak",
+      "says": [
+        "california chicken cheese steak",
+        "california chicken cheesesteak",
+        "california chicken",
+        "number 31",
+        "#31"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500068,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 930,
+          "proteinG": 49,
+          "carbsG": 70,
+          "fatG": 51,
+          "default": true
+        },
+        {
+          "id": 900500069,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1860,
+          "proteinG": 98,
+          "carbsG": 139,
+          "fatG": 102,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/569/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Philly Chicken, White American Cheese, Mayo, White Bread, Lettuce, Tomatoes. Size ids on https://subs.jerseymikes.com/nutrition/569/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#20 Grilled Pastrami Reuben",
+      "says": [
+        "grilled pastrami reuben",
+        "pastrami reuben",
+        "reuben",
+        "reuben sub",
+        "number 20",
+        "#20",
+        "number twenty"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500070,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 720,
+          "proteinG": 42,
+          "carbsG": 74,
+          "fatG": 30,
+          "default": true
+        },
+        {
+          "id": 900500071,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1380,
+          "proteinG": 83,
+          "carbsG": 147,
+          "fatG": 53,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/19/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Pastrami, Swiss, Sauerkraut, Thousand Island, White Bread. Size ids on https://subs.jerseymikes.com/nutrition/19/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "#19 BBQ Beef",
+      "says": [
+        "bbq beef",
+        "barbecue beef",
+        "bbq beef sub",
+        "number 19",
+        "#19",
+        "number nineteen"
+      ],
+      "signature": [],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500072,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 710,
+          "proteinG": 60,
+          "carbsG": 87,
+          "fatG": 11,
+          "default": true
+        },
+        {
+          "id": 900500073,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1290,
+          "proteinG": 107,
+          "carbsG": 163,
+          "fatG": 20,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/158/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Roast Beef, BBQ Sauce, White Bread. Size ids on https://subs.jerseymikes.com/nutrition/158/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "Mike's Hot Italian",
+      "says": [
+        "mike's hot italian",
+        "mikes hot italian",
+        "hot italian",
+        "hot italian sub"
+      ],
+      "signature": [
+        "mike's hot italian",
+        "mikes hot italian"
+      ],
+      "category": "sub",
+      "sizes": [
+        {
+          "id": 900500074,
+          "size": "regular",
+          "label": "Regular sub",
+          "grams": null,
+          "calories": 720,
+          "proteinG": 43,
+          "carbsG": 71,
+          "fatG": 29,
+          "default": true
+        },
+        {
+          "id": 900500075,
+          "size": "giant",
+          "label": "Giant sub",
+          "grams": null,
+          "calories": 1430,
+          "proteinG": 85,
+          "carbsG": 143,
+          "fatG": 59,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/731/2",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Ham, Pepperoni, Hard Salami, Provolone, White Bread, Lettuce, Tomatoes, Hot Chopped Pepper Relish, Grilled Onions. Size ids on https://subs.jerseymikes.com/nutrition/731/{size}: regular=2, giant=3. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "Kid's Sub Ham",
+      "says": [
+        "kids ham sub",
+        "kid's ham sub",
+        "kids sub ham",
+        "kids ham"
+      ],
+      "signature": [],
+      "category": "kids",
+      "sizes": [
+        {
+          "id": 900500076,
+          "size": "kids",
+          "label": "Kid's sub",
+          "grams": null,
+          "calories": 240,
+          "proteinG": 14,
+          "carbsG": 33,
+          "fatG": 6,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/446/33",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Ham, Provolone, White Bread, Lettuce, Tomatoes. Size ids on https://subs.jerseymikes.com/nutrition/446/{size}: kids=33. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "Kid's Sub Turkey",
+      "says": [
+        "kids turkey sub",
+        "kid's turkey sub",
+        "kids sub turkey",
+        "kids turkey"
+      ],
+      "signature": [],
+      "category": "kids",
+      "sizes": [
+        {
+          "id": 900500077,
+          "size": "kids",
+          "label": "Kid's sub",
+          "grams": null,
+          "calories": 240,
+          "proteinG": 17,
+          "carbsG": 32,
+          "fatG": 5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/447/33",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Turkey, Provolone, White Bread, Lettuce, Tomatoes. Size ids on https://subs.jerseymikes.com/nutrition/447/{size}: kids=33. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "Kid's Sub Salami",
+      "says": [
+        "kids salami sub",
+        "kid's salami sub",
+        "kids sub salami",
+        "kids salami"
+      ],
+      "signature": [],
+      "category": "kids",
+      "sizes": [
+        {
+          "id": 900500078,
+          "size": "kids",
+          "label": "Kid's sub",
+          "grams": null,
+          "calories": 270,
+          "proteinG": 12,
+          "carbsG": 33,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/448/33",
+      "note": "Jersey Mike's official nutrition tool, default ingredients (inclusion type 'D') summed as the site does: Hard Salami, Provolone, White Bread, Lettuce, Tomatoes. Size ids on https://subs.jerseymikes.com/nutrition/448/{size}: kids=33. Calories FDA-rounded by the site; fat/carb/protein (shown to 2 decimals on the site) FDA-rounded here. Serving weight not published."
+    },
+    {
+      "name": "Chips",
+      "says": [
+        "chips",
+        "bag of chips",
+        "lays",
+        "lay's",
+        "lays classic",
+        "potato chips"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900500079,
+          "size": "bag",
+          "label": "1 regular bag",
+          "grams": null,
+          "calories": 240,
+          "proteinG": 3,
+          "carbsG": 23,
+          "fatG": 16,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/117/2",
+      "note": "Jersey Mike's official nutrition tool, default item: Lays Classic. Serving weight not published. Default/standard chip is Lay's Classic regular bag; other flavors differ (e.g. Baked Lay's 140 cal, Doritos Cool Ranch 260 cal)."
+    },
+    {
+      "name": "Chocolate Chunk Cookie",
+      "says": [
+        "chocolate chunk cookie",
+        "cookie",
+        "chocolate chip cookie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900500080,
+          "size": "cookie",
+          "label": "1 cookie",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 3,
+          "carbsG": 37,
+          "fatG": 14,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/113/2",
+      "note": "Jersey Mike's official nutrition tool, default item: Chocolate Chunk Cookie. Serving weight not published."
+    },
+    {
+      "name": "Brownie",
+      "says": [
+        "brownie",
+        "chocolate brownie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900500081,
+          "size": "brownie",
+          "label": "1 brownie",
+          "grams": null,
+          "calories": 500,
+          "proteinG": 5,
+          "carbsG": 62,
+          "fatG": 28,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://subs.jerseymikes.com/nutrition/115/2",
+      "note": "Jersey Mike's official nutrition tool, default item: Brownie. Serving weight not published."
+    }
+  ]
+}

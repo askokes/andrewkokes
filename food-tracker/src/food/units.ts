@@ -4,6 +4,7 @@
 // yogurt). When nothing matches we assume 100 g per unit and flag the amount
 // as guessed.
 import { commonPortions, commonUnit } from "./common";
+import { menuEntryName, menuUnits, menuWeightKnown } from "./menu";
 import { nutritionFor } from "./nutrition";
 import {
   GRAMS_PER,
@@ -206,6 +207,9 @@ function classify(p: RawPortion, gramsEach: number, foodWords: string[], contain
  * portions lack (see commonPortions); `withCommon: false` leaves them out.
  */
 export function unitOptions(food: FoodRecord, withCommon = true): UnitOption[] {
+  // A restaurant item is measured the chain's way: a serving, and oz or g only when the chain gives a weight.
+  const menu = menuUnits(food.fdcId);
+  if (menu) return menu;
   const foodWords = words(food.description);
   const found = new Map<string, { label: string; grams: number; rank: number }>();
   // The table's can and bottle sizes stand for a drink it names; USDA's are used for any other.
@@ -367,5 +371,9 @@ export function toCandidate(
     units,
     amount,
     nutrition: nutritionFor(food.per100g, amount.grams),
+    ...(isMenuFood(food) ? { entryName: menuEntryName(food.fdcId) ?? food.description } : {}),
+    ...(isMenuFood(food) && !menuWeightKnown(food.fdcId) ? { noWeight: true } : {}),
   };
 }
+
+const isMenuFood = (food: FoodRecord) => food.dataType === "Restaurant";

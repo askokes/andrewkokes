@@ -1,0 +1,2036 @@
+{
+  "chain": "Chipotle",
+  "chainSays": [
+    "chipotle",
+    "chipotle mexican grill",
+    "chipotles"
+  ],
+  "sources": [
+    "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+    "https://www.chipotle.com/nutrition-calculator",
+    "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900700091,
+  "items": [
+    {
+      "name": "Chicken",
+      "says": [
+        "chicken",
+        "grilled chicken",
+        "adobo chicken"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900700001,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 180,
+          "proteinG": 32,
+          "carbsG": 0,
+          "fatG": 7,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Chicken\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-1). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Steak",
+      "says": [
+        "steak"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900700002,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 150,
+          "proteinG": 21,
+          "carbsG": 1,
+          "fatG": 6,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Steak\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-2). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Barbacoa",
+      "says": [
+        "barbacoa",
+        "beef barbacoa"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900700003,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 170,
+          "proteinG": 24,
+          "carbsG": 2,
+          "fatG": 7,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Barbacoa\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-4). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Carnitas",
+      "says": [
+        "carnitas"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900700004,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 210,
+          "proteinG": 23,
+          "carbsG": 0,
+          "fatG": 12,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Carnitas\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-3). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Sofritas",
+      "says": [
+        "sofritas",
+        "tofu sofritas"
+      ],
+      "signature": [
+        "sofritas"
+      ],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900700005,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 150,
+          "proteinG": 8,
+          "carbsG": 9,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Sofritas\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-5). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Pollo Asado",
+      "says": [
+        "pollo asado"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900700006,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 180,
+          "proteinG": 29,
+          "carbsG": 3,
+          "fatG": 7,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Not in the nutrition-facts PDF (added after it); value from chipotle.com nutrition-calculator data, item CMG-11, portion 4 oz. Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Cilantro-Lime White Rice",
+      "says": [
+        "white rice",
+        "cilantro lime rice",
+        "cilantro-lime white rice",
+        "rice"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700007,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 210,
+          "proteinG": 4,
+          "carbsG": 40,
+          "fatG": 4,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Cilantro-Lime White Rice\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-5001). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Cilantro-Lime Brown Rice",
+      "says": [
+        "brown rice",
+        "cilantro lime brown rice",
+        "cilantro-lime brown rice"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700008,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 210,
+          "proteinG": 4,
+          "carbsG": 36,
+          "fatG": 6,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Cilantro-Lime Brown Rice\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-5002). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Black Beans",
+      "says": [
+        "black beans"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700009,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 130,
+          "proteinG": 8,
+          "carbsG": 22,
+          "fatG": 1.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Black Beans\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-5051). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Pinto Beans",
+      "says": [
+        "pinto beans"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700010,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 130,
+          "proteinG": 8,
+          "carbsG": 21,
+          "fatG": 1.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Pinto Beans\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-5052). Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Fajita Veggies",
+      "says": [
+        "fajita veggies",
+        "fajita vegetables",
+        "fajitas"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700011,
+          "size": "regular",
+          "label": "entrée portion (2 oz)",
+          "grams": 57,
+          "calories": 20,
+          "proteinG": 1,
+          "carbsG": 5,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Fajita Vegetables\", portion 2 oz. Values match the chipotle.com nutrition-calculator data (CMG-5101). Grams = PDF 2 oz x 28.35 (calculator lists 2.5 oz with the same nutrition)."
+    },
+    {
+      "name": "Fresh Tomato Salsa",
+      "says": [
+        "fresh tomato salsa",
+        "tomato salsa",
+        "pico de gallo",
+        "pico",
+        "mild salsa"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700012,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 25,
+          "proteinG": 0,
+          "carbsG": 4,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Fresh Tomato Salsa\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-5201). Grams = PDF 4 oz x 28.35 (calculator lists 3.5 oz with the same nutrition)."
+    },
+    {
+      "name": "Roasted Chili-Corn Salsa",
+      "says": [
+        "roasted chili-corn salsa",
+        "roasted chili corn salsa",
+        "corn salsa"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700013,
+          "size": "regular",
+          "label": "entrée portion (4 oz)",
+          "grams": 113,
+          "calories": 80,
+          "proteinG": 3,
+          "carbsG": 16,
+          "fatG": 1.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Roasted Chili-Corn Salsa\", portion 4 oz. Values match the chipotle.com nutrition-calculator data (CMG-5202). Grams = PDF 4 oz x 28.35 (calculator lists 3.5 oz with the same nutrition)."
+    },
+    {
+      "name": "Tomatillo-Green Chili Salsa",
+      "says": [
+        "tomatillo-green chili salsa",
+        "tomatillo green chili salsa",
+        "green salsa",
+        "salsa verde"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700014,
+          "size": "regular",
+          "label": "entrée portion (2 fl oz)",
+          "grams": 57,
+          "calories": 15,
+          "proteinG": 0,
+          "carbsG": 4,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Tomatillo-Green Chili Salsa\", portion 2 fl oz. Values match the chipotle.com nutrition-calculator data (CMG-5203). PDF portion is 2 fl oz; calculator lists 2 oz. Grams = 2 oz x 28.35."
+    },
+    {
+      "name": "Tomatillo-Red Chili Salsa",
+      "says": [
+        "tomatillo-red chili salsa",
+        "tomatillo red chili salsa",
+        "red salsa",
+        "hot salsa"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700015,
+          "size": "regular",
+          "label": "entrée portion (2 fl oz)",
+          "grams": 57,
+          "calories": 30,
+          "proteinG": 0,
+          "carbsG": 4,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Tomatillo-Red Chili Salsa\", portion 2 fl oz. Values match the chipotle.com nutrition-calculator data (CMG-5204). PDF portion is 2 fl oz; calculator lists 2 oz. Grams = 2 oz x 28.35. Macro outlier as published: 30 cal but only 4 g carbs, 0 g protein/fat (4P+4C+9F = 16)."
+    },
+    {
+      "name": "Cheese",
+      "says": [
+        "cheese",
+        "shredded cheese",
+        "monterey jack cheese"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700016,
+          "size": "regular",
+          "label": "entrée portion (1 oz)",
+          "grams": 28,
+          "calories": 110,
+          "proteinG": 6,
+          "carbsG": 1,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Cheese\", portion 1 oz. Values match the chipotle.com nutrition-calculator data (CMG-5252). Grams = 1 oz x 28.35."
+    },
+    {
+      "name": "Sour Cream",
+      "says": [
+        "sour cream"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700017,
+          "size": "regular",
+          "label": "entrée portion (2 oz)",
+          "grams": 57,
+          "calories": 110,
+          "proteinG": 2,
+          "carbsG": 2,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Sour Cream\", portion 2 oz. Values match the chipotle.com nutrition-calculator data (CMG-5251). Grams = 2 oz x 28.35."
+    },
+    {
+      "name": "Romaine Lettuce",
+      "says": [
+        "romaine lettuce",
+        "lettuce",
+        "romaine"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700018,
+          "size": "regular",
+          "label": "entrée portion (1 oz)",
+          "grams": 28,
+          "calories": 5,
+          "proteinG": 0,
+          "carbsG": 1,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Romaine Lettuce (tacos)\", portion 1 oz. Values match the chipotle.com nutrition-calculator data (CMG-5351). Grams = 1 oz x 28.35."
+    },
+    {
+      "name": "Supergreens Salad Mix",
+      "says": [
+        "supergreens",
+        "supergreens salad mix",
+        "salad greens"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700019,
+          "size": "regular",
+          "label": "salad base (3 oz)",
+          "grams": 85,
+          "calories": 15,
+          "proteinG": 1,
+          "carbsG": 3,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Supergreens Salad Mix\", portion 3 oz. Not itemized in the calculator data. Grams = 3 oz x 28.35."
+    },
+    {
+      "name": "Chipotle-Honey Vinaigrette",
+      "says": [
+        "honey vinaigrette",
+        "vinaigrette",
+        "salad dressing",
+        "salad vinaigrette"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900700020,
+          "size": "regular",
+          "label": "1 serving (2 fl oz)",
+          "grams": 57,
+          "calories": 220,
+          "proteinG": 1,
+          "carbsG": 18,
+          "fatG": 16,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Chipotle-Honey Vinaigrette\", portion 2 fl oz. Values match the chipotle.com nutrition-calculator data (CMG-5353). PDF portion is 2 fl oz; calculator lists 2 oz. Grams = 2 oz x 28.35."
+    },
+    {
+      "name": "Queso Blanco",
+      "says": [
+        "queso blanco",
+        "queso",
+        "side of queso",
+        "large queso"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700021,
+          "size": "entree",
+          "label": "entrée topping (2 oz)",
+          "grams": 57,
+          "calories": 120,
+          "proteinG": 5,
+          "carbsG": 4,
+          "fatG": 9,
+          "default": true
+        },
+        {
+          "id": 900700022,
+          "size": "side",
+          "label": "side (4 oz)",
+          "grams": 113,
+          "calories": 240,
+          "proteinG": 10,
+          "carbsG": 7,
+          "fatG": 18,
+          "default": false
+        },
+        {
+          "id": 900700023,
+          "size": "large",
+          "label": "large side (8 oz)",
+          "grams": 227,
+          "calories": 480,
+          "proteinG": 20,
+          "carbsG": 14,
+          "fatG": 37,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF rows \"Queso Blanco (entreé/side/large)\", portions 2/4/8 oz. Entrée portion matches calculator (CMG-1029); calculator 4 oz side (CMG-4134) shows 8 g carbs vs PDF 7 g. Grams = oz x 28.35."
+    },
+    {
+      "name": "Guacamole",
+      "says": [
+        "guacamole",
+        "guac",
+        "side of guac",
+        "side of guacamole",
+        "large guac"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700024,
+          "size": "regular",
+          "label": "topping or side (4 oz)",
+          "grams": 113,
+          "calories": 230,
+          "proteinG": 2,
+          "carbsG": 8,
+          "fatG": 22,
+          "default": true
+        },
+        {
+          "id": 900700025,
+          "size": "large",
+          "label": "large side (8 oz)",
+          "grams": 227,
+          "calories": 460,
+          "proteinG": 4,
+          "carbsG": 16,
+          "fatG": 44,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF rows \"Guacamole (topping/side)\" 4 oz and \"Guacamole (large)\" 8 oz; 4 oz matches calculator (CMG-5301). Grams = oz x 28.35."
+    },
+    {
+      "name": "Cilantro Lime Sauce",
+      "says": [
+        "cilantro lime sauce",
+        "cilantro-lime sauce"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900700026,
+          "size": "entree",
+          "label": "entrée topping (2 oz)",
+          "grams": 57,
+          "calories": 80,
+          "proteinG": 2,
+          "carbsG": 3,
+          "fatG": 6,
+          "default": true
+        },
+        {
+          "id": 900700027,
+          "size": "side",
+          "label": "side (4 oz)",
+          "grams": 113,
+          "calories": 160,
+          "proteinG": 4,
+          "carbsG": 6,
+          "fatG": 12,
+          "default": false
+        },
+        {
+          "id": 900700028,
+          "size": "large",
+          "label": "large side (8 oz)",
+          "grams": 227,
+          "calories": 320,
+          "proteinG": 8,
+          "carbsG": 12,
+          "fatG": 24,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Not in the PDF; chipotle.com nutrition-calculator data CMG-5412 (2 oz), CMG-5414 (4 oz), CMG-5415 (8 oz). The calculator's separate \"Side of Cilantro Lime Sauce\" record (CMG-5413) lists 160 cal but 2 g protein / 3 g carbs / 6 g fat, which does not add up, so the internally consistent 4 oz record was used. Grams = oz x 28.35."
+    },
+    {
+      "name": "Flour Tortilla (burrito)",
+      "says": [
+        "burrito tortilla",
+        "flour tortilla",
+        "tortilla on the side",
+        "large flour tortilla"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700029,
+          "size": "regular",
+          "label": "1 burrito-size tortilla",
+          "grams": 113,
+          "calories": 320,
+          "proteinG": 8,
+          "carbsG": 50,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Flour Tortilla (burrito)\", 1 each; matches calculator \"Tortilla on the Side\" (CMG-4025), whose portion is 4 oz. Grams = 4 oz x 28.35."
+    },
+    {
+      "name": "Flour Tortilla (taco)",
+      "says": [
+        "taco tortilla",
+        "soft taco tortilla",
+        "soft flour tortilla",
+        "small flour tortilla"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700030,
+          "size": "1 tortilla",
+          "label": "1 soft taco tortilla",
+          "grams": 28,
+          "calories": 80,
+          "proteinG": 2,
+          "carbsG": 13,
+          "fatG": 2.5,
+          "default": true
+        },
+        {
+          "id": 900700031,
+          "size": "3 tortillas",
+          "label": "3 soft taco tortillas",
+          "grams": 85,
+          "calories": 250,
+          "proteinG": 7,
+          "carbsG": 40,
+          "fatG": 8,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "1 tortilla: PDF row \"Flour Tortilla (taco)\" (matches calculator CMG-5401, 1 oz). 3 tortillas: the calculator's tortilla portion for a 3-taco order (CMG-5501, 3 oz) from https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us ; it is 250 cal rather than 3 x 80 because the per-tortilla figure is rounded. Grams = oz x 28.35."
+    },
+    {
+      "name": "Crispy Corn Tortilla",
+      "says": [
+        "crispy corn tortilla",
+        "crispy taco shell",
+        "hard taco shell",
+        "corn taco shell"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700032,
+          "size": "1 shell",
+          "label": "1 crispy corn taco shell",
+          "grams": 14,
+          "calories": 70,
+          "proteinG": 1,
+          "carbsG": 10,
+          "fatG": 3,
+          "default": true
+        },
+        {
+          "id": 900700033,
+          "size": "3 shells",
+          "label": "3 crispy corn taco shells",
+          "grams": 43,
+          "calories": 200,
+          "proteinG": 3,
+          "carbsG": 29,
+          "fatG": 9,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "1 shell: PDF row \"Crispy Corn Tortilla\". 3 shells: calculator tortilla portion for a 3-taco order (CMG-5503, 1.5 oz) from https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us ; 200 cal rather than 3 x 70 because of rounding. Grams from calculator portions (0.5 oz per shell) x 28.35."
+    },
+    {
+      "name": "Chips",
+      "says": [
+        "chips",
+        "tortilla chips",
+        "side of chips",
+        "large chips",
+        "bag of chips"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700034,
+          "size": "regular",
+          "label": "regular bag (4 oz)",
+          "grams": 113,
+          "calories": 540,
+          "proteinG": 7,
+          "carbsG": 73,
+          "fatG": 25,
+          "default": true
+        },
+        {
+          "id": 900700035,
+          "size": "large",
+          "label": "large bag (6 oz)",
+          "grams": 170,
+          "calories": 810,
+          "proteinG": 11,
+          "carbsG": 110,
+          "fatG": 38,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF rows \"Chips (regular)\" 4 oz and \"Chips (large)\" 6 oz; both match calculator (CMG-1002, CMG-1016). Grams = oz x 28.35."
+    },
+    {
+      "name": "Chili Lime Chips",
+      "says": [
+        "chili lime chips",
+        "large chili lime chips"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700036,
+          "size": "regular",
+          "label": "regular bag (4 oz)",
+          "grams": 113,
+          "calories": 550,
+          "proteinG": 9,
+          "carbsG": 68,
+          "fatG": 27,
+          "default": true
+        },
+        {
+          "id": 900700037,
+          "size": "large",
+          "label": "large bag (6 oz)",
+          "grams": 170,
+          "calories": 790,
+          "proteinG": 11,
+          "carbsG": 107,
+          "fatG": 36,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Not in the PDF; chipotle.com nutrition-calculator data CMG-5362 (4 oz) and CMG-5363 (6 oz). Grams = oz x 28.35."
+    },
+    {
+      "name": "Chips & Guacamole",
+      "says": [
+        "chips and guac",
+        "chips & guac",
+        "chips and guacamole",
+        "chips & guacamole",
+        "large chips and guac"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700038,
+          "size": "regular",
+          "label": "regular chips + 4 oz guac",
+          "grams": 227,
+          "calories": 770,
+          "proteinG": 9,
+          "carbsG": 81,
+          "fatG": 47,
+          "default": true
+        },
+        {
+          "id": 900700039,
+          "size": "large",
+          "label": "large chips + 8 oz guac",
+          "grams": 397,
+          "calories": 1270,
+          "proteinG": 15,
+          "carbsG": 126,
+          "fatG": 82,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Chipotle.com nutrition-calculator data CMG-1003 (8 oz) and CMG-1015 \"Large Chips & Large Guacamole\" (14 oz). Calories match the PDF menu panel (770 / 1270, \"serves 2\" / \"serves 3\") and equal chips + guacamole rows. Grams = oz x 28.35."
+    },
+    {
+      "name": "Chips & Queso Blanco",
+      "says": [
+        "chips and queso",
+        "chips & queso",
+        "chips and queso blanco",
+        "chips & queso blanco",
+        "large chips and queso"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700040,
+          "size": "regular",
+          "label": "regular chips + 4 oz queso",
+          "grams": null,
+          "calories": 780,
+          "proteinG": 17,
+          "carbsG": 80,
+          "fatG": 43,
+          "default": true
+        },
+        {
+          "id": 900700041,
+          "size": "large",
+          "label": "large chips + 8 oz queso",
+          "grams": null,
+          "calories": 1290,
+          "proteinG": 31,
+          "carbsG": 124,
+          "fatG": 75,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Chipotle.com nutrition-calculator data CMG-1032 and CMG-1033 \"Large Chips & Large Queso Blanco\". Calories match the PDF menu panel (780 / 1290) and equal chips + queso side rows. grams null: the calculator's portion fields (4 oz / 8 oz) cover only the queso, so no reliable total weight is published."
+    },
+    {
+      "name": "Chips & Fresh Tomato Salsa",
+      "says": [
+        "chips and salsa",
+        "chips & salsa",
+        "chips and fresh tomato salsa",
+        "chips and pico"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700042,
+          "size": "regular",
+          "label": "regular chips + salsa",
+          "grams": 213,
+          "calories": 565,
+          "proteinG": 7,
+          "carbsG": 74,
+          "fatG": 25,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Chipotle.com nutrition-calculator data CMG-1005, portion 7.5 oz (grams = oz x 28.35). PDF menu panel gives \"Chips & Salsa 560-620 cal\". Carbs as published (74 g); the chips + salsa rows sum to 77 g."
+    },
+    {
+      "name": "Chips & Tomatillo-Red Chili Salsa",
+      "says": [
+        "chips and red salsa",
+        "chips & tomatillo-red chili salsa",
+        "chips and hot salsa"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700043,
+          "size": "regular",
+          "label": "regular chips + salsa",
+          "grams": 170,
+          "calories": 570,
+          "proteinG": 7,
+          "carbsG": 77,
+          "fatG": 25,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Chipotle.com nutrition-calculator data CMG-1007, portion 6 oz (grams = oz x 28.35). PDF menu panel gives \"Chips & Salsa 560-620 cal\"."
+    },
+    {
+      "name": "Chips & Tomatillo-Green Chili Salsa",
+      "says": [
+        "chips and green salsa",
+        "chips & tomatillo-green chili salsa",
+        "chips and salsa verde"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700044,
+          "size": "regular",
+          "label": "regular chips + salsa",
+          "grams": 170,
+          "calories": 555,
+          "proteinG": 7,
+          "carbsG": 77,
+          "fatG": 25,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Chipotle.com nutrition-calculator data CMG-1006, portion 6 oz (grams = oz x 28.35). PDF menu panel gives \"Chips & Salsa 560-620 cal\"."
+    },
+    {
+      "name": "Chips & Roasted Chili-Corn Salsa",
+      "says": [
+        "chips and corn salsa",
+        "chips & roasted chili-corn salsa"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900700045,
+          "size": "regular",
+          "label": "regular chips + salsa",
+          "grams": 213,
+          "calories": 620,
+          "proteinG": 10,
+          "carbsG": 89,
+          "fatG": 27,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Chipotle.com nutrition-calculator data CMG-1008, portion 7.5 oz (grams = oz x 28.35). PDF menu panel gives \"Chips & Salsa 560-620 cal\"."
+    },
+    {
+      "name": "Tractor Organic Lemonade",
+      "says": [
+        "lemonade",
+        "tractor lemonade",
+        "organic lemonade",
+        "tractor organic lemonade"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700046,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 170,
+          "proteinG": 0,
+          "carbsG": 43,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700047,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 250,
+          "proteinG": 0,
+          "carbsG": 62,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Tractor Lemonade\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Matches calculator CMG-2010/2011."
+    },
+    {
+      "name": "Tractor Organic Berry Agua Fresca",
+      "says": [
+        "berry agua fresca",
+        "tractor berry agua fresca",
+        "agua fresca"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700048,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 200,
+          "proteinG": 0,
+          "carbsG": 50,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700049,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 290,
+          "proteinG": 0,
+          "carbsG": 72,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Tractor Berry Agua Fresca\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Calories match calculator CMG-2017/2018."
+    },
+    {
+      "name": "Tractor Organic Watermelon Limeade",
+      "says": [
+        "watermelon limeade",
+        "tractor watermelon limeade"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700050,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 230,
+          "proteinG": 0,
+          "carbsG": 56,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700051,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 330,
+          "proteinG": 0,
+          "carbsG": 82,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Tractor Watermelon Limeade\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Matches calculator CMG-2019/2020."
+    },
+    {
+      "name": "Tractor Organic Mandarin Agua Fresca",
+      "says": [
+        "mandarin agua fresca",
+        "tractor mandarin agua fresca"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700052,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 0,
+          "carbsG": 47,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700053,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 0,
+          "carbsG": 69,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Tractor Mandarin Agua Fresca\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Calories match calculator CMG-2012/2013."
+    },
+    {
+      "name": "Coca-Cola",
+      "says": [
+        "coke",
+        "coca-cola",
+        "coca cola",
+        "fountain coke"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700054,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 260,
+          "proteinG": 0,
+          "carbsG": 70,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700055,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 380,
+          "proteinG": 0,
+          "carbsG": 105,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Coca-Cola Classic\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Fountain brands vary by restaurant."
+    },
+    {
+      "name": "Diet Coke",
+      "says": [
+        "diet coke"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700056,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700057,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Diet Coke\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Fountain brands vary by restaurant."
+    },
+    {
+      "name": "Sprite",
+      "says": [
+        "sprite"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700058,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 260,
+          "proteinG": 0,
+          "carbsG": 70,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700059,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 380,
+          "proteinG": 0,
+          "carbsG": 105,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Sprite\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Fountain brands vary by restaurant."
+    },
+    {
+      "name": "Pepsi",
+      "says": [
+        "pepsi",
+        "fountain pepsi"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700060,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 0,
+          "carbsG": 77,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700061,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 400,
+          "proteinG": 0,
+          "carbsG": 112,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Pepsi\" (Pepsi-market sheet). Fluid ounces only; grams null. Only at restaurants that pour Pepsi; fountain brands vary by restaurant."
+    },
+    {
+      "name": "Chipotle Sweet Iced Tea",
+      "says": [
+        "sweet tea",
+        "sweet iced tea"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700062,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 150,
+          "proteinG": 0,
+          "carbsG": 45,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700063,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 220,
+          "proteinG": 0,
+          "carbsG": 65,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Chipotle Sweet Iced Tea\" (Coca-Cola-market sheet). Fluid ounces only; grams null. Published carbs (45 g / 65 g) imply ~180 / ~260 cal vs the published 150 / 220 cal; values kept as published."
+    },
+    {
+      "name": "Chipotle Iced Tea",
+      "says": [
+        "iced tea",
+        "unsweetened iced tea",
+        "unsweet tea"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700064,
+          "size": "regular",
+          "label": "regular (22 fl oz)",
+          "grams": null,
+          "calories": 10,
+          "proteinG": 0,
+          "carbsG": 3,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900700065,
+          "size": "large",
+          "label": "large (32 fl oz)",
+          "grams": null,
+          "calories": 15,
+          "proteinG": 0,
+          "carbsG": 4,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "PDF row \"Chipotle Iced Tea\" (Coca-Cola-market sheet). Fluid ounces only; grams null."
+    },
+    {
+      "name": "Mexican Coca-Cola",
+      "says": [
+        "mexican coke",
+        "mexican coca-cola",
+        "mexican coca cola"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900700066,
+          "size": "bottle",
+          "label": "355 mL bottle",
+          "grams": null,
+          "calories": 150,
+          "proteinG": 0,
+          "carbsG": 39,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://services.chipotle.com/menu-metadata/v1/menu-metadata/nutrition?channel=web&region=us",
+      "note": "Chipotle.com nutrition-calculator data CMG-2810 (355 mL). Fluid only; grams null."
+    },
+    {
+      "name": "Chicken Burrito",
+      "says": [
+        "chicken burrito"
+      ],
+      "signature": [],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900700067,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 624,
+          "calories": 980,
+          "proteinG": 58,
+          "carbsG": 118,
+          "fatG": 29.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): flour tortilla (burrito, 320 cal) + cilantro-lime white rice 4 oz + black beans 4 oz + chicken 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (22 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Chicken Bowl",
+      "says": [
+        "chicken bowl",
+        "chicken burrito bowl"
+      ],
+      "signature": [],
+      "category": "bowl",
+      "sizes": [
+        {
+          "id": 900700068,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 510,
+          "calories": 660,
+          "proteinG": 50,
+          "carbsG": 68,
+          "fatG": 20.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): cilantro-lime white rice 4 oz + black beans 4 oz + chicken 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Chicken Salad",
+      "says": [
+        "chicken salad",
+        "chicken burrito salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900700069,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 510,
+          "calories": 680,
+          "proteinG": 48,
+          "carbsG": 48,
+          "fatG": 32.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): supergreens salad mix 3 oz + black beans 4 oz + chicken 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + chipotle-honey vinaigrette 2 fl oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total. Vinaigrette is included by default on Chipotle salads; no rice."
+    },
+    {
+      "name": "Chicken Tacos (3)",
+      "says": [
+        "chicken tacos",
+        "3 chicken tacos",
+        "three chicken tacos"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900700070,
+          "size": "regular",
+          "label": "3 tacos",
+          "grams": 369,
+          "calories": 570,
+          "proteinG": 45,
+          "carbsG": 46,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): 3 soft flour taco tortillas (250 cal as published for a 3-taco order) + chicken 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (13 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Steak Burrito",
+      "says": [
+        "steak burrito"
+      ],
+      "signature": [],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900700071,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 624,
+          "calories": 950,
+          "proteinG": 47,
+          "carbsG": 119,
+          "fatG": 28.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): flour tortilla (burrito, 320 cal) + cilantro-lime white rice 4 oz + black beans 4 oz + steak 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (22 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Steak Bowl",
+      "says": [
+        "steak bowl",
+        "steak burrito bowl"
+      ],
+      "signature": [],
+      "category": "bowl",
+      "sizes": [
+        {
+          "id": 900700072,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 510,
+          "calories": 630,
+          "proteinG": 39,
+          "carbsG": 69,
+          "fatG": 19.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): cilantro-lime white rice 4 oz + black beans 4 oz + steak 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Steak Salad",
+      "says": [
+        "steak salad",
+        "steak burrito salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900700073,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 510,
+          "calories": 650,
+          "proteinG": 37,
+          "carbsG": 49,
+          "fatG": 31.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): supergreens salad mix 3 oz + black beans 4 oz + steak 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + chipotle-honey vinaigrette 2 fl oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total. Vinaigrette is included by default on Chipotle salads; no rice."
+    },
+    {
+      "name": "Steak Tacos (3)",
+      "says": [
+        "steak tacos",
+        "3 steak tacos",
+        "three steak tacos"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900700074,
+          "size": "regular",
+          "label": "3 tacos",
+          "grams": 369,
+          "calories": 540,
+          "proteinG": 34,
+          "carbsG": 47,
+          "fatG": 22,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): 3 soft flour taco tortillas (250 cal as published for a 3-taco order) + steak 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (13 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Beef Barbacoa Burrito",
+      "says": [
+        "barbacoa burrito",
+        "beef barbacoa burrito"
+      ],
+      "signature": [],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900700075,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 624,
+          "calories": 970,
+          "proteinG": 50,
+          "carbsG": 120,
+          "fatG": 29.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): flour tortilla (burrito, 320 cal) + cilantro-lime white rice 4 oz + black beans 4 oz + barbacoa 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (22 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Beef Barbacoa Bowl",
+      "says": [
+        "barbacoa bowl",
+        "barbacoa burrito bowl",
+        "beef barbacoa bowl",
+        "beef barbacoa burrito bowl"
+      ],
+      "signature": [],
+      "category": "bowl",
+      "sizes": [
+        {
+          "id": 900700076,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 510,
+          "calories": 650,
+          "proteinG": 42,
+          "carbsG": 70,
+          "fatG": 20.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): cilantro-lime white rice 4 oz + black beans 4 oz + barbacoa 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Beef Barbacoa Salad",
+      "says": [
+        "barbacoa salad",
+        "barbacoa burrito salad",
+        "beef barbacoa salad",
+        "beef barbacoa burrito salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900700077,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 510,
+          "calories": 670,
+          "proteinG": 40,
+          "carbsG": 50,
+          "fatG": 32.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): supergreens salad mix 3 oz + black beans 4 oz + barbacoa 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + chipotle-honey vinaigrette 2 fl oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total. Vinaigrette is included by default on Chipotle salads; no rice."
+    },
+    {
+      "name": "Beef Barbacoa Tacos (3)",
+      "says": [
+        "barbacoa tacos",
+        "3 barbacoa tacos",
+        "three barbacoa tacos",
+        "beef barbacoa tacos",
+        "3 beef barbacoa tacos",
+        "three beef barbacoa tacos"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900700078,
+          "size": "regular",
+          "label": "3 tacos",
+          "grams": 369,
+          "calories": 560,
+          "proteinG": 37,
+          "carbsG": 48,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): 3 soft flour taco tortillas (250 cal as published for a 3-taco order) + barbacoa 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (13 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Carnitas Burrito",
+      "says": [
+        "carnitas burrito"
+      ],
+      "signature": [],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900700079,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 624,
+          "calories": 1010,
+          "proteinG": 49,
+          "carbsG": 118,
+          "fatG": 34.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): flour tortilla (burrito, 320 cal) + cilantro-lime white rice 4 oz + black beans 4 oz + carnitas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (22 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Carnitas Bowl",
+      "says": [
+        "carnitas bowl",
+        "carnitas burrito bowl"
+      ],
+      "signature": [],
+      "category": "bowl",
+      "sizes": [
+        {
+          "id": 900700080,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 510,
+          "calories": 690,
+          "proteinG": 41,
+          "carbsG": 68,
+          "fatG": 25.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): cilantro-lime white rice 4 oz + black beans 4 oz + carnitas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Carnitas Salad",
+      "says": [
+        "carnitas salad",
+        "carnitas burrito salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900700081,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 510,
+          "calories": 710,
+          "proteinG": 39,
+          "carbsG": 48,
+          "fatG": 37.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): supergreens salad mix 3 oz + black beans 4 oz + carnitas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + chipotle-honey vinaigrette 2 fl oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total. Vinaigrette is included by default on Chipotle salads; no rice."
+    },
+    {
+      "name": "Carnitas Tacos (3)",
+      "says": [
+        "carnitas tacos",
+        "3 carnitas tacos",
+        "three carnitas tacos"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900700082,
+          "size": "regular",
+          "label": "3 tacos",
+          "grams": 369,
+          "calories": 600,
+          "proteinG": 36,
+          "carbsG": 46,
+          "fatG": 28,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): 3 soft flour taco tortillas (250 cal as published for a 3-taco order) + carnitas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (13 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Sofritas Burrito",
+      "says": [
+        "sofritas burrito"
+      ],
+      "signature": [
+        "sofritas burrito"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900700083,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 624,
+          "calories": 950,
+          "proteinG": 34,
+          "carbsG": 127,
+          "fatG": 32.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): flour tortilla (burrito, 320 cal) + cilantro-lime white rice 4 oz + black beans 4 oz + sofritas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (22 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Sofritas Bowl",
+      "says": [
+        "sofritas bowl",
+        "sofritas burrito bowl"
+      ],
+      "signature": [
+        "sofritas bowl",
+        "sofritas burrito bowl"
+      ],
+      "category": "bowl",
+      "sizes": [
+        {
+          "id": 900700084,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 510,
+          "calories": 630,
+          "proteinG": 26,
+          "carbsG": 77,
+          "fatG": 23.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): cilantro-lime white rice 4 oz + black beans 4 oz + sofritas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Sofritas Salad",
+      "says": [
+        "sofritas salad",
+        "sofritas burrito salad"
+      ],
+      "signature": [
+        "sofritas salad",
+        "sofritas burrito salad"
+      ],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900700085,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 510,
+          "calories": 650,
+          "proteinG": 24,
+          "carbsG": 57,
+          "fatG": 35.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): supergreens salad mix 3 oz + black beans 4 oz + sofritas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + chipotle-honey vinaigrette 2 fl oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total. Vinaigrette is included by default on Chipotle salads; no rice."
+    },
+    {
+      "name": "Sofritas Tacos (3)",
+      "says": [
+        "sofritas tacos",
+        "3 sofritas tacos",
+        "three sofritas tacos"
+      ],
+      "signature": [
+        "sofritas tacos",
+        "3 sofritas tacos",
+        "three sofritas tacos"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900700086,
+          "size": "regular",
+          "label": "3 tacos",
+          "grams": 369,
+          "calories": 540,
+          "proteinG": 21,
+          "carbsG": 55,
+          "fatG": 26,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): 3 soft flour taco tortillas (250 cal as published for a 3-taco order) + sofritas 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (13 oz x 28.35), not a weighed total."
+    },
+    {
+      "name": "Pollo Asado Burrito",
+      "says": [
+        "pollo asado burrito"
+      ],
+      "signature": [],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900700087,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 624,
+          "calories": 980,
+          "proteinG": 55,
+          "carbsG": 121,
+          "fatG": 29.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): flour tortilla (burrito, 320 cal) + cilantro-lime white rice 4 oz + black beans 4 oz + pollo asado 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (22 oz x 28.35), not a weighed total. Pollo Asado itself is not in the PDF; its value is from chipotle.com calculator data (CMG-11)."
+    },
+    {
+      "name": "Pollo Asado Bowl",
+      "says": [
+        "pollo asado bowl",
+        "pollo asado burrito bowl"
+      ],
+      "signature": [],
+      "category": "bowl",
+      "sizes": [
+        {
+          "id": 900700088,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 510,
+          "calories": 660,
+          "proteinG": 47,
+          "carbsG": 71,
+          "fatG": 20.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): cilantro-lime white rice 4 oz + black beans 4 oz + pollo asado 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total. Pollo Asado itself is not in the PDF; its value is from chipotle.com calculator data (CMG-11)."
+    },
+    {
+      "name": "Pollo Asado Salad",
+      "says": [
+        "pollo asado salad",
+        "pollo asado burrito salad"
+      ],
+      "signature": [],
+      "category": "salad",
+      "sizes": [
+        {
+          "id": 900700089,
+          "size": "regular",
+          "label": "1 salad",
+          "grams": 510,
+          "calories": 680,
+          "proteinG": 45,
+          "carbsG": 51,
+          "fatG": 32.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): supergreens salad mix 3 oz + black beans 4 oz + pollo asado 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + chipotle-honey vinaigrette 2 fl oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (18 oz x 28.35), not a weighed total. Vinaigrette is included by default on Chipotle salads; no rice. Pollo Asado itself is not in the PDF; its value is from chipotle.com calculator data (CMG-11)."
+    },
+    {
+      "name": "Pollo Asado Tacos (3)",
+      "says": [
+        "pollo asado tacos",
+        "3 pollo asado tacos",
+        "three pollo asado tacos"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900700090,
+          "size": "regular",
+          "label": "3 tacos",
+          "grams": 369,
+          "calories": 570,
+          "proteinG": 42,
+          "carbsG": 49,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official-sum",
+      "source": "https://www.chipotle.com/content/dam/chipotle/menu/nutrition/US-Nutrition-Facts-Paper-Menu-3-2025.pdf",
+      "note": "Standard build (not a Chipotle-published item): 3 soft flour taco tortillas (250 cal as published for a 3-taco order) + pollo asado 4 oz + fresh tomato salsa 4 oz + cheese 1 oz + romaine lettuce 1 oz. Totals are the sum of the published component values (see the component items in this file; protein and components from the Chipotle nutrition PDF / chipotle.com calculator data). Grams = sum of published component portions (13 oz x 28.35), not a weighed total. Pollo Asado itself is not in the PDF; its value is from chipotle.com calculator data (CMG-11)."
+    }
+  ]
+}

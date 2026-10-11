@@ -13,7 +13,13 @@ const DEFAULT = "🍽️";
 const RULES: [string, string][] = [
   // Dishes
   ["pizza", "🍕"],
-  ["burger|cheeseburger|hamburger", "🍔"],
+  ["burger|cheeseburger|hamburger|big mac|quarter pounder|mcdouble|whopper|baconator", "🍔"],
+  ["mcnugget|nugget|chick n strip|tender|strip|mcchicken|mccrispy|chick n mini", "🍗"],
+  ["crunchwrap|chalupa|gordita|doritos locos|quesadilla", "🌮"],
+  ["egg roll|rangoon|spring roll|potsticker", "🥟"],
+  ["chow mein|lo mein|chow fun", "🍜"],
+  ["mcflurry|frosted lemonade|frosted coffee|frosty", "🍦"],
+  ["mcmuffin|mcgriddle", "🥪"],
   ["hot dog|hotdog", "🌭"],
   ["taco", "🌮"],
   ["burrito|wrap", "🌯"],

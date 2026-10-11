@@ -39,7 +39,7 @@ export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day
   const unit = el(
     "select",
     { className: "control", attrs: { "aria-label": `Unit for ${name}` } },
-    ...units.map((u) => el("option", { value: u.unit, textContent: unitOptionLabel(u), selected: u.unit === entry.unit })),
+    ...units.map((u) => el("option", { value: u.unit, textContent: unitOptionLabel(u, entry.noWeight), selected: u.unit === entry.unit })),
   );
   const calOut = el("span", { className: "item-cal" });
   const gramsOut = el("span", { className: "muted" });
@@ -76,7 +76,7 @@ export function openEditSheet(host: HTMLElement, entry: EntryView, onSaved: (day
       return;
     }
     calOut.textContent = `${whole(c.nutrition.calories)} cal`;
-    gramsOut.textContent = c.unit.unit === "g" || c.grams <= 0 ? "" : `${whole(c.grams)} g`;
+    gramsOut.textContent = c.unit.unit === "g" || c.grams <= 0 || entry.noWeight ? "" : `${whole(c.grams)} g`;
     macrosOut.textContent = macroText(c.nutrition);
   };
   qty.addEventListener("input", () => {

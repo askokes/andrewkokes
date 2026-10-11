@@ -37,6 +37,11 @@ export interface ParsedItem {
   food: string;
   /** The slice of the original text this item came from, trimmed. */
   text: string;
+  /**
+   * Where the sentence says the food came from, lowercase, as said after "from" or "at"
+   * ("mcdonald's"). Every item in the sentence shares it. Absent when none was said.
+   */
+  place?: string;
 }
 
 export interface ParseResult {
@@ -133,6 +138,13 @@ export interface Candidate {
   amount: Amount;
   /** Nutrition for amount.grams. */
   nutrition: Nutrition;
+  /**
+   * A restaurant item whose chain publishes no weight (McDonald's, Panera):
+   * it is measured in servings only and its grams are never shown.
+   */
+  noWeight?: boolean;
+  /** The name to save it under when better than what was said: a restaurant item's menu name ("McDonald's Big Mac"). */
+  entryName?: string;
 }
 
 /**
@@ -190,6 +202,8 @@ export interface EntryView {
   nutrition: Nutrition;
   /** Units this entry can be changed to. Manual entries offer only their own unit. */
   units: UnitOption[];
+  /** As Candidate.noWeight: grams aren't shown. */
+  noWeight?: boolean;
   createdAt: string;
 }
 

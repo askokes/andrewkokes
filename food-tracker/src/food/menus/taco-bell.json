@@ -1,0 +1,1156 @@
+{
+  "chain": "Taco Bell",
+  "chainSays": [
+    "taco bell",
+    "tacobell"
+  ],
+  "sources": [
+    "https://www.tacobell.com/nutrition/info",
+    "https://www.nutritionix.com/taco-bell/menu/premium",
+    "https://www.nutritionix.com/taco-bell/menu/view-label/item/{id}/notFromAllergenPage",
+    "https://www.tacobell.com/food/drinks/mtn-dew-baja-blast"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900600049,
+  "items": [
+    {
+      "name": "Crunchy Taco",
+      "says": [
+        "crunchy taco",
+        "hard taco",
+        "hard shell taco",
+        "crunchy beef taco",
+        "beef crunchy taco"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600001,
+          "size": "regular",
+          "label": "1 taco",
+          "grams": 78,
+          "calories": 170,
+          "proteinG": 7,
+          "carbsG": 13,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Crunchy Taco. Weight from the item nutrition label (166772)."
+    },
+    {
+      "name": "Crunchy Taco Supreme",
+      "says": [
+        "crunchy taco supreme",
+        "taco supreme"
+      ],
+      "signature": [
+        "crunchy taco supreme"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600002,
+          "size": "regular",
+          "label": "1 taco",
+          "grams": 106,
+          "calories": 190,
+          "proteinG": 8,
+          "carbsG": 16,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Crunchy Taco Supreme®. Weight from the item nutrition label (166774)."
+    },
+    {
+      "name": "Soft Taco - Beef",
+      "says": [
+        "soft taco",
+        "beef soft taco",
+        "soft beef taco"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600003,
+          "size": "regular",
+          "label": "1 taco",
+          "grams": 92,
+          "calories": 180,
+          "proteinG": 9,
+          "carbsG": 18,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Soft Taco - Beef. Weight from the item nutrition label (166975)."
+    },
+    {
+      "name": "Soft Taco - Chicken",
+      "says": [
+        "chicken soft taco",
+        "soft chicken taco"
+      ],
+      "signature": [],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600004,
+          "size": "regular",
+          "label": "1 taco",
+          "grams": 89,
+          "calories": 160,
+          "proteinG": 12,
+          "carbsG": 16,
+          "fatG": 5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Soft Taco - Chicken. Weight from the item nutrition label (166759)."
+    },
+    {
+      "name": "Nacho Cheese Doritos Locos Taco",
+      "says": [
+        "nacho cheese doritos locos taco",
+        "doritos locos taco",
+        "doritos locos",
+        "doritos taco",
+        "dlt"
+      ],
+      "signature": [
+        "nacho cheese doritos locos taco",
+        "doritos locos taco",
+        "doritos locos"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600005,
+          "size": "regular",
+          "label": "1 taco",
+          "grams": 78,
+          "calories": 170,
+          "proteinG": 7,
+          "carbsG": 13,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Nacho Cheese Doritos® Locos Taco. Weight from the item nutrition label (166781)."
+    },
+    {
+      "name": "Nacho Cheese Doritos Locos Taco Supreme",
+      "says": [
+        "nacho cheese doritos locos taco supreme",
+        "doritos locos taco supreme",
+        "dlt supreme"
+      ],
+      "signature": [
+        "nacho cheese doritos locos taco supreme",
+        "doritos locos taco supreme"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600006,
+          "size": "regular",
+          "label": "1 taco",
+          "grams": 106,
+          "calories": 190,
+          "proteinG": 8,
+          "carbsG": 15,
+          "fatG": 11,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Nacho Cheese Doritos® Locos Taco Supreme®. Weight from the item nutrition label (166779)."
+    },
+    {
+      "name": "Chalupa Supreme - Beef",
+      "says": [
+        "chalupa supreme",
+        "chalupa",
+        "beef chalupa",
+        "beef chalupa supreme"
+      ],
+      "signature": [
+        "chalupa supreme",
+        "beef chalupa supreme",
+        "chalupa"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600007,
+          "size": "regular",
+          "label": "1 chalupa",
+          "grams": 146,
+          "calories": 350,
+          "proteinG": 12,
+          "carbsG": 32,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Chalupa Supreme® - Beef. Weight from the item nutrition label (166739)."
+    },
+    {
+      "name": "Chalupa Supreme - Chicken",
+      "says": [
+        "chicken chalupa supreme",
+        "chicken chalupa"
+      ],
+      "signature": [
+        "chicken chalupa supreme"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600008,
+          "size": "regular",
+          "label": "1 chalupa",
+          "grams": 143,
+          "calories": 330,
+          "proteinG": 15,
+          "carbsG": 30,
+          "fatG": 17,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Chalupa Supreme® - Chicken. Weight from the item nutrition label (166740)."
+    },
+    {
+      "name": "Chalupa Supreme - Steak",
+      "says": [
+        "steak chalupa supreme",
+        "steak chalupa"
+      ],
+      "signature": [
+        "steak chalupa supreme"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600009,
+          "size": "regular",
+          "label": "1 chalupa",
+          "grams": 140,
+          "calories": 340,
+          "proteinG": 15,
+          "carbsG": 30,
+          "fatG": 18,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Chalupa Supreme® - Steak. Weight from the item nutrition label (166741)."
+    },
+    {
+      "name": "Cheesy Gordita Crunch",
+      "says": [
+        "cheesy gordita crunch",
+        "gordita crunch",
+        "cheesy gordita",
+        "cgc"
+      ],
+      "signature": [
+        "cheesy gordita crunch",
+        "gordita crunch"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600010,
+          "size": "regular",
+          "label": "1 gordita crunch",
+          "grams": 174,
+          "calories": 480,
+          "proteinG": 20,
+          "carbsG": 44,
+          "fatG": 26,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cheesy Gordita Crunch. Weight from the item nutrition label (354902)."
+    },
+    {
+      "name": "Spicy Potato Soft Taco",
+      "says": [
+        "spicy potato soft taco",
+        "spicy potato taco",
+        "potato taco"
+      ],
+      "signature": [
+        "spicy potato soft taco"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600011,
+          "size": "regular",
+          "label": "1 taco",
+          "grams": 98,
+          "calories": 240,
+          "proteinG": 5,
+          "carbsG": 28,
+          "fatG": 11,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Spicy Potato Soft Taco (V). Weight from the item nutrition label (360539)."
+    },
+    {
+      "name": "Crunchwrap Supreme",
+      "says": [
+        "crunchwrap supreme",
+        "crunchwrap"
+      ],
+      "signature": [
+        "crunchwrap supreme",
+        "crunchwrap"
+      ],
+      "category": "taco",
+      "sizes": [
+        {
+          "id": 900600012,
+          "size": "regular",
+          "label": "1 crunchwrap",
+          "grams": 258,
+          "calories": 530,
+          "proteinG": 15,
+          "carbsG": 74,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Crunchwrap Supreme®. Weight from the item nutrition label (166771)."
+    },
+    {
+      "name": "Bean Burrito",
+      "says": [
+        "bean burrito"
+      ],
+      "signature": [],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600013,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 190,
+          "calories": 360,
+          "proteinG": 13,
+          "carbsG": 54,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Bean Burrito (V). Weight from the item nutrition label (288828)."
+    },
+    {
+      "name": "Beefy 5-Layer Burrito",
+      "says": [
+        "beefy 5-layer burrito",
+        "beefy 5 layer burrito",
+        "beefy five layer burrito",
+        "5-layer burrito",
+        "5 layer burrito",
+        "five layer burrito"
+      ],
+      "signature": [
+        "beefy 5-layer burrito",
+        "beefy 5 layer burrito",
+        "beefy five layer burrito"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600014,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 223,
+          "calories": 490,
+          "proteinG": 17,
+          "carbsG": 65,
+          "fatG": 18,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Beefy 5-Layer Burrito. Weight from the item nutrition label (166718)."
+    },
+    {
+      "name": "Burrito Supreme - Beef",
+      "says": [
+        "burrito supreme",
+        "beef burrito supreme"
+      ],
+      "signature": [
+        "burrito supreme",
+        "beef burrito supreme"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600015,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 232,
+          "calories": 390,
+          "proteinG": 16,
+          "carbsG": 52,
+          "fatG": 14,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Burrito Supreme® - Beef. Weight from the item nutrition label (166727)."
+    },
+    {
+      "name": "Burrito Supreme - Chicken",
+      "says": [
+        "chicken burrito supreme"
+      ],
+      "signature": [
+        "chicken burrito supreme"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600016,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 230,
+          "calories": 370,
+          "proteinG": 19,
+          "carbsG": 49,
+          "fatG": 11,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Burrito Supreme® - Chicken. Weight from the item nutrition label (166728)."
+    },
+    {
+      "name": "Cheesy Bean & Rice Burrito",
+      "says": [
+        "cheesy bean and rice burrito",
+        "cheesy bean & rice burrito",
+        "bean and rice burrito"
+      ],
+      "signature": [
+        "cheesy bean and rice burrito",
+        "cheesy bean & rice burrito"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600017,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 181,
+          "calories": 400,
+          "proteinG": 9,
+          "carbsG": 56,
+          "fatG": 16,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cheesy Bean & Rice Burrito (V). Weight from the item nutrition label (292244)."
+    },
+    {
+      "name": "Cheesy Double Beef Burrito",
+      "says": [
+        "cheesy double beef burrito",
+        "double beef burrito"
+      ],
+      "signature": [
+        "cheesy double beef burrito"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600018,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 252,
+          "calories": 560,
+          "proteinG": 20,
+          "carbsG": 64,
+          "fatG": 25,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cheesy Double Beef Burrito. Weight from the item nutrition label (198433)."
+    },
+    {
+      "name": "Grilled Cheese Burrito",
+      "says": [
+        "grilled cheese burrito",
+        "beef grilled cheese burrito"
+      ],
+      "signature": [
+        "grilled cheese burrito"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600019,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 266,
+          "calories": 690,
+          "proteinG": 25,
+          "carbsG": 68,
+          "fatG": 36,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Seasoned beef version (label lists Seasoned Beef). Taco Bell table names: Grilled Cheese Burrito. Weight from the item nutrition label (277318)."
+    },
+    {
+      "name": "Grilled Cheese Burrito - Chicken",
+      "says": [
+        "chicken grilled cheese burrito",
+        "grilled cheese burrito with chicken"
+      ],
+      "signature": [
+        "chicken grilled cheese burrito"
+      ],
+      "category": "burrito",
+      "sizes": [
+        {
+          "id": 900600020,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": 264,
+          "calories": 670,
+          "proteinG": 28,
+          "carbsG": 66,
+          "fatG": 33,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Grilled Cheese Burrito - Chicken. Weight from the item nutrition label (420889)."
+    },
+    {
+      "name": "Cantina Chicken Bowl",
+      "says": [
+        "cantina chicken bowl",
+        "cantina bowl"
+      ],
+      "signature": [
+        "cantina chicken bowl"
+      ],
+      "category": "bowl",
+      "sizes": [
+        {
+          "id": 900600021,
+          "size": "regular",
+          "label": "1 bowl",
+          "grams": 412,
+          "calories": 580,
+          "proteinG": 26,
+          "carbsG": 55,
+          "fatG": 29,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cantina Chicken Bowl. Weight from the item nutrition label (423324)."
+    },
+    {
+      "name": "Mexican Pizza",
+      "says": [
+        "mexican pizza"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900600022,
+          "size": "regular",
+          "label": "1 pizza",
+          "grams": 213,
+          "calories": 530,
+          "proteinG": 19,
+          "carbsG": 51,
+          "fatG": 27,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Seasoned beef (standard build). Taco Bell table names: Mexican Pizza. Weight from the item nutrition label (166804)."
+    },
+    {
+      "name": "Quesadilla - Chicken",
+      "says": [
+        "chicken quesadilla",
+        "quesadilla"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900600023,
+          "size": "regular",
+          "label": "1 quesadilla",
+          "grams": 179,
+          "calories": 490,
+          "proteinG": 26,
+          "carbsG": 44,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Quesadilla - Chicken. Weight from the item nutrition label (166758)."
+    },
+    {
+      "name": "Quesadilla - Cheese",
+      "says": [
+        "cheese quesadilla"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900600024,
+          "size": "regular",
+          "label": "1 quesadilla",
+          "grams": 139,
+          "calories": 440,
+          "proteinG": 18,
+          "carbsG": 43,
+          "fatG": 22,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Quesadilla - Cheese (V). Weight from the item nutrition label (288829)."
+    },
+    {
+      "name": "Quesadilla - Steak",
+      "says": [
+        "steak quesadilla"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900600025,
+          "size": "regular",
+          "label": "1 quesadilla",
+          "grams": 176,
+          "calories": 500,
+          "proteinG": 26,
+          "carbsG": 44,
+          "fatG": 24,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Quesadilla - Steak. Weight from the item nutrition label (166846)."
+    },
+    {
+      "name": "Nachos BellGrande - Beef",
+      "says": [
+        "nachos bellgrande",
+        "nachos bell grande",
+        "beef nachos bellgrande",
+        "nachos bel grande"
+      ],
+      "signature": [
+        "nachos bellgrande",
+        "nachos bell grande"
+      ],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900600026,
+          "size": "regular",
+          "label": "1 order",
+          "grams": 301,
+          "calories": 730,
+          "proteinG": 17,
+          "carbsG": 81,
+          "fatG": 38,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Nachos BellGrande® - Beef. Weight from the item nutrition label (354931)."
+    },
+    {
+      "name": "Chips and Nacho Cheese Sauce",
+      "says": [
+        "chips and nacho cheese sauce",
+        "chips and nacho cheese",
+        "chips and cheese"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900600027,
+          "size": "regular",
+          "label": "1 order",
+          "grams": 71,
+          "calories": 220,
+          "proteinG": 3,
+          "carbsG": 24,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Chips and Nacho Cheese Sauce (V). Weight from the item nutrition label (166763)."
+    },
+    {
+      "name": "Nacho Fries",
+      "says": [
+        "nacho fries",
+        "large nacho fries"
+      ],
+      "signature": [
+        "nacho fries"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900600028,
+          "size": "regular",
+          "label": "regular order",
+          "grams": 139,
+          "calories": 350,
+          "proteinG": 4,
+          "carbsG": 36,
+          "fatG": 21,
+          "default": true
+        },
+        {
+          "id": 900600029,
+          "size": "large",
+          "label": "large order",
+          "grams": 190,
+          "calories": 500,
+          "proteinG": 6,
+          "carbsG": 52,
+          "fatG": 29,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Regular and Large are separate rows in the Taco Bell table. Taco Bell table names: Nacho Fries; Large Nacho Fries. Weight from the item nutrition label (244268, 306421)."
+    },
+    {
+      "name": "Cheesy Fiesta Potatoes",
+      "says": [
+        "cheesy fiesta potatoes",
+        "fiesta potatoes"
+      ],
+      "signature": [
+        "cheesy fiesta potatoes"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900600030,
+          "size": "regular",
+          "label": "1 order",
+          "grams": 119,
+          "calories": 240,
+          "proteinG": 3,
+          "carbsG": 29,
+          "fatG": 12,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cheesy Fiesta Potatoes (V). Weight from the item nutrition label (166751)."
+    },
+    {
+      "name": "Black Beans & Rice",
+      "says": [
+        "black beans and rice",
+        "black beans & rice"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900600031,
+          "size": "regular",
+          "label": "1 order",
+          "grams": 116,
+          "calories": 160,
+          "proteinG": 4,
+          "carbsG": 25,
+          "fatG": 4.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Black Beans & Rice (V). Weight from the item nutrition label (288835)."
+    },
+    {
+      "name": "Cheesy Roll Up",
+      "says": [
+        "cheesy roll up",
+        "cheesy roll-up",
+        "cheese roll up"
+      ],
+      "signature": [
+        "cheesy roll up",
+        "cheesy roll-up"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900600032,
+          "size": "regular",
+          "label": "1 roll up",
+          "grams": 57,
+          "calories": 170,
+          "proteinG": 8,
+          "carbsG": 18,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cheesy Roll Up (V). Weight from the item nutrition label (288830)."
+    },
+    {
+      "name": "Cinnamon Twists",
+      "says": [
+        "cinnamon twists"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900600033,
+          "size": "regular",
+          "label": "1 order",
+          "grams": 35,
+          "calories": 170,
+          "proteinG": 2,
+          "carbsG": 27,
+          "fatG": 6,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cinnamon Twists (V). Weight from the item nutrition label (166768)."
+    },
+    {
+      "name": "Cinnabon Delights",
+      "says": [
+        "cinnabon delights",
+        "cinnabon delight"
+      ],
+      "signature": [
+        "cinnabon delights"
+      ],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900600034,
+          "size": "2 pack",
+          "label": "2-pack",
+          "grams": 35,
+          "calories": 170,
+          "proteinG": 2,
+          "carbsG": 15,
+          "fatG": 11,
+          "default": true
+        },
+        {
+          "id": 900600035,
+          "size": "12 pack",
+          "label": "12-pack (serves 4)",
+          "grams": 208,
+          "calories": 1010,
+          "proteinG": 11,
+          "carbsG": 88,
+          "fatG": 68,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Taco Bell table names: Cinnabon® Delights™ (2 Pk) (V); Cinnabon® Delights™ (12 Pk - Serves 4) (V). Weight from the item nutrition label (167371, 167370)."
+    },
+    {
+      "name": "Crispy Chicken Nuggets",
+      "says": [
+        "crispy chicken nuggets",
+        "chicken nuggets",
+        "nuggets"
+      ],
+      "signature": [],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900600036,
+          "size": "5 piece",
+          "label": "5 nuggets",
+          "grams": 130,
+          "calories": 320,
+          "proteinG": 26,
+          "carbsG": 25,
+          "fatG": 13,
+          "default": true
+        },
+        {
+          "id": 900600037,
+          "size": "10 piece",
+          "label": "10 nuggets",
+          "grams": 258,
+          "calories": 640,
+          "proteinG": 51,
+          "carbsG": 50,
+          "fatG": 26,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Listed under \"New\" on the Taco Bell table. Taco Bell table names: Crispy Chicken Nuggets - 5 Piece; Crispy Chicken Nuggets - 10 Piece. Weight from the item nutrition label (442705, 442706)."
+    },
+    {
+      "name": "Mtn Dew Baja Blast",
+      "says": [
+        "baja blast",
+        "mtn dew baja blast",
+        "mountain dew baja blast"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900600038,
+          "size": "small",
+          "label": "small (16 fl oz)",
+          "grams": null,
+          "calories": 220,
+          "proteinG": 0,
+          "carbsG": 59,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900600039,
+          "size": "medium",
+          "label": "medium (20 fl oz)",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 0,
+          "carbsG": 74,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900600040,
+          "size": "large",
+          "label": "large (30 fl oz)",
+          "grams": null,
+          "calories": 420,
+          "proteinG": 0,
+          "carbsG": 111,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Size names from tacobell.com ordering page (Small/Medium/Large = 16/20/30 fl oz, matched by calories). The ordering page shows Large = 410 cal; the full nutrition table (used here) lists 30 fl oz = 420 cal. Large is the ordering-page default. Taco Bell table names: Mtn Dew® Baja Blast™ (16 fl oz); Mtn Dew® Baja Blast™ (20 fl oz); Mtn Dew® Baja Blast™ (30 fl oz). Fluid ounces only; no weight published, so grams is null."
+    },
+    {
+      "name": "Mtn Dew Baja Blast Zero Sugar",
+      "says": [
+        "baja blast zero sugar",
+        "baja blast zero",
+        "diet baja blast"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900600041,
+          "size": "small",
+          "label": "small (16 fl oz)",
+          "grams": null,
+          "calories": 5,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900600042,
+          "size": "medium",
+          "label": "medium (20 fl oz)",
+          "grams": null,
+          "calories": 10,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900600043,
+          "size": "large",
+          "label": "large (30 fl oz)",
+          "grams": null,
+          "calories": 15,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Size names from tacobell.com ordering page (Small/Medium/Large = 16/20/30 fl oz, calories match exactly). Published 5-15 cal with 0 g protein/carbs/fat (rounding of sub-gram amounts). Taco Bell table names: Mtn Dew® Baja Blast Zero Sugar (16 fl oz); Mtn Dew® Baja Blast Zero Sugar (20 fl oz); Mtn Dew® Baja Blast Zero Sugar (30 fl oz). Fluid ounces only; no weight published, so grams is null."
+    },
+    {
+      "name": "Mtn Dew Baja Blast Freeze",
+      "says": [
+        "baja blast freeze",
+        "frozen baja blast",
+        "baja blast slushie"
+      ],
+      "signature": [
+        "baja blast freeze"
+      ],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900600044,
+          "size": "regular",
+          "label": "regular (16 oz)",
+          "grams": null,
+          "calories": 150,
+          "proteinG": 0,
+          "carbsG": 41,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900600045,
+          "size": "large",
+          "label": "large (20 oz)",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 0,
+          "carbsG": 51,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Size names from tacobell.com ordering page (Regular = 16 oz, Large = 20 oz, calories match exactly). Taco Bell table names: Mtn Dew® Baja Blast Freeze™ (16 oz); Mtn Dew® Baja Blast Freeze™ (20 oz). Fluid ounces only; no weight published, so grams is null."
+    },
+    {
+      "name": "Pepsi",
+      "says": [
+        "pepsi",
+        "fountain pepsi"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900600046,
+          "size": "small",
+          "label": "small (16 fl oz)",
+          "grams": null,
+          "calories": 200,
+          "proteinG": 0,
+          "carbsG": 55,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900600047,
+          "size": "medium",
+          "label": "medium (20 fl oz)",
+          "grams": null,
+          "calories": 250,
+          "proteinG": 0,
+          "carbsG": 69,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900600048,
+          "size": "large",
+          "label": "large (30 fl oz)",
+          "grams": null,
+          "calories": 380,
+          "proteinG": 0,
+          "carbsG": 103,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.nutritionix.com/taco-bell/menu/premium",
+      "note": "Size names from tacobell.com ordering page (Small/Medium/Large = 16/20/30 fl oz, calories match exactly). Taco Bell table names: Pepsi® (16 fl oz); Pepsi® (20 fl oz); Pepsi® (30 fl oz). Fluid ounces only; no weight published, so grams is null."
+    }
+  ]
+}

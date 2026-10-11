@@ -356,7 +356,8 @@ const ADVERSARIAL: { phrase: string; items: Pick[] }[] = [
   // Was a dry chai powder.
   { phrase: "a chai latte", items: [{ food: "chai latte", fdcId: 173776, kcal: [200, 280], amount: { unit: "medium" } }] },
   // Was "CHEESY MAC" from Branded.
-  { phrase: "a big mac", items: [{ food: "big mac", fdcId: 170720, kcal: [540, 600], amount: { unit: "each" } }] },
+  // Chain items come from the chains' own menus now (src/food/menus): the current Big Mac is 580.
+  { phrase: "a big mac", items: [{ food: "big mac", fdcId: 900100001, kcal: [570, 590], amount: { unit: "each" } }] },
   // Was Sun Country wheat bran.
   { phrase: "a capri sun", items: [{ food: "capri sun", fdcId: 174176, kcal: [40, 90], amount: { unit: "pouch" } }] },
   // Was a French bread roll.
@@ -390,7 +391,8 @@ const ADVERSARIAL: { phrase: string; items: Pick[] }[] = [
   // Was pecan pie.
   { phrase: "a slice of pie", items: [{ food: "pie", fdcId: 175011, kcal: [280, 330], amount: { unit: "piece" } }] },
   // Were guessed 100 g: USDA's "1 item" and "6 inch sub" portions are read now.
-  { phrase: "a quarter pounder", items: [{ food: "quarter pounder", fdcId: 170321, kcal: [400, 430], amount: { unit: "each", grams: 171 } }] },
+  // McDonald's sells the Quarter Pounder with Cheese only.
+  { phrase: "a quarter pounder", items: [{ food: "quarter pounder", fdcId: 900100002, kcal: [510, 530], amount: { unit: "each" } }] },
   { phrase: "a tuna sandwich", items: [{ food: "tuna sandwich", fdcId: 170299, kcal: [450, 550], amount: { unit: "each", grams: 237 } }] },
   { phrase: "a yogurt parfait", items: [{ food: "yogurt parfait", fdcId: 170355, kcal: [120, 130], amount: { unit: "each", grams: 149 } }] },
   { phrase: "a slice of birthday cake", items: [{ food: "birthday cake", fdcId: 174944, kcal: [500, 560], amount: { unit: "piece" } }] },

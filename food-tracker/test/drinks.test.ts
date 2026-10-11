@@ -59,7 +59,8 @@ const CASES: [phrase: string, items: Want[]][] = [
   ["a bud light lime", [{ food: "bud light lime", fdcId: 169572, kcal: [99, 135], amount: { unit: "can", grams: 354 }, never: /rita|margarita/i }]],
   ["some pringles", [{ food: "pringles", fdcId: 168853, kcal: [140, 160], amount: { unit: "oz" } }]],
   // Wrong.
-  ["A McChicken", [{ food: "mcchicken", fdcId: 173305, kcal: [340, 370], amount: { unit: "each", grams: 131 } }]],
+  // McDonald's own published McChicken (src/food/menus); McDonald's gives no weight, so the grams are one serving.
+  ["A McChicken", [{ food: "mcchicken", fdcId: 900100013, kcal: [380, 400], amount: { unit: "each" } }]],
   ["A large fries from McDonald's", [{ food: "fries", fdcId: 170698, kcal: [460, 510], amount: { unit: "large", grams: 154 } }]],
   ["A bag of peanut M&Ms", [{ food: "peanut m and ms", fdcId: 169582, kcal: [250, 290], amount: { unit: "serving", grams: 54 } }]],
   ["a bag of M&Ms", [{ food: "m and ms", fdcId: 169583, kcal: [230, 245], amount: { unit: "pack" } }]],

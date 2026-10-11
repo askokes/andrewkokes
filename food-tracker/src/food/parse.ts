@@ -10,6 +10,7 @@
 //   [filler] [quantity] [container of] [unit] [of] food [trailing filler]
 
 import { commonMatch } from "./common";
+import { chainIn, isMenuName } from "./menu";
 import type { Meal, ParseResult, ParsedItem, SpokenUnit } from "./types";
 
 interface Token {
@@ -517,9 +518,19 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
     last -= n;
   }
   let end = last;
-  // "Fries from McDonald's", "a burrito at Chipotle": the food is what comes before.
+  // "Fries from McDonald's", "a burrito at Chipotle": the food is what comes before, and the place is kept
+  // so a restaurant's own menu can answer (see menu.ts).
   const from = seg.findIndex((tok, k) => k > i && k < end - 1 && SOURCE_LEAD.has(tok.w));
-  if (from > 0) end = from;
+  let place: string | undefined;
+  if (from > 0) {
+    // The place ends where another food starts: "from Chick-fil-A with waffle fries".
+    const stop = seg.findIndex((tok, k) => k > from && tok.w === "with");
+    place = seg
+      .slice(from + 1, stop > from ? stop : last)
+      .map((tok) => tok.w)
+      .join(" ");
+    end = from;
+  }
   // A typed amount after the food, only when none came first: "chicken breast 6 oz".
   if (!q && !u) {
     for (let k = i + 1; k < end; k++) {
@@ -552,13 +563,14 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
       .map((tok) => tok.w)
       .join(" "),
     text: text(),
+    ...(place ? { place } : {}),
   };
 }
 
 /**
  * "A bagel with cream cheese" is two foods, read as two items ("a bagel",
  * "cream cheese"), each with its own amount ("toast with 2 tablespoons of
- * peanut butter"). A dish the common-foods table names whole stays one item
+ * peanut butter"). A dish the common-foods table or a restaurant menu names whole stays one item
  * ("spaghetti with meat sauce", "nachos with cheese"); company and what was
  * left off are dropped ("pizza with my friends", "a burger with no pickles");
  * and milk or cream in a hot drink is a splash ("coffee with milk" is 2 tbsp).
@@ -566,7 +578,8 @@ function parseItem(seg: Token[], source: string): ParsedItem | null {
 function itemsOf(seg: Token[], source: string): ParsedItem[] {
   const whole = parseItem(seg, source);
   const k = seg.findIndex((tok, i) => i > 0 && tok.w === "with");
-  if (k < 0 || k === seg.length - 1 || (whole && commonMatch(whole.food))) return whole ? [whole] : [];
+  const named = whole && (commonMatch(whole.food) || (whole.food.split(" ").includes("with") && isMenuName(whole.food, whole.place)));
+  if (k < 0 || k === seg.length - 1 || named) return whole ? [whole] : [];
 
   const left = itemsOf(seg.slice(0, k), source);
   let tail = seg.slice(k + 1);
@@ -590,6 +603,27 @@ export function parseMeal(text: string): ParseResult {
   if (typeof text !== "string") return { meal: null, items: [] };
   const tokens = tokenize(text).filter((tok) => !HESITATIONS.has(tok.w));
   const { meal, rest } = extractMeal(tokens);
-  const items = splitItems(rest).flatMap((segment) => itemsOf(segment, text));
-  return { meal, items };
+  let items = splitItems(rest).flatMap((segment) => itemsOf(segment, text));
+  // "A Big Mac and large fries from McDonald's", "Panda Express orange chicken and chow mein": the place
+  // goes with the whole sentence, whether said with "from" or in a food's name.
+  const place = items.find((item) => item.place)?.place ?? items.map((item) => chainIn(item.food)).find(Boolean);
+  if (!place || items.length < 2) return { meal, items };
+  items = joinMenuNames(items, place);
+  return { meal, items: items.map((item) => (item.place ? item : { ...item, place })) };
+}
+
+/**
+ * Two foods split at "and" that are one item on the restaurant's menu, joined again: "a mini turkey and
+ * provolone from Jersey Mike's" is the Turkey and Provolone sub, not a sub and some cheese.
+ */
+function joinMenuNames(items: ParsedItem[], place: string): ParsedItem[] {
+  const out: ParsedItem[] = [];
+  for (const item of items) {
+    const prev = out[out.length - 1];
+    const joined = prev ? `${prev.food} and ${item.food}` : "";
+    if (prev && item.quantity === 1 && item.unit === null && isMenuName(joined, place)) {
+      out[out.length - 1] = { ...prev, food: joined, text: `${prev.text} and ${item.text}`, ...(item.place ? { place: item.place } : {}) };
+    } else out.push(item);
+  }
+  return out;
 }

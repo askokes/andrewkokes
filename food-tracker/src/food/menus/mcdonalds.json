@@ -1,0 +1,2204 @@
+{
+  "chain": "McDonald's",
+  "chainSays": [
+    "mcdonald's",
+    "mcdonalds",
+    "mcdonald",
+    "mickey d's",
+    "mickey ds",
+    "mcd's",
+    "mcds",
+    "golden arches"
+  ],
+  "sources": [
+    "https://www.mcdonalds.com/us/en-us/about-our-food/nutrition-calculator.html",
+    "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900100108,
+  "items": [
+    {
+      "name": "Big Mac",
+      "says": [
+        "big mac",
+        "big mac sandwich",
+        "bigmac"
+      ],
+      "signature": [
+        "big mac",
+        "bigmac"
+      ],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100001,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 580,
+          "proteinG": 25,
+          "carbsG": 45,
+          "fatG": 34,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200463",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Quarter Pounder with Cheese",
+      "says": [
+        "quarter pounder with cheese",
+        "quarter pounder",
+        "qpc",
+        "quarter pounder cheese",
+        "quarter pounder w/ cheese"
+      ],
+      "signature": [
+        "quarter pounder with cheese",
+        "quarter pounder",
+        "qpc"
+      ],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100002,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 520,
+          "proteinG": 30,
+          "carbsG": 42,
+          "fatG": 26,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200466",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Double Quarter Pounder with Cheese",
+      "says": [
+        "double quarter pounder with cheese",
+        "double quarter pounder",
+        "dqpc",
+        "double quarter pounder cheese"
+      ],
+      "signature": [
+        "double quarter pounder with cheese",
+        "double quarter pounder",
+        "dqpc"
+      ],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100003,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 740,
+          "proteinG": 48,
+          "carbsG": 43,
+          "fatG": 42,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200476",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Quarter Pounder with Cheese Deluxe",
+      "says": [
+        "quarter pounder with cheese deluxe",
+        "quarter pounder deluxe",
+        "deluxe quarter pounder"
+      ],
+      "signature": [
+        "quarter pounder with cheese deluxe",
+        "quarter pounder deluxe",
+        "deluxe quarter pounder"
+      ],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100004,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 630,
+          "proteinG": 30,
+          "carbsG": 44,
+          "fatG": 37,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200765",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Bacon Quarter Pounder with Cheese",
+      "says": [
+        "bacon quarter pounder with cheese",
+        "bacon quarter pounder",
+        "bacon qpc"
+      ],
+      "signature": [
+        "bacon quarter pounder with cheese",
+        "bacon quarter pounder"
+      ],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100005,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 630,
+          "proteinG": 36,
+          "carbsG": 43,
+          "fatG": 35,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=203410",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "McDouble",
+      "says": [
+        "mcdouble",
+        "mc double"
+      ],
+      "signature": [
+        "mcdouble"
+      ],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100006,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 390,
+          "proteinG": 22,
+          "carbsG": 32,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200491",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Cheeseburger",
+      "says": [
+        "cheeseburger",
+        "cheese burger",
+        "plain cheeseburger"
+      ],
+      "signature": [],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100007,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 300,
+          "proteinG": 15,
+          "carbsG": 31,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200480",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Double Cheeseburger",
+      "says": [
+        "double cheeseburger",
+        "double cheese burger"
+      ],
+      "signature": [],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100008,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 440,
+          "proteinG": 25,
+          "carbsG": 34,
+          "fatG": 24,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200486",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Hamburger",
+      "says": [
+        "hamburger",
+        "plain hamburger",
+        "plain burger"
+      ],
+      "signature": [],
+      "category": "burger",
+      "sizes": [
+        {
+          "id": 900100009,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 250,
+          "proteinG": 12,
+          "carbsG": 30,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200477",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "McCrispy",
+      "says": [
+        "mccrispy",
+        "mccrispy chicken sandwich",
+        "crispy chicken sandwich"
+      ],
+      "signature": [
+        "mccrispy",
+        "mccrispy chicken sandwich"
+      ],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900100010,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 470,
+          "proteinG": 26,
+          "carbsG": 46,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=203747",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Spicy McCrispy",
+      "says": [
+        "spicy mccrispy",
+        "spicy mccrispy chicken sandwich",
+        "spicy crispy chicken sandwich",
+        "spicy chicken sandwich"
+      ],
+      "signature": [
+        "spicy mccrispy"
+      ],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900100011,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 27,
+          "carbsG": 48,
+          "fatG": 26,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=203901",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Deluxe McCrispy",
+      "says": [
+        "deluxe mccrispy",
+        "mccrispy deluxe",
+        "deluxe crispy chicken sandwich"
+      ],
+      "signature": [
+        "deluxe mccrispy",
+        "mccrispy deluxe"
+      ],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900100012,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 27,
+          "carbsG": 48,
+          "fatG": 26,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=203745",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "McChicken",
+      "says": [
+        "mcchicken",
+        "mc chicken",
+        "mcchicken sandwich",
+        "chicken sandwich"
+      ],
+      "signature": [
+        "mcchicken"
+      ],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900100013,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 390,
+          "proteinG": 14,
+          "carbsG": 38,
+          "fatG": 21,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200438",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Filet-O-Fish",
+      "says": [
+        "filet-o-fish",
+        "filet o fish",
+        "fillet o fish",
+        "fish filet",
+        "fish sandwich"
+      ],
+      "signature": [
+        "filet-o-fish",
+        "filet o fish",
+        "fillet o fish"
+      ],
+      "category": "sandwich",
+      "sizes": [
+        {
+          "id": 900100014,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 380,
+          "proteinG": 16,
+          "carbsG": 38,
+          "fatG": 19,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200445",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Chicken McNuggets",
+      "says": [
+        "chicken mcnuggets",
+        "mcnuggets",
+        "nuggets",
+        "chicken nuggets",
+        "4 piece nuggets",
+        "6 piece nuggets",
+        "10 piece nuggets",
+        "20 piece nuggets",
+        "40 piece nuggets",
+        "4 piece mcnuggets",
+        "6 piece mcnuggets",
+        "10 piece mcnuggets",
+        "20 piece mcnuggets",
+        "40 piece mcnuggets"
+      ],
+      "signature": [
+        "chicken mcnuggets",
+        "mcnuggets"
+      ],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900100015,
+          "size": "4-count",
+          "label": "4 piece",
+          "grams": null,
+          "calories": 170,
+          "proteinG": 9,
+          "carbsG": 10,
+          "fatG": 10,
+          "default": false
+        },
+        {
+          "id": 900100016,
+          "size": "6-count",
+          "label": "6 piece",
+          "grams": null,
+          "calories": 250,
+          "proteinG": 14,
+          "carbsG": 15,
+          "fatG": 15,
+          "default": false
+        },
+        {
+          "id": 900100017,
+          "size": "10-count",
+          "label": "10 piece",
+          "grams": null,
+          "calories": 410,
+          "proteinG": 23,
+          "carbsG": 26,
+          "fatG": 24,
+          "default": true
+        },
+        {
+          "id": 900100018,
+          "size": "20-count",
+          "label": "20 piece",
+          "grams": null,
+          "calories": 830,
+          "proteinG": 46,
+          "carbsG": 51,
+          "fatG": 49,
+          "default": false
+        },
+        {
+          "id": 900100019,
+          "size": "40-count",
+          "label": "40 piece",
+          "grams": null,
+          "calories": 1650,
+          "proteinG": 92,
+          "carbsG": 102,
+          "fatG": 98,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200567",
+      "note": "Dipping sauce not included. Each size fetched from the same endpoint: 4-count=item 200692, 6-count=item 200574, 10-count=item 200567, 20-count=item 200573, 40-count=item 200577. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "McCrispy Strips",
+      "says": [
+        "mccrispy strips",
+        "chicken strips",
+        "chicken tenders",
+        "strips",
+        "tenders",
+        "3 piece strips",
+        "4 piece strips"
+      ],
+      "signature": [
+        "mccrispy strips"
+      ],
+      "category": "chicken",
+      "sizes": [
+        {
+          "id": 900100020,
+          "size": "3-count",
+          "label": "3 piece",
+          "grams": null,
+          "calories": 400,
+          "proteinG": 31,
+          "carbsG": 24,
+          "fatG": 20,
+          "default": true
+        },
+        {
+          "id": 900100021,
+          "size": "4-count",
+          "label": "4 piece",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 41,
+          "carbsG": 32,
+          "fatG": 26,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=204386",
+      "note": "Dipping sauce not included. Each size fetched from the same endpoint: 3-count=item 204386, 4-count=item 204385. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Ranch Snack Wrap",
+      "says": [
+        "ranch snack wrap",
+        "snack wrap",
+        "chicken snack wrap",
+        "mccrispy snack wrap",
+        "ranch wrap"
+      ],
+      "signature": [
+        "ranch snack wrap",
+        "snack wrap",
+        "mccrispy snack wrap"
+      ],
+      "category": "wrap",
+      "sizes": [
+        {
+          "id": 900100022,
+          "size": "regular",
+          "label": "1 wrap",
+          "grams": null,
+          "calories": 400,
+          "proteinG": 17,
+          "carbsG": 32,
+          "fatG": 23,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=204401",
+      "note": "Listed by McDonald's as 'Snack Wrap McCrispy Ranch'. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Spicy Snack Wrap",
+      "says": [
+        "spicy snack wrap",
+        "spicy chicken snack wrap",
+        "spicy wrap"
+      ],
+      "signature": [
+        "spicy snack wrap"
+      ],
+      "category": "wrap",
+      "sizes": [
+        {
+          "id": 900100023,
+          "size": "regular",
+          "label": "1 wrap",
+          "grams": null,
+          "calories": 390,
+          "proteinG": 17,
+          "carbsG": 32,
+          "fatG": 22,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=204402",
+      "note": "Listed by McDonald's as 'Snack Wrap McCrispy Spicy'. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "World Famous Fries",
+      "says": [
+        "fries",
+        "french fries",
+        "world famous fries",
+        "kids fries",
+        "small fries",
+        "medium fries",
+        "large fries"
+      ],
+      "signature": [
+        "world famous fries"
+      ],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900100024,
+          "size": "kids",
+          "label": "kids",
+          "grams": null,
+          "calories": 110,
+          "proteinG": 2,
+          "carbsG": 14,
+          "fatG": 5,
+          "default": false
+        },
+        {
+          "id": 900100025,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 230,
+          "proteinG": 3,
+          "carbsG": 31,
+          "fatG": 11,
+          "default": false
+        },
+        {
+          "id": 900100026,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 320,
+          "proteinG": 5,
+          "carbsG": 43,
+          "fatG": 15,
+          "default": true
+        },
+        {
+          "id": 900100027,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 7,
+          "carbsG": 65,
+          "fatG": 23,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=201234",
+      "note": "Each size fetched from the same endpoint: kids=item 200092, small=item 200066, medium=item 201234, large=item 200083. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Hash Browns",
+      "says": [
+        "hash brown",
+        "hash browns",
+        "hashbrown",
+        "hashbrowns"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900100028,
+          "size": "regular",
+          "label": "1 hash brown",
+          "grams": null,
+          "calories": 140,
+          "proteinG": 2,
+          "carbsG": 18,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200340",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Apple Slices",
+      "says": [
+        "apple slices",
+        "apples",
+        "apple dippers"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900100029,
+          "size": "regular",
+          "label": "1 bag",
+          "grams": null,
+          "calories": 15,
+          "proteinG": 0,
+          "carbsG": 4,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200068",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Egg McMuffin",
+      "says": [
+        "egg mcmuffin",
+        "egg mc muffin"
+      ],
+      "signature": [
+        "egg mcmuffin"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100030,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 310,
+          "proteinG": 17,
+          "carbsG": 30,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200298",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sausage McMuffin",
+      "says": [
+        "sausage mcmuffin",
+        "sausage mc muffin"
+      ],
+      "signature": [
+        "sausage mcmuffin"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100031,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 400,
+          "proteinG": 14,
+          "carbsG": 29,
+          "fatG": 26,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200449",
+      "note": "Sausage and cheese only; no egg. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sausage McMuffin with Egg",
+      "says": [
+        "sausage mcmuffin with egg",
+        "sausage egg mcmuffin",
+        "sausage and egg mcmuffin",
+        "sausage egg mc muffin"
+      ],
+      "signature": [
+        "sausage mcmuffin with egg",
+        "sausage egg mcmuffin",
+        "sausage and egg mcmuffin"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100032,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 20,
+          "carbsG": 30,
+          "fatG": 31,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200161",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Bacon, Egg & Cheese Biscuit",
+      "says": [
+        "bacon egg and cheese biscuit",
+        "bacon egg & cheese biscuit",
+        "bacon egg cheese biscuit",
+        "bec biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100033,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 460,
+          "proteinG": 17,
+          "carbsG": 39,
+          "fatG": 26,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200300",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sausage Biscuit",
+      "says": [
+        "sausage biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100034,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 460,
+          "proteinG": 11,
+          "carbsG": 37,
+          "fatG": 30,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200301",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sausage Biscuit with Egg",
+      "says": [
+        "sausage biscuit with egg",
+        "sausage egg biscuit",
+        "sausage and egg biscuit"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100035,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 530,
+          "proteinG": 17,
+          "carbsG": 38,
+          "fatG": 35,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200302",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sausage, Egg & Cheese McGriddles",
+      "says": [
+        "sausage egg and cheese mcgriddle",
+        "sausage egg and cheese mcgriddles",
+        "sausage egg & cheese mcgriddles",
+        "sausage egg cheese mcgriddle",
+        "mcgriddle",
+        "mcgriddles"
+      ],
+      "signature": [
+        "sausage egg and cheese mcgriddle",
+        "sausage egg and cheese mcgriddles",
+        "sausage egg & cheese mcgriddles",
+        "mcgriddle",
+        "mcgriddles"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100036,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 550,
+          "proteinG": 19,
+          "carbsG": 44,
+          "fatG": 33,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200307",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Bacon, Egg & Cheese McGriddles",
+      "says": [
+        "bacon egg and cheese mcgriddle",
+        "bacon egg and cheese mcgriddles",
+        "bacon egg & cheese mcgriddles",
+        "bacon egg cheese mcgriddle"
+      ],
+      "signature": [
+        "bacon egg and cheese mcgriddle",
+        "bacon egg and cheese mcgriddles",
+        "bacon egg & cheese mcgriddles"
+      ],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100037,
+          "size": "regular",
+          "label": "1 sandwich",
+          "grams": null,
+          "calories": 430,
+          "proteinG": 17,
+          "carbsG": 44,
+          "fatG": 21,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200304",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Hotcakes",
+      "says": [
+        "hotcakes",
+        "hot cakes",
+        "pancakes"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100038,
+          "size": "regular",
+          "label": "1 order (3 hotcakes)",
+          "grams": null,
+          "calories": 580,
+          "proteinG": 9,
+          "carbsG": 101,
+          "fatG": 15,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200325",
+      "note": "3 hotcakes with butter and hotcake syrup included (McDonald's standard build). McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Hotcakes and Sausage",
+      "says": [
+        "hotcakes and sausage",
+        "hot cakes and sausage",
+        "pancakes and sausage"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100039,
+          "size": "regular",
+          "label": "1 order",
+          "grams": null,
+          "calories": 770,
+          "proteinG": 15,
+          "carbsG": 102,
+          "fatG": 33,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200258",
+      "note": "3 hotcakes, butter, hotcake syrup and 1 sausage patty (McDonald's standard build). McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sausage Burrito",
+      "says": [
+        "sausage burrito",
+        "breakfast burrito"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100040,
+          "size": "regular",
+          "label": "1 burrito",
+          "grams": null,
+          "calories": 310,
+          "proteinG": 13,
+          "carbsG": 25,
+          "fatG": 17,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200267",
+      "note": "Burrito only; no sauce packet included. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Big Breakfast with Hotcakes",
+      "says": [
+        "big breakfast with hotcakes",
+        "big breakfast with hot cakes",
+        "big breakfast and hotcakes"
+      ],
+      "signature": [],
+      "category": "breakfast",
+      "sizes": [
+        {
+          "id": 900100041,
+          "size": "regular",
+          "label": "1 platter",
+          "grams": null,
+          "calories": 1340,
+          "proteinG": 36,
+          "carbsG": 158,
+          "fatG": 63,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200323",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Coca-Cola",
+      "says": [
+        "coke",
+        "coca-cola",
+        "coca cola",
+        "extra small coke",
+        "small coke",
+        "medium coke",
+        "large coke"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100042,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 150,
+          "proteinG": 0,
+          "carbsG": 40,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100043,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 200,
+          "proteinG": 0,
+          "carbsG": 53,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100044,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 270,
+          "proteinG": 0,
+          "carbsG": 70,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100045,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 380,
+          "proteinG": 0,
+          "carbsG": 100,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=201191",
+      "note": "McDonald's publishes fountain-drink nutrition for the cup filled with no ice; a cup served with ice holds less drink, so these values are an upper bound. Each size fetched from the same endpoint: extra-small=item 201597, small=item 201677, medium=item 201191, large=item 201298. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Diet Coke",
+      "says": [
+        "diet coke",
+        "small diet coke",
+        "medium diet coke",
+        "large diet coke"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100046,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100047,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100048,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100049,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 1,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200642",
+      "note": "Each size fetched from the same endpoint: extra-small=item 200640, small=item 200612, medium=item 200642, large=item 200641. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Coca-Cola Zero Sugar",
+      "says": [
+        "coke zero",
+        "coke zero sugar",
+        "coca-cola zero sugar",
+        "coca cola zero"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100050,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100051,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100052,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100053,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200207",
+      "note": "Each size fetched from the same endpoint: extra-small=item 200206, small=item 200208, medium=item 200207, large=item 200104. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sprite",
+      "says": [
+        "sprite",
+        "small sprite",
+        "medium sprite",
+        "large sprite"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100054,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 140,
+          "proteinG": 0,
+          "carbsG": 36,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100055,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 0,
+          "carbsG": 49,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100056,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 250,
+          "proteinG": 0,
+          "carbsG": 64,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100057,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 350,
+          "proteinG": 0,
+          "carbsG": 91,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=201228",
+      "note": "McDonald's publishes fountain-drink nutrition for the cup filled with no ice; a cup served with ice holds less drink, so these values are an upper bound. Each size fetched from the same endpoint: extra-small=item 201625, small=item 201711, medium=item 201228, large=item 200950. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Dr Pepper",
+      "says": [
+        "dr pepper",
+        "dr. pepper",
+        "doctor pepper"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100058,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 140,
+          "proteinG": 0,
+          "carbsG": 39,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100059,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 0,
+          "carbsG": 52,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100060,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 250,
+          "proteinG": 0,
+          "carbsG": 68,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100061,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 360,
+          "proteinG": 0,
+          "carbsG": 98,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200863",
+      "note": "McDonald's publishes fountain-drink nutrition for the cup filled with no ice; a cup served with ice holds less drink, so these values are an upper bound. Each size fetched from the same endpoint: extra-small=item 201651, small=item 201201, medium=item 200863, large=item 200934. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Hi-C Orange Lavaburst",
+      "says": [
+        "hi-c",
+        "hi c",
+        "hi-c orange",
+        "orange hi-c",
+        "hi-c orange lavaburst",
+        "orange lavaburst"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100062,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 160,
+          "proteinG": 0,
+          "carbsG": 42,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100063,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 220,
+          "proteinG": 0,
+          "carbsG": 56,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100064,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 0,
+          "carbsG": 73,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100065,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 410,
+          "proteinG": 0,
+          "carbsG": 104,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=203568",
+      "note": "McDonald's publishes fountain-drink nutrition for the cup filled with no ice; a cup served with ice holds less drink, so these values are an upper bound. Each size fetched from the same endpoint: extra-small=item 203549, small=item 203557, medium=item 203568, large=item 203554. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Sweet Tea",
+      "says": [
+        "sweet tea",
+        "sweet iced tea",
+        "small sweet tea",
+        "medium sweet tea",
+        "large sweet tea"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100066,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 110,
+          "proteinG": 1,
+          "carbsG": 28,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100067,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 170,
+          "proteinG": 1,
+          "carbsG": 42,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100068,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 200,
+          "proteinG": 1,
+          "carbsG": 50,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100069,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 280,
+          "proteinG": 1,
+          "carbsG": 70,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=202144",
+      "note": "McDonald's publishes fountain-drink nutrition for the cup filled with no ice; a cup served with ice holds less drink, so these values are an upper bound. Each size fetched from the same endpoint: extra-small=item 202126, small=item 202140, medium=item 202144, large=item 203945. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Unsweetened Iced Tea",
+      "says": [
+        "unsweetened iced tea",
+        "unsweet tea",
+        "unsweetened tea",
+        "iced tea"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100070,
+          "size": "extra-small",
+          "label": "extra small",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 1,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100071,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 1,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100072,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 1,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100073,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 0,
+          "proteinG": 1,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200662",
+      "note": "McDonald's lists 1 g protein with 0 Cal for every size. Each size fetched from the same endpoint: extra-small=item 200660, small=item 200626, medium=item 200662, large=item 200661. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Lemonade",
+      "says": [
+        "lemonade",
+        "small lemonade",
+        "medium lemonade",
+        "large lemonade"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100074,
+          "size": "small",
+          "label": "small (16 oz)",
+          "grams": null,
+          "calories": 120,
+          "proteinG": 0,
+          "carbsG": 31,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100075,
+          "size": "medium",
+          "label": "medium (22 oz)",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 1,
+          "carbsG": 48,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100076,
+          "size": "large",
+          "label": "large (30 oz)",
+          "grams": null,
+          "calories": 270,
+          "proteinG": 1,
+          "carbsG": 68,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=203958",
+      "note": "Cup sizes in oz are from McDonald's item names. Each size fetched from the same endpoint: small=item 203957, medium=item 203958, large=item 203962. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Iced Coffee",
+      "says": [
+        "iced coffee",
+        "mccafe iced coffee",
+        "small iced coffee",
+        "medium iced coffee",
+        "large iced coffee"
+      ],
+      "signature": [
+        "mccafe iced coffee"
+      ],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100077,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 150,
+          "proteinG": 1,
+          "carbsG": 25,
+          "fatG": 5,
+          "default": false
+        },
+        {
+          "id": 900100078,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 2,
+          "carbsG": 32,
+          "fatG": 6,
+          "default": true
+        },
+        {
+          "id": 900100079,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 270,
+          "proteinG": 2,
+          "carbsG": 47,
+          "fatG": 8,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200605",
+      "note": "Standard build includes light cream and liquid sugar. Each size fetched from the same endpoint: small=item 203885, medium=item 200605, large=item 203882. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Premium Roast Coffee",
+      "says": [
+        "coffee",
+        "hot coffee",
+        "black coffee",
+        "premium roast coffee",
+        "mccafe coffee",
+        "mccafe premium roast"
+      ],
+      "signature": [
+        "mccafe premium roast",
+        "mccafe coffee"
+      ],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100080,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 5,
+          "proteinG": 0,
+          "carbsG": 1,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100081,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 10,
+          "proteinG": 1,
+          "carbsG": 1,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100082,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 10,
+          "proteinG": 1,
+          "carbsG": 2,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200543",
+      "note": "Black coffee; cream and sugar not included. Each size fetched from the same endpoint: small=item 200020, medium=item 200543, large=item 200122. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Caramel Frappé",
+      "says": [
+        "caramel frappe",
+        "caramel frappé",
+        "frappe",
+        "frappé",
+        "mccafe caramel frappe"
+      ],
+      "signature": [
+        "mccafe caramel frappe"
+      ],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100083,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 420,
+          "proteinG": 7,
+          "carbsG": 60,
+          "fatG": 17,
+          "default": false
+        },
+        {
+          "id": 900100084,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 490,
+          "proteinG": 8,
+          "carbsG": 70,
+          "fatG": 20,
+          "default": true
+        },
+        {
+          "id": 900100085,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 650,
+          "proteinG": 11,
+          "carbsG": 94,
+          "fatG": 26,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200564",
+      "note": "Includes whipped light cream and caramel drizzle. Each size fetched from the same endpoint: small=item 200149, medium=item 200564, large=item 200464. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Minute Maid Premium Orange Juice",
+      "says": [
+        "orange juice",
+        "oj",
+        "minute maid orange juice"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100086,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 150,
+          "proteinG": 2,
+          "carbsG": 36,
+          "fatG": 0,
+          "default": false
+        },
+        {
+          "id": 900100087,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 190,
+          "proteinG": 3,
+          "carbsG": 45,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900100088,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 270,
+          "proteinG": 4,
+          "carbsG": 65,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=201248",
+      "note": "Each size fetched from the same endpoint: small=item 200982, medium=item 201248, large=item 200663. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "1% Low Fat Milk Jug",
+      "says": [
+        "milk",
+        "1% milk",
+        "low fat milk",
+        "milk jug",
+        "white milk"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100089,
+          "size": "regular",
+          "label": "1 jug",
+          "grams": null,
+          "calories": 100,
+          "proteinG": 8,
+          "carbsG": 12,
+          "fatG": 2,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200610",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Reduced Sugar Low Fat Chocolate Milk Jug",
+      "says": [
+        "chocolate milk",
+        "chocolate milk jug",
+        "low fat chocolate milk"
+      ],
+      "signature": [],
+      "category": "drink",
+      "sizes": [
+        {
+          "id": 900100090,
+          "size": "regular",
+          "label": "1 jug",
+          "grams": null,
+          "calories": 130,
+          "proteinG": 9,
+          "carbsG": 18,
+          "fatG": 2.5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200607",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "McFlurry with OREO Cookies",
+      "says": [
+        "oreo mcflurry",
+        "mcflurry with oreo",
+        "mcflurry with oreo cookies",
+        "mcflurry",
+        "mini oreo mcflurry",
+        "oreo mc flurry"
+      ],
+      "signature": [
+        "oreo mcflurry",
+        "mcflurry with oreo",
+        "mcflurry with oreo cookies",
+        "mcflurry",
+        "mini oreo mcflurry"
+      ],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100091,
+          "size": "mini",
+          "label": "mini",
+          "grams": null,
+          "calories": 240,
+          "proteinG": 5,
+          "carbsG": 38,
+          "fatG": 8,
+          "default": false
+        },
+        {
+          "id": 900100092,
+          "size": "regular",
+          "label": "regular",
+          "grams": null,
+          "calories": 410,
+          "proteinG": 10,
+          "carbsG": 64,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200101",
+      "note": "Each size fetched from the same endpoint: mini=item 204315, regular=item 200101. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "McFlurry with M&M'S Candies",
+      "says": [
+        "m&m mcflurry",
+        "m&ms mcflurry",
+        "m&m's mcflurry",
+        "m and m mcflurry",
+        "mcflurry with m&ms",
+        "mini m&m mcflurry"
+      ],
+      "signature": [
+        "m&m mcflurry",
+        "m&ms mcflurry",
+        "m&m's mcflurry",
+        "m and m mcflurry",
+        "mcflurry with m&ms",
+        "mini m&m mcflurry"
+      ],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100093,
+          "size": "mini",
+          "label": "mini",
+          "grams": null,
+          "calories": 340,
+          "proteinG": 7,
+          "carbsG": 51,
+          "fatG": 12,
+          "default": false
+        },
+        {
+          "id": 900100094,
+          "size": "regular",
+          "label": "regular",
+          "grams": null,
+          "calories": 570,
+          "proteinG": 11,
+          "carbsG": 85,
+          "fatG": 19,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200096",
+      "note": "Each size fetched from the same endpoint: mini=item 204314, regular=item 200096. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Vanilla Cone",
+      "says": [
+        "vanilla cone",
+        "ice cream cone",
+        "cone",
+        "soft serve cone",
+        "vanilla ice cream cone"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100095,
+          "size": "regular",
+          "label": "1 cone",
+          "grams": null,
+          "calories": 200,
+          "proteinG": 5,
+          "carbsG": 33,
+          "fatG": 5,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200062",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Chocolate Shake",
+      "says": [
+        "chocolate shake",
+        "chocolate milkshake",
+        "small chocolate shake",
+        "medium chocolate shake",
+        "large chocolate shake"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100096,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 520,
+          "proteinG": 12,
+          "carbsG": 85,
+          "fatG": 14,
+          "default": false
+        },
+        {
+          "id": 900100097,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 650,
+          "proteinG": 15,
+          "carbsG": 107,
+          "fatG": 17,
+          "default": true
+        },
+        {
+          "id": 900100098,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 800,
+          "proteinG": 18,
+          "carbsG": 134,
+          "fatG": 20,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200052",
+      "note": "Includes whipped light cream. Each size fetched from the same endpoint: small=item 200107, medium=item 200052, large=item 200058. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Vanilla Shake",
+      "says": [
+        "vanilla shake",
+        "vanilla milkshake",
+        "small vanilla shake",
+        "medium vanilla shake",
+        "large vanilla shake"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100099,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 480,
+          "proteinG": 10,
+          "carbsG": 80,
+          "fatG": 13,
+          "default": false
+        },
+        {
+          "id": 900100100,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 570,
+          "proteinG": 12,
+          "carbsG": 97,
+          "fatG": 15,
+          "default": true
+        },
+        {
+          "id": 900100101,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 780,
+          "proteinG": 17,
+          "carbsG": 133,
+          "fatG": 19,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200623",
+      "note": "Includes whipped light cream. Each size fetched from the same endpoint: small=item 200108, medium=item 200623, large=item 200624. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Strawberry Shake",
+      "says": [
+        "strawberry shake",
+        "strawberry milkshake",
+        "small strawberry shake",
+        "medium strawberry shake",
+        "large strawberry shake"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100102,
+          "size": "small",
+          "label": "small",
+          "grams": null,
+          "calories": 470,
+          "proteinG": 10,
+          "carbsG": 77,
+          "fatG": 13,
+          "default": false
+        },
+        {
+          "id": 900100103,
+          "size": "medium",
+          "label": "medium",
+          "grams": null,
+          "calories": 600,
+          "proteinG": 13,
+          "carbsG": 99,
+          "fatG": 16,
+          "default": true
+        },
+        {
+          "id": 900100104,
+          "size": "large",
+          "label": "large",
+          "grams": null,
+          "calories": 850,
+          "proteinG": 19,
+          "carbsG": 143,
+          "fatG": 21,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200621",
+      "note": "Includes whipped light cream. Each size fetched from the same endpoint: small=item 200109, medium=item 200621, large=item 200622. McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Hot Fudge Sundae",
+      "says": [
+        "hot fudge sundae",
+        "fudge sundae",
+        "sundae"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100105,
+          "size": "regular",
+          "label": "1 sundae",
+          "grams": null,
+          "calories": 330,
+          "proteinG": 8,
+          "carbsG": 51,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200074",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Baked Apple Pie",
+      "says": [
+        "apple pie",
+        "baked apple pie",
+        "hot apple pie",
+        "baked hot apple pie"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100106,
+          "size": "regular",
+          "label": "1 pie",
+          "grams": null,
+          "calories": 230,
+          "proteinG": 2,
+          "carbsG": 33,
+          "fatG": 11,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200007",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "says": [
+        "chocolate chip cookie",
+        "cookie",
+        "cookies"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900100107,
+          "size": "regular",
+          "label": "1 cookie",
+          "grams": null,
+          "calories": 170,
+          "proteinG": 2,
+          "carbsG": 22,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.mcdonalds.com/dnaapp/itemDetails?country=US&language=en&showLiveData=true&item=200009",
+      "note": "McDonald's US does not publish a serving weight, so grams is null."
+    }
+  ]
+}

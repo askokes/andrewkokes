@@ -1,0 +1,913 @@
+{
+  "chain": "Panda Express",
+  "chainSays": [
+    "panda express",
+    "panda",
+    "pandas",
+    "panda's"
+  ],
+  "sources": [
+    "https://www.pandaexpress.com/nutritioninformation"
+  ],
+  "retrieved": "2026-10-11",
+  "nextId": 900900040,
+  "items": [
+    {
+      "name": "The Original Orange Chicken",
+      "says": [
+        "orange chicken",
+        "original orange chicken",
+        "the original orange chicken"
+      ],
+      "signature": [
+        "original orange chicken",
+        "the original orange chicken"
+      ],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900001,
+          "size": "entree",
+          "label": "1 entree serving (6.2 oz)",
+          "grams": 176,
+          "calories": 560,
+          "proteinG": 19,
+          "carbsG": 63,
+          "fatG": 25,
+          "default": true
+        },
+        {
+          "id": 900900002,
+          "size": "cub meal",
+          "label": "Cub Meal kids portion (4 oz)",
+          "grams": 113,
+          "calories": 360,
+          "proteinG": 12,
+          "carbsG": 41,
+          "fatG": 16,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 6.2 oz; cub meal 4 oz)."
+    },
+    {
+      "name": "Beijing Beef",
+      "says": [
+        "beijing beef"
+      ],
+      "signature": [
+        "beijing beef"
+      ],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900003,
+          "size": "entree",
+          "label": "1 entree serving (5.6 oz)",
+          "grams": 159,
+          "calories": 480,
+          "proteinG": 14,
+          "carbsG": 46,
+          "fatG": 27,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 5.6 oz)."
+    },
+    {
+      "name": "Broccoli Beef",
+      "says": [
+        "broccoli beef",
+        "beef and broccoli",
+        "beef broccoli",
+        "broccoli and beef"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900004,
+          "size": "entree",
+          "label": "1 entree serving (6.3 oz)",
+          "grams": 179,
+          "calories": 190,
+          "proteinG": 17,
+          "carbsG": 14,
+          "fatG": 7,
+          "default": true
+        },
+        {
+          "id": 900900005,
+          "size": "cub meal",
+          "label": "Cub Meal kids portion (4.7 oz)",
+          "grams": 133,
+          "calories": 140,
+          "proteinG": 13,
+          "carbsG": 10,
+          "fatG": 5,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 6.3 oz; cub meal 4.7 oz)."
+    },
+    {
+      "name": "Black Pepper Sirloin Steak",
+      "says": [
+        "black pepper sirloin steak",
+        "black pepper steak",
+        "pepper steak",
+        "sirloin steak"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900006,
+          "size": "entree",
+          "label": "1 entree serving (5.9 oz)",
+          "grams": 167,
+          "calories": 200,
+          "proteinG": 17,
+          "carbsG": 15,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 5.9 oz)."
+    },
+    {
+      "name": "Kung Pao Chicken",
+      "says": [
+        "kung pao chicken",
+        "kung pao"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900007,
+          "size": "entree",
+          "label": "1 entree serving (6.7 oz)",
+          "grams": 190,
+          "calories": 270,
+          "proteinG": 20,
+          "carbsG": 16,
+          "fatG": 14,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 6.7 oz)."
+    },
+    {
+      "name": "Grilled Teriyaki Chicken",
+      "says": [
+        "grilled teriyaki chicken",
+        "teriyaki chicken"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900008,
+          "size": "entree",
+          "label": "1 entree serving (6.1 oz)",
+          "grams": 173,
+          "calories": 280,
+          "proteinG": 38,
+          "carbsG": 13,
+          "fatG": 9,
+          "default": true
+        },
+        {
+          "id": 900900009,
+          "size": "cub meal",
+          "label": "Cub Meal kids portion (3.3 oz)",
+          "grams": 94,
+          "calories": 150,
+          "proteinG": 20,
+          "carbsG": 7,
+          "fatG": 5,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Teriyaki sauce is listed separately (see Teriyaki Sauce). Grams converted from Panda's published portion in oz x 28.35 (entree 6.1 oz; cub meal 3.3 oz)."
+    },
+    {
+      "name": "Mushroom Chicken",
+      "says": [
+        "mushroom chicken"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900010,
+          "size": "entree",
+          "label": "1 entree serving (5.7 oz)",
+          "grams": 162,
+          "calories": 180,
+          "proteinG": 13,
+          "carbsG": 12,
+          "fatG": 9,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 5.7 oz)."
+    },
+    {
+      "name": "Black Pepper Chicken",
+      "says": [
+        "black pepper chicken"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900011,
+          "size": "entree",
+          "label": "1 entree serving (6.3 oz)",
+          "grams": 179,
+          "calories": 200,
+          "proteinG": 15,
+          "carbsG": 9,
+          "fatG": 12,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Marked on Panda's nutrition page as a regional entree / limited-time item (not at all locations). Grams converted from Panda's published portion in oz x 28.35 (entree 6.3 oz)."
+    },
+    {
+      "name": "Honey Sesame Chicken Breast",
+      "says": [
+        "honey sesame chicken breast",
+        "honey sesame chicken"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900012,
+          "size": "entree",
+          "label": "1 entree serving (6.2 oz)",
+          "grams": 176,
+          "calories": 420,
+          "proteinG": 16,
+          "carbsG": 44,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 6.2 oz)."
+    },
+    {
+      "name": "String Bean Chicken Breast",
+      "says": [
+        "string bean chicken breast",
+        "string bean chicken",
+        "chicken with string beans",
+        "green bean chicken"
+      ],
+      "signature": [
+        "string bean chicken breast"
+      ],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900013,
+          "size": "entree",
+          "label": "1 entree serving (5.6 oz)",
+          "grams": 159,
+          "calories": 210,
+          "proteinG": 15,
+          "carbsG": 15,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 5.6 oz)."
+    },
+    {
+      "name": "SweetFire Chicken Breast",
+      "says": [
+        "sweetfire chicken breast",
+        "sweetfire chicken",
+        "sweet fire chicken"
+      ],
+      "signature": [
+        "sweetfire chicken breast",
+        "sweetfire chicken",
+        "sweet fire chicken"
+      ],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900014,
+          "size": "entree",
+          "label": "1 entree serving (5.8 oz)",
+          "grams": 164,
+          "calories": 360,
+          "proteinG": 15,
+          "carbsG": 40,
+          "fatG": 15,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Marked on Panda's nutrition page as a regional entree / limited-time item (not at all locations). Grams converted from Panda's published portion in oz x 28.35 (entree 5.8 oz)."
+    },
+    {
+      "name": "Honey Walnut Shrimp",
+      "says": [
+        "honey walnut shrimp",
+        "walnut shrimp"
+      ],
+      "signature": [
+        "honey walnut shrimp"
+      ],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900015,
+          "size": "entree",
+          "label": "1 entree serving (4.4 oz)",
+          "grams": 125,
+          "calories": 340,
+          "proteinG": 13,
+          "carbsG": 28,
+          "fatG": 20,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (entree 4.4 oz)."
+    },
+    {
+      "name": "Eggplant Tofu",
+      "says": [
+        "eggplant tofu",
+        "eggplant and tofu",
+        "tofu eggplant"
+      ],
+      "signature": [],
+      "category": "entree",
+      "sizes": [
+        {
+          "id": 900900016,
+          "size": "entree",
+          "label": "1 entree serving (6.1 oz)",
+          "grams": 173,
+          "calories": 310,
+          "proteinG": 8,
+          "carbsG": 23,
+          "fatG": 21,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Marked on Panda's nutrition page as a regional entree / limited-time item (not at all locations). Grams converted from Panda's published portion in oz x 28.35 (entree 6.1 oz)."
+    },
+    {
+      "name": "Chow Mein",
+      "says": [
+        "chow mein",
+        "noodles"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900017,
+          "size": "side",
+          "label": "1 side serving (12 oz)",
+          "grams": 340,
+          "calories": 520,
+          "proteinG": 14,
+          "carbsG": 89,
+          "fatG": 12,
+          "default": true
+        },
+        {
+          "id": 900900018,
+          "size": "cub meal",
+          "label": "Cub Meal kids portion (2.3 oz)",
+          "grams": 65,
+          "calories": 100,
+          "proteinG": 3,
+          "carbsG": 17,
+          "fatG": 2,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (side 12 oz; cub meal 2.3 oz)."
+    },
+    {
+      "name": "Fried Rice",
+      "says": [
+        "fried rice",
+        "egg fried rice"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900019,
+          "size": "side",
+          "label": "1 side serving (12 oz)",
+          "grams": 340,
+          "calories": 610,
+          "proteinG": 15,
+          "carbsG": 109,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (side 12 oz)."
+    },
+    {
+      "name": "White Steamed Rice",
+      "says": [
+        "white steamed rice",
+        "white rice",
+        "steamed rice",
+        "rice"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900020,
+          "size": "side",
+          "label": "1 side serving (12 oz)",
+          "grams": 340,
+          "calories": 570,
+          "proteinG": 11,
+          "carbsG": 129,
+          "fatG": 0,
+          "default": true
+        },
+        {
+          "id": 900900021,
+          "size": "cub meal",
+          "label": "Cub Meal kids portion (2.5 oz)",
+          "grams": 71,
+          "calories": 120,
+          "proteinG": 2,
+          "carbsG": 27,
+          "fatG": 0,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (side 12 oz; cub meal 2.5 oz)."
+    },
+    {
+      "name": "Super Greens",
+      "says": [
+        "super greens",
+        "mixed vegetables",
+        "veggies",
+        "steamed vegetables",
+        "super greens side"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900022,
+          "size": "side",
+          "label": "1 side serving (10 oz)",
+          "grams": 284,
+          "calories": 180,
+          "proteinG": 8,
+          "carbsG": 17,
+          "fatG": 9,
+          "default": true
+        },
+        {
+          "id": 900900023,
+          "size": "entree",
+          "label": "1 entree serving (3.5 oz)",
+          "grams": 99,
+          "calories": 45,
+          "proteinG": 3,
+          "carbsG": 5,
+          "fatG": 2,
+          "default": false
+        },
+        {
+          "id": 900900024,
+          "size": "cub meal",
+          "label": "Cub Meal kids portion (2.6 oz)",
+          "grams": 74,
+          "calories": 45,
+          "proteinG": 2,
+          "carbsG": 4,
+          "fatG": 2,
+          "default": false
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Panda publishes three portions: side (10 oz), entree (3.5 oz) and Cub Meal (2.6 oz). Grams converted from Panda's published portion in oz x 28.35 (side 10 oz; entree 3.5 oz; cub meal 2.6 oz)."
+    },
+    {
+      "name": "Chow Fun",
+      "says": [
+        "chow fun",
+        "chow fun noodles"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900025,
+          "size": "side",
+          "label": "1 side serving (12 oz)",
+          "grams": 340,
+          "calories": 580,
+          "proteinG": 13,
+          "carbsG": 103,
+          "fatG": 13,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Marked on Panda's nutrition page as a regional entree / limited-time item (not at all locations). Grams converted from Panda's published portion in oz x 28.35 (side 12 oz)."
+    },
+    {
+      "name": "Quinoa Fried Rice",
+      "says": [
+        "quinoa fried rice"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900026,
+          "size": "side",
+          "label": "1 side serving (12 oz)",
+          "grams": 340,
+          "calories": 600,
+          "proteinG": 15,
+          "carbsG": 91,
+          "fatG": 19,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Marked on Panda's nutrition page as a regional entree / limited-time item (not at all locations). Grams converted from Panda's published portion in oz x 28.35 (side 12 oz)."
+    },
+    {
+      "name": "Chicken Egg Roll",
+      "says": [
+        "chicken egg roll",
+        "egg roll",
+        "eggroll"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900027,
+          "size": "1 roll",
+          "label": "1 egg roll (2.75 oz)",
+          "grams": 78,
+          "calories": 200,
+          "proteinG": 6,
+          "carbsG": 20,
+          "fatG": 10,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published 2.75 oz per roll (x 28.35)."
+    },
+    {
+      "name": "Cream Cheese Rangoon",
+      "says": [
+        "cream cheese rangoon",
+        "cream cheese rangoons",
+        "rangoon",
+        "rangoons",
+        "crab rangoon"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900028,
+          "size": "3 pieces",
+          "label": "3 rangoons (2.4 oz)",
+          "grams": 68,
+          "calories": 190,
+          "proteinG": 5,
+          "carbsG": 24,
+          "fatG": 8,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published 2.4 oz per 3 pieces (x 28.35). Panda's rangoon has no crab."
+    },
+    {
+      "name": "Vegetable Spring Roll",
+      "says": [
+        "vegetable spring roll",
+        "veggie spring roll",
+        "spring roll",
+        "spring rolls"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900029,
+          "size": "2 rolls",
+          "label": "2 spring rolls (3.5 oz)",
+          "grams": 99,
+          "calories": 240,
+          "proteinG": 4,
+          "carbsG": 24,
+          "fatG": 14,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published 3.5 oz per 2 rolls (x 28.35)."
+    },
+    {
+      "name": "Chicken Potsticker",
+      "says": [
+        "chicken potsticker",
+        "chicken potstickers",
+        "potstickers",
+        "potsticker",
+        "dumplings"
+      ],
+      "signature": [],
+      "category": "side",
+      "sizes": [
+        {
+          "id": 900900030,
+          "size": "3 pieces",
+          "label": "3 potstickers (3.3 oz)",
+          "grams": 94,
+          "calories": 160,
+          "proteinG": 6,
+          "carbsG": 20,
+          "fatG": 6,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Marked on Panda's nutrition page as a regional entree / limited-time item (not at all locations). Grams converted from Panda's published 3.3 oz per 3 pieces (x 28.35)."
+    },
+    {
+      "name": "Hot & Sour Soup",
+      "says": [
+        "hot and sour soup",
+        "hot & sour soup",
+        "hot sour soup"
+      ],
+      "signature": [],
+      "category": "soup",
+      "sizes": [
+        {
+          "id": 900900031,
+          "size": "cup",
+          "label": "cup (12.2 oz)",
+          "grams": 346,
+          "calories": 140,
+          "proteinG": 9,
+          "carbsG": 16,
+          "fatG": 4,
+          "default": false
+        },
+        {
+          "id": 900900032,
+          "size": "bowl",
+          "label": "bowl (17.4 oz)",
+          "grams": 493,
+          "calories": 170,
+          "proteinG": 10,
+          "carbsG": 20,
+          "fatG": 6,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Marked on Panda's nutrition page as a regional entree / limited-time item (not at all locations). Portion is published in oz without saying weight vs fluid oz; grams assume weight oz. Grams converted from Panda's published portion in oz x 28.35 (cup 12.2 oz; bowl 17.4 oz)."
+    },
+    {
+      "name": "Sweet & Sour Sauce",
+      "says": [
+        "sweet and sour sauce",
+        "sweet & sour sauce"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900900033,
+          "size": "container",
+          "label": "1 sauce container (1.8 oz)",
+          "grams": 51,
+          "calories": 70,
+          "proteinG": 0,
+          "carbsG": 21,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Published values: 70 cal with 21 g carbs (4 x 21 = 84); kept as published (rounding). Grams converted from Panda's published portion in oz x 28.35 (container 1.8 oz)."
+    },
+    {
+      "name": "Teriyaki Sauce",
+      "says": [
+        "teriyaki sauce"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900900034,
+          "size": "container",
+          "label": "1 sauce container (1.8 oz)",
+          "grams": 51,
+          "calories": 70,
+          "proteinG": 0,
+          "carbsG": 16,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Grams converted from Panda's published portion in oz x 28.35 (container 1.8 oz)."
+    },
+    {
+      "name": "Soy Sauce",
+      "says": [
+        "soy sauce",
+        "soy sauce packet"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900900035,
+          "size": "packet",
+          "label": "1 packet (6 g)",
+          "grams": 6,
+          "calories": 5,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Published as 5 cal with 0 g protein/carbs/fat (sub-gram amounts rounded to 0); macro check not meaningful at this size."
+    },
+    {
+      "name": "Chili Sauce",
+      "says": [
+        "chili sauce",
+        "chili sauce packet",
+        "hot sauce"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900900036,
+          "size": "packet",
+          "label": "1 packet (7 g)",
+          "grams": 7,
+          "calories": 10,
+          "proteinG": 0,
+          "carbsG": 2,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Published as 10 cal / 2 g carbs; small rounding gap (4 x 2 = 8), not meaningful at this size."
+    },
+    {
+      "name": "Hot Mustard",
+      "says": [
+        "hot mustard",
+        "hot mustard packet",
+        "chinese mustard"
+      ],
+      "signature": [],
+      "category": "sauce",
+      "sizes": [
+        {
+          "id": 900900037,
+          "size": "packet",
+          "label": "1 packet (7 g)",
+          "grams": 7,
+          "calories": 10,
+          "proteinG": 0,
+          "carbsG": 0,
+          "fatG": 1,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation"
+    },
+    {
+      "name": "Fortune Cookie",
+      "says": [
+        "fortune cookie",
+        "fortune cookies"
+      ],
+      "signature": [],
+      "category": "dessert",
+      "sizes": [
+        {
+          "id": 900900038,
+          "size": "cookie",
+          "label": "1 fortune cookie (5 g)",
+          "grams": 5,
+          "calories": 20,
+          "proteinG": 0,
+          "carbsG": 5,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Panda lists this as 'Fortune Cookies', 1 piece = 5 g."
+    },
+    {
+      "name": "Tree Top Apple Crisps",
+      "says": [
+        "apple crisps",
+        "tree top apple crisps",
+        "apple chips"
+      ],
+      "signature": [],
+      "category": "kids",
+      "sizes": [
+        {
+          "id": 900900039,
+          "size": "bag",
+          "label": "1 bag (0.34 oz)",
+          "grams": 10,
+          "calories": 40,
+          "proteinG": 0,
+          "carbsG": 10,
+          "fatG": 0,
+          "default": true
+        }
+      ],
+      "sourceKind": "official",
+      "source": "https://www.pandaexpress.com/nutritioninformation",
+      "note": "Cub Meal side. Grams converted from published 0.34 oz (x 28.35)."
+    }
+  ]
+}

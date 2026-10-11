@@ -24,6 +24,26 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 - Anything you looked for and couldn't find?
 - Any food with a silly picture? Write down the food.
 
+## Restaurants
+
+1. On **Diary**, tap the mic and say **a Big Mac and a large fries from McDonald's**. The check screen should show **McDonald's Big Mac** (580 cal) and **McDonald's World Famous Fries**, large (480 cal).
+2. Try the other chains the same way, saying where it's from:
+   - **8 nuggets and waffle fries from Chick-fil-A**
+   - **a 6 inch Italian BMT from Subway**, then **a footlong turkey from Subway**
+   - **a number 9 from Jimmy John's**
+   - **a regular number 13 from Jersey Mike's**
+   - **a Crunchwrap Supreme and a Baja Blast** (no need to say Taco Bell)
+   - **a chicken burrito bowl from Chipotle**
+   - **a cup of broccoli cheddar soup from Panera**
+   - **orange chicken and chow mein from Panda Express**
+3. Each one should come up with the restaurant's name in front, and **Wrong food?** should offer the other sizes first.
+4. Some places don't publish weights (McDonald's, Panera, Jersey Mike's). Their foods show servings, not grams. That's expected.
+5. Plain words with no restaurant still work as before: **fries** or **a chicken sandwich** are generic.
+
+### Tell Andrew
+
+- Anything you ordered that it didn't know? Write down what you said and where it was from.
+
 ## Voice and drinks
 
 1. Tap the big green **mic** above the tabs. It works from any tab: it jumps to **Diary** and starts listening.

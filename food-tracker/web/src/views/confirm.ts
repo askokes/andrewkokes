@@ -148,7 +148,7 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     pool: item.candidates,
     selected: found ? item.candidates[0] : (null as Candidate | null),
     /** The plain name saved with the entry: what was said, or the search that found the pick. */
-    name: spoken,
+    name: (found ? item.candidates[0].entryName : undefined) ?? spoken,
     qty: "",
     unit: "",
     guessed: false,
@@ -164,7 +164,8 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     manual: { name: spoken, calories: "", protein: "", carbs: "", fat: "" },
   };
   /** Plain name per candidate: the spoken phrase for the parse's matches, the search text for search results. */
-  const names = new Map<number, string>(item.candidates.map((c) => [c.fdcId, spoken]));
+  // A restaurant item goes by its menu name ("Chick-fil-A Nuggets"), not however it was said.
+  const names = new Map<number, string>(item.candidates.map((c) => [c.fdcId, c.entryName ?? spoken]));
   /**
    * Which control gets focus after the next render, since render() rebuilds the
    * card and the pressed button goes away. A data-role value, or "name" for the heading.
@@ -241,7 +242,7 @@ function itemCard(item: ParseItemResult, changed: () => void) {
       s.searching = false;
       // Retrying the spoken phrase keeps the spoken name; a typed search names the food after the search.
       const name = retry ? spoken : plainName(q);
-      for (const c of res.candidates) names.set(c.fdcId, name);
+      for (const c of res.candidates) names.set(c.fdcId, c.entryName ?? name);
       if (retry) {
         if (res.status === "ok" && res.candidates.length > 0) {
           s.pool = res.candidates;
@@ -399,7 +400,7 @@ function itemCard(item: ParseItemResult, changed: () => void) {
     const unit = el(
       "select",
       { className: "control", dataset: { role: "unit" }, attrs: { "aria-label": `Unit for ${s.name}` } },
-      ...sortUnits(c.units).map((u) => el("option", { value: u.unit, textContent: unitOptionLabel(u), selected: u.unit === s.unit })),
+      ...sortUnits(c.units).map((u) => el("option", { value: u.unit, textContent: unitOptionLabel(u, c.noWeight), selected: u.unit === s.unit })),
     );
     const guess = guessParts(c);
     const calOut = el("span", { className: "item-cal" });
@@ -420,7 +421,8 @@ function itemCard(item: ParseItemResult, changed: () => void) {
       const grams = gramsFor(q, u);
       const n = nutritionFor(c.per100g, grams);
       calOut.textContent = `${whole(n.calories)} cal`;
-      gramsOut.textContent = u.unit === "g" ? "" : `${grams < 10 ? formatQuantity(grams) : whole(grams)} g`;
+      // A restaurant that publishes no weight (McDonald's, Panera) gets no grams: they'd only be a stand-in.
+      gramsOut.textContent = u.unit === "g" || c.noWeight ? "" : `${grams < 10 ? formatQuantity(grams) : whole(grams)} g`;
       macrosOut.textContent = macroText(n);
     };
     const edited = () => {
