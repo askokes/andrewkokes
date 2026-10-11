@@ -9,6 +9,8 @@ export interface GoalsInput {
   carbsG: number | null;
   fatG: number | null;
   goalWeightLb: number | null;
+  /** Calories burned in a normal day (maintenance), optional. Shown next to the goal, never instead of it. */
+  baselineCalories: number | null;
 }
 
 export interface ProfileInput {
@@ -64,7 +66,8 @@ function readGoals(raw: unknown, errors: FieldErrors, prefix = ""): GoalsInput |
   const carbsG = optionalWholeNumber(raw.carbsG, `${prefix}carbsG`, "Carbs", 0, 1000, errors);
   const fatG = optionalWholeNumber(raw.fatG, `${prefix}fatG`, "Fat", 0, 1000, errors);
   const goalWeightLb = optionalWeight(raw.goalWeightLb, `${prefix}goalWeightLb`, "Goal weight", errors);
-  return calories === null ? null : { calories, proteinG, carbsG, fatG, goalWeightLb };
+  const baselineCalories = optionalWholeNumber(raw.baselineCalories, `${prefix}baselineCalories`, "Calories you burn", 500, 10000, errors);
+  return calories === null ? null : { calories, proteinG, carbsG, fatG, goalWeightLb, baselineCalories };
 }
 
 export function parseGoals(raw: unknown): Result<GoalsInput> {

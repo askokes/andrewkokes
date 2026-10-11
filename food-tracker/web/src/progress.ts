@@ -43,6 +43,8 @@ export interface PeriodStats {
   /** The goal in effect on the last day, for "of 2,000 cal". */
   goalCalories: number | null;
   goalProtein: number | null;
+  /** The calories the user burns in a normal day, as set on the last day; null when not set. */
+  baselineCalories: number | null;
 }
 
 /**
@@ -70,6 +72,7 @@ export function periodStats(days: DaySummary[], averages: (number | null)[]): Pe
     weightChange,
     goalCalories: last?.calories ?? null,
     goalProtein: last?.proteinG ?? null,
+    baselineCalories: last?.baselineCalories ?? null,
   };
 }
 
@@ -79,7 +82,12 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 export function summarySentence(stats: PeriodStats, period: Exclude<Period, "today">, trackWeight: boolean): string {
   const span = period === "week" ? "this week" : "over the last 30 days";
   if (stats.daysLogged === 0) return "Log a few days of food to see your progress here.";
-  const intake = `You averaged ${fmt(stats.avgCalories!)} cal a day on the ${stats.daysLogged === 1 ? "day" : `${stats.daysLogged} days`} you logged.`;
+  let intake = `You averaged ${fmt(stats.avgCalories!)} cal a day on the ${stats.daysLogged === 1 ? "day" : `${stats.daysLogged} days`} you logged.`;
+  if (stats.baselineCalories) {
+    // Against what they burn, so a goal set below it doesn't hide eating above it.
+    const diff = Math.round((stats.avgCalories! - stats.baselineCalories) / 10) * 10;
+    intake += Math.abs(diff) < 50 ? " That's about even with what you burn." : ` That's about ${fmt(Math.abs(diff))} ${diff < 0 ? "below" : "above"} what you burn.`;
+  }
   if (!trackWeight) return intake;
   if (stats.weightChange === null) return `${intake} Log your weight a few times to see your trend.`;
   const change = stats.weightChange;

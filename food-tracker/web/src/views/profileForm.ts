@@ -90,6 +90,15 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
   calories.input.addEventListener("input", updateCalNote);
   updateCalNote();
 
+  const baseline = field({
+    label: "Calories you burn a day",
+    name: "goals.baselineCalories",
+    value: goals?.baselineCalories,
+    inputmode: "numeric",
+    suffix: "cal",
+    hint: "Optional. Your baseline, what you'd burn on a normal day, from a fitness watch, your doctor or an online calculator. The chart shows it as a dashed line next to your goal.",
+  });
+
   const protein = field({ label: "Protein", name: "goals.proteinG", value: goals?.proteinG, inputmode: "numeric", suffix: "g" });
   const carbs = field({ label: "Carbs", name: "goals.carbsG", value: goals?.carbsG, inputmode: "numeric", suffix: "g" });
   const fat = field({ label: "Fat", name: "goals.fatG", value: goals?.fatG, inputmode: "numeric", suffix: "g" });
@@ -117,6 +126,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     "goals.carbsG": carbs,
     "goals.fatG": fat,
     "goals.goalWeightLb": goalWeight,
+    "goals.baselineCalories": baseline,
     currentWeightLb: currentWeight,
   };
 
@@ -131,6 +141,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     { className: "card stack" },
     el("h2", { textContent: "Daily goals" }),
     calories.wrap,
+    baseline.wrap,
     el("p", { className: "subhead", textContent: "Macro goals (optional)" }),
     el("div", { className: "grid3" }, protein.wrap, carbs.wrap, fat.wrap),
   );
@@ -185,6 +196,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
         carbsG: carbs.input.value,
         fatG: fat.input.value,
         goalWeightLb: goalWeight.input.value,
+        baselineCalories: baseline.input.value,
       },
       currentWeightLb: track.checked ? currentWeight.input.value : "",
     };

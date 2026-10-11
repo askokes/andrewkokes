@@ -574,7 +574,7 @@ describe("entries", () => {
     expect(await res.json()).toEqual({
       date: today(),
       today: today(),
-      goals: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60 },
+      goals: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60, baselineCalories: null },
       totals: { calories: 0, proteinG: 0, carbsG: 0, fatG: 0 },
       entries: [],
     });
@@ -610,10 +610,10 @@ describe("entries", () => {
 
     const goalsOn = async (date: string) => (await dayOf(as, email, date)).goals;
     // Before any goals existed, the first ones apply.
-    expect(await goalsOn(addDays(t, -200))).toEqual({ calories: 1800, proteinG: 120, carbsG: null, fatG: 60 });
+    expect(await goalsOn(addDays(t, -200))).toEqual({ calories: 1800, proteinG: 120, carbsG: null, fatG: 60, baselineCalories: null });
     expect(await goalsOn(addDays(t, -100))).toMatchObject({ calories: 1800 });
     expect(await goalsOn(addDays(t, -51))).toMatchObject({ calories: 1800 });
-    expect(await goalsOn(addDays(t, -50))).toEqual({ calories: 1900, proteinG: 100, carbsG: null, fatG: null });
+    expect(await goalsOn(addDays(t, -50))).toEqual({ calories: 1900, proteinG: 100, carbsG: null, fatG: null, baselineCalories: null });
     expect(await goalsOn(addDays(t, -1))).toMatchObject({ calories: 1900 });
     expect(await goalsOn(t)).toMatchObject({ calories: 2100 });
     expect(await goalsOn(addDays(t, 1))).toMatchObject({ calories: 2100 });

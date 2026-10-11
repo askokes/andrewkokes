@@ -166,6 +166,8 @@ export interface GoalsSnapshot {
   proteinG: number | null;
   carbsG: number | null;
   fatG: number | null;
+  /** Calories burned in a normal day (maintenance), when the user has set it. */
+  baselineCalories: number | null;
 }
 
 export interface EntryView {

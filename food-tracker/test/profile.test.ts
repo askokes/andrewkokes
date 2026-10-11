@@ -56,7 +56,7 @@ describe("first run", () => {
       timezone: "America/Chicago",
       trackWeight: false,
       today: localDate("America/Chicago"),
-      goals: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60, goalWeightLb: null },
+      goals: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60, goalWeightLb: null, baselineCalories: null },
       latestWeight: null,
     });
     expect((await as(email, "GET", "/api/me")).status).toBe(200);
@@ -103,6 +103,8 @@ describe("validation", () => {
     [{ ...setup, goals: { calories: 1800.5 } }, "goals.calories"],
     [{ ...setup, goals: { calories: "lots" } }, "goals.calories"],
     [{ ...setup, goals: { calories: 1800, proteinG: -5 } }, "goals.proteinG"],
+    [{ ...setup, goals: { calories: 1800, baselineCalories: 300 } }, "goals.baselineCalories"],
+    [{ ...setup, goals: { calories: 1800, baselineCalories: "2400.5" } }, "goals.baselineCalories"],
     [{ ...setup, trackWeight: true, currentWeightLb: 20 }, "currentWeightLb"],
   ])("rejects bad input (%#: %s)", async (body, field) => {
     const res = await as(newEmail(), "POST", "/api/me", body);
@@ -169,6 +171,23 @@ describe("updating", () => {
     await as(email, "POST", "/api/goals", { calories: 2000 });
     const res = await as(email, "POST", "/api/goals", { calories: 2200 });
     expect(await res.json()).toMatchObject({ goals: { calories: 2200 } });
+  });
+
+  it("keeps the calories you burn with the goals, with the same history", async () => {
+    const email = newEmail();
+    await as(email, "POST", "/api/me", { ...setup, goals: { ...setup.goals, baselineCalories: "2400" } });
+    expect(await (await as(email, "GET", "/api/me")).json()).toMatchObject({ goals: { calories: 1800, baselineCalories: 2400 } });
+    await env.DB.prepare("UPDATE goals SET effective_from = '2026-01-01' WHERE user_id = (SELECT id FROM users WHERE email = ?)")
+      .bind(email)
+      .run();
+
+    // A new baseline alone is a change: a new row today, the old one kept for earlier days.
+    const res = await as(email, "POST", "/api/goals", { ...setup.goals, baselineCalories: 2300 });
+    expect(await res.json()).toMatchObject({ goals: { calories: 1800, baselineCalories: 2300 } });
+    expect(await goalRows(email)).toHaveLength(2);
+    // Clearing it is allowed.
+    const cleared = await as(email, "POST", "/api/goals", { ...setup.goals, baselineCalories: "" });
+    expect(await cleared.json()).toMatchObject({ goals: { baselineCalories: null } });
   });
 
   it("POST /api/goals is 404 before setup", async () => {

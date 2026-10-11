@@ -10,6 +10,12 @@ the browser has no `SpeechRecognition` / `webkitSpeechRecognition`. From any tab
 and listens in the same tap. Words show in the food box as they're heard, and the final transcript
 goes through the same `POST /api/parse` and confirm screen as typing.
 
+Baseline: Goals takes an optional "calories you burn a day" (`goals.baseline_calories`, migration 0007),
+kept with the goals so it has the same history. The chart draws it as a dashed line next to the goal,
+the Week / Month sentence compares the average to it, and Today says how far over or under it the day
+is, so a goal set below it never hides eating above it. The first baseline entered also stands for the
+days before it; later changes start on their own day.
+
 Fun touches Andrew picked: Overview greets by first name and time of day, shows "N days logged in a
 row" once there are two (it counts logging, never amounts), and draws today as a big calorie ring with
 protein, carbs and fat rings in the chart colors (past a goal a ring closes in the neutral "over"

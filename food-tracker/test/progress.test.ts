@@ -56,7 +56,7 @@ describe("GET /api/summary", () => {
       carbsG: 75,
       fatG: 20.3,
       entries: 2,
-      goal: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60 },
+      goal: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60, baselineCalories: null },
     });
     expect(body.days.at(-3)).toMatchObject({ calories: 700, entries: 1 });
     expect(body.days.at(-2)).toMatchObject({ calories: 0, proteinG: 0, entries: 0 });
@@ -74,6 +74,28 @@ describe("GET /api/summary", () => {
     expect(goalOn(-5)).toBe(1800);
     expect(goalOn(-3)).toBe(2200);
     expect(goalOn(0)).toBe(2200);
+  });
+
+  it("shows the first baseline on the days before it was set; later changes start on their day", async () => {
+    const email = await signUp();
+    const user = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first<{ id: number }>();
+    const insert = (calories: number, baseline: number | null, offset: number) =>
+      env.DB.prepare("INSERT INTO goals (user_id, calories, baseline_calories, effective_from) VALUES (?, ?, ?, ?)")
+        .bind(user!.id, calories, baseline, addDays(today(), offset))
+        .run();
+    await env.DB.prepare("UPDATE goals SET effective_from = ? WHERE user_id = ?").bind(addDays(today(), -10), user!.id).run();
+    await insert(1800, 2600, -4); // baseline first entered
+    await insert(1800, 2500, -2); // then changed
+    await insert(1700, null, 0); // then cleared
+
+    const body = await (await as(email, "GET", `/api/summary?from=${addDays(today(), -12)}&to=${today()}`)).json<SummaryResponse>();
+    const on = (offset: number) => body.days.find((d) => d.date === addDays(today(), offset))!.goal?.baselineCalories;
+    expect(on(-12)).toBe(2600);
+    expect(on(-6)).toBe(2600);
+    expect(on(-4)).toBe(2600);
+    expect(on(-2)).toBe(2500);
+    expect(on(-1)).toBe(2500);
+    expect(on(0)).toBeNull();
   });
 
   it.each([

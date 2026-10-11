@@ -96,6 +96,8 @@ export function todayRings() {
   const calLeft = el("p", { className: "ring-left" });
   const calWrap = el("div", { className: "ring-big", attrs: { role: "progressbar", "aria-label": "Calories" } }, cal.node, el("div", { className: "ring-center" }, calNumber, calOf, calLeft));
   const hint = el("p", { className: "hint", textContent: "Add a daily goal on the Goals tab to see what's left." });
+  // Against what they burn on a normal day, when set: a goal below it can hide eating above it.
+  const burn = el("p", { className: "ring-baseline" });
 
   const macros = MACROS.map((m) => {
     const r = ring("small", m.color);
@@ -111,7 +113,7 @@ export function todayRings() {
     return { ...m, r, grams, sub, wrap };
   });
 
-  const node = el("div", { className: "rings" }, calWrap, hint, el("div", { className: "ring-row" }, ...macros.map((m) => m.wrap)));
+  const node = el("div", { className: "rings" }, calWrap, burn, hint, el("div", { className: "ring-row" }, ...macros.map((m) => m.wrap)));
 
   return {
     node,
@@ -124,6 +126,16 @@ export function todayRings() {
       calLeft.textContent = g ? `${whole(Math.abs(left))} ${left < 0 ? "over" : "left"}` : "";
       calLeft.classList.toggle("over-text", left < 0);
       hint.hidden = g !== null;
+      const baseline = g?.baselineCalories ?? null;
+      burn.hidden = baseline === null;
+      if (baseline !== null) {
+        const diff = eaten - baseline;
+        burn.replaceChildren(
+          el("span", { className: "ring-baseline-mark", attrs: { "aria-hidden": "true" } }),
+          `You burn about ${whole(baseline)} a day · `,
+          el("strong", { className: diff > 0 ? "over-text" : "", textContent: `${whole(Math.abs(diff))} ${diff > 0 ? "over" : "under"}` }),
+        );
+      }
       progressAttrs(calWrap, eaten, g?.calories ?? null, "calories");
 
       for (const m of macros) {

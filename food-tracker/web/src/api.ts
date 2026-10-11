@@ -4,6 +4,8 @@ export interface Goals {
   carbsG: number | null;
   fatG: number | null;
   goalWeightLb: number | null;
+  /** Calories burned in a normal day, if set. */
+  baselineCalories: number | null;
   effectiveFrom: string;
 }
 

@@ -34,9 +34,10 @@ function kpi(label: string, value: string, sub: string) {
   );
 }
 
-function key(kind: "swatch" | "line" | "dot", color: string, text: string) {
+function key(kind: "swatch" | "line" | "dash" | "dot", color: string, text: string) {
   const mark = el("span", { className: `key-${kind}`, attrs: { "aria-hidden": "true" } });
-  mark.style.background = `var(${color})`;
+  if (kind === "dash") mark.style.borderTopColor = `var(${color})`;
+  else mark.style.background = `var(${color})`;
   return el("span", { className: "key" }, mark, text);
 }
 
@@ -111,6 +112,11 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
           key("swatch", "--fat", `${whole(d.fatG)} g fat`),
         );
       }
+      const burn = d.goal?.baselineCalories;
+      if (d.entries && burn) {
+        const diff = Math.round(d.calories - burn);
+        items.push(el("span", { className: diff > 0 ? "over-text" : "muted", textContent: `${whole(Math.abs(diff))} ${diff > 0 ? "over" : "under"} what you burn` }));
+      }
       if (weighIns[selected] !== null) items.push(key("dot", "--weight", `${weighIns[selected]} lb`));
       else if (averages[selected] !== null) items.push(key("line", "--weight", `avg ${averages[selected]} lb`));
       const open = el("button", { type: "button", className: "text-button open-day", textContent: d.date === today ? "See today ›" : "Open this day ›" });
@@ -126,6 +132,7 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
       key("swatch", "--carbs", "Carbs"),
       key("swatch", "--fat", "Fat"),
       key("line", "--goal-line", "Goal"),
+      days.some((d) => d.goal?.baselineCalories) ? key("dash", "--baseline", "Baseline (what you burn)") : null,
       showWeight ? key("line", "--weight", "Weight, 7-day avg") : null,
       showWeight ? key("dot", "--weight", "Weigh-in") : null,
     );

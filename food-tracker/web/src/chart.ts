@@ -39,7 +39,7 @@ const FONT = { family: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif
 
 /** The left axis's top: room above the tallest bar (and the goal) so the weight line can ride above most bars. */
 function calorieMax(days: DaySummary[]) {
-  const peak = Math.max(...days.map((d) => Math.max(d.calories, d.goal?.calories ?? 0)), 1000);
+  const peak = Math.max(...days.map((d) => Math.max(d.calories, d.goal?.calories ?? 0, d.goal?.baselineCalories ?? 0)), 1000);
   return Math.ceil((peak * 1.3) / 500) * 500;
 }
 
@@ -118,6 +118,8 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
       label: "Goal",
       data: input.days.map((d) => d.goal?.calories ?? null),
       yAxisID: "y",
+      // The calorie axis stacks the macro bars; each line is its own stack so it isn't added on top of another.
+      stack: "goal",
       borderColor: css("--goal-line"),
       borderWidth: 1.5,
       pointRadius: 0,
@@ -127,6 +129,25 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
       order: 3,
     },
   ];
+  // What the user burns on a normal day: dashed, so it reads as a different line from the goal.
+  const baselines = input.days.map((d) => d.goal?.baselineCalories ?? null);
+  if (baselines.some((b) => b !== null)) {
+    datasets.push({
+      type: "line",
+      label: "Baseline",
+      data: baselines,
+      yAxisID: "y",
+      stack: "baseline",
+      borderColor: css("--baseline"),
+      borderWidth: 1.5,
+      borderDash: [5, 4],
+      pointRadius: 0,
+      pointHoverRadius: 0,
+      stepped: "middle",
+      spanGaps: false,
+      order: 3,
+    });
+  }
   if (showWeight) {
     datasets.push(
       // A wider line in the card color under the weight line keeps it readable where it crosses bars.

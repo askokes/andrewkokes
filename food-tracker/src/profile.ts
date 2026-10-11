@@ -17,6 +17,7 @@ interface GoalRow {
   carbs_g: number | null;
   fat_g: number | null;
   goal_weight_lb: number | null;
+  baseline_calories: number | null;
   effective_from: string;
 }
 
@@ -31,7 +32,7 @@ export function getUser(db: D1Database, email: string) {
 function currentGoals(db: D1Database, userId: number, today: string) {
   return db
     .prepare(
-      `SELECT calories, protein_g, carbs_g, fat_g, goal_weight_lb, effective_from FROM goals
+      `SELECT calories, protein_g, carbs_g, fat_g, goal_weight_lb, baseline_calories, effective_from FROM goals
        WHERE user_id = ? ORDER BY (effective_from <= ?) DESC, effective_from DESC, id DESC LIMIT 1`,
     )
     .bind(userId, today)
@@ -46,7 +47,7 @@ function currentGoals(db: D1Database, userId: number, today: string) {
 export function goalsOn(db: D1Database, userId: number, date: string) {
   return db
     .prepare(
-      `SELECT calories, protein_g, carbs_g, fat_g, goal_weight_lb, effective_from FROM goals
+      `SELECT calories, protein_g, carbs_g, fat_g, goal_weight_lb, baseline_calories, effective_from FROM goals
        WHERE user_id = ?
        ORDER BY (effective_from <= ?) DESC, CASE WHEN effective_from <= ? THEN effective_from END DESC,
          effective_from ASC, id DESC
@@ -70,7 +71,8 @@ function sameGoals(row: GoalRow | null, goals: GoalsInput) {
     row.protein_g === goals.proteinG &&
     row.carbs_g === goals.carbsG &&
     row.fat_g === goals.fatG &&
-    row.goal_weight_lb === goals.goalWeightLb
+    row.goal_weight_lb === goals.goalWeightLb &&
+    row.baseline_calories === goals.baselineCalories
   );
 }
 
@@ -78,10 +80,10 @@ function sameGoals(row: GoalRow | null, goals: GoalsInput) {
 function insertGoals(db: D1Database, email: string, goals: GoalsInput, today: string) {
   return db
     .prepare(
-      `INSERT INTO goals (user_id, calories, protein_g, carbs_g, fat_g, goal_weight_lb, effective_from)
-       SELECT id, ?, ?, ?, ?, ?, ? FROM users WHERE email = ?`,
+      `INSERT INTO goals (user_id, calories, protein_g, carbs_g, fat_g, goal_weight_lb, baseline_calories, effective_from)
+       SELECT id, ?, ?, ?, ?, ?, ?, ? FROM users WHERE email = ?`,
     )
-    .bind(goals.calories, goals.proteinG, goals.carbsG, goals.fatG, goals.goalWeightLb, today, email);
+    .bind(goals.calories, goals.proteinG, goals.carbsG, goals.fatG, goals.goalWeightLb, goals.baselineCalories, today, email);
 }
 
 async function loadMe(db: D1Database, email: string) {
@@ -102,6 +104,7 @@ async function loadMe(db: D1Database, email: string) {
       carbsG: goals.carbs_g,
       fatG: goals.fat_g,
       goalWeightLb: goals.goal_weight_lb,
+      baselineCalories: goals.baseline_calories,
       effectiveFrom: goals.effective_from,
     },
     latestWeight: trackWeight && weight ? { weightLb: weight.weight_lb, date: weight.log_date } : null,

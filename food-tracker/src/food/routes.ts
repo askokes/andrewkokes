@@ -288,6 +288,7 @@ async function dayView(c: Ctx, usda: UsdaDeps, user: UserRow, date: string): Pro
       proteinG: goals.protein_g,
       carbsG: goals.carbs_g,
       fatG: goals.fat_g,
+      baselineCalories: goals.baseline_calories,
     },
     totals: {
       calories: sum((n) => n.calories),

@@ -3,7 +3,7 @@ import type { DaySummary, WeightEntry } from "../src/food/types";
 import { greeting, loggedStreak, macroCalories, movingAverage, periodStats, summarySentence } from "../web/src/progress";
 
 const day = (date: string, calories: number, entries = calories > 0 ? 1 : 0, proteinG = 0): DaySummary => ({
-  date, calories, proteinG, carbsG: 0, fatG: 0, entries, goal: { calories: 2000, proteinG: 120, carbsG: null, fatG: null },
+  date, calories, proteinG, carbsG: 0, fatG: 0, entries, goal: { calories: 2000, proteinG: 120, carbsG: null, fatG: null, baselineCalories: null },
 });
 const w = (date: string, weightLb: number): WeightEntry => ({ id: 0, date, weightLb });
 const dates = (n: number, end = "2026-10-11") =>
@@ -50,7 +50,7 @@ describe("periodStats", () => {
 });
 
 describe("summarySentence", () => {
-  const base = { avgCalories: 1846, avgProtein: 110, daysLogged: 6, days: 7, goalCalories: 2000, goalProtein: 120 };
+  const base = { avgCalories: 1846, avgProtein: 110, daysLogged: 6, days: 7, goalCalories: 2000, goalProtein: 120, baselineCalories: null };
   it("talks about the 7-day average and the intake, calmly", () => {
     expect(summarySentence({ ...base, weightChange: -1.2 }, "month", true)).toBe(
       "Your 7-day average weight is down 1.2 lb over the last 30 days. You averaged 1,846 cal a day on the 6 days you logged.",
@@ -59,6 +59,14 @@ describe("summarySentence", () => {
     expect(summarySentence({ ...base, weightChange: null }, "week", true)).toMatch(/Log your weight a few times/);
     expect(summarySentence({ ...base, weightChange: -3 }, "week", false)).toBe("You averaged 1,846 cal a day on the 6 days you logged.");
     expect(summarySentence({ ...base, daysLogged: 0, avgCalories: null, weightChange: null }, "week", true)).toMatch(/^Log a few days/);
+  });
+
+  it("compares the average to what the user burns, when they've set it", () => {
+    expect(summarySentence({ ...base, weightChange: null, baselineCalories: 2500 }, "week", false)).toBe(
+      "You averaged 1,846 cal a day on the 6 days you logged. That's about 650 below what you burn.",
+    );
+    expect(summarySentence({ ...base, avgCalories: 2620, weightChange: null, baselineCalories: 2500 }, "week", false)).toMatch(/about 120 above what you burn\.$/);
+    expect(summarySentence({ ...base, avgCalories: 2480, weightChange: null, baselineCalories: 2500 }, "week", false)).toMatch(/about even with what you burn\.$/);
   });
 });
 

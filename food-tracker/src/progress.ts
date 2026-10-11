@@ -58,6 +58,7 @@ interface GoalRow {
   protein_g: number | null;
   carbs_g: number | null;
   fat_g: number | null;
+  baseline_calories: number | null;
   effective_from: string;
 }
 
@@ -68,15 +69,26 @@ interface GoalRow {
  */
 function goalsByDate(rows: GoalRow[]) {
   // rows are ordered by effective_from, id: the last started row wins.
-  const snapshot = (r: GoalRow): GoalsSnapshot => ({ calories: r.calories, proteinG: r.protein_g, carbsG: r.carbs_g, fatG: r.fat_g });
+  const snapshot = (r: GoalRow): GoalsSnapshot => ({
+    calories: r.calories,
+    proteinG: r.protein_g,
+    carbsG: r.carbs_g,
+    fatG: r.fat_g,
+    baselineCalories: r.baseline_calories,
+  });
+  // What a user burns isn't a target they set for a day: the first baseline they enter also stands for the
+  // days before it, so the line shows across the chart at once. A later change (or clearing it) starts on
+  // its own day, like any goal.
+  const firstBaseline = rows.findIndex((r) => r.baseline_calories !== null);
   return (date: string): GoalsSnapshot | null => {
     if (!rows.length) return null;
-    let current = rows[0];
-    for (const r of rows) {
-      if (r.effective_from <= date) current = r;
-      else break;
-    }
-    return snapshot(current);
+    let at = 0;
+    rows.forEach((r, i) => {
+      if (r.effective_from <= date) at = i;
+    });
+    const goals = snapshot(rows[at]);
+    if (firstBaseline > at) goals.baselineCalories = rows[firstBaseline].baseline_calories;
+    return goals;
   };
 }
 
@@ -111,7 +123,9 @@ progressRoutes.get("/summary", async (c) => {
       .bind(user.id, from, to)
       .all<{ log_date: string; calories: number; protein_g: number; carbs_g: number; fat_g: number; entries: number }>(),
     db
-      .prepare("SELECT calories, protein_g, carbs_g, fat_g, effective_from FROM goals WHERE user_id = ? ORDER BY effective_from, id")
+      .prepare(
+        "SELECT calories, protein_g, carbs_g, fat_g, baseline_calories, effective_from FROM goals WHERE user_id = ? ORDER BY effective_from, id",
+      )
       .bind(user.id)
       .all<GoalRow>(),
   ]);
