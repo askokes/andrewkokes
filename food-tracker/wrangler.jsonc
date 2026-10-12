@@ -35,7 +35,11 @@
     // scripts/setup-access.mjs fills in both of these.
     "ACCESS_TEAM_DOMAIN": "soft-violet-454e.cloudflareaccess.com",
     // Application Audience (AUD) tag from the Access application.
-    "ACCESS_AUD": "442d6a6d440d13cc279a3fdb679058013b18c26fc57be549310f618ee9d61013"
+    "ACCESS_AUD": "442d6a6d440d13cc279a3fdb679058013b18c26fc57be549310f618ee9d61013",
+    // Invites (src/invites.ts): the account whose Access policy lists who may sign in, and who may invite.
+    // The key that edits that policy is the Worker secret ACCESS_INVITE_TOKEN.
+    "CF_ACCOUNT_ID": "fd5ad410c0a9e058fc62e42ab827be98",
+    "ADMIN_EMAILS": "andrewkokes@gmail.com"
   },
 
   "observability": { "enabled": true }

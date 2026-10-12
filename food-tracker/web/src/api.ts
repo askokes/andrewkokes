@@ -26,6 +26,8 @@ export interface Me {
   timezone: string;
   trackWeight: boolean;
   today: string;
+  /** May invite people (Goals tab). */
+  canInvite: boolean;
   goals: Goals | null;
   burn: BurnSettings;
   latestWeight: { weightLb: number; date: string } | null;

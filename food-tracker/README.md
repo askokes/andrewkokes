@@ -10,6 +10,14 @@ the browser has no `SpeechRecognition` / `webkitSpeechRecognition`. From any tab
 and listens in the same tap. Words show in the food box as they're heard, and the final transcript
 goes through the same `POST /api/parse` and confirm screen as typing.
 
+Invites (`src/invites.ts`): people in `ADMIN_EMAILS` (a Worker var, now Andrew) see "Invite someone" on the
+Goals tab. It adds the email to the Access policy "Food Tracker: allowed people" through Cloudflare's API
+(`POST /api/invites`; `GET /api/people` lists who can sign in), then offers the phone's share sheet with
+a note saying where to go and which email to use. The invitee signs in with the emailed code and sets up
+their own profile. The Worker secret `ACCESS_INVITE_TOKEN` is a Cloudflare API token limited to Account >
+Access: Apps and Policies > Edit; `CF_ACCOUNT_ID` names the account. `npm run access` still replaces the
+whole list, so include everyone when using it.
+
 Restaurants (`src/food/menu.ts`, data in `src/food/menus/*.json`): McDonald's, Chick-fil-A, Subway, Jimmy
 John's, Jersey Mike's, Taco Bell, Chipotle, Panera and Panda Express, about 425 items, from each chain's own
 published nutrition (every item cites its source URL; retrieved October 2026). Each size is a food with a

@@ -24,6 +24,13 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 - Anything you looked for and couldn't find?
 - Any food with a silly picture? Write down the food.
 
+## Inviting someone (Andrew only)
+
+1. On **Goals**, scroll to **Invite someone**. Type their email and tap **Invite**.
+2. It should say they can sign in now. Tap **Send them the link** and pick Messages; the note says where to go and which email to use.
+3. Tap **Who can sign in** to see everyone on the list.
+4. On their phone: they open the link, type that email, enter the code, and fill in their own setup.
+
 ## Restaurants
 
 1. On **Diary**, tap the mic and say **a Big Mac and a large fries from McDonald's**. The check screen should show **McDonald's Big Mac** (580 cal) and **McDonald's World Famous Fries**, large (480 cal).

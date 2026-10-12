@@ -38,11 +38,35 @@ export function tabBar(go: Go) {
     icon("mic"),
   );
   const nav = el("nav", { className: "tabbar", hidden: true, attrs: { "aria-label": "Main" } }, mic, el("div", { className: "tabbar-inner" }, ...links.map((l) => l.a)));
+
+  // While a box has the keyboard up, the bar hides (styles.css). It comes back a moment after typing ends,
+  // not at once: a tap on a button near the bottom closes the keyboard first, and a bar that reappeared
+  // under the finger would take the tap ("Invite", "Save").
+  const typing = () => {
+    const a = document.activeElement;
+    return a instanceof HTMLInputElement || a instanceof HTMLSelectElement || a instanceof HTMLTextAreaElement;
+  };
+  let settle = 0;
+  const settleLater = () => {
+    clearTimeout(settle);
+    settle = window.setTimeout(() => {
+      if (!typing()) document.body.classList.remove("typing");
+    }, 400);
+  };
+  document.addEventListener("focusin", () => {
+    if (typing()) {
+      clearTimeout(settle);
+      document.body.classList.add("typing");
+    } else settleLater();
+  });
+  document.addEventListener("focusout", settleLater);
   return {
     nav,
     mic,
     /** Mark the current tab, or hide the bar (first-run setup, the confirm screen). */
     show(active: Tab | null) {
+      // A new screen: the box that had the keyboard may be gone without a focusout.
+      if (!typing()) document.body.classList.remove("typing");
       nav.hidden = active === null;
       document.body.classList.toggle("has-tabs", active !== null);
       for (const l of links) {

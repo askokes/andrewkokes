@@ -1,4 +1,5 @@
 import { Hono, type Context } from "hono";
+import { isAdmin } from "./admins";
 import { ageOn, caloriesBurned, weightOn, type Activity, type BurnProfile, type Sex } from "./burn";
 import { localDate } from "./dates";
 import type { AppEnv } from "./env";
@@ -113,7 +114,7 @@ function insertGoals(db: D1Database, email: string, goals: GoalsInput, today: st
     .bind(goals.calories, goals.proteinG, goals.carbsG, goals.fatG, goals.goalWeightLb, today, email);
 }
 
-async function loadMe(db: D1Database, email: string) {
+async function loadMe(db: D1Database, email: string, env: { ADMIN_EMAILS?: string }) {
   const user = await getUser(db, email);
   if (!user) return null;
   const today = localDate(user.timezone);
@@ -126,6 +127,8 @@ async function loadMe(db: D1Database, email: string) {
     timezone: user.timezone,
     trackWeight,
     today,
+    /** May add people from the Goals tab (see invites.ts). */
+    canInvite: isAdmin(env, user.email),
     goals: goals && {
       calories: goals.calories,
       proteinG: goals.protein_g,
@@ -165,7 +168,7 @@ export const noProfile = (c: Context<AppEnv>) =>
 export const profileRoutes = new Hono<AppEnv>();
 
 profileRoutes.get("/me", async (c) => {
-  const me = await loadMe(c.env.DB, c.get("email"));
+  const me = await loadMe(c.env.DB, c.get("email"), c.env);
   return me ? c.json(me) : noProfile(c);
 });
 
@@ -215,7 +218,7 @@ profileRoutes.post("/me", async (c) => {
   }
   await db.batch(statements);
 
-  return c.json(await loadMe(db, email), existing ? 200 : 201);
+  return c.json(await loadMe(db, email, c.env), existing ? 200 : 201);
 });
 
 profileRoutes.post("/goals", async (c) => {
@@ -231,5 +234,5 @@ profileRoutes.post("/goals", async (c) => {
   if (!sameGoals(await currentGoals(db, user.id, today), parsed.value)) {
     await insertGoals(db, email, parsed.value, today).run();
   }
-  return c.json(await loadMe(db, email));
+  return c.json(await loadMe(db, email, c.env));
 });

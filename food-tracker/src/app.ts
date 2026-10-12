@@ -3,6 +3,7 @@ import { bodyLimit } from "hono/body-limit";
 import { accessKeys, devUserEmail, verifyAccessJwt, type KeyResolver } from "./auth";
 import type { AppEnv } from "./env";
 import { foodRoutes } from "./food/routes";
+import { inviteRoutes } from "./invites";
 import { profileRoutes } from "./profile";
 import { progressRoutes } from "./progress";
 
@@ -11,10 +12,17 @@ export interface AppDeps {
   keys: KeyResolver;
   /** fetch used for USDA FoodData Central. Tests and dev:mock pass a fake. */
   usdaFetch: typeof fetch;
+  /** fetch used for Cloudflare's API (invites). Tests pass a fake. */
+  cfFetch: typeof fetch;
 }
 
 export function createApp(overrides: Partial<AppDeps> = {}) {
-  const deps: AppDeps = { keys: accessKeys, usdaFetch: (input, init) => fetch(input, init), ...overrides };
+  const deps: AppDeps = {
+    keys: accessKeys,
+    usdaFetch: (input, init) => fetch(input, init),
+    cfFetch: (input, init) => fetch(input, init),
+    ...overrides,
+  };
   const app = new Hono<AppEnv>();
   const api = new Hono<AppEnv>();
 
@@ -75,6 +83,7 @@ export function createApp(overrides: Partial<AppDeps> = {}) {
   api.route("/", profileRoutes);
   api.route("/", foodRoutes(deps));
   api.route("/", progressRoutes);
+  api.route("/", inviteRoutes(deps));
 
   // Registered last so unknown API paths get JSON, never the SPA's index.html.
   api.all("*", (c) => c.json({ error: "not_found", message: "No such endpoint." }, 404));

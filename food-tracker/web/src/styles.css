@@ -565,9 +565,9 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 .tab[aria-current="page"] { color: var(--accent); }
 .tab[aria-current="page"] .tab-icon { background: color-mix(in srgb, var(--accent) 14%, transparent); }
 .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-/* On a phone the keyboard needs the room while typing. */
+/* On a phone the keyboard needs the room while typing (body.typing, see tabs.ts). */
 @media (pointer: coarse) {
-  body:has(.screen input:focus, .screen select:focus) .tabbar { display: none; }
+  body.typing .tabbar { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .tab-icon { transition: none; } }
 
@@ -635,3 +635,8 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 .height-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: -6px; }
 .burn-estimate { padding: 12px 14px; border-radius: 12px; background: var(--note-bg); font-size: 1rem; }
 .burn-estimate strong { font-size: 1.15rem; }
+
+/* Goals: invite someone */
+.invite-done { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; border-radius: 12px; background: var(--note-bg); }
+.people-box summary { cursor: pointer; color: var(--accent); font-weight: 600; min-height: 44px; display: flex; align-items: center; }
+.people { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.95rem; overflow-wrap: anywhere; }
