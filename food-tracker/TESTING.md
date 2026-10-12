@@ -16,7 +16,7 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 8. Tap in the food box on Diary. While the keyboard is up, the tabs and mic hide so you have room to type.
 9. Add a food. The **Check and add** screen has no tabs; after **Add** you're back on Diary.
 
-10. Add it to your home screen: in Safari tap **Share**, then **Add to Home Screen**. The icon should be a green tile with a little sprout inside a mint, apricot and lavender ring. If you added it before, delete the old one first so the new icon shows.
+10. Add it to your home screen: in Safari tap **Share**, then **Add to Home Screen**. The icon should be a mint tile with a smiling white bowl holding a tomato, a blueberry and a leaf. If you added it before, delete the old one first so the new icon shows.
 
 ### Tell Andrew
 
