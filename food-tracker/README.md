@@ -151,3 +151,7 @@ Afterwards, commit the updated `wrangler.jsonc` (the AUD tag and database id are
 **Later deploys:** `npm run deploy`.
 
 The Worker has `workers_dev` and preview URLs turned off, so the only way in is the Access-protected subdomain.
+The one exception is the home-screen icon and its friends (`PUBLIC_FILES` in `scripts/cloudflare.mjs`: the
+icon PNGs, `icon.svg` and the manifest). iOS fetches the icon without the sign-in cookie, got Access's login
+page and drew a letter instead, so a second Access app, "Food Tracker: public icons", lets anyone load just
+those files. `npm run access` keeps it in place.

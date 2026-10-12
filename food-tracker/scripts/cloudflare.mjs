@@ -92,6 +92,37 @@ export async function ensureAccess(cf, account, hostname, emails) {
   return { teamDomain, aud: app.aud };
 }
 
+const PUBLIC_APP_NAME = "Food Tracker: public icons";
+const PUBLIC_POLICY_NAME = "Food Tracker: anyone (icons only)";
+/**
+ * Files a phone fetches without the sign-in cookie: iOS asks for the home-screen icon on its own, and gets
+ * Access's login page instead (so it draws a letter). Only these images and the manifest skip Access.
+ */
+export const PUBLIC_FILES = ["/apple-touch-icon.png", "/icon-192.png", "/icon-512.png", "/favicon-32.png", "/icon.svg", "/manifest.webmanifest"];
+
+/** A second Access app, on just PUBLIC_FILES, that lets anyone through. More specific paths win in Access. */
+export async function ensurePublicFiles(cf, account, hostname) {
+  const base = `/accounts/${account}/access`;
+  const policyBody = { name: PUBLIC_POLICY_NAME, decision: "bypass", include: [{ everyone: {} }] };
+  const policies = await cf("GET", `${base}/policies`);
+  const oldPolicy = policies.find((p) => p.name === PUBLIC_POLICY_NAME);
+  const policy = oldPolicy
+    ? await cf("PUT", `${base}/policies/${oldPolicy.id}`, policyBody)
+    : await cf("POST", `${base}/policies`, policyBody);
+
+  const appBody = {
+    name: PUBLIC_APP_NAME,
+    type: "self_hosted",
+    domain: `${hostname}${PUBLIC_FILES[0]}`,
+    destinations: PUBLIC_FILES.map((path) => ({ type: "public", uri: `${hostname}${path}` })),
+    app_launcher_visible: false,
+    policies: [{ id: policy.id, precedence: 1 }],
+  };
+  const apps = await cf("GET", `${base}/apps`);
+  const oldApp = apps.find((a) => a.name === PUBLIC_APP_NAME);
+  return oldApp ? cf("PUT", `${base}/apps/${oldApp.id}`, appBody) : cf("POST", `${base}/apps`, appBody);
+}
+
 /** Finds or creates the D1 database and returns its id. */
 export async function ensureDatabase(cf, account, name) {
   const existing = await cf("GET", `/accounts/${account}/d1/database?name=${encodeURIComponent(name)}`);
