@@ -246,6 +246,30 @@ export type EntryInput =
       unit?: string;
     };
 
+/** One of the foods a user logs most, from their own entries (GET /api/foods/usual). */
+export interface UsualFood {
+  /** The same food keeps its key from one call to the next. */
+  key: string;
+  foodName: string;
+  /** As EntryView.usdaName. */
+  usdaName: string | null;
+  /** The amount logged last time, which a tap logs again. */
+  quantity: number;
+  unitLabel: string;
+  nutrition: Nutrition;
+  noWeight?: boolean;
+  /** Times logged lately, and how many of those were at each meal. */
+  count: number;
+  meals: Record<Meal, number>;
+  /** The item to send in POST /api/entries to log it again. */
+  entry: EntryInput;
+}
+
+export interface UsualResponse {
+  /** Most logged first; ties go to the one logged most recently. */
+  foods: UsualFood[];
+}
+
 /**
  * PATCH /api/entries/:id body. `unit` alone converts the amount: the weight
  * stays the same and the quantity is worked out in the new unit, to 2 decimals

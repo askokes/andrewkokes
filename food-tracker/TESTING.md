@@ -24,6 +24,21 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 - Anything you looked for and couldn't find?
 - Any food with a silly picture? Write down the food.
 
+## Your usual foods
+
+1. Log a few things over a couple of days the normal way (typing or the mic).
+2. On **Diary**, under the food box, **Your usual foods** lists what you log most, each with the amount you had last time and its calories.
+3. The meal buttons above the list start on the meal for this time of day. Foods you usually have at that meal come first. Tap **Dinner** and the order should change.
+4. Tap a food. It turns into a green check, and it shows up in that meal below with the same amount as last time. The total at the top goes up.
+5. A note says what was added, with **Undo**. Tap **Undo**: the food comes back out.
+6. Tap two foods quickly, one after the other. Both should be added.
+7. If you ate a different amount this time, tap the food in the meal list below and change it, like any other food.
+
+### Tell Andrew
+
+- Is anything missing from the list that you eat all the time?
+- Did a tap ever add the wrong amount?
+
 ## Inviting someone (Andrew only)
 
 1. On **Goals**, scroll to **Invite someone**. Type their email and tap **Invite**.

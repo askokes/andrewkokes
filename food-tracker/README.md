@@ -41,6 +41,13 @@ follows the weight; the Week / Month sentence compares the average to it, and To
 under it the day is, so a goal set below it never hides eating above it. The typed-in
 `goals.baseline_calories` from migration 0007 is no longer read.
 
+Your usual foods (`GET /api/foods/usual`, `web/src/views/usual.ts`): under the Diary's food box, each
+person's most-logged foods from the last 60 days (up to 12; 4 show until "Show more"), worked out from
+their own entries, so there is nothing to set up or keep. A USDA or restaurant food is one food whatever
+it was called or how much; a typed-in food is known by its name. Each comes back at the amount logged
+last, and one tap logs it again to the meal picked above the list (it starts on the meal for the time of
+day, and foods usually eaten at that meal sort first). The note under the meals offers Undo.
+
 Fun touches Andrew picked: Overview greets by first name and time of day, shows "N days logged in a
 row" once there are two (it counts logging, never amounts), and draws today as a big calorie ring with
 protein, carbs and fat rings in the chart colors (past a goal a ring closes in the neutral "over"
@@ -49,7 +56,7 @@ a short confetti burst plays once per day when breakfast, lunch and dinner are a
 reduced motion).
 
 API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/foods/search`,
-`GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/summary`, `GET/POST /api/weight`,
+`GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/foods/usual`, `GET /api/summary`, `GET/POST /api/weight`,
 `DELETE /api/weight/:id`. Shapes live in `src/food/types.ts`.
 
 Home is a dashboard: Today / Week / Month. Week and Month show one Chart.js chart, calories stacked by
@@ -100,7 +107,8 @@ At Andrew's request (October 2026) the screens in section 8 are arranged as thre
 goals, weight tracking, profile, sign out; Phase 6 adds export and delete here). The old `/settings`
 and `/day/...` addresses redirect. Section 6 names USDA as the food source; at Andrew's request restaurant items come from the chains'
 own published nutrition instead (see Restaurants above). Section 8 also asks for light and dark mode; Andrew prefers light
-only, so the dark theme is gone. SPEC.md itself is unchanged.
+only, so the dark theme is gone. Section 13 leaves saved favorites for v2; at Andrew's request the Diary
+has "Your usual foods" now, built from what each person logs. SPEC.md itself is unchanged.
 
 Every write (POST, PUT, PATCH) must send `Content-Type: application/json`, and writes a browser
 marks as started by another site (`Sec-Fetch-Site`) are refused, so other pages can't post to the

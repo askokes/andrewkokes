@@ -5,7 +5,7 @@ import { createApp } from "../src/app";
 import { addDays, localDate } from "../src/dates";
 import devMock from "../src/dev-mock";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
-import { USDA_CALLS_PER_REQUEST, USDA_CALLS_PER_USER_HOUR } from "../src/food/routes";
+import { USDA_CALLS_PER_REQUEST, USDA_CALLS_PER_USER_HOUR, USUAL_DAYS, USUAL_MAX } from "../src/food/routes";
 import { commonFor, tailFor } from "../src/food/usda";
 import {
   MAX_GRAMS,
@@ -16,6 +16,7 @@ import {
   type Nutrition,
   type ParseResponse,
   type SearchResponse,
+  type UsualResponse,
 } from "../src/food/types";
 import { createFakeUsda, type FakeUsdaOptions } from "./fixtures/usda/fake-fetch";
 import foodsFile from "./fixtures/usda/foods.json";
@@ -1150,6 +1151,111 @@ describe("DELETE /api/entries/:id", () => {
   });
 });
 
+describe("GET /api/foods/usual", () => {
+  async function usualOf(as: Call, email: string) {
+    const res = await as(email, "GET", "/api/foods/usual");
+    expect(res.status).toBe(200);
+    return (await res.json<UsualResponse>()).foods;
+  }
+
+  it("ranks a user's foods by how often they log them, each at the amount logged last", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    expect(await usualOf(as, email)).toEqual([]);
+
+    await logFoods(as, email, [{ ...eggsItem, name: "Eggs" }], { meal: "breakfast", date: addDays(today(), -2) });
+    await logFoods(as, email, [chickenItem, cookieItem], { meal: "dinner", date: addDays(today(), -1) });
+    await logFoods(as, email, [{ ...eggsItem, quantity: 3, name: "Two eggs" }, { ...cookieItem, quantity: 1 }], { meal: "snack" });
+    const last = await logFoods(as, email, [{ ...eggsItem, quantity: 3, name: "Eggs" }], { meal: "breakfast" });
+
+    const foods = await usualOf(as, email);
+    expect(foods.map((f) => [f.foodName, f.count])).toEqual([
+      ["Eggs", 3],
+      ["Grandma's cookie", 2],
+      [food(ROAST_CHICKEN).description, 1],
+    ]);
+    const [eggs, cookie, chicken] = foods;
+    // Any name or amount is the same USDA food; it comes back as logged last.
+    const lastEggs = last.entries.at(-1)!;
+    expect(eggs).toEqual({
+      key: `usda:${LARGE_EGG}`,
+      foodName: "Eggs",
+      usdaName: food(LARGE_EGG).description,
+      quantity: 3,
+      unitLabel: "egg",
+      nutrition: lastEggs.nutrition,
+      count: 3,
+      meals: { breakfast: 2, lunch: 0, dinner: 0, snack: 1 },
+      entry: { fdcId: LARGE_EGG, quantity: 3, unit: "each", name: "Eggs" },
+    });
+    // A typed-in food comes back with its numbers per unit, as they were typed.
+    expect(cookie).toMatchObject({
+      key: "own:grandma's cookie",
+      usdaName: null,
+      quantity: 1,
+      unitLabel: "serving",
+      nutrition: { calories: 120, proteinG: 2, carbsG: 15.5, fatG: 6 },
+      meals: { breakfast: 0, lunch: 0, dinner: 1, snack: 1 },
+      entry: { manual: { name: "Grandma's cookie", calories: 120, proteinG: 2, carbsG: 15.5, fatG: 6 }, quantity: 1, unit: "serving" },
+    });
+    expect(chicken).toMatchObject({ quantity: 6, unitLabel: "oz", entry: { fdcId: ROAST_CHICKEN, quantity: 6, unit: "oz" } });
+
+    // Each one logs again exactly as before.
+    const again = await logFoods(as, email, foods.map((f) => f.entry), { meal: "lunch" });
+    const added = again.entries.slice(-3);
+    expect(added.map((e) => [e.foodName, e.quantity, e.unit, e.nutrition])).toEqual([
+      ["Eggs", 3, "each", lastEggs.nutrition],
+      ["Grandma's cookie", 1, "serving", { calories: 120, proteinG: 2, carbsG: 15.5, fatG: 6 }],
+      [food(ROAST_CHICKEN).description, 6, "oz", nutritionFor(food(ROAST_CHICKEN).per100g, 170.1)],
+    ]);
+  });
+
+  it("knows a typed-in food by its name in any case, and keeps a changed amount's numbers per unit", async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    await logFoods(as, email, [{ manual: { name: "Protein shake", calories: 160, proteinG: 30 } }]);
+    const day = await logFoods(as, email, [{ manual: { name: "protein SHAKE", calories: 150, proteinG: 25 }, quantity: 2, unit: "scoop" }]);
+    await as(email, "PATCH", `/api/entries/${day.entries.at(-1)!.id}`, { quantity: 3 });
+
+    const [shake, ...rest] = await usualOf(as, email);
+    expect(rest).toEqual([]);
+    expect(shake).toMatchObject({
+      foodName: "protein SHAKE",
+      count: 2,
+      quantity: 3,
+      unitLabel: "scoop",
+      nutrition: { calories: 450, proteinG: 75, carbsG: 0, fatG: 0 },
+      entry: { manual: { name: "protein SHAKE", calories: 150, proteinG: 25, carbsG: 0, fatG: 0 }, quantity: 3, unit: "scoop" },
+    });
+  });
+
+  it(`looks back ${USUAL_DAYS} days and offers at most ${USUAL_MAX} foods`, async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    await logFoods(as, email, [cookieItem, cookieItem], { date: addDays(today(), -USUAL_DAYS - 1) });
+    await logFoods(as, email, [chickenItem], { date: addDays(today(), -USUAL_DAYS) });
+    const names = Array.from({ length: USUAL_MAX }, (_, i) => `Snack ${i + 1}`);
+    await logFoods(as, email, names.map((name) => ({ manual: { name, calories: 100 } })));
+
+    const foods = await usualOf(as, email);
+    expect(foods).toHaveLength(USUAL_MAX);
+    // All logged once: newest first, so the oldest (the chicken, 60 days back) is the one left off.
+    expect(foods.map((f) => f.foodName)).toEqual([...names].reverse());
+    expect(foods.some((f) => f.foodName === "Grandma's cookie")).toBe(false);
+  });
+
+  it("are each user's own", async () => {
+    const { as } = client();
+    const a = await signUp(as);
+    const b = await signUp(as);
+    await logFoods(as, a, [chickenItem, cookieItem]);
+    expect(await usualOf(as, b)).toEqual([]);
+    await logFoods(as, b, [eggsItem]);
+    expect((await usualOf(as, b)).map((f) => f.key)).toEqual([`usda:${LARGE_EGG}`]);
+    expect((await usualOf(as, a)).map((f) => f.key)).toEqual(["own:grandma's cookie", `usda:${ROAST_CHICKEN}`]);
+  });
+});
+
 describe("before profile setup", () => {
   it("every food route is 404 no_profile, and USDA is never called", async () => {
     const { as, usda } = client();
@@ -1162,6 +1268,7 @@ describe("before profile setup", () => {
       ["POST", "/api/entries", { date: today(), meal: null, items: [eggsItem] }],
       ["PATCH", "/api/entries/1", { quantity: 2 }],
       ["DELETE", "/api/entries/1"],
+      ["GET", "/api/foods/usual"],
     ];
     for (const [method, path, body] of routes) {
       const res = await as(email, method, path, body);

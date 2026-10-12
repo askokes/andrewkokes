@@ -35,6 +35,8 @@ const ICONS = {
   book: "M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" + "M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z",
   // Feather "target" (MIT): three rings.
   target: "M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z" + "M18 12a6 6 0 1 1-12 0 6 6 0 0 1 12 0z" + "M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0z",
+  plus: "M12 5v14" + "M5 12h14",
+  check: "M20 6L9 17l-5-5",
 } as const;
 
 /** A stroked 24x24 icon in the current text color. Decorative: label the button, not the icon. */

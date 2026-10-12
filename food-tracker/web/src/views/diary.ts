@@ -9,6 +9,7 @@ import { listen, voiceErrorMessage, voiceSupported, type Listening } from "../vo
 import { clearProgressCache } from "./dashboard";
 import { openEditSheet } from "./editEntry";
 import { compactTotals, totalsText } from "./summary";
+import { usualCard } from "./usual";
 
 // Days already seen this session, so going back to one paints instantly while it refreshes.
 const days = new Map<string, DayView>();
@@ -146,7 +147,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
   let today = days.get(date)?.today ?? todayIn(me.timezone);
   const added = justAdded?.date === date ? justAdded : null;
   justAdded = null;
-  const highlight = added && added.ids.length ? { ids: new Set(added.ids), at: added.at } : null;
+  let highlight = added && added.ids.length ? { ids: new Set(added.ids), at: added.at } : null;
 
   const prev = el("button", { type: "button", className: "icon-button", dataset: { nav: "prev" }, attrs: { "aria-label": "Previous day" } }, icon("back"));
   const next = el("button", { type: "button", className: "icon-button", dataset: { nav: "next" }, attrs: { "aria-label": "Next day" } }, icon("forward"));
@@ -290,7 +291,16 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
   // ---- the day: where it stands, the food box, then what was eaten
   const summary = el("section", { className: "card compact-totals", tabIndex: -1, attrs: { "aria-label": "Totals" } });
   const list = el("div", { className: "entries" });
-  const page = el("div", { className: "stack" }, summary, form, list);
+  // One tap on a usual food adds it here; its new row lights up like the confirm screen's do.
+  const usual = usualCard({
+    date,
+    onDay: (day, newIds) => {
+      if (newIds.length) highlight = { ids: new Set(newIds), at: performance.now() };
+      changed(day);
+      if (newIds.length && allThreeMeals(day) && firstCelebration(day.date)) confetti();
+    },
+  });
+  const page = el("div", { className: "stack" }, summary, form, usual, list);
 
   if (added) {
     let what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}${added.meal ? ` to ${MEAL_LABELS[added.meal]}` : ""}. Nice!`;

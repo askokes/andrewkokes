@@ -4,7 +4,7 @@
 // the client.
 import { Hono, type Context } from "hono";
 import type { AppDeps } from "../app";
-import { localDate } from "../dates";
+import { addDays, localDate } from "../dates";
 import type { AppEnv } from "../env";
 import { baselineOn, getUser, goalsOn, noProfile, readJson, type UserRow } from "../profile";
 import { isObject, type FieldErrors } from "../validate";
@@ -22,6 +22,7 @@ import {
   type Amount,
   type Candidate,
   type DayView,
+  type EntryInput,
   type EntryView,
   type FoodRecord,
   type LookupStatus,
@@ -31,6 +32,8 @@ import {
   type ParseResponse,
   type SearchResponse,
   type UnitOption,
+  type UsualFood,
+  type UsualResponse,
 } from "./types";
 import { menuMatch, menuWeightKnown, withoutChain } from "./menu";
 import { resolveAmount, toCandidate, unitOptions } from "./units";
@@ -51,6 +54,9 @@ type Ctx = Context<AppEnv>;
 const MAX_PARSE_ITEMS = 8;
 const PARSE_LIMIT = 5;
 const SEARCH_LIMIT = 8;
+/** "Your usual foods" looks back this many days and offers this many. */
+export const USUAL_DAYS = 60;
+export const USUAL_MAX = 12;
 const WEIGHT_UNITS = new Set(["oz", "lb", "g"]);
 
 /**
@@ -313,6 +319,73 @@ async function dayView(c: Ctx, usda: UsdaDeps, user: UserRow, date: string): Pro
   };
 }
 
+/** Logs `row` again as it was: a USDA food at the same amount, or a typed-in food's numbers per unit. */
+function entryInputFor(row: EntryRow): EntryInput | null {
+  if (row.fdc_id !== null) return { fdcId: row.fdc_id, quantity: row.quantity, unit: row.unit, name: row.food_name };
+  if (!(row.quantity > 0)) return null;
+  const manual = {
+    name: row.food_name,
+    calories: perUnit(row.calories, row.quantity),
+    proteinG: perUnit(row.protein_g, row.quantity),
+    carbsG: perUnit(row.carbs_g, row.quantity),
+    fatG: perUnit(row.fat_g, row.quantity),
+  };
+  // A row from before amounts had a minimum can't be split per unit.
+  if (![manual.calories, manual.proteinG, manual.carbsG, manual.fatG].every(Number.isFinite)) return null;
+  return { manual, quantity: row.quantity, unit: row.unit };
+}
+
+/**
+ * The foods a user logged most in the last USUAL_DAYS days, each at the
+ * amount they logged last time. A USDA food is the same food under any name or
+ * amount; a typed-in food is known by its name.
+ */
+async function usualFoods(c: Ctx, usda: UsdaDeps, user: UserRow): Promise<UsualFood[]> {
+  const since = addDays(localDate(user.timezone), -USUAL_DAYS);
+  const { results: rows } = await c.env.DB.prepare(
+    `SELECT ${ENTRY_COLUMNS} FROM food_entries WHERE user_id = ? AND log_date >= ?
+     ORDER BY created_at DESC, id DESC LIMIT 2000`,
+  )
+    .bind(user.id, since)
+    .all<EntryRow>();
+
+  const groups = new Map<string, { latest: EntryRow; count: number; meals: Record<Meal, number> }>();
+  for (const row of rows) {
+    const key = row.fdc_id !== null ? `usda:${row.fdc_id}` : `own:${row.food_name.toLowerCase()}`;
+    let group = groups.get(key);
+    if (!group) groups.set(key, (group = { latest: row, count: 0, meals: { breakfast: 0, lunch: 0, dinner: 0, snack: 0 } }));
+    group.count++;
+    const meal = toMeal(row.meal);
+    if (meal) group.meals[meal]++;
+  }
+  // Newest first already, and the sort is stable: ties stay newest first.
+  const top = [...groups.entries()].sort(([, a], [, b]) => b.count - a.count).slice(0, USUAL_MAX);
+  const foods = await foodsFor(usda, top.map(([, g]) => g.latest));
+
+  return top.flatMap(([key, { latest, count, meals }]): UsualFood[] => {
+    const food = latest.fdc_id === null ? undefined : foods.get(latest.fdc_id);
+    // Its USDA record no longer has that amount's unit: logging it again would be refused.
+    if (food && !measure(food, latest.quantity, latest.unit)) return [];
+    const entry = entryInputFor(latest);
+    if (!entry) return [];
+    const view = entryView(latest, food);
+    return [
+      {
+        key,
+        foodName: view.foodName,
+        usdaName: view.usdaName ?? null,
+        quantity: view.quantity,
+        unitLabel: view.unitLabel,
+        nutrition: view.nutrition,
+        ...(view.noWeight ? { noWeight: true } : {}),
+        count,
+        meals,
+        entry,
+      },
+    ];
+  });
+}
+
 /** An entry id from the path, or null if it can't be one. */
 function entryId(raw: string): number | null {
   if (!/^\d{1,15}$/.test(raw)) return null;
@@ -384,6 +457,13 @@ export function foodRoutes(deps: AppDeps): Hono<AppEnv> {
       brandHint: looksLikeBrand(query),
     });
     return c.json<SearchResponse>({ query, ...result });
+  });
+
+  // The foods this user logs most, to add again with one tap.
+  routes.get("/foods/usual", async (c) => {
+    const user = await currentUser(c);
+    if (!user) return noProfile(c);
+    return c.json<UsualResponse>({ foods: await usualFoods(c, usdaDeps(c), user) });
   });
 
   // One day: entries, totals and the goals in effect that day. No date means today.
