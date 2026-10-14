@@ -274,13 +274,14 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
  * The day: a green header with where it stands (calories against the goal, the bar, the macros), and
  * the day's meals in a mint panel under it. The header sticks to the top while the meals scroll under it.
  */
+/* On a phone it runs edge to edge, past the page's 16px margins, like an app's header and list. */
 .day-log {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0 12px 18px;
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-  border-radius: 22px;
+  margin: 0 -16px;
+  padding: 0 16px 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
   background: var(--note-bg);
 }
 .day-log-head {
@@ -290,9 +291,8 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 0 -12px;
+  margin: 0 -16px;
   padding: 14px 16px;
-  border-radius: 21px 21px 0 0;
   background: var(--accent);
   color: var(--accent-text);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -316,6 +316,16 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .day-log-macros strong { font-weight: 700; }
 .day-log-left { font-weight: 700; white-space: nowrap; }
 .day-log-left.over { color: #ffd9a8; }
+/* Wider than a phone (the page stops at 32rem): a rounded box inside the margins instead. */
+@media (min-width: 33rem) {
+  .day-log {
+    margin: 0;
+    padding: 0 12px 18px;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    border-radius: 22px;
+  }
+  .day-log-head { margin: 0 -12px; border-radius: 21px 21px 0 0; }
+}
 .meal-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 0 4px 8px; }
 .meal-head h2 { font-size: 1.05rem; }
 .meal-head span { font-size: 0.95rem; }
