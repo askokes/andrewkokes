@@ -9,7 +9,7 @@ import { listen, voiceErrorMessage, voiceSupported, type Listening } from "../vo
 import { clearProgressCache } from "./dashboard";
 import { openEditSheet } from "./editEntry";
 import { openScanner } from "./scanner";
-import { compactTotals, totalsText } from "./summary";
+import { bar, totalsText } from "./summary";
 import { usualCard } from "./usual";
 
 // Days already seen this session, so going back to one paints instantly while it refreshes.
@@ -153,7 +153,6 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
   const prev = el("button", { type: "button", className: "icon-button", dataset: { nav: "prev" }, attrs: { "aria-label": "Previous day" } }, icon("back"));
   const next = el("button", { type: "button", className: "icon-button", dataset: { nav: "next" }, attrs: { "aria-label": "Next day" } }, icon("forward"));
   const title = el("h1");
-  const subtitle = el("p", { className: "muted" });
   const backToToday = el("button", { type: "button", className: "text-button back-today", textContent: "Back to today" });
   // Day changes replace the history entry, so the back gesture doesn't walk through every day viewed.
   prev.addEventListener("click", () => go(dayPath(addDays(date, -1), today), { replace: true, focus: "[data-nav=prev]" }));
@@ -166,9 +165,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
     const yesterday = addDays(today, -1);
     title.textContent = dayTitle(date, today);
     title.classList.toggle("long", date < yesterday);
-    // "Today" and "Yesterday" need the date spelled out; older titles already say it.
-    subtitle.hidden = date < yesterday;
-    subtitle.textContent = fullDate(date, today);
+    // The date itself is in the green header just below.
     backToToday.hidden = date >= today;
     next.disabled = date >= today;
   };
@@ -322,38 +319,43 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
     }
   });
 
-  // ---- the day: where it stands, the food box, then what was eaten
-  const summary = el("section", { className: "card compact-totals", tabIndex: -1, attrs: { "aria-label": "Totals" } });
+  // ---- the day: a green header with where it stands, what was eaten under it, then the food box and usual foods
   const list = el("div", { className: "entries" });
-  // What was eaten that day, in its own tinted panel with the day and its total, so it reads apart from
-  // the food box and the usual foods above it.
-  const logTitle = el("h2", { id: "day-log-title" });
-  const logDate = el("p");
-  const logTotal = el("p", { className: "day-log-total" });
-  const log = el(
-    "section",
-    { className: "day-log", attrs: { "aria-labelledby": "day-log-title" } },
-    el(
-      "header",
-      { className: "day-log-head" },
-      el("div", {}, logTitle, logDate),
-      logTotal,
-    ),
-    list,
-  );
+  // The header stays at the top of the screen while the day's meals scroll under it.
+  const logHead = el("header", { className: "day-log-head", tabIndex: -1, attrs: { "aria-label": "Totals" } });
+  const log = el("section", { className: "day-log", attrs: { "aria-labelledby": "day-log-title" } }, logHead, list);
   const paintLogHead = (day: DayView | undefined) => {
     const name = date === today ? "Today" : date === addDays(today, -1) ? "Yesterday" : formatDay(date, { weekday: "long" });
-    logTitle.replaceChildren(el("span", { className: "day-log-emoji", textContent: "🍽️", attrs: { "aria-hidden": "true" } }), `${name}'s food`);
-    logDate.textContent = fullDate(date, today);
-    logTotal.replaceChildren(
-      ...(day
-        ? [
-            el("strong", { textContent: whole(day.totals.calories) }),
-            " cal",
-            day.goals ? el("span", { textContent: `of ${whole(day.goals.calories)}` }) : "",
-          ]
-        : []),
+    const titleBlock = el(
+      "div",
+      {},
+      el("h2", { id: "day-log-title" }, el("span", { className: "day-log-emoji", textContent: "🍽️", attrs: { "aria-hidden": "true" } }), `${name}'s food`),
+      el("p", { textContent: fullDate(date, today) }),
     );
+    if (!day) {
+      logHead.replaceChildren(el("div", { className: "day-log-top" }, titleBlock));
+      return;
+    }
+    const g = day.goals;
+    const eaten = Math.round(day.totals.calories);
+    const left = g ? g.calories - eaten : null;
+    const macro = (label: string, grams: number) => el("span", {}, el("strong", { textContent: whole(Math.round(grams)) }), ` g ${label}`);
+    const parts: (HTMLElement | null)[] = [
+      el(
+        "div",
+        { className: "day-log-top" },
+        titleBlock,
+        el("p", { className: "day-log-total" }, el("strong", { textContent: whole(eaten) }), " cal", g ? el("span", { textContent: `of ${whole(g.calories)}` }) : ""),
+      ),
+      g ? bar(eaten, g.calories, "Calories") : null,
+      el(
+        "div",
+        { className: "day-log-foot" },
+        el("p", { className: "day-log-macros" }, macro("protein", day.totals.proteinG), macro("carbs", day.totals.carbsG), macro("fat", day.totals.fatG)),
+        left === null ? null : el("p", { className: left < 0 ? "day-log-left over" : "day-log-left", textContent: `${whole(Math.abs(left))} ${left < 0 ? "over" : "left"}` }),
+      ),
+    ];
+    logHead.replaceChildren(...parts.filter((n): n is HTMLElement => n !== null));
   };
   paintLogHead(days.get(date));
   // One tap on a usual food adds it here; its new row lights up like the confirm screen's do.
@@ -365,7 +367,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
       if (newIds.length && allThreeMeals(day) && firstCelebration(day.date)) confetti();
     },
   });
-  const page = el("div", { className: "stack" }, summary, form, usual, log);
+  const page = el("div", { className: "stack" }, log, form, usual);
 
   if (added) {
     let what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}${added.meal ? ` to ${MEAL_LABELS[added.meal]}` : ""}. Nice!`;
@@ -390,7 +392,6 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
   const paint = (day: DayView) => {
     today = day.today;
     paintHeader();
-    summary.replaceChildren(...compactTotals(day));
     paintLogHead(day);
     list.replaceChildren(...entryGroups(day, edit, highlight));
   };
@@ -410,20 +411,20 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
       announce(`${kind === "removed" ? "Removed" : "Saved"}. ${totalsText(day)}`);
       // The row that opened the sheet was just rebuilt; land on its replacement, or on the totals if it's gone.
       const row = list.querySelector<HTMLElement>(`.entry[data-id="${entry.id}"]`);
-      (row ?? summary).focus();
+      (row ?? logHead).focus();
     });
 
   const load = async () => {
     const cached = days.get(date);
     if (cached) paint(cached);
-    else summary.replaceChildren(el("p", { className: "muted", textContent: "Loading…" }));
+    else list.replaceChildren(el("p", { className: "muted", textContent: "Loading…" }));
     try {
       saved(await api<DayView>("GET", `/api/entries?date=${encodeURIComponent(date)}`));
     } catch (err) {
       if (cached) return;
       const retry = el("button", { type: "button", className: "button secondary", textContent: "Try again" });
       retry.addEventListener("click", load);
-      summary.replaceChildren(
+      list.replaceChildren(
         el("p", { textContent: "Hmm, that didn't load." }),
         el("p", { className: "muted", textContent: err instanceof ApiError ? err.message : "Something went wrong. Please try again." }),
         retry,
@@ -433,7 +434,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
   load();
 
   return [
-    el("header", { className: "daybar" }, el("div", { className: "daytitle" }, title, subtitle, backToToday), el("div", { className: "daynav" }, prev, next)),
+    el("header", { className: "daybar" }, el("div", { className: "daytitle" }, title, backToToday), el("div", { className: "daynav" }, prev, next)),
     status,
     page,
   ];

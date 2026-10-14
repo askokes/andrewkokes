@@ -119,7 +119,8 @@ asks for 50, because USDA's ranking often leaves the everyday food out of the to
 And the common-foods table above is an addition: it answers everyday phrases before USDA's search.
 At Andrew's request (October 2026) the screens in section 8 are arranged as three bottom tabs:
 **Overview** (`/`: today's totals or the Week / Month chart, and the weigh-in), **Diary**
-(`/diary`, `/diary/YYYY-MM-DD`: the day, the food box and mic, the meals) and **Goals** (`/goals`:
+(`/diary`, `/diary/YYYY-MM-DD`: a green header with the day's calories, bar and macros that stays pinned while
+the day's meals scroll under it, then the food box, mic and barcode button, then usual foods) and **Goals** (`/goals`:
 goals, weight tracking, profile, sign out; Phase 6 adds export and delete here). The old `/settings`
 and `/day/...` addresses redirect. Section 6 names USDA as the food source; at Andrew's request restaurant items come from the chains'
 own published nutrition instead (see Restaurants above). Section 8 also asks for light and dark mode; Andrew prefers light

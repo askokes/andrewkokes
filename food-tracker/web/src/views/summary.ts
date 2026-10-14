@@ -3,7 +3,7 @@ import { el } from "../dom";
 import { whole } from "../food";
 
 /** A progress bar. Past the goal it fills completely in a calm neutral color, never red. */
-function bar(value: number, goal: number, label: string, thin = false) {
+export function bar(value: number, goal: number, label: string, thin = false) {
   const fill = el("span", { className: "bar-fill" });
   fill.style.width = `${goal > 0 ? Math.min(100, (value / goal) * 100) : 100}%`;
   return el(
@@ -159,27 +159,6 @@ export function todayRings() {
       });
     },
   };
-}
-
-/** One line and a bar for the Diary: where the day stands while logging. */
-export function compactTotals(day: DayView): Node[] {
-  const g = day.goals;
-  const eaten = Math.round(day.totals.calories);
-  const left = g ? g.calories - eaten : null;
-  const macro = (label: string, grams: number) => el("span", {}, el("strong", { textContent: whole(Math.round(grams)) }), ` g ${label}`);
-  const parts: (Node | null)[] = [
-    el(
-      "div",
-      { className: "compact-head" },
-      el("p", {}, el("strong", { className: "compact-cal", textContent: whole(eaten) }), g ? ` of ${whole(g.calories)} cal` : " cal"),
-      left === null
-        ? null
-        : el("p", { className: left < 0 ? "over-text" : "muted", textContent: `${whole(Math.abs(left))} ${left < 0 ? "over" : "left"}` }),
-    ),
-    g ? bar(eaten, g.calories, "Calories") : null,
-    el("p", { className: "compact-macros muted" }, macro("protein", day.totals.proteinG), macro("carbs", day.totals.carbsG), macro("fat", day.totals.fatG)),
-  ];
-  return parts.filter((n): n is Node => n !== null);
 }
 
 /** "2,090 of 2,000 calories, 90 over." for the screen reader announcement after a change. */
