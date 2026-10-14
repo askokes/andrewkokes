@@ -511,9 +511,9 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .choice:active { border-color: var(--accent); }
 .choice-name { font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
 .choice-meta { color: var(--muted); font-size: 0.9rem; }
-/* Three narrow number boxes on a phone: less room reserved for the "g" suffix. */
-.manual .with-suffix input { padding: 0 30px 0 10px; }
-.manual .suffix { right: 10px; }
+/* Three narrow number boxes on a phone (macro goals, typed-in foods): less room reserved for the "g". */
+.grid3 .with-suffix input { padding: 0 30px 0 10px; }
+.grid3 .suffix { right: 10px; }
 .manual .grid3 .field-msg { font-size: 0.8rem; }
 .item-card.removed { flex-direction: row; align-items: center; justify-content: space-between; padding-top: 4px; padding-bottom: 4px; background: transparent; border-style: dashed; }
 .item-card.removed p { overflow-wrap: anywhere; min-width: 0; }
@@ -609,6 +609,21 @@ dialog.scanner::backdrop { background: var(--bg); }
 }
 
 /* Dashboard: Today / Week / Month */
+/* Overview: the greeting and Today / Week / Month stay put while the cards scroll up under them. */
+.overview-top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: -16px -16px 0;
+  padding: 16px 16px 10px;
+  background: var(--bg);
+  transition: box-shadow 0.2s ease;
+}
+.overview-top.stuck { box-shadow: 0 8px 12px -10px rgba(0, 0, 0, 0.3); }
+@media (prefers-reduced-motion: reduce) { .overview-top { transition: none; } }
 .period-switch { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .period-switch button { font-size: 0.95rem; }
 @media (max-width: 340px) { .period-switch { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

@@ -101,7 +101,7 @@ If the mic button is missing, your browser doesn't support voice. Use Safari on 
 
 ## Dashboard and weight
 
-1. Open the app on **Overview**. Under the date you should see **Today | Week | Month**.
+1. Open the app on **Overview**. Under the date you should see **Today | Week | Month**. Scroll down: the greeting and those three buttons stay at the top while the cards slide under them.
 2. Tap **Week**. You should see your average calories a day, how many days you logged, and (if weight tracking is on) your weight trend, then a chart with a colored bar for each day.
 3. Each bar is split into protein (mint), carbs (apricot) and fat (lavender). The gray line is your goal.
 4. Tap any bar. The box above the chart should switch to that day's numbers. Tap **Open this day** to see what you ate that day.

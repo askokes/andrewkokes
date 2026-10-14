@@ -103,7 +103,11 @@ export function overviewView({ me, go }: { me: Me; go: Go }): Node[] {
 
   const weighIn = me.trackWeight ? weighInCard({ today, onSaved: () => period !== "today" && show() }) : null;
 
-  return [
+  // The greeting and Today / Week / Month stay at the top while the cards scroll under them, with a
+  // shadow once something is underneath.
+  const top = el(
+    "div",
+    { className: "overview-top" },
     el(
       "header",
       { className: "page-head" },
@@ -111,6 +115,14 @@ export function overviewView({ me, go }: { me: Me; go: Go }): Node[] {
       el("p", { className: "muted", textContent: fullDate(today, today) }),
       streakPill(today),
     ),
-    el("div", { className: "stack" }, switcher, slot, weighIn),
-  ];
+    switcher,
+  );
+  const onScroll = () => {
+    // Left the screen: stop listening.
+    if (!top.isConnected) return window.removeEventListener("scroll", onScroll);
+    top.classList.toggle("stuck", window.scrollY > 4);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  return [top, el("div", { className: "stack" }, slot, weighIn)];
 }
