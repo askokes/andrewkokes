@@ -1,0 +1,19 @@
+{
+  "_note": "Made-up products in the shapes USDA's branded search and details and Open Food Facts' v2 product API return, for the barcode tests and dev:mock. Names and numbers are invented, not real labels. USDA files 012345678905 under two records (an old label and a new one); Open Food Facts has 0099999999990 with a serving, 5012345678900 with only kJ per serving, and 041000000027 with no nutrition at all.",
+  "usdaSearch": {
+    "012345678905": [
+      { "fdcId": 2600001, "dataType": "Branded", "description": "TOASTED OAT CEREAL", "gtinUpc": "012345678905", "brandOwner": "Sunny Morning Foods Inc.", "brandName": "SUNNY MORNING", "servingSize": 28, "servingSizeUnit": "g", "householdServingFullText": "1 cup", "foodNutrients": [{ "nutrientId": 1008, "value": 375 }, { "nutrientId": 1003, "value": 10.7 }, { "nutrientId": 1005, "value": 78.6 }, { "nutrientId": 1004, "value": 7.1 }] },
+      { "fdcId": 2700001, "dataType": "Branded", "description": "TOASTED OAT CEREAL", "gtinUpc": "012345678905", "brandOwner": "Sunny Morning Foods Inc.", "brandName": "SUNNY MORNING", "servingSize": 39, "servingSizeUnit": "g", "householdServingFullText": "1.5 cup", "foodNutrients": [{ "nutrientId": 1008, "value": 359 }, { "nutrientId": 1003, "value": 12.8 }, { "nutrientId": 1005, "value": 74.4 }, { "nutrientId": 1004, "value": 6.4 }] },
+      { "fdcId": 2700002, "dataType": "Branded", "description": "HONEY OAT CEREAL 012345678905 FAMILY SIZE", "gtinUpc": "0012345678912", "brandOwner": "Sunny Morning Foods Inc.", "brandName": "SUNNY MORNING", "servingSize": 39, "servingSizeUnit": "g", "householdServingFullText": "1 cup", "foodNutrients": [{ "nutrientId": 1008, "value": 385 }, { "nutrientId": 1003, "value": 7.7 }, { "nutrientId": 1005, "value": 84.6 }, { "nutrientId": 1004, "value": 3.8 }] }
+    ]
+  },
+  "usdaFoods": [
+    { "fdcId": 2600001, "dataType": "Branded", "description": "TOASTED OAT CEREAL", "gtinUpc": "012345678905", "brandOwner": "Sunny Morning Foods Inc.", "brandName": "SUNNY MORNING", "servingSize": 28, "servingSizeUnit": "g", "householdServingFullText": "1 cup", "foodNutrients": [{ "nutrient": { "id": 1008 }, "amount": 375 }, { "nutrient": { "id": 1003 }, "amount": 10.7 }, { "nutrient": { "id": 1005 }, "amount": 78.6 }, { "nutrient": { "id": 1004 }, "amount": 7.1 }] },
+    { "fdcId": 2700001, "dataType": "Branded", "description": "TOASTED OAT CEREAL", "gtinUpc": "012345678905", "brandOwner": "Sunny Morning Foods Inc.", "brandName": "SUNNY MORNING", "servingSize": 39, "servingSizeUnit": "g", "householdServingFullText": "1.5 cup", "foodNutrients": [{ "nutrient": { "id": 1008 }, "amount": 359 }, { "nutrient": { "id": 1003 }, "amount": 12.8 }, { "nutrient": { "id": 1005 }, "amount": 74.4 }, { "nutrient": { "id": 1004 }, "amount": 6.4 }] }
+  ],
+  "off": {
+    "0099999999990": { "code": "0099999999990", "status": 1, "status_verbose": "product found", "product": { "code": "0099999999990", "product_name": "Chocolate Peanut Protein Bar", "brands": "Fitbar,Fitbar Inc", "serving_size": "1 bar (60 g)", "serving_quantity": 60, "serving_quantity_unit": "g", "nutriments": { "energy-kcal_100g": 350, "energy-kcal_serving": 210, "proteins_100g": 33.3, "carbohydrates_100g": 40, "fat_100g": 11.7 } } },
+    "5012345678900": { "code": "5012345678900", "status": 1, "status_verbose": "product found", "product": { "code": "5012345678900", "product_name": "Sparkling Elderflower", "brands": "Hedgerow", "serving_size": "1 can (330 ml)", "serving_quantity": "330", "serving_quantity_unit": "ml", "nutriments": { "energy-kj_serving": 469, "carbohydrates_serving": 26.7, "proteins_serving": 0, "fat_serving": 0 } } },
+    "041000000027": { "code": "041000000027", "status": 1, "status_verbose": "product found", "product": { "code": "041000000027", "product_name": "Mystery Snack", "brands": "", "nutriments": {} } }
+  }
+}

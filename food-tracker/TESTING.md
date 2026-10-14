@@ -24,6 +24,21 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 - Anything you looked for and couldn't find?
 - Any food with a silly picture? Write down the food.
 
+## Scanning a package
+
+1. On **Diary**, tap the barcode button next to **Add**. The first time, your phone asks to use the camera. Tap **Allow**.
+2. Hold a package's barcode (the lines with numbers under them) inside the white box. It should buzz or close on its own within a second or two.
+3. The **Check and add** screen shows the product by brand and name, at one serving from the label, with its calories. Check it against the label. Change the amount if you had more or less, then tap **Add**.
+4. Try a few kinds: a cereal box, a can or bottle, a snack bar, something small like gum (its barcode is short).
+5. If it says **We don't know this barcode yet**, search for it by name, or tap **Enter it yourself** and copy the numbers from the label.
+6. Tap the barcode button again, then **Type the number instead**. Type the digits under the lines and tap **Look up**.
+7. If you tapped **Don't Allow** for the camera: it goes straight to typing the number. On iPhone, tap **aA** in the address bar, then **Website Settings**, then set **Camera** to **Allow**.
+
+### Tell Andrew
+
+- Which products did it get wrong, or not know? Write down the name and the numbers under the barcode.
+- Did the calories match the label?
+
 ## Your usual foods
 
 1. Log a few things over a couple of days the normal way (typing or the mic).

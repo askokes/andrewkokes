@@ -1,4 +1,4 @@
-import type { DayView, EntryView, Meal, ParseResponse } from "../../../src/food/types";
+import type { BarcodeResponse, DayView, EntryView, Meal, ParseResponse } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
 import { el, icon } from "../dom";
 import { confetti } from "../confetti";
@@ -8,6 +8,7 @@ import type { Go } from "../nav";
 import { listen, voiceErrorMessage, voiceSupported, type Listening } from "../voice";
 import { clearProgressCache } from "./dashboard";
 import { openEditSheet } from "./editEntry";
+import { openScanner } from "./scanner";
 import { compactTotals, totalsText } from "./summary";
 import { usualCard } from "./usual";
 
@@ -187,18 +188,19 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
     type: "text",
     className: "control",
     value: draft,
-    placeholder: "two eggs and toast",
+    placeholder: "2 eggs and toast",
     attrs: { enterkeyhint: "send", autocomplete: "off", "aria-describedby": "food-text-msg" },
   });
   const add = el("button", { type: "submit", className: "button", textContent: "Add" });
+  const scan = el("button", { type: "button", className: "button secondary scan-button", title: "Scan a barcode", attrs: { "aria-label": "Scan a barcode" } }, icon("scan"));
   const formMsg = el("p", { id: "food-text-msg", className: "form-msg", attrs: { "aria-live": "polite" } });
   const working = el("p", { className: "hint sr-only-empty", attrs: { role: "status" } });
   const form = el(
     "form",
     { className: "card add-form", noValidate: true },
     el("label", { htmlFor: "food-text", className: "add-label", textContent: "What did you eat?" }),
-    el("div", { className: "input-row" }, input, add),
-    voiceSupported() ? el("p", { className: "hint", textContent: "Or tap the green mic below and say it." }) : null,
+    el("div", { className: "input-row" }, input, scan, add),
+    el("p", { className: "hint", textContent: voiceSupported() ? "Or say it with the green mic below, or scan a package." : "Or scan a package's barcode." }),
     working,
     formMsg,
   );
@@ -213,7 +215,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
     mic.classList.toggle("listening", on);
     mic.setAttribute("aria-pressed", String(on));
     mic.setAttribute("aria-label", on ? "Stop listening" : "Say what you ate");
-    input.placeholder = on ? "Listening…" : "two eggs and toast";
+    input.placeholder = on ? "Listening…" : "2 eggs and toast";
     working.textContent = on ? "Listening. Say what you ate, like “two eggs and toast”." : "";
   };
   const toggle = () => {
@@ -257,6 +259,44 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
   };
   voice = { toggle, stop: () => listening?.stop() };
 
+  /** While a lookup runs, the box can't take another. */
+  const setBusy = (on: boolean, note = "") => {
+    add.disabled = on;
+    scan.disabled = on;
+    add.textContent = on ? "Looking…" : "Add";
+    input.readOnly = on;
+    working.textContent = note;
+  };
+
+  // ---- a package's barcode: straight to the confirm screen, like typing
+  scan.addEventListener("click", () => {
+    if (add.disabled) return;
+    if (listening) listening.stop();
+    formMsg.textContent = "";
+    openScanner(async (code) => {
+      if (!form.isConnected) return;
+      setBusy(true, "Looking up that barcode…");
+      try {
+        const res = await api<BarcodeResponse>("GET", `/api/foods/barcode?code=${encodeURIComponent(code)}`);
+        // Found, or not found (the confirm screen offers search and the label's numbers); trouble stays here.
+        if (res.status !== "ok" && res.status !== "not_found") {
+          formMsg.textContent = res.message ?? "Something went wrong. Please try again.";
+          return;
+        }
+        const product = res.candidates[0];
+        const parsed: ParseResponse = {
+          meal: null,
+          items: [{ quantity: 1, unit: null, food: product?.entryName?.toLowerCase() ?? "", text: `Barcode ${res.code}`, barcode: res.code, status: res.status, message: res.message, candidates: res.candidates }],
+        };
+        openConfirm(parsed, `Barcode ${res.code}`, date, today);
+      } catch (err) {
+        formMsg.textContent = err instanceof ApiError ? err.message : "Something went wrong. Please try again.";
+      } finally {
+        if (form.isConnected) setBusy(false);
+      }
+    });
+  });
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const text = input.value.trim();
@@ -266,10 +306,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
       return;
     }
     formMsg.textContent = "";
-    add.disabled = true;
-    add.textContent = "Looking…";
-    input.readOnly = true;
-    working.textContent = "Looking that up…";
+    setBusy(true, "Looking that up…");
     try {
       const parsed = await api<ParseResponse>("POST", "/api/parse", { text });
       if (parsed.items.length === 0) {
@@ -281,10 +318,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
     } catch (err) {
       formMsg.textContent = err instanceof ApiError ? err.message : "Something went wrong. Please try again.";
     } finally {
-      add.disabled = false;
-      add.textContent = "Add";
-      input.readOnly = false;
-      working.textContent = "";
+      setBusy(false);
     }
   });
 

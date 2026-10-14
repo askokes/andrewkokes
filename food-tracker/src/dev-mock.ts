@@ -1,9 +1,10 @@
-// Local development entry point: the real app, with USDA replaced by recorded
-// fixtures so the UI can be exercised without an API key or rate limits, and
+// Local development entry point: the real app, with USDA and Open Food Facts
+// replaced by recorded fixtures so the UI can be exercised without an API key
+// or rate limits, and
 // Cloudflare's Access API by an in-memory policy so invites can be tried
 // without touching who can really sign in.
 // Used only by `npm run dev:mock`; production deploys src/index.ts.
-import { createFakeUsda } from "../test/fixtures/usda/fake-fetch";
+import { createFakeOff, createFakeUsda } from "../test/fixtures/usda/fake-fetch";
 import { createApp } from "./app";
 import type { Env } from "./env";
 import { ALLOWED_POLICY } from "./invites";
@@ -14,7 +15,7 @@ const fakeCloudflare: typeof fetch = async (input, init) => {
   return Response.json({ success: true, result: String(input).endsWith("/policies") ? [policy] : policy });
 };
 
-const app = createApp({ usdaFetch: createFakeUsda().fetch, cfFetch: fakeCloudflare });
+const app = createApp({ usdaFetch: createFakeUsda().fetch, cfFetch: fakeCloudflare, offFetch: createFakeOff().fetch });
 
 export default {
   fetch(request, env, ctx) {

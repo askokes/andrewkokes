@@ -1,6 +1,7 @@
 // A stand-in for api.nal.usda.gov, serving the recorded fixtures. Used by the
 // tests and by `npm run dev:mock`. Never imported by the production entry point.
 import foodsFile from "./foods.json";
+import barcodesFile from "./barcodes.json";
 import adversarialFile from "./live/adversarial.json";
 import brandsFile from "./live/brands.json";
 import drinksFile from "./live/drinks.json";
@@ -11,6 +12,9 @@ type Json = Record<string, unknown>;
 const foods = new Map<number, Json>((foodsFile.foods as Json[]).map((f) => [f.fdcId as number, f]));
 /** Real records for every food in src/food/common.ts. Only the bulk endpoint serves them; foods.json wins on overlap. */
 const common = new Map<number, Json>((commonFile.foods as Json[]).map((f) => [f.fdcId as number, f]));
+/** Made-up products for the barcode tests (see barcodes.json): branded searches by barcode and their records. */
+const barcodeSearch = barcodesFile.usdaSearch as Record<string, Json[]>;
+const barcodeFoods = new Map<number, Json>((barcodesFile.usdaFoods as Json[]).map((f) => [f.fdcId as number, f]));
 const core = searchFile.foundationAndSr as Record<string, Json>;
 const branded = searchFile.branded as Record<string, Json>;
 
@@ -98,6 +102,8 @@ export function createFakeUsda(options: FakeUsdaOptions = {}): FakeUsda {
       const types = url.searchParams.getAll("dataType").flatMap((t) => t.split(",")).map((t) => t.trim());
       const scope = types.includes("Branded") ? "branded" : "core";
       const table = scope === "branded" ? branded : core;
+      const byBarcode = scope === "branded" && barcodeSearch[query];
+      if (byBarcode) return json({ ...emptySearch(query), totalHits: byBarcode.length, totalPages: 1, foods: byBarcode });
       return json(table[query] ?? liveSearch(scope, query) ?? emptySearch(query));
     }
     if (path === "/fdc/v1/foods") {
@@ -106,7 +112,7 @@ export function createFakeUsda(options: FakeUsdaOptions = {}): FakeUsda {
         .flatMap((v) => v.split(","))
         .map((v) => Number(v.trim()))
         .filter(Number.isFinite);
-      return json(ids.map((id) => foods.get(id) ?? common.get(id) ?? liveFoods.get(id)).filter(Boolean));
+      return json(ids.map((id) => foods.get(id) ?? common.get(id) ?? liveFoods.get(id) ?? barcodeFoods.get(id)).filter(Boolean));
     }
     const one = path.match(/^\/fdc\/v1\/food\/(\d+)$/);
     if (one) {
@@ -117,4 +123,31 @@ export function createFakeUsda(options: FakeUsdaOptions = {}): FakeUsda {
   };
 
   return { fetch: fakeFetch as typeof fetch, calls, options };
+}
+
+export interface FakeOff {
+  fetch: typeof fetch;
+  /** Every URL requested, in order. */
+  calls: string[];
+  /** User-Agent of every request, in order. */
+  agents: (string | null)[];
+}
+
+/** A stand-in for Open Food Facts' product API, serving barcodes.json. `down` answers 503. */
+export function createFakeOff(options: { down?: boolean } = {}): FakeOff {
+  const calls: string[] = [];
+  const agents: (string | null)[] = [];
+  const products = barcodesFile.off as Record<string, Json>;
+  const fakeFetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+    const request = new Request(input, init);
+    const url = new URL(request.url);
+    calls.push(url.toString());
+    agents.push(request.headers.get("User-Agent"));
+    if (url.hostname !== "world.openfoodfacts.org") return json({ error: "unexpected host" }, 599);
+    if (options.down) return new Response("Service Unavailable", { status: 503 });
+    const code = url.pathname.match(/^\/api\/v2\/product\/(\d+)\.json$/)?.[1];
+    const product = code ? products[code] : undefined;
+    return product ? json(product) : json({ code, status: 0, status_verbose: "product not found" }, 404);
+  };
+  return { fetch: fakeFetch as typeof fetch, calls, agents };
 }

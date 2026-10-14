@@ -1,6 +1,6 @@
 import type { Candidate, CreateEntriesBody, DayView, EntryInput, LookupStatus, Meal, ParseItemResult, ParseResponse, SearchResponse, UnitOption } from "../../../src/food/types";
 import { api, ApiError } from "../api";
-import { el, segmented } from "../dom";
+import { el, icon, segmented } from "../dom";
 import {
   amountText,
   capitalize,
@@ -141,7 +141,8 @@ function smallField(
  */
 function itemCard(item: ParseItemResult, changed: () => void) {
   const found = item.status === "ok" && item.candidates.length > 0;
-  const spoken = plainName(item.food) || plainName(item.text);
+  // A scanned product goes by its own name; "Barcode 0123..." is no name for a food.
+  const spoken = plainName(item.food) || (item.barcode ? "" : plainName(item.text));
   const s = {
     status: (found ? "ok" : item.status === "ok" ? "not_found" : item.status) as LookupStatus,
     message: item.message,
@@ -479,9 +480,11 @@ function itemCard(item: ParseItemResult, changed: () => void) {
       : null;
 
     const usda = friendlyName(c.name);
+    // Lines that would only repeat the name ("Sunny Morning Toasted Oat Cereal" is TOASTED OAT CEREAL by SUNNY MORNING) are left out.
+    const says = (part: string) => s.name.toLowerCase().includes(part.toLowerCase());
     return parts(
-      el("div", { className: "name-block" }, heading(s.name), usda !== s.name ? el("p", { className: "usda-name", textContent: usda }) : null),
-      c.brand ? el("p", { className: "muted small", textContent: c.brand }) : null,
+      el("div", { className: "name-block" }, heading(s.name), !says(usda) ? el("p", { className: "usda-name", textContent: usda }) : null),
+      c.brand && !says(c.brand) ? el("p", { className: "muted small", textContent: c.brand }) : null,
       guess,
       el("div", { className: "amount-row" }, qty, unit),
       el("div", { className: "item-cal-row" }, calOut, gramsOut),
@@ -494,8 +497,8 @@ function itemCard(item: ParseItemResult, changed: () => void) {
   function missingParts(): Node[] {
     if (s.status === "not_found") {
       return [
-        heading(`We couldn't find “${item.food}”`),
-        el("p", { className: "hint", textContent: "Try another name, or enter it yourself." }),
+        heading(item.barcode ? "We don't know this barcode yet" : `We couldn't find “${item.food}”`),
+        el("p", { className: "hint", textContent: item.barcode ? "Search for it by name, or enter the numbers from the label." : "Try another name, or enter it yourself." }),
         ...searchBlock(),
         el("div", { className: "card-actions" }, manualButton(), removeButton()),
       ];
@@ -563,9 +566,10 @@ function itemCard(item: ParseItemResult, changed: () => void) {
       node.replaceChildren(el("p", { className: "muted", textContent: `Removed “${item.text}”` }), undo);
     } else {
       node.className = "card item-card";
-      const said = el("p", { className: "said-small", textContent: `“${item.text}”` });
+      // A scan's barcode is already at the top of the screen.
+      const said = item.barcode ? null : el("p", { className: "said-small", textContent: `“${item.text}”` });
       const body = s.mode === "match" && s.selected ? matchParts(s.selected) : s.mode === "manual" ? manualParts() : missingParts();
-      node.replaceChildren(said, ...body);
+      node.replaceChildren(...parts(said, ...body));
     }
     if (focusNext) {
       const target = node.querySelector<HTMLElement>(focusNext === "name" ? ".food-name" : `[data-role="${focusNext}"]`);
@@ -642,7 +646,10 @@ export function confirmView({ parsed, text, date, today, onCancel, onAdded }: Co
       el("h1", { textContent: "Check and add" }),
       date !== today ? el("p", { className: "muted", textContent: `Adding to ${fullDate(date, today)}` }) : null,
     ),
-    el("blockquote", { className: "said" }, `“${text}”`),
+    // A scan has nothing that was said: the barcode stands in.
+    parsed.items.every((i) => i.barcode)
+      ? el("p", { className: "said scanned" }, icon("scan"), el("span", { textContent: `Scanned ${text.toLowerCase()}` }))
+      : el("blockquote", { className: "said" }, `“${text}”`),
     el("div", { className: "meal-pick" }, el("p", { className: "small-label", textContent: "Which meal?" }), mealPicker),
     ...cards.map((c) => c.node),
     el("div", { className: "sticky-footer" }, footMsg, skipped, el("div", { className: "footer-buttons" }, cancel, add)),

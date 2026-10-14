@@ -499,6 +499,55 @@ dialog.sheet::backdrop { background: var(--backdrop); }
 .confirm-q { font-weight: 700; text-align: center; }
 body:has(dialog[open]) { overflow: hidden; }
 
+/* Barcode scanner: a full-screen sheet with the camera in a rounded box. */
+.scan-button { flex: none; width: 52px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.input-row .scan-button { padding: 0; }
+.scan-button .icon { width: 26px; height: 26px; }
+.said.scanned { display: flex; align-items: center; gap: 8px; font-style: normal; }
+.said.scanned .icon { flex: none; width: 20px; height: 20px; }
+dialog.scanner {
+  width: 100%;
+  max-width: 32rem;
+  height: 100dvh;
+  max-height: none;
+  margin: 0 auto;
+  padding: max(12px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  border: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+dialog.scanner[open] { display: flex; flex-direction: column; gap: 14px; }
+dialog.scanner::backdrop { background: var(--bg); }
+.scan-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.scan-top h2 { font-size: 1.3rem; }
+.scan-close { width: 48px; height: 48px; border: 0; border-radius: 12px; background: var(--surface); color: var(--text); cursor: pointer; }
+.scan-view {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  max-height: 60dvh;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #1c1f1d;
+}
+.scan-view[hidden] { display: none; }
+.scan-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* The box to hold the barcode in: wide and short, like a barcode. Everything outside it is dimmed. */
+.scan-frame {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 34%;
+  transform: translateY(-50%);
+  border: 3px solid #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.35);
+}
+.scan-status { text-align: center; font-weight: 600; text-wrap: balance; }
+.scan-type { display: flex; flex-direction: column; gap: 10px; }
+.scan-type[hidden] { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .notice, .bar-fill, .usual-plus { transition: none; }
 }

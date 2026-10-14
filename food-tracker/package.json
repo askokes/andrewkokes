@@ -17,9 +17,11 @@
     "deploy": "npm run build && wrangler d1 migrations apply DB --remote && wrangler deploy"
   },
   "dependencies": {
+    "barcode-detector": "3.2.2",
     "chart.js": "^4.5.1",
     "hono": "^4.13.13",
-    "jose": "^6.2.12"
+    "jose": "^6.2.12",
+    "zxing-wasm": "3.1.3"
   },
   "devDependencies": {
     "@cloudflare/vitest-plugin": "^1.4.0",

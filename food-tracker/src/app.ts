@@ -14,6 +14,8 @@ export interface AppDeps {
   usdaFetch: typeof fetch;
   /** fetch used for Cloudflare's API (invites). Tests pass a fake. */
   cfFetch: typeof fetch;
+  /** fetch used for Open Food Facts (barcodes USDA doesn't have). Tests and dev:mock pass a fake. */
+  offFetch: typeof fetch;
 }
 
 export function createApp(overrides: Partial<AppDeps> = {}) {
@@ -21,6 +23,7 @@ export function createApp(overrides: Partial<AppDeps> = {}) {
     keys: accessKeys,
     usdaFetch: (input, init) => fetch(input, init),
     cfFetch: (input, init) => fetch(input, init),
+    offFetch: (input, init) => fetch(input, init),
     ...overrides,
   };
   const app = new Hono<AppEnv>();

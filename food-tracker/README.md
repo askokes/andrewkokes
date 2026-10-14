@@ -41,6 +41,22 @@ follows the weight; the Week / Month sentence compares the average to it, and To
 under it the day is, so a goal set below it never hides eating above it. The typed-in
 `goals.baseline_calories` from migration 0007 is no longer read.
 
+Barcodes (`src/food/barcode.ts`, `src/food/gtin.ts`, `web/src/views/scanner.ts`): the barcode button next
+to the Diary's food box opens the back camera full screen and reads UPC, EAN and the GS1 QR codes newer
+packages carry (a QR code that's only a link is ignored), or takes the number typed in. Phones with a
+built-in reader (Chrome on Android) use it; elsewhere (iPhone) ZXing compiled to WebAssembly does, loaded
+only when the scanner opens and served from the app (`zxing-wasm`, about 460 KB gzipped). `GET
+/api/foods/barcode?code=` checks the code's check digit, then asks USDA's branded foods (a search by the
+code, keeping only hits whose `gtinUpc` is that code, newest record first), then Open Food Facts, the open
+database of product labels, for what USDA doesn't have. A found product comes back at one label serving,
+named brand first, and opens the usual Check and add screen; an unknown one opens it with search and the
+label's numbers. Each answer is kept in `barcode_cache` (migration 0009; "not found" for a week), and
+Open Food Facts products in `usda_cache` under ids from 10^15 up, so they log, edit and show up in usual
+foods like any food. `web/public/_headers` now allows the camera for the app itself
+(`Permissions-Policy: camera=(self)`). The tests use made-up products in USDA's and Open Food Facts'
+shapes (`test/fixtures/usda/barcodes.json`): this session couldn't reach either API, so the first real
+scans are the live check.
+
 Your usual foods (`GET /api/foods/usual`, `web/src/views/usual.ts`): under the Diary's food box, each
 person's most-logged foods from the last 60 days (up to 12; 4 show until "Show more"), worked out from
 their own entries, so there is nothing to set up or keep. A USDA or restaurant food is one food whatever
@@ -56,7 +72,7 @@ a short confetti burst plays once per day when breakfast, lunch and dinner are a
 reduced motion).
 
 API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/foods/search`,
-`GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/foods/usual`, `GET /api/summary`, `GET/POST /api/weight`,
+`GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/foods/usual`, `GET /api/foods/barcode`, `GET /api/summary`, `GET/POST /api/weight`,
 `DELETE /api/weight/:id`. Shapes live in `src/food/types.ts`.
 
 Home is a dashboard: Today / Week / Month. Week and Month show one Chart.js chart, calories stacked by
@@ -108,7 +124,9 @@ goals, weight tracking, profile, sign out; Phase 6 adds export and delete here).
 and `/day/...` addresses redirect. Section 6 names USDA as the food source; at Andrew's request restaurant items come from the chains'
 own published nutrition instead (see Restaurants above). Section 8 also asks for light and dark mode; Andrew prefers light
 only, so the dark theme is gone. Section 13 leaves saved favorites for v2; at Andrew's request the Diary
-has "Your usual foods" now, built from what each person logs. SPEC.md itself is unchanged.
+has "Your usual foods" now, built from what each person logs; it also leaves barcode scanning for v2, and
+at his request the Diary scans barcodes now, with Open Food Facts as a second source after USDA. SPEC.md
+itself is unchanged.
 
 Every write (POST, PUT, PATCH) must send `Content-Type: application/json`, and writes a browser
 marks as started by another site (`Sec-Fetch-Site`) are refused, so other pages can't post to the

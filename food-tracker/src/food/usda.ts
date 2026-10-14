@@ -2,6 +2,7 @@
 // cached in D1 so repeat lookups never hit the API, which is rate limited to
 // roughly 1,000 requests an hour per key.
 import { commonMatch, commonTail, isCocktailUsdaLacks, type CommonFood } from "./common";
+import { isOffId } from "./gtin";
 import { menuFood } from "./menu";
 import { extractFood, extractSearchHit } from "./nutrition";
 import type { FoodRecord, RawPortion } from "./types";
@@ -837,10 +838,10 @@ export function rankHits<T extends RankableHit>(query: string, hits: readonly T[
 
 // ---------------------------------------------------------------- HTTP
 
-const sqlTime = (d: Date) => d.toISOString().slice(0, 19).replace("T", " ");
-const clock = (deps: UsdaDeps) => (deps.now ? deps.now() : new Date());
+export const sqlTime = (d: Date) => d.toISOString().slice(0, 19).replace("T", " ");
+export const clock = (deps: UsdaDeps) => (deps.now ? deps.now() : new Date());
 
-async function callUsda(deps: UsdaDeps, path: string, params: Record<string, string>): Promise<unknown> {
+export async function callUsda(deps: UsdaDeps, path: string, params: Record<string, string>): Promise<unknown> {
   if (!deps.apiKey) {
     console.warn("USDA_API_KEY is not set, so food lookups are unavailable.");
     throw new UsdaError("unavailable", "USDA API key is not set");
@@ -965,7 +966,7 @@ async function readFoods(db: D1Database, ids: number[]): Promise<FoodRecord[]> {
   return foods;
 }
 
-async function writeFoods(db: D1Database, foods: FoodRecord[], at: Date) {
+export async function writeFoods(db: D1Database, foods: FoodRecord[], at: Date) {
   if (!foods.length) return;
   const stmt = db.prepare(
     `INSERT INTO usda_cache (fdc_id, description, data_type, brand, kcal_per_100g, protein_per_100g,
@@ -1031,7 +1032,8 @@ export async function getFoods(deps: UsdaDeps, ids: number[]): Promise<Map<numbe
   }
   const fromUsda = wanted.filter((id) => !found.has(id));
   if (fromUsda.length) for (const food of await readFoods(deps.db, fromUsda)) found.set(food.fdcId, food);
-  const missing = wanted.filter((id) => !found.has(id));
+  // Open Food Facts products are only ever in the cache (see barcode.ts): USDA doesn't know their ids.
+  const missing = wanted.filter((id) => !found.has(id) && !isOffId(id));
   for (let i = 0; i < missing.length; i += BULK_CHUNK) {
     const fetched = await detailsApi(deps, missing.slice(i, i + BULK_CHUNK));
     await writeFoods(deps.db, fetched, clock(deps));

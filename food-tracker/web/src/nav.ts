@@ -20,6 +20,8 @@ export type Go = (path: string, opts?: GoOpts) => void;
 
 let active: { id: number; close: () => void } | null = null;
 let ownPops = 0;
+/** Resolved as each of our own pops lands, oldest first. */
+const popWaiters: (() => void)[] = [];
 let nextId = 0;
 
 export function pushOverlay(close: () => void): number {
@@ -29,19 +31,25 @@ export function pushOverlay(close: () => void): number {
   return id;
 }
 
-/** Call when the overlay closed on its own (not from the back gesture). */
-export function overlayClosed(id: number) {
+/**
+ * Call when the overlay closed on its own (not from the back gesture). Resolves
+ * once its history entry is gone, so the next push (say, the confirm screen)
+ * can't be popped by mistake.
+ */
+export function overlayClosed(id: number): Promise<void> {
   if (active?.id === id) active = null;
-  if ((history.state as { overlay?: number } | null)?.overlay === id) {
-    ownPops++;
-    history.back();
-  }
+  if ((history.state as { overlay?: number } | null)?.overlay !== id) return Promise.resolve();
+  ownPops++;
+  const popped = new Promise<void>((resolve) => popWaiters.push(resolve));
+  history.back();
+  return popped;
 }
 
 /** From the popstate listener: true when the pop belonged to an overlay and the screen should stay as it is. */
 export function handleOverlayPop(): boolean {
   if (ownPops > 0) {
     ownPops--;
+    popWaiters.shift()?.();
     return true;
   }
   if (active) {

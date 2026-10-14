@@ -158,10 +158,25 @@ export interface ParseResponse {
 }
 
 export interface ParseItemResult extends ParsedItem {
+  /** Set by the scanner (never by /api/parse): the item is the product with this barcode. */
+  barcode?: string;
   status: LookupStatus;
   /** Friendly message when status is not "ok". */
   message?: string;
   /** candidates[0] is the top match; up to 5 total. Empty unless status is "ok". */
+  candidates: Candidate[];
+}
+
+/**
+ * GET /api/foods/barcode?code= -> BarcodeResponse. A found product is one
+ * candidate at one label serving (or its usual amount when the label gives no
+ * serving), with entryName set to the brand and product name.
+ */
+export interface BarcodeResponse {
+  /** The barcode's digits. */
+  code: string;
+  status: LookupStatus;
+  message?: string;
   candidates: Candidate[];
 }
 

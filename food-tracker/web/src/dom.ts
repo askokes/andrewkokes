@@ -37,6 +37,9 @@ const ICONS = {
   target: "M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z" + "M18 12a6 6 0 1 1-12 0 6 6 0 0 1 12 0z" + "M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0z",
   plus: "M12 5v14" + "M5 12h14",
   check: "M20 6L9 17l-5-5",
+  close: "M6 6l12 12" + "M18 6L6 18",
+  // A barcode in a viewfinder: four corners, then the bars.
+  scan: "M3 8V5a2 2 0 0 1 2-2h3" + "M16 3h3a2 2 0 0 1 2 2v3" + "M21 16v3a2 2 0 0 1-2 2h-3" + "M8 21H5a2 2 0 0 1-2-2v-3" + "M7 8v8" + "M10 8v8" + "M13 8v8" + "M17 8v8",
 } as const;
 
 /** A stroked 24x24 icon in the current text color. Decorative: label the button, not the icon. */

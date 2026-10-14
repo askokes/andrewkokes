@@ -20,6 +20,7 @@ import {
   MEALS,
   MIN_QUANTITY,
   type Amount,
+  type BarcodeResponse,
   type Candidate,
   type DayView,
   type EntryInput,
@@ -35,6 +36,8 @@ import {
   type UsualFood,
   type UsualResponse,
 } from "./types";
+import { lookupBarcode, productName } from "./barcode";
+import { readBarcode } from "./gtin";
 import { menuMatch, menuWeightKnown, withoutChain } from "./menu";
 import { resolveAmount, toCandidate, unitOptions } from "./units";
 import {
@@ -75,6 +78,7 @@ const USDA_MESSAGES: Record<UsdaErrorKind, string> = {
   unavailable: "We couldn't reach the food database. Try again in a minute, or enter it yourself.",
   skipped: "That's a lot of foods at once. Search for this one separately, or enter it yourself.",
 };
+const BARCODE_NOT_FOUND = "We don't know this barcode yet. Search for it by name, or enter the numbers from the label.";
 const notFoundMessage = (food: string) => `We couldn't find "${food}". Try other words, or enter it yourself.`;
 const TOO_MUCH = `One entry can hold up to ${MAX_GRAMS / 1000} kg (about ${Math.round(MAX_GRAMS / GRAMS_PER.lb)} lb) of a food. Enter less, or add the rest as another entry.`;
 
@@ -464,6 +468,24 @@ export function foodRoutes(deps: AppDeps): Hono<AppEnv> {
     const user = await currentUser(c);
     if (!user) return noProfile(c);
     return c.json<UsualResponse>({ foods: await usualFoods(c, usdaDeps(c), user) });
+  });
+
+  // A packaged food by its barcode, at one label serving. Nothing is saved.
+  routes.get("/foods/barcode", async (c) => {
+    const user = await currentUser(c);
+    if (!user) return noProfile(c);
+    const code = readBarcode(c.req.query("code"));
+    if (!code) return invalid(c, { code: "That isn't a barcode we can read. Check the number and try again." });
+
+    try {
+      const food = await lookupBarcode({ ...usdaDeps(c), offFetch: deps.offFetch }, code);
+      if (!food) return c.json<BarcodeResponse>({ code, status: "not_found", message: BARCODE_NOT_FOUND, candidates: [] });
+      const candidate = { ...toCandidate(food, 1, null, ["serving"]), entryName: productName(food) };
+      return c.json<BarcodeResponse>({ code, status: "ok", candidates: [candidate] });
+    } catch (err) {
+      if (!(err instanceof UsdaError)) throw err;
+      return c.json<BarcodeResponse>({ code, status: err.kind, message: USDA_MESSAGES[err.kind], candidates: [] });
+    }
   });
 
   // One day: entries, totals and the goals in effect that day. No date means today.
