@@ -72,7 +72,7 @@ function table(days: DaySummary[], averages: (number | null)[], weighIns: (numbe
   );
 }
 
-/** The Week or Month card: headline numbers, one calm sentence, and the combined chart. */
+/** The Week or Month card: the combined chart, then the tapped day, the headline numbers and one calm sentence. */
 export function progressCard(opts: { me: Me; period: Range; today: string; go: Go }): HTMLElement {
   const { me, period, go } = opts;
   const card = el("section", { className: "card progress", attrs: { "aria-label": period === "week" ? "This week" : "Last 30 days" } });
@@ -159,7 +159,13 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
     });
     paintTable();
 
+    // The chart first; its key, the tapped day, and the period's numbers under it.
     card.replaceChildren(
+      el("h2", { className: "chart-title", textContent: showWeight ? "Calories and weight" : "Calories by macro" }),
+      units,
+      plot,
+      legend,
+      readout,
       el(
         "div",
         { className: "kpis" },
@@ -168,11 +174,6 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
         third,
       ),
       el("p", { className: "progress-summary", textContent: summarySentence(stats, period, showWeight) }),
-      readout,
-      el("h2", { className: "chart-title", textContent: showWeight ? "Calories and weight" : "Calories by macro" }),
-      legend,
-      units,
-      plot,
       toggle,
       tableSlot,
     );
