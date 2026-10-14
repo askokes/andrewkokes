@@ -9,7 +9,7 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 1. Open the app. You should land on **Overview**, with three tabs along the bottom: **Overview**, **Diary** and **Goals**, and a big green **mic** just above them in the middle. The app is always light, even if your phone is in dark mode.
 2. The top should greet you by name ("Good morning, ..."). Once you've logged two days in a row, a small 🌱 count shows under the date.
 3. On **Today**, a big ring shows calories, and three smaller rings show protein (mint), carbs (apricot) and fat (lavender). Past a goal, a ring closes in a soft tan, never red.
-4. Tap **Diary**. You should see today's total, the food box, and what you've eaten so far, each food with a little picture (🥚 eggs, 🍌 banana, 🍺 beer). Foods it has no picture for get a plate.
+4. Tap **Diary**. You should see today's total, the food box, your usual foods, and then a green-topped **Today's food** box with the date and the day's calories, holding what you've eaten so far by meal. Each food has a little picture (🥚 eggs, 🍌 banana, 🍺 beer). Foods it has no picture for get a plate. On other days the box says **Yesterday's food** or the weekday.
 5. Tap the back arrow to see yesterday. Tap **Diary** at the bottom again: it goes back to today.
 6. Log something for breakfast, lunch and dinner on the same day. When the third one goes in, a little confetti burst should pop once.
 7. Tap **Goals**. Change your calorie goal and tap **Save changes**. It should say **Saved.** Tap **Overview**: the new goal shows there.

@@ -270,6 +270,34 @@ select.control { padding-right: 8px; text-overflow: ellipsis; }
 .add-label { font-size: 1.1rem; font-weight: 700; }
 
 .entries { display: flex; flex-direction: column; gap: 18px; }
+/* The day's food: a mint panel under a solid green header, so it reads apart from the food box and usual foods. */
+.day-log {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+  padding: 0 12px 18px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: 22px;
+  background: var(--note-bg);
+}
+.day-log-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 -12px;
+  padding: 14px 16px;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+.day-log-head h2 { font-size: 1.25rem; line-height: 1.25; }
+.day-log-head p { font-size: 0.9rem; }
+.day-log-emoji { margin-right: 8px; }
+.day-log-total { flex: none; text-align: right; white-space: nowrap; line-height: 1.2; }
+.day-log-total strong { font-size: 1.45rem; }
+.day-log-total span { display: block; font-size: 0.85rem; }
 .meal-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 0 4px 8px; }
 .meal-head h2 { font-size: 1.05rem; }
 .meal-head span { font-size: 0.95rem; }

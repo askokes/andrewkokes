@@ -1,6 +1,6 @@
 import type { BarcodeResponse, DayView, EntryView, Meal, ParseResponse } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
-import { el, icon } from "../dom";
+import { el, formatDay, icon } from "../dom";
 import { confetti } from "../confetti";
 import { foodEmoji, MEAL_EMOJI, OTHER_MEAL_EMOJI } from "../emoji";
 import { addDays, amountText, dayPath, dayTitle, friendlyName, fullDate, MEAL_LABELS, MEAL_ORDER, todayIn, whole } from "../food";
@@ -325,6 +325,37 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
   // ---- the day: where it stands, the food box, then what was eaten
   const summary = el("section", { className: "card compact-totals", tabIndex: -1, attrs: { "aria-label": "Totals" } });
   const list = el("div", { className: "entries" });
+  // What was eaten that day, in its own tinted panel with the day and its total, so it reads apart from
+  // the food box and the usual foods above it.
+  const logTitle = el("h2", { id: "day-log-title" });
+  const logDate = el("p");
+  const logTotal = el("p", { className: "day-log-total" });
+  const log = el(
+    "section",
+    { className: "day-log", attrs: { "aria-labelledby": "day-log-title" } },
+    el(
+      "header",
+      { className: "day-log-head" },
+      el("div", {}, logTitle, logDate),
+      logTotal,
+    ),
+    list,
+  );
+  const paintLogHead = (day: DayView | undefined) => {
+    const name = date === today ? "Today" : date === addDays(today, -1) ? "Yesterday" : formatDay(date, { weekday: "long" });
+    logTitle.replaceChildren(el("span", { className: "day-log-emoji", textContent: "🍽️", attrs: { "aria-hidden": "true" } }), `${name}'s food`);
+    logDate.textContent = fullDate(date, today);
+    logTotal.replaceChildren(
+      ...(day
+        ? [
+            el("strong", { textContent: whole(day.totals.calories) }),
+            " cal",
+            day.goals ? el("span", { textContent: `of ${whole(day.goals.calories)}` }) : "",
+          ]
+        : []),
+    );
+  };
+  paintLogHead(days.get(date));
   // One tap on a usual food adds it here; its new row lights up like the confirm screen's do.
   const usual = usualCard({
     date,
@@ -334,7 +365,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
       if (newIds.length && allThreeMeals(day) && firstCelebration(day.date)) confetti();
     },
   });
-  const page = el("div", { className: "stack" }, summary, form, usual, list);
+  const page = el("div", { className: "stack" }, summary, form, usual, log);
 
   if (added) {
     let what = `Added ${added.count} ${added.count === 1 ? "food" : "foods"}${added.meal ? ` to ${MEAL_LABELS[added.meal]}` : ""}. Nice!`;
@@ -360,6 +391,7 @@ export function diaryView({ me, date, go, mic, openConfirm }: DiaryOpts): Node[]
     today = day.today;
     paintHeader();
     summary.replaceChildren(...compactTotals(day));
+    paintLogHead(day);
     list.replaceChildren(...entryGroups(day, edit, highlight));
   };
   const saved = (day: DayView) => {
