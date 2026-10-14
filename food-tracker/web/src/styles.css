@@ -798,6 +798,21 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 
 /* Goals: the calories you burn a day */
 .segmented.two-up { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.segmented.three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+/* Weight plan: pounds and "a week | a month" side by side, then the result in a soft box. */
+.plan-pace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 10px; align-items: start; }
+.plan-pace[hidden] { display: none; }
+.plan-result { display: flex; flex-direction: column; gap: 6px; padding: 14px; border-radius: 14px; background: var(--note-bg); }
+.plan-target { font-size: 1.1rem; }
+.plan-target strong { font-size: 1.5rem; }
+.plan-macros { display: flex; flex-wrap: wrap; gap: 2px 14px; }
+/* The daily goals card after the plan fills it: a short glow. */
+.card.flash { animation: flash-card 1.6s ease-out; }
+@keyframes flash-card {
+  0%, 30% { box-shadow: 0 0 0 3px var(--accent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) { .card.flash { animation: none; } }
 .field-label { font-weight: 600; margin: 0; }
 .height-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: -6px; }
 .burn-estimate { padding: 12px 14px; border-radius: 12px; background: var(--note-bg); font-size: 1rem; }

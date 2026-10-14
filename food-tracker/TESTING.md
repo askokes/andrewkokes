@@ -39,6 +39,21 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 - Which products did it get wrong, or not know? Write down the name and the numbers under the barcode.
 - Did the calories match the label?
 
+## Your weight plan
+
+1. On **Goals**, fill in **Calories you burn a day** if you haven't (sex, age, activity, weight).
+2. Under it, **Your weight plan**: tap **Lose**, type **1**, and keep **a week**. It should say "Eat about ___ cal a day", that it's 500 under what you burn, and show protein, carbs and fat. With a goal weight set, it says about when you'd reach it.
+3. Switch to **a month** and type **4**: about 460 a day under.
+4. Type something too fast, like **3** a week: it keeps it to a safe pace and says so.
+5. Tap **Use these as my daily goals**. The page jumps up to **Daily goals** with the new numbers filled in and saved. Check **Overview** and **Diary**: the new goal shows there.
+6. Leave and come back to Goals: the plan card remembers what you picked.
+7. Try **Keep** (eat what you burn) and **Gain**.
+
+### Tell Andrew
+
+- Do the numbers feel right for you?
+- Was anything confusing?
+
 ## Your usual foods
 
 1. Log a few things over a couple of days the normal way (typing or the mic).

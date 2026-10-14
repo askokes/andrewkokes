@@ -1,4 +1,5 @@
 import type { Activity, Sex } from "../../src/burn";
+import type { PlanGoal, PlanPer } from "../../src/plan";
 export interface Goals {
   calories: number;
   proteinG: number | null;
@@ -31,6 +32,8 @@ export interface Me {
   goals: Goals | null;
   burn: BurnSettings;
   latestWeight: { weightLb: number; date: string } | null;
+  /** The weight plan's choices on the Goals tab, or null until one is picked. */
+  plan: { goal: PlanGoal; lb: number | null; per: PlanPer } | null;
 }
 
 export class ApiError extends Error {

@@ -1,4 +1,5 @@
 import { isActivity, isSex, type Activity, type Sex } from "./burn";
+import { isPlanGoal, isPlanPer, type PlanGoal, type PlanPer } from "./plan";
 import { isValidTimeZone } from "./dates";
 
 export type FieldErrors = Record<string, string>;
@@ -20,6 +21,13 @@ export interface BurnInput {
   activity: Activity | null;
 }
 
+/** The weight plan's choices (see plan.ts). */
+export interface PlanChoice {
+  goal: PlanGoal;
+  lb: number | null;
+  per: PlanPer;
+}
+
 export interface ProfileInput {
   displayName: string;
   timezone: string;
@@ -28,6 +36,8 @@ export interface ProfileInput {
   /** Null when the body says nothing about it: what's saved stays. */
   burn: BurnInput | null;
   currentWeightLb: number | null;
+  /** Undefined when the body says nothing about it: what's saved stays. Null clears it. */
+  plan?: PlanChoice | null;
 }
 
 export const isObject = (v: unknown): v is Record<string, unknown> =>
@@ -105,9 +115,27 @@ export function parseProfile(raw: unknown, requireGoals: boolean): Result<Profil
   // Today's weight, from the weight card, or (tracking off) for the calories-burned estimate.
   const currentWeightLb = optionalWeight(raw.currentWeightLb, "currentWeightLb", "Weight", errors);
   const burn = BURN_KEYS.some((k) => k in raw) ? readBurn(raw, errors) : null;
+  const plan = "plan" in raw ? readPlan(raw.plan, errors) : undefined;
 
   if (Object.keys(errors).length) return { ok: false, errors };
-  return { ok: true, value: { displayName, timezone, trackWeight, goals, burn, currentWeightLb } };
+  return { ok: true, value: { displayName, timezone, trackWeight, goals, burn, currentWeightLb, ...(plan === undefined ? {} : { plan }) } };
+}
+
+/** The weight plan: blank clears it; pounds may be left out until typed, and are kept to a sane range. */
+function readPlan(raw: unknown, errors: FieldErrors): PlanChoice | null {
+  if (isBlank(raw) || (isObject(raw) && isBlank(raw.goal))) return null;
+  if (!isObject(raw) || !isPlanGoal(raw.goal)) {
+    errors["plan.goal"] = "Pick lose, keep or gain.";
+    return null;
+  }
+  const per = isBlank(raw.per) ? "week" : isPlanPer(raw.per) ? raw.per : ((errors["plan.per"] = "Pick a week or a month."), "week");
+  let lb: number | null = null;
+  if (!isBlank(raw.lb)) {
+    const n = typeof raw.lb === "string" ? Number(raw.lb.trim()) : raw.lb;
+    if (typeof n !== "number" || !Number.isFinite(n) || n <= 0 || n > 20) errors["plan.lb"] = "Pounds should be a number from 0.1 to 20.";
+    else lb = Math.round(n * 10) / 10;
+  }
+  return { goal: raw.goal, lb, per };
 }
 
 const BURN_KEYS = ["sex", "age", "heightIn", "activity"] as const;

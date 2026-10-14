@@ -192,6 +192,33 @@ describe("updating", () => {
     expect(await cleared.json()).toMatchObject({ goals: { baselineCalories: null }, burn: { activity: null } });
   });
 
+  it("keeps the weight plan's choices, leaves them alone when not sent, and clears them when blank", async () => {
+    const email = newEmail();
+    await as(email, "POST", "/api/me", setup);
+    expect(await (await as(email, "GET", "/api/me")).json()).toMatchObject({ plan: null });
+
+    const res = await as(email, "POST", "/api/me", { ...setup, plan: { goal: "lose", lb: "4", per: "month" } });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ plan: { goal: "lose", lb: 4, per: "month" } });
+    // Not sent: unchanged.
+    expect(await (await as(email, "POST", "/api/me", setup)).json()).toMatchObject({ plan: { goal: "lose", lb: 4, per: "month" } });
+    // Keeping weight steady needs no pounds; the pace defaults to a week.
+    expect(await (await as(email, "POST", "/api/me", { ...setup, plan: { goal: "keep" } })).json()).toMatchObject({ plan: { goal: "keep", lb: null, per: "week" } });
+    expect(await (await as(email, "POST", "/api/me", { ...setup, plan: { goal: "" } })).json()).toMatchObject({ plan: null });
+
+    for (const [plan, field] of [
+      [{ goal: "shrink", lb: 1 }, "plan.goal"],
+      [{ goal: "lose", lb: 0 }, "plan.lb"],
+      [{ goal: "lose", lb: 25 }, "plan.lb"],
+      [{ goal: "lose", lb: "lots" }, "plan.lb"],
+      [{ goal: "lose", lb: 1, per: "year" }, "plan.per"],
+    ] as const) {
+      const bad = await as(email, "POST", "/api/me", { ...setup, plan });
+      expect(bad.status, JSON.stringify(plan)).toBe(400);
+      expect(await bad.json()).toMatchObject({ fields: { [field]: expect.any(String) } });
+    }
+  });
+
   it("POST /api/goals is 404 before setup", async () => {
     expect((await as(newEmail(), "POST", "/api/goals", { calories: 2000 })).status).toBe(404);
   });

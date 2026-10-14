@@ -1,6 +1,7 @@
 import { api, ApiError, type Me } from "../api";
 import { ACTIVITY_LEVELS, caloriesBurned, type Activity, type Sex } from "../../../src/burn";
-import { el, segmented } from "../dom";
+import { lbText, weightPlan, type PlanGoal, type PlanPer } from "../../../src/plan";
+import { el, formatDay, segmented } from "../dom";
 import { whole } from "../food";
 import { US_TIME_ZONES, usZoneFor } from "../timezones";
 
@@ -146,6 +147,9 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
   const burnWeight = field({ label: "Your weight", name: "burnWeightLb", value: saved?.weightLb, inputmode: "decimal", suffix: "lb" });
   const weightNote = el("p", { className: "hint" });
   const estimate = el("p", { className: "burn-estimate", attrs: { "aria-live": "polite" } });
+  // The estimate, for the weight plan below; the plan card redraws whenever it changes.
+  let burnedNow: number | null = null;
+  let showPlan = () => {};
 
   const heightIn = () => {
     const ft = feet.input.value.trim();
@@ -177,6 +181,8 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
       weightForBurn(),
       today,
     );
+    burnedNow = burned;
+    showPlan();
     estimate.replaceChildren(
       ...(burned === null
         ? [el("span", { className: "muted", textContent: "Fill in sex, age, activity and weight to see it." })]
@@ -187,6 +193,93 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     input.addEventListener("input", showBurn);
     input.addEventListener("change", showBurn);
   }
+
+  // ---- the weight plan (see src/plan.ts): daily goals from what you burn and a pace
+  let planGoal: PlanGoal | null = me?.plan?.goal ?? null;
+  let planPer: PlanPer = me?.plan?.per ?? "week";
+  const goalPicker = segmented<PlanGoal>({
+    label: "I want to",
+    options: [
+      { value: "lose", label: "Lose" },
+      { value: "keep", label: "Keep" },
+      { value: "gain", label: "Gain" },
+    ],
+    value: planGoal,
+    onChange: (v) => {
+      planGoal = v;
+      showPlan();
+    },
+  });
+  goalPicker.classList.add("three-up");
+  const planLb = field({ label: "Pounds", name: "plan.lb", value: me?.plan?.lb, inputmode: "decimal", suffix: "lb" });
+  const perPicker = segmented<PlanPer>({
+    label: "Per",
+    options: [
+      { value: "week", label: "a week" },
+      { value: "month", label: "a month" },
+    ],
+    value: planPer,
+    onChange: (v) => {
+      planPer = v;
+      showPlan();
+    },
+  });
+  perPicker.classList.add("two-up");
+  const pace = el("div", { className: "plan-pace" }, planLb.wrap, el("div", { className: "field" }, el("p", { className: "field-label", textContent: "\u00a0" }), perPicker));
+  const planOut = el("div", { className: "plan-result", attrs: { "aria-live": "polite" } });
+  const useIt = el("button", { type: "button", className: "button wide", textContent: "Use these as my daily goals" });
+  const planMsg = el("p", { className: "field-msg", attrs: { "aria-live": "polite" } });
+  let planned: ReturnType<typeof weightPlan> | null = null;
+
+  const numberIn = (input: HTMLInputElement) => {
+    const v = input.value.trim();
+    const n = v ? Number(v) : NaN;
+    return Number.isFinite(n) && n > 0 ? n : null;
+  };
+  showPlan = () => {
+    pace.hidden = planGoal === null || planGoal === "keep";
+    planned = null;
+    useIt.hidden = true;
+    const say = (text: string) => planOut.replaceChildren(el("p", { className: "muted", textContent: text }));
+    if (planGoal === null) return say("Pick lose, keep or gain to see your daily target.");
+    const weightLb = weightForBurn();
+    const ageN = Number(age.input.value.trim());
+    if (burnedNow === null || weightLb === null || !sex) return say("Fill in the calories you burn above to see it.");
+    planned = weightPlan({
+      goal: planGoal,
+      lb: numberIn(planLb.input),
+      per: planPer,
+      burned: burnedNow,
+      weightLb,
+      goalWeightLb: numberIn(goalWeight.input),
+      sex,
+      age: ageN,
+      today: me?.today ?? new Date().toISOString().slice(0, 10),
+    });
+    if (!planned.ok) return say(planned.reason);
+    const p = planned.plan;
+    const pounds = lbText(Math.abs(p.weeklyLb));
+    const change =
+      p.dailyChange === 0
+        ? `That's what you burn, so your weight stays steady.`
+        : `That's ${whole(Math.abs(p.dailyChange))} ${p.dailyChange < 0 ? "under" : "over"} the ${whole(burnedNow)} you burn, for about ${pounds} lb a week.`;
+    const today = me?.today ?? "";
+    const goalLb = numberIn(goalWeight.input);
+    const lines: (HTMLElement | null)[] = [
+      el("p", { className: "plan-target" }, "Eat about ", el("strong", { textContent: whole(p.calories) }), " cal a day"),
+      el("p", { textContent: change }),
+      el("p", { className: "plan-macros" }, ...[["Protein", p.proteinG], ["Carbs", p.carbsG], ["Fat", p.fatG]].map(([label, g]) => el("span", {}, `${label} `, el("strong", { textContent: `${g} g` })))),
+      p.reachBy && goalLb
+        ? el("p", {
+            textContent: `At this pace you'd reach ${lbText(goalLb)} lb around ${formatDay(p.reachBy, { month: "long", day: "numeric", ...(p.reachBy.slice(0, 4) === today.slice(0, 4) ? {} : { year: "numeric" }) })}.`,
+          })
+        : null,
+      ...p.notes.map((n) => el("p", { className: "note", textContent: n })),
+    ];
+    planOut.replaceChildren(...lines.filter((n): n is HTMLElement => n !== null));
+    useIt.hidden = false;
+  };
+  for (const input of [planLb.input, goalWeight.input]) input.addEventListener("input", showPlan);
 
   const syncWeight = () => {
     weightFields.hidden = !track.checked;
@@ -208,6 +301,9 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     age,
     heightIn: { msg: inches.msg, input: feet.input },
     activity: { msg: activityWrap.querySelector(".field-msg")!, input: activity },
+    "plan.goal": { msg: planMsg, input: goalPicker },
+    "plan.lb": planLb,
+    "plan.per": { msg: planMsg, input: perPicker },
   };
 
   const formMsg = el("p", { className: "form-msg", attrs: { role: "alert" } });
@@ -238,6 +334,17 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     weightNote,
     estimate,
   );
+  const planCard = el(
+    "section",
+    { className: "card stack" },
+    el("h2", { textContent: "Your weight plan" }),
+    el("p", { className: "hint", textContent: "Works out your daily goals from what you burn and how fast you want to go. A pound is about 3,500 calories." }),
+    el("div", { className: "field" }, el("p", { className: "field-label", textContent: "I want to" }), goalPicker),
+    pace,
+    planOut,
+    useIt,
+    planMsg,
+  );
   const weight = el(
     "section",
     { className: "card stack" },
@@ -253,7 +360,7 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     "form",
     { className: "stack", noValidate: true },
     // First run starts with who you are; the Goals tab leads with the goals.
-    ...(mode === "setup" ? [about, daily, weight, burn] : [daily, burn, weight, about]),
+    ...(mode === "setup" ? [about, daily, weight, burn] : [daily, burn, planCard, weight, about]),
     formMsg,
     savedMsg,
     submit,
@@ -268,6 +375,21 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
     }
     if (!Object.values(fields).some((f) => f.msg.textContent)) formMsg.textContent = "";
     savedMsg.textContent = "";
+  });
+
+  // "Use these as my daily goals": the plan's numbers go into the daily goals and the form saves.
+  let applying = false;
+  useIt.addEventListener("click", () => {
+    if (!planned?.ok || submit.disabled) return;
+    const p = planned.plan;
+    calories.input.value = String(p.calories);
+    protein.input.value = String(p.proteinG);
+    carbs.input.value = String(p.carbsG);
+    fat.input.value = String(p.fatG);
+    updateCalNote();
+    planMsg.textContent = "";
+    applying = true;
+    form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit", { cancelable: true }));
   });
 
   form.addEventListener("submit", async (event) => {
@@ -301,6 +423,8 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
         : burnWeight.input.value.trim() !== String(saved?.weightLb ?? "")
           ? burnWeight.input.value
           : "",
+      // The weight plan's choices, so the calculator opens on them next time.
+      ...(mode === "settings" && planGoal ? { plan: { goal: planGoal, lb: planGoal === "keep" ? "" : planLb.input.value, per: planPer } } : {}),
     };
     fields.currentWeightLb = track.checked ? currentWeight : burnWeight;
 
@@ -314,6 +438,14 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
         saved = next.burn;
         showBurn();
         savedMsg.textContent = "Saved.";
+        if (applying) {
+          // Show where the plan's numbers went.
+          planMsg.textContent = "Saved as your daily goals.";
+          daily.classList.remove("flash");
+          void daily.offsetWidth;
+          daily.classList.add("flash");
+          daily.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }
       onSaved(next);
     } catch (err) {
@@ -328,8 +460,10 @@ export function profileForm(mode: "setup" | "settings", me: Me | null, onSaved: 
       }
       // A weight error with tracking switched off can't be seen, so show it up top too.
       formMsg.textContent = e.message;
+      if (applying) planMsg.textContent = `Not saved yet: ${e.message}`;
       first?.focus();
     } finally {
+      applying = false;
       submit.disabled = false;
       submit.textContent = mode === "setup" ? "Save and start" : "Save changes";
     }

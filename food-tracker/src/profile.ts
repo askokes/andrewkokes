@@ -1,6 +1,7 @@
 import { Hono, type Context } from "hono";
 import { isAdmin } from "./admins";
 import { ageOn, caloriesBurned, weightOn, type Activity, type BurnProfile, type Sex } from "./burn";
+import type { PlanGoal, PlanPer } from "./plan";
 import { localDate } from "./dates";
 import type { AppEnv } from "./env";
 import { parseGoals, parseProfile, type FieldErrors, type GoalsInput } from "./validate";
@@ -15,6 +16,9 @@ export interface UserRow {
   birth_year: number | null;
   height_in: number | null;
   activity: Activity | null;
+  plan_goal: PlanGoal | null;
+  plan_lb: number | null;
+  plan_per: PlanPer | null;
 }
 
 interface GoalRow {
@@ -29,7 +33,10 @@ interface GoalRow {
 
 export function getUser(db: D1Database, email: string) {
   return db
-    .prepare("SELECT id, email, display_name, timezone, track_weight, sex, birth_year, height_in, activity FROM users WHERE email = ?")
+    .prepare(
+      `SELECT id, email, display_name, timezone, track_weight, sex, birth_year, height_in, activity, plan_goal, plan_lb, plan_per
+       FROM users WHERE email = ?`,
+    )
     .bind(email)
     .first<UserRow>();
 }
@@ -148,6 +155,8 @@ async function loadMe(db: D1Database, email: string, env: { ADMIN_EMAILS?: strin
       weightLb: burnWeight === null ? null : Math.round(burnWeight * 10) / 10,
     },
     latestWeight: trackWeight && weight ? { weightLb: weight.weight_lb, date: weight.log_date } : null,
+    // The weight plan's choices, for the Goals tab's calculator.
+    plan: user.plan_goal ? { goal: user.plan_goal, lb: user.plan_lb, per: user.plan_per ?? "week" } : null,
   };
 }
 
@@ -199,6 +208,14 @@ profileRoutes.post("/me", async (c) => {
       db
         .prepare("UPDATE users SET sex = ?, birth_year = ?, height_in = ?, activity = ? WHERE email = ?")
         .bind(b.sex, b.age === null ? null : Number(today.slice(0, 4)) - b.age, b.heightIn, b.activity, email),
+    );
+  }
+  if (input.plan !== undefined) {
+    const p = input.plan;
+    statements.push(
+      db
+        .prepare("UPDATE users SET plan_goal = ?, plan_lb = ?, plan_per = ? WHERE email = ?")
+        .bind(p?.goal ?? null, p?.lb ?? null, p?.per ?? null, email),
     );
   }
   if (input.goals) {
