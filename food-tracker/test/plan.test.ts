@@ -12,10 +12,10 @@ describe("weight plan", () => {
   it("eats 500 a day under what's burned to lose a pound a week, with macros to match", () => {
     expect(planOf({})).toEqual({
       calories: 1900,
-      // 0.8 g a pound (144), fat 30% of calories (63), carbs the rest.
-      proteinG: 145,
+      // 1 g a pound (180), fat 30% of calories (63), carbs the rest.
+      proteinG: 180,
       fatG: 65,
-      carbsG: 185,
+      carbsG: 150,
       weeklyLb: -1,
       dailyChange: -500,
       notes: [],
@@ -65,19 +65,19 @@ describe("weight plan", () => {
     expect(planOf({ goal: "gain", lb: 0.5 })).toMatchObject({ calories: 2650, weeklyLb: 0.5, dailyChange: 250 });
   });
 
-  it("works out when the goal weight is reached, and sizes protein to it when losing", () => {
+  it("works out when the goal weight is reached, with protein still by today's weight", () => {
     const p = planOf({ goalWeightLb: 170 });
     expect(p.reachBy).toBe("2026-12-23"); // 10 lb at 1 lb a week: 70 days
-    expect(p.proteinG).toBe(135); // 0.8 x 170 = 136
+    expect(p.proteinG).toBe(180);
     expect(planOf({ goalWeightLb: 190 }).reachBy).toBeNull(); // losing away from it
     expect(planOf({ goal: "keep", goalWeightLb: 170 }).reachBy).toBeNull();
     expect(planOf({ goal: "gain", lb: 0.5, goalWeightLb: 185 }).reachBy).toBe("2026-12-23");
   });
 
-  it("keeps protein to 35% of calories", () => {
+  it("keeps protein to 40% of calories", () => {
     const p = planOf({ weightLb: 320, burned: 2000, lb: 1 });
     expect(p.calories).toBe(1500);
-    expect(p.proteinG).toBe(130); // 0.35 x 1500 / 4 = 131, not 0.8 x 320 = 256
+    expect(p.proteinG).toBe(150); // 0.4 x 1500 / 4, not 1 x 320
     expect(p.carbsG).toBeGreaterThan(0);
   });
 });

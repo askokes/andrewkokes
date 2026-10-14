@@ -66,8 +66,8 @@ day, and foods usually eaten at that meal sort first). The note under the meals 
 
 Weight plan (`src/plan.ts`, the "Your weight plan" card on Goals): pick lose, keep or gain and how many
 pounds a week or a month, and it works out the daily calories from the calories burned (a pound is about
-3,500 calories, so 1 lb a week is 500 a day under), then protein at 0.8 g a pound (of the goal weight when
-losing toward one; never over 35% of calories), fat at 30% of calories and carbs the rest. Losing is kept to
+3,500 calories, so 1 lb a week is 500 a day under), then protein at 1 g per pound of today's weight (Andrew's
+call; never over 40% of calories), fat at 30% of calories and carbs the rest. Losing is kept to
 2 lb a week and 1% of body weight, gaining to 1 lb, and a loss plan never goes under 1,200 cal (women) or
 1,500 (men); it says when it adjusted anything. Under 18 it offers no loss plan (a doctor's call). With a
 goal weight it shows the date it would be reached. "Use these as my daily goals" fills the daily goals and

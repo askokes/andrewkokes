@@ -26,10 +26,10 @@ export const MAX_LOSS_SHARE_WEEK = 0.01;
 export const MAX_GAIN_LB_WEEK = 1;
 /** The least most adults should eat in a day without a doctor's help. */
 export const MIN_CALORIES: Record<Sex, number> = { female: 1200, male: 1500 };
-/** Protein per pound of body weight (the goal weight when losing toward one). */
-export const PROTEIN_G_PER_LB = 0.8;
+/** Protein per pound of body weight (Andrew's call: 1 g a pound). */
+export const PROTEIN_G_PER_LB = 1;
 /** Protein never more than this share of calories, fat this share. Carbs are the rest. */
-export const MAX_PROTEIN_SHARE = 0.35;
+export const MAX_PROTEIN_SHARE = 0.4;
 export const FAT_SHARE = 0.3;
 /** A goal weight further off than this at the chosen pace gets no date. */
 const MAX_WEEKS_TO_GOAL = 5 * 52;
@@ -114,10 +114,8 @@ export function weightPlan(input: PlanInput): PlanResult {
   }
   const weeklyLb = goal === "keep" ? 0 : sign * weekly;
 
-  // Protein by body weight (the goal weight when losing toward one), fat a share of calories, carbs the rest.
-  const towardGoal = goal === "lose" && input.goalWeightLb !== null && input.goalWeightLb < weightLb;
-  const proteinWeight = towardGoal ? input.goalWeightLb! : weightLb;
-  const proteinG = round5(Math.min(PROTEIN_G_PER_LB * proteinWeight, (MAX_PROTEIN_SHARE * calories) / 4));
+  // Protein by body weight, fat a share of calories, carbs the rest.
+  const proteinG = round5(Math.min(PROTEIN_G_PER_LB * weightLb, (MAX_PROTEIN_SHARE * calories) / 4));
   const fatG = round5((FAT_SHARE * calories) / 9);
   const carbsG = Math.max(0, round5((calories - proteinG * 4 - fatG * 9) / 4));
 
