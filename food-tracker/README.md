@@ -182,7 +182,12 @@ Account > Access: Organizations, Identity Providers, and Groups > Edit, Zone > D
 Afterwards, commit the updated `wrangler.jsonc` (the AUD tag and database id are not secrets).
 
 **Change who's allowed in:** `export CLOUDFLARE_API_TOKEN=...` then `npm run access`.
-**Later deploys:** `npm run deploy`.
+**Later deploys:** pushing to `claude/phase-1-scaffold-deploy-rwsafu` publishes. The GitHub workflow
+`.github/workflows/deploy-food-tracker.yml` runs the typecheck and tests, then `npm run deploy` (build,
+remote migrations, Worker), so a change goes live without anyone needing Cloudflare access on their own
+machine or session. It needs the repository secret `CLOUDFLARE_API_TOKEN` (the token above); the optional
+secret `FOOD_INVITE_TOKEN` is installed as the Worker's `ACCESS_INVITE_TOKEN`. It can also be run by hand
+from the Actions tab. `npm run deploy` still works from a machine with the token.
 
 The Worker has `workers_dev` and preview URLs turned off, so the only way in is the Access-protected subdomain.
 The one exception is the home-screen icon and its friends (`PUBLIC_FILES` in `scripts/cloudflare.mjs`: the
