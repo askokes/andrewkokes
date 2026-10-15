@@ -4,7 +4,7 @@ import { progressChart } from "../chart";
 import { el } from "../dom";
 import { dayPath, whole } from "../food";
 import type { Go } from "../nav";
-import { movingAverage, PERIOD_DAYS, periodStats, shiftDate, summarySentence, type Period } from "../progress";
+import { macroCalories, movingAverage, PERIOD_DAYS, periodStats, shiftDate, summarySentence, type Period } from "../progress";
 
 type Range = Exclude<Period, "today">;
 
@@ -89,6 +89,7 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
     const byDate = new Map(weights.map((w) => [w.date, w.weightLb]));
     const weighIns = dates.map((d) => (showWeight ? byDate.get(d) ?? null : null));
     const stats = periodStats(days, averages);
+    const slices = days.map(macroCalories);
     let selected = days.length - 1;
 
     const third = showWeight
@@ -111,6 +112,8 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
           key("swatch", "--carbs", `${whole(d.carbsG)} g carbs`),
           key("swatch", "--fat", `${whole(d.fatG)} g fat`),
         );
+        const other = Math.round(slices[selected].other);
+        if (other > 0) items.push(key("swatch", "--other", `${whole(other)} cal other`));
       }
       const burn = d.goal?.baselineCalories;
       if (d.entries && burn) {
@@ -131,6 +134,7 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
       key("swatch", "--protein", "Protein"),
       key("swatch", "--carbs", "Carbs"),
       key("swatch", "--fat", "Fat"),
+      slices.some((m) => Math.round(m.other) > 0) ? key("swatch", "--other", "Other (calories only, alcohol)") : null,
       key("line", "--goal-line", "Goal"),
       days.some((d) => d.goal?.baselineCalories) ? key("dash", "--baseline", "Baseline (what you burn)") : null,
       showWeight ? key("line", "--weight", "Weight, 7-day avg") : null,

@@ -98,9 +98,25 @@ export function summarySentence(stats: PeriodStats, period: Exclude<Period, "tod
   return `${weight} ${intake}`;
 }
 
-/** Calories from each macro, for the stacked bars (4 / 4 / 9 cal per gram). */
+/** Below this share of the day's calories, the gap the macros leave is rounding, not something missing. */
+const OTHER_MIN_SHARE = 0.05;
+
+/**
+ * The stacked bar's slices (4 / 4 / 9 cal per gram), adding up to the day's
+ * calories. What the macros don't account for (foods logged with calories
+ * only, a drink's alcohol) is "other"; a few percent either way is just
+ * rounding on labels, so the macros are scaled to the total instead.
+ */
 export function macroCalories(d: DaySummary) {
-  return { protein: d.proteinG * 4, carbs: d.carbsG * 4, fat: d.fatG * 9 };
+  const protein = d.proteinG * 4;
+  const carbs = d.carbsG * 4;
+  const fat = d.fatG * 9;
+  const sum = protein + carbs + fat;
+  if (!(d.calories > 0) || sum <= 0) return { protein, carbs, fat, other: d.calories > 0 ? d.calories : 0 };
+  const gap = d.calories - sum;
+  if (gap > d.calories * OTHER_MIN_SHARE) return { protein, carbs, fat, other: gap };
+  const k = d.calories / sum;
+  return { protein: protein * k, carbs: carbs * k, fat: fat * k, other: 0 };
 }
 
 export { shift as shiftDate };

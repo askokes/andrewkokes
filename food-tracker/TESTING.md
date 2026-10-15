@@ -118,7 +118,7 @@ If the mic button is missing, your browser doesn't support voice. Use Safari on 
 
 1. Open the app on **Overview**. Under the date you should see **Today | Week | Month**. Scroll down: the greeting and those three buttons stay at the top while the cards slide under them.
 2. Tap **Week**. The chart comes first, with a colored bar for each day. Under it: what the colors mean, the day you tapped, then your average calories a day, how many days you logged, and (if weight tracking is on) your weight trend.
-3. Each bar is split into protein (mint), carbs (apricot) and fat (lavender). The gray line is your goal.
+3. Each bar is split into protein (mint), carbs (apricot) and fat (lavender), plus gray on top for calories the macros don't cover (a food typed in with calories only, the alcohol in a drink). The whole bar is the day's calories. The gray line is your goal.
 4. Tap any bar. The box under the chart should switch to that day's numbers. Tap **Open this day** to see what you ate that day.
 5. Tap **Month**. You should see 30 days. Close the app and open it again: it should still be on Month.
 6. Tap **Show as table**. You should see the same numbers as a list.

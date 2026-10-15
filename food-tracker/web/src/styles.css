@@ -23,6 +23,8 @@
   --protein: #3fb6a0;
   --carbs: #f2994a;
   --fat: #8c7ae6;
+  /* Calories the macros don't account for (typed-in calories only, alcohol): a plain neutral gray. */
+  --other: #a2a8a4;
   --weight: #c45a92;
   --goal-line: #858d88;
   /* What the user burns on a normal day: a dashed line, darker than the goal so the two read apart. */

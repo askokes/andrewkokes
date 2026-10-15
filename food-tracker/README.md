@@ -86,7 +86,9 @@ API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/
 `DELETE /api/weight/:id`. Shapes live in `src/food/types.ts`.
 
 Home is a dashboard: Today / Week / Month. Week and Month show one Chart.js chart, calories stacked by
-macro on the left axis and the 7-day average weight plus weigh-ins on a right axis (Andrew chose the
+macro on the left axis (each bar is the day's calories: what protein, carbs and fat don't account for, such as
+calories-only entries and alcohol, is a gray "Other" slice on top; a gap under 5% is rounding, so the macros are
+scaled to the total instead) and the 7-day average weight plus weigh-ins on a right axis (Andrew chose the
 combined two-axis chart over two aligned charts). Colors are validated for color-blind separation.
 Every write must be `Content-Type: application/json` from the app's own origin.
 

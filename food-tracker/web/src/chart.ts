@@ -84,7 +84,11 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
   const muted = css("--muted");
   const macros = input.days.map(macroCalories);
 
-  const bar = (key: "protein" | "carbs" | "fat", label: string, color: string, top: boolean) => ({
+  type Slice = "protein" | "carbs" | "fat" | "other";
+  const ORDER: Slice[] = ["protein", "carbs", "fat", "other"];
+  // The highest slice with anything in it gets the rounded end; the ones under it a gap above them.
+  const isTop = (key: Slice, i: number) => !ORDER.slice(ORDER.indexOf(key) + 1).some((k) => Math.round(macros[i][k]) > 0);
+  const bar = (key: Slice, label: string, color: string) => ({
     type: "bar" as const,
     label,
     data: macros.map((m) => Math.round(m[key])),
@@ -97,9 +101,9 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
     barPercentage: 1,
     // A 2px gap in the card color between stacked segments; only the top gets the rounded end.
     borderColor: surface,
-    borderWidth: { top: top ? 0 : 2, right: 0, bottom: 0, left: 0 },
+    borderWidth: (c: { dataIndex: number }) => ({ top: isTop(key, c.dataIndex) ? 0 : 2, right: 0, bottom: 0, left: 0 }),
     borderSkipped: false as const,
-    borderRadius: top ? { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 } : 0,
+    borderRadius: (c: { dataIndex: number }) => (isTop(key, c.dataIndex) ? { topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0 } : 0),
     order: 4,
   });
 
@@ -110,9 +114,11 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
 
   type Config = ChartConfigurationCustomTypesPerDataset<"bar" | "line", (number | null)[], string>;
   const datasets: Config["data"]["datasets"] = [
-    bar("protein", "Protein", css("--protein"), false),
-    bar("carbs", "Carbs", css("--carbs"), false),
-    bar("fat", "Fat", css("--fat"), true),
+    bar("protein", "Protein", css("--protein")),
+    bar("carbs", "Carbs", css("--carbs")),
+    bar("fat", "Fat", css("--fat")),
+    // Calories the macros don't account for: foods logged with calories only, a drink's alcohol.
+    bar("other", "Other", css("--other")),
     {
       type: "line",
       label: "Goal",

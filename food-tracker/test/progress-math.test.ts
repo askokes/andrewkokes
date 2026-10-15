@@ -71,8 +71,26 @@ describe("summarySentence", () => {
 });
 
 describe("macroCalories", () => {
+  const withMacros = (calories: number, proteinG: number, carbsG: number, fatG: number) => ({ ...day("2026-10-11", calories), proteinG, carbsG, fatG });
+
   it("uses 4, 4 and 9 calories per gram", () => {
-    expect(macroCalories({ ...day("2026-10-11", 0), proteinG: 10, carbsG: 20, fatG: 5 })).toEqual({ protein: 40, carbs: 80, fat: 45 });
+    expect(macroCalories(withMacros(165, 10, 20, 5))).toEqual({ protein: 40, carbs: 80, fat: 45, other: 0 });
+  });
+
+  it("puts what the macros don't account for in other, so the bar is the day's calories", () => {
+    // A 1,500 cal dinner typed in with calories only, on top of 165 cal with macros.
+    expect(macroCalories(withMacros(1665, 10, 20, 5))).toEqual({ protein: 40, carbs: 80, fat: 45, other: 1500 });
+    // Calories only, all day.
+    expect(macroCalories(withMacros(600, 0, 0, 0))).toEqual({ protein: 0, carbs: 0, fat: 0, other: 600 });
+  });
+
+  it("scales the macros to the total when they're only a few percent off", () => {
+    const s = macroCalories(withMacros(160, 10, 20, 5)); // macros say 165
+    expect(s.other).toBe(0);
+    expect(s.protein + s.carbs + s.fat).toBeCloseTo(160, 6);
+    const under = macroCalories(withMacros(170, 10, 20, 5)); // 5 short of 170: rounding, not a missing food
+    expect(under.other).toBe(0);
+    expect(under.protein + under.carbs + under.fat).toBeCloseTo(170, 6);
   });
 });
 
