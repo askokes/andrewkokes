@@ -99,13 +99,17 @@ export function summarySentence(stats: PeriodStats, period: Exclude<Period, "tod
 }
 
 /** Below this share of the day's calories, the gap the macros leave is rounding, not something missing. */
-const OTHER_MIN_SHARE = 0.05;
+/**
+ * USDA's calories don't always match 4 / 4 / 9 a gram: plain chicken breast
+ * comes out about 6% over, so the cutoff sits above that.
+ */
+const OTHER_MIN_SHARE = 0.1;
 
 /**
  * The stacked bar's slices (4 / 4 / 9 cal per gram), adding up to the day's
  * calories. What the macros don't account for (foods logged with calories
- * only, a drink's alcohol) is "other"; a few percent either way is just
- * rounding on labels, so the macros are scaled to the total instead.
+ * only, a drink's alcohol) is "other"; under 10% either way is just
+ * rounding and USDA's own calorie math, so the macros are scaled to the total instead.
  */
 export function macroCalories(d: Pick<DaySummary, "calories" | "proteinG" | "carbsG" | "fatG">) {
   const protein = d.proteinG * 4;

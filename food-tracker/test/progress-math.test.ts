@@ -92,6 +92,15 @@ describe("macroCalories", () => {
     expect(under.other).toBe(0);
     expect(under.protein + under.carbs + under.fat).toBeCloseTo(170, 6);
   });
+
+  it("leaves a gap under 10% out of other, and shows one over it", () => {
+    // 6 oz chicken breast: about 52 g protein and 6 g fat is 262 by 4 / 4 / 9, but USDA says 281.
+    const chicken = macroCalories(withMacros(281, 52, 0, 6));
+    expect(chicken.other).toBe(0);
+    expect(chicken.protein + chicken.fat).toBeCloseTo(281, 6);
+    // 165 with macros plus a 25 cal calories-only food: 13% of the day.
+    expect(macroCalories(withMacros(190, 10, 20, 5)).other).toBe(25);
+  });
 });
 
 describe("loggedStreak", () => {
