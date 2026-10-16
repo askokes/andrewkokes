@@ -107,7 +107,7 @@ const OTHER_MIN_SHARE = 0.05;
  * only, a drink's alcohol) is "other"; a few percent either way is just
  * rounding on labels, so the macros are scaled to the total instead.
  */
-export function macroCalories(d: DaySummary) {
+export function macroCalories(d: Pick<DaySummary, "calories" | "proteinG" | "carbsG" | "fatG">) {
   const protein = d.proteinG * 4;
   const carbs = d.carbsG * 4;
   const fat = d.fatG * 9;

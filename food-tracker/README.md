@@ -75,9 +75,10 @@ saves; the choices are kept on the profile (`users.plan_goal`, `plan_lb`, `plan_
 card opens on them.
 
 Fun touches Andrew picked: Overview greets by first name and time of day, shows "N days logged in a
-row" once there are two (it counts logging, never amounts), and draws today as a big calorie ring with
-protein, carbs and fat rings in the chart colors (past a goal a ring closes in the neutral "over"
-color). The Diary gives each meal and food a little emoji (`web/src/emoji.ts`, decoration only), and
+row" once there are two (it counts logging, never amounts), and draws today as a big calorie ring split
+into protein, carbs, fat and other like the chart's bars (with each share as a percent under it),
+plus protein, carbs and fat rings in the chart colors (past a goal a small ring closes in the neutral
+"over" color; the calorie ring fills and its middle says how far over). The Diary gives each meal and food a little emoji (`web/src/emoji.ts`, decoration only), and
 a short confetti burst plays once per day when breakfast, lunch and dinner are all logged (skipped for
 reduced motion).
 

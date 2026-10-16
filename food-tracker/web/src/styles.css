@@ -746,6 +746,12 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 .ring-track { stroke: color-mix(in srgb, var(--ring-color) 16%, var(--surface)); }
 .ring-arc { stroke: var(--ring-color); transition: stroke-dashoffset 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), stroke 0.3s; }
 .ring-arc.over { stroke: var(--over); }
+/* The calorie ring's slices sweep and resize together. */
+.ring-slice { transition: stroke-dasharray 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), stroke-dashoffset 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.ring-split { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 14px; margin-top: -6px; font-size: 0.85rem; color: var(--muted); }
+.ring-split > span { display: inline-flex; align-items: center; gap: 6px; }
+.ring-split-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; }
+.ring-split[hidden] { display: none; }
 .ring-big, .ring-small { position: relative; }
 .ring-big { width: 196px; height: 196px; margin-top: 4px; }
 .ring-small { width: 84px; height: 84px; }
@@ -760,7 +766,7 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 .ring-grams small { color: var(--muted); font-size: 0.75rem; font-weight: 600; }
 .ring-name { font-size: 0.9rem; font-weight: 600; margin-top: 8px; }
 .ring-sub { color: var(--muted); font-size: 0.8rem; }
-@media (prefers-reduced-motion: reduce) { .ring-arc { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .ring-arc, .ring-slice { transition: none; } }
 
 /* Overview: days logged in a row */
 .page-head .streak {

@@ -1,6 +1,7 @@
 import type { DayView } from "../../../src/food/types";
 import { el } from "../dom";
 import { whole } from "../food";
+import { macroCalories } from "../progress";
 
 /** A progress bar. Past the goal it fills completely in a calm neutral color, never red. */
 export function bar(value: number, goal: number, label: string, thin = false) {
@@ -31,12 +32,12 @@ function svg<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string,
   return node;
 }
 
-/** One ring: a pale track in its own color and an arc that fills toward the goal. */
-function ring(size: "big" | "small", color: string) {
-  const stroke = size === "big" ? 9 : 11;
+/** A macro's ring: a pale track in its own color and an arc that fills toward the goal. */
+function ring(color: string) {
+  const stroke = 11;
   const r = 50 - stroke / 2;
   const c = 2 * Math.PI * r;
-  const node = svg("svg", { viewBox: "0 0 100 100", class: `ring ring-${size}`, "aria-hidden": "true" });
+  const node = svg("svg", { viewBox: "0 0 100 100", class: "ring", "aria-hidden": "true" });
   node.style.setProperty("--ring-color", `var(${color})`);
   const track = svg("circle", { cx: 50, cy: 50, r, fill: "none", "stroke-width": stroke, class: "ring-track" });
   const arc = svg("circle", {
@@ -61,6 +62,63 @@ function ring(size: "big" | "small", color: string) {
       arc.classList.toggle("over", over);
       // A round cap on an empty arc still draws a dot.
       arc.style.opacity = f > 0 ? "1" : "0";
+    },
+  };
+}
+
+/** The slices of the calorie ring, in the chart's order and colors. */
+const SLICES = [
+  { key: "protein", label: "protein", color: "--protein" },
+  { key: "carbs", label: "carbs", color: "--carbs" },
+  { key: "fat", label: "fat", color: "--fat" },
+  { key: "other", label: "other", color: "--other" },
+] as const;
+
+/**
+ * The big calorie ring, split like the chart's bars: protein, carbs, fat and
+ * other end to end, together as far round as the day is toward its goal. A
+ * hairline gap separates the slices.
+ */
+function calorieRing() {
+  const stroke = 9;
+  const r = 50 - stroke / 2;
+  const c = 2 * Math.PI * r;
+  const GAP = 1.2;
+  const node = svg("svg", { viewBox: "0 0 100 100", class: "ring", "aria-hidden": "true" });
+  node.style.setProperty("--ring-color", "var(--accent)");
+  const track = svg("circle", { cx: 50, cy: 50, r, fill: "none", "stroke-width": stroke, class: "ring-track" });
+  const arcs = SLICES.map((s) => {
+    const arc = svg("circle", {
+      cx: 50,
+      cy: 50,
+      r,
+      fill: "none",
+      "stroke-width": stroke,
+      "stroke-dasharray": `0 ${c}`,
+      "stroke-dashoffset": 0,
+      transform: "rotate(-90 50 50)",
+      class: "ring-slice",
+    });
+    arc.style.stroke = `var(${s.color})`;
+    return arc;
+  });
+  node.append(track, ...arcs);
+  return {
+    node,
+    /** `slices` are calories per slice; `fraction` how far round they go together (1 = the whole ring). */
+    set(slices: Record<(typeof SLICES)[number]["key"], number>, fraction: number) {
+      const total = SLICES.reduce((sum, s) => sum + Math.max(0, slices[s.key]), 0);
+      const span = c * Math.max(0, Math.min(1, fraction));
+      const shown = SLICES.filter((s) => slices[s.key] > 0).length;
+      let start = 0;
+      SLICES.forEach((s, i) => {
+        const len = total > 0 ? (span * Math.max(0, slices[s.key])) / total : 0;
+        // Each slice gives up a hairline at its end, so neighbors read apart; a lone slice keeps it all.
+        const drawn = shown > 1 && len > GAP ? len - GAP : len;
+        arcs[i].style.strokeDasharray = `${drawn} ${c}`;
+        arcs[i].style.strokeDashoffset = String(-start);
+        start += len;
+      });
     },
   };
 }
@@ -90,17 +148,19 @@ const MACROS = [
  * sweep from where they were, so a refresh with the same numbers doesn't move.
  */
 export function todayRings() {
-  const cal = ring("big", "--accent");
+  const cal = calorieRing();
   const calNumber = el("p", { className: "ring-number" });
   const calOf = el("p", { className: "ring-of" });
   const calLeft = el("p", { className: "ring-left" });
   const calWrap = el("div", { className: "ring-big", attrs: { role: "progressbar", "aria-label": "Calories" } }, cal.node, el("div", { className: "ring-center" }, calNumber, calOf, calLeft));
   const hint = el("p", { className: "hint", textContent: "Add a daily goal on the Goals tab to see what's left." });
+  // What the ring's colors are: each slice's share of the day's calories.
+  const split = el("p", { className: "ring-split" });
   // Against what they burn on a normal day, when set: a goal below it can hide eating above it.
   const burn = el("p", { className: "ring-baseline" });
 
   const macros = MACROS.map((m) => {
-    const r = ring("small", m.color);
+    const r = ring(m.color);
     const grams = el("p", { className: "ring-grams" });
     const sub = el("p", { className: "ring-sub" });
     const wrap = el(
@@ -113,7 +173,7 @@ export function todayRings() {
     return { ...m, r, grams, sub, wrap };
   });
 
-  const node = el("div", { className: "rings" }, calWrap, burn, hint, el("div", { className: "ring-row" }, ...macros.map((m) => m.wrap)));
+  const node = el("div", { className: "rings" }, calWrap, split, burn, hint, el("div", { className: "ring-row" }, ...macros.map((m) => m.wrap)));
 
   return {
     node,
@@ -138,6 +198,19 @@ export function todayRings() {
       }
       progressAttrs(calWrap, eaten, g?.calories ?? null, "calories");
 
+      const slices = macroCalories(day.totals);
+      const sliceTotal = slices.protein + slices.carbs + slices.fat + slices.other;
+      split.hidden = !(sliceTotal > 0);
+      split.replaceChildren(
+        ...SLICES.map((s) => ({ ...s, pct: sliceTotal > 0 ? Math.round((slices[s.key] / sliceTotal) * 100) : 0 }))
+          .filter((s) => s.pct > 0)
+          .map((s) => {
+            const swatch = el("span", { className: "ring-split-swatch", attrs: { "aria-hidden": "true" } });
+            swatch.style.background = `var(${s.color})`;
+            return el("span", {}, swatch, `${s.pct}% ${s.label}`);
+          }),
+      );
+
       for (const m of macros) {
         const grams = Math.round(day.totals[m.key]);
         const goal = g?.[m.goalKey] ?? null;
@@ -150,7 +223,8 @@ export function todayRings() {
       // Sweep after the rings are on screen at their old values, so the change animates.
       requestAnimationFrame(() => {
         void node.getBoundingClientRect();
-        cal.set(g ? eaten / g.calories : 0, g !== null && eaten > g.calories);
+        // With no goal the ring is just the split of what was eaten.
+        cal.set(slices, g ? eaten / g.calories : sliceTotal > 0 ? 1 : 0);
         for (const m of macros) {
           const grams = Math.round(day.totals[m.key]);
           const goal = g?.[m.goalKey] ?? null;
