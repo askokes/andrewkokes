@@ -95,7 +95,12 @@ jobs:
           echo "icon-192.png: HTTP $code"
           [ "$code" = "200" ]
           # A sync with no key reaches the Worker (401 from the app), not Access's sign-in page (302).
-          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d '{}' https://food.pivotaiglobal.com/api/watch/sync)
-          echo "watch sync without a key: HTTP $code"
+          # A new Access rule takes a little while to apply, so give it a minute.
+          for try in 1 2 3 4 5 6 7; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d '{}' https://food.pivotaiglobal.com/api/watch/sync)
+            echo "watch sync without a key: HTTP $code"
+            [ "$code" = "401" ] && break
+            sleep 10
+          done
           [ "$code" = "401" ] || echo "::warning::The Apple Watch sync path still goes to the sign-in page (HTTP $code)."
 
