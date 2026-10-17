@@ -8,6 +8,7 @@ import type { DaySummary, GoalsSnapshot, SummaryResponse, WeightEntry, WeightRes
 import { checkDate, DATE_ERROR, FIRST_DATE } from "./food/input";
 import { burnProfileOf, getUser, noProfile, readJson, weighInsOf, type UserRow } from "./profile";
 import { isBlank, isObject, type FieldErrors } from "./validate";
+import { watchDaysBetween } from "./watch";
 
 type Ctx = Context<AppEnv>;
 
@@ -108,7 +109,7 @@ progressRoutes.get("/summary", async (c) => {
   const { from, to } = range;
 
   const db = c.env.DB;
-  const [totals, goals, weighIns] = await Promise.all([
+  const [totals, goals, weighIns, watch] = await Promise.all([
     db
       .prepare(
         `SELECT log_date, SUM(calories) AS calories, SUM(protein_g) AS protein_g, SUM(carbs_g) AS carbs_g,
@@ -124,6 +125,7 @@ progressRoutes.get("/summary", async (c) => {
       .bind(user.id)
       .all<GoalRow>(),
     weighInsOf(db, user.id),
+    watchDaysBetween(db, user.id, from, to),
   ]);
   const byDate = new Map(totals.results.map((r) => [r.log_date, r]));
   const profile = burnProfileOf(user);
@@ -140,6 +142,7 @@ progressRoutes.get("/summary", async (c) => {
       fatG: round1(r?.fat_g ?? 0),
       entries: r?.entries ?? 0,
       goal: goalOn(date),
+      watch: watch.get(date) ?? null,
     });
   }
   const body: SummaryResponse = { from, to, today, days };

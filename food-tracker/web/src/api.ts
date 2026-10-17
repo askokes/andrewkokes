@@ -1,4 +1,5 @@
 import type { Activity, Sex } from "../../src/burn";
+import type { WatchStatus } from "../../src/food/types";
 import type { PlanGoal, PlanPer } from "../../src/plan";
 export interface Goals {
   calories: number;
@@ -34,6 +35,8 @@ export interface Me {
   latestWeight: { weightLb: number; date: string } | null;
   /** The weight plan's choices on the Goals tab, or null until one is picked. */
   plan: { goal: PlanGoal; lb: number | null; per: PlanPer } | null;
+  /** Apple Watch sync (Goals tab): whether a key is set and when anything last came in. */
+  watch: WatchStatus;
 }
 
 export class ApiError extends Error {

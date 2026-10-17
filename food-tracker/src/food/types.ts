@@ -231,6 +231,8 @@ export interface DayView {
   goals: GoalsSnapshot | null;
   totals: Nutrition;
   entries: EntryView[];
+  /** What the Apple Watch synced for `date` (src/watch.ts), or null. */
+  watch: WatchDay | null;
 }
 
 /** POST /api/entries body. */
@@ -310,6 +312,29 @@ export interface DaySummary {
   entries: number;
   /** Goals in effect that day (goal history), or null if the user has none. */
   goal: GoalsSnapshot | null;
+  /** What the Apple Watch synced that day, or null. */
+  watch: WatchDay | null;
+}
+
+/** A day's Apple Watch totals as of the last sync. A field the Shortcut didn't send is null. */
+export interface WatchDay {
+  activeKcal: number | null;
+  restingKcal: number | null;
+  steps: number | null;
+  /** ISO time of the last sync that day. */
+  syncedAt: string;
+}
+
+/** /api/me's `watch`: whether a sync key is set and when anything last came in. */
+export interface WatchStatus {
+  connected: boolean;
+  lastSync: string | null;
+}
+
+/** POST /api/watch/key: the new key, shown once, and where the Shortcut sends it. */
+export interface WatchKeyResponse {
+  key: string;
+  syncUrl: string;
 }
 
 /** GET /api/summary?from=&to= */

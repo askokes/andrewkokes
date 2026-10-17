@@ -2,7 +2,8 @@
 # pushed to the working branch, or on demand from the Actions tab. Tests must
 # pass first. Needs the repository secret CLOUDFLARE_API_TOKEN (the same
 # Cloudflare deploy key `npm run deploy` uses); FOOD_INVITE_TOKEN is optional
-# and, when set, is installed as the Worker secret ACCESS_INVITE_TOKEN.
+# and, when set, is installed as the Worker secret ACCESS_INVITE_TOKEN and used
+# to let the Apple Watch Shortcut's sync path through Access.
 # Secrets never reach forks or pull requests: this runs only on pushes and
 # manual runs.
 name: Deploy food tracker
@@ -76,8 +77,25 @@ jobs:
           fi
           printf %s "$INVITE_KEY" | npx wrangler secret put ACCESS_INVITE_TOKEN
 
+      # The Shortcut can't sign in, so its one path skips Access and the Worker
+      # checks its sync key instead. Needs a key that may edit Access apps.
+      - name: Let the Apple Watch Shortcut through Access
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.FOOD_INVITE_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "No FOOD_INVITE_TOKEN secret; skipping. Apple Watch syncs will get the sign-in page until it's set."
+            exit 0
+          fi
+          node scripts/watch-access.mjs
+
       - name: Check the live app answers
         run: |
           code=$(curl -s -o /dev/null -w "%{http_code}" https://food.pivotaiglobal.com/icon-192.png)
           echo "icon-192.png: HTTP $code"
           [ "$code" = "200" ]
+          # A sync with no key reaches the Worker (401 from the app), not Access's sign-in page (302).
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/json" -d '{}' https://food.pivotaiglobal.com/api/watch/sync)
+          echo "watch sync without a key: HTTP $code"
+          [ "$code" = "401" ] || echo "::warning::The Apple Watch sync path still goes to the sign-in page (HTTP $code)."
+

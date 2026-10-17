@@ -3,7 +3,7 @@
 // Replaces the allow list with exactly the emails you enter.
 
 import readline from "node:readline/promises";
-import { client, ensureAccess, ensurePublicFiles, parseEmails, patchConfig, readConfig, SetupError } from "./cloudflare.mjs";
+import { client, ensureAccess, ensurePublicFiles, ensureWatchSync, parseEmails, patchConfig, readConfig, SetupError } from "./cloudflare.mjs";
 
 async function main() {
   const token = process.env.CLOUDFLARE_API_TOKEN;
@@ -24,6 +24,7 @@ async function main() {
 
   const { teamDomain, aud } = await ensureAccess(cf, account, host, emails);
   await ensurePublicFiles(cf, account, host);
+  await ensureWatchSync(cf, account, host);
   await patchConfig({ ACCESS_TEAM_DOMAIN: teamDomain, ACCESS_AUD: aud });
   console.log(`\n✓ ${host} now allows: ${emails.join(", ")}\n`);
 }

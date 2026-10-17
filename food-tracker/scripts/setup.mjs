@@ -5,7 +5,7 @@
 
 import { spawn } from "node:child_process";
 import readline from "node:readline";
-import { client, ensureAccess, ensureDatabase, ensurePublicFiles, parseEmails, patchConfig, readConfig, SetupError } from "./cloudflare.mjs";
+import { client, ensureAccess, ensureDatabase, ensurePublicFiles, ensureWatchSync, parseEmails, patchConfig, readConfig, SetupError } from "./cloudflare.mjs";
 
 const TOTAL = 7;
 let stepNo = 0;
@@ -114,6 +114,7 @@ async function main() {
   step("Setting up sign-in (Cloudflare Access)");
   const { teamDomain, aud } = await ensureAccess(cf, account, host, emails);
   await ensurePublicFiles(cf, account, host);
+  await ensureWatchSync(cf, account, host);
   await patchConfig({ ACCESS_TEAM_DOMAIN: teamDomain, ACCESS_AUD: aud });
   ok(`One-time PIN login for: ${emails.join(", ")}`);
 

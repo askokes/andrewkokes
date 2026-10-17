@@ -72,7 +72,7 @@ describe("schema", () => {
       "SELECT name FROM sqlite_master WHERE type = 'table' AND name NOT LIKE '\\_%' ESCAPE '\\' AND name NOT LIKE 'd1_%' AND name NOT LIKE 'sqlite_%' ORDER BY name",
     ).all<{ name: string }>();
     expect(results.map((r) => r.name)).toEqual([
-      "barcode_cache", "food_entries", "goals", "usda_cache", "usda_search_cache", "usda_usage", "users", "weight_entries",
+      "barcode_cache", "food_entries", "goals", "usda_cache", "usda_search_cache", "usda_usage", "users", "watch_days", "weight_entries",
     ]);
   });
 });

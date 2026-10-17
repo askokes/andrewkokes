@@ -1,7 +1,8 @@
-import type { DayView } from "../../../src/food/types";
+import type { DayView, WatchDay } from "../../../src/food/types";
 import { el } from "../dom";
 import { whole } from "../food";
-import { macroCalories } from "../progress";
+import { macroCalories, watchBurned } from "../progress";
+import { SHORTCUT_URL, syncedWhen } from "./watch";
 
 /** A progress bar. Past the goal it fills completely in a calm neutral color, never red. */
 export function bar(value: number, goal: number, label: string, thin = false) {
@@ -136,6 +137,23 @@ function progressAttrs(node: HTMLElement, value: number, goal: number | null, un
   node.setAttribute("aria-valuetext", `${whole(value)} of ${whole(goal)} ${unit}`);
 }
 
+/** "⌚ 2,432 cal burned so far · 8,412 steps", then where it came from and a way to sync again. */
+function watchLines(w: WatchDay | null, canSync: boolean): (Node | string)[] {
+  const sync = canSync ? el("a", { className: "text-button ring-watch-sync", href: SHORTCUT_URL, textContent: "Sync now" }) : null;
+  const icon = el("span", { textContent: "⌚ ", attrs: { "aria-hidden": "true" } });
+  const withSync = (lines: Node[]) => (sync ? [...lines, sync] : lines);
+  if (!w) return withSync([el("p", {}, icon, "No Apple Watch sync yet today.")]);
+  const burned = watchBurned(w);
+  // Each figure stays on one line with its words.
+  const part = (n: number, words: string) => el("span", { className: "nowrap" }, el("strong", { textContent: whole(n) }), words);
+  const main: (Node | string)[] = [];
+  if (burned !== null) main.push(part(burned, " cal burned so far"));
+  else if (w.activeKcal !== null) main.push(part(w.activeKcal, " active cal so far"));
+  if (w.steps !== null) main.push(main.length ? " · " : "", part(w.steps, " steps"));
+  const from = burned !== null ? `${whole(w.activeKcal!)} active + ${whole(w.restingKcal!)} resting · ` : "";
+  return withSync([el("p", {}, icon, ...main), el("p", { className: "ring-watch-sub" }, `${from}Apple Watch, synced ${syncedWhen(w.syncedAt)}`)]);
+}
+
 const MACROS = [
   { key: "proteinG", goalKey: "proteinG", label: "Protein", color: "--protein" },
   { key: "carbsG", goalKey: "carbsG", label: "Carbs", color: "--carbs" },
@@ -147,7 +165,7 @@ const MACROS = [
  * chart's colors. Build once and paint as the day's data arrives; the rings
  * sweep from where they were, so a refresh with the same numbers doesn't move.
  */
-export function todayRings() {
+export function todayRings(opts: { watchConnected?: () => boolean } = {}) {
   const cal = calorieRing();
   const calNumber = el("p", { className: "ring-number" });
   const calOf = el("p", { className: "ring-of" });
@@ -158,6 +176,8 @@ export function todayRings() {
   const split = el("p", { className: "ring-split" });
   // Against what they burn on a normal day, when set: a goal below it can hide eating above it.
   const burn = el("p", { className: "ring-baseline" });
+  // What the Apple Watch synced today (src/watch.ts), for whoever connected one.
+  const watch = el("div", { className: "ring-watch", attrs: { "aria-label": "Apple Watch" } });
 
   const macros = MACROS.map((m) => {
     const r = ring(m.color);
@@ -173,7 +193,7 @@ export function todayRings() {
     return { ...m, r, grams, sub, wrap };
   });
 
-  const node = el("div", { className: "rings" }, calWrap, split, burn, hint, el("div", { className: "ring-row" }, ...macros.map((m) => m.wrap)));
+  const node = el("div", { className: "rings" }, calWrap, split, burn, watch, hint, el("div", { className: "ring-row" }, ...macros.map((m) => m.wrap)));
 
   return {
     node,
@@ -197,6 +217,9 @@ export function todayRings() {
         );
       }
       progressAttrs(calWrap, eaten, g?.calories ?? null, "calories");
+      const connected = opts.watchConnected?.() ?? false;
+      watch.hidden = !day.watch && !connected;
+      if (!watch.hidden) watch.replaceChildren(...watchLines(day.watch, connected));
 
       const slices = macroCalories(day.totals);
       const sliceTotal = slices.protein + slices.carbs + slices.fat + slices.other;

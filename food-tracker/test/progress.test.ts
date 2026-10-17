@@ -58,6 +58,7 @@ describe("GET /api/summary", () => {
       fatG: 20.3,
       entries: 2,
       goal: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60, baselineCalories: null },
+      watch: null,
     });
     expect(body.days.at(-3)).toMatchObject({ calories: 700, entries: 1 });
     expect(body.days.at(-2)).toMatchObject({ calories: 0, proteinG: 0, entries: 0 });

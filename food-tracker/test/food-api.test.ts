@@ -578,6 +578,7 @@ describe("entries", () => {
       goals: { calories: 1800, proteinG: 120, carbsG: null, fatG: 60, baselineCalories: null },
       totals: { calories: 0, proteinG: 0, carbsG: 0, fatG: 0 },
       entries: [],
+      watch: null,
     });
   });
 

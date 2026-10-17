@@ -4,7 +4,7 @@ import { progressChart } from "../chart";
 import { el } from "../dom";
 import { dayPath, whole } from "../food";
 import type { Go } from "../nav";
-import { macroCalories, movingAverage, PERIOD_DAYS, periodStats, shiftDate, summarySentence, type Period } from "../progress";
+import { macroCalories, movingAverage, PERIOD_DAYS, periodStats, shiftDate, summarySentence, watchBurned, type Period } from "../progress";
 
 type Range = Exclude<Period, "today">;
 
@@ -34,7 +34,7 @@ function kpi(label: string, value: string, sub: string) {
   );
 }
 
-function key(kind: "swatch" | "line" | "dash" | "dot", color: string, text: string) {
+function key(kind: "swatch" | "line" | "dash" | "dot" | "tick", color: string, text: string) {
   const mark = el("span", { className: `key-${kind}`, attrs: { "aria-hidden": "true" } });
   if (kind === "dash") mark.style.borderTopColor = `var(${color})`;
   else mark.style.background = `var(${color})`;
@@ -42,7 +42,8 @@ function key(kind: "swatch" | "line" | "dash" | "dot", color: string, text: stri
 }
 
 function table(days: DaySummary[], averages: (number | null)[], weighIns: (number | null)[], showWeight: boolean) {
-  const head = ["Day", "Cal", "Protein", "Carbs", "Fat", ...(showWeight ? ["Weight"] : [])];
+  const showBurned = days.some((d) => watchBurned(d.watch) !== null);
+  const head = ["Day", "Cal", "Protein", "Carbs", "Fat", ...(showBurned ? ["Burned"] : []), ...(showWeight ? ["Weight"] : [])];
   return el(
     "div",
     { className: "table-wrap" },
@@ -62,12 +63,14 @@ function table(days: DaySummary[], averages: (number | null)[], weighIns: (numbe
             d.entries ? `${whole(d.proteinG)} g` : "",
             d.entries ? `${whole(d.carbsG)} g` : "",
             d.entries ? `${whole(d.fatG)} g` : "",
+            ...(showBurned ? [watchBurned(d.watch) === null ? "" : whole(watchBurned(d.watch)!)] : []),
             ...(showWeight ? [weight] : []),
           ];
           return el("tr", {}, el("th", { scope: "row", textContent: cells[0] }), ...cells.slice(1).map((c) => el("td", { textContent: c })));
         }),
       ),
     ),
+    showBurned ? el("p", { className: "hint", textContent: "Burned is what your Apple Watch synced: active plus resting calories." }) : null,
     showWeight ? el("p", { className: "hint", textContent: "Weight in parentheses is the 7-day average on a day without a weigh-in." }) : null,
   );
 }
@@ -90,6 +93,8 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
     const weighIns = dates.map((d) => (showWeight ? byDate.get(d) ?? null : null));
     const stats = periodStats(days, averages);
     const slices = days.map(macroCalories);
+    // Watch calories for finished days only: today's are still adding up.
+    const burned = days.map((d) => (d.date < today ? watchBurned(d.watch) : null));
     let selected = days.length - 1;
 
     const third = showWeight
@@ -115,10 +120,21 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
         const other = Math.round(slices[selected].other);
         if (other > 0) items.push(key("swatch", "--other", `${whole(other)} cal other`));
       }
-      const burn = d.goal?.baselineCalories;
+      // Against what the Watch measured that day when there is one, else the estimate.
+      const measured = burned[selected];
+      const burn = measured ?? d.goal?.baselineCalories;
       if (d.entries && burn) {
         const diff = Math.round(d.calories - burn);
-        items.push(el("span", { className: diff > 0 ? "over-text" : "muted", textContent: `${whole(Math.abs(diff))} ${diff > 0 ? "over" : "under"} what you burn` }));
+        const against = measured !== null ? "what your Watch says you burned" : "what you burn";
+        items.push(el("span", { className: diff > 0 ? "over-text" : "muted", textContent: `${whole(Math.abs(diff))} ${diff > 0 ? "over" : "under"} ${against}` }));
+      }
+      if (d.watch) {
+        const sofar = watchBurned(d.watch);
+        const parts = [
+          sofar !== null ? `${whole(sofar)} burned${d.date === today ? " so far" : ""}` : d.watch.activeKcal !== null ? `${whole(d.watch.activeKcal)} active cal` : null,
+          d.watch.steps !== null ? `${whole(d.watch.steps)} steps` : null,
+        ].filter((p): p is string => p !== null);
+        if (parts.length) items.push(key("tick", "--baseline", `Watch: ${parts.join(", ")}`));
       }
       if (weighIns[selected] !== null) items.push(key("dot", "--weight", `${weighIns[selected]} lb`));
       else if (averages[selected] !== null) items.push(key("line", "--weight", `avg ${averages[selected]} lb`));
@@ -137,6 +153,7 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
       slices.some((m) => Math.round(m.other) > 0) ? key("swatch", "--other", "Other (calories only, alcohol)") : null,
       key("line", "--goal-line", "Goal"),
       days.some((d) => d.goal?.baselineCalories) ? key("dash", "--baseline", "Baseline (what you burn)") : null,
+      burned.some((b) => b !== null) ? key("tick", "--baseline", "Burned (Apple Watch)") : null,
       showWeight ? key("line", "--weight", "Weight, 7-day avg") : null,
       showWeight ? key("dot", "--weight", "Weigh-in") : null,
     );
@@ -189,6 +206,7 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
         days,
         averages,
         weighIns,
+        burned,
         showWeight,
         labels: dates.map((d, i) =>
           period === "week" ? shortDay(d) : i === dates.length - 1 || (dates.length - 1 - i) % 7 === 0 ? numericDay(d) : "",

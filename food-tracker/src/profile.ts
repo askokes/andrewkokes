@@ -5,6 +5,7 @@ import type { PlanGoal, PlanPer } from "./plan";
 import { localDate } from "./dates";
 import type { AppEnv } from "./env";
 import { parseGoals, parseProfile, type FieldErrors, type GoalsInput } from "./validate";
+import { watchStatus } from "./watch";
 
 export interface UserRow {
   id: number;
@@ -19,6 +20,8 @@ export interface UserRow {
   plan_goal: PlanGoal | null;
   plan_lb: number | null;
   plan_per: PlanPer | null;
+  /** 1 when an Apple Watch sync key is set (src/watch.ts). */
+  watch_connected: number;
 }
 
 interface GoalRow {
@@ -34,7 +37,8 @@ interface GoalRow {
 export function getUser(db: D1Database, email: string) {
   return db
     .prepare(
-      `SELECT id, email, display_name, timezone, track_weight, sex, birth_year, height_in, activity, plan_goal, plan_lb, plan_per
+      `SELECT id, email, display_name, timezone, track_weight, sex, birth_year, height_in, activity, plan_goal, plan_lb, plan_per,
+         (watch_key_hash IS NOT NULL) AS watch_connected
        FROM users WHERE email = ?`,
     )
     .bind(email)
@@ -125,7 +129,12 @@ async function loadMe(db: D1Database, email: string, env: { ADMIN_EMAILS?: strin
   const user = await getUser(db, email);
   if (!user) return null;
   const today = localDate(user.timezone);
-  const [goals, weight, weighIns] = await Promise.all([currentGoals(db, user.id, today), latestWeight(db, user.id), weighInsOf(db, user.id)]);
+  const [goals, weight, weighIns, watch] = await Promise.all([
+    currentGoals(db, user.id, today),
+    latestWeight(db, user.id),
+    weighInsOf(db, user.id),
+    watchStatus(db, user),
+  ]);
   const trackWeight = user.track_weight === 1;
   const burnWeight = weightOn(weighIns, today);
   return {
@@ -157,6 +166,8 @@ async function loadMe(db: D1Database, email: string, env: { ADMIN_EMAILS?: strin
     latestWeight: trackWeight && weight ? { weightLb: weight.weight_lb, date: weight.log_date } : null,
     // The weight plan's choices, for the Goals tab's calculator.
     plan: user.plan_goal ? { goal: user.plan_goal, lb: user.plan_lb, per: user.plan_per ?? "week" } : null,
+    // Apple Watch sync (src/watch.ts).
+    watch,
   };
 }
 

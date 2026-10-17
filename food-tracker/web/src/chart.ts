@@ -26,6 +26,8 @@ export interface ChartInput {
   averages: (number | null)[];
   /** The weigh-in on each day, or null. */
   weighIns: (number | null)[];
+  /** Calories the Apple Watch says were burned each finished day, or null. */
+  burned: (number | null)[];
   showWeight: boolean;
   /** Tick labels under the bars ("Mon" or "9/16"); "" hides one. */
   labels: string[];
@@ -38,8 +40,8 @@ const css = (name: string) => getComputedStyle(document.documentElement).getProp
 const FONT = { family: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', size: 11 };
 
 /** The left axis's top: room above the tallest bar (and the goal) so the weight line can ride above most bars. */
-function calorieMax(days: DaySummary[]) {
-  const peak = Math.max(...days.map((d) => Math.max(d.calories, d.goal?.calories ?? 0, d.goal?.baselineCalories ?? 0)), 1000);
+function calorieMax(days: DaySummary[], burned: (number | null)[]) {
+  const peak = Math.max(...days.map((d, i) => Math.max(d.calories, d.goal?.calories ?? 0, d.goal?.baselineCalories ?? 0, burned[i] ?? 0)), 1000);
   return Math.ceil((peak * 1.3) / 500) * 500;
 }
 
@@ -154,6 +156,27 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
       order: 3,
     });
   }
+  // What the Apple Watch says was burned: a short solid tick across each bar, in the baseline's color
+  // (same idea, measured), over a card-colored halo so it reads on top of the bars.
+  if (input.burned.some((b) => b !== null)) {
+    const reach = Math.max(6, input.barThickness / 2 + 3);
+    const tick = (label: string, color: string, width: number, order: number) => ({
+      type: "line" as const,
+      label,
+      data: input.burned,
+      yAxisID: "y",
+      stack: "watch",
+      showLine: false,
+      pointStyle: "line" as const,
+      pointRadius: reach,
+      pointHoverRadius: reach,
+      pointBorderColor: color,
+      pointBorderWidth: width,
+      pointHoverBorderWidth: width,
+      order,
+    });
+    datasets.push(tick("watch halo", surface, 6, 2), tick("Burned (Apple Watch)", css("--baseline"), 3, 1));
+  }
   if (showWeight) {
     datasets.push(
       // A wider line in the card color under the weight line keeps it readable where it crosses bars.
@@ -234,7 +257,7 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
           position: "left",
           stacked: true,
           min: 0,
-          max: calorieMax(input.days),
+          max: calorieMax(input.days, input.burned),
           afterFit: (axis) => void (axis.width = 40),
           grid: { color: css("--chart-grid") },
           border: { display: false },

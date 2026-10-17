@@ -6,6 +6,7 @@ import { foodRoutes } from "./food/routes";
 import { inviteRoutes } from "./invites";
 import { profileRoutes } from "./profile";
 import { progressRoutes } from "./progress";
+import { WATCH_SYNC_PATH, watchRoutes, watchSync } from "./watch";
 
 export interface AppDeps {
   /** Access signing keys. Tests pass a local key set. */
@@ -87,10 +88,15 @@ export function createApp(overrides: Partial<AppDeps> = {}) {
   api.route("/", foodRoutes(deps));
   api.route("/", progressRoutes);
   api.route("/", inviteRoutes(deps));
+  api.route("/", watchRoutes);
 
   // Registered last so unknown API paths get JSON, never the SPA's index.html.
   api.all("*", (c) => c.json({ error: "not_found", message: "No such endpoint." }, 404));
 
+  // The Apple Watch Shortcut signs in with its sync key, not Access, so it's
+  // answered before the API's sign-in check. Any other method or path under
+  // it still goes through that check.
+  app.post(WATCH_SYNC_PATH, watchSync);
   app.route("/api", api);
 
   app.onError((err, c) => {

@@ -8,6 +8,7 @@ import { addDays, localDate } from "../dates";
 import type { AppEnv } from "../env";
 import { baselineOn, getUser, goalsOn, noProfile, readJson, type UserRow } from "../profile";
 import { isObject, type FieldErrors } from "../validate";
+import { watchOn } from "../watch";
 import { spokenUnits } from "./common";
 import { checkDate, DATE_ERROR, parseEntryChanges, parseNewEntries, readQuantity } from "./input";
 import { nutritionFor } from "./nutrition";
@@ -292,9 +293,10 @@ async function foodsFor(usda: UsdaDeps, rows: EntryRow[]): Promise<Map<number, F
 
 async function dayView(c: Ctx, usda: UsdaDeps, user: UserRow, date: string): Promise<DayView> {
   const db = c.env.DB;
-  const [goals, baseline, { results: rows }] = await Promise.all([
+  const [goals, baseline, watch, { results: rows }] = await Promise.all([
     goalsOn(db, user.id, date),
     baselineOn(db, user, date),
+    watchOn(db, user.id, date),
     db
       .prepare(`SELECT ${ENTRY_COLUMNS} FROM food_entries WHERE user_id = ? AND log_date = ? ORDER BY created_at, id`)
       .bind(user.id, date)
@@ -320,6 +322,7 @@ async function dayView(c: Ctx, usda: UsdaDeps, user: UserRow, date: string): Pro
       fatG: sum((n) => n.fatG),
     },
     entries,
+    watch,
   };
 }
 

@@ -100,27 +100,57 @@ const PUBLIC_POLICY_NAME = "Food Tracker: anyone (icons only)";
  */
 export const PUBLIC_FILES = ["/apple-touch-icon.png", "/icon-192.png", "/icon-512.png", "/favicon-32.png", "/icon.svg", "/manifest.webmanifest"];
 
-/** A second Access app, on just PUBLIC_FILES, that lets anyone through. More specific paths win in Access. */
-export async function ensurePublicFiles(cf, account, hostname) {
+const WATCH_APP_NAME = "Food Tracker: Apple Watch sync";
+const WATCH_POLICY_NAME = "Food Tracker: anyone (Watch sync, the app checks the key)";
+/** Where the Apple Watch Shortcut posts the day's activity (src/watch.ts WATCH_SYNC_PATH). */
+export const WATCH_SYNC_PATH = "/api/watch/sync";
+
+/**
+ * An Access app on just these paths whose policy lets anyone through. More
+ * specific paths win in Access, so the main app still covers everything else.
+ * Found by name and updated, so running it again changes nothing.
+ */
+async function ensureBypassApp(cf, account, { appName, policyName, uris }) {
   const base = `/accounts/${account}/access`;
-  const policyBody = { name: PUBLIC_POLICY_NAME, decision: "bypass", include: [{ everyone: {} }] };
+  const policyBody = { name: policyName, decision: "bypass", include: [{ everyone: {} }] };
   const policies = await cf("GET", `${base}/policies`);
-  const oldPolicy = policies.find((p) => p.name === PUBLIC_POLICY_NAME);
+  const oldPolicy = policies.find((p) => p.name === policyName);
   const policy = oldPolicy
     ? await cf("PUT", `${base}/policies/${oldPolicy.id}`, policyBody)
     : await cf("POST", `${base}/policies`, policyBody);
 
   const appBody = {
-    name: PUBLIC_APP_NAME,
+    name: appName,
     type: "self_hosted",
-    domain: `${hostname}${PUBLIC_FILES[0]}`,
-    destinations: PUBLIC_FILES.map((path) => ({ type: "public", uri: `${hostname}${path}` })),
+    domain: uris[0],
+    destinations: uris.map((uri) => ({ type: "public", uri })),
     app_launcher_visible: false,
     policies: [{ id: policy.id, precedence: 1 }],
   };
   const apps = await cf("GET", `${base}/apps`);
-  const oldApp = apps.find((a) => a.name === PUBLIC_APP_NAME);
+  const oldApp = apps.find((a) => a.name === appName);
   return oldApp ? cf("PUT", `${base}/apps/${oldApp.id}`, appBody) : cf("POST", `${base}/apps`, appBody);
+}
+
+/** The home-screen icons and manifest skip Access. */
+export function ensurePublicFiles(cf, account, hostname) {
+  return ensureBypassApp(cf, account, {
+    appName: PUBLIC_APP_NAME,
+    policyName: PUBLIC_POLICY_NAME,
+    uris: PUBLIC_FILES.map((path) => `${hostname}${path}`),
+  });
+}
+
+/**
+ * The Apple Watch Shortcut can't sign in to Access, so its one path skips it.
+ * The Worker answers that path only for a POST carrying a valid sync key.
+ */
+export function ensureWatchSync(cf, account, hostname) {
+  return ensureBypassApp(cf, account, {
+    appName: WATCH_APP_NAME,
+    policyName: WATCH_POLICY_NAME,
+    uris: [`${hostname}${WATCH_SYNC_PATH}`],
+  });
 }
 
 /** Finds or creates the D1 database and returns its id. */

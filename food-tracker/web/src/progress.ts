@@ -1,5 +1,5 @@
 // Dashboard math, kept free of DOM and Chart.js so it can be unit tested.
-import type { DaySummary, WeightEntry } from "../../src/food/types";
+import type { DaySummary, WatchDay, WeightEntry } from "../../src/food/types";
 
 export type Period = "today" | "week" | "month";
 export const PERIOD_DAYS: Record<Exclude<Period, "today">, number> = { week: 7, month: 30 };
@@ -130,6 +130,13 @@ export { shift as shiftDate };
  * (so the count doesn't vanish each morning before breakfast is logged).
  * `days` is in date order and ends on `today`.
  */
+/** Calories the Apple Watch says were burned (active plus resting), when it sent both. */
+export function watchBurned(w: WatchDay | null | undefined): number | null {
+  // A day saved on the phone before Watch sync existed has no `watch` at all.
+  if (!w || w.activeKcal == null || w.restingKcal == null) return null;
+  return w.activeKcal + w.restingKcal;
+}
+
 export function loggedStreak(days: DaySummary[], today: string): number {
   const logged = new Set(days.filter((d) => d.entries > 0).map((d) => d.date));
   let date = logged.has(today) ? today : shift(today, -1);

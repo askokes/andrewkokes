@@ -57,6 +57,26 @@ foods like any food. `web/public/_headers` now allows the camera for the app its
 shapes (`test/fixtures/usda/barcodes.json`): this session couldn't reach either API, so the first real
 scans are the live check.
 
+Apple Watch (`src/watch.ts`, `web/src/views/watch.ts`, migration 0011): Apple keeps Watch data in the
+iPhone's Health app with no web API, so an Apple Shortcut on the phone reads the day's Active Energy,
+Resting Energy and Steps (Find Health Samples, today, grouped by day) and posts them to
+`POST /api/watch/sync` with the person's sync key. Goals has an Apple Watch card: "Connect" makes the
+key (`POST /api/watch/key`; shown once, only its SHA-256 hash is kept in `users.watch_key_hash`; a new
+one replaces it, `DELETE` disconnects) and shows the steps to build the Shortcut, named "Food Sync" so
+Today's Sync now link (`shortcuts://run-shortcut?name=Food%20Sync`) can run it. The Shortcut can't sign
+in to Access, so the deploy workflow adds an Access app with a bypass policy on just that path
+(`scripts/watch-access.mjs`, run with the FOOD_INVITE_TOKEN key), and the Worker answers it before the
+API's sign-in check: a POST with a valid key and nothing else; any other method or path under it still
+needs Access. Answers are plain text so the Shortcut can show them ("Synced today: 612 active cal..."). Numbers
+are read leniently ("612 kcal", "8,412", a list is added up), filed under today in the person's time
+zone in `watch_days`, a field not sent keeps its value, and a zero never replaces a real number (a
+locked phone can read as zero). Today shows burned so far (active plus resting) and steps; Week and
+Month draw each finished day's burned as a short solid tick in the baseline's color, list it in the
+table, and the readout compares eaten with it in place of the estimate. Goals are never changed by it:
+Watch calorie counts often run high. iPhone keeps Health data locked while the phone is locked, so a
+timed automation can miss; Sync now works any time. Untested on a real phone from here; Andrew's first
+sync is the live check. Phase 6's delete account must also delete `watch_days`.
+
 Your usual foods (`GET /api/foods/usual`, `web/src/views/usual.ts`): under the Diary's food box, each
 person's most-logged foods from the last 60 days (up to 12; 4 show until "Show more"), worked out from
 their own entries, so there is nothing to set up or keep. A USDA or restaurant food is one food whatever
@@ -84,7 +104,7 @@ reduced motion).
 
 API so far: `GET/POST /api/me`, `POST /api/goals`, `POST /api/parse`, `GET /api/foods/search`,
 `GET/POST /api/entries`, `PATCH/DELETE /api/entries/:id`, `GET /api/foods/usual`, `GET /api/foods/barcode`, `GET /api/summary`, `GET/POST /api/weight`,
-`DELETE /api/weight/:id`. Shapes live in `src/food/types.ts`.
+`DELETE /api/weight/:id`, `POST/DELETE /api/watch/key`, and `POST /api/watch/sync` (sync key, no Access). Shapes live in `src/food/types.ts`.
 
 Home is a dashboard: Today / Week / Month. Week and Month show one Chart.js chart, calories stacked by
 macro on the left axis (each bar is the day's calories: what protein, carbs and fat don't account for, such as

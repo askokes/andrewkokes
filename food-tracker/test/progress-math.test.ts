@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import type { DaySummary, WeightEntry } from "../src/food/types";
-import { greeting, loggedStreak, macroCalories, movingAverage, periodStats, summarySentence } from "../web/src/progress";
+import { greeting, loggedStreak, macroCalories, movingAverage, periodStats, summarySentence, watchBurned } from "../web/src/progress";
 
 const day = (date: string, calories: number, entries = calories > 0 ? 1 : 0, proteinG = 0): DaySummary => ({
-  date, calories, proteinG, carbsG: 0, fatG: 0, entries, goal: { calories: 2000, proteinG: 120, carbsG: null, fatG: null, baselineCalories: null },
+  date, calories, proteinG, carbsG: 0, fatG: 0, entries, goal: { calories: 2000, proteinG: 120, carbsG: null, fatG: null, baselineCalories: null }, watch: null,
 });
 const w = (date: string, weightLb: number): WeightEntry => ({ id: 0, date, weightLb });
 const dates = (n: number, end = "2026-10-11") =>
@@ -100,6 +100,16 @@ describe("macroCalories", () => {
     expect(chicken.protein + chicken.fat).toBeCloseTo(281, 6);
     // 165 with macros plus a 25 cal calories-only food: 13% of the day.
     expect(macroCalories(withMacros(190, 10, 20, 5)).other).toBe(25);
+  });
+});
+
+describe("watchBurned", () => {
+  const at = "2026-10-11T03:00:00Z";
+  it("adds active and resting, only when the Watch sent both", () => {
+    expect(watchBurned({ activeKcal: 612, restingKcal: 1820, steps: 8412, syncedAt: at })).toBe(2432);
+    expect(watchBurned({ activeKcal: 612, restingKcal: null, steps: null, syncedAt: at })).toBeNull();
+    expect(watchBurned(null)).toBeNull();
+    expect(watchBurned(undefined)).toBeNull();
   });
 });
 

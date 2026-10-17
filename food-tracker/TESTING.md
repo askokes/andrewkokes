@@ -24,6 +24,21 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 - Anything you looked for and couldn't find?
 - Any food with a silly picture? Write down the food.
 
+## Apple Watch
+
+1. On **Goals**, scroll to **Apple Watch** and tap **Connect my Apple Watch**. It shows your sync key, the sync address, and the steps.
+2. Follow the steps in the **Shortcuts** app on your iPhone. Use **Copy** to bring the key and address over. Name the shortcut **Food Sync** exactly.
+3. Run it once. Allow it to read Health data and to connect. It should say "Synced today" with your active calories, resting calories and steps.
+4. Open the food app. On **Overview**, **Today** shows "___ cal burned so far" and your steps under the ring. Compare them with the Fitness app: they should be close. If steps look about double, tell Andrew.
+5. Tap **Sync now** on Today. It opens Shortcuts and runs it. Come back to the food app: the numbers update.
+6. Tomorrow, look at **Week**: yesterday has a short dark tick for what your Watch says you burned, and tapping the day says how far under or over that you ate.
+7. On **Goals**, **Make a new key** and **Disconnect** each ask first. After either, the old Shortcut says "That sync key isn't right."
+
+### Tell Andrew
+
+- Did the Shortcut steps match what you saw on your phone? Which step was confusing?
+- Did the numbers match the Fitness app?
+
 ## Scanning a package
 
 1. On **Diary**, tap the barcode button next to **Add**. The first time, your phone asks to use the camera. Tap **Allow**.

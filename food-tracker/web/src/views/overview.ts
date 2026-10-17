@@ -30,9 +30,9 @@ function savePeriod(p: Period) {
 }
 
 /** Today's totals against the goals, from the same day data the Diary uses. */
-function todayCard(today: string): HTMLElement {
+function todayCard(today: string, me: Me): HTMLElement {
   const card = el("section", { className: "card today-card", attrs: { "aria-label": "Today's totals" } });
-  const rings = todayRings();
+  const rings = todayRings({ watchConnected: () => me.watch.connected });
   const paint = (day: DayView) => {
     if (rings.node.parentNode !== card) card.replaceChildren(rings.node);
     rings.paint(day);
@@ -57,6 +57,12 @@ function todayCard(today: string): HTMLElement {
     }
   };
   load();
+  // Back from the Shortcuts app (Sync now): show what it just sent.
+  const onVisible = () => {
+    if (!card.isConnected) return document.removeEventListener("visibilitychange", onVisible);
+    if (document.visibilityState === "visible") load();
+  };
+  document.addEventListener("visibilitychange", onVisible);
   return card;
 }
 
@@ -82,7 +88,7 @@ export function overviewView({ me, go }: { me: Me; go: Go }): Node[] {
   const today = cachedDay(todayIn(me.timezone))?.today ?? todayIn(me.timezone);
   let period = savedPeriod();
   const slot = el("div", { className: "period-slot" });
-  const show = () => slot.replaceChildren(period === "today" ? todayCard(today) : progressCard({ me, period, today, go }));
+  const show = () => slot.replaceChildren(period === "today" ? todayCard(today, me) : progressCard({ me, period, today, go }));
   show();
 
   const switcher = segmented<Period>({
