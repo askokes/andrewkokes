@@ -12,6 +12,7 @@ import {
   LineController,
   LineElement,
   PointElement,
+  type ChartConfiguration,
   type ChartConfigurationCustomTypesPerDataset,
   type Plugin,
 } from "chart.js";
@@ -289,6 +290,91 @@ export function progressChart(canvas: HTMLCanvasElement, input: ChartInput) {
 
   return {
     chart,
+    /** Where the plot sits inside the canvas, so a chart under it can line its days up. */
+    gutters: () => ({ left: chart.chartArea.left, right: chart.width - chart.chartArea.right }),
+    select(index: number) {
+      selected = index;
+      chart.draw();
+    },
+    destroy: () => chart.destroy(),
+  };
+}
+
+export interface StepsInput {
+  /** Apple Watch steps each day, or null. */
+  steps: (number | null)[];
+  barThickness: number;
+  /** The calorie chart's gutters (progressChart().gutters()), so each day sits under its bar. */
+  gutters: { left: number; right: number };
+  selected: number;
+  onSelect: (index: number) => void;
+}
+
+/** "10K", "7.5K", "800". */
+const thousands = (v: number) => (v >= 1000 ? `${Math.round(v / 100) / 10}K` : String(v));
+
+/**
+ * Steps from the Apple Watch: a short bar chart of its own under the calorie
+ * chart, the days lined up with it. Its own chart, not a third scale on that
+ * one. Taps select a day in both.
+ */
+export function stepsChart(canvas: HTMLCanvasElement, input: StepsInput) {
+  let selected = input.selected;
+  const color = css("--steps");
+  const muted = css("--muted");
+  const peak = Math.max(...input.steps.map((s) => s ?? 0), 1000);
+  // Two even steps to a round top: 0, 5K, 10K.
+  const unit = peak > 10_000 ? 5000 : peak > 4000 ? 2500 : 1000;
+  const max = Math.ceil(peak / (unit * 2)) * unit * 2;
+
+  const config: ChartConfiguration<"bar", (number | null)[], string> = {
+    type: "bar",
+    data: {
+      labels: input.steps.map(() => ""),
+      datasets: [
+        {
+          label: "Steps",
+          data: input.steps,
+          backgroundColor: color,
+          hoverBackgroundColor: color,
+          maxBarThickness: input.barThickness,
+          categoryPercentage: 0.72,
+          barPercentage: 1,
+          borderRadius: { topLeft: 3, topRight: 3, bottomLeft: 0, bottomRight: 0 },
+          borderSkipped: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      events: ["click"],
+      layout: { autoPadding: false, padding: { top: 6, right: input.gutters.right, bottom: 0, left: 0 } },
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      onClick: (event, _elements, c) => {
+        const hits = c.getElementsAtEventForMode(event as unknown as Event, "index", { intersect: false }, false);
+        if (!hits.length) return;
+        selected = hits[0].index;
+        c.draw();
+        input.onSelect(selected);
+      },
+      scales: {
+        x: { offset: true, grid: { display: false }, border: { color: css("--border") }, ticks: { display: false } },
+        y: {
+          min: 0,
+          max,
+          afterFit: (axis) => void (axis.width = input.gutters.left),
+          grid: { color: css("--chart-grid") },
+          border: { display: false },
+          ticks: { color: muted, font: FONT, stepSize: max / 2, callback: (v) => thousands(Number(v)) },
+        },
+      },
+    },
+    plugins: [crosshair(() => selected) as Plugin<"bar">],
+  };
+  const chart = new Chart(canvas, config);
+  return {
     select(index: number) {
       selected = index;
       chart.draw();

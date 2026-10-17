@@ -26,6 +26,8 @@
   /* Calories the macros don't account for (typed-in calories only, alcohol): a plain neutral gray. */
   --other: #a2a8a4;
   --weight: #c45a92;
+  /* Apple Watch steps, a chart of their own (validated with the macro colors). */
+  --steps: #4a8fd6;
   --goal-line: #858d88;
   /* What the user burns on a normal day: a dashed line, darker than the goal so the two read apart. */
   --baseline: #4a524d;
@@ -656,6 +658,8 @@ dialog.scanner::backdrop { background: var(--bg); }
 /* The plot height includes the x-axis labels, so the card never scrolls inside itself. */
 .plot { position: relative; height: 230px; }
 .plot canvas { cursor: pointer; }
+.plot.steps-plot { height: 72px; }
+.steps-units { margin-top: 6px; }
 .table-wrap { overflow-x: auto; }
 .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
 .data-table th, .data-table td { padding: 6px 4px; text-align: right; border-top: 1px solid var(--border); white-space: nowrap; }

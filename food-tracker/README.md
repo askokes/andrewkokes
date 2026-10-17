@@ -72,7 +72,10 @@ are read leniently ("612 kcal", "8,412", a list is added up), filed under today 
 zone in `watch_days`, a field not sent keeps its value, and a zero never replaces a real number (a
 locked phone can read as zero). Today shows burned so far (active plus resting) and steps; Week and
 Month draw each finished day's burned as a short solid tick in the baseline's color, list it in the
-table, and the readout compares eaten with it in place of the estimate. Goals are never changed by it:
+table, and the readout compares eaten with it in place of the estimate. Steps get a short bar chart of
+their own under the calorie chart (`stepsChart` in `web/src/chart.ts`, `--steps` blue, validated with the
+macro colors), its days lined up with the bars above and a tap selecting the day in both, since a third
+scale on the combined chart would be unreadable; the table lists them too. Goals are never changed by it:
 Watch calorie counts often run high. iPhone keeps Health data locked while the phone is locked, so a
 timed automation can miss; Sync now works any time. Untested on a real phone from here; Andrew's first
 sync is the live check. Phase 6's delete account must also delete `watch_days`.

@@ -1,6 +1,6 @@
 import type { DaySummary, SummaryResponse, WeightEntry, WeightResponse } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
-import { progressChart } from "../chart";
+import { progressChart, stepsChart } from "../chart";
 import { el } from "../dom";
 import { dayPath, whole } from "../food";
 import type { Go } from "../nav";
@@ -43,7 +43,8 @@ function key(kind: "swatch" | "line" | "dash" | "dot" | "tick", color: string, t
 
 function table(days: DaySummary[], averages: (number | null)[], weighIns: (number | null)[], showWeight: boolean) {
   const showBurned = days.some((d) => watchBurned(d.watch) !== null);
-  const head = ["Day", "Cal", "Protein", "Carbs", "Fat", ...(showBurned ? ["Burned"] : []), ...(showWeight ? ["Weight"] : [])];
+  const showSteps = days.some((d) => d.watch?.steps != null);
+  const head = ["Day", "Cal", "Protein", "Carbs", "Fat", ...(showBurned ? ["Burned"] : []), ...(showSteps ? ["Steps"] : []), ...(showWeight ? ["Weight"] : [])];
   return el(
     "div",
     { className: "table-wrap" },
@@ -64,13 +65,16 @@ function table(days: DaySummary[], averages: (number | null)[], weighIns: (numbe
             d.entries ? `${whole(d.carbsG)} g` : "",
             d.entries ? `${whole(d.fatG)} g` : "",
             ...(showBurned ? [watchBurned(d.watch) === null ? "" : whole(watchBurned(d.watch)!)] : []),
+            ...(showSteps ? [d.watch?.steps == null ? "" : whole(d.watch.steps)] : []),
             ...(showWeight ? [weight] : []),
           ];
           return el("tr", {}, el("th", { scope: "row", textContent: cells[0] }), ...cells.slice(1).map((c) => el("td", { textContent: c })));
         }),
       ),
     ),
-    showBurned ? el("p", { className: "hint", textContent: "Burned is what your Apple Watch synced: active plus resting calories." }) : null,
+    showBurned || showSteps
+      ? el("p", { className: "hint", textContent: `${showBurned ? "Burned (active plus resting calories)" : "Steps"}${showBurned && showSteps ? " and steps" : ""} come from your Apple Watch.` })
+      : null,
     showWeight ? el("p", { className: "hint", textContent: "Weight in parentheses is the 7-day average on a day without a weigh-in." }) : null,
   );
 }
@@ -93,8 +97,10 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
     const weighIns = dates.map((d) => (showWeight ? byDate.get(d) ?? null : null));
     const stats = periodStats(days, averages);
     const slices = days.map(macroCalories);
-    // Watch calories for finished days only: today's are still adding up.
+    // Watch calories for finished days only: today's are still adding up. Steps show today's so far, like the bars.
     const burned = days.map((d) => (d.date < today ? watchBurned(d.watch) : null));
+    const steps = days.map((d) => d.watch?.steps ?? null);
+    const hasSteps = steps.some((s) => s !== null);
     let selected = days.length - 1;
 
     const third = showWeight
@@ -168,6 +174,15 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
       attrs: { role: "img", "aria-label": `Calories by macro${showWeight ? " and weight" : ""}, ${period === "week" ? "last 7 days" : "last 30 days"}. ${summarySentence(stats, period, showWeight)}` },
     });
     const plot = el("div", { className: "plot" }, canvas);
+    const stepsCanvas = hasSteps
+      ? el("canvas", { attrs: { role: "img", "aria-label": `Steps from your Apple Watch, ${period === "week" ? "last 7 days" : "last 30 days"}. The table lists each day.` } })
+      : null;
+    const stepsPlot = stepsCanvas
+      ? [
+          el("div", { className: "axis-units steps-units", attrs: { "aria-hidden": "true" } }, el("span", { textContent: "steps" })),
+          el("div", { className: "plot steps-plot" }, stepsCanvas),
+        ]
+      : [];
     const tableSlot = el("div");
     const toggle = el("button", { type: "button", className: "text-button", textContent: showTable ? "Hide table" : "Show as table" });
     const paintTable = () => {
@@ -185,6 +200,7 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
       el("h2", { className: "chart-title", textContent: showWeight ? "Calories and weight" : "Calories by macro" }),
       units,
       plot,
+      ...stepsPlot,
       legend,
       readout,
       el(
@@ -202,7 +218,7 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
     // Chart.js needs the canvas in the page to size it.
     requestAnimationFrame(() => {
       if (!canvas.isConnected) return;
-      live = progressChart(canvas, {
+      const main = progressChart(canvas, {
         days,
         averages,
         weighIns,
@@ -213,11 +229,25 @@ export function progressCard(opts: { me: Me; period: Range; today: string; go: G
         ),
         barThickness: period === "week" ? 24 : 8,
         selected,
-        onSelect: (i) => {
-          selected = i;
-          paintReadout();
-        },
+        onSelect: (i) => select(i),
       });
+      const stepsLive = stepsCanvas
+        ? stepsChart(stepsCanvas, {
+            steps,
+            barThickness: period === "week" ? 24 : 8,
+            gutters: main.gutters(),
+            selected,
+            onSelect: (i) => select(i),
+          })
+        : null;
+      // A tap on either chart selects the day in both.
+      function select(i: number) {
+        selected = i;
+        main.select(i);
+        stepsLive?.select(i);
+        paintReadout();
+      }
+      live = { destroy: () => (main.destroy(), stepsLive?.destroy()) };
     });
   };
 

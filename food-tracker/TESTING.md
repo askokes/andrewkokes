@@ -31,7 +31,7 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 3. Run it once. Allow it to read Health data and to connect. It should say "Synced today" with your active calories, resting calories and steps.
 4. Open the food app. On **Overview**, **Today** shows "___ cal burned so far" and your steps under the ring. Compare them with the Fitness app: they should be close. If steps look about double, tell Andrew.
 5. Tap **Sync now** on Today. It opens Shortcuts and runs it. Come back to the food app: the numbers update.
-6. Tomorrow, look at **Week**: yesterday has a short dark tick for what your Watch says you burned, and tapping the day says how far under or over that you ate.
+6. Tomorrow, look at **Week**: yesterday has a short dark tick for what your Watch says you burned, and tapping the day says how far under or over that you ate. Under the calorie chart, a small blue chart shows your steps each day, lined up with the days above. Tap a day in either chart and both follow.
 7. On **Goals**, **Make a new key** and **Disconnect** each ask first. After either, the old Shortcut says "That sync key isn't right."
 
 ### Tell Andrew
