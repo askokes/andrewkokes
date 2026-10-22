@@ -212,3 +212,16 @@ Use your phone. Try it once on cellular and once on Wi-Fi if you can.
 - Did every step above match? If not, which number?
 - How long did the code email take to arrive?
 - Anything confusing on any screen?
+
+## Your meals today and food balance
+
+1. Open **Overview** on **Today**. Under the rings, **Your meals today** lists Breakfast, Lunch, Dinner and Snack, each with what you had and its calories. A meal with nothing yet shows **Nothing yet** and a solid green **+**.
+2. Tap a meal. The **Diary** opens with the food box ready, and **Your usual foods** starts on that meal. Log something: it goes into that meal.
+3. Under it, **Food balance** shows a bar split into **Light** (green), **Moderate** (gold) and **Rich** (orange), with the percent of today's calories in each and one short sentence. Light foods fill you up for fewer calories. Nothing is ever called bad.
+4. On **Diary**, each food's picture has a thin ring in the same color.
+5. Restaurant items with no weight (McDonald's, Panera, Jersey Mike's) aren't counted in the balance, and a note says how many calories that leaves out.
+
+### Tell Andrew
+
+- Does any food land in a color that feels wrong? Write down the food.
+- Does the sentence under the balance feel helpful or naggy?

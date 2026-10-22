@@ -41,6 +41,14 @@ follows the weight; the Week / Month sentence compares the average to it, and To
 under it the day is, so a goal set below it never hides eating above it. The typed-in
 `goals.baseline_calories` from migration 0007 is no longer read.
 
+Food balance (`web/src/balance.ts`, `web/src/views/todayExtras.ts`): Overview's Today shows **Your meals
+today** (each meal with its foods and calories, a + that opens the Diary on that meal with the food box
+focused) and **Food balance**, the day's calories split by energy density: light under 1 cal/g, moderate
+1 to 2.4, rich over 2.4. Drinks with calories count as moderate at least, since water makes them look
+light by weight. Foods with no weight are left out and noted. Diary rows carry the same color as a ring on
+the food's picture, with the band in screen-reader text. The sentence only ever nudges toward more light
+foods; nothing is red or called bad.
+
 Barcodes (`src/food/barcode.ts`, `src/food/gtin.ts`, `web/src/views/scanner.ts`): the barcode button next
 to the Diary's food box opens the back camera full screen and reads UPC, EAN and the GS1 QR codes newer
 packages carry (a QR code that's only a link is ignored), or takes the number typed in. Phones with a

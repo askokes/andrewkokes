@@ -7,6 +7,7 @@ import { greeting, loggedStreak, shiftDate, type Period } from "../progress";
 import { progressCard, weighInCard } from "./dashboard";
 import { cachedDay, rememberDay } from "./diary";
 import { todayRings } from "./summary";
+import { balanceCard, mealsCard } from "./todayExtras";
 
 const PERIOD_KEY = "food.period";
 
@@ -29,13 +30,19 @@ function savePeriod(p: Period) {
   }
 }
 
-/** Today's totals against the goals, from the same day data the Diary uses. */
-function todayCard(today: string, me: Me): HTMLElement {
+/** Today's totals against the goals, the day's meals and its food balance, from the same day data the Diary uses. */
+function todayCard(today: string, me: Me, go: Go): HTMLElement {
   const card = el("section", { className: "card today-card", attrs: { "aria-label": "Today's totals" } });
   const rings = todayRings({ watchConnected: () => me.watch.connected });
+  const meals = mealsCard(go);
+  const balance = balanceCard();
+  meals.node.hidden = true;
   const paint = (day: DayView) => {
     if (rings.node.parentNode !== card) card.replaceChildren(rings.node);
     rings.paint(day);
+    meals.node.hidden = false;
+    meals.paint(day);
+    balance.paint(day);
   };
   const load = async () => {
     const cached = cachedDay(today);
@@ -63,7 +70,7 @@ function todayCard(today: string, me: Me): HTMLElement {
     if (document.visibilityState === "visible") load();
   };
   document.addEventListener("visibilitychange", onVisible);
-  return card;
+  return el("div", { className: "stack" }, card, meals.node, balance.node);
 }
 
 /** How far back the days-in-a-row count looks; longer shows as "60+". */
@@ -88,7 +95,7 @@ export function overviewView({ me, go }: { me: Me; go: Go }): Node[] {
   const today = cachedDay(todayIn(me.timezone))?.today ?? todayIn(me.timezone);
   let period = savedPeriod();
   const slot = el("div", { className: "period-slot" });
-  const show = () => slot.replaceChildren(period === "today" ? todayCard(today, me) : progressCard({ me, period, today, go }));
+  const show = () => slot.replaceChildren(period === "today" ? todayCard(today, me, go) : progressCard({ me, period, today, go }));
   show();
 
   const switcher = segmented<Period>({

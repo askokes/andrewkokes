@@ -33,6 +33,10 @@
   --baseline: #4a524d;
   --chart-grid: #edefeb;
   --chart-cross: #858d88;
+  /* Food balance (balance.ts): calories per gram. Each at least 3:1 on white; never red. */
+  --light: #3f9a5c;
+  --moderate: #b98a12;
+  --rich: #cf6a3c;
   color-scheme: light;
 }
 
@@ -850,3 +854,53 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 .button-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .button-row .button { flex: 1 1 auto; }
 .people { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.95rem; overflow-wrap: anywhere; }
+
+/* Diary: a colored edge on each food's picture for light, moderate or rich (balance.ts). */
+.food-emoji.band-light { box-shadow: inset 0 0 0 2.5px var(--light); }
+.food-emoji.band-moderate { box-shadow: inset 0 0 0 2.5px var(--moderate); }
+.food-emoji.band-rich { box-shadow: inset 0 0 0 2.5px var(--rich); }
+
+/* Overview: your meals today, one row per meal with a + to log it. */
+.meals-card { display: flex; flex-direction: column; gap: 6px; padding-bottom: 8px; }
+.meal-list { list-style: none; margin: 0 -8px; padding: 0; }
+.meal-list li + li { border-top: 1px solid var(--border); }
+.meal-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 8px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.meal-row:active { background: var(--track); }
+.meal-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.meal-row-emoji { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--track); font-size: 1.25rem; filter: grayscale(0.6); opacity: 0.8; }
+.meal-row.logged .meal-row-emoji { background: var(--note-bg); filter: none; opacity: 1; }
+.meal-row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.meal-row-name { font-weight: 600; line-height: 1.3; }
+.meal-row-what { color: var(--muted); font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.meal-row-cal { flex: none; font-weight: 600; white-space: nowrap; }
+.meal-row-add { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--note-bg); color: var(--accent); }
+.meal-row:not(.logged) .meal-row-add { background: var(--accent); color: var(--accent-text); }
+.meal-row-add .icon { width: 20px; height: 20px; stroke-width: 2.6; }
+
+/* Overview: food balance, a split bar and a key. */
+.balance-card { display: flex; flex-direction: column; gap: 12px; }
+.balance-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.balance-bar { display: flex; gap: 3px; height: 14px; border-radius: 999px; overflow: hidden; background: var(--track); }
+.balance-seg { min-width: 6px; transition: flex-grow 0.6s ease; }
+.balance-keys { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.balance-keys li { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.balance-dot { flex: none; width: 12px; height: 12px; border-radius: 50%; }
+.balance-key-text { flex: 1; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 8px; min-width: 0; font-size: 0.95rem; line-height: 1.35; }
+.balance-example { color: var(--muted); font-size: 0.85rem; }
+.balance-pct { flex: none; font-weight: 700; font-variant-numeric: tabular-nums; }
+.balance-sentence { font-size: 0.95rem; padding: 10px 12px; border-radius: 12px; background: var(--note-bg); text-wrap: pretty; }
+@media (prefers-reduced-motion: reduce) { .balance-seg { transition: none; } }

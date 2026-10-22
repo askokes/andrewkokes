@@ -13,7 +13,7 @@ import {
   macroText,
   MEAL_LABELS,
   MEAL_ORDER,
-  mealForTime,
+  preferredMeal,
   nutritionFor,
   parseQuantity,
   sortUnits,
@@ -583,7 +583,7 @@ function itemCard(item: ParseItemResult, changed: () => void) {
 }
 
 export function confirmView({ parsed, text, date, today, onCancel, onAdded }: ConfirmOpts): Node[] {
-  let meal: Meal = parsed.meal ?? mealForTime();
+  let meal: Meal = parsed.meal ?? preferredMeal();
   let saving = false;
 
   const footMsg = el("p", { className: "form-msg", attrs: { role: "alert" } });

@@ -2,6 +2,7 @@ import type { BarcodeResponse, DayView, EntryView, Meal, ParseResponse } from ".
 import { api, ApiError, type Me } from "../api";
 import { el, formatDay, icon } from "../dom";
 import { confetti } from "../confetti";
+import { bandFor } from "../balance";
 import { foodEmoji, MEAL_EMOJI, OTHER_MEAL_EMOJI } from "../emoji";
 import { addDays, amountText, dayPath, dayTitle, friendlyName, fullDate, MEAL_LABELS, MEAL_ORDER, todayIn, whole } from "../food";
 import type { Go } from "../nav";
@@ -90,15 +91,22 @@ interface DiaryOpts {
 }
 
 function entryRow(entry: EntryView, onTap: (entry: EntryView) => void, highlight: { ids: Set<number>; at: number } | null) {
+  // Light, moderate or rich (balance.ts): a colored edge on the food's picture.
+  const band = bandFor(entry);
   const button = el(
     "button",
     { type: "button", className: "entry", dataset: { id: String(entry.id) } },
-    el("span", { className: "food-emoji", textContent: foodEmoji(entry.foodName, entry.usdaName), attrs: { "aria-hidden": "true" } }),
+    el("span", { className: `food-emoji${band ? ` band-${band}` : ""}`, textContent: foodEmoji(entry.foodName, entry.usdaName), attrs: { "aria-hidden": "true" } }),
     el(
       "span",
       { className: "entry-main" },
       el("span", { className: "entry-name", textContent: friendlyName(entry.foodName) }),
-      el("span", { className: "entry-amount", textContent: amountText(entry.quantity, entry.unitLabel) }),
+      el(
+        "span",
+        { className: "entry-amount" },
+        amountText(entry.quantity, entry.unitLabel),
+        band ? el("span", { className: "sr-only", textContent: `, ${band} food` }) : null,
+      ),
     ),
     el("span", { className: "entry-cal" }, whole(entry.nutrition.calories), el("span", { className: "unit", textContent: " cal" })),
     icon("chevron"),

@@ -2,7 +2,7 @@ import type { CreateEntriesBody, DayView, Meal, UsualFood, UsualResponse } from 
 import { api, ApiError } from "../api";
 import { el, icon, segmented } from "../dom";
 import { foodEmoji } from "../emoji";
-import { amountText, friendlyName, MEAL_LABELS, MEAL_ORDER, mealForTime, whole } from "../food";
+import { amountText, friendlyName, MEAL_LABELS, MEAL_ORDER, preferredMeal, whole } from "../food";
 
 /** Foods shown before "Show more". */
 const SHOWN = 4;
@@ -28,7 +28,7 @@ const errorText = (err: unknown) => (err instanceof ApiError ? err.message : "So
  */
 export function usualCard({ date, onDay }: UsualOpts): HTMLElement {
   let foods = cached ?? [];
-  let meal: Meal = mealForTime();
+  let meal: Meal = preferredMeal();
   let expanded = false;
   let msgTimer: ReturnType<typeof setTimeout> | undefined;
 

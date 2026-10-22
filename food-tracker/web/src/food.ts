@@ -138,6 +138,21 @@ export function mealForTime(now = new Date()): Meal {
   return "snack";
 }
 
+// A meal picked on Overview ("Add" next to Dinner), so the Diary's usual foods and the confirm screen
+// start on it. Kept for a few minutes only, then the clock decides again.
+let picked: { meal: Meal; at: number } | null = null;
+const PICK_MS = 10 * 60 * 1000;
+
+export function pickMeal(meal: Meal) {
+  picked = { meal, at: Date.now() };
+}
+
+/** The meal just picked on Overview, or the clock's. */
+export function preferredMeal(now = new Date()): Meal {
+  if (picked && now.getTime() - picked.at < PICK_MS) return picked.meal;
+  return mealForTime(now);
+}
+
 /** Today's date (YYYY-MM-DD) in the user's time zone. */
 export function todayIn(timeZone: string) {
   try {
