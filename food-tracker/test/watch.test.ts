@@ -74,8 +74,14 @@ describe("parseSync", () => {
     expect(parseSync("text")).toMatchObject({ ok: false, status: 400 });
   });
 
+  it("reads yesterday's fields too, and names the one that's wrong", () => {
+    const key = "k".repeat(32);
+    expect(parseSync({ key, yesterday_steps: "8,488" })).toEqual({ ok: true, key, values: {}, yesterday: { steps: 8488 } });
+    expect(parseSync({ key, yesterday_active: "lots" })).toMatchObject({ ok: false, status: 400, message: "The yesterday_active field should be a number, like 612." });
+  });
+
   it("rounds, skips what wasn't sent, and says which field is wrong", () => {
-    expect(parseSync({ key, active: "612.6 kcal", steps: "" })).toEqual({ ok: true, key, values: { active: 613 } });
+    expect(parseSync({ key, active: "612.6 kcal", steps: "" })).toEqual({ ok: true, key, values: { active: 613 }, yesterday: {} });
     expect(parseSync({ key, steps: "lots" })).toMatchObject({ ok: false, message: expect.stringContaining("steps field should be a number") });
     expect(parseSync({ key, resting: 9000 })).toMatchObject({ ok: false, message: expect.stringContaining("9,000 resting calories is more than a day can hold") });
     expect(parseSync({ key })).toMatchObject({ ok: false, message: expect.stringContaining("named active, resting and steps") });
@@ -115,6 +121,35 @@ describe("Apple Watch sync", () => {
     const summary = await (await as(email, "GET", `/api/summary?from=${addDays(today(), -1)}&to=${today()}`)).json<SummaryResponse>();
     expect(summary.days[0].watch).toBeNull();
     expect(summary.days[1].watch).toMatchObject({ activeKcal: 612, restingKcal: 1820, steps: 8412 });
+  });
+
+  it("files yesterday's whole day under yesterday, so a missed or early-ending day fills in", async () => {
+    const email = await signUp();
+    const { key } = await connect(email);
+    const yesterday = addDays(today(), -1);
+    const summary = async () =>
+      (await (await as(email, "GET", `/api/summary?from=${yesterday}&to=${today()}`)).json<SummaryResponse>()).days;
+
+    // Last night's sync stopped early in the evening.
+    const user = await env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email).first<{ id: number }>();
+    await env.DB.prepare("INSERT INTO watch_days (user_id, log_date, active_kcal, resting_kcal, steps, synced_at) VALUES (?, ?, 200, 1100, 3000, ?)")
+      .bind(user!.id, yesterday, new Date().toISOString())
+      .run();
+
+    const res = await sync({ key, active: 40, resting: 500, steps: 600, yesterday_active: "707 kcal", yesterday_resting: 2548, yesterday_steps: "8,488" });
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe("Synced today: 40 active cal, 500 resting cal, 600 steps. Yesterday: 707 active cal, 2,548 resting cal, 8,488 steps.");
+    const [y, t] = await summary();
+    expect(y.watch).toMatchObject({ activeKcal: 707, restingKcal: 2548, steps: 8488 });
+    expect(t.watch).toMatchObject({ activeKcal: 40, restingKcal: 500, steps: 600 });
+
+    // A day with no sync at all comes back from yesterday's fields alone.
+    const other = await signUp();
+    const k2 = (await connect(other)).key;
+    expect(await (await sync({ key: k2, yesterday_steps: 5000 })).text()).toBe("Yesterday: 5,000 steps.");
+    const days = (await (await as(other, "GET", `/api/summary?from=${yesterday}&to=${today()}`)).json<SummaryResponse>()).days;
+    expect(days[0].watch).toMatchObject({ steps: 5000 });
+    expect(days[1].watch).toBeNull();
   });
 
   it("files the sync under today in the person's own time zone", async () => {

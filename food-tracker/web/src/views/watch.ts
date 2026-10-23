@@ -56,17 +56,34 @@ function setupSteps(host: string) {
     step("Add the action ", ["Find Health Samples"], ". Set Type to ", ["Active Energy"], ", Start Date to ", ["is today"], ", and Group By to ", ["Day"], "."),
     step("Add ", ["Find Health Samples"], " again the same way, for ", ["Resting Energy"], "."),
     step("Add it a third time, for ", ["Steps"], "."),
+    step("Now yesterday, so a day you didn't sync, or last synced before bed, still fills in. Add ", ["Adjust Date"], ", set to ", ["Get Start of Day"], " of ", ["Current Date"], ". That's midnight this morning."),
+    step("Add ", ["Adjust Date"], " again: ", ["Subtract"], " 1 day from the Adjusted Date above. That's midnight yesterday."),
+    step(
+      "Add ",
+      ["Find Health Samples"],
+      " three more times, for Active Energy, Resting Energy and Steps. This time set Start Date to ",
+      ["is between"],
+      ", from the second Adjusted Date (yesterday) to the first (this morning), and Group By ",
+      ["Day"],
+      ".",
+    ),
     step("Add ", ["Get Contents of URL"], ". Paste the sync address as the URL. Tap the arrow to show more, then set Method to ", ["POST"], " and Request Body to ", ["JSON"], "."),
     step(
-      "Add four fields. ",
+      "Add seven fields. ",
       ["key"],
       " (Text): paste your sync key. ",
       ["active"],
-      " (Number): tap the value and pick the first Health Samples. ",
+      ", ",
       ["resting"],
-      " (Number): the second. ",
+      " and ",
       ["steps"],
-      " (Number): the third.",
+      " (Number): tap each value and pick today's Health Samples, in that order. ",
+      ["yesterday_active"],
+      ", ",
+      ["yesterday_resting"],
+      " and ",
+      ["yesterday_steps"],
+      " (Number): yesterday's three.",
     ),
     step("Optional: add ", ["Show Notification"], " with ", ["Contents of URL"], " in it, so you see what synced."),
     step("Tap ▶ to run it. Allow it to read your Health data and to connect to ", [host], ". It should say “Synced today” with your numbers."),
@@ -77,11 +94,11 @@ function setupSteps(host: string) {
       ["+"],
       ", pick ",
       ["Time of Day"],
-      " (say 9 pm, daily), choose ",
+      " (say 7 am, daily), choose ",
       ["Run Immediately"],
       ", and pick ",
       [SHORTCUT_NAME],
-      ". iPhone locks Health data while the phone is locked, so a run then gets skipped. The Sync button on Today works any time.",
+      ". Each run also sends yesterday, so once a day covers the day before in full. iPhone locks Health data while the phone is locked, so a run then gets skipped. The Sync button on Today works any time.",
     ),
   );
 }
@@ -165,7 +182,13 @@ export function watchCard(me: Me): HTMLElement {
     });
     const off = el("button", { type: "button", className: "button secondary", textContent: "Disconnect" });
     off.addEventListener("click", () => disconnect(off));
-    const steps = el("details", { className: "watch-help" }, el("summary", { textContent: "How to build the Shortcut" }), setupSteps(host));
+    const steps = el(
+      "details",
+      { className: "watch-help" },
+      el("summary", { textContent: "How to build the Shortcut" }),
+      el("p", { className: "hint", textContent: "Built it before October 23? Add steps 5 to 7 and the three yesterday fields, so a missed day fills in." }),
+      setupSteps(host),
+    );
     card.replaceChildren(
       head(),
       el("p", {}, status.lastSync ? `Connected. Last synced ${syncedWhen(status.lastSync)}.` : "Connected. Nothing has synced yet. Run the Shortcut once to check it works."),

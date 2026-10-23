@@ -7,7 +7,7 @@
 // so the key is all the sign-in it has: random, shown once, and stored only as
 // a SHA-256 hash. It can add a day's activity and nothing else.
 import { Hono, type Context } from "hono";
-import { localDate } from "./dates";
+import { addDays, localDate } from "./dates";
 import type { AppEnv } from "./env";
 import type { WatchDay, WatchKeyResponse, WatchStatus } from "./food/types";
 import { getUser, noProfile, type UserRow } from "./profile";
@@ -60,7 +60,8 @@ export function readAmount(raw: unknown): number | undefined {
   return total;
 }
 
-type SyncInput = { ok: true; key: string; values: Partial<Record<Field, number>> } | { ok: false; status: 400 | 401; message: string };
+type Values = Partial<Record<Field, number>>;
+type SyncInput = { ok: true; key: string; values: Values; yesterday: Values } | { ok: false; status: 400 | 401; message: string };
 
 export function parseSync(body: unknown): SyncInput {
   if (!isObject(body)) return { ok: false, status: 400, message: "The Shortcut didn't send JSON. Set its Request Body to JSON." };
@@ -68,26 +69,37 @@ export function parseSync(body: unknown): SyncInput {
   if (!/^[A-Za-z0-9_-]{20,64}$/.test(key)) {
     return { ok: false, status: 401, message: "The Shortcut needs your sync key in a field named key. It's on the Goals tab under Apple Watch." };
   }
-  const values: Partial<Record<Field, number>> = {};
-  for (const field of Object.keys(WATCH_LIMITS) as Field[]) {
-    const n = readAmount(body[field]);
-    if (n === undefined) continue;
-    if (Number.isNaN(n)) return { ok: false, status: 400, message: `The ${field} field should be a number, like ${field === "steps" ? "8412" : "612"}.` };
-    if (n > WATCH_LIMITS[field]) return { ok: false, status: 400, message: `${Math.round(n).toLocaleString("en-US")} ${LABELS[field]} is more than a day can hold. Check the Shortcut's ${field} field.` };
-    values[field] = Math.round(n);
+  // Today's totals so far, and (optionally) yesterday's whole day in yesterday_active and so on, so a
+  // day the Shortcut didn't run, or last ran before bedtime, still ends up complete.
+  const values: Values = {};
+  const yesterday: Values = {};
+  for (const [prefix, into] of [["", values], ["yesterday_", yesterday]] as const) {
+    for (const f of Object.keys(WATCH_LIMITS) as Field[]) {
+      const field = `${prefix}${f}`;
+      const n = readAmount(body[field]);
+      if (n === undefined) continue;
+      if (Number.isNaN(n)) return { ok: false, status: 400, message: `The ${field} field should be a number, like ${f === "steps" ? "8412" : "612"}.` };
+      if (n > WATCH_LIMITS[f]) return { ok: false, status: 400, message: `${Math.round(n).toLocaleString("en-US")} ${LABELS[f]} is more than a day can hold. Check the Shortcut's ${field} field.` };
+      into[f] = Math.round(n);
+    }
   }
-  if (!Object.keys(values).length) {
+  if (!Object.keys(values).length && !Object.keys(yesterday).length) {
     return { ok: false, status: 400, message: "Nothing to sync. The Shortcut's fields should be named active, resting and steps." };
   }
-  return { ok: true, key, values };
+  return { ok: true, key, values, yesterday };
 }
 
 /** The line the Shortcut can show when it's done. */
-export function syncedText(values: Partial<Record<Field, number>>) {
-  const parts = (Object.keys(WATCH_LIMITS) as Field[])
-    .filter((f) => values[f] !== undefined)
-    .map((f) => `${values[f]!.toLocaleString("en-US")} ${f === "steps" ? "steps" : `${f} cal`}`);
-  return `Synced today: ${parts.join(", ")}.`;
+export function syncedText(values: Values, yesterday: Values = {}) {
+  const list = (v: Values) =>
+    (Object.keys(WATCH_LIMITS) as Field[])
+      .filter((f) => v[f] !== undefined)
+      .map((f) => `${v[f]!.toLocaleString("en-US")} ${f === "steps" ? "steps" : `${f} cal`}`)
+      .join(", ");
+  const lines = [];
+  if (Object.keys(values).length) lines.push(`Synced today: ${list(values)}.`);
+  if (Object.keys(yesterday).length) lines.push(`Yesterday: ${list(yesterday)}.`);
+  return lines.join(" ");
 }
 
 /**
@@ -116,21 +128,28 @@ export async function watchSync(c: Context<AppEnv>) {
     .first<{ id: number; timezone: string }>();
   if (!user) return c.text("That sync key isn't right. Make a new one on the Goals tab under Apple Watch and paste it into the Shortcut.", 401);
 
-  const v = input.values;
   // A field that wasn't sent keeps what it had. A zero never replaces a real
   // number: that's what an unreadable Health app gives, and the day's totals
   // only ever go up.
   const keep = (col: string) =>
     `${col} = CASE WHEN excluded.${col} IS NULL OR (excluded.${col} = 0 AND ${col} > 0) THEN ${col} ELSE excluded.${col} END`;
-  await db
-    .prepare(
-      `INSERT INTO watch_days (user_id, log_date, active_kcal, resting_kcal, steps, synced_at) VALUES (?, ?, ?, ?, ?, ?)
-       ON CONFLICT(user_id, log_date) DO UPDATE SET
-         ${keep("active_kcal")}, ${keep("resting_kcal")}, ${keep("steps")}, synced_at = excluded.synced_at`,
-    )
-    .bind(user.id, localDate(user.timezone), v.active ?? null, v.resting ?? null, v.steps ?? null, new Date().toISOString())
-    .run();
-  return c.text(syncedText(v));
+  const upsert = db.prepare(
+    `INSERT INTO watch_days (user_id, log_date, active_kcal, resting_kcal, steps, synced_at) VALUES (?, ?, ?, ?, ?, ?)
+     ON CONFLICT(user_id, log_date) DO UPDATE SET
+       ${keep("active_kcal")}, ${keep("resting_kcal")}, ${keep("steps")}, synced_at = excluded.synced_at`,
+  );
+  const today = localDate(user.timezone);
+  const now = new Date().toISOString();
+  const writes = [
+    [today, input.values],
+    [addDays(today, -1), input.yesterday],
+  ] as const;
+  await db.batch(
+    writes
+      .filter(([, v]) => Object.keys(v).length > 0)
+      .map(([date, v]) => upsert.bind(user.id, date, v.active ?? null, v.resting ?? null, v.steps ?? null, now)),
+  );
+  return c.text(syncedText(input.values, input.yesterday));
 }
 
 interface WatchRow {

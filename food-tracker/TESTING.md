@@ -34,6 +34,13 @@ Type the address exactly as **food.pivotaiglobal.com**, with nothing after "com"
 6. Tomorrow, look at **Week**: yesterday has a short dark tick for what your Watch says you burned, and tapping the day says how far under or over that you ate. Under the calorie chart, a small blue chart shows your steps each day, lined up with the days above. Tap a day in either chart and both follow.
 7. On **Goals**, **Make a new key** and **Disconnect** each ask first. After either, the old Shortcut says "That sync key isn't right."
 
+### Catching up a missed day
+
+If you built the Shortcut before October 23, open **Goals > Apple Watch > How to build the Shortcut** and add steps 5 to 7 and the three **yesterday_** fields.
+
+1. Run it. It should say "Synced today: ..." and then "Yesterday: ..." with yesterday's full numbers.
+2. On **Overview**, tap **Week**. Yesterday's bar has its burned tick and steps, even if you never synced yesterday.
+
 ### Tell Andrew
 
 - Did the Shortcut steps match what you saw on your phone? Which step was confusing?

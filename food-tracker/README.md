@@ -77,7 +77,9 @@ in to Access, so the deploy workflow adds an Access app with a bypass policy on 
 API's sign-in check: a POST with a valid key and nothing else; any other method or path under it still
 needs Access. Answers are plain text so the Shortcut can show them ("Synced today: 612 active cal..."). Numbers
 are read leniently ("612 kcal", "8,412", a list is added up), filed under today in the person's time
-zone in `watch_days`, a field not sent keeps its value, and a zero never replaces a real number (a
+zone in `watch_days`. The Shortcut also sends yesterday's whole day (`yesterday_active`, `yesterday_resting`,
+`yesterday_steps`, Find Health Samples between midnight yesterday and midnight today), filed under yesterday,
+so a day with no sync, or a last sync before bed, still ends up complete. A field not sent keeps its value, and a zero never replaces a real number (a
 locked phone can read as zero). Today shows burned so far (active plus resting) and steps; Week and
 Month draw each finished day's burned as a short solid tick in the baseline's color, list it in the
 table, and the readout compares eaten with it in place of the estimate. Steps get a short bar chart of
