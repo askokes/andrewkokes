@@ -51,8 +51,33 @@ export class ApiError extends Error {
   }
 }
 
+/** How long a request may take before the app gives up and says so, instead of waiting forever. */
+const TIMEOUT_MS = 20_000;
+/** When the app last reloaded to renew the sign-in, so a reload that doesn't help can't repeat forever. */
+const SIGNIN_KEY = "food.signinReload";
+const SIGNIN_WINDOW_MS = 60_000;
+
+function lastSigninReload(): number {
+  try {
+    return Number(sessionStorage.getItem(SIGNIN_KEY)) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** The app loaded fine: a later lapse may reload again. */
+export function signinWorked() {
+  try {
+    sessionStorage.removeItem(SIGNIN_KEY);
+  } catch {
+    // Storage blocked: nothing was saved either.
+  }
+}
+
 export async function api<T>(method: string, path: string, body?: unknown): Promise<T> {
   let res: Response;
+  const abort = new AbortController();
+  const timer = setTimeout(() => abort.abort(), TIMEOUT_MS);
   try {
     res = await fetch(path, {
       method,
@@ -61,13 +86,28 @@ export async function api<T>(method: string, path: string, body?: unknown): Prom
       // When the Access session lapses, Access answers with a redirect to its
       // login page. Reloading lets Access show that login.
       redirect: "manual",
+      signal: abort.signal,
     });
   } catch {
+    if (abort.signal.aborted) throw new ApiError(0, "The server took too long to answer. Check your connection and try again.", "timeout");
     throw new ApiError(0, "Couldn't reach the server. Check your connection and try again.", "network");
+  } finally {
+    clearTimeout(timer);
   }
   if (res.type === "opaqueredirect") {
-    location.reload();
-    return new Promise<T>(() => {});
+    // Reload once so Access can renew the sign-in. If that already happened a moment ago and the
+    // sign-in still bounces (a home screen app can come back without Access's page), say so instead
+    // of reloading forever behind "Loading…".
+    if (Date.now() - lastSigninReload() > SIGNIN_WINDOW_MS) {
+      try {
+        sessionStorage.setItem(SIGNIN_KEY, String(Date.now()));
+      } catch {
+        throw new ApiError(401, "Your sign-in needs renewing.", "signin");
+      }
+      location.reload();
+      return new Promise<T>(() => {});
+    }
+    throw new ApiError(401, "Your sign-in needs renewing.", "signin");
   }
   const json = (await res.json().catch(() => ({}))) as Record<string, unknown>;
   if (!res.ok) {

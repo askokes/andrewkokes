@@ -16,8 +16,17 @@
     <title>Food Tracker</title>
   </head>
   <body>
+    <!--
+      Shown until the app draws its first screen. If that hasn't happened after a while (the script
+      didn't load, or the sign-in is stuck), a way out appears on its own: no script needed.
+    -->
+    <style>
+      .boot-slow { opacity: 0; animation: boot-show 0.3s ease 10s forwards; }
+      @keyframes boot-show { to { opacity: 1; } }
+    </style>
     <main id="app" class="screen">
       <p class="muted">Loading…</p>
+      <p class="boot-slow">This is taking longer than usual. <a href="/?r=1">Tap to reload</a>, or open food.pivotaiglobal.com in Safari to sign in again.</p>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

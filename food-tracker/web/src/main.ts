@@ -1,6 +1,6 @@
 import "./styles.css";
 import type { DayView, ParseResponse } from "../../src/food/types";
-import { api, ApiError, type Me } from "./api";
+import { api, ApiError, signinWorked, type Me } from "./api";
 import { el } from "./dom";
 import { isIsoDate, todayIn } from "./food";
 import { handleOverlayPop, type Go, type NavState } from "./nav";
@@ -143,23 +143,40 @@ function route() {
   render(diaryView({ me, date: date ?? today, go, mic: tabs.mic, openConfirm }));
 }
 
-function showError(message: string) {
-  const retry = el("button", { className: "button", type: "button", textContent: "Try again" });
-  retry.addEventListener("click", () => location.reload());
-  render([el("h1", { textContent: "Hmm, that didn't load" }), el("p", { textContent: message }), retry]);
+/** The start failed: say why and offer a way out, never a page stuck on "Loading…". */
+function showError(message: string, code: string) {
+  const signin = code === "signin";
+  const retry = el("button", { className: "button", type: "button", textContent: signin ? "Sign in again" : "Try again" });
+  // A fresh address makes the browser ask the server again (and Access show its sign-in) instead of reusing a saved page.
+  retry.addEventListener("click", () => location.replace(`/?r=${Date.now()}`));
+  tabs.show(null);
+  render([
+    el("h1", { textContent: signin ? "Time to sign in again" : "Hmm, that didn't load" }),
+    el("p", { textContent: signin ? "Your sign-in ran out. Tap below and use the code Cloudflare emails you." : message }),
+    retry,
+    el("p", { className: "hint", textContent: `If it keeps happening, tell Andrew: ${code}.` }),
+  ]);
 }
 
 async function start() {
   try {
     me = await api<Me>("GET", "/api/me");
+    signinWorked();
   } catch (err) {
     if (!(err instanceof ApiError && err.code === "no_profile")) {
-      showError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
+      showError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.", err instanceof ApiError ? err.code : "start");
       return;
     }
     me = null;
   }
-  route();
+  // The cache-busting "?r=" from Sign in again isn't part of any screen's address.
+  if (location.search.startsWith("?r=")) history.replaceState(null, "", location.pathname);
+  try {
+    route();
+  } catch (err) {
+    console.error(err);
+    showError("Something went wrong showing this screen. Please try again.", `screen: ${err instanceof Error ? err.message : String(err)}`.slice(0, 120));
+  }
 }
 
 window.addEventListener("popstate", () => {
