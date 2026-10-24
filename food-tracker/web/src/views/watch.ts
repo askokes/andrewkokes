@@ -93,12 +93,14 @@ function setupSteps(host: string) {
       " tab, tap ",
       ["+"],
       ", pick ",
-      ["Time of Day"],
-      " (say 7 am, daily), choose ",
+      ["App"],
+      ", choose an app you open every day (Messages or Mail), tick ",
+      ["Is Opened"],
+      ", choose ",
       ["Run Immediately"],
       ", and pick ",
       [SHORTCUT_NAME],
-      ". Each run also sends yesterday, so once a day covers the day before in full. iPhone locks Health data while the phone is locked, so a run then gets skipped. The Sync button on Today works any time.",
+      ". It then syncs quietly whenever you open that app. The phone is unlocked then, so Health can be read (a clock-based automation often runs while it's locked and gets skipped). Each run also sends yesterday, so every day ends up complete. The Sync button on Today works any time.",
     ),
   );
 }
