@@ -7,7 +7,7 @@
 // so the key is all the sign-in it has: random, shown once, and stored only as
 // a SHA-256 hash. It can add a day's activity and nothing else.
 import { Hono, type Context } from "hono";
-import { addDays, localDate } from "./dates";
+import { addDays, isCalendarDate, localDate } from "./dates";
 import type { AppEnv } from "./env";
 import type { WatchDay, WatchKeyResponse, WatchStatus } from "./food/types";
 import { getUser, noProfile, type UserRow } from "./profile";
@@ -61,7 +61,25 @@ export function readAmount(raw: unknown): number | undefined {
 }
 
 type Values = Partial<Record<Field, number>>;
-type SyncInput = { ok: true; key: string; values: Values; yesterday: Values } | { ok: false; status: 400 | 401; message: string };
+/** Most days one sync may carry (the iPhone app sends the last week). */
+export const MAX_SYNC_DAYS = 14;
+type SyncInput =
+  | { ok: true; key: string; values: Values; yesterday: Values; days: { date: string; values: Values }[] }
+  | { ok: false; status: 400 | 401; message: string };
+
+/** One day's fields, from the Shortcut's flat body or a `days` entry. */
+function readValues(from: Record<string, unknown>, prefix: string, where: string): { ok: true; values: Values } | { ok: false; message: string } {
+  const values: Values = {};
+  for (const f of Object.keys(WATCH_LIMITS) as Field[]) {
+    const field = `${prefix}${f}`;
+    const n = readAmount(from[field]);
+    if (n === undefined) continue;
+    if (Number.isNaN(n)) return { ok: false, message: `The ${where}${field} field should be a number, like ${f === "steps" ? "8412" : "612"}.` };
+    if (n > WATCH_LIMITS[f]) return { ok: false, message: `${Math.round(n).toLocaleString("en-US")} ${LABELS[f]} is more than a day can hold. Check the Shortcut's ${where}${field} field.` };
+    values[f] = Math.round(n);
+  }
+  return { ok: true, values };
+}
 
 export function parseSync(body: unknown): SyncInput {
   if (!isObject(body)) return { ok: false, status: 400, message: "The Shortcut didn't send JSON. Set its Request Body to JSON." };
@@ -71,22 +89,27 @@ export function parseSync(body: unknown): SyncInput {
   }
   // Today's totals so far, and (optionally) yesterday's whole day in yesterday_active and so on, so a
   // day the Shortcut didn't run, or last ran before bedtime, still ends up complete.
-  const values: Values = {};
-  const yesterday: Values = {};
-  for (const [prefix, into] of [["", values], ["yesterday_", yesterday]] as const) {
-    for (const f of Object.keys(WATCH_LIMITS) as Field[]) {
-      const field = `${prefix}${f}`;
-      const n = readAmount(body[field]);
-      if (n === undefined) continue;
-      if (Number.isNaN(n)) return { ok: false, status: 400, message: `The ${field} field should be a number, like ${f === "steps" ? "8412" : "612"}.` };
-      if (n > WATCH_LIMITS[f]) return { ok: false, status: 400, message: `${Math.round(n).toLocaleString("en-US")} ${LABELS[f]} is more than a day can hold. Check the Shortcut's ${field} field.` };
-      into[f] = Math.round(n);
+  const today = readValues(body, "", "");
+  if (!today.ok) return { ok: false, status: 400, message: today.message };
+  const yesterday = readValues(body, "yesterday_", "");
+  if (!yesterday.ok) return { ok: false, status: 400, message: yesterday.message };
+  // The iPhone app instead sends whole days by date: `days: [{ date, active, resting, steps }]`.
+  const days: { date: string; values: Values }[] = [];
+  if (body.days !== undefined) {
+    if (!Array.isArray(body.days) || body.days.length > MAX_SYNC_DAYS) {
+      return { ok: false, status: 400, message: `days should be a list of up to ${MAX_SYNC_DAYS} days.` };
+    }
+    for (const d of body.days) {
+      if (!isObject(d) || typeof d.date !== "string" || !isCalendarDate(d.date)) return { ok: false, status: 400, message: "Each day needs a date like 2026-10-22." };
+      const read = readValues(d, "", `${d.date} `);
+      if (!read.ok) return { ok: false, status: 400, message: read.message };
+      if (Object.keys(read.values).length) days.push({ date: d.date, values: read.values });
     }
   }
-  if (!Object.keys(values).length && !Object.keys(yesterday).length) {
+  if (!Object.keys(today.values).length && !Object.keys(yesterday.values).length && !days.length) {
     return { ok: false, status: 400, message: "Nothing to sync. The Shortcut's fields should be named active, resting and steps." };
   }
-  return { ok: true, key, values, yesterday };
+  return { ok: true, key, values: today.values, yesterday: yesterday.values, days };
 }
 
 /** The line the Shortcut can show when it's done. */
@@ -140,16 +163,23 @@ export async function watchSync(c: Context<AppEnv>) {
   );
   const today = localDate(user.timezone);
   const now = new Date().toISOString();
-  const writes = [
+  // Dated days count only from two weeks back to tomorrow (a phone a time zone ahead); others are skipped.
+  const earliest = addDays(today, -(MAX_SYNC_DAYS - 1));
+  const latest = addDays(today, 1);
+  const dated = input.days.filter((d) => d.date >= earliest && d.date <= latest);
+  const writes: [string, Values][] = [
     [today, input.values],
     [addDays(today, -1), input.yesterday],
-  ] as const;
-  await db.batch(
-    writes
-      .filter(([, v]) => Object.keys(v).length > 0)
-      .map(([date, v]) => upsert.bind(user.id, date, v.active ?? null, v.resting ?? null, v.steps ?? null, now)),
-  );
-  return c.text(syncedText(input.values, input.yesterday));
+    ...dated.map((d): [string, Values] => [d.date, d.values]),
+  ];
+  const statements = writes
+    .filter(([, v]) => Object.keys(v).length > 0)
+    .map(([date, v]) => upsert.bind(user.id, date, v.active ?? null, v.resting ?? null, v.steps ?? null, now));
+  if (statements.length) await db.batch(statements);
+  const text = syncedText(input.values, input.yesterday);
+  if (!input.days.length) return c.text(text);
+  const days = `Synced ${dated.length} ${dated.length === 1 ? "day" : "days"}.`;
+  return c.text(text ? `${text} ${days}` : days);
 }
 
 interface WatchRow {

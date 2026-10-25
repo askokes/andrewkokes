@@ -2,6 +2,7 @@ import type { DayView, WatchDay } from "../../../src/food/types";
 import { el } from "../dom";
 import { whole } from "../food";
 import { macroCalories, watchBurned } from "../progress";
+import { inNativeApp, native } from "../native";
 import { SHORTCUT_URL, syncedWhen } from "./watch";
 
 /** A progress bar. Past the goal it fills completely in a calm neutral color, never red. */
@@ -137,9 +138,30 @@ function progressAttrs(node: HTMLElement, value: number, goal: number | null, un
   node.setAttribute("aria-valuetext", `${whole(value)} of ${whole(goal)} ${unit}`);
 }
 
+/** Fired after the iPhone app syncs, so Today can show the new numbers. */
+export const WATCH_SYNCED_EVENT = "food:watch-synced";
+
+/** In the iPhone app, a button that syncs Apple Health now; in a browser, a link that runs the Shortcut. */
+function syncNowControl(): HTMLElement {
+  if (!inNativeApp()) return el("a", { className: "text-button ring-watch-sync", href: SHORTCUT_URL, textContent: "Sync now" });
+  const button = el("button", { type: "button", className: "text-button ring-watch-sync", textContent: "Sync now" });
+  button.addEventListener("click", async () => {
+    button.disabled = true;
+    button.textContent = "Syncing…";
+    try {
+      await native({ type: "sync" });
+      window.dispatchEvent(new Event(WATCH_SYNCED_EVENT));
+    } catch {
+      button.textContent = "Couldn't sync. Try again";
+      button.disabled = false;
+    }
+  });
+  return button;
+}
+
 /** "⌚ 2,432 cal burned so far · 8,412 steps", then where it came from and a way to sync again. */
 function watchLines(w: WatchDay | null, canSync: boolean): (Node | string)[] {
-  const sync = canSync ? el("a", { className: "text-button ring-watch-sync", href: SHORTCUT_URL, textContent: "Sync now" }) : null;
+  const sync = canSync ? syncNowControl() : null;
   const icon = el("span", { textContent: "⌚ ", attrs: { "aria-hidden": "true" } });
   const withSync = (lines: Node[]) => (sync ? [...lines, sync] : lines);
   if (!w) return withSync([el("p", {}, icon, "No Apple Watch sync yet today.")]);

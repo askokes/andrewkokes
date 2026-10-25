@@ -1,0 +1,6 @@
+FoodTracker.xcodeproj/
+FoodTracker/Info.plist
+FoodTracker/FoodTracker.entitlements
+build/
+DerivedData/
+xcuserdata/

@@ -6,7 +6,7 @@ import type { Go } from "../nav";
 import { greeting, loggedStreak, shiftDate, type Period } from "../progress";
 import { progressCard, weighInCard } from "./dashboard";
 import { cachedDay, rememberDay } from "./diary";
-import { todayRings } from "./summary";
+import { todayRings, WATCH_SYNCED_EVENT } from "./summary";
 import { balanceCard, mealsCard } from "./todayExtras";
 
 const PERIOD_KEY = "food.period";
@@ -70,6 +70,12 @@ function todayCard(today: string, me: Me, go: Go): HTMLElement {
     if (document.visibilityState === "visible") load();
   };
   document.addEventListener("visibilitychange", onVisible);
+  // Sync now in the iPhone app: show what it just sent.
+  const onSynced = () => {
+    if (!card.isConnected) return window.removeEventListener(WATCH_SYNCED_EVENT, onSynced);
+    load();
+  };
+  window.addEventListener(WATCH_SYNCED_EVENT, onSynced);
   return el("div", { className: "stack" }, card, meals.node, balance.node);
 }
 

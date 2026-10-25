@@ -1,0 +1,64 @@
+# The Food Tracker iPhone app. Generate the Xcode project with XcodeGen:
+#   brew install xcodegen && cd food-tracker/ios && xcodegen
+# then open FoodTracker.xcodeproj. See README.md.
+name: FoodTracker
+options:
+  bundleIdPrefix: com.pivotaiglobal
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    # Your Apple Developer team: set it here or in Xcode (Signing & Capabilities).
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+targets:
+  FoodTracker:
+    type: application
+    platform: iOS
+    sources:
+      - FoodTracker
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pivotaiglobal.foodtracker
+        PRODUCT_NAME: FoodTracker
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+    info:
+      path: FoodTracker/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: en
+        CFBundleDisplayName: Food Tracker
+        CFBundleName: $(PRODUCT_NAME)
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleIdentifier: $(PRODUCT_BUNDLE_IDENTIFIER)
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleInfoDictionaryVersion: "6.0"
+        LSRequiresIPhoneOS: true
+        ITSAppUsesNonExemptEncryption: false
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIStatusBarStyle: UIStatusBarStyleDarkContent
+        UIUserInterfaceStyle: Light
+        NSHealthShareUsageDescription: Food Tracker reads the calories your Apple Watch says you burned and your steps, so your day shows what you ate next to what you burned.
+        NSHealthUpdateUsageDescription: Food Tracker doesn't write anything to Apple Health.
+        NSCameraUsageDescription: Food Tracker uses the camera to scan a package's barcode.
+        NSMicrophoneUsageDescription: Food Tracker listens when you tap the mic to say what you ate.
+        NSSpeechRecognitionUsageDescription: Food Tracker turns what you say into the foods you ate.
+        UIBackgroundModes:
+          - fetch
+        BGTaskSchedulerPermittedIdentifiers:
+          - com.pivotaiglobal.foodtracker.sync
+    entitlements:
+      path: FoodTracker/FoodTracker.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.background-delivery: true

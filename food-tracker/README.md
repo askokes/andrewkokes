@@ -49,6 +49,14 @@ light by weight. Foods with no weight are left out and noted. Diary rows carry t
 the food's picture, with the band in screen-reader text. The sentence only ever nudges toward more light
 foods; nothing is red or called bad.
 
+iPhone app (`ios/`, see `ios/README.md`): the web app full screen in a native shell that reads Apple
+Health (active and resting energy, steps) and posts the last 7 days to `POST /api/watch/sync` as `days: [{
+date, active, resting, steps }]` (up to 14, dated from two weeks back to tomorrow) on HealthKit background
+delivery, background refresh and app open. The page finds the shell through `web/src/native.ts`
+(`window.webkit.messageHandlers.foodTracker`); inside it, Goals' Apple Watch card is one "Turn on
+automatic sync" button and Today's Sync now asks the app, in place of the Shortcut. Built on a Mac with
+XcodeGen and Xcode, shared through TestFlight.
+
 Barcodes (`src/food/barcode.ts`, `src/food/gtin.ts`, `web/src/views/scanner.ts`): the barcode button next
 to the Diary's food box opens the back camera full screen and reads UPC, EAN and the GS1 QR codes newer
 packages carry (a QR code that's only a link is ignored), or takes the number typed in. Phones with a

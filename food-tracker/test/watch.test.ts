@@ -76,12 +76,12 @@ describe("parseSync", () => {
 
   it("reads yesterday's fields too, and names the one that's wrong", () => {
     const key = "k".repeat(32);
-    expect(parseSync({ key, yesterday_steps: "8,488" })).toEqual({ ok: true, key, values: {}, yesterday: { steps: 8488 } });
+    expect(parseSync({ key, yesterday_steps: "8,488" })).toEqual({ ok: true, key, values: {}, yesterday: { steps: 8488 }, days: [] });
     expect(parseSync({ key, yesterday_active: "lots" })).toMatchObject({ ok: false, status: 400, message: "The yesterday_active field should be a number, like 612." });
   });
 
   it("rounds, skips what wasn't sent, and says which field is wrong", () => {
-    expect(parseSync({ key, active: "612.6 kcal", steps: "" })).toEqual({ ok: true, key, values: { active: 613 }, yesterday: {} });
+    expect(parseSync({ key, active: "612.6 kcal", steps: "" })).toEqual({ ok: true, key, values: { active: 613 }, yesterday: {}, days: [] });
     expect(parseSync({ key, steps: "lots" })).toMatchObject({ ok: false, message: expect.stringContaining("steps field should be a number") });
     expect(parseSync({ key, resting: 9000 })).toMatchObject({ ok: false, message: expect.stringContaining("9,000 resting calories is more than a day can hold") });
     expect(parseSync({ key })).toMatchObject({ ok: false, message: expect.stringContaining("named active, resting and steps") });
@@ -150,6 +150,34 @@ describe("Apple Watch sync", () => {
     const days = (await (await as(other, "GET", `/api/summary?from=${yesterday}&to=${today()}`)).json<SummaryResponse>()).days;
     expect(days[0].watch).toMatchObject({ steps: 5000 });
     expect(days[1].watch).toBeNull();
+  });
+
+  it("takes whole days by date from the iPhone app, within the last two weeks", async () => {
+    const email = await signUp();
+    const { key } = await connect(email);
+    const t = today();
+    const res = await sync({
+      key,
+      days: [
+        { date: addDays(t, -2), active: 500, resting: 2100, steps: 9000 },
+        { date: addDays(t, -1), active: 300, resting: 2000, steps: 4000 },
+        { date: t, active: 40, resting: 400, steps: 500 },
+        { date: addDays(t, -30), steps: 1 },
+      ],
+    });
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe("Synced 3 days.");
+    const days = (await (await as(email, "GET", `/api/summary?from=${addDays(t, -2)}&to=${t}`)).json<SummaryResponse>()).days;
+    expect(days.map((d) => d.watch?.steps)).toEqual([9000, 4000, 500]);
+    expect(days[0].watch).toMatchObject({ activeKcal: 500, restingKcal: 2100 });
+  });
+
+  it("explains a bad days list", () => {
+    const key = "k".repeat(32);
+    expect(parseSync({ key, days: "lots" })).toMatchObject({ ok: false, status: 400 });
+    expect(parseSync({ key, days: [{ date: "Oct 22", steps: 1 }] })).toMatchObject({ ok: false, message: "Each day needs a date like 2026-10-22." });
+    expect(parseSync({ key, days: [{ date: "2026-10-22", steps: "many" }] })).toMatchObject({ ok: false, message: "The 2026-10-22 steps field should be a number, like 8412." });
+    expect(parseSync({ key, days: Array.from({ length: 15 }, () => ({ date: "2026-10-22", steps: 1 })) })).toMatchObject({ ok: false });
   });
 
   it("files the sync under today in the person's own time zone", async () => {

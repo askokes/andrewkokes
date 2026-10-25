@@ -1,6 +1,7 @@
 import type { WatchKeyResponse, WatchStatus } from "../../../src/food/types";
 import { api, ApiError, type Me } from "../api";
 import { el } from "../dom";
+import { native, inNativeApp, type NativeStatus } from "../native";
 
 /** What the Shortcut must be called, so the Sync button on Today can run it. */
 export const SHORTCUT_NAME = "Food Sync";
@@ -111,6 +112,7 @@ function setupSteps(host: string) {
  * `me.watch` current so Today knows to show the Sync button.
  */
 export function watchCard(me: Me): HTMLElement {
+  if (inNativeApp()) return nativeWatchCard(me);
   const card = el("section", { className: "card stack watch-card", attrs: { "aria-label": "Apple Watch" } });
   const msg = el("p", { className: "form-msg", attrs: { "aria-live": "polite" } });
   const host = location.host;
@@ -201,5 +203,99 @@ export function watchCard(me: Me): HTMLElement {
   }
 
   paint();
+  return card;
+}
+
+/**
+ * The Apple Watch card inside the iPhone app: one tap makes a sync key, hands it to the app and asks for
+ * Health access. From then on the app syncs in the background, with no Shortcut.
+ */
+const present = (...nodes: (Node | null)[]) => nodes.filter((n): n is Node => n !== null);
+
+function nativeWatchCard(me: Me): HTMLElement {
+  const card = el("section", { className: "card stack watch-card", attrs: { "aria-label": "Apple Watch" } });
+  const msg = el("p", { className: "form-msg", attrs: { "aria-live": "polite" } });
+  const head = () => el("h2", {}, el("span", { textContent: "⌚ ", attrs: { "aria-hidden": "true" } }), "Apple Watch");
+  const fail = (err: unknown) => (msg.textContent = err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
+
+  async function turnOn(button: HTMLButtonElement) {
+    button.disabled = true;
+    msg.textContent = "";
+    try {
+      const res = await api<WatchKeyResponse>("POST", "/api/watch/key", {});
+      const status = await native({ type: "connect", key: res.key, syncUrl: res.syncUrl });
+      me.watch = { connected: true, lastSync: status.lastSync ?? me.watch.lastSync };
+      paint(status);
+    } catch (err) {
+      fail(err);
+      button.disabled = false;
+    }
+  }
+
+  async function syncNow(button: HTMLButtonElement) {
+    button.disabled = true;
+    button.textContent = "Syncing…";
+    try {
+      const status = await native({ type: "sync" });
+      if (status.lastSync) me.watch = { connected: true, lastSync: status.lastSync };
+      paint(status);
+    } catch (err) {
+      fail(err);
+      button.disabled = false;
+      button.textContent = "Sync now";
+    }
+  }
+
+  async function turnOff(button: HTMLButtonElement) {
+    if (!confirm("Turn off Apple Watch sync? What already synced stays.")) return;
+    button.disabled = true;
+    try {
+      await native({ type: "disconnect" });
+      me.watch = await api<WatchStatus>("DELETE", "/api/watch/key");
+      paint({ connected: false, lastSync: null, message: null });
+    } catch (err) {
+      fail(err);
+      button.disabled = false;
+    }
+  }
+
+  function paint(status: NativeStatus) {
+    if (!status.connected) {
+      const on = el("button", { type: "button", className: "button wide", textContent: "Turn on automatic sync" });
+      on.addEventListener("click", () => turnOn(on));
+      card.replaceChildren(
+        ...present(
+        head(),
+        el("p", { className: "hint", textContent: "Brings in the calories your Watch says you burned and your steps from Apple Health, on its own in the background. Your phone asks once to share them." }),
+        me.watch.connected
+          ? el("p", { className: "hint", textContent: "This replaces the Apple Shortcut: once it's on, the old Shortcut's key stops working and you can delete the Shortcut and its automation." })
+          : null,
+        on,
+        msg,
+        ),
+      );
+      return;
+    }
+    const now = el("button", { type: "button", className: "button secondary", textContent: "Sync now" });
+    now.addEventListener("click", () => syncNow(now));
+    const off = el("button", { type: "button", className: "button secondary", textContent: "Turn off" });
+    off.addEventListener("click", () => turnOff(off));
+    const last = status.lastSync ?? me.watch.lastSync;
+    card.replaceChildren(
+      ...present(
+      head(),
+      el("p", {}, last ? `Syncing on its own. Last synced ${syncedWhen(last)}.` : "Syncing on its own. Nothing has come in yet."),
+      status.message ? el("p", { className: "hint", textContent: status.message }) : null,
+      el("p", { className: "hint", textContent: "It fills in the last week each time, so a day the phone missed catches up. If numbers stop, check Settings > Health > Data Access & Devices > Food Tracker and turn everything on." }),
+      el("div", { className: "button-row" }, now, off),
+      msg,
+      ),
+    );
+  }
+
+  card.replaceChildren(head(), el("p", { className: "muted", textContent: "Checking…" }));
+  native({ type: "status" })
+    .then(paint)
+    .catch(() => paint({ connected: false, lastSync: null, message: null }));
   return card;
 }
