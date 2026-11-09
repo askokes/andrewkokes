@@ -237,3 +237,19 @@ Use your phone. Try it once on cellular and once on Wi-Fi if you can.
 
 - Does any food land in a color that feels wrong? Write down the food.
 - Does the sentence under the balance feel helpful or naggy?
+
+## Face ID sign-in
+
+1. On **Goals**, find **Face ID sign-in** and tap **Set up Face ID**. Face ID asks to save a passkey for food.pivotaiglobal.com. Allow it.
+2. The card lists your iPhone. Tap **Sign out** at the bottom of Goals.
+3. Open the app again. For now Cloudflare's emailed code still comes first (that goes away in the next step); after that, the app should be signed in.
+4. (Andrew) **Invite someone**: the shared note now has a link. Opening it on their phone, after the code, shows **Set up Face ID** as them.
+
+### Tell Andrew
+
+- Did Face ID set up on the first try? Any error message?
+
+## Foods you type in by hand
+
+1. On **Diary**, add a food and on **Check and add** tap **Enter it yourself**. Fill in a made-up food and add it.
+2. Under the food box, **Your usual foods** shows it right away (tap **Show more** if the list is folded).

@@ -57,6 +57,19 @@ delivery, background refresh and app open. The page finds the shell through `web
 automatic sync" button and Today's Sync now asks the app, in place of the Shortcut. Built on a Mac with
 XcodeGen and Xcode, shared through TestFlight.
 
+Face ID sign-in (`src/passkeys.ts`, `web/src/views/faceId.ts`, migration 0012): passkeys (WebAuthn, via
+`@simplewebauthn`) in place of Access's emailed codes. Signing in with one starts the app's own session: a
+random token in an HttpOnly `__Host-ft_session` cookie, only its SHA-256 kept in `sessions`, good for a year
+from the last use. The API takes a session, then (while it's still in front of the app) Access's header.
+A passkey can be made by someone signed in (Goals > Face ID sign-in) or with an invite link
+(`/join#token`, one use, 7 days, made by an admin from Invite someone; inviting an email again gives a
+lost-phone link). Passkeys belong to `APP_ORIGIN`. The iPhone app uses them once the Worker var
+`APPLE_TEAM_ID` is set (`/.well-known/apple-app-site-association`, which skips Access). Rollout: stage 1
+(now) adds Face ID beside Access; stage 2 removes the Access app once everyone has set up Face ID.
+
+Your usual foods also keeps every food typed in by hand in the last 365 days (up to 40), after the 12
+most-logged foods of the last 60 days, so a food entered once is one tap from then on.
+
 Barcodes (`src/food/barcode.ts`, `src/food/gtin.ts`, `web/src/views/scanner.ts`): the barcode button next
 to the Diary's food box opens the back camera full screen and reads UPC, EAN and the GS1 QR codes newer
 packages carry (a QR code that's only a link is ignored), or takes the number typed in. Phones with a

@@ -904,3 +904,13 @@ body.has-tabs .screen { padding-bottom: calc(168px + env(safe-area-inset-bottom)
 .balance-pct { flex: none; font-weight: 700; font-variant-numeric: tabular-nums; }
 .balance-sentence { font-size: 0.95rem; padding: 10px 12px; border-radius: 12px; background: var(--note-bg); text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) { .balance-seg { transition: none; } }
+
+/* Face ID: the sign-in and join screens, and the devices on Goals. */
+.signin { display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 12vh; text-align: center; }
+.signin .button { width: 100%; }
+.signin-brand { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.signin-brand img { border-radius: 22px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); }
+.signin-brand h1 { margin: 0; }
+.passkey-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.passkey-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 0; border-top: 1px solid var(--border); overflow-wrap: anywhere; }
+.passkey-row:first-child { border-top: 0; }

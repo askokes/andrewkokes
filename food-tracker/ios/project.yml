@@ -62,3 +62,7 @@ targets:
       properties:
         com.apple.developer.healthkit: true
         com.apple.developer.healthkit.background-delivery: true
+        # Face ID sign-in (passkeys) for the site, inside the app. The site serves the matching
+        # file once the Worker var APPLE_TEAM_ID holds your team id (see README).
+        com.apple.developer.associated-domains:
+          - webcredentials:food.pivotaiglobal.com

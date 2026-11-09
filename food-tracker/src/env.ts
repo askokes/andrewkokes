@@ -12,6 +12,10 @@ export interface Env {
   ADMIN_EMAILS?: string;
   /** Worker secret: a Cloudflare key limited to Access: Apps and Policies. Never log it or return it. */
   ACCESS_INVITE_TOKEN?: string;
+  /** The app's address, e.g. "https://food.pivotaiglobal.com": the site passkeys belong to. Unset: the request's own. */
+  APP_ORIGIN?: string;
+  /** Apple Developer team id (10 characters), so the iPhone app may use this site's passkeys. */
+  APPLE_TEAM_ID?: string;
   /** Local dev only, from .dev.vars. Ignored unless the request host is localhost. */
   DEV_USER_EMAIL?: string;
 }

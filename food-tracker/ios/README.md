@@ -37,6 +37,13 @@ and sending), `WebView.swift` (the web app, and the bridge it talks to: `web/src
    **Signing & Capabilities**. Tick **Automatically manage signing** and pick your **Team**. Check that
    **HealthKit** shows with **Background Delivery** ticked.
 
+6. **Face ID sign-in in the app.** Find your **Team ID** (10 letters and numbers) at
+   developer.apple.com/account under Membership details. Tell Claude, or put it in
+   `food-tracker/wrangler.jsonc` as `"APPLE_TEAM_ID": "ABCDE12345"` under `vars` and push. Then
+   `https://food.pivotaiglobal.com/.well-known/apple-app-site-association` shows your team id, and Face
+   ID works inside the app. In Signing & Capabilities, check **Associated Domains** lists
+   `webcredentials:food.pivotaiglobal.com`.
+
 ## Put it on your iPhone
 
 1. Plug the iPhone into the Mac (or same Wi-Fi after the first time). On the phone, allow

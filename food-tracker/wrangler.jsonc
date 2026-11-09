@@ -17,7 +17,7 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*", "/.well-known/*"]
   },
 
   "d1_databases": [
@@ -39,7 +39,9 @@
     // Invites (src/invites.ts): the account whose Access policy lists who may sign in, and who may invite.
     // The key that edits that policy is the Worker secret ACCESS_INVITE_TOKEN.
     "CF_ACCOUNT_ID": "fd5ad410c0a9e058fc62e42ab827be98",
-    "ADMIN_EMAILS": "andrewkokes@gmail.com"
+    "ADMIN_EMAILS": "andrewkokes@gmail.com",
+    // Face ID sign-in (src/passkeys.ts): passkeys belong to this address.
+    "APP_ORIGIN": "https://food.pivotaiglobal.com"
   },
 
   "observability": { "enabled": true }

@@ -141,15 +141,19 @@ export function ensurePublicFiles(cf, account, hostname) {
   });
 }
 
+/** Apple fetches this to let the iPhone app use the site's passkeys (Face ID sign-in); it holds no data. */
+export const APPLE_ASSOCIATION_PATH = "/.well-known/apple-app-site-association";
+
 /**
  * The Apple Watch Shortcut can't sign in to Access, so its one path skips it.
  * The Worker answers that path only for a POST carrying a valid sync key.
+ * Apple's servers can't sign in either, so the iPhone app's passkey file skips it too.
  */
 export function ensureWatchSync(cf, account, hostname) {
   return ensureBypassApp(cf, account, {
     appName: WATCH_APP_NAME,
     policyName: WATCH_POLICY_NAME,
-    uris: [`${hostname}${WATCH_SYNC_PATH}`],
+    uris: [`${hostname}${WATCH_SYNC_PATH}`, `${hostname}${APPLE_ASSOCIATION_PATH}`],
   });
 }
 

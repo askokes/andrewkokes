@@ -6,6 +6,7 @@ import { isIsoDate, todayIn } from "./food";
 import { handleOverlayPop, type Go, type NavState } from "./nav";
 import { confirmView, type Added } from "./views/confirm";
 import { clearProgressCache } from "./views/dashboard";
+import { joinView, signInView } from "./views/faceId";
 import { cachedDay, clearDraft, diaryView, noteAdded, rememberDay, stopDiaryVoice, toggleDiaryVoice } from "./views/diary";
 import { goalsView } from "./views/goals";
 import { overviewView } from "./views/overview";
@@ -159,10 +160,21 @@ function showError(message: string, code: string) {
 }
 
 async function start() {
+  // An invite link: set up Face ID as the invited person. Needs no sign-in.
+  if (location.pathname === "/join") {
+    tabs.show(null);
+    render(joinView());
+    return;
+  }
   try {
     me = await api<Me>("GET", "/api/me");
     signinWorked();
   } catch (err) {
+    if (err instanceof ApiError && err.code === "unauthorized") {
+      tabs.show(null);
+      render(signInView());
+      return;
+    }
     if (!(err instanceof ApiError && err.code === "no_profile")) {
       showError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.", err instanceof ApiError ? err.code : "start");
       return;

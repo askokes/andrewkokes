@@ -9,12 +9,11 @@ interface InviteResult {
 
 /** The note to send someone just invited: where to go and which email to use. */
 function inviteText(email: string) {
-  return `Join me on Food Tracker, our family food log! Open the link on your phone and sign in with ${email}. It emails you a 6-digit code (no password). Then tap Share, Add to Home Screen.`;
+  return `Join me on Food Tracker, our family food log! Open this link on your iPhone. The first time, sign in with ${email} and the 6-digit code it emails you, then tap Set up Face ID. After that, Face ID signs you in.`;
 }
 
 /** Opens the phone's share sheet (Messages, Mail...), or copies the note where there's none. */
-async function share(email: string, msg: HTMLElement) {
-  const url = location.origin;
+async function share(email: string, url: string, msg: HTMLElement) {
   const text = inviteText(email);
   if (navigator.share) {
     try {
@@ -66,7 +65,7 @@ export function inviteCard(): HTMLElement {
     "form",
     { className: "stack", noValidate: true },
     el("label", { htmlFor: id, className: "add-label", textContent: "Invite someone" }),
-    el("p", { className: "hint", textContent: "Add their email and they can sign in. They get a 6-digit code by email each time, no password. Their food and weight stay private to them." }),
+    el("p", { className: "hint", textContent: "Add their email and send them the link. They set up Face ID once, no password. Their food and weight stay private to them. Lost a phone? Invite the same email again for a new link." }),
     el("div", { className: "input-row" }, input, button),
     msg,
     done,
@@ -87,11 +86,13 @@ export function inviteCard(): HTMLElement {
     msg.textContent = "";
     try {
       const res = await api<InviteResult>("POST", "/api/invites", { email });
+      // A one-time link that sets up Face ID as them (src/passkeys.ts), good for a week.
+      const link = await api<{ url: string }>("POST", "/api/invite-links", { email: res.email });
       input.value = "";
       input.blur();
       const shareMsg = el("p", { className: "hint", attrs: { "aria-live": "polite" } });
       const send = el("button", { type: "button", className: "button wide", textContent: "Send them the link" });
-      send.addEventListener("click", () => share(res.email, shareMsg));
+      send.addEventListener("click", () => share(res.email, link.url, shareMsg));
       done.replaceChildren(
         el("p", {}, el("strong", { textContent: res.email }), res.added ? " can sign in now." : " could already sign in."),
         send,
