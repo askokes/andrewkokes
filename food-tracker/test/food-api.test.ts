@@ -5,7 +5,7 @@ import { createApp } from "../src/app";
 import { addDays, localDate } from "../src/dates";
 import devMock from "../src/dev-mock";
 import { extractFood, nutritionFor } from "../src/food/nutrition";
-import { USDA_CALLS_PER_REQUEST, USDA_CALLS_PER_USER_HOUR, USUAL_DAYS, USUAL_MAX } from "../src/food/routes";
+import { OWN_FOOD_DAYS, USDA_CALLS_PER_REQUEST, USDA_CALLS_PER_USER_HOUR, USUAL_DAYS, USUAL_MAX } from "../src/food/routes";
 import { commonFor, tailFor } from "../src/food/usda";
 import {
   MAX_GRAMS,
@@ -1230,19 +1230,31 @@ describe("GET /api/foods/usual", () => {
     });
   });
 
-  it(`looks back ${USUAL_DAYS} days and offers at most ${USUAL_MAX} foods`, async () => {
+  it(`looks back ${USUAL_DAYS} days for searched foods, and keeps every typed-in food for ${OWN_FOOD_DAYS}`, async () => {
     const { as } = client();
     const email = await signUp(as);
-    await logFoods(as, email, [cookieItem, cookieItem], { date: addDays(today(), -USUAL_DAYS - 1) });
-    await logFoods(as, email, [chickenItem], { date: addDays(today(), -USUAL_DAYS) });
-    const names = Array.from({ length: USUAL_MAX }, (_, i) => `Snack ${i + 1}`);
+    // A searched food past the window drops off; a typed-in one stays for a year.
+    await logFoods(as, email, [chickenItem, chickenItem], { date: addDays(today(), -USUAL_DAYS - 1) });
+    await logFoods(as, email, [cookieItem], { date: addDays(today(), -200) });
+    await logFoods(as, email, [{ manual: { name: "Ancient fudge", calories: 300 } }], { date: addDays(today(), -OWN_FOOD_DAYS - 1) });
+    // More typed-in foods than the most-logged list holds: none are left off.
+    const names = Array.from({ length: USUAL_MAX + 1 }, (_, i) => `Snack ${i + 1}`);
     await logFoods(as, email, names.map((name) => ({ manual: { name, calories: 100 } })));
 
-    const foods = await usualOf(as, email);
-    expect(foods).toHaveLength(USUAL_MAX);
-    // All logged once: newest first, so the oldest (the chicken, 60 days back) is the one left off.
-    expect(foods.map((f) => f.foodName)).toEqual([...names].reverse());
-    expect(foods.some((f) => f.foodName === "Grandma's cookie")).toBe(false);
+    const foods = (await usualOf(as, email)).map((f) => f.foodName);
+    expect(foods).toEqual([...[...names].reverse(), "Grandma's cookie"]);
+    expect(foods).not.toContain("Ancient fudge");
+    expect(foods.some((f) => /chicken/i.test(f))).toBe(false);
+  });
+
+  it(`offers the ${USUAL_MAX} most-logged foods first, then the typed-in ones`, async () => {
+    const { as } = client();
+    const email = await signUp(as);
+    await logFoods(as, email, [{ manual: { name: "Once-only salad", calories: 250 } }]);
+    await logFoods(as, email, [chickenItem, chickenItem, chickenItem]);
+    const foods = (await usualOf(as, email)).map((f) => f.foodName);
+    expect(foods[0]).toMatch(/chicken/i);
+    expect(foods).toContain("Once-only salad");
   });
 
   it("are each user's own", async () => {

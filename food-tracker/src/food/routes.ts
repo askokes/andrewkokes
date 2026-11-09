@@ -61,6 +61,12 @@ const SEARCH_LIMIT = 8;
 /** "Your usual foods" looks back this many days and offers this many. */
 export const USUAL_DAYS = 60;
 export const USUAL_MAX = 12;
+/**
+ * Foods typed in by hand aren't in any database to search again, so they stay in the list from the
+ * first time they're logged: this far back, this many, after the most-logged foods.
+ */
+export const OWN_FOOD_DAYS = 365;
+export const OWN_FOOD_MAX = 40;
 const WEIGHT_UNITS = new Set(["oz", "lb", "g"]);
 
 /**
@@ -344,16 +350,18 @@ function entryInputFor(row: EntryRow): EntryInput | null {
 
 /**
  * The foods a user logged most in the last USUAL_DAYS days, each at the
- * amount they logged last time. A USDA food is the same food under any name or
- * amount; a typed-in food is known by its name.
+ * amount they logged last time, then every food they typed in by hand in the
+ * last OWN_FOOD_DAYS. A USDA food is the same food under any name or amount; a
+ * typed-in food is known by its name.
  */
 async function usualFoods(c: Ctx, usda: UsdaDeps, user: UserRow): Promise<UsualFood[]> {
-  const since = addDays(localDate(user.timezone), -USUAL_DAYS);
+  const today = localDate(user.timezone);
   const { results: rows } = await c.env.DB.prepare(
-    `SELECT ${ENTRY_COLUMNS} FROM food_entries WHERE user_id = ? AND log_date >= ?
+    `SELECT ${ENTRY_COLUMNS} FROM food_entries
+     WHERE user_id = ? AND (log_date >= ? OR (fdc_id IS NULL AND log_date >= ?))
      ORDER BY created_at DESC, id DESC LIMIT 2000`,
   )
-    .bind(user.id, since)
+    .bind(user.id, addDays(today, -USUAL_DAYS), addDays(today, -OWN_FOOD_DAYS))
     .all<EntryRow>();
 
   const groups = new Map<string, { latest: EntryRow; count: number; meals: Record<Meal, number> }>();
@@ -366,7 +374,11 @@ async function usualFoods(c: Ctx, usda: UsdaDeps, user: UserRow): Promise<UsualF
     if (meal) group.meals[meal]++;
   }
   // Newest first already, and the sort is stable: ties stay newest first.
-  const top = [...groups.entries()].sort(([, a], [, b]) => b.count - a.count).slice(0, USUAL_MAX);
+  const ranked = [...groups.entries()].sort(([, a], [, b]) => b.count - a.count);
+  const most = ranked.slice(0, USUAL_MAX);
+  // Then the typed-in foods that didn't make the top, newest first.
+  const own = [...groups.entries()].filter(([key]) => key.startsWith("own:") && !most.some(([k]) => k === key)).slice(0, OWN_FOOD_MAX);
+  const top = [...most, ...own];
   const foods = await foodsFor(usda, top.map(([, g]) => g.latest));
 
   return top.flatMap(([key, { latest, count, meals }]): UsualFood[] => {
